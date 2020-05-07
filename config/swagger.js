@@ -2,11 +2,11 @@ module.exports = {
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Belka Application",
+    "title": "Helen Application",
     "description": "Project",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
-      "name": "Belka Team"
+      "name": "Helen Team"
     },
     "license": {
       "name": "MIT"
