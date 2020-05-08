@@ -4,10 +4,6 @@ const BCRYPT = require("bcrypt");
 const JWT = require("jsonwebtoken");
 const CONFIG = require('../../config');
 
-let client = require('redis').createClient({
-  port: CONFIG.REDIS.PORT,
-  host: CONFIG.REDIS.HOST
-});
 let commonFunctions = {};
 
 /**
@@ -171,38 +167,6 @@ commonFunctions.createAccountRestoreLink = (userData) => {
   let dataForJWT = { previousAccountId: userData._id, Date: Date.now, email: userData.email, newAccountId: userData.newAccountId };
   let accountRestoreLink = CONFIG.SERVER_URL + '/v1/user/restore/' + commonFunctions.encryptJwt(dataForJWT);
   return accountRestoreLink;
-};
-
-/**
- * function to save data on redis 
- */
-commonFunctions.saveDataInRedis = (key, data) => {
-  key = key.toString();
-  client.set(key, JSON.stringify(data));
-  return;
-};
-
-/**
- * function to get data from redis 
- */
-commonFunctions.getDataFromRedis = async (key) => {
-  key = key.toString();
-  let value = await new Promise((resolve, reject) => {
-    client.get(key, function (err, value) {
-      return resolve(JSON.parse(value))
-    });
-  })
-  return value;
-};
-
-/**
- * function to delete a key data from redis
- */
-commonFunctions.deleteDataFromRedis = (key) => {
-  key = key.toString();
-  client.del(key.toString(), function (err, response) {
-    return;
-  });
 };
 
 /**
