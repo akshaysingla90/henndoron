@@ -15,13 +15,14 @@ let routes = [
 			description: 'Route to get server response (Is server working fine or not?).',
 			model: 'SERVER'
 		},
+		auth: AVAILABLE_AUTHS.USER,
 		handler: getServerResponse
 	},
 	{
 		method: 'POST',
 		path: '/v1/user/register',
 		joiSchemaForSwagger: {
-			body:{
+			body: {
 				email: Joi.string().email().required().description('User\'s email.'),
 				password: Joi.string().required().description('User\'s password.'),
 				name: Joi.string().required().description('User\'s name.'),
@@ -42,7 +43,7 @@ let routes = [
 		method: 'POST',
 		path: '/v1/user/login',
 		joiSchemaForSwagger: {
-			body:{
+			body: {
 				email: Joi.string().email().required().description('User\'s email Id.'),
 				password: Joi.string().required().description('User\'s password.')
 			},

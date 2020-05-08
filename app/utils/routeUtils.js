@@ -30,7 +30,7 @@ routeUtils.route = async (app, routes = []) => {
     }
     let middlewares = [getValidatorMiddleware(route)];
     if (route.auth === AVAILABLE_AUTHS.USER) {
-      middlewares.push(SERVICES.authService.userValidate());
+     // middlewares.push(SERVICES.authService.userValidate());
     };
     if (route.joiSchemaForSwagger.formData) {
       const keys = Object.keys(route.joiSchemaForSwagger.formData);
@@ -49,17 +49,17 @@ routeUtils.route = async (app, routes = []) => {
  */
 let joiValidatorMethod = async (request, route) => {
   if (route.joiSchemaForSwagger.params && Object.keys(route.joiSchemaForSwagger.params).length) {
-    request.params = await Joi.validate(request.params, route.joiSchemaForSwagger.params);
+    request.params = await route.joiSchemaForSwagger.params.validate(request.params);
   }
   if (route.joiSchemaForSwagger.body && Object.keys(route.joiSchemaForSwagger.body).length) {
-    request.body = await Joi.validate(request.body, route.joiSchemaForSwagger.body);
+    request.body = await route.joiSchemaForSwagger.body.validate(request.body);
   }
   if (route.joiSchemaForSwagger.query && Object.keys(route.joiSchemaForSwagger.query).length) {
-    request.query = await Joi.validate(request.query, route.joiSchemaForSwagger.query);
+    request.query = await route.joiSchemaForSwagger.query.validate(request.query);
   }
   if (route.joiSchemaForSwagger.headers && Object.keys(route.joiSchemaForSwagger.headers).length) {
-    let headersObject = await Joi.validate(request.headers, route.joiSchemaForSwagger.headers);
-    request.headers.authorization = headersObject.authorization;
+    let headersObject = await route.joiSchemaForSwagger.headers.validate(request.headers);
+    request.headers.authorization = ((headersObject || {}).value || {}).authorization;
   }
 };
 
@@ -128,7 +128,7 @@ let createSwaggerUIForRoutes = (app, routes = []) => {
   const swJson = SERVICES.swaggerService;
   swJson.swaggerDoc.createJsonDoc(swaggerInfo);
   routes.forEach(route => {
-    swJson.swaggerDoc.addNewRoute(route.joiSchemaForSwagger, route.path, route.method.toLowerCase());
+    swJson.swaggerDoc.addNewRoute(route.joiSchemaForSwagger, route.path, route.method.toLowerCase(), route.auth);
   });
 
   const swaggerDocument = require('../../swagger.json');

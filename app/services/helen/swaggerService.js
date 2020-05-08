@@ -2,6 +2,7 @@ const fs = require('fs');
 const swaggerJson = require('../../../config').swagger;
 const j2s = require('joi-to-swagger');
 let singleton = undefined;
+const { AVAILABLE_AUTHS } = require('../../utils/constants');
 
 class Swagger {
     constructor() {
@@ -46,10 +47,9 @@ class Swagger {
         return fs.writeFileSync('swagger.json', JSON.stringify(swaggerData));
     }
 
-    addNewRoute(joiDefinitions, path, method) {
+    addNewRoute(joiDefinitions, path, method, auth) {
 
         if (this.currentRoute.includes(path + method)) {
-
             return false;
         }
 
@@ -81,7 +81,7 @@ class Swagger {
 
         const parameters = [];
 
-        const { body, params, query, headers, formData,responseDescription } = joiDefinitions;
+        const { body, params, query, headers, formData, responseDescription } = joiDefinitions;
 
         if (body) {
             parameters.push({
@@ -159,6 +159,8 @@ class Swagger {
                 if (index > -1) {
                     toSwagger.properties.headers.properties[key].required = true;
                 }
+                //  delete authorization token  from swagger
+                if (key == "authorization") return;
                 parameters.push({
                     "in": "header",
                     "name": key,
@@ -166,6 +168,7 @@ class Swagger {
                 })
             });
         }
+
         if (this.paths && this.paths[transformPath]) {
             this.paths[transformPath] = {
                 ...this.paths[transformPath],
@@ -203,6 +206,18 @@ class Swagger {
                 }
             }
         }
+
+
+       // add security for specific routes based on auth.
+       this.paths[transformPath][method].security = [];
+       let availableAuths = Object.keys(AVAILABLE_AUTHS || {});
+       availableAuths.forEach((availableAuth) => {
+           if(AVAILABLE_AUTHS[availableAuth] === auth){
+               let securityObject = {};
+               securityObject[`${AVAILABLE_AUTHS[availableAuth]}TokenHeader`] = [];
+               this.paths[transformPath][method].security.push(securityObject);
+           }
+       });
 
         const newData = {
             ...otherData,

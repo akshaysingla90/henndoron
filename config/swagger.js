@@ -1,12 +1,12 @@
 module.exports = {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "Helen Application",
+    "version": "2.0.0",
+    "title": "Helen Aplication",
     "description": "Project",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
-      "name": "Helen Team"
+      "name": "Chicmic Team"
     },
     "license": {
       "name": "MIT"
@@ -23,5 +23,17 @@ module.exports = {
   ],
   "produces": [
     "application/json"
-  ]
+  ],
+  "securityDefinitions": { // security definitions can be multiple
+    "adminTokenHeader": {
+      "type": "apiKey",
+      "name": "authorization",
+      "in": "header"
+    },
+    "userTokenHeader": {
+      "type": "apiKey",
+      "name": "authorization",
+      "in": "header"
+    }
+  }
 };
