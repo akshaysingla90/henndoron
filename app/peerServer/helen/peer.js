@@ -12,7 +12,11 @@ peerConnection.connect = function (server, app) {
     });
     app.use('/peerjs', peerServer);
     peerServer.on('connection', (client) => {
-        console.log('Client connected', client);
+        console.log('Client connected', client.id);
+    });
+
+    peerServer.on('disconnect',(client) => {
+        console.log('Disconnected client is ', client.id);
     });
 };
 
