@@ -1,5 +1,5 @@
 const SERVICES = require(`../../services`);
-const {  userController  } = require(`../../controllers`);
+const { userController } = require(`../../controllers`);
 let { userModel } = require(`../../models`);
 const HELPERS = require("../../helpers");
 const { SOCKET_EVENTS, MESSAGES, ERROR_TYPES } = require('../../utils/constants');
@@ -18,9 +18,8 @@ socketConnection.connect = function (io) {
         /**
          * socket disconnect event.
          */
-        socket.on(SOCKET_EVENTS.DISCONNECT, async (data) => {
-            console.log('Disconnected socket id is ', data.userId);
-            await SERVICES.socketService.removeUserSocketId(data.userId);
+        socket.on(SOCKET_EVENTS.DISCONNECT, () => {
+            console.log('Disconnected socket id is ', socket.id);
         });
 
         socket.on('testing', (data) => {

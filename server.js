@@ -9,8 +9,6 @@ const EXPRESS = require("express");
 const CONFIG = require('./config');
 /**creating express server app for server */
 const app = EXPRESS();
-const { ExpressPeerServer } = require('peer');
-
 
 /********************************
  ***** Server Configuration *****
@@ -40,8 +38,9 @@ let startNodeserver = async () => {
 
 
 startNodeserver()
-  .then(() => {
-    connectPeerServer(server,app);
+  .then(async () => {
+    // start peer server with express server.
+    await require(`./app/peerServer/${CONFIG.PLATFORM}/peer`).connect(server, app);
     console.log('Node server running on ', CONFIG.server.URL);
   }).catch((err) => {
     console.log('Error in starting server', err);
@@ -52,14 +51,3 @@ process.on('unhandledRejection', error => {
   // Will print "unhandledRejection err is not defined"
   console.log('unhandledRejection', error);
 });
-
-/**
- * Start peer server with express app.
- */
-let connectPeerServer = (server, app) => {
-  const peerServer = ExpressPeerServer(server, {
-    debug: true,
-    path: '/myapp'
-  });
-  app.use('/peerjs', peerServer);
-};
