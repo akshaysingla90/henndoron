@@ -19,6 +19,8 @@ app.use(EXPRESS.static(__dirname + '/'));
 const server = require('http').Server(app);
 // const io = require('socket.io')(server);
 global.io = require('socket.io')(server);
+const p2p = require('socket.io-p2p-server').Server;
+global.io.use(p2p);
 
 
 /** Server is running here */
@@ -26,7 +28,7 @@ let startNodeserver = async () => {
   // express startup.
   await require(`./app/startup/${CONFIG.PLATFORM}/expressStartup`)(app);
   // start socket on server
-  await require(`./app/socket/${CONFIG.PLATFORM}/socket`).connect(global.io);
+  await require(`./app/socket/${CONFIG.PLATFORM}/socket`).connect(global.io, p2p);
 
   return new Promise((resolve, reject) => {
     server.listen(CONFIG.server.PORT, (err) => {
