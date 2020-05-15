@@ -55,7 +55,21 @@ CONSTANTS.EMAIL_CONTENTS = {
 };
 
 CONSTANTS.SOCKET_EVENTS = {
-  DISCONNECT: 'disconnect'
+  DISCONNECT: 'disconnect',
+  CONNECTION: 'connection',
+  PEER_MSG: 'peer-msg',
+  READY: 'ready',
+  GO_PRIVATE: 'go-private',
+  START_STREAM: 'start-stream',
+  REMOVE_CARD_FROM_QUEUE: 'removeCardFromQueue',
+  DISABLE_STUDENT_INTERATION: 'disableStudentInteraction',
+  ADD_CARD_TO_QUEUE: 'addCardToQueue',
+  DISABLE_INTERACTION: 'disableInteraction',
+  RECEIVE_GRADES: 'receiveGrades',
+  FLASH_CARDS_NEXT_ITEM: 'flashCardsNextItem',
+  PLAYER_CHRACTER_CONVERSATION: 'playCharacterConversation',
+  SHOW_FLASH_CARD: 'showFlashCard',
+  LAUNCH_ACTIVITY: 'launchActivity'
 };
 
 CONSTANTS.MAX_LIMITS_OF_USERS_FOR_SINGLE_ROOM = 4;
