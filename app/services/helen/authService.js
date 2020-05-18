@@ -59,7 +59,7 @@ authService.validateToken = async (token) => {
 authService.socketAuthentication = async (socket, next) => {
     try {
         // const token = socket.handshake.query.authToken;
-        const token = socket.handshake.query.name;
+        const token = socket.handshake.query.userName;
         console.log(token);
         if (token) {
             // const socketUser = await sessionModel.findOne({ token: token}).lean();
