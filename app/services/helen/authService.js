@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { SECURITY, MESSAGES, ERROR_TYPES } = require('../../utils/constants');
 const CONFIG = require('../../../config');
 const HELPERS = require("../../helpers");
-const {userModel,sessionModel} = require(`../../models`);
+const { userModel, sessionModel, testUserModel } = require(`../../models`);
 
 let authService = {};
 
@@ -34,7 +34,7 @@ let validateUser = async (request) => {
     try {
         // return request.headers.authorization === SECURITY.STATIC_TOKEN_FOR_AUTHORIZATION
         let decodedToken = jwt.verify(request.headers.authorization, SECURITY.JWT_SIGN_KEY);
-        let authenticatedUser = await userModel.findOne({ _id: decodedToken.id }).lean();
+        let authenticatedUser = await testUserModel.findOne({ _id: decodedToken.id }).lean();
         if (authenticatedUser) {
             request.user = authenticatedUser;
             return true;
@@ -58,11 +58,16 @@ authService.validateToken = async (token) => {
  */
 authService.socketAuthentication = async (socket, next) => {
     try {
-        const token = socket.handshake.query.authToken;
+        // const token = socket.handshake.query.authToken;
+        const token = socket.handshake.query.name;
+        console.log(token);
         if (token) {
-            const socketUser = await sessionModel.findOne({ token: token}).lean();
+            // const socketUser = await sessionModel.findOne({ token: token}).lean();
+            const socketUser = await testUserModel.findOne({ name: token }).lean();
             if (socketUser) {
-                socket.id = socketUser.userId;
+                // socket.id = socketUser.userId;
+                socket.id = socketUser._id;
+                console.log("socketId", socket.id);
                 return next();
             }
             else {
