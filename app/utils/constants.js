@@ -69,7 +69,11 @@ CONSTANTS.SOCKET_EVENTS = {
   FLASH_CARDS_NEXT_ITEM: 'flashCardsNextItem',
   PLAYER_CHRACTER_CONVERSATION: 'playCharacterConversation',
   SHOW_FLASH_CARD: 'showFlashCard',
-  LAUNCH_ACTIVITY: 'launchActivity'
+  LAUNCH_ACTIVITY: 'launchActivity',
+  CREATE_ROOM:'createRoom',
+  JOIN_ROOM:'joinRoom',
+  ROOM_DATA:'roomData',
+  EXIT_ROOM:'exitRoom'
 };
 
 CONSTANTS.MAX_LIMITS_OF_USERS_FOR_SINGLE_ROOM = 4;

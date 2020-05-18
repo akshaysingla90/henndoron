@@ -10,5 +10,6 @@ module.exports = {
     authService: require(`./${CONFIG.PLATFORM}/authService`),
     sessionService: require(`./${CONFIG.PLATFORM}/sessionService`),
     socketService: require(`./${CONFIG.PLATFORM}/socketService`),
-    fileUploadService: require(`./${CONFIG.PLATFORM}/fileUploadService`)
+    fileUploadService: require(`./${CONFIG.PLATFORM}/fileUploadService`),
+    roomService: require(`./${CONFIG.PLATFORM}/roomService`)
 };

@@ -5,5 +5,6 @@ const CONFIG = require('../../config');
  ********* independently ********
  ********************************/
 module.exports = {
-    userModel: require(`../models/${CONFIG.PLATFORM}/userModel`)
+    userModel: require(`../models/${CONFIG.PLATFORM}/userModel`),
+    roomModel:require(`../models/${CONFIG.PLATFORM}/roomModel`)
 };
