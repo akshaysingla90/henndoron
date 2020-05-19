@@ -70,12 +70,14 @@ CONSTANTS.SOCKET_EVENTS = {
   PLAYER_CHRACTER_CONVERSATION: 'playCharacterConversation',
   SHOW_FLASH_CARD: 'showFlashCard',
   LAUNCH_ACTIVITY: 'launchActivity',
-  CREATE_ROOM:'createRoom',
-  JOIN_ROOM:'joinRoom',
-  ROOM_DATA:'roomData',
-  EXIT_ROOM:'exitRoom',
-  SOCKET_ERROR:'socketError',
-  STUDENT_STATUS:'studentStatus'
+  CREATE_ROOM: 'createRoom',
+  JOIN_ROOM: 'joinRoom',
+  ROOM_DATA: 'roomData',
+  EXIT_ROOM: 'exitRoom',
+  SOCKET_ERROR: 'socketError',
+  STUDENT_STATUS: 'studentStatus',
+  SYNC_DATA: 'syncData',
+  RECONNECTED_SERVER: 'reconnectedServer'
 };
 
 CONSTANTS.MAX_LIMITS_OF_USERS_FOR_SINGLE_ROOM = 4;
@@ -89,9 +91,9 @@ CONSTANTS.PAGINATION = {
   DEFAULT_NUMBER_OF_DOCUMENTS_TO_SKIP: 0
 };
 
-CONSTANTS.STUDENT_STATUS= {
-  JOIN:1,
-  LEAVE:2
+CONSTANTS.STUDENT_STATUS = {
+  JOIN: 1,
+  LEAVE: 2
 }
 
 module.exports = CONSTANTS;

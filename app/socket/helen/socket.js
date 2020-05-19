@@ -13,6 +13,9 @@ socketConnection.connect = function (io, p2p) {
         let onGoingRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
         if (onGoingRoom) {
             socket.join(onGoingRoom._id.toString());
+            socket.emit(SOCKET_EVENTS.RECONNECTED_SERVER, { data: { reconnect: true } });
+            _.remove(onGoingRoom.users, { userId: onGoingRoom.createdBy })
+            io.to(onGoingRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onGoingRoom.users } });
         }
         socket.use((packet, next) => {
             console.log("Socket hit:=>", packet);
@@ -156,8 +159,8 @@ socketConnection.connect = function (io, p2p) {
             console.log("updatedRoom", updatedRoom._id);
             socket.join(data.roomId);
             socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: updatedRoom.users.length } });
-            if (socket.id != updatedRoom.createdBy.toString())
-                io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { studentId: socket.id, status: STUDENT_STATUS.JOIN } });
+            _.remove(updatedRoom.users, { userId: updatedRoom.createdBy })
+            io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: updatedRoom.users } });
         });
 
         // socket.on(SOCKET_EVENTS.ROOM_DATA, (data) => {             //{roomData:,roomId}
@@ -167,8 +170,16 @@ socketConnection.connect = function (io, p2p) {
         socket.on(SOCKET_EVENTS.EXIT_ROOM, async (data) => {         //{roomId:}
             let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $pull: { users: { userId: socket.id } } }, { lean: true, new: true });
             socket.leave(data.roomId);
-            if (socket.id != updatedRoom.createdBy.toString())
-                io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { studentId: socket.id, status: STUDENT_STATUS.LEAVE } });
+            _.remove(updatedRoom.users, { userId: updatedRoom.createdBy })
+            io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: updatedRoom.users } });
+        });
+
+        socket.on(SOCKET_EVENTS.SYNC_DATA, async (data) => {
+            console.log('sync data');
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
+            if (userRoom)
+                socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.SYNC_DATA, data);
+            // socket.broadcast.emit(SOCKET_EVENTS.SHOW_FLASH_CARD, data)
         });
     });
 };
