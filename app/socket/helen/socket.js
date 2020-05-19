@@ -9,6 +9,11 @@ socketConnection.connect = function (io, p2p) {
     io.use(authService.socketAuthentication);
     io.on(SOCKET_EVENTS.CONNECTION, async (socket) => {
         console.log('connection established', socket.id);
+        //get ongoing room of the user.
+        let onGoingRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
+        if (onGoingRoom) {
+            socket.join(onGoingRoom._id.toString());
+        }
         socket.use((packet, next) => {
             console.log("Socket hit:=>", packet);
             next();
