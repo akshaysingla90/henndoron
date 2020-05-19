@@ -145,7 +145,7 @@ socketConnection.connect = function (io, p2p) {
                 socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'room is full.' } });
                 return;
             }
-            let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $addToSet: { users: { userId: socket.id } } }, { lean: true });
+            let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $addToSet: { users: { userId: socket.id } } }, { lean: true,new:true });
             console.log("updatedRoom", updatedRoom._id);
             socket.join(data.roomId);
             socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: updatedRoom.users.length } });
