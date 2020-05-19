@@ -46,13 +46,13 @@ socketConnection.connect = function (io, p2p) {
          */
         socket.on(SOCKET_EVENTS.DISCONNECT, async () => {
             console.log('Disconnected socket id is ', socket.id);
-            let room = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
-            if (room) {
-                socket.leave(room._id.toString());
-                let updatedRoom = await roomService.updateRoom({ _id: room._id }, { $pull: { users: { userId: socket.id } } }, { lean: true, new: true });
-                if (socket.id != updatedRoom.createdBy.toString())
-                    io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { studentId: socket.id, status: STUDENT_STATUS.LEAVE } });
-            }
+            // let room = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
+            // if (room) {
+            //     socket.leave(room._id.toString());
+            //     let updatedRoom = await roomService.updateRoom({ _id: room._id }, { $pull: { users: { userId: socket.id } } }, { lean: true, new: true });
+            //     if (socket.id != updatedRoom.createdBy.toString())
+            //         io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { studentId: socket.id, status: STUDENT_STATUS.LEAVE } });
+            // }
             //remove from all the rooms.
         });
 
