@@ -136,13 +136,19 @@ socketConnection.connect = function (io, p2p) {
         });
 
         socket.on(SOCKET_EVENTS.CREATE_ROOM, async (data) => {        //{capacity:}
+            let roomNumber = await roomService.getRoom({}, {}, { sort: { _id: -1 } });
             //create room.
             let dataToSave = {
                 createdBy: socket.id,
                 users: [{ userId: socket.id }],
                 createdBy: socket.id,
-                capacity: data.capacity
+                capacity: data.capacity,
+                _id:'1'
             };
+            if (roomNumber) {
+                dataToSave['_id'] = parseInt(roomNumber._id) + 1;
+                dataToSave._id.toString();
+            }
             let roomInfo = await roomService.createRoom(dataToSave);
             console.log('roomInfo', roomInfo._id.toString());
             socket.join(roomInfo._id.toString());
