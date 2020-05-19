@@ -1,7 +1,7 @@
 
 const { SOCKET_EVENTS } = require('../../utils/constants');
 let _ = require(`lodash`);
-let { roomService,authService } = require(`../../services`);
+let { roomService, authService } = require(`../../services`);
 
 
 let socketConnection = {};
@@ -36,12 +36,12 @@ socketConnection.connect = function (io, p2p) {
         /**
          * socket disconnect event.
          */
-        socket.on(SOCKET_EVENTS.DISCONNECT,async () => {
+        socket.on(SOCKET_EVENTS.DISCONNECT, async () => {
             console.log('Disconnected socket id is ', socket.id);
-            let room = await roomService.getRoom({'users.userId':socket.id},{},{lean:true});
-            if(room){
-            socket.leave(room._id.toString());
-            await roomService.updateRoom({ _id: room._id }, { $pull: { users: { userId: socket.id } } });
+            let room = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            if (room) {
+                socket.leave(room._id.toString());
+                await roomService.updateRoom({ _id: room._id }, { $pull: { users: { userId: socket.id } } });
             }
             //remove from all the rooms.
         });
@@ -141,13 +141,14 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.JOIN_ROOM, async (data) => {     //{roomId:}
             let roomInfo = await roomService.getRoom({ _id: data.roomId }, {}, { lean: true });
-            if (roomInfo.users.length === roomInfo.capacity) {
+            if (roomInfo.users.length === (roomInfo.capacity + 1)) {
                 socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'room is full.' } });
                 return;
             }
-            let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $addToSet: { users: { userId: socket.id } } });
+            let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $addToSet: { users: { userId: socket.id } } }, { lean: true });
             console.log("updatedRoom", updatedRoom._id);
             socket.join(data.roomId);
+            socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: updatedRoom.users.length } });
         });
 
         // socket.on(SOCKET_EVENTS.ROOM_DATA, (data) => {             //{roomData:,roomId}

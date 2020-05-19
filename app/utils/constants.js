@@ -73,7 +73,8 @@ CONSTANTS.SOCKET_EVENTS = {
   CREATE_ROOM:'createRoom',
   JOIN_ROOM:'joinRoom',
   ROOM_DATA:'roomData',
-  EXIT_ROOM:'exitRoom'
+  EXIT_ROOM:'exitRoom',
+  SOCKET_ERROR:'socketError'
 };
 
 CONSTANTS.MAX_LIMITS_OF_USERS_FOR_SINGLE_ROOM = 4;
