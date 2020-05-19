@@ -38,7 +38,7 @@ socketConnection.connect = function (io, p2p) {
          */
         socket.on(SOCKET_EVENTS.DISCONNECT, async () => {
             console.log('Disconnected socket id is ', socket.id);
-            let room = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let room = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true,sort: { createdAt: -1 } });
             if (room) {
                 socket.leave(room._id.toString());
                 await roomService.updateRoom({ _id: room._id }, { $pull: { users: { userId: socket.id } } });
@@ -52,7 +52,7 @@ socketConnection.connect = function (io, p2p) {
         socket.on(SOCKET_EVENTS.REMOVE_CARD_FROM_QUEUE, async (data) => {
             console.log('removeCardFromQueue');
             //get user room.
-            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true,sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.REMOVE_CARD_FROM_QUEUE, data);
 
@@ -61,7 +61,7 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.DISABLE_STUDENT_INTERATION, async (data) => {
             console.log('disableStudentInteraction');
-            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true,sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.DISABLE_STUDENT_INTERATION, data);
             // socket.broadcast.emit(SOCKET_EVENTS.DISABLE_STUDENT_INTERATION, data)
@@ -69,7 +69,7 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.ADD_CARD_TO_QUEUE, async (data) => {
             console.log('addCardToQueue');
-            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true,sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.ADD_CARD_TO_QUEUE, data);
             // socket.broadcast.emit(SOCKET_EVENTS.ADD_CARD_TO_QUEUE, data)
@@ -78,7 +78,7 @@ socketConnection.connect = function (io, p2p) {
         socket.on(SOCKET_EVENTS.DISABLE_INTERACTION, async (data) => {
             console.log('disableInteraction');
             console.log('addCardToQueue');
-            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true,sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.DISABLE_INTERACTION, data);
             // socket.broadcast.emit(SOCKET_EVENTS.DISABLE_INTERACTION, data)
@@ -86,7 +86,7 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.RECEIVE_GRADES, async (data) => {
             console.log('receiveGrades');
-            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true,sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.RECEIVE_GRADES, data);
             // socket.broadcast.emit(SOCKET_EVENTS.RECEIVE_GRADES, data)
@@ -94,7 +94,7 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.FLASH_CARDS_NEXT_ITEM, async (data) => {
             console.log('flashCardsNextItem');
-            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.FLASH_CARDS_NEXT_ITEM, data);
             // socket.broadcast.emit(SOCKET_EVENTS.FLASH_CARDS_NEXT_ITEM, data)
@@ -102,7 +102,7 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.PLAYER_CHRACTER_CONVERSATION, async (data) => {
             console.log('playCharacterConversation');
-            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true,sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.PLAYER_CHRACTER_CONVERSATION, data);
             // socket.broadcast.emit(SOCKET_EVENTS.PLAYER_CHRACTER_CONVERSATION, data)
@@ -110,7 +110,7 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.SHOW_FLASH_CARD, async (data) => {
             console.log('showFlashCard');
-            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true,sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.SHOW_FLASH_CARD, data);
             // socket.broadcast.emit(SOCKET_EVENTS.SHOW_FLASH_CARD, data)
@@ -118,7 +118,7 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.LAUNCH_ACTIVITY, async (data) => {
             console.log('launchActivity');
-            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true });
+            let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true,sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.LAUNCH_ACTIVITY, data);
 
@@ -145,7 +145,7 @@ socketConnection.connect = function (io, p2p) {
                 socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'room is full.' } });
                 return;
             }
-            let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $addToSet: { users: { userId: socket.id } } }, { lean: true,new:true });
+            let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $addToSet: { users: { userId: socket.id } } }, { lean: true, new: true });
             console.log("updatedRoom", updatedRoom._id);
             socket.join(data.roomId);
             socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: updatedRoom.users.length } });
