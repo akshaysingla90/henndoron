@@ -42,7 +42,7 @@ let startNodeserver = async () => {
 startNodeserver()
   .then(async () => {
     // start peer server with express server.
-    await require(`./app/peerServer/${CONFIG.PLATFORM}/peer`).connect(server, app);
+    // await require(`./app/peerServer/${CONFIG.PLATFORM}/peer`).connect(server, app);
     console.log('Node server running on ', CONFIG.server.URL);
   }).catch((err) => {
     console.log('Error in starting server', err);

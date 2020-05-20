@@ -1,8 +1,8 @@
 
-const { SOCKET_EVENTS, STUDENT_STATUS } = require('../../utils/constants');
+const { SOCKET_EVENTS } = require('../../utils/constants');
 let _ = require(`lodash`);
 let { roomService, authService } = require(`../../services`);
-
+let { testUserModel } = require(`../../models`);
 
 let socketConnection = {};
 socketConnection.connect = function (io, p2p) {
@@ -136,14 +136,14 @@ socketConnection.connect = function (io, p2p) {
         });
 
         socket.on(SOCKET_EVENTS.CREATE_ROOM, async (data) => {        //{capacity:}
-            let roomNumber = await roomService.getRoom({}, {}, { sort: { _id: -1 } });
+            let roomNumber = await roomService.getRoom({}, {}, { sort: { createdAt: -1 } });
             //create room.
             let dataToSave = {
                 createdBy: socket.id,
                 users: [{ userId: socket.id }],
                 createdBy: socket.id,
                 capacity: data.capacity,
-                _id:'1'
+                _id: '1'
             };
             if (roomNumber) {
                 dataToSave['_id'] = parseInt(roomNumber._id) + 1;
@@ -161,17 +161,14 @@ socketConnection.connect = function (io, p2p) {
                 socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'room is full.' } });
                 return;
             }
-            let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $addToSet: { users: { userId: socket.id } } }, { lean: true, new: true });
+            let updatedRoom = await roomService.updateRoom({ _id: data.roomId, 'users.userId': { $ne: socket.id } }, { $addToSet: { users: { userId: socket.id } } }, { lean: true, new: true });
+            updatedRoom = updatedRoom ? updatedRoom : roomInfo;
             console.log("updatedRoom", updatedRoom._id);
             socket.join(data.roomId);
             socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: updatedRoom.users.length } });
             _.remove(updatedRoom.users, { userId: updatedRoom.createdBy })
             io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: updatedRoom.users } });
         });
-
-        // socket.on(SOCKET_EVENTS.ROOM_DATA, (data) => {             //{roomData:,roomId}
-        //     socket.to(data.roomId).emit(SOCKET_EVENTS.ROOM_DATA, { data: data.roomData });
-        // });
 
         socket.on(SOCKET_EVENTS.EXIT_ROOM, async (data) => {         //{roomId:}
             let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $pull: { users: { userId: socket.id } } }, { lean: true, new: true });
@@ -187,6 +184,22 @@ socketConnection.connect = function (io, p2p) {
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.SYNC_DATA, data);
             // socket.broadcast.emit(SOCKET_EVENTS.SHOW_FLASH_CARD, data)
         });
+
+        socket.on(SOCKET_EVENTS.SWITCH_TURN_BY_TEACHER, async (data) => {                 //{roomId:,users:[{userName:""},  ]}
+            io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { ...data } })
+        });
+
+        socket.on(SOCKET_EVENTS.SWITCH_TURN_BY_STUDENT, async (data) => {           //{roomId:""}
+            let roomInfo = await roomService.getRoom({ _id: data.roomId }, {}, { lean: true });
+            _.remove(roomInfo.users, { userId: roomInfo.createdBy });
+            let studentPos = roomInfo.users.map(function (e) {
+                return e.userId.toString();
+            }).indexOf(socket.id);
+            let nextPlayerUserId = (studentPos % (roomInfo.users.length - 1)) + 1;
+            console.log("nextPlayerUserId", nextPlayerUserId)
+            let nextPlayerInfo = await testUserModel.findOne({ _id: roomInfo.users[nextPlayerUserId].userId }, {}, { lean: true });
+            io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { roomId: data.roomId, users: [{ userName: nextPlayerInfo.name }] });
+        })
     });
 };
 

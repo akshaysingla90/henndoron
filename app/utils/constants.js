@@ -77,7 +77,10 @@ CONSTANTS.SOCKET_EVENTS = {
   SOCKET_ERROR: 'socketError',
   STUDENT_STATUS: 'studentStatus',
   SYNC_DATA: 'syncData',
-  RECONNECTED_SERVER: 'reconnectedServer'
+  RECONNECTED_SERVER: 'reconnectedServer',
+  SWITCH_TURN_BY_TEACHER:'switchTurnByTeacher',
+  SWITCH_TURN_BY_STUDENT:'switchTurnByStudent',
+  STUDENT_TURN:'studentTurn'
 };
 
 CONSTANTS.MAX_LIMITS_OF_USERS_FOR_SINGLE_ROOM = 4;
@@ -90,10 +93,5 @@ CONSTANTS.PAGINATION = {
   DEFAULT_LIMIT: 10,
   DEFAULT_NUMBER_OF_DOCUMENTS_TO_SKIP: 0
 };
-
-CONSTANTS.STUDENT_STATUS = {
-  JOIN: 1,
-  LEAVE: 2
-}
 
 module.exports = CONSTANTS;
