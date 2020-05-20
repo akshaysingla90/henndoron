@@ -1,4 +1,4 @@
-FROM node:8.9.4
+FROM node:12.16.3
 COPY . /app
 WORKDIR /app
 RUN npm install

@@ -20,7 +20,7 @@ joiUtils.Joi = Joi.extend((Joi) => ({
                 if (mongoose.Types.ObjectId.isValid(value)) {
                     return mongoose.Types.ObjectId(value);
                 }
-                return { value, errors: helpers.error('string.objectId') };
+                return helpers.error('string.objectId');
             }
         },
         isValidEmail: {
@@ -29,7 +29,7 @@ joiUtils.Joi = Joi.extend((Joi) => ({
                 if (filter.test(value.toLowerCase())) {
                     return value.toLowerCase();
                 }
-                return { value, errors: helpers.error('string.emailMessage') };
+                return helpers.error('string.emailMessage');
             }
         }
     }
