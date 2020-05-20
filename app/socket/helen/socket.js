@@ -199,10 +199,12 @@ socketConnection.connect = function (io, p2p) {
         socket.on(SOCKET_EVENTS.SWITCH_TURN_BY_STUDENT, async (data) => {           //{roomId:""}
             let roomInfo = await roomService.getRoom({ _id: data.roomId }, {}, { lean: true });
             _.remove(roomInfo.users, { userId: roomInfo.createdBy });
-            let studentPos = roomInfo.users.map(function (e) {
-                return e.userId.toString();
-            }).indexOf(socket.id);
-            let nextPlayerUserId = (studentPos % (roomInfo.users.length - 1)) + 1;
+            // let studentPos = roomInfo.users.map(function (e) {
+            //     return e.userId.toString() == socket.id;
+            // }).indexOf(socket.id);
+            let studentPos = _.findIndex(roomInfo.users, { userId: socket.id });
+            console.log(studentPos, "-------")
+            let nextPlayerUserId = ((studentPos + 1) % roomInfo.users.length) ;
             console.log("nextPlayerUserId", nextPlayerUserId)
             let nextPlayerInfo = await testUserModel.findOne({ _id: roomInfo.users[nextPlayerUserId].userId }, {}, { lean: true });
             io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { roomId: data.roomId, users: [{ userName: nextPlayerInfo.name }] });
