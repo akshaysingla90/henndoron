@@ -42,7 +42,7 @@ module.exports = async function (app) {
     // initialize mongodb 
     await require('../db_mongo')();
     //TODO: remove after testing.
-    await userModel.insertMany([{ userName: 'chicmic1' }, { userName: 'chicmic2' }, { userName: 'chicmic3' }, { userName: 'chicmic4' }, { userName: 'chicmic5' }, { userName: 'chicmic6' }, { userName: 'chicmic7' }, { userName: 'chicmic8' }, { userName: 'chicmic9' }, { userName: 'chicmic10' }, { userName: 'chicmic11' }])
+    // await userModel.insertMany([{ userName: 'chicmic1' }, { userName: 'chicmic2' }, { userName: 'chicmic3' }, { userName: 'chicmic4' }, { userName: 'chicmic5' }, { userName: 'chicmic6' }, { userName: 'chicmic7' }, { userName: 'chicmic8' }, { userName: 'chicmic9' }, { userName: 'chicmic10' }, { userName: 'chicmic11' }])
     // initalize routes.
     await routeUtils.route(app, routes);
 };
