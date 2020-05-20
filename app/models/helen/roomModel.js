@@ -11,7 +11,8 @@ const roomSchema = new Schema({
     createdBy: { type: Schema.Types.ObjectId, required: true },
     capacity: { type: Number, default: 1 },
     isDeleted: { type: Boolean, default: false },
-    tempRoomId: { type: Number }
+    tempRoomId: { type: Number },
+    roomData: { type: Object, default: {} }
 });
 
 roomSchema.set('timestamps', true);

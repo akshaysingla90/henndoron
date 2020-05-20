@@ -80,7 +80,8 @@ CONSTANTS.SOCKET_EVENTS = {
   RECONNECTED_SERVER: 'reconnectedServer',
   SWITCH_TURN_BY_TEACHER:'switchTurnByTeacher',
   SWITCH_TURN_BY_STUDENT:'switchTurnByStudent',
-  STUDENT_TURN:'studentTurn'
+  STUDENT_TURN:'studentTurn',
+  UPDATE_ROOM_DATA:'updateRoomData'
 };
 
 CONSTANTS.MAX_LIMITS_OF_USERS_FOR_SINGLE_ROOM = 4;

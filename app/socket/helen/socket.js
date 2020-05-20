@@ -13,6 +13,11 @@ socketConnection.connect = function (io, p2p) {
         let onGoingRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
         if (onGoingRoom) {
             socket.join(onGoingRoom._id.toString());
+            if (onGoingRoom.createdBy.toString() == socket.id) {
+                io.in(onGoingRoom._id).emit(SOCKET_EVENTS.SYNC_DATA, { data: { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} } });
+            } else {
+                socket.to(onGoingRoom._id.toString()).emit(SOCKET_EVENTS.SYNC_DATA, { data: { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} } });
+            }
             socket.emit(SOCKET_EVENTS.RECONNECTED_SERVER, { data: { reconnect: true } });
             _.remove(onGoingRoom.users, { userId: onGoingRoom.createdBy })
             io.to(onGoingRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onGoingRoom.users } });
@@ -174,7 +179,7 @@ socketConnection.connect = function (io, p2p) {
             socket.join(data.roomId);
             socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: roomInfoWithUserInfo.users.length } });
             // _.remove(updatedRoom.users, { userId: roomInfoWithUserInfo.createdBy })
-            io.to(roomInfoWithUserInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: roomInfoWithUserInfo.userName } });
+            io.to(roomInfoWithUserInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: roomInfoWithUserInfo.userName, roomData: roomInfoWithUserInfo.roomData || {} } });
         });
 
         socket.on(SOCKET_EVENTS.EXIT_ROOM, async (data) => {         //{roomId:}
@@ -204,11 +209,15 @@ socketConnection.connect = function (io, p2p) {
             // }).indexOf(socket.id);
             let studentPos = _.findIndex(roomInfo.users, { userId: socket.id });
             console.log(studentPos, "-------")
-            let nextPlayerUserId = ((studentPos + 1) % roomInfo.users.length) ;
+            let nextPlayerUserId = ((studentPos + 1) % roomInfo.users.length);
             console.log("nextPlayerUserId", nextPlayerUserId)
             let nextPlayerInfo = await testUserModel.findOne({ _id: roomInfo.users[nextPlayerUserId].userId }, {}, { lean: true });
             io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { roomId: data.roomId, users: [{ userName: nextPlayerInfo.name }] });
         })
+
+        socket.on(SOCKET_EVENTS.UPDATE_ROOM_DATA, async (data) => {                 //{roomId:,roomData:{}}
+            await roomService.updateRoom({ _id: data.roomId }, { roomId: data.roomData });
+        });
     });
 };
 
