@@ -177,9 +177,9 @@ socketConnection.connect = function (io, p2p) {
             }
 
             socket.join(data.roomId);
-            socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: roomInfoWithUserInfo.users.length } });
+            socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: roomInfoWithUserInfo.users.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId: data.roomId } });
             // _.remove(updatedRoom.users, { userId: roomInfoWithUserInfo.createdBy })
-            io.to(roomInfoWithUserInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: roomInfoWithUserInfo.userName, roomData: roomInfoWithUserInfo.roomData || {} } });
+            io.to(roomInfoWithUserInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: roomInfoWithUserInfo.userName } });
         });
 
         socket.on(SOCKET_EVENTS.EXIT_ROOM, async (data) => {         //{roomId:}
