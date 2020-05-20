@@ -157,23 +157,30 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.JOIN_ROOM, async (data) => {     //{roomId:}
             let roomInfo = await roomService.getRoom({ _id: data.roomId }, {}, { lean: true });
+            // let roomInfo = await roomService.getRoomWithUsersInfo({ _id: data.roomId });
             if (roomInfo.users.length === (roomInfo.capacity + 1)) {
                 socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'room is full.' } });
                 return;
             }
-            let updatedRoom = await roomService.updateRoom({ _id: data.roomId, 'users.userId': { $ne: socket.id } }, { $addToSet: { users: { userId: socket.id } } }, { lean: true, new: true });
-            updatedRoom = updatedRoom ? updatedRoom : roomInfo;
-            console.log("updatedRoom", updatedRoom._id);
+            await roomService.updateRoom({ _id: data.roomId, 'users.userId': { $ne: socket.id } }, { $addToSet: { users: { userId: socket.id } } }, { lean: true, new: true });
+            let roomInfoWithUserInfo = await roomService.getRoomWithUsersInfo({ _id: data.roomId });
+            roomInfoWithUserInfo = roomInfoWithUserInfo[0] || {};
+            for (let i = 0; i < roomInfoWithUserInfo.userName.length; i++) {
+                roomInfoWithUserInfo.userName[i].userName = roomInfoWithUserInfo.userName[i]['name'];
+                delete roomInfoWithUserInfo.userName[i].name;
+                delete roomInfoWithUserInfo.userName[i]._id;
+            }
+
             socket.join(data.roomId);
-            socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: updatedRoom.users.length } });
-            _.remove(updatedRoom.users, { userId: updatedRoom.createdBy })
-            io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: updatedRoom.users } });
+            socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: roomInfoWithUserInfo.users.length } });
+            // _.remove(updatedRoom.users, { userId: roomInfoWithUserInfo.createdBy })
+            io.to(roomInfoWithUserInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: roomInfoWithUserInfo.userName } });
         });
 
         socket.on(SOCKET_EVENTS.EXIT_ROOM, async (data) => {         //{roomId:}
             let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $pull: { users: { userId: socket.id } } }, { lean: true, new: true });
             socket.leave(data.roomId);
-            _.remove(updatedRoom.users, { userId: updatedRoom.createdBy })
+            _.remove(updatedRoom.users, { userId: updatedRoom.createdBy });
             io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: updatedRoom.users } });
         });
 

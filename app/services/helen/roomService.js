@@ -21,4 +21,20 @@ roomService.getRoom = async (criteria, projection, options) => {
     return await roomModel.findOne(criteria, projection, options);
 };
 
+//function to get room info with userInfo.
+roomService.getRoomWithUsersInfo = async (criteria) => {
+    let query = [
+        { $match: { ...criteria } },
+        {
+            $lookup: {
+                from: 'testusers',
+                localField: 'users.userId',
+                foreignField: '_id',
+                as: 'userName'
+            }
+        }
+    ];
+    return roomModel.aggregate(query);
+};
+
 module.exports = roomService;
