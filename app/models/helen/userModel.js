@@ -6,7 +6,7 @@ const Schema = MONGOOSE.Schema;
  ************* User Model or collection ***********
  **************************************************/
 const userSchema = new Schema({
-    name: { type: { first: String, last: String } },
+    userName: { type:String},
     email: { type: String },
     password: { type: String }
 });

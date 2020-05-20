@@ -63,7 +63,7 @@ authService.socketAuthentication = async (socket, next) => {
         console.log(token);
         if (token) {
             // const socketUser = await sessionModel.findOne({ token: token}).lean();
-            const socketUser = await testUserModel.findOne({ name: token }).lean();
+            const socketUser = await userModel.findOne({ userName: token }).lean();
             if (socketUser) {
                 // socket.id = socketUser.userId;
                 socket.id = socketUser._id;

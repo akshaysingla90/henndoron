@@ -11,16 +11,21 @@ socketConnection.connect = function (io, p2p) {
         console.log('connection established', socket.id);
         //get ongoing room of the user.
         let onGoingRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
+        // let onGoingRoom = await roomService.getRoomWithUsersInfo({ 'users.userId': socket.id });
         if (onGoingRoom) {
+            let updatedRoom = await roomService.updateRoom({ _id: onGoingRoom._id, 'users.userId': socket.id }, { 'users.$.isOnline': true }, { new: true, lean: true });
+            onGoingRoom = (await roomService.getRoomWithUsersInfo({ _id: updatedRoom._id }))[0];
             socket.join(onGoingRoom._id.toString());
             if (onGoingRoom.createdBy.toString() == socket.id) {
-                io.in(onGoingRoom._id).emit(SOCKET_EVENTS.SYNC_DATA, { data: { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} } });
+                io.in(onGoingRoom._id.toString()).emit(SOCKET_EVENTS.SYNC_DATA, { data: { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} } });
             } else {
                 socket.to(onGoingRoom._id.toString()).emit(SOCKET_EVENTS.SYNC_DATA, { data: { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} } });
             }
             socket.emit(SOCKET_EVENTS.RECONNECTED_SERVER, { data: { reconnect: true } });
-            _.remove(onGoingRoom.users, { userId: onGoingRoom.createdBy })
-            io.to(onGoingRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onGoingRoom.users } });
+            // _.remove(onGoingRoom.users, { userId: onGoingRoom.createdBy });
+            let onlineUsers = onlineUsersFromAllUsers(onGoingRoom.users);
+            // io.to(onGoingRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers }, roomId: onGoingRoom._id });
+            io.in(onGoingRoom._id).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers }, roomId: onGoingRoom._id });
         }
         socket.use((packet, next) => {
             console.log("Socket hit:=>", packet);
@@ -51,14 +56,16 @@ socketConnection.connect = function (io, p2p) {
          */
         socket.on(SOCKET_EVENTS.DISCONNECT, async () => {
             console.log('Disconnected socket id is ', socket.id);
-            // let room = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
-            // if (room) {
-            //     socket.leave(room._id.toString());
-            //     let updatedRoom = await roomService.updateRoom({ _id: room._id }, { $pull: { users: { userId: socket.id } } }, { lean: true, new: true });
-            //     if (socket.id != updatedRoom.createdBy.toString())
-            //         io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { studentId: socket.id, status: STUDENT_STATUS.LEAVE } });
-            // }
-            //remove from all the rooms.
+            let room = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
+            if (room) {
+                socket.leave(room._id.toString());
+                let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
+                let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: room._id }))[0];
+                let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
+                // io.to(latestRoomInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: room._id } });
+                io.in(latestRoomInfo._id.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: room._id } });
+
+            }
         });
 
         /**
@@ -162,35 +169,42 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.JOIN_ROOM, async (data) => {     //{roomId:}
             let roomInfo = await roomService.getRoom({ _id: data.roomId }, {}, { lean: true });
-            // let roomInfo = await roomService.getRoomWithUsersInfo({ _id: data.roomId });
+            if (!roomInfo) {
+                socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'Invalid room id.' } });
+                return;
+            }
             if (roomInfo.users.length === (roomInfo.capacity + 1)) {
                 socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'room is full.' } });
                 return;
             }
-            await roomService.updateRoom({ _id: data.roomId, 'users.userId': { $ne: socket.id } }, { $addToSet: { users: { userId: socket.id } } }, { lean: true, new: true });
+            //update the room.
+            //check is user already in room then change the status of the user.
+            let updatedRoom = await roomService.updateRoom({ _id: data.roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true }, { lean: true, new: true });
+            if (!updatedRoom) {
+                updatedRoom = await roomService.updateRoom({ _id: data.roomId, 'users.userId': { $ne: socket.id } }, { $push: { users: { userId: socket.id } } }, { lean: true, new: true });
+            }
             let roomInfoWithUserInfo = await roomService.getRoomWithUsersInfo({ _id: data.roomId });
             roomInfoWithUserInfo = roomInfoWithUserInfo[0] || {};
-            for (let i = 0; i < roomInfoWithUserInfo.userName.length; i++) {
-                roomInfoWithUserInfo.userName[i].userName = roomInfoWithUserInfo.userName[i]['name'];
-                delete roomInfoWithUserInfo.userName[i].name;
-                delete roomInfoWithUserInfo.userName[i]._id;
-            }
-
+            let allUsers = [...roomInfoWithUserInfo.users];
+            let onlineUsers = onlineUsersFromAllUsers(allUsers);
             socket.join(data.roomId);
-            socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: roomInfoWithUserInfo.users.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId: data.roomId } });
-            // _.remove(updatedRoom.users, { userId: roomInfoWithUserInfo.createdBy })
-            io.to(roomInfoWithUserInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: roomInfoWithUserInfo.userName } });
+            socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId: data.roomId } });
+            // io.to(roomInfoWithUserInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: data.roomId } });
+            io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: data.roomId } });
+
         });
 
         socket.on(SOCKET_EVENTS.EXIT_ROOM, async (data) => {         //{roomId:}
             let updatedRoom = await roomService.updateRoom({ _id: data.roomId }, { $pull: { users: { userId: socket.id } } }, { lean: true, new: true });
             socket.leave(data.roomId);
             _.remove(updatedRoom.users, { userId: updatedRoom.createdBy });
-            io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: updatedRoom.users } });
+            // io.to(updatedRoom.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: updatedRoom.users, roomId: data.roomId } });
+            io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: updatedRoom.users, roomId: data.roomId } });
         });
 
         socket.on(SOCKET_EVENTS.SYNC_DATA, async (data) => {
             console.log('sync data');
+            // let userRoom = await roomService.getRoom({ users: { $elemMatch: { userId: socket.id, isOnline: true } } }, {}, { lean: true, sort: { createdAt: -1 } });
             let userRoom = await roomService.getRoom({ 'users.userId': socket.id }, {}, { lean: true, sort: { createdAt: -1 } });
             if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.SYNC_DATA, data);
@@ -202,17 +216,19 @@ socketConnection.connect = function (io, p2p) {
         });
 
         socket.on(SOCKET_EVENTS.SWITCH_TURN_BY_STUDENT, async (data) => {           //{roomId:""}
-            let roomInfo = await roomService.getRoom({ _id: data.roomId }, {}, { lean: true });
+            let roomInfoWithUserInfo = await roomService.getRoomWithUsersInfo({ _id: data.roomId });
+            let roomInfo = roomInfoWithUserInfo[0] || {};
+            // let roomInfo = await roomService.getRoom({ _id: data.roomId }, {}, { lean: true });
             _.remove(roomInfo.users, { userId: roomInfo.createdBy });
             // let studentPos = roomInfo.users.map(function (e) {
             //     return e.userId.toString() == socket.id;
             // }).indexOf(socket.id);
-            let studentPos = _.findIndex(roomInfo.users, { userId: socket.id });
-            console.log(studentPos, "-------")
-            let nextPlayerUserId = ((studentPos + 1) % roomInfo.users.length);
-            console.log("nextPlayerUserId", nextPlayerUserId)
-            let nextPlayerInfo = await testUserModel.findOne({ _id: roomInfo.users[nextPlayerUserId].userId }, {}, { lean: true });
-            io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { roomId: data.roomId, users: [{ userName: nextPlayerInfo.name }] });
+            let allUsers = [...roomInfo.users];
+            let onlineUsers = onlineUsersFromAllUsers(allUsers);
+            let studentPos = _.findIndex(onlineUsers, { userId: socket.id });
+            let nextPlayerIndex = ((studentPos + 1) % onlineUsers.length);
+            // let nextPlayerInfo = await testUserModel.findOne({ _id: roomInfo.users[nextPlayerUserId].userId }, {}, { lean: true });
+            io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { roomId: data.roomId, users: [{ userName: onlineUsers[nextPlayerIndex].userName }] } });
         })
 
         socket.on(SOCKET_EVENTS.UPDATE_ROOM_DATA, async (data) => {                 //{roomId:,roomData:{}}
@@ -221,4 +237,9 @@ socketConnection.connect = function (io, p2p) {
     });
 };
 
+let onlineUsersFromAllUsers = (allUsers) => {
+    return _.filter(allUsers, {
+        isOnline: true
+    });
+};
 module.exports = socketConnection;

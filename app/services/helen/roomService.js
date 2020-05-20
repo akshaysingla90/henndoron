@@ -25,14 +25,49 @@ roomService.getRoom = async (criteria, projection, options) => {
 roomService.getRoomWithUsersInfo = async (criteria) => {
     let query = [
         { $match: { ...criteria } },
+        { $unwind: '$users' },
         {
             $lookup: {
-                from: 'testusers',
+                from: 'users',
                 localField: 'users.userId',
                 foreignField: '_id',
-                as: 'userName'
+                as: 'users.userInfo'
             }
+        },
+        {
+            $unwind: '$users.userInfo'
+        },
+        {
+            $addFields: {
+                'users.userName': '$users.userInfo.userName'
+            }
+        },
+        {
+            $project: { 'users.userInfo': 0 }
+        },
+        {
+            $group: {
+                _id: '$_id',
+                root: { $mergeObjects: '$$ROOT' },
+                users: { $push: '$users' }
+            }
+        },
+        {
+            $replaceRoot: {
+                newRoot: {
+                    $mergeObjects: ['$root', '$$ROOT']
+                }
+            }
+        },
+        {
+            $project: {
+                root: 0
+            }
+        },
+        {
+            $sort: { createdAt: -1 }
         }
+
     ];
     return roomModel.aggregate(query);
 };
