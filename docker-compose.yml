@@ -18,7 +18,7 @@ services:
       - SERVER_PORT=5000
       - DOMAIN_PROTOCOL=http
       - DOMAIN_HOST=127.0.0.1
-      - DOMAIN_PORT=3000
+      - DOMAIN_PORT=5000
       - NODE_ENV=development
       - PLATFORM=helen
   helen-database:

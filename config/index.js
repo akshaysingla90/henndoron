@@ -60,7 +60,7 @@ var defaults = {
     domain: {
         PROTOCOL: process.env.DOMAIN_PROTOCOL || 'http',
         HOST: process.env.DOMAIN_HOST || '127.0.0.1',
-        PORT: process.env.DOMAIN_PORT ? process.env.DOMAIN_PORT : '3000',
+        PORT: process.env.DOMAIN_PORT ? process.env.DOMAIN_PORT : '5000',
         get URL() { return `${this.PROTOCOL}://${this.HOST}${!!this.PORT ? ':' + this.PORT : ''}` }
     },
     server: {
@@ -70,7 +70,7 @@ var defaults = {
         get URL() { return `${this.PROTOCOL}://${this.HOST}:${this.PORT}` }
     },
     PATH_FOR_LOCAL: process.env.PATH_FOR_LOCAL || '/uploads/',
-    SERVER_URL: process.env.SERVER_URL || 'http://localhost:3000',
+    SERVER_URL: process.env.SERVER_URL || 'http://localhost:5000',
     swagger: require('./swagger'),
     s3Bucket: {
         accessKeyId: process.env.ACCESS_KEY_ID || 'access-key-id',
@@ -81,7 +81,7 @@ var defaults = {
         PORT: process.env.REDIS_PORT || '6379',
         HOST: process.env.REDIS_HOST || '127.0.0.1'
     },
-    SERVER_URL: process.env.SERVER_URL || 'http://localhost:3000',
+    SERVER_URL: process.env.SERVER_URL || 'http://localhost:5000',
     PATH_TO_UPLOAD_FILES_ON_LOCAL: process.env.PATH_TO_UPLOAD_FILES_ON_LOCAL || '/uploads/files',
 };
 
