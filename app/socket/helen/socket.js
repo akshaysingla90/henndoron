@@ -232,7 +232,7 @@ socketConnection.connect = function (io, p2p) {
         })
 
         socket.on(SOCKET_EVENTS.UPDATE_ROOM_DATA, async (data) => {                 //{roomId:,roomData:{}}
-            await roomService.updateRoom({ _id: data.roomId }, { roomId: data.roomData });
+            await roomService.updateRoom({ _id: data.roomId }, { roomData: data.roomData });
         });
     });
 };
