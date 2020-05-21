@@ -78,10 +78,11 @@ CONSTANTS.SOCKET_EVENTS = {
   STUDENT_STATUS: 'studentStatus',
   SYNC_DATA: 'syncData',
   RECONNECTED_SERVER: 'reconnectedServer',
-  SWITCH_TURN_BY_TEACHER:'switchTurnByTeacher',
-  SWITCH_TURN_BY_STUDENT:'switchTurnByStudent',
-  STUDENT_TURN:'studentTurn',
-  UPDATE_ROOM_DATA:'updateRoomData'
+  SWITCH_TURN_BY_TEACHER: 'switchTurnByTeacher',
+  SWITCH_TURN_BY_STUDENT: 'switchTurnByStudent',
+  STUDENT_TURN: 'studentTurn',
+  UPDATE_ROOM_DATA: 'updateRoomData',
+  COMPLETE_LEASSON: 'completeLesson'
 };
 
 CONSTANTS.MAX_LIMITS_OF_USERS_FOR_SINGLE_ROOM = 4;
@@ -94,5 +95,10 @@ CONSTANTS.PAGINATION = {
   DEFAULT_LIMIT: 10,
   DEFAULT_NUMBER_OF_DOCUMENTS_TO_SKIP: 0
 };
+
+CONSTANTS.LESSON_STATUS = {
+  ON_GOING: 1,
+  COMPLETE: 2
+}
 
 module.exports = CONSTANTS;
