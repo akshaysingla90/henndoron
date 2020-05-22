@@ -221,7 +221,7 @@ socketConnection.connect = function (io, p2p) {
             //get userInfo
             let userInfo = await userService.getUser({ userName: (data.users[0] || {}).userName || '' }, {});
             //update user turn in database.
-            await roomService.updateRoom({ _id: data.roomId }, { $set: { currentTurnUserId: (userInfo || {})._id.toString() || '' } });
+            await roomService.updateRoom({ _id: data.roomId }, { $set: { currentTurnUserId: (userInfo || {})._id || '' } });
             io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { ...data } })
         });
 
