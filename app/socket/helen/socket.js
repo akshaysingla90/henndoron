@@ -62,7 +62,7 @@ socketConnection.connect = function (io, p2p) {
                 socket.leave(room._id.toString());
                 let dataToUpdate = {};
                 if (room.currentTurnUserId && room.currentTurnUserId.toString() == socket.id) {
-                    dataToUpdate = { currentTurnUserId: '' };
+                    dataToUpdate = { $unset: { currentTurnUserId: '' } };
                     io.in(room._id.toString()).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { users: [] } });
                 }
                 let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
