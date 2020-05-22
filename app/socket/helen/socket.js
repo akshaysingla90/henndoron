@@ -61,7 +61,7 @@ socketConnection.connect = function (io, p2p) {
             if (room) {
                 socket.leave(room._id.toString());
                 let dataToUpdate = {};
-                if (room.currentTurnUserId.toString() == socket.id) {
+                if (room.currentTurnUserId && room.currentTurnUserId.toString() == socket.id) {
                     dataToUpdate = { currentTurnUserId: '' };
                     io.in(room._id.toString()).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { users: [] } });
                 }
