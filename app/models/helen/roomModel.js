@@ -13,6 +13,7 @@ const roomSchema = new Schema({
     isDeleted: { type: Boolean, default: false },
     roomData: { type: Object, default: {} },
     lessonStatus: { type: Number, enum: [1, 2], default: 1 },      //1 for ongoing 2 for complete
+    currentTurnUserId: { type: Schema.Types.ObjectId }
 });
 
 roomSchema.set('timestamps', true);
