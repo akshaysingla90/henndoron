@@ -61,10 +61,10 @@ socketConnection.connect = function (io, p2p) {
             if (room) {
                 socket.leave(room._id.toString());
                 let dataToUpdate = {};
-                // if (room.currentTurnUserId && room.currentTurnUserId.toString() == socket.id) {
-                //     dataToUpdate = { $unset: { currentTurnUserId: '' } };
-                //     io.in(room._id.toString()).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { users: [] } });
-                // }
+                if (room.currentTurnUserId && room.currentTurnUserId == socket.id) {
+                    dataToUpdate = { currentTurnUserId: '' };
+                    io.in(room._id.toString()).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { users: [] } });
+                }
                 let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
                 let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: room._id }))[0];
                 let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
@@ -221,7 +221,7 @@ socketConnection.connect = function (io, p2p) {
             //get userInfo
             let userInfo = await userService.getUser({ userName: (data.users[0] || {}).userName || '' }, {});
             //update user turn in database.
-            // await roomService.updateRoom({ _id: data.roomId }, { $set: { currentTurnUserId: (userInfo || {})._id || '' } });
+            await roomService.updateRoom({ _id: data.roomId }, { $set: { currentTurnUserId: (userInfo || {})._id.toString() || '' } });
             io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { ...data } })
         });
 
@@ -237,8 +237,8 @@ socketConnection.connect = function (io, p2p) {
             let onlineUsers = onlineUsersFromAllUsers(allUsers);
             let studentPos = _.findIndex(onlineUsers, { userId: socket.id });
             let nextPlayerIndex = ((studentPos + 1) % onlineUsers.length);
-            //update the turn in the database
-            // await roomService.updateRoom({ _id: data.roomId }, { $set: { currentTurnUserId: onlineUsers[nextPlayerIndex].userId } });
+            // update the turn in the database
+            await roomService.updateRoom({ _id: data.roomId }, { $set: { currentTurnUserId: onlineUsers[nextPlayerIndex].userId.toString() } });
             // let nextPlayerInfo = await testUserModel.findOne({ _id: roomInfo.users[nextPlayerUserId].userId }, {}, { lean: true });
             io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { roomId: data.roomId, users: [{ userName: onlineUsers[nextPlayerIndex].userName }] } });
         })
