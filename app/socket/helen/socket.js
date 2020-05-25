@@ -155,6 +155,7 @@ socketConnection.connect = function (io, p2p) {
 
         socket.on(SOCKET_EVENTS.CREATE_ROOM, async (data) => {        //{capacity:}
             let roomNumber = await roomService.getRoom({}, {}, { sort: { createdAt: -1 } });
+            await leaveAllPreviousRooms(socket);
             //create room.
             let dataToSave = {
                 createdBy: socket.id,
@@ -174,6 +175,7 @@ socketConnection.connect = function (io, p2p) {
         });
 
         socket.on(SOCKET_EVENTS.JOIN_ROOM, async (data) => {     //{roomId:}
+            await leaveAllPreviousRooms(socket);
             let roomInfo = await roomService.getRoom({ _id: data.roomId, lessonStatus: LESSON_STATUS.ON_GOING }, {}, { lean: true });
             if (!roomInfo) {
                 socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'Invalid room id.' } });
@@ -193,7 +195,7 @@ socketConnection.connect = function (io, p2p) {
             roomInfoWithUserInfo = roomInfoWithUserInfo[0] || {};
             let allUsers = [...roomInfoWithUserInfo.users];
             let onlineUsers = onlineUsersFromAllUsers(allUsers);
-            socket.join(data.roomId);
+            let ongoingRooms = io.sockets.adapter.sids[socket.id];
             socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId: data.roomId } });
             // io.to(roomInfoWithUserInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: data.roomId } });
             io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: data.roomId } });
@@ -277,4 +279,24 @@ let onlineUsersFromAllUsers = (allUsers) => {
         isOnline: true
     });
 };
+
+let leaveAllPreviousRooms = async (socket) => {
+    let ongoingRooms = io.sockets.adapter.sids[socket.id];
+    for (let room in ongoingRooms) {
+        socket.leave(room);
+        let roomInfo = await roomService.getRoom({ _id: room }, {}, { lean: true });
+        if (roomInfo) {
+            let dataToUpdate = {};
+            if (roomInfo.currentTurnUserId && roomInfo.currentTurnUserId == socket.id) {
+                dataToUpdate = { currentTurnUserId: '' };
+                io.in(room._id.toString()).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { users: [] } });
+            }
+            let updatedRoom = await roomService.updateRoom({ _id: roomInfo._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
+            let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: roomInfo._id }))[0];
+            let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
+            io.in(latestRoomInfo._id.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: roomInfo._id } });
+        }
+    }
+
+}
 module.exports = socketConnection;
