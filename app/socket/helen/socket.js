@@ -195,6 +195,7 @@ socketConnection.connect = function (io, p2p) {
             roomInfoWithUserInfo = roomInfoWithUserInfo[0] || {};
             let allUsers = [...roomInfoWithUserInfo.users];
             let onlineUsers = onlineUsersFromAllUsers(allUsers);
+            socket.join(data.roomId);
             socket.emit(SOCKET_EVENTS.JOIN_ROOM, { data: { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId: data.roomId } });
             // io.to(roomInfoWithUserInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: data.roomId } });
             io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: data.roomId } });
@@ -281,11 +282,8 @@ let onlineUsersFromAllUsers = (allUsers) => {
 
 let leaveAllPreviousRooms = async (socket, io) => {
     let ongoingRooms = io.sockets.adapter.sids[socket.id];
-    console.log("ongoingRooms", ongoingRooms);
-
     for (let room in ongoingRooms) {
         let roomInfo = await roomService.getRoom({ _id: room.toString() }, {}, { lean: true });
-        console.log(roomInfo);
         socket.leave(room.toString());
         if (roomInfo) {
             let dataToUpdate = {};
