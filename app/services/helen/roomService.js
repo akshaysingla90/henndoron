@@ -72,4 +72,9 @@ roomService.getRoomWithUsersInfo = async (criteria) => {
     return roomModel.aggregate(query);
 };
 
+//Function to get all rooms.
+roomService.getAllRooms = async (criteria, projection, options) => {
+    return await roomModel.find(criteria, projection, options);
+};
+
 module.exports = roomService;

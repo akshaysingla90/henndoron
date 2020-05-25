@@ -1,7 +1,7 @@
 
-const { SOCKET_EVENTS, LESSON_STATUS } = require('../../utils/constants');
+const { SOCKET_EVENTS, LESSON_STATUS, USER_ROLE } = require('../../utils/constants');
 let _ = require(`lodash`);
-let { roomService, authService } = require(`../../services`);
+let { roomService, authService, userService } = require(`../../services`);
 
 let socketConnection = {};
 socketConnection.connect = function (io, p2p) {
@@ -16,6 +16,7 @@ socketConnection.connect = function (io, p2p) {
             let updatedRoom = await roomService.updateRoom({ _id: onGoingRoom._id, 'users.userId': socket.id }, { 'users.$.isOnline': true }, { new: true, lean: true });
             onGoingRoom = (await roomService.getRoomWithUsersInfo({ _id: updatedRoom._id }))[0];
             socket.join(onGoingRoom._id.toString());
+            console.log("RoomData", onGoingRoom.roomData)
             if (onGoingRoom.createdBy.toString() == socket.id) {
                 io.in(onGoingRoom._id.toString()).emit(SOCKET_EVENTS.SYNC_DATA, { data: { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} } });
             } else {
@@ -59,11 +60,17 @@ socketConnection.connect = function (io, p2p) {
             let room = await roomService.getRoom({ 'users.userId': socket.id, lessonStatus: LESSON_STATUS.ON_GOING }, {}, { lean: true, sort: { createdAt: -1 } });
             if (room) {
                 socket.leave(room._id.toString());
-                let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
+                let dataToUpdate = {};
+                if (room.currentTurnUserId && room.currentTurnUserId == socket.id) {
+                    dataToUpdate = { currentTurnUserId: '' };
+                    io.in(room._id.toString()).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { users: [] } });
+                }
+                let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
                 let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: room._id }))[0];
                 let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
                 // io.to(latestRoomInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: room._id } });
                 io.in(latestRoomInfo._id.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: room._id } });
+
             }
         });
 
@@ -211,6 +218,10 @@ socketConnection.connect = function (io, p2p) {
         });
 
         socket.on(SOCKET_EVENTS.SWITCH_TURN_BY_TEACHER, async (data) => {                 //{roomId:,users:[{userName:""},  ]}
+            //get userInfo
+            let userInfo = await userService.getUser({ userName: (data.users[0] || {}).userName || '' }, {});
+            //update user turn in database.
+            await roomService.updateRoom({ _id: data.roomId }, { $set: { currentTurnUserId: (userInfo || {})._id || '' } });
             io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { ...data } })
         });
 
@@ -226,6 +237,8 @@ socketConnection.connect = function (io, p2p) {
             let onlineUsers = onlineUsersFromAllUsers(allUsers);
             let studentPos = _.findIndex(onlineUsers, { userId: socket.id });
             let nextPlayerIndex = ((studentPos + 1) % onlineUsers.length);
+            // update the turn in the database
+            await roomService.updateRoom({ _id: data.roomId }, { $set: { currentTurnUserId: onlineUsers[nextPlayerIndex].userId.toString() } });
             // let nextPlayerInfo = await testUserModel.findOne({ _id: roomInfo.users[nextPlayerUserId].userId }, {}, { lean: true });
             io.in(data.roomId).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { roomId: data.roomId, users: [{ userName: onlineUsers[nextPlayerIndex].userName }] } });
         })
@@ -245,7 +258,17 @@ socketConnection.connect = function (io, p2p) {
                     }
                 }
             }
-        })
+        });
+
+        socket.on(SOCKET_EVENTS.LIST_OF_ROOMS, async (data) => {    //{role: 1/2}
+            let criteria = { lessonStatus: LESSON_STATUS.ON_GOING };
+            if (data.role === USER_ROLE.TEACHER) {
+                criteria = { createdBy: socket.id, ...criteria };
+            };
+            let list = await roomService.getAllRooms(criteria, { _id: 1 }, { sort: { createdAt: -1 } });
+            socket.emit(SOCKET_EVENTS.LIST_OF_ROOMS, { data: list })
+
+        });
     });
 };
 
