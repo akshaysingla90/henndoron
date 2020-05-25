@@ -82,7 +82,8 @@ CONSTANTS.SOCKET_EVENTS = {
   SWITCH_TURN_BY_STUDENT: 'switchTurnByStudent',
   STUDENT_TURN: 'studentTurn',
   UPDATE_ROOM_DATA: 'updateRoomData',
-  COMPLETE_LEASSON: 'completeLesson'
+  COMPLETE_LEASSON: 'completeLesson',
+  LIST_OF_ROOMS: 'listOfRooms'
 };
 
 CONSTANTS.MAX_LIMITS_OF_USERS_FOR_SINGLE_ROOM = 4;
@@ -99,6 +100,11 @@ CONSTANTS.PAGINATION = {
 CONSTANTS.LESSON_STATUS = {
   ON_GOING: 1,
   COMPLETE: 2
-}
+};
+
+CONSTANTS.USER_ROLE = {
+  STUDENT: 1,
+  TEACHER: 2
+};
 
 module.exports = CONSTANTS;

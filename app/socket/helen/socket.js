@@ -1,5 +1,5 @@
 
-const { SOCKET_EVENTS, LESSON_STATUS } = require('../../utils/constants');
+const { SOCKET_EVENTS, LESSON_STATUS, USER_ROLE } = require('../../utils/constants');
 let _ = require(`lodash`);
 let { roomService, authService, userService } = require(`../../services`);
 
@@ -258,7 +258,17 @@ socketConnection.connect = function (io, p2p) {
                     }
                 }
             }
-        })
+        });
+
+        socket.on(SOCKET_EVENTS.LIST_OF_ROOMS, async (data) => {    //{role: 1/2}
+            let criteria = { lessonStatus: LESSON_STATUS.ON_GOING };
+            if (data.role === USER_ROLE.TEACHER) {
+                criteria = { createdBy: socket.id, ...criteria };
+            };
+            let list = await roomService.getAllRooms(criteria, { _id: 1 }, { sort: { createdAt: -1 } });
+            socket.emit(SOCKET_EVENTS.LIST_OF_ROOMS, { data: list })
+
+        });
     });
 };
 
