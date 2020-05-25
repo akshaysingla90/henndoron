@@ -287,12 +287,12 @@ let leaveAllPreviousRooms = async (socket, io) => {
     for (let room in ongoingRooms) {
         let roomInfo = await roomService.getRoom({ _id: room.toString() }, {}, { lean: true });
         console.log(roomInfo);
-        socket.leave(room);
+        socket.leave(room.toString());
         if (roomInfo) {
             let dataToUpdate = {};
             if (roomInfo.currentTurnUserId && roomInfo.currentTurnUserId == socket.id) {
                 dataToUpdate = { currentTurnUserId: '' };
-                io.in(room._id.toString()).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { users: [] } });
+                io.in(roomInfo._id.toString()).emit(SOCKET_EVENTS.STUDENT_TURN, { data: { users: [] } });
             }
             let updatedRoom = await roomService.updateRoom({ _id: roomInfo._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
             let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: roomInfo._id }))[0];
