@@ -1,5 +1,5 @@
 
-const { SOCKET_EVENTS, LESSON_STATUS, USER_ROLE } = require('../../utils/constants');
+const { SOCKET_EVENTS, LESSON_STATUS, USER_ROLE, SOCKET_EVENTS_TYPES } = require('../../utils/constants');
 let _ = require(`lodash`);
 let { roomService, authService, userService } = require(`../../services`);
 
@@ -271,6 +271,77 @@ socketConnection.connect = function (io, p2p) {
             socket.emit(SOCKET_EVENTS.LIST_OF_ROOMS, { data: list })
 
         });
+
+
+
+        /**
+         * Single socket event to manage all the socket events.
+         * 
+         */
+        let dataForSingleEvent = {
+            eventName: 'eventName',
+            eventType: 1,
+            data: {
+
+            }
+        };
+
+
+        //   REMOVE_CARD_FROM_QUEUE: 1,
+        //   DISABLE_STUDENT_INTERATION: 2,
+        //   ADD_CARD_TO_QUEUE: 3,
+        //   DISABLE_INTERACTION: 4,
+        //   RECEIVE_GRADES: 5,
+        //   FLASH_CARDS_NEXT_ITEM: 6,
+        //   PLAYER_CHRACTER_CONVERSATION: 7,
+        //   SHOW_FLASH_CARD: 8,
+        //   LAUNCH_ACTIVITY: 9,
+
+
+        //   CREATE_ROOM: 10,
+        //   JOIN_ROOM: 11,
+        //   ROOM_DATA: 12,
+        //   EXIT_ROOM: 13,
+        //   SOCKET_ERROR: 14,
+        //   STUDENT_STATUS: 15,
+
+
+        //   SYNC_DATA: 16,
+
+
+        //   RECONNECTED_SERVER: 17,
+        //   SWITCH_TURN_BY_TEACHER: 18,
+        //   SWITCH_TURN_BY_STUDENT: 19,
+        //   STUDENT_TURN: 20,
+        //   UPDATE_ROOM_DATA: 21,
+        //   COMPLETE_LEASSON: 22,
+        //   LIST_OF_ROOMS: 23
+
+        socket.on('SingleEvent', async (data) => {
+            if (data.eventType) {
+                if (data.eventType === SOCKET_EVENTS_TYPES.CREATE_ROOM) {
+                    await createRoom(socket, data);
+                } else if (data.eventType === SOCKET_EVENTS_TYPES.JOIN_ROOM) {
+                    await joinRoom(socket, data, io);
+                } else if (data.eventType === SOCKET_EVENTS_TYPES.ROOM_DATA) {
+                    let roomId = ((data || {}).data || {}).roomId,
+                        roomData = ((data || {}).data || {}).roomData;
+                    await roomService.updateRoom({ _id: roomId }, { roomData });
+                } else if (data.eventType === SOCKET_EVENTS_TYPES.EXIT_ROOM) {
+                    await exitRoom(socket, data, io);
+                }
+                else {
+                    let userRoom = await roomService.getRoom({ 'users.userId': socket.id, lessonStatus: LESSON_STATUS.ON_GOING }, {}, { lean: true, sort: { createdAt: -1 } });
+                    if (userRoom) {
+                        socket.to(userRoom._id.toString()).emit('SingleEvent', data);
+                    }
+                }
+            }else{
+                // TODO socket error of invalid payload. 
+            }
+        });
+
+
     });
 };
 
@@ -297,6 +368,75 @@ let leaveAllPreviousRooms = async (socket, io) => {
             io.in(latestRoomInfo._id.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: roomInfo._id } });
         }
     }
+};
 
-}
+let createRoom = async (socket, data) => {
+    await leaveAllPreviousRooms(socket, io);
+    let roomNumber = await roomService.getRoom({}, {}, { sort: { createdAt: -1 } });
+    //create room.
+    let dataToSave = {
+        createdBy: socket.id,
+        users: [{ userId: socket.id }],
+        createdBy: socket.id,
+        capacity: data.capacity,
+        _id: '1'
+    };
+    if (roomNumber) {
+        dataToSave['_id'] = parseInt(roomNumber._id) + 1;
+        dataToSave._id.toString();
+    }
+    let roomInfo = await roomService.createRoom(dataToSave);
+    console.log('roomInfo', roomInfo._id.toString());
+    socket.join(roomInfo._id.toString());
+    data.data.roomId = roomInfo._id;
+    socket.emit('SingleEvent', data);
+};
+
+let joinRoom = async (socket, data, io) => {
+    await leaveAllPreviousRooms(socket, io);
+    let roomId = ((data || {}).data || {}).roomId;
+    let roomInfo = await roomService.getRoom({ _id: roomId, lessonStatus: LESSON_STATUS.ON_GOING }, {}, { lean: true });
+    if (!roomInfo) {
+        socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'Invalid room id.' } });
+        return;
+    }
+    if (roomInfo.users.length === (roomInfo.capacity + 1)) {
+        socket.emit(SOCKET_EVENTS.SOCKET_ERROR, { data: { msg: 'room is full.' } });
+        return;
+    }
+    //update the room.
+    //check is user already in room then change the status of the user.
+    let updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true }, { lean: true, new: true });
+    if (!updatedRoom) {
+        updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': { $ne: socket.id } }, { $push: { users: { userId: socket.id } } }, { lean: true, new: true });
+    }
+    let roomInfoWithUserInfo = await roomService.getRoomWithUsersInfo({ _id: roomId });
+    roomInfoWithUserInfo = roomInfoWithUserInfo[0] || {};
+    let allUsers = [...roomInfoWithUserInfo.users];
+    let onlineUsers = onlineUsersFromAllUsers(allUsers);
+    socket.join(roomId);
+    data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId };
+    socket.emit('SingleEvent', data);
+
+    data.data = { users: onlineUsers, roomId };
+    data.eventType = SOCKET_EVENTS_TYPES.STUDENT_STATUS;
+    io.in(roomId).emit('SingleEvent', data);
+};
+
+/**
+ * function when a student exit from room. 
+ * @param {*} socket 
+ * @param {*} data 
+ * @param {*} io 
+ */
+let exitRoom = async (socket, data, io) => {
+    let roomId = ((data || {}).data || {}).roomId;
+    let updatedRoom = await roomService.updateRoom({ _id: roomId }, { $pull: { users: { userId: socket.id } } }, { lean: true, new: true });
+    socket.leave(data.roomId);
+    _.remove(updatedRoom.users, { userId: updatedRoom.createdBy });
+    data.eventType = SOCKET_EVENTS_TYPES.STUDENT_STATUS;
+    data.data = { users: updatedRoom.users, roomId };
+    io.in(data.roomId).emit('SingleEvent', data);
+};
+
 module.exports = socketConnection;
