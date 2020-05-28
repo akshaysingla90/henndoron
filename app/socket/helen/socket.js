@@ -275,9 +275,11 @@ socketConnection.connect = function (io, p2p) {
 };
 
 let onlineUsersFromAllUsers = (allUsers) => {
-    return _.filter(allUsers, {
+    let onlineUsers = _.filter(allUsers, {
         isOnline: true
-    });
+    })
+    console.log('Online users are ', onlineUsers);
+    return onlineUsers;
 };
 
 let leaveAllPreviousRooms = async (socket, io) => {
