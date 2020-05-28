@@ -8,7 +8,8 @@ const Schema = MONGOOSE.Schema;
 const userSchema = new Schema({
     userName: { type:String},
     email: { type: String },
-    password: { type: String }
+    password: { type: String },
+    
 });
 
 userSchema.set('timestamps', true);
