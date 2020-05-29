@@ -1,30 +1,7 @@
 'use strict';
-const CONFIG = require('../../../config');
-const { userModel, blackListModel, rankTypeModel, userChatModel, gameRoomModel, userProgressHistoryModel } = require(`../../models`);
-const utils = require(`../../utils/utils`);
-const { PAGINATION, GAME_STATUSES, GAME_RESULTS, MATCH_MAKING_TYPES, USER_PROGRESS_HISTORY_TYPE } = require('../../utils/constants');
+const { userModel } = require(`../../models`);
 
 let userService = {};
-
-/** 
- * function to register a new  user
- */
-userService.registerUser = async (payload) => {
-  // encrypt user's password and store it in the database.
-  payload.password = utils.hashPassword(payload.password);
-  return await userModel(payload).save();
-};
-
-/**
- * function to update user.
- */
-userService.updateUser = async (criteria, dataToUpdate, projection = {}) => {
-  let userData = await userService.getUser(criteria);
-  let updatedUserData = await userModel.findOneAndUpdate(criteria, dataToUpdate, { new: true, projection: projection }).lean();
-  //function to maintain the users stats history.
-  await userService.updateUserStatsHistory(userData, updatedUserData);
-  return updatedUserData;
-};
 
 /**
  * function to fetch user from the system based on criteria.
@@ -34,14 +11,11 @@ userService.getUser = async (criteria, projection) => {
 };
 
 /**
- * function to create new user into the system.
+ * function to create new user if not exists in databaase for the given criteria 
+ * and update if it exists in the database. 
  */
-userService.createUser = async (payload) => {
-  // fetch initial rank type and rank value for new user. 
-  let defaultRankType = await rankTypeModel.findOne({ isDefault: true, isDeleted: false });
-  payload.rankType = defaultRankType._id;
-  payload.rankValue = defaultRankType.maxRank;
-  return await userModel(payload).save();
+userService.createAndUpdateUser = async (criteria = {}, dataToUpdate = {}) => {
+  return await userModel.findOneAndUpdate(criteria, dataToUpdate, { new: true, upsert: true }).lean();
 };
 
 module.exports = userService;

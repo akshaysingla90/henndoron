@@ -9,14 +9,14 @@ socketConnection.connect = function (io, p2p) {
     io.on(SOCKET_EVENTS.CONNECTION, async (socket) => {
         console.log('connection established', socket.id);
         //get ongoing room of the user.
-        let onGoingRoom = await roomService.getRoom({ 'users.userId': socket.id, lessonStatus: LESSON_STATUS.ON_GOING }, {}, { lean: true, sort: { createdAt: -1 } });
-        // let onGoingRoom = await roomService.getRoomWithUsersInfo({ 'users.userId': socket.id });
+        let ongoingRoomId = socket.handshake.query.roomId;
+        let onGoingRoom = await roomService.getRoom({ _id: ongoingRoomId }, {}, { lean: true });
         if (onGoingRoom) {
             console.log("On going room Id", onGoingRoom._id)
             let updatedRoom = await roomService.updateRoom({ _id: onGoingRoom._id, 'users.userId': socket.id }, { 'users.$.isOnline': true }, { new: true, lean: true });
             onGoingRoom = (await roomService.getRoomWithUsersInfo({ _id: updatedRoom._id }))[0];
             socket.join(onGoingRoom._id.toString());
-            console.log("RoomData", onGoingRoom.roomData)
+            console.log("RoomData", onGoingRoom.roomData);
             let data = {};
             data.eventType = SOCKET_EVENTS_TYPES.SYNC_DATA;
             data.data = { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} };
@@ -50,9 +50,7 @@ socketConnection.connect = function (io, p2p) {
                 let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
                 let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: room._id }))[0];
                 let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-                // io.to(latestRoomInfo.createdBy.toString()).emit(SOCKET_EVENTS.STUDENT_STATUS, { data: { users: onlineUsers, roomId: room._id } });
                 io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: room._id }, eventType: SOCKET_EVENTS.STUDENT_STATUS });
-
             }
         });
 
@@ -62,13 +60,6 @@ socketConnection.connect = function (io, p2p) {
          * Single socket event to manage all the socket events.
          * 
          */
-
-        let dataForSingleEvent = {
-            eventType: 1,
-            data: {
-                // data as previously sent in separate events, 
-            }
-        };
 
         socket.on('SingleEvent', async (data) => {
             if (data.eventType) {
@@ -95,12 +86,12 @@ socketConnection.connect = function (io, p2p) {
                     await completeLession(socket, data, io);
                 }
                 else {
-                    let userRoom = await roomService.getRoom({ 'users.userId': socket.id, lessonStatus: LESSON_STATUS.ON_GOING }, {}, { lean: true, sort: { createdAt: -1 } });
-                    if (userRoom) {
-                        socket.to(userRoom._id.toString()).emit('SingleEvent', data);
+                    if (data.roomId) {
+                        socket.to(data.roomId).emit('SingleEvent', data);
                     }
                 }
             } else {
+                console.log('Event here ');
                 data.eventType = SOCKET_EVENTS_TYPES.SOCKET_ERROR;
                 data.data = { msg: 'Invalid payload.' };
                 socket.emit('SingleEvent', data);

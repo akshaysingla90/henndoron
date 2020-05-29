@@ -1,11 +1,7 @@
 "use strict";
-const jwt = require('jsonwebtoken');
-const path = require('path');
-const CONFIG = require('../../../config');
 const HELPERS = require("../../helpers");
 const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, OPERATION_TYPES } = require('../../utils/constants');
 const SERVICES = require('../../services');
-const User = require(`../../models/${CONFIG.PLATFORM}/userModel`);
 const { compareHash, encryptJwt, createResetPasswordLink, createAccountRestoreLink, sendEmail } = require(`../../utils/utils`);
 
 /**************************************************
@@ -58,11 +54,12 @@ userController.loginUser = async (payload) => {
  * function to create and update user based on the operation type. 
  */
 userController.createAndUpdateUser = async (payload) => {
-  if(payload.operationType === OPERATION_TYPES.CREATE || payload.operationType === OPERATION_TYPES.UPDATE){
-    // TODO create/update new user.
-  }else if (payload.operationType === OPERATION_TYPES.DELETE){
-    // TODO delete an user. 
+  let criteria = { email: payload.email, isDeleted: false }, dataToUpdate = payload;
+  if (payload.operationType === OPERATION_TYPES.DELETE) {
+    dataToUpdate = { $set: { isDeleted: true } };
   }
+  await SERVICES.userService.createAndUpdateUser(criteria, dataToUpdate);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.USER_UPDATED_SUCCESSFULLY), { data: user });
 };
 
 /* export userController */
