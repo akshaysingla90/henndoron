@@ -143,7 +143,7 @@ let createRoom = async (socket, data) => {
         createdBy: socket.id,
         users: [{ userId: socket.id }],
         createdBy: socket.id,
-        capacity: data.capacity,
+        capacity: ((data || {}).data || {}).capacity,
         _id: '1'
     };
     if (roomNumber) {
