@@ -17,6 +17,7 @@ socketConnection.connect = function (io, p2p) {
             onGoingRoom = (await roomService.getRoomWithUsersInfo({ _id: updatedRoom._id }))[0];
             socket.join(onGoingRoom._id.toString());
             console.log("RoomData", onGoingRoom.roomData)
+            let data = {};
             data.eventType = SOCKET_EVENTS_TYPES.SYNC_DATA;
             data.data = { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} };
             if (onGoingRoom.createdBy.toString() == socket.id) {
