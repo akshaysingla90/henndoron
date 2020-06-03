@@ -11,11 +11,10 @@ userService.getUser = async (criteria, projection) => {
 };
 
 /**
- * function to create new user if not exists in databaase for the given criteria 
- * and update if it exists in the database. 
+ * function to update user. 
  */
-userService.createAndUpdateUser = async (criteria = {}, dataToUpdate = {}) => {
-  return await userModel.findOneAndUpdate(criteria, dataToUpdate, { new: true, upsert: true }).lean();
+userService.updateUser = async (criteria = {}, dataToUpdate = {}, options = {}) => {
+  return await userModel.findOneAndUpdate(criteria, dataToUpdate, options).lean();
 };
 
 module.exports = userService;

@@ -6,6 +6,7 @@
  ********* All routes ***********
  ********************************/
 let v1Routes = [
-    ...require('./userRoutes')
+    ...require('./userRoutes'),
+    ...require('./teacherRoutes'),
 ]
 module.exports = v1Routes;
