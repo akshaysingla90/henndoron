@@ -96,9 +96,10 @@ socketConnection.connect = function (io, p2p) {
         });
 
         socket.on(SOCKET_EVENTS.ADD_CARD_TO_QUEUE, async (data) => {
-            console.log('addCardToQueue');
+            console.log('addCardToQueue',data);
             let userRoom = await roomService.getRoom({ 'users.userId': socket.id, lessonStatus: LESSON_STATUS.ON_GOING }, {}, { lean: true, sort: { createdAt: -1 } });
-            if (userRoom)
+            console.log('Room id ', userRoom._id.toString());
+		if (userRoom)
                 socket.to(userRoom._id.toString()).emit(SOCKET_EVENTS.ADD_CARD_TO_QUEUE, data);
             // socket.broadcast.emit(SOCKET_EVENTS.ADD_CARD_TO_QUEUE, data)
         });
