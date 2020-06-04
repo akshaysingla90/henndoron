@@ -372,5 +372,5 @@ let completeLession = async (socket, data, io) => {
         }
     }
 };
-}
+
 module.exports = socketConnection;
