@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { AVAILABLE_AUTHS } = require(`../../../utils/constants`);
 //load controllers
-const { getServerResponse, registerNewUser, loginUser, getUserProfile, socialLogin, logout, updateProfile, checkAndSendRestoreAccountEmail, restoreAccount, getOpenRooms, getOtherUserProfile, uploadFile, addToBlackList, removeFromBlackList, getBlackList, getChatHistory, getUserGameStats, addUserAvtar, setDefaultUserAvtar, getUserAvtars, getAvtarsOfAnotherUser, likeUnlikeAvtar, deleteAvtar, getGameHistory } = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
+const { getServerResponse, loginUser, createAndUpdateUser } = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
 
 let routes = [
 	{
@@ -20,24 +20,22 @@ let routes = [
 	},
 	{
 		method: 'POST',
-		path: '/v1/user/register',
+		path: '/v1/user/',
 		joiSchemaForSwagger: {
 			body: {
-				email: Joi.string().email().required().description('User\'s email.'),
-				password: Joi.string().required().description('User\'s password.'),
-				name: Joi.string().required().description('User\'s name.'),
-				country: Joi.string().required().description('User\'s country.'),
-				city: Joi.string().required().description('User\'s city.'),
-				// tc: Joi.string().required().description('User\'s tc.'),
-				// userType: Joi.string().required().description('User\'s type.')
-				avtar: Joi.string().optional().description('Url of avtar.'),
-				image: Joi.string().optional().description('Url of image.')
+				email: Joi.string().email().optional().description('User\'s email.'),
+				password: Joi.string().optional().description('User\'s password.'),
+				userName: Joi.string().optional().description('User\'s user name.'),
+				firstName: Joi.string().optional().description('User\'s first name.'),
+				lastName: Joi.string().optional().description('User\'s last name.'),
+				contactNumber: Joi.string().optional().description('User\'s contact number.'),
+				operationType: Joi.number().required().description('Operation type. 1 for create, 2 for update & 3 for delete.')
 			},
 			group: 'User',
-			description: 'Route to register a user.',
-			model: 'Register'
+			description: 'Route to create/update/Delete a user.',
+			model: 'CRUD_USER'
 		},
-		handler: registerNewUser
+		handler: createAndUpdateUser
 	},
 	{
 		method: 'POST',
