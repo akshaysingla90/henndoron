@@ -33,8 +33,9 @@ authService.userValidate = () => {
 let validateUser = async (request) => {
     try {
         // return request.headers.authorization === SECURITY.STATIC_TOKEN_FOR_AUTHORIZATION
-        let decodedToken = jwt.verify(request.headers.authorization, SECURITY.JWT_SIGN_KEY);
-        let authenticatedUser = await testUserModel.findOne({ _id: decodedToken.id }).lean();
+        // let decodedToken = jwt.verify(request.headers.authorization, SECURITY.JWT_SIGN_KEY);
+        // let authenticatedUser = await testUserModel.findOne({ _id: decodedToken.id }).lean();
+        let authenticatedUser = await userModel.findOne({ userName: request.headers.authorization }).lean();
         if (authenticatedUser) {
             request.user = authenticatedUser;
             return true;

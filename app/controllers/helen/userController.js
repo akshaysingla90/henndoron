@@ -58,8 +58,29 @@ userController.createAndUpdateUser = async (payload) => {
   if (payload.operationType === OPERATION_TYPES.DELETE) {
     dataToUpdate = { $set: { isDeleted: true } };
   }
-  await SERVICES.userService.createAndUpdateUser(criteria, dataToUpdate);
+  await SERVICES.userService.updateUser(criteria, dataToUpdate, { new: true, upsert: true });
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.USER_UPDATED_SUCCESSFULLY), { data: user });
+};
+
+/**
+ * Function to add reward points of the student.
+ */
+userController.saveRewardPoints = async (payload) => {
+  console.log(payload.user._id.toString());
+  let userInfo = await SERVICES.userService.getUser({ userName: payload.studentUserName }, {}, { lean: true });
+  if (!userInfo) {
+    return HELPERS.responseHelper.createErrorResponse(MESSAGES.INVALID_STUDENT_USER_NAME, ERROR_TYPES.BAD_REQUEST);
+  }
+  let criteria = { _id: userInfo._id, lessonReward: { $elemMatch: { activity: payload.activity, roomId: payload.roomId } } };
+  //check is reward points already rewarded or not.
+  let isAlreadyRewarded = await SERVICES.userService.getUser(criteria, {}, { lean: true });
+  if (isAlreadyRewarded) {
+    return HELPERS.responseHelper.createErrorResponse(MESSAGES.ALREADY_REWARDED, ERROR_TYPES.BAD_REQUEST);
+  }
+  let dataToPush = { teacherId: payload.user._id, roomId: payload.roomId, rewards: payload.rewards, activity: payload.activity };
+  //update student record.
+  let updatedRecord = await SERVICES.userService.updateUser({ _id: userInfo._id }, { $push: { lessonReward: dataToPush } }, { lean: true, new: true });
+  return HELPERS.responseHelper.createSuccessResponse(MESSAGES.SUCCESSFULLY_REWARDED);
 };
 
 /* export userController */

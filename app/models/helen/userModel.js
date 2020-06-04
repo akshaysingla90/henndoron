@@ -12,7 +12,13 @@ const userSchema = new Schema({
     isDeleted: { type: Boolean, default: false },
     firstName: { type: String },
     lastName: { type: String },
-    contactNumber: { type: String }
+    contactNumber: { type: String },
+    lessonReward: [{
+        roomId: { type: String, ref: 'room' },
+        activity: { type: String },
+        rewards: { type: Number },
+        teacherId: { type: Schema.Types.ObjectId, ref: 'user' }
+    }]
 });
 
 userSchema.set('timestamps', true);

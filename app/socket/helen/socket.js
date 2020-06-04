@@ -221,8 +221,11 @@ let switchTurnByStudent = async (socket, data, io) => {
 
     let allUsers = [...roomInfo.users];
     let onlineUsers = onlineUsersFromAllUsers(allUsers);
+    console.log(onlineUsers, "onlineUsers");
     let studentPos = _.findIndex(onlineUsers, { userId: socket.id });
     let nextPlayerIndex = ((studentPos + 1) % onlineUsers.length);
+    console.log(nextPlayerIndex, "nextPlayerIndex");
+
     // update the turn in the database
     await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: onlineUsers[nextPlayerIndex].userId.toString() } });
 
