@@ -76,7 +76,10 @@ module.exports = {
   AVTAR_LIKED_SUCCESSFULLY: 'Avatar liked successfully.',
   AVTAR_DELETED_SUCCESSFULLY: 'Avtar deleted successfully.',
   GAME_HISTORY_FETCHED_SUCCESSFULLY: 'Game history fetched successfully.',
-  ROOM_IS_ALREADY_FULL:'Room is already full.',
-  BOTH_USERS_ARE_NOT_ONLINE:'Both users are not online.',
-  LIST_FECHED_SUCCESSFULLY:'Leaderboard ranking fetched successfully.'
+  ROOM_IS_ALREADY_FULL: 'Room is already full.',
+  BOTH_USERS_ARE_NOT_ONLINE: 'Both users are not online.',
+  LIST_FECHED_SUCCESSFULLY: 'Leaderboard ranking fetched successfully.',
+  INVALID_STUDENT_USER_NAME: 'Invalid student username.',
+  ALREADY_REWARDED: 'Already rewarded.',
+  SUCCESSFULLY_REWARDED: 'Successfully rewarded.',
 };

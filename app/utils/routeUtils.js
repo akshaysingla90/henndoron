@@ -30,7 +30,7 @@ routeUtils.route = async (app, routes = []) => {
     }
     let middlewares = [getValidatorMiddleware(route)];
     if (route.auth === AVAILABLE_AUTHS.USER) {
-     // middlewares.push(SERVICES.authService.userValidate());
+     middlewares.push(SERVICES.authService.userValidate());
     };
     if (route.joiSchemaForSwagger.formData) {
       const keys = Object.keys(route.joiSchemaForSwagger.formData);
