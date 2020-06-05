@@ -7,30 +7,31 @@ let socketConnection = {};
 socketConnection.connect = function (io, p2p) {
     io.use(authService.socketAuthentication);
     io.on(SOCKET_EVENTS.CONNECTION, async (socket) => {
-        console.log('connection established', socket.id);
-        //get ongoing room of the user.
-        let ongoingRoomId = socket.handshake.query.roomId;
-        let onGoingRoom = await roomService.getRoom({ _id: ongoingRoomId }, {}, { lean: true });
-        if (onGoingRoom) {
-            console.log("On going room Id", onGoingRoom._id)
-            let updatedRoom = await roomService.updateRoom({ _id: onGoingRoom._id, 'users.userId': socket.id }, { 'users.$.isOnline': true }, { new: true, lean: true });
-            onGoingRoom = (await roomService.getRoomWithUsersInfo({ _id: updatedRoom._id }))[0];
-            socket.join(onGoingRoom._id.toString());
-            console.log("RoomData", onGoingRoom.roomData);
-            let data = {};
-            data.eventType = SOCKET_EVENTS_TYPES.SYNC_DATA;
-            data.data = { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} };
-            if (onGoingRoom.createdBy.toString() == socket.id) {
-                io.in(onGoingRoom._id.toString()).emit('SingleEvent', data);
-            } else {
-                socket.to(onGoingRoom._id.toString()).emit('SingleEvent', data);
-            }
-            socket.emit(SOCKET_EVENTS.RECONNECTED_SERVER, { data: { reconnect: true, roomId: onGoingRoom._id } });
-            let onlineUsers = onlineUsersFromAllUsers(onGoingRoom.users);
-            io.in(onGoingRoom._id).emit('SingleEvent', { data: { users: onlineUsers }, eventType: SOCKET_EVENTS.STUDENT_STATUS, roomId: onGoingRoom._id });
-        }
+        // console.log('connection established', socket.id);
+        // //get ongoing room of the user.
+        // let ongoingRoomId = socket.handshake.query.roomId;
+        // console.log('ongoingRoomId', ongoingRoomId);
+        // let onGoingRoom = await roomService.getRoom({ _id: ongoingRoomId }, {}, { lean: true });
+        // if (onGoingRoom) {
+        //     console.log("On going room Id", onGoingRoom._id)
+        //     let updatedRoom = await roomService.updateRoom({ _id: onGoingRoom._id, 'users.userId': socket.id }, { 'users.$.isOnline': true }, { new: true, lean: true });
+        //     onGoingRoom = (await roomService.getRoomWithUsersInfo({ _id: updatedRoom._id }))[0];
+        //     socket.join(onGoingRoom._id.toString());
+        //     console.log("RoomData", onGoingRoom.roomData);
+        //     let data = {};
+        //     data.eventType = SOCKET_EVENTS_TYPES.SYNC_DATA;
+        //     data.data = { roomId: onGoingRoom._id, roomData: onGoingRoom.roomData || {} };
+        //     if (onGoingRoom.createdBy.toString() == socket.id) {
+        //         io.in(onGoingRoom._id.toString()).emit('SingleEvent', data);
+        //     } else {
+        //         socket.to(onGoingRoom._id.toString()).emit('SingleEvent', data);
+        //     }
+        //     socket.emit(SOCKET_EVENTS.RECONNECTED_SERVER, { data: { reconnect: true, roomId: onGoingRoom._id } });
+        //     let onlineUsers = onlineUsersFromAllUsers(onGoingRoom.users);
+        //     io.in(onGoingRoom._id).emit('SingleEvent', { data: { users: onlineUsers }, eventType: SOCKET_EVENTS.STUDENT_STATUS, roomId: onGoingRoom._id });
+        // }
         socket.use((packet, next) => {
-            console.log("Socket hit:=>", packet);
+            // console.log("Socket hit:=>", packet);
             next();
         });
 
@@ -93,12 +94,19 @@ socketConnection.connect = function (io, p2p) {
                     }
                 }
                 else {
+                    // console.log("data", data, "=========");
+                    // let users = io.sockets.clients(data.roomId);
+                    // let roomsOngoing = io.sockets.adapter.sids["5ec5510c9864e530eda8e60d"];
+                    // console.log(roomsOngoing, "++++++++++++++++")
+                    // let roomsOngoing2 = io.sockets.adapter.sids["5ec5510c9864e530eda8e60c"];
+                    // console.log(roomsOngoing2, "----------------")
+                    // console.log("users",users)
                     if (data.roomId) {
                         socket.to(data.roomId).emit('SingleEvent', data);
                     }
                 }
             } else {
-                console.log('Event here ');
+                // console.log('Event here ');
                 data.eventType = SOCKET_EVENTS_TYPES.SOCKET_ERROR;
                 data.data = { msg: 'Invalid payload.' };
                 socket.emit('SingleEvent', data);
@@ -112,7 +120,7 @@ let onlineUsersFromAllUsers = (allUsers) => {
     let onlineUsers = _.filter(allUsers, {
         isOnline: true
     })
-    console.log('Online users are ', onlineUsers);
+    // console.log('Online users are ', onlineUsers);
     return onlineUsers;
 };
 
@@ -151,7 +159,7 @@ let createRoom = async (socket, data) => {
         dataToSave._id.toString();
     }
     let roomInfo = await roomService.createRoom(dataToSave);
-    console.log('roomInfo', roomInfo._id.toString());
+    // console.log('roomInfo', roomInfo._id.toString());
     socket.join(roomInfo._id.toString());
     data.data.roomId = roomInfo._id;
     socket.emit('SingleEvent', data);
@@ -228,10 +236,10 @@ let switchTurnByStudent = async (socket, data, io) => {
 
     let allUsers = [...roomInfo.users];
     let onlineUsers = onlineUsersFromAllUsers(allUsers);
-    console.log(onlineUsers, "onlineUsers");
+    // console.log(onlineUsers, "onlineUsers");
     let studentPos = _.findIndex(onlineUsers, { userId: socket.id });
     let nextPlayerIndex = ((studentPos + 1) % onlineUsers.length);
-    console.log(nextPlayerIndex, "nextPlayerIndex");
+    // console.log(nextPlayerIndex, "nextPlayerIndex");
 
     // update the turn in the database
     await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: onlineUsers[nextPlayerIndex].userId.toString() } });
