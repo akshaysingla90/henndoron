@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { AVAILABLE_AUTHS } = require(`../../../utils/constants`);
 //load controllers
-const { getServerResponse, loginUser, createAndUpdateUser } = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
+const { getServerResponse, loginUser, createAndUpdateUser,getGameData } = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
 
 let routes = [
 	{
@@ -50,6 +50,20 @@ let routes = [
 			model: 'Login'
 		},
 		handler: loginUser
+	},
+	{
+		method: 'GET',
+		path: '/v1/user/gameData',
+		joiSchemaForSwagger: {
+			query: {
+				roomId: Joi.string().required().description('Room Id.')
+			},
+			group: 'User',
+			description: 'Route to get game data.',
+			model: 'Game_Data'
+		},
+		auth: AVAILABLE_AUTHS.USER,
+		handler: getGameData
 	}
 ];
 

@@ -83,5 +83,16 @@ userController.saveRewardPoints = async (payload) => {
   return HELPERS.responseHelper.createSuccessResponse(MESSAGES.SUCCESSFULLY_REWARDED);
 };
 
+//Function to fetch room Data.
+userController.getGameData = async (payload) => {
+  let roomId = payload.roomId;
+  let roomInfo = await SERVICES.roomService.getRoom({ _id: roomId }, { roomData: 1 }, { lean: true });
+  if(!roomInfo){
+    return HELPERS.responseHelper.createErrorResponse(MESSAGES.INVALID_ROOM_ID, ERROR_TYPES.BAD_REQUEST);
+  }
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.SUCCESS), { data: roomInfo.roomData || {} })
+
+};
+
 /* export userController */
 module.exports = userController;
