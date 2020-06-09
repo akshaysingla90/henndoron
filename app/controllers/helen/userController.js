@@ -58,7 +58,7 @@ userController.createAndUpdateUser = async (payload) => {
   if (payload.operationType === OPERATION_TYPES.DELETE) {
     dataToUpdate = { $set: { isDeleted: true } };
   }
-  await SERVICES.userService.updateUser(criteria, dataToUpdate, { new: true, upsert: true });
+  let user = await SERVICES.userService.updateUser(criteria, dataToUpdate, { new: true, upsert: true });
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.USER_UPDATED_SUCCESSFULLY), { data: user });
 };
 

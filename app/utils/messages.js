@@ -82,4 +82,5 @@ module.exports = {
   INVALID_STUDENT_USER_NAME: 'Invalid student username.',
   ALREADY_REWARDED: 'Already rewarded.',
   SUCCESSFULLY_REWARDED: 'Successfully rewarded.',
+  USER_UPDATED_SUCCESSFULLY:'User updated successfully.'
 };
