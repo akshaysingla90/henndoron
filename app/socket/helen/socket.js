@@ -51,7 +51,7 @@ socketConnection.connect = function (io, p2p) {
                 let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
                 let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: room._id }))[0];
                 let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-                io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: room._id }, eventType: SOCKET_EVENTS.STUDENT_STATUS });
+                io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: room._id }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
             }
         });
 
