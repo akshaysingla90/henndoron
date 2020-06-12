@@ -16,6 +16,11 @@ roomService.updateRoom = async (criteria, dataToUpdate, options) => {
     return await roomModel.findOneAndUpdate(criteria, dataToUpdate, options);
 };
 
+//Function to update the room.
+roomService.updateMany = async (criteria, dataToUpdate, options) => {
+    return await roomModel.updateMany(criteria, dataToUpdate, options);
+};
+
 //Function to get room.
 roomService.getRoom = async (criteria, projection, options) => {
     return await roomModel.findOne(criteria, projection, options);
