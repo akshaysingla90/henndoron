@@ -160,8 +160,9 @@ let leaveAllPreviousRooms = async (socket, io) => {
             let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
             io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
         }
-       await roomService.updateRoom({'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
     }
+    await roomService.updateRoom({'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
+
 };
 
 let createRoom = async (socket, data) => {
