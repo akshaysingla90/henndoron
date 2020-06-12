@@ -1,5 +1,5 @@
 
-const { SOCKET_EVENTS, LESSON_STATUS, SOCKET_EVENTS_TYPES } = require('../../utils/constants');
+const { SOCKET_EVENTS, LESSON_STATUS, SOCKET_EVENTS_TYPES, SOCKET_OPERATIONS } = require('../../utils/constants');
 let _ = require(`lodash`);
 let { roomService, authService, userService } = require(`../../services`);
 
@@ -92,15 +92,35 @@ socketConnection.connect = function (io, p2p) {
                         let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
                         io.in(roomId).emit('SingleEvent', { data: { users: onlineUsers, roomId }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
                     }
+                } else if (data.eventType === SOCKET_EVENTS_TYPES.MODIFY_ROOM_DATA) {
+                    let roomId = ((data || {}).data || {}).roomId;
+                    let operation = ((data || {}).data || {}).operation;
+                    let slideIndex = ((data || {}).data || {}).slideIndex || 0;
+                    let tag = ((data || {}).data || {}).tag || 0;
+                    let dataToInsert = ((data || {}).data || {}).dataToInsert;
+                    let criteria = { _id: roomId };
+                    let dataToUpdate = {}, condition = {};
+                    if (operation === SOCKET_OPERATIONS.CLEAR) {
+                        condition[`roomData.data.dataArray.${slideIndex}`] = [];
+                        dataToUpdate = { $set: condition };
+                    }
+                    else if (operation === SOCKET_OPERATIONS.INSERT) {
+                        condition[`roomData.data.dataArray.${slideIndex}`] = dataToInsert;
+                        dataToUpdate = { $push: condition };
+
+                    } else if (operation === SOCKET_OPERATIONS.REMOVE) {
+                        clearCounter++;
+                        condition[`roomData.data.dataArray.${slideIndex}`] = { tag: tag };
+                        dataToUpdate = { $pull: condition };
+
+                    } else if (operation === SOCKET_OPERATIONS.CHANGE_INDEX) {
+                        condition[`roomData.data.slideIndex`] = slideIndex;
+                        dataToUpdate = condition;
+                    }
+                    let updatedRoom = await roomService.updateRoom(criteria, dataToUpdate, { new: true });
+                    return;
                 }
                 else {
-                    // console.log("data", data, "=========");
-                    // let users = io.sockets.clients(data.roomId);
-                    // let roomsOngoing = io.sockets.adapter.sids["5ec5510c9864e530eda8e60d"];
-                    // console.log(roomsOngoing, "++++++++++++++++")
-                    // let roomsOngoing2 = io.sockets.adapter.sids["5ec5510c9864e530eda8e60c"];
-                    // console.log(roomsOngoing2, "----------------")
-                    // console.log("users",users)
                     if (data.roomId) {
                         socket.to(data.roomId).emit('SingleEvent', data);
                     }
@@ -133,13 +153,14 @@ let leaveAllPreviousRooms = async (socket, io) => {
             let dataToUpdate = {};
             if (roomInfo.currentTurnUserId && roomInfo.currentTurnUserId == socket.id) {
                 dataToUpdate = { $unset: { currentTurnUserId: 1 } };
-                io.in(roomInfo._id.toString()).emit('SingleEvent', { data: { users: [] }, eventType: SOCKET_EVENTS.STUDENT_TURN });
+                io.in(roomInfo._id.toString()).emit('SingleEvent', { data: { users: [] }, eventType: SOCKET_EVENTS_TYPES.STUDENT_TURN });
             }
             let updatedRoom = await roomService.updateRoom({ _id: roomInfo._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
             let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: roomInfo._id }))[0];
             let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-            io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id }, eventType: SOCKET_EVENTS.STUDENT_STATUS });
+            io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
         }
+       await roomService.updateRoom({'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
     }
 };
 
