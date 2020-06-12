@@ -2,6 +2,7 @@
 const { SOCKET_EVENTS, LESSON_STATUS, SOCKET_EVENTS_TYPES, SOCKET_OPERATIONS } = require('../../utils/constants');
 let _ = require(`lodash`);
 let { roomService, authService, userService } = require(`../../services`);
+let lCounter = 0, rCounter = 0;
 
 let socketConnection = {};
 socketConnection.connect = function (io, p2p) {
@@ -109,7 +110,6 @@ socketConnection.connect = function (io, p2p) {
                         dataToUpdate = { $push: condition };
 
                     } else if (operation === SOCKET_OPERATIONS.REMOVE) {
-                        clearCounter++;
                         condition[`roomData.data.dataArray.${slideIndex}`] = { tag: tag };
                         dataToUpdate = { $pull: condition };
 
@@ -161,7 +161,7 @@ let leaveAllPreviousRooms = async (socket, io) => {
             io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
         }
     }
-    await roomService.updateRoom({'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
+    await roomService.updateMany({ 'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
 
 };
 
@@ -244,7 +244,7 @@ let switchTurnByTeacher = async (socket, data, io) => {
         users = ((data || {}).data || {}).users;
     let userInfo = await userService.getUser({ userName: (users[0] || {}).userName || '' }, {});
     //update user turn in database.
-    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: (userInfo || {})._id  } });
+    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: (userInfo || {})._id } });
     data.eventType = SOCKET_EVENTS_TYPES.STUDENT_TURN;
     io.in(roomId).emit('SingleEvent', data);
 };
