@@ -44,7 +44,7 @@ socketConnection.connect = function (io, p2p) {
             if (room) {
                 socket.leave(room._id.toString());
                 let dataToUpdate = {};
-                if (room.currentTurnUserId && room.currentTurnUserId == socket.id) {
+                if (room.currentTurnUserId && room.currentTurnUserId.toString() == socket.id) {
                     dataToUpdate = { $unset: { currentTurnUserId: 1 } };
                     io.in(room._id.toString()).emit('SingleEvent', { data: { users: [] }, eventType: SOCKET_EVENTS_TYPES.STUDENT_TURN });
                 }
@@ -244,7 +244,7 @@ let switchTurnByTeacher = async (socket, data, io) => {
         users = ((data || {}).data || {}).users;
     let userInfo = await userService.getUser({ userName: (users[0] || {}).userName || '' }, {});
     //update user turn in database.
-    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: (userInfo || {})._id || '' } });
+    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: (userInfo || {})._id  } });
     data.eventType = SOCKET_EVENTS_TYPES.STUDENT_TURN;
     io.in(roomId).emit('SingleEvent', data);
 };
@@ -264,7 +264,7 @@ let switchTurnByStudent = async (socket, data, io) => {
     // console.log(nextPlayerIndex, "nextPlayerIndex");
 
     // update the turn in the database
-    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: onlineUsers[nextPlayerIndex].userId.toString() } });
+    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: onlineUsers[nextPlayerIndex].userId } });
 
     data.eventType = SOCKET_EVENTS_TYPES.STUDENT_TURN;
     data.data = { roomId, users: [{ userName: onlineUsers[nextPlayerIndex].userName }] };
