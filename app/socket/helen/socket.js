@@ -97,20 +97,30 @@ socketConnection.connect = function (io, p2p) {
                     let roomId = ((data || {}).data || {}).roomId;
                     let operation = ((data || {}).data || {}).operation;
                     let slideIndex = ((data || {}).data || {}).slideIndex || 0;
-                    let tag = ((data || {}).data || {}).tag || 0;
-                    let dataToInsert = ((data || {}).data || {}).dataToInsert;
+                    // let arrayOfTags = ((data || {}).data || {}).arrayOfTags || [];
+                    let arrayToPush = ((data || {}).data || {}).arrayToPush;
+                    // let userName = ((data || {}).data || {}).userName;
                     let criteria = { _id: roomId };
                     let dataToUpdate = {}, condition = {};
-                    if (operation === SOCKET_OPERATIONS.CLEAR) {
-                        condition[`roomData.data.dataArray.${slideIndex}`] = [];
+                    if (operation === SOCKET_OPERATIONS.CLEAR && arrayToPush && arrayToPush.length) {
+                        for (let index = 0; index < arrayToPush.length; index++) {
+                            condition[`roomData.data.dataArray.${arrayToPush[index].userName}.${arrayToPush[index].slideIndex}`] = [];
+                        }
+                        // condition[`roomData.data.dataArray.${userName}.${slideIndex}`] = [];
                         dataToUpdate = { $set: condition };
                     }
                     else if (operation === SOCKET_OPERATIONS.INSERT) {
-                        condition[`roomData.data.dataArray.${slideIndex}`] = dataToInsert;
+                        for (let index = 0; index < arrayToPush.length; index++) {
+                            condition[`roomData.data.dataArray.${arrayToPush[index].userName}.${arrayToPush[index].slideIndex}`] = { $each: arrayToPush[index].data };
+                        }
+                        // condition[`roomData.data.dataArray.${userName}.${slideIndex}`] = { $each: arrayToPush };
                         dataToUpdate = { $push: condition };
 
                     } else if (operation === SOCKET_OPERATIONS.REMOVE) {
-                        condition[`roomData.data.dataArray.${slideIndex}`] = { tag: tag };
+                        for (let index = 0; index < arrayToPush.length; index++) {
+                            condition[`roomData.data.dataArray.${arrayToPush[index].userName}.${arrayToPush[index].slideIndex}`] = { tag: { $in: arrayToPush[index].data } };
+                        }
+                        // condition[`roomData.data.dataArray.${userName}.${slideIndex}`] = { tag: { $in: arrayOfTags } };
                         dataToUpdate = { $pull: condition };
 
                     } else if (operation === SOCKET_OPERATIONS.CHANGE_INDEX) {
