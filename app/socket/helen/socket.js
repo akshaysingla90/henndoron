@@ -1,7 +1,8 @@
 
-const { SOCKET_EVENTS, LESSON_STATUS, SOCKET_EVENTS_TYPES } = require('../../utils/constants');
+const { SOCKET_EVENTS, LESSON_STATUS, SOCKET_EVENTS_TYPES, SOCKET_OPERATIONS } = require('../../utils/constants');
 let _ = require(`lodash`);
 let { roomService, authService, userService } = require(`../../services`);
+let lCounter = 0, rCounter = 0;
 
 let socketConnection = {};
 socketConnection.connect = function (io, p2p) {
@@ -44,14 +45,14 @@ socketConnection.connect = function (io, p2p) {
             if (room) {
                 socket.leave(room._id.toString());
                 let dataToUpdate = {};
-                if (room.currentTurnUserId && room.currentTurnUserId == socket.id) {
+                if (room.currentTurnUserId && room.currentTurnUserId.toString() == socket.id) {
                     dataToUpdate = { $unset: { currentTurnUserId: 1 } };
                     io.in(room._id.toString()).emit('SingleEvent', { data: { users: [] }, eventType: SOCKET_EVENTS_TYPES.STUDENT_TURN });
                 }
                 let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
                 let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: room._id }))[0];
                 let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-                io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: room._id }, eventType: SOCKET_EVENTS.STUDENT_STATUS });
+                io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: room._id }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
             }
         });
 
@@ -92,15 +93,44 @@ socketConnection.connect = function (io, p2p) {
                         let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
                         io.in(roomId).emit('SingleEvent', { data: { users: onlineUsers, roomId }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
                     }
+                } else if (data.eventType === SOCKET_EVENTS_TYPES.MODIFY_ROOM_DATA) {
+                    let roomId = ((data || {}).data || {}).roomId;
+                    let operation = ((data || {}).data || {}).operation;
+                    let slideIndex = ((data || {}).data || {}).slideIndex || 0;
+                    // let arrayOfTags = ((data || {}).data || {}).arrayOfTags || [];
+                    let arrayToPush = ((data || {}).data || {}).arrayToPush;
+                    // let userName = ((data || {}).data || {}).userName;
+                    let criteria = { _id: roomId };
+                    let dataToUpdate = {}, condition = {};
+                    if (operation === SOCKET_OPERATIONS.CLEAR && arrayToPush && arrayToPush.length) {
+                        for (let index = 0; index < arrayToPush.length; index++) {
+                            condition[`roomData.data.dataArray.${arrayToPush[index].userName}.${arrayToPush[index].slideIndex}`] = [];
+                        }
+                        // condition[`roomData.data.dataArray.${userName}.${slideIndex}`] = [];
+                        dataToUpdate = { $set: condition };
+                    }
+                    else if (operation === SOCKET_OPERATIONS.INSERT) {
+                        for (let index = 0; index < arrayToPush.length; index++) {
+                            condition[`roomData.data.dataArray.${arrayToPush[index].userName}.${arrayToPush[index].slideIndex}`] = { $each: arrayToPush[index].data };
+                        }
+                        // condition[`roomData.data.dataArray.${userName}.${slideIndex}`] = { $each: arrayToPush };
+                        dataToUpdate = { $push: condition };
+
+                    } else if (operation === SOCKET_OPERATIONS.REMOVE) {
+                        for (let index = 0; index < arrayToPush.length; index++) {
+                            condition[`roomData.data.dataArray.${arrayToPush[index].userName}.${arrayToPush[index].slideIndex}`] = { tag: { $in: arrayToPush[index].data } };
+                        }
+                        // condition[`roomData.data.dataArray.${userName}.${slideIndex}`] = { tag: { $in: arrayOfTags } };
+                        dataToUpdate = { $pull: condition };
+
+                    } else if (operation === SOCKET_OPERATIONS.CHANGE_INDEX) {
+                        condition[`roomData.data.slideIndex`] = slideIndex;
+                        dataToUpdate = condition;
+                    }
+                    let updatedRoom = await roomService.updateRoom(criteria, dataToUpdate, { new: true });
+                    return;
                 }
                 else {
-                    // console.log("data", data, "=========");
-                    // let users = io.sockets.clients(data.roomId);
-                    // let roomsOngoing = io.sockets.adapter.sids["5ec5510c9864e530eda8e60d"];
-                    // console.log(roomsOngoing, "++++++++++++++++")
-                    // let roomsOngoing2 = io.sockets.adapter.sids["5ec5510c9864e530eda8e60c"];
-                    // console.log(roomsOngoing2, "----------------")
-                    // console.log("users",users)
                     if (data.roomId) {
                         socket.to(data.roomId).emit('SingleEvent', data);
                     }
@@ -133,14 +163,16 @@ let leaveAllPreviousRooms = async (socket, io) => {
             let dataToUpdate = {};
             if (roomInfo.currentTurnUserId && roomInfo.currentTurnUserId == socket.id) {
                 dataToUpdate = { $unset: { currentTurnUserId: 1 } };
-                io.in(roomInfo._id.toString()).emit('SingleEvent', { data: { users: [] }, eventType: SOCKET_EVENTS.STUDENT_TURN });
+                io.in(roomInfo._id.toString()).emit('SingleEvent', { data: { users: [] }, eventType: SOCKET_EVENTS_TYPES.STUDENT_TURN });
             }
             let updatedRoom = await roomService.updateRoom({ _id: roomInfo._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
             let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: roomInfo._id }))[0];
             let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-            io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id}, eventType: SOCKET_EVENTS.STUDENT_STATUS } );
+            io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
         }
     }
+    await roomService.updateMany({ 'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
+
 };
 
 let createRoom = async (socket, data) => {
@@ -222,7 +254,7 @@ let switchTurnByTeacher = async (socket, data, io) => {
         users = ((data || {}).data || {}).users;
     let userInfo = await userService.getUser({ userName: (users[0] || {}).userName || '' }, {});
     //update user turn in database.
-    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: (userInfo || {})._id || '' } });
+    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: (userInfo || {})._id } });
     data.eventType = SOCKET_EVENTS_TYPES.STUDENT_TURN;
     io.in(roomId).emit('SingleEvent', data);
 };
@@ -242,7 +274,7 @@ let switchTurnByStudent = async (socket, data, io) => {
     // console.log(nextPlayerIndex, "nextPlayerIndex");
 
     // update the turn in the database
-    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: onlineUsers[nextPlayerIndex].userId.toString() } });
+    await roomService.updateRoom({ _id: roomId }, { $set: { currentTurnUserId: onlineUsers[nextPlayerIndex].userId } });
 
     data.eventType = SOCKET_EVENTS_TYPES.STUDENT_TURN;
     data.data = { roomId, users: [{ userName: onlineUsers[nextPlayerIndex].userName }] };
