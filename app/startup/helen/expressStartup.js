@@ -6,7 +6,6 @@ const routes = require('../../routes');
 const routeUtils = require('../../utils/routeUtils');
 const dbUtils = require(`../../utils/dbUtils`);
 const COMMON_FUN = require('../../utils/utils');
-const { userModel } = require('../../models');
 
 module.exports = async function (app) {
 
@@ -41,8 +40,8 @@ module.exports = async function (app) {
 
     // initialize mongodb 
     await require('../db_mongo')();
-    //TODO: remove after testing.
-    // await userModel.insertMany([{ userName: 'chicmic1' }, { userName: 'chicmic2' }, { userName: 'chicmic3' }, { userName: 'chicmic4' }, { userName: 'chicmic5' }, { userName: 'chicmic6' }, { userName: 'chicmic7' }, { userName: 'chicmic8' }, { userName: 'chicmic9' }, { userName: 'chicmic10' }, { userName: 'chicmic11' }])
+    //Db Migrations.
+    await dbUtils.migrateDatabase();
     // initalize routes.
     await routeUtils.route(app, routes);
 };
