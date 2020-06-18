@@ -36,6 +36,7 @@ dbUtils.migrateDatabase = async () => {
     }
     await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: 1 }, { upsert: true });
   }
+  return;
 };
 
 module.exports = dbUtils;
