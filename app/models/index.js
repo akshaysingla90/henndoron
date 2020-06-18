@@ -6,5 +6,7 @@ const CONFIG = require('../../config');
  ********************************/
 module.exports = {
     userModel: require(`../models/${CONFIG.PLATFORM}/userModel`),
-    roomModel: require(`../models/${CONFIG.PLATFORM}/roomModel`)
+    roomModel: require(`../models/${CONFIG.PLATFORM}/roomModel`),
+    versionModel: require(`../models/${CONFIG.PLATFORM}/versionModel`)
+
 };
