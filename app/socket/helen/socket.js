@@ -52,7 +52,7 @@ socketConnection.connect = function (io, p2p) {
                 let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
                 let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: room._id }))[0];
                 let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-                io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: room._id }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
+                io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: room._id, teacherId: updatedRoom.createdBy }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
             }
         });
 
@@ -91,7 +91,7 @@ socketConnection.connect = function (io, p2p) {
                     let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: roomId }))[0];
                     if (latestRoomInfo) {
                         let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-                        io.in(roomId).emit('SingleEvent', { data: { users: onlineUsers, roomId }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
+                        io.in(roomId).emit('SingleEvent', { data: { users: onlineUsers, roomId,teacherId: latestRoomInfo.createdBy }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
                     }
                 } else if (data.eventType === SOCKET_EVENTS_TYPES.MODIFY_ROOM_DATA) {
                     let roomId = ((data || {}).data || {}).roomId;
@@ -168,7 +168,7 @@ let leaveAllPreviousRooms = async (socket, io) => {
             let updatedRoom = await roomService.updateRoom({ _id: roomInfo._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
             let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: roomInfo._id }))[0];
             let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-            io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
+            io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id,teacherId: latestRoomInfo.createdBy }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
         }
     }
     await roomService.updateMany({ 'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
@@ -227,7 +227,7 @@ let joinRoom = async (socket, data, io) => {
     data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId };
     socket.emit('SingleEvent', data);
 
-    data.data = { users: onlineUsers, roomId };
+    data.data = { users: onlineUsers, roomId,teacherId: roomInfoWithUserInfo.createdBy };
     data.eventType = SOCKET_EVENTS_TYPES.STUDENT_STATUS;
     io.in(roomId).emit('SingleEvent', data);
 };
@@ -244,7 +244,7 @@ let exitRoom = async (socket, data, io) => {
     socket.leave(roomId);
     _.remove(updatedRoom.users, { userId: updatedRoom.createdBy });
     data.eventType = SOCKET_EVENTS_TYPES.STUDENT_STATUS;
-    data.data = { users: updatedRoom.users, roomId };
+    data.data = { users: updatedRoom.users, roomId, teacherId: updatedRoom.createdBy };
     io.in(roomId).emit('SingleEvent', data);
 };
 
