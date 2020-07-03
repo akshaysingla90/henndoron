@@ -1,5 +1,5 @@
 
-const { SOCKET_EVENTS, LESSON_STATUS, SOCKET_EVENTS_TYPES, SOCKET_OPERATIONS,USER_TYPES } = require('../../utils/constants');
+const { SOCKET_EVENTS, LESSON_STATUS, SOCKET_EVENTS_TYPES, SOCKET_OPERATIONS, USER_TYPES } = require('../../utils/constants');
 let _ = require(`lodash`);
 let { roomService, authService, userService } = require(`../../services`);
 let lCounter = 0, rCounter = 0;
@@ -216,7 +216,7 @@ let joinRoom = async (socket, data, io) => {
     //update the room.
     //check is user already in room then change the status of the user.
     let dataToUpdateWhenTeacherLogin = {};
-    if (data.userType === USER_TYPES.TEACHER) {
+    if (data.data && data.data.userType === USER_TYPES.TEACHER) {
         dataToUpdateWhenTeacherLogin[`createdBy`] = socket.id;
     }
     let updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
