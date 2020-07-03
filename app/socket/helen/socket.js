@@ -216,7 +216,7 @@ let joinRoom = async (socket, data, io) => {
     //update the room.
     //check is user already in room then change the status of the user.
     let dataToUpdateWhenTeacherLogin = {};
-    if (data.userType === USER_TYPES.TEACHER) {
+    if (data.data && data.data.userType === USER_TYPES.TEACHER) {
         dataToUpdateWhenTeacherLogin[`createdBy`] = socket.id;
     }
     let updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
