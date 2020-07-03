@@ -1,5 +1,5 @@
 
-const { SOCKET_EVENTS, LESSON_STATUS, SOCKET_EVENTS_TYPES, SOCKET_OPERATIONS } = require('../../utils/constants');
+const { SOCKET_EVENTS, LESSON_STATUS, SOCKET_EVENTS_TYPES, SOCKET_OPERATIONS, USER_TYPES } = require('../../utils/constants');
 let _ = require(`lodash`);
 let { roomService, authService, userService } = require(`../../services`);
 let lCounter = 0, rCounter = 0;
@@ -91,7 +91,7 @@ socketConnection.connect = function (io, p2p) {
                     let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: roomId }))[0];
                     if (latestRoomInfo) {
                         let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-                        io.in(roomId).emit('SingleEvent', { data: { users: onlineUsers, roomId,teacherId: latestRoomInfo.createdBy }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
+                        io.in(roomId).emit('SingleEvent', { data: { users: onlineUsers, roomId, teacherId: latestRoomInfo.createdBy }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
                     }
                 } else if (data.eventType === SOCKET_EVENTS_TYPES.MODIFY_ROOM_DATA) {
                     let roomId = ((data || {}).data || {}).roomId;
@@ -168,7 +168,7 @@ let leaveAllPreviousRooms = async (socket, io) => {
             let updatedRoom = await roomService.updateRoom({ _id: roomInfo._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
             let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: roomInfo._id }))[0];
             let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
-            io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id,teacherId: latestRoomInfo.createdBy }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
+            io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: roomInfo._id, teacherId: latestRoomInfo.createdBy }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
         }
     }
     await roomService.updateMany({ 'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
@@ -215,9 +215,13 @@ let joinRoom = async (socket, data, io) => {
     }
     //update the room.
     //check is user already in room then change the status of the user.
-    let updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true }, { lean: true, new: true });
+    let dataToUpdateWhenTeacherLogin = {};
+    if (data.userType === USER_TYPES.TEACHER) {
+        dataToUpdateWhenTeacherLogin[`createdBy`] = socket.id;
+    }
+    let updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
     if (!updatedRoom) {
-        updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': { $ne: socket.id } }, { $push: { users: { userId: socket.id } } }, { lean: true, new: true });
+        updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': { $ne: socket.id } }, { $push: { users: { userId: socket.id } }, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
     }
     let roomInfoWithUserInfo = await roomService.getRoomWithUsersInfo({ _id: roomId });
     roomInfoWithUserInfo = roomInfoWithUserInfo[0] || {};
@@ -227,7 +231,7 @@ let joinRoom = async (socket, data, io) => {
     data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId };
     socket.emit('SingleEvent', data);
 
-    data.data = { users: onlineUsers, roomId,teacherId: roomInfoWithUserInfo.createdBy };
+    data.data = { users: onlineUsers, roomId, teacherId: roomInfoWithUserInfo.createdBy };
     data.eventType = SOCKET_EVENTS_TYPES.STUDENT_STATUS;
     io.in(roomId).emit('SingleEvent', data);
 };
