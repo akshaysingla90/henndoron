@@ -15,6 +15,7 @@ let userController = {};
 
 userController.getServerResponse = async (payload) => {
   return HELPERS.responseHelper.createSuccessResponse(MESSAGES.SERVER_IS_WORKING_FINE);
+  
 };
 
 /**
