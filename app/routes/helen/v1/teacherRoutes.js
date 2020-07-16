@@ -16,9 +16,9 @@ let routes = [
             }).unknown(),
             body: {
                 studentUserName: Joi.string().required().description('Student user name.'),
-                rewards: Joi.number().min(0).required().description('Reward Points.'),
+                rewards: Joi.number().optional().description('Reward Points.'),
                 roomId: Joi.string().required().description('Room Id.'),
-                activity: Joi.string().required().description('Activity name.')
+                // activity: Joi.string().required().description('Activity name.')
             },
             group: 'Teacher',
             description: 'Route to reward student.',

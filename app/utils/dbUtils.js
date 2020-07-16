@@ -35,6 +35,9 @@ dbUtils.migrateDatabase = async () => {
       await MODELS.roomModel.findOneAndUpdate({ _id: rooms[index]._id }, dataToUpdate);
     }
     await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: 1 }, { upsert: true });
+  } else if (version < 2) {
+    await MODELS.userModel.updateMany({}, { $set: { rewards: 0 } });
+    await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: 2 }, { upsert: true });
   }
   return;
 };

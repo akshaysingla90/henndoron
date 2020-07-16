@@ -199,6 +199,7 @@ let createRoom = async (socket, data) => {
 
 let joinRoom = async (socket, data, io) => {
     await leaveAllPreviousRooms(socket, io);
+    let userInfo = await userService.getUser({ _id: socket.id }, {}, { lean: true });
     let roomId = ((data || {}).data || {}).roomId;
     let roomInfo = await roomService.getRoom({ _id: roomId, lessonStatus: LESSON_STATUS.ON_GOING }, {}, { lean: true });
     if (!roomInfo) {
@@ -228,7 +229,7 @@ let joinRoom = async (socket, data, io) => {
     let allUsers = [...roomInfoWithUserInfo.users];
     let onlineUsers = onlineUsersFromAllUsers(allUsers);
     socket.join(roomId);
-    data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId };
+    data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId, rewards: (userInfo || {}).rewards || 0 };
     socket.emit('SingleEvent', data);
 
     data.data = { users: onlineUsers, roomId, teacherId: roomInfoWithUserInfo.createdBy };
