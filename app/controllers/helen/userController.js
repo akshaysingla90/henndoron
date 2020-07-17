@@ -15,7 +15,7 @@ let userController = {};
 
 userController.getServerResponse = async (payload) => {
   return HELPERS.responseHelper.createSuccessResponse(MESSAGES.SERVER_IS_WORKING_FINE);
-  
+
 };
 
 /**
@@ -86,8 +86,8 @@ userController.saveRewardPoints = async (payload) => {
   let criteria = { _id: userInfo._id }, dataToUpdate = { $inc: { rewards: payload.rewards } };
   let updatedUser = await SERVICES.userService.updateUser(criteria, dataToUpdate, { lean: true, new: true });
   let eventData = { eventType: SOCKET_EVENTS_TYPES.STUDENT_REWARDS, roomId: payload.roomId };
-  eventData.data = { roomId: payload.roomId, rewards: (updatedUser || {}).rewards || 0 };
-  global.io.to(updatedUser._id.toString()).emit('SingleEvent', eventData);
+  eventData.data = { roomId: payload.roomId, rewards: (updatedUser || {}).rewards || 0, userName: payload.studentUserName };
+  global.io.in(payload.roomId).emit('SingleEvent', eventData);
   return HELPERS.responseHelper.createSuccessResponse(MESSAGES.SUCCESSFULLY_REWARDED);
 };
 
