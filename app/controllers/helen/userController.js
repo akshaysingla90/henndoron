@@ -88,7 +88,7 @@ userController.saveRewardPoints = async (payload) => {
   let eventData = { eventType: SOCKET_EVENTS_TYPES.STUDENT_REWARDS, roomId: payload.roomId };
   eventData.data = { roomId: payload.roomId, rewards: (updatedUser || {}).rewards || 0, userName: payload.studentUserName };
   global.io.in(payload.roomId).emit('SingleEvent', eventData);
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.SUCCESSFULLY_REWARDED), { userName: updateUser.userName, rewards: updatedUser.rewards });
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.SUCCESSFULLY_REWARDED), { userName: updatedUser.userName, rewards: updatedUser.rewards });
 };
 
 //Function to fetch room Data.
