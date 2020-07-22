@@ -7,7 +7,7 @@ const Schema = MONGOOSE.Schema;
  **************************************************/
 const roomSchema = new Schema({
     _id: { type: String },
-    users: [{ userId: { type: Schema.Types.ObjectId }, isOnline: { type: Boolean, default: true } }],
+    users: [{ userId: { type: Schema.Types.ObjectId }, isOnline: { type: Boolean, default: true }, starColor: { type: Number, default: -1 } }],
     createdBy: { type: Schema.Types.ObjectId, required: true },
     capacity: { type: Number, default: 1 },
     isDeleted: { type: Boolean, default: false },
