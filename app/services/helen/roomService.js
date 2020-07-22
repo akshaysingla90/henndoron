@@ -44,7 +44,8 @@ roomService.getRoomWithUsersInfo = async (criteria) => {
         },
         {
             $addFields: {
-                'users.userName': '$users.userInfo.userName'
+                'users.userName': '$users.userInfo.userName',
+                'users.rewards':'$users.userInfo.rewards'
             }
         },
         {

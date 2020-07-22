@@ -1,6 +1,6 @@
 "use strict";
 const HELPERS = require("../../helpers");
-const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, OPERATION_TYPES } = require('../../utils/constants');
+const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, OPERATION_TYPES, SOCKET_EVENTS, SOCKET_EVENTS_TYPES } = require('../../utils/constants');
 const SERVICES = require('../../services');
 const { compareHash, encryptJwt, createResetPasswordLink, createAccountRestoreLink, sendEmail } = require(`../../utils/utils`);
 
@@ -15,6 +15,7 @@ let userController = {};
 
 userController.getServerResponse = async (payload) => {
   return HELPERS.responseHelper.createSuccessResponse(MESSAGES.SERVER_IS_WORKING_FINE);
+
 };
 
 /**
@@ -66,28 +67,35 @@ userController.createAndUpdateUser = async (payload) => {
  * Function to add reward points of the student.
  */
 userController.saveRewardPoints = async (payload) => {
-  console.log(payload.user._id.toString());
   let userInfo = await SERVICES.userService.getUser({ userName: payload.studentUserName }, {}, { lean: true });
   if (!userInfo) {
     return HELPERS.responseHelper.createErrorResponse(MESSAGES.INVALID_STUDENT_USER_NAME, ERROR_TYPES.BAD_REQUEST);
   }
-  let criteria = { _id: userInfo._id, lessonReward: { $elemMatch: { activity: payload.activity, roomId: payload.roomId } } };
-  //check is reward points already rewarded or not.
-  let isAlreadyRewarded = await SERVICES.userService.getUser(criteria, {}, { lean: true });
-  if (isAlreadyRewarded) {
-    return HELPERS.responseHelper.createErrorResponse(MESSAGES.ALREADY_REWARDED, ERROR_TYPES.BAD_REQUEST);
+  if (!payload.hasOwnProperty('rewards')) {
+    payload.rewards = 1;
   }
-  let dataToPush = { teacherId: payload.user._id, roomId: payload.roomId, rewards: payload.rewards, activity: payload.activity };
-  //update student record.
-  let updatedRecord = await SERVICES.userService.updateUser({ _id: userInfo._id }, { $push: { lessonReward: dataToPush } }, { lean: true, new: true });
-  return HELPERS.responseHelper.createSuccessResponse(MESSAGES.SUCCESSFULLY_REWARDED);
+  // let criteria = { _id: userInfo._id, lessonReward: { $elemMatch: { activity: payload.activity, roomId: payload.roomId } } };
+  // //check is reward points already rewarded or not.
+  // let isAlreadyRewarded = await SERVICES.userService.getUser(criteria, {}, { lean: true });
+  // if (isAlreadyRewarded) {
+  //   return HELPERS.responseHelper.createErrorResponse(MESSAGES.ALREADY_REWARDED, ERROR_TYPES.BAD_REQUEST);
+  // }
+  // let dataToPush = { teacherId: payload.user._id, roomId: payload.roomId, rewards: payload.rewards, activity: payload.activity };
+  // //update student record.
+  // let updatedRecord = await SERVICES.userService.updateUser({ _id: userInfo._id }, { $push: { lessonReward: dataToPush } }, { lean: true, new: true });
+  let criteria = { _id: userInfo._id }, dataToUpdate = { $inc: { rewards: payload.rewards } };
+  let updatedUser = await SERVICES.userService.updateUser(criteria, dataToUpdate, { lean: true, new: true });
+  let eventData = { eventType: SOCKET_EVENTS_TYPES.STUDENT_REWARDS, roomId: payload.roomId };
+  eventData.data = { roomId: payload.roomId, rewards: (updatedUser || {}).rewards || 0, userName: payload.studentUserName };
+  global.io.in(payload.roomId).emit('SingleEvent', eventData);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.SUCCESSFULLY_REWARDED), { userName: updatedUser.userName, rewards: updatedUser.rewards });
 };
 
 //Function to fetch room Data.
 userController.getGameData = async (payload) => {
   let roomId = payload.roomId;
   let roomInfo = await SERVICES.roomService.getRoom({ _id: roomId }, { roomData: 1 }, { lean: true });
-  if(!roomInfo){
+  if (!roomInfo) {
     return HELPERS.responseHelper.createErrorResponse(MESSAGES.INVALID_ROOM_ID, ERROR_TYPES.BAD_REQUEST);
   }
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.SUCCESS), { data: roomInfo.roomData || {} })

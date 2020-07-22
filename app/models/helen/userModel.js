@@ -12,6 +12,7 @@ const userSchema = new Schema({
     isDeleted: { type: Boolean, default: false },
     firstName: { type: String },
     lastName: { type: String },
+    rewards: { type: Number, default: 0 },
     contactNumber: { type: String },
     lessonReward: [{
         roomId: { type: String, ref: 'room' },
