@@ -217,12 +217,15 @@ let joinRoom = async (socket, data, io) => {
     //update the room.
     //check is user already in room then change the status of the user.
     let dataToUpdateWhenTeacherLogin = {};
+    let starColor = -1;
     if (data.data && data.data.userType === USER_TYPES.TEACHER) {
         dataToUpdateWhenTeacherLogin[`createdBy`] = socket.id;
+    } else {
+        starColor = roomInfo.users.length - 1;
     }
     let updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
     if (!updatedRoom) {
-        updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': { $ne: socket.id } }, { $push: { users: { userId: socket.id } }, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
+        updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': { $ne: socket.id } }, { $push: { users: { userId: socket.id, starColor } }, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
     }
     let roomInfoWithUserInfo = await roomService.getRoomWithUsersInfo({ _id: roomId });
     roomInfoWithUserInfo = roomInfoWithUserInfo[0] || {};
