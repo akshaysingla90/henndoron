@@ -22,6 +22,7 @@ dbUtils.checkValidReference = async (document, referenceMapping) => {
 dbUtils.migrateDatabase = async () => {
   let dbVersion = await MODELS.versionModel.findOne();
   let version = dbVersion ? dbVersion.dbVersion : 0;
+  let updatedVersion = version;
   if (version < 1) {
     //change data type of currentUserTurn in room model from string to objectId.
     let rooms = await MODELS.roomModel.find({ currentTurnUserId: { $type: 2 } }, {}, { lean: true });
@@ -33,12 +34,17 @@ dbUtils.migrateDatabase = async () => {
         dataToUpdate = { $unset: { currentTurnUserId: 1 } }
       }
       await MODELS.roomModel.findOneAndUpdate({ _id: rooms[index]._id }, dataToUpdate);
+      updatedVersion = 1;
     }
-    await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: 1 }, { upsert: true });
-  } else if (version < 2) {
-    await MODELS.userModel.updateMany({}, { $set: { rewards: 0 } });
-    await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: 2 }, { upsert: true });
   }
+  if (version < 2) {
+    await MODELS.userModel.updateMany({}, { $set: { rewards: 0 } });
+    // await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: 2 }, { upsert: true });
+    updatedVersion = 2;
+  }
+  if (updatedVersion !== version)
+    await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: updatedVersion }, { upsert: true });
+
   return;
 };
 
