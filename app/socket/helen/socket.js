@@ -129,6 +129,9 @@ socketConnection.connect = function (io, p2p) {
                     }
                     let updatedRoom = await roomService.updateRoom(criteria, dataToUpdate, { new: true });
                     return;
+                } else if (data.eventType === SOCKET_EVENTS_TYPES.SAVE_GAME_DATA) {
+                    let roomId = ((data || {}).data || {}).roomId, startAt = ((data || {}).data || {}).startAt;
+                    await roomService.updateRoom({ _id: roomdId }, { $set: { startAt } });
                 }
                 else {
                     if (data.roomId) {
@@ -232,7 +235,7 @@ let joinRoom = async (socket, data, io) => {
     let allUsers = [...roomInfoWithUserInfo.users];
     let onlineUsers = onlineUsersFromAllUsers(allUsers);
     socket.join(roomId);
-    data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId, rewards: (userInfo || {}).rewards || 0 };
+    data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId, rewards: (userInfo || {}).rewards || 0, startAt: roomInfoWithUserInfo.startAt || -1 };
     socket.emit('SingleEvent', data);
 
     data.data = { users: onlineUsers, roomId, teacherId: roomInfoWithUserInfo.createdBy };
