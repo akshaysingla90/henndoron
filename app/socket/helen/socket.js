@@ -130,8 +130,8 @@ socketConnection.connect = function (io, p2p) {
                     let updatedRoom = await roomService.updateRoom(criteria, dataToUpdate, { new: true });
                     return;
                 } else if (data.eventType === SOCKET_EVENTS_TYPES.SAVE_GAME_DATA) {
-                    let roomId = ((data || {}).data || {}).roomId, startAt = ((data || {}).data || {}).startAt;
-                    await roomService.updateRoom({ _id: roomdId }, { $set: { startAt } });
+                    let roomId = ((data || {}).data || {}).roomId;
+                    await roomService.updateRoom({ _id: roomId }, { $set: { startAt: Date.now() } });
                 }
                 else {
                     if (data.roomId) {
