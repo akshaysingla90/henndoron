@@ -1,4 +1,5 @@
-module.exports = {
+const { AVAILABLE_AUTHS } = require('../app/utils/constants');
+let swaggerConfig = {
   "swagger": "2.0",
   "info": {
     "version": "2.0.0",
@@ -24,16 +25,16 @@ module.exports = {
   "produces": [
     "application/json"
   ],
-  "securityDefinitions": { // security definitions can be multiple
-    "adminTokenHeader": {
-      "type": "apiKey",
-      "name": "authorization",
-      "in": "header"
-    },
-    "userTokenHeader": {
-      "type": "apiKey",
-      "name": "authorization",
-      "in": "header"
-    }
-  }
+  "securityDefinitions": {}// security definitions can be multiple
 };
+
+/** Adding Security definitions Header for each Auth */
+Object.keys(AVAILABLE_AUTHS).forEach(auth => {
+  swaggerConfig.securityDefinitions[`${AVAILABLE_AUTHS[auth]}TokenHeader`] = {
+    "type": "apiKey",
+    "name": "authorization",
+    "in": "header"
+  }
+});
+
+module.exports = swaggerConfig;
