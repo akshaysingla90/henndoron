@@ -211,12 +211,12 @@ let joinRoom = async (socket, data, io) => {
         socket.emit('SingleEvent', data);
         return;
     }
-    if (roomInfo.users.length === (roomInfo.capacity + 1)) {
-        data.eventType = SOCKET_EVENTS_TYPES.SOCKET_ERROR;
-        data.data = { msg: 'Room is full.' };
-        socket.emit('SingleEvent', data);
-        return;
-    }
+    // if (roomInfo.users.length === (roomInfo.capacity + 1)) {
+    //     data.eventType = SOCKET_EVENTS_TYPES.SOCKET_ERROR;
+    //     data.data = { msg: 'Room is full.' };
+    //     socket.emit('SingleEvent', data);
+    //     return;
+    // }
     //update the room.
     //check is user already in room then change the status of the user.
     let dataToUpdateWhenTeacherLogin = {};
@@ -228,6 +228,12 @@ let joinRoom = async (socket, data, io) => {
     }
     let updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
     if (!updatedRoom) {
+        if (roomInfo.users.length === (roomInfo.capacity + 1)) {
+            data.eventType = SOCKET_EVENTS_TYPES.SOCKET_ERROR;
+            data.data = { msg: 'Room is full.' };
+            socket.emit('SingleEvent', data);
+            return;
+        }
         updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': { $ne: socket.id } }, { $push: { users: { userId: socket.id, starColor } }, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
     }
     let roomInfoWithUserInfo = await roomService.getRoomWithUsersInfo({ _id: roomId });
