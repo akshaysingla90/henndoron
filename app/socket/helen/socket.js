@@ -129,6 +129,9 @@ socketConnection.connect = function (io, p2p) {
                     }
                     let updatedRoom = await roomService.updateRoom(criteria, dataToUpdate, { new: true });
                     return;
+                } else if (data.eventType === SOCKET_EVENTS_TYPES.SAVE_GAME_DATA) {
+                    let roomId = ((data || {}).data || {}).roomId;
+                    await roomService.updateRoom({ _id: roomId }, { $set: { startAt: Date.now() } });
                 }
                 else {
                     if (data.roomId) {
@@ -208,12 +211,12 @@ let joinRoom = async (socket, data, io) => {
         socket.emit('SingleEvent', data);
         return;
     }
-    if (roomInfo.users.length === (roomInfo.capacity + 1)) {
-        data.eventType = SOCKET_EVENTS_TYPES.SOCKET_ERROR;
-        data.data = { msg: 'Room is full.' };
-        socket.emit('SingleEvent', data);
-        return;
-    }
+    // if (roomInfo.users.length === (roomInfo.capacity + 1)) {
+    //     data.eventType = SOCKET_EVENTS_TYPES.SOCKET_ERROR;
+    //     data.data = { msg: 'Room is full.' };
+    //     socket.emit('SingleEvent', data);
+    //     return;
+    // }
     //update the room.
     //check is user already in room then change the status of the user.
     let dataToUpdateWhenTeacherLogin = {};
@@ -225,6 +228,12 @@ let joinRoom = async (socket, data, io) => {
     }
     let updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
     if (!updatedRoom) {
+        if (roomInfo.users.length === (roomInfo.capacity + 1)) {
+            data.eventType = SOCKET_EVENTS_TYPES.SOCKET_ERROR;
+            data.data = { msg: 'Room is full.' };
+            socket.emit('SingleEvent', data);
+            return;
+        }
         updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': { $ne: socket.id } }, { $push: { users: { userId: socket.id, starColor } }, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
     }
     let roomInfoWithUserInfo = await roomService.getRoomWithUsersInfo({ _id: roomId });
@@ -232,7 +241,7 @@ let joinRoom = async (socket, data, io) => {
     let allUsers = [...roomInfoWithUserInfo.users];
     let onlineUsers = onlineUsersFromAllUsers(allUsers);
     socket.join(roomId);
-    data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId, rewards: (userInfo || {}).rewards || 0 };
+    data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId, rewards: (userInfo || {}).rewards || 0, startAt: roomInfoWithUserInfo.startAt || -1 };
     socket.emit('SingleEvent', data);
 
     data.data = { users: onlineUsers, roomId, teacherId: roomInfoWithUserInfo.createdBy };
