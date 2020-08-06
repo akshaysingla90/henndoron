@@ -14,7 +14,7 @@ const app = EXPRESS();
  ***** Server Configuration *****
  ********************************/
 app.set('port', CONFIG.server.PORT);
-app.use(EXPRESS.static(__dirname + '/'));
+// app.use(EXPRESS.static(__dirname + '/'));
 // configuration to setup socket.io on express server.
 const server = require('http').Server(app);
 // const io = require('socket.io')(server);
