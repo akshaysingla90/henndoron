@@ -11,6 +11,12 @@ CONSTANTS.AVAILABLE_AUTHS = {
   ADMIN: 'admin'
 };
 
+CONSTANTS.USER_ROLE = {
+  ADMIN: 0,
+  STUDENT: 1,
+  TEACHER: 2,
+};
+
 CONSTANTS.PASSWORD_PATTER_REGEX = /^(?=.{6,})(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;
 
 CONSTANTS.NORMAL_PROJECTION = { __v: 0, isDeleted: 0, createdAt: 0, updatedAt: 0 };
@@ -103,10 +109,7 @@ CONSTANTS.LESSON_STATUS = {
   COMPLETE: 2
 };
 
-CONSTANTS.USER_ROLE = {
-  STUDENT: 1,
-  TEACHER: 2
-};
+
 
 CONSTANTS.SOCKET_EVENTS_TYPES = {
   GAME_MESSAGE: 1000,

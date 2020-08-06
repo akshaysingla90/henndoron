@@ -27,6 +27,10 @@ var defaults = {
         API_KEY: 'dummy',
         SENDER_EMAIL: 'contact@demo.in'
     },
+    COCOS_PROJECT_PATH: {
+        BASE_PATH: '',
+        ACTIVITY_DIRECTORY_PATH:'',        
+    },
     SMTP: {
         TRANSPORT: {
             host: process.env.NODEMAILER_HOST || `node-mailer-host-name`,

@@ -136,6 +136,12 @@ class Swagger {
         }
 
         if (formData) {
+            toSwagger.properties.formData.properties = {
+                ...(toSwagger.properties.formData.properties.file && toSwagger.properties.formData.properties.file.properties),
+                ...(toSwagger.properties.formData.properties.fileArray && toSwagger.properties.formData.properties.fileArray.properties),
+                ...(toSwagger.properties.formData.properties.files && toSwagger.properties.formData.properties.files.properties),
+                ...(toSwagger.properties.formData.properties.body && toSwagger.properties.formData.properties.body.properties),
+            }
             const keys = Object.keys(toSwagger.properties.formData.properties).map((key) => key);
             let requiredFields = toSwagger.properties.formData.required;
             keys.forEach((key) => {
