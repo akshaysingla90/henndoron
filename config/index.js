@@ -28,8 +28,10 @@ var defaults = {
         SENDER_EMAIL: 'contact@demo.in'
     },
     COCOS_PROJECT_PATH: {
-        BASE_PATH: '',
-        ACTIVITY_DIRECTORY_PATH:'',        
+        BASE_PATH: '/HelenDron-Cocos2d',
+        ACTIVITY_DIRECTORY_PATH: '/HelenDoron/res/Activity',        
+        ACTIVITY_RESOURCE_DIRECTORY_PATH:'/res',        
+        ACTIVITY_CONFIG_PATH:'/config.json',        
     },
     SMTP: {
         TRANSPORT: {

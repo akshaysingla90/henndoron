@@ -17,6 +17,17 @@ CONSTANTS.USER_ROLE = {
   TEACHER: 2,
 };
 
+CONSTANTS.RESOURCE_TYPE = {
+  SPRITE: { VALUE: 1, BASE_PATH: 'res/Sprite/' },
+  SOUND: { VALUE: 2, BASE_PATH: 'res/AnimationFrames/' },
+  ANIMATION_FRAMES: { VALUE: 3, BASE_PATH: 'res/AnimationFrames/' }
+};
+
+CONSTANTS.ACTIVITY_TYPE = {
+  TEMPLATE: 1,
+  CLONED: 2
+};
+
 CONSTANTS.PASSWORD_PATTER_REGEX = /^(?=.{6,})(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;
 
 CONSTANTS.NORMAL_PROJECTION = { __v: 0, isDeleted: 0, createdAt: 0, updatedAt: 0 };

@@ -82,5 +82,9 @@ module.exports = {
   INVALID_STUDENT_USER_NAME: 'Invalid student username.',
   ALREADY_REWARDED: 'Already rewarded.',
   SUCCESSFULLY_REWARDED: 'Successfully rewarded.',
-  USER_UPDATED_SUCCESSFULLY:'User updated successfully.'
+  USER_UPDATED_SUCCESSFULLY:'User updated successfully.',
+  ACTIVITY_CLONED_SUCCESSFULLY: "Activity cloned successfully",
+  ACTIVITIES_FETCHED_SUCCESSFULLY: "Activities fetched successfully",
+  ACTIVITY_FETCHED_SUCCESSFULLY: "Activity fetched successfully",
+  RESOURCES_UPLOAD_SUCCESSFULLY:"Resource uploaded successfully"
 };
