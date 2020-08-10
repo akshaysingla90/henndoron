@@ -74,4 +74,30 @@ fileUploadService.uploadFile = async (payload, pathToUpload, pathOnServer) => {
     throw HELPERS.responseHelper.createErrorResponse(MESSAGES.INVALID_FILE_TYPE, ERROR_TYPES.BAD_REQUEST);
 };
 
+/**
+ * function to upload file to local server.
+ */
+fileUploadService.uploadMultipleFilesToLocal = async (payload, pathToUpload) => {
+    let directoryPath = pathToUpload;
+    // create user's directory if not present.
+    if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath, { recursive: true });
+    }
+    const promises = payload.files.map(file => {
+        let fileSavePath = `${directoryPath}/${file.originalname}`;
+        const writeStream = fs.createWriteStream(fileSavePath);
+        return new Promise((resolve, reject) => {
+            writeStream.write(file.buffer);
+            writeStream.on('error', reject);
+            writeStream.end(err => {
+                if (err) reject(err)
+                else {
+                    resolve(file.originalname);
+                }
+            });
+        });
+    });
+    return Promise.all(promises);
+};
+
 module.exports = fileUploadService;
