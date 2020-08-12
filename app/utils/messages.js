@@ -86,5 +86,6 @@ module.exports = {
   ACTIVITY_CLONED_SUCCESSFULLY: "Activity cloned successfully",
   ACTIVITIES_FETCHED_SUCCESSFULLY: "Activities fetched successfully",
   ACTIVITY_FETCHED_SUCCESSFULLY: "Activity fetched successfully",
+  ACTIVITY_DOESNOT_EXISTS:"Activity with this id doesn't exist",
   RESOURCES_UPLOAD_SUCCESSFULLY:"Resource uploaded successfully"
 };

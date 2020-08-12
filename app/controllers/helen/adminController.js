@@ -57,6 +57,7 @@ adminController.getActivities = async (payload) => {
  */
 adminController.getActivity = async (payload) => {
   let activity = await SERVICES.activityService.getActivity({ _id: payload.id }, NORMAL_PROJECTION);
+  if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_FETCHED_SUCCESSFULLY), { activity });
 }
 
