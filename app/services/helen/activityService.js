@@ -28,7 +28,7 @@ activityService.getActivities = async (criteria, projection) => {
  * function to update user's Activity in the database.
  */
 activityService.updateActivity = async (criteria, dataToUpdate) => {
-  return await activityModel.findOneAndUpdate(criteria, dataToUpdate, { new: true, upsert: true }).lean();
+  return await activityModel.findOneAndUpdate(criteria, dataToUpdate, { new: true, upsert: true, useFindAndModify:false }).lean();
 };
 
 /**
