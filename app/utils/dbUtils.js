@@ -1,7 +1,7 @@
 const CONSTANTS = require('../utils/constants');
 const MODELS = require('../models/index');
 const MONGOOSE = require('mongoose');
-
+const activities = require('../data-db/activityConfig.json')
 let dbUtils = {};
 
 /**
@@ -42,10 +42,22 @@ dbUtils.migrateDatabase = async () => {
     // await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: 2 }, { upsert: true });
     updatedVersion = 2;
   }
+  if (version < 3) {
+    //adding template activity's configData
+    await dbUtils.addInitialTemplateActivities();
+    updatedVersion = 3;
+  }
   if (updatedVersion !== version)
     await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: updatedVersion }, { upsert: true });
 
   return;
+};
+
+/**
+ *  function to add initial template activities.
+ */
+dbUtils.addInitialTemplateActivities = async () => {
+  await MODELS.activityModel.insertMany(activities);
 };
 
 module.exports = dbUtils;
