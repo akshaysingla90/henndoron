@@ -6,15 +6,12 @@ CONSTANTS.SERVER = {
   ONE: 1
 };
 
-CONSTANTS.AVAILABLE_AUTHS = {
-  USER: 'user',
-  ADMIN: 'admin'
-};
 
 CONSTANTS.USER_ROLE = {
-  ADMIN: 0,
-  STUDENT: 1,
-  TEACHER: 2,
+  STUDENT: 'student',
+  TEACHER: 'teacher',
+  ADMIN: 'admin',
+
 };
 
 CONSTANTS.RESOURCE_TYPE = {

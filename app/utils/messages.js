@@ -3,6 +3,7 @@ module.exports = {
   USER_REGISTERED_SUCCESSFULLY: 'User registered successfully.',
   SOMETHING_WENT_WRONG: 'Something went wrong.',
   UNAUTHORIZED: 'Unauthorized access!',
+  FORBIDDEN: 'Forbidden! You don’t have permission to access this resource',
   LOGGED_IN_SUCCESSFULLY: 'Logged in successfully.',
   EMAIL_ALREADY_EXISTS: 'Email already exists.',
   INVALID_EMAIL: 'Invalid email address.',

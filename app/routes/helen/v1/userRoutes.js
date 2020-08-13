@@ -2,7 +2,7 @@
 
 const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
-const { AVAILABLE_AUTHS } = require(`../../../utils/constants`);
+const { USER_ROLE } = require(`../../../utils/constants`);
 //load controllers
 const { getServerResponse, loginUser, createAndUpdateUser,getGameData } = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
 
@@ -15,7 +15,7 @@ let routes = [
 			description: 'Route to get server response (Is server working fine or not?).',
 			model: 'SERVER'
 		},
-		auth: AVAILABLE_AUTHS.USER,
+		// auth: [USER_ROLE.STUDENT, USER_ROLE.TEACHER],
 		handler: getServerResponse
 	},
 	{
@@ -62,7 +62,7 @@ let routes = [
 			description: 'Route to get game data.',
 			model: 'Game_Data'
 		},
-		auth: AVAILABLE_AUTHS.USER,
+		// auth: [USER_ROLE.STUDENT, USER_ROLE.TEACHER],
 		handler: getGameData
 	}
 ];

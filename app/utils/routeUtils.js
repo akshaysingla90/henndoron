@@ -25,8 +25,9 @@ routeUtils.route = async (app, routes = []) => {
       middlewares = [multerMiddleware];
     }
     middlewares.push(getValidatorMiddleware(route));
-    if (route.auth === AVAILABLE_AUTHS.USER) {
-      middlewares.push(SERVICES.authService.userValidate());
+    if (route.auth) {
+      if (typeof route.auth === 'string') route.auth = [route.auth];
+      middlewares.push(SERVICES.authService.validateUser(route.auth));
     };
     app.route(route.path)[route.method.toLowerCase()](...middlewares, getHandlerMethod(route));
   });
@@ -51,7 +52,7 @@ let joiValidatorMethod = async (request, route) => {
     checkJoiValidationError(request.query);
   }
   if (route.joiSchemaForSwagger.headers && Object.keys(route.joiSchemaForSwagger.headers).length) {
-    let headersObject = await Joi.object(route.joiSchemaForSwagger.headers).validate(request.headers);
+    let headersObject = await Joi.object(route.joiSchemaForSwagger.headers).unknown().validate(request.headers);
     checkJoiValidationError(headersObject);
     request.headers.authorization = ((headersObject || {}).value || {}).authorization;
   }

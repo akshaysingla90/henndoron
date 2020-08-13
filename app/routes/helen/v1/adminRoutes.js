@@ -2,7 +2,7 @@
 
 const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
-const { AVAILABLE_AUTHS, ACTIVITY_TYPE, RESOURCE_TYPE } = require(`../../../utils/constants`);
+const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE } = require(`../../../utils/constants`);
 //load controllers
 const { cloneActivity, getActivities, getActivity, addResourceFiles } = require(`../../../controllers/${CONFIG.PLATFORM}/adminController`);
 
@@ -11,9 +11,9 @@ let routes = [
     method: 'POST',
     path: '/v1/admin/activities/:activityId',
     joiSchemaForSwagger: {
-      // headers: Joi.object({
-      //   'authorization': Joi.string().required().description('User\'s JWT token.')
-      // }).unknown(),
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
       params: {
         activityId: Joi.string().optional().description('Activity Id to clone.')
       },
@@ -26,16 +26,16 @@ let routes = [
       description: 'Route to create a new activity',
       model: 'Auth Tool'
     },
-    // auth: AVAILABLE_AUTHS.ADMIN,
+    auth: USER_ROLE.ADMIN,
     handler: cloneActivity
   },
   {
     method: 'GET',
     path: '/v1/admin/activities',
     joiSchemaForSwagger: {
-      // headers: Joi.object({
-      //   'authorization': Joi.string().required().description('User\'s JWT token.')
-      // }).unknown(),
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
       query: {
         //TODO PAGINATION AND FILTERS AND SORTING ORDER
         type: Joi.number().valid(ACTIVITY_TYPE.CLONED, ACTIVITY_TYPE.TEMPLATE).description('1 => TEMPLATE,2 => CLONED'),
@@ -45,16 +45,16 @@ let routes = [
       description: 'Route to get activities',
       model: 'Auth Tool'
     },
-    // auth: AVAILABLE_AUTHS.ADMIN,
+    auth: USER_ROLE.ADMIN,
     handler: getActivities
   },
   {
     method: 'GET',
     path: '/v1/admin/activities/:id',
     joiSchemaForSwagger: {
-      // headers: Joi.object({
-      //   'authorization': Joi.string().required().description('User\'s JWT token.')
-      // }).unknown(),
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
       params: {
         id: Joi.string().required().description('Activity\'s Id.')
       },
@@ -62,16 +62,16 @@ let routes = [
       description: 'Route to get activity by its id',
       model: 'Auth Tool'
     },
-    // auth: AVAILABLE_AUTHS.ADMIN,
+    auth: USER_ROLE.ADMIN,
     handler: getActivity
   },
   {
     method: 'POST',
     path: '/v1/admin/activities/:id/files-upload',
     joiSchemaForSwagger: {
-      // headers: Joi.object({
-      //   'authorization': Joi.string().required().description('User\'s JWT token.')
-      // }).unknown(),
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
       params: {
         id: Joi.string().required().description('Activity\'s Id.')
       },
@@ -88,7 +88,7 @@ let routes = [
       description: 'Route to create a new activity',
       model: 'Auth Tool'
     },
-    // auth: AVAILABLE_AUTHS.ADMIN,
+    auth: USER_ROLE.ADMIN,
     handler: addResourceFiles
   }
 ];

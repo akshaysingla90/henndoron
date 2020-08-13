@@ -1,4 +1,4 @@
-const { AVAILABLE_AUTHS } = require('../app/utils/constants');
+const { USER_ROLE } = require('../app/utils/constants');
 let swaggerConfig = {
   "swagger": "2.0",
   "info": {
@@ -28,9 +28,9 @@ let swaggerConfig = {
   "securityDefinitions": {}// security definitions can be multiple
 };
 
-/** Adding Security definitions Header for each Auth */
-Object.keys(AVAILABLE_AUTHS).forEach(auth => {
-  swaggerConfig.securityDefinitions[`${AVAILABLE_AUTHS[auth]}TokenHeader`] = {
+/** Adding Security definitions Header for each role */
+Object.keys(USER_ROLE).forEach(auth => {
+  swaggerConfig.securityDefinitions[`${USER_ROLE[auth]}TokenHeader`] = {
     "type": "apiKey",
     "name": "authorization",
     "in": "header"

@@ -1,57 +1,62 @@
 const jwt = require('jsonwebtoken');
 
 const { SECURITY, MESSAGES, ERROR_TYPES } = require('../../utils/constants');
-const CONFIG = require('../../../config');
 const HELPERS = require("../../helpers");
 const { userModel, sessionModel, testUserModel } = require(`../../models`);
 
 let authService = {};
 
 /**
- * function to authenticate user.
+ * function to authenticate user and attach user to request
+ * @param {*} request 
  */
-authService.userValidate = () => {
-    return (request, response, next) => {
-        validateUser(request).then((isAuthorized) => {
-            if (isAuthorized) {
-                return next();
-            }
-            let responseObject = HELPERS.responseHelper.createErrorResponse(MESSAGES.UNAUTHORIZED, ERROR_TYPES.UNAUTHORIZED);
-            return response.status(responseObject.statusCode).json(responseObject);
-        }).catch((err) => {
-            let responseObject = HELPERS.responseHelper.createErrorResponse(MESSAGES.UNAUTHORIZED, ERROR_TYPES.UNAUTHORIZED);
-            return response.status(responseObject.statusCode).json(responseObject);
-        });
-    };
-};
-
-
-/**
- * function to validate user's jwt token and fetch its details from the system. 
- * @param {} request 
- */
-let validateUser = async (request) => {
+const authenticateUser = async (request) => {
     try {
-        // return request.headers.authorization === SECURITY.STATIC_TOKEN_FOR_AUTHORIZATION
-        // let decodedToken = jwt.verify(request.headers.authorization, SECURITY.JWT_SIGN_KEY);
-        // let authenticatedUser = await testUserModel.findOne({ _id: decodedToken.id }).lean();
-        let authenticatedUser = await userModel.findOne({ userName: request.headers.authorization }).lean();
-        if (authenticatedUser) {
-            request.user = authenticatedUser;
-            return true;
+        // authenticate JWT token and attach user to request object (request.user)
+        let decodedToken = jwt.verify(request.headers.authorization, SECURITY.JWT_SIGN_KEY);
+        let authenticatedUser = await userModel.findOne({ _id: decodedToken.id }).lean();
+        if (!authenticatedUser) {
+            throw HELPERS.responseHelper.createErrorResponse(MESSAGES.UNAUTHORIZED, ERROR_TYPES.UNAUTHORIZED);
         }
-        return false;
+        request.user = authenticatedUser;
+        return authenticatedUser;
     } catch (err) {
-        return false;
+        throw HELPERS.responseHelper.createErrorResponse(MESSAGES.UNAUTHORIZED, ERROR_TYPES.UNAUTHORIZED);
     }
-};
+}
+
 
 /**
- * function to validate user's token from samsung server if it is valid or not.
+ * fucntion to authorise user according to its role
+ * @param {*} request 
+ * @param {*} roles 
  */
-authService.validateToken = async (token) => {
-    let isValidToken = true;
-    return isValidToken;
+const authoriseUser = (request, roles) => {
+    if (roles.length && !roles.includes(request.user.role)) {
+        // user's role is not authorized to access the resource
+        throw HELPERS.responseHelper.createErrorResponse(MESSAGES.FORBIDDEN, ERROR_TYPES.FORBIDDEN);
+    }
+    return true;
+}
+
+
+/**
+ * function to check authentication and authorisation for user.
+ * @param {*} roles authorised roles array
+ */
+
+authService.validateUser = (roles = []) => {
+    return (request, response, next) => {
+        authenticateUser(request)
+            .then(user => {
+                authoriseUser(request, roles);
+                // authentication and authorization successful
+                return next();
+            })
+            .catch(err => {
+                response.status(err.statusCode).json(err);
+            })
+    };
 };
 
 /**
