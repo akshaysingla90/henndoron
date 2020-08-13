@@ -6,6 +6,8 @@ const routes = require('../../routes');
 const routeUtils = require('../../utils/routeUtils');
 const dbUtils = require(`../../utils/dbUtils`);
 const COMMON_FUN = require('../../utils/utils');
+const SERVICES = require('../../services');
+const { USER_ROLE } = require('../../utils/constants');
 const { ACTIVITY_DIRECTORY_PATH, BASE_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const path = require('path');
 const activityPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
@@ -40,12 +42,7 @@ module.exports = async function (app) {
     // app.use('/public', express.static('public'));
     // app.use('/uploads', express.static('uploads'));
 
-    //todo add auth middleware for ADMIN
-    app.use('/activity', (req, response, next) => {
-        // console.log(req.method)
-        // return response.status(400).json({message:"BAD REQUEST"});
-        next();
-    });
+    app.use('/activity', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
     app.use('/activity', express.static(activityPath));
 
 
