@@ -3,6 +3,7 @@ node_modules/
 
 # Visual Studio Code created by default file's
 .vscode
+.DS_Store
 
 # Remove unnessary file's
 .idea

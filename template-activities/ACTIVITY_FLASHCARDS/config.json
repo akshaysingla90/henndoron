@@ -1,0 +1,181 @@
+{
+  "properties": {
+    "configurable": true,
+    "url": "res/Activity/ACTIVITY_FLASHCARDS/",
+    "number": "1",
+    "name": "MainFlashCardsLayer",
+    "namespace": "Flashcards",
+    "activityName": "Flashcards",
+    "layerName" : "MainFlashCardsLayer",
+    "teacherScriptsNotes": {
+      "notes": "Ask to identify notes",
+      "timestamp": "",
+      "triggers": ""
+    },
+    "controls" : {
+      "mouse" : false
+    },
+    "teacherTipsNotes": {
+      "tips": "Don't ask about bag",
+      "timestamp": "",
+      "triggers": ""
+    },
+    "description" : "",
+    "allocatedTime": 10,
+    "studentPreview": false,
+    "preLoaded" : false
+  },
+  "jsList": [
+    "res/Activity/ACTIVITY_FLASHCARDS/src/Flashcards.js"
+  ],
+  "scripts": {
+    "jsLists": ["src/Flashcards.js"]
+  },
+  "sounds": {
+    "pageFlip": "flashcards_pageFlip.mp3",
+    "swipe": "flashcards_swipe.mp3"
+  },
+  "theme": {
+    "classic": 1,
+    "billboards": 2,
+    "bookOfRhymes": 3
+  },
+  "currentTheme": 2,
+  "graphicalAssets": {
+    "background": {
+      "configurable": true,
+      "imageName": "flashcards_billboardBackground.png",
+      "size": { "width": 960, "height": 640 },
+      "constraints": ["imageName, size"]
+    },
+    "billboard": {
+      "configurable": true,
+      "imageName": "flashcards_billboard.png",
+      "position": { "y": 288 },
+      "size": "{width, height}",
+      "constraints": ["imageName, size"]
+    },
+    "billboardDisplayImage": {
+      "configurable": true,
+      "position": { "x": 456, "y": 384 },
+      "size": "{width, height}"
+    },
+
+    "wordHolder": {
+      "configurable": true,
+      "imageName": "flashcards_wordHolder.png",
+      "imageSize": { "width": 300, "height": 300 },
+      "student": {
+        "position": { "x": 480, "y": 544 }
+      },
+      "teacher": {
+        "position": { "x": 480, "y": 544 }
+      },
+      "wordLabel": {
+        "font": "sassoon_sans_regular",
+        "fontSize": 50,
+        "color": { "r": 0, "g": 0, "b": 0, "a": 255 },
+        "position": { "x": 145, "y": 44.65 }
+      }
+    },
+    "BookOfRhymesWordLabel": {
+      "font": "sassoon_sans_regular",
+      "fontSize": 50,
+      "color": { "r": 124, "g": 99, "b": 81, "a": 255 },
+      "student": {
+        "position": { "x": 480, "y": 90 }
+      },
+      "teacher": {
+        "position": { "x": 480, "y": 532 }
+      }
+    },
+    "carouselBackground": {
+      "imageName": "flashcards_panelBackground.png"
+    },
+    "carouselForeground": {
+      "imageName": "flashcards_panelForeground.png"
+    },
+    "carouselItemLabel": {
+      "font": "sassoon_sans_regular",
+      "fontSize": 12,
+      "color": { "r": 255, "g": 255, "b": 255, "a": 255 }
+    },
+    "carouselItemLabelBackground": {
+      "color": { "r": 58, "g": 76, "b": 88, "a": 159.375 }
+    },
+    "carouselItemHighlighted": {
+      "color": { "r": 167, "g": 115, "b": 67, "a": 159.375 }
+    },
+    "carouselAssets": [
+      {
+        "configurable": true,
+        "thumbnailImageName": "flashcards_dog.png",
+        "thumbnailImageSize": { "width": 100, "height": 100 },
+        "previewImageName": "flashcards_dog.png",
+        "label": "dog"
+      },
+      {
+        "configurable": true,
+        "thumbnailImageName": "flashcards_boy.png",
+        "thumbnailImageSize": { "width": 100, "height": 100 },
+        "previewImageName": "flashcards_boy.png",
+        "label": "boy"
+      },
+      {
+        "configurable": true,
+        "thumbnailImageName": "flashcards_cat.png",
+        "thumbnailImageSize": { "width": 100, "height": 100 },
+        "previewImageName": "flashcards_cat.png",
+        "label": "cat"
+      },
+      {
+        "configurable": true,
+        "thumbnailImageName": "flashcards_girl.png",
+        "thumbnailImageSize": { "width": 100, "height": 100 },
+        "previewImageName": "flashcards_girl.png",
+        "label": "girl"
+      },
+      {
+        "configurable": true,
+        "thumbnailImageName": "flashcards_hen.png",
+        "thumbnailImageSize": { "width": 100, "height": 100 },
+        "previewImageName": "flashcards_hen.png",
+        "label": "hen"
+      },
+      {
+        "configurable": true,
+        "thumbnailImageName": "flashcards_mouse.png",
+        "thumbnailImageSize": { "width": 100, "height": 100 },
+        "previewImageName": "flashcards_mouse.png",
+        "label": "mouse"
+      }
+    ]
+  },
+  "resources": {
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+         "flashcards_background.png",
+         "flashcards_dog.png",
+         "flashcards_wordHolder.png",
+         "flashcards_boy.png",
+         "flashcards_cat.png",
+         "flashcards_girl.png",
+         "flashcards_hen.png",
+         "flashcards_mouse.png",
+         "flashcards_bookPage.png",
+         "flashcards_panelBackground.png",
+         "flashcards_panelForeground.png",
+         "flashcards_billboardBackground.png",
+         "flashcards_billboard.png"
+      ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": [
+        "flashcards_pageFlip.mp3",
+        "flashcards_swipe.mp3"
+      ]
+    }
+  }
+}

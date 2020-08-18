@@ -1,0 +1,471 @@
+{
+  "properties": {
+    "configurable": true,
+    "number": "1",
+    "name": "Character conversation",
+    "namespace": "ACTIVITY_CWC_1",
+    "layerName": "conversationLayer",
+    "activityName": "Character Conversation",
+    "teacherScriptsNotes": {
+      "notes": "Ask to identify notes",
+      "timestamp": "",
+      "triggers": ""
+    },
+    "controls": {
+      "mouse": false
+    },
+    "teacherTipsNotes": {
+      "tips": "Don't ask about bag",
+      "timestamp": "",
+      "triggers": ""
+    },
+    "description": "",
+    "allocatedTime": 10,
+    "studentPreview": false,
+    "preLoaded" : false,
+    "url": "http://cocosteam.s3.us-east-2.amazonaws.com/Helen-Doron-Dev/res/ACTIVITY_CWC_1/"
+  },
+  "jsList": [
+    "res/Activity/ACTIVITY_CWC_1/src/CharacterConversation.js"
+  ],
+  "teacherScripts": {
+    "moduleStart": {
+      "ops": [
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Hi"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": " ______! "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "I'm so glad you are here. I am"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": " (teacher's name). "
+        },
+        {
+          "insert": "\n"
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "This is"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": " ("
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Granny Fix/Paul/Flupe"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "). Say Hi to (Fix/Paul/Flupe). Say hi to me!"
+        },
+        {
+          "insert": " \nMake characters say “Hi” using their menus. \n\n"
+        }
+      ]
+    },
+    "onSoundPlayed":{
+      "ops": [
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "Ask Students to greet characters and teacher."
+        },
+        {
+          "insert": "\n\n"
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Let’s have fun! Let’s have fun with "
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "("
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Granny Fix/Paul/Flupe"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": ")"
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "."
+        },
+        {
+          "insert": "\n\n"
+        },
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "Make characters say more sentences."
+        },
+        {
+          "insert": "\n\n\n\n\n"
+        }
+      ]
+    }
+  },
+  "teacherTips": {
+    "moduleStart":{
+      "ops": [
+        {
+          "insert": "- Click the buttons below each character to have them respond to students or to move/bounce around. \n - Wave while saying "
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "Hi "
+        },
+        {
+          "insert": "to the characters with the students.\n- You can place an open hand behind the ear to show that they want the child to say something.\n- Throw hands up in the air when saying "
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "Fun."
+        },
+        {
+          "insert": "\n"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "- Movement for Flupe: Place both hands touching the forehead with palms facing out and wiggle fingers. "
+        },
+        {
+          "insert": "\n\n"
+        }
+      ]
+    }
+  },
+  "graphicalAssets": {
+    "background": {
+      "configurable": true,
+      "name": "playground.png",
+      "size": "{960, 649}",
+      "constraints": [
+        "imageName",
+        "size"
+      ]
+    }
+  },
+  "charactersData": [
+    {
+      "name": "Poul",
+      "configurable": true,
+      "imageName": "Poul.png",
+      "position": {
+        "x": 230,
+        "y": 330
+      },
+      "size": "{960, 649}",
+      "constraints": [
+        "imageName",
+        "size"
+      ],
+      "audioData": [
+        {
+          "text": "Hello",
+          "audio": "polly_hello.mp3",
+          "animation": "Hi",
+          "frameCount": 24
+        },
+        {
+          "text": "I am Polly",
+          "audio": "polly_i_am_polly.mp3",
+          "animation": "Hi",
+          "frameCount": 24
+        },
+        {
+          "text": "Who are you",
+          "audio": "polly_who_are_you.mp3",
+          "animation": "Excited",
+          "frameCount": 60
+        }
+      ],
+      "animation": {
+        "RestPose01": {
+          "frameCount": 25
+        },
+        "RestPose02": {
+          "frameCount": 21
+        },
+        "RestPose03": {
+          "frameCount": 25
+        },
+        "Hi": {
+          "frameCount": 24
+        },
+        "Excited": {
+          "frameCount": 23
+        }
+      }
+    },
+    {
+      "name": "Flupe",
+      "configurable": true,
+      "imageName": "Flupe.png",
+      "position": {
+        "x": 480,
+        "y": 330
+      },
+      "size": "{960, 649}",
+      "constraints": [
+        "imageName",
+        "size"
+      ],
+      "audioData": [
+        {
+          "text": "Hello",
+          "audio": "nat_hello.mp3",
+          "animation": "Hi",
+          "frameCount": 23
+        },
+        {
+          "text": "I am Nat",
+          "audio": "nat_i_am_nat.mp3",
+          "animation": "Hi",
+          "frameCount": 23
+        },
+        {
+          "text": "Who are you",
+          "audio": "nat_who_are_you.mp3",
+          "animation": "Excited",
+          "frameCount": 29
+        }
+      ],
+      "animation": {
+        "RestPose01": {
+          "frameCount": 26
+        },
+        "RestPose02": {
+          "frameCount": 20
+        },
+        "RestPose03": {
+          "frameCount": 23
+        },
+        "Hi": {
+          "frameCount": 23
+        },
+        "Excited": {
+          "frameCount": 29
+        }
+      }
+    },
+    {
+      "name": "Grnanny_fix",
+      "configurable": true,
+      "imageName": "Grnanny_fix.png",
+      "position": {
+        "x": 740,
+        "y": 330
+      },
+      "size": "{960, 649}",
+      "constraints": [
+        "imageName",
+        "size"
+      ],
+      "audioData": [
+        {
+          "text": "Hello",
+          "audio": "nat_hello.mp3",
+          "animation": "Hi",
+          "frameCount": 24
+        },
+        {
+          "text": "I am Nat",
+          "audio": "nat_i_am_nat.mp3",
+          "animation": "Hi",
+          "frameCount": 24
+        },
+        {
+          "text": "Who are you",
+          "audio": "nat_who_are_you.mp3",
+          "animation": "Excited",
+          "frameCount": 64
+        }
+      ],
+      "animation": {
+        "RestPose01": {
+          "frameCount": 32
+        },
+        "RestPose02": {
+          "frameCount": 31
+        },
+        "RestPose03": {
+          "frameCount": 31
+        },
+        "Hi": {
+          "frameCount": 27
+        },
+        "Excited": {
+          "frameCount": 24
+        }
+      }
+    }
+  ],
+  "resources": {
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "nat.png",
+        "polly.png",
+        "playground.png"
+      ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": [
+        "nat_hello.mp3",
+        "nat_i_am_nat.mp3",
+        "nat_who_are_you.mp3",
+        "polly_hello.mp3",
+        "polly_i_am_polly.mp3",
+        "polly_who_are_you.mp3"
+      ]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "Name": "Flupe Excited",
+          "frameCount": 29,
+          "frameInitial": "Flupe/Excited/Flupe_excited_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Flupe Hi",
+          "frameCount": 23,
+          "frameInitial": "Flupe/Hi/Flupe_hi_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Flupe Restpose01",
+          "frameCount": 26,
+          "frameInitial": "Flupe/RestPose01/Flupe_restpose01_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Flupe Restpose02",
+          "frameCount": 20,
+          "frameInitial": "Flupe/RestPose02/Flupe_restpose02_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Flupe Restpose03",
+          "frameCount": 23,
+          "frameInitial": "Flupe/RestPose03/Flupe_restpose03_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Grnanny Excited",
+          "frameCount": 24,
+          "frameInitial": "Grnanny_fix/Excited/Grnanny_fix_excited_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Grnanny  Hi",
+          "frameCount": 27,
+          "frameInitial": "Grnanny_fix/Hi/Grnanny_fix_hi_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Grnanny_fix Restpose01",
+          "frameCount": 32,
+          "frameInitial": "Grnanny_fix/RestPose01/Grnanny_fix_restpose01_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Grnanny_fix Restpose02",
+          "frameCount": 31,
+          "frameInitial": "Grnanny_fix/RestPose02/Grnanny_fix_restpose02_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Grnanny_fix Restpose03",
+          "frameCount": 31,
+          "frameInitial": "Grnanny_fix/RestPose03/Grnanny_fix_restpose03_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Poul Excited",
+          "frameCount": 23,
+          "frameInitial": "Poul/Excited/Poul_excited_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Poul Hi",
+          "frameCount": 24,
+          "frameInitial": "Poul/Hi/Poul_hi_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Poul Restpose01",
+          "frameCount": 25,
+          "frameInitial": "Poul/RestPose01/Poul_restpose01_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Poul Restpose02",
+          "frameCount": 21,
+          "frameInitial": "Poul/RestPose02/Poul_restpose02_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Poul Restpose03",
+          "frameCount": 25,
+          "frameInitial": "Poul/RestPose02/Poul_restpose03_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}

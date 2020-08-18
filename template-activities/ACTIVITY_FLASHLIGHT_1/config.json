@@ -1,0 +1,376 @@
+{
+  "properties": {
+    "configurable": true,
+    "url": "res/Activity/ACTIVITY_FLASHLIGHT_1/",
+    "number": "1",
+    "renderMode": 1,
+    "name": "Flash Light",
+    "namespace": "ACTIVITY_FLASHLIGHT_1",
+    "layerName": "flashlight",
+    "activityName": "Flashlight",
+    "teacherScriptsNotes": {
+      "notes": "Ask to identify notes",
+      "timestamp": "",
+      "triggers": ""
+    },
+    "controls" : {
+      "mouse" : true,
+      "turnBased":false
+    },
+    "teacherTipsNotes": {
+      "tips": "Don't ask about bag",
+      "timestamp": "",
+      "triggers": ""
+    },
+    "description" : "",
+    "allocatedTime": 10,
+    "studentPreview": false,
+    "preLoaded" : false
+  },
+  "jsList": [
+    "res/Activity/ACTIVITY_FLASHLIGHT_1/src/Flashlight.js"
+  ],
+  "teacherScripts": {
+    "moduleStart":{
+      "ops": [
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "The students screens are dark - they can only see the area inside the red circle(s) on your screen. "
+        },
+        {
+          "insert": "\n"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "We’re at Granny Fix’s house! She needs (object). "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Where is"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": " (object)? "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "I can’t see"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": " (object)! "
+        },
+        {
+          "insert": "\n"
+        },
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "Ask students to move their mouse around i.e. shine their torch."
+        },
+        {
+          "insert": "\n"
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Shine! "
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "Shine your light. "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "What can you see"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "? "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Look!"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": " "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Is that a"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": " "
+        },
+        {
+          "insert": "(object)? \n"
+        },
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "Click on the red circle representing the student’s mouse"
+        },
+        {
+          "insert": "\n\n\n"
+        }
+      ]
+    },
+    "onRedCircle": [
+      {
+        "attributes": {
+          "italic": true
+        },
+        "insert": "Is this what Granny Fix is looking for?"
+      },
+      {
+        "insert": "\nIf not, click the X and keep looking. If yes, click the tick.\n"
+      },
+      {
+        "attributes": {
+          "italic": true
+        },
+        "insert": "Hurray! Granny Fix has found her (object)!"
+      },
+      {
+        "insert": "\nSelect a new object to find and repeat.\n\n"
+      }
+    ]
+  },
+  "teacherTips": {
+    "moduleStart":{
+      "ops": [
+        {
+          "insert": "You can act out words!\n- Movement for "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "shine"
+        },
+        {
+          "insert": ": open and close hands quickly showing how something shines. \n- Movement for "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "look"
+        },
+        {
+          "insert": ":"
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": " "
+        },
+        {
+          "insert": "place hands cupped over the eyes and point forward.\n- Movement for "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "I see"
+        },
+        {
+          "insert": ":"
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": " "
+        },
+        {
+          "insert": "Point to yourself and point to one eye. \n\n\n"
+        }
+      ]
+    }
+  },
+  "graphicalAssets": {
+    "background": {
+      "configurable": true,
+      "name": "bg.png",
+      "size": "{960, 640}",
+      "constraints": [
+        "size"
+      ]
+    },
+    "tick": {
+      "configurable": true,
+      "name": "tick.png",
+      "scale": 0.35,
+      "size": "{960, 640}",
+      "constraints": [
+        "size"
+      ]
+    },
+    "cross": {
+      "configurable": true,
+      "name": "cross.png",
+      "scale": 0.35,
+      "size": "{960, 640}",
+      "constraints": [
+        "size"
+      ]
+    },
+    "animationSprite": {
+      "scale": 0.75
+    }
+  },
+  "animation": {
+    "idle": {
+      "configurable": true,
+      "name": "idle",
+      "frameCount": 16,
+      "sound": "cardTakeOut.mp3",
+      "size": "{100,100}",
+      "position": {
+        "x": 256,
+        "y": 512
+      },
+      "animationPath": "{100,100},{200,200}",
+      "constraints": [
+        "imageName, size, animationPath"
+      ]
+    },
+    "celebrating": {
+      "configurable": true,
+      "name": "celebrating",
+      "frameCount": 32,
+      "sound": "cardTakeOut.mp3",
+      "size": "{100,100}",
+      "position": {
+        "x": 256,
+        "y": 512
+      },
+      "animationPath": "{100,100},{200,200}",
+      "constraints": [
+        "imageName, size, animationPath"
+      ]
+    },
+    "run_left": {
+      "configurable": true,
+      "name": "run_left",
+      "frameCount": 11,
+      "sound": "cardTakeOut.mp3",
+      "size": "{100,100}",
+      "position": {
+        "x": 256,
+        "y": 512
+      },
+      "animationPath": "{100,100},{200,200}",
+      "constraints": [
+        "imageName, size, animationPath"
+      ]
+    },
+    "run_right": {
+      "configurable": true,
+      "name": "run_right",
+      "frameCount": 11,
+      "sound": "cardTakeOut.mp3",
+      "size": "{100,100}",
+      "position": {
+        "x": 256,
+        "y": 512
+      },
+      "animationPath": "{100,100},{200,200}",
+      "constraints": [
+        "imageName, size, animationPath"
+      ]
+    }
+  },
+  "resources": {
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "circle.png",
+        "redCircle.png",
+        "bg.png",
+        "tick.png",
+        "cross.png",
+        "blackImage.png"
+      ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": [
+        "object_pulled_out_animation_sound.mp3"
+      ]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "Name": "Granny Celebrating",
+          "frameCount": 32,
+          "frameInitial": "Granny_Fix_celebrating/celebrating_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Granny Idle",
+          "frameCount": 16,
+          "frameInitial": "Granny_Fix_idle/idle_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Granny Run Left",
+          "frameCount": 11,
+          "frameInitial": "Granny_Fix_run_left/run_left_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Granny Run Right",
+          "frameCount": 11,
+          "frameInitial": "Granny_Fix_run_right/run_right_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "properties": {
+    "configurable": true,
+    "url": "res/Activity/ACTIVITY_PIANO_PLAYER/",
+    "number": "1",
+    "name": "MainPianoPlayerLayer",
+    "namespace": "PianoPlayer",
+    "activityName": "Piano Player",
+    "layerName" : "MainPianoPlayerLayer",
+    "teacherScriptsNotes": {
+      "notes": "Ask to identify notes",
+      "timestamp": "",
+      "triggers": ""
+    },
+    "controls" : {
+      "mouse": true,
+      "turnBased": false
+    },
+    "description" : "",
+    "allocatedTime": 10,
+    "studentPreview": false,
+    "preLoaded" : false
+  },
+  "jsList": [
+    "res/Activity/ACTIVITY_PIANO_PLAYER/src/main.js"
+  ],
+  "scripts": {
+    "jsLists": ["res/Activity/ACTIVITY_PIANO_PLAYER/src/main.js"]
+  },
+  "mode": {
+    "verbal": 1,
+    "reading": 2
+  },
+  "currentMode": 2,
+  "teacherScripts": {
+    "moduleStart": {
+      "ops": [
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "Play keys one by one while reviewing all vocab. "
+        },
+        {
+          "insert": "\n\n"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "Let’s play with the piano!  "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Girl, boy, hat, tree, book, donkey, rabbit."
+        },
+        {
+          "insert": "\n\n\n\n\n\n\n"
+        }
+      ]
+    },
+    "startButtonClicked": {
+      "ops": [
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "Click on Start button to activate the correct/incorrect feedback and prompt the students with the first note/word to play. "
+        },
+        {
+          "insert": "\n\n"
+        },
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "Enable student’s mouse."
+        },
+        {
+          "insert": "\n\n"
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Where is the (hat, tree, girl, tree, hat, hat, hat)? The____ is here! "
+        },
+        {
+          "insert": "\n\n"
+        },
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "Prompt students to play the highlighted notes one by one."
+        },
+        {
+          "insert": "\n\n"
+        },
+        {
+          "attributes": {
+            "italic": true
+          },
+          "insert": "Let’s sing a song! "
+        },
+        {
+          "attributes": {
+            "italic": true,
+            "bold": true
+          },
+          "insert": "Hat, tree, girl, tree, hat, hat, hat! "
+        },
+        {
+          "insert": "\n\n"
+        },
+        {
+          "attributes": {
+            "underline": true
+          },
+          "insert": "Play/sing the full tune again at a faster pace to complete the activity."
+        },
+        {
+          "insert": " \n\n\n"
+        }
+      ]
+    } },
+  "teacherTips": {
+    "moduleStart": {
+      "ops": [
+        {
+          "insert": "- As you demonstrate the keys, you may use movements from the songs to help the student remember the words. \n\n\n\n\n\n"
+        }
+      ]
+    },
+    "startButtonClicked": {
+      "ops": [
+        {
+          "insert": "- To provide feedback to students, use the green and red feedback, and the pictures inside, to see when students correctly or incorrectly click their piano keys. \n- Teacher must remember to enunciate and use visual cues if the student doesn’t recall the vocabulary word. \n- Younger students may have trouble with clicking keys fast enough to hear the tune. When student has had a few tries to click keys/review vocab, teacher can sing/play the tune before moving on to the next module.   \n\n\n\n\n\n\n\n\n"
+        }
+      ]
+    }
+  },
+  "graphicalAssets": {
+    "background": {
+      "imageName": "bg.png"
+    },
+    "pianoKeys": [
+      {
+        "idleImage": "C_idle.png",
+        "pressedImage": "C_pressed.png",
+        "audio": "c-5.mp3"
+      },
+      {
+        "idleImage": "D_idle.png",
+        "pressedImage": "D_pressed.png",
+        "audio": "d-5.mp3"
+      },
+      {
+        "idleImage": "E_idle.png",
+        "pressedImage": "E_pressed.png",
+        "audio": "e-5.mp3"
+      },
+      {
+        "idleImage": "F_idle.png",
+        "pressedImage": "F_pressed.png",
+        "audio": "f-5.mp3"
+      },
+      {
+        "idleImage": "G_idle.png",
+        "pressedImage": "G_pressed.png",
+        "audio": "g-5.mp3"
+      },
+      {
+        "idleImage": "A_idle.png",
+        "pressedImage": "A_pressed.png",
+        "audio": "a-5.mp3"
+      },
+      {
+        "idleImage": "B_idle.png",
+        "pressedImage": "B_pressed.png",
+        "audio": "b-5.mp3"
+      }
+    ],
+    "songs": [
+      {
+        "correctSequence": [
+          "girl",
+          "rabbit",
+          "tree",
+          "hat",
+          "book",
+          "book",
+          "donkey",
+          "girl",
+          "boy",
+          "girl",
+          "donkey",
+          "donkey"
+        ],
+        "pianoKeyIconImages": [
+          {
+            "imageName": "Item_book.png",
+            "word": "book"
+          },
+          {
+            "imageName": "Item_boy.png",
+            "word": "boy"
+          },
+          {
+            "imageName": "Item_donkey.png",
+            "word": "donkey"
+          },
+          {
+            "imageName": "Item_girl.png",
+            "word": "girl"
+          },
+          {
+            "imageName": "Item_hat.png",
+            "word": "hat"
+          },
+          {
+            "imageName": "Item_rabbit.png",
+            "word": "rabbit"
+          },
+          {
+            "imageName": "Item_tree.png",
+            "word": "tree"
+          }
+        ]
+      },
+      {
+        "correctSequence": [
+          "dog",
+          "mouse",
+          "mouse",
+          "tree",
+          "tree",
+          "cat",
+          "cat",
+          "girl",
+          "girl",
+          "boy",
+          "hen",
+          "hen",
+          "boy"
+        ],
+        "pianoKeyIconImages": [
+          {
+            "imageName": "flashcards_boy.png",
+            "word": "boy"
+          },
+          {
+            "imageName": "flashcards_cat.png",
+            "word": "cat"
+          },
+          {
+            "imageName": "flashcards_dog.png",
+            "word": "dog"
+          },
+          {
+            "imageName": "flashcards_girl.png",
+            "word": "girl"
+          },
+          {
+            "imageName": "flashcards_hen.png",
+            "word": "hen"
+          },
+          {
+            "imageName": "flashcards_mouse.png",
+            "word": "mouse"
+          },
+          {
+            "imageName": "Item_tree.png",
+            "word": "tree"
+          }
+        ]
+      }
+    ],
+    "feedback": {
+      "keyPressedCorrectImage": "key_pressed_correct.png",
+      "keyPressedIncorrectImage": "key_pressed_incorrect.png"
+    },
+    "sheetMusicWordContainer": {
+      "imageName": "",
+      "color": { "r": "", "g": "", "b": "", "a": "" },
+      "highlightedColor": { "r": "", "g": "", "b": "", "a": "" },
+      "wordLabel": {
+        "font": "",
+        "fontSize": "",
+        "color": { "r": "", "g": "", "b": "", "a": "" }
+      }
+    },
+    "student_answer": {
+      "imageName": "student_answer.png"
+    },
+    "buttons": {
+      "startButton": {
+        "idleImage": "start_idle.png",
+        "pressedImage": "start_pressed.png"
+      },
+      "nextButton": {
+        "idleImage": "next_idle.png",
+        "pressedImage": "next_pressed.png"
+      },
+      "playButton": {
+        "idleImage": "play_idle.png",
+        "pressedImage": "play_pressed.png"
+      }
+    }
+  },
+  "resources": {
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+         "student_answer.png",
+         "Item_book.png",
+         "Item_boy.png",
+         "Item_hat.png",
+         "Item_girl.png",
+         "Item_rabbit.png",
+         "Item_tree.png",
+         "Item_donkey.png",
+         "next_idle.png",
+         "next_pressed.png",
+         "start_idle.png",
+         "start_pressed.png",
+         "flashcards_boy.png",
+         "flashcards_cat.png",
+         "flashcards_dog.png",
+         "flashcards_girl.png",
+         "flashcards_hen.png",
+         "flashcards_mouse.png",
+         "A_idle.png",
+         "A_pressed.png",
+         "B_idle.png",
+         "B_pressed.png",
+         "bg.png",
+         "C_idle.png",
+         "C_pressed.png",
+         "D_idle.png",
+         "D_pressed.png",
+         "E_idle.png",
+         "E_pressed.png",
+         "F_idle.png",
+         "F_pressed.png",
+         "G_idle.png",
+         "G_pressed.png",
+         "key_pressed_correct.png",
+         "key_pressed_incorrect.png",
+         "play_idle.png",
+         "play_pressed.png"
+
+      ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": [
+        "a-5.mp3",
+        "b-5.mp3",
+        "c-5.mp3",
+        "d-5.mp3",
+        "e-5.mp3",
+        "f-5.mp3",
+        "g-5.mp3"
+      ]
+    }
+  }
+}

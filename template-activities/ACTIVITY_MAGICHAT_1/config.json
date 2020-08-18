@@ -1,0 +1,475 @@
+{
+  "properties": {
+    "configurable": true,
+    "url": "res/Activity/ACTIVITY_MAGICHAT_1/",
+    "number": "1",
+    "name": "magicHat_1",
+    "namespace": "magicHat_1",
+    "activityName": "Magic Hat",
+    "layerName" : "HDMagicHatLayer",
+    "teacherScriptsNotes": {
+      "notes": "Ask to identify notes",
+      "timestamp": "",
+      "triggers": ""
+    },
+    "controls" : {
+      "mouse" : true,
+      "turnBased": true
+    },
+    "teacherTipsNotes": {
+      "tips": "Don't ask about bag",
+      "timestamp": "",
+      "triggers": ""
+    },
+    "description" : "",
+    "allocatedTime": 100,
+    "studentPreview": false
+  },
+  "jsList": [
+    "res/Activity/ACTIVITY_MAGICHAT_1/src/MagicHat_1.js"
+  ],
+  "graphicalAssets": {
+    "background": {
+      "configurable": true,
+      "name": "background.png",
+      "size": "{960, 649}",
+      "constraints": [
+        "imageName, size"
+      ]
+    },
+    "flashCardFront": {
+      "configurable": true,
+      "name": "HatFront.png",
+      "size": "{300, 300}",
+      "position": {"x" : 240, "y" : 324.5},
+      "constraints": [
+        "imageName, size, position"
+      ]
+    },
+    "flashCardBack": {
+      "configurable": true,
+      "name": "HatBack.png",
+      "size": "{300, 300}",
+      "position": {"x" : 240, "y" : 324.5},
+      "constraints": [
+        "imageName, size, position"
+      ]
+    },
+    "currentCard": {
+      "configurable": true,
+      "name": "HelloWorld.png",
+      "size": "{300, 300}",
+      "position": {"x" : 576, "y" : 324.5},
+      "constraints": [
+        "imageName, size, position"
+      ]
+    },
+    "currentCardDescription": {
+      "configurable": true,
+      "name": "HelloWorld.png",
+      "size": "{300, 300}",
+      "constraints": [
+        "imageName, size"
+      ]
+    },
+    "currentCardDescriptionBox": {
+      "configurable": true,
+      "name": "wordHolder.png",
+      "size": "{290, 95}",
+      "position": {"x" : 700, "y" : 200},
+      "constraints": [
+        "imageName, size, position"
+      ]
+    },
+    "carouselBackgroundImage": {
+      "configurable": true,
+      "name": "carouselImage.png",
+      "size": "{290, 95}",
+      "position": {"x" : 768, "y" : 454.3},
+      "constraints": [
+        "imageName, size, position"
+      ]
+    },
+    "carouselBackgroundBorderImage": {
+      "configurable": true,
+      "name": "carouselBorderImage.png",
+      "imageName": "magicHat_1_carouselBorderImage.png",
+      "size": "{290, 95}",
+      "position": {"x" : 768, "y" : 454.3},
+      "constraints": [
+        "imageName, size, position"
+      ]
+    },
+    "carouselBackground": {
+      "configurable": true,
+      "color": {"r" : 60, "g" : 92, "b" : 113, "a" : 0},
+      "constraints": [
+        "color"
+      ]
+    },
+    "carouselBoxBackground": {
+      "configurable": true,
+      "color": {"r" : 78, "g" : 106, "b" : 125, "a" : 0},
+      "constraints": [
+        "color"
+      ]
+    },
+    "carouselBoxCardBackground": {
+      "configurable": true,
+      "color": {"r" : 44, "g" : 59, "b" : 69, "a" : 0},
+      "constraints": [
+        "color"
+      ]
+    },
+    "carouselBoxCardText": {
+      "configurable": true,
+      "color": {"r" : 0, "g" : 0, "b" : 0, "a" : 255},
+      "font": "sassoon_sans_regular",
+      "fontSize": 16,
+      "constraints": [
+        "color"
+      ]
+    },
+    "carouselBoxHighlight": {
+      "configurable": true,
+      "color": {"r" : 148, "g" : 95, "b" : 56, "a" : 100},
+      "constraints": [
+        "color"
+      ]
+    },
+    "carouselGlowBoxCard": {
+      "configurable": true,
+      "name": "cellGlow.png",
+      "constraints": [
+        "imageName"
+      ]
+    },
+    "answerCardText": {
+      "configurable": true,
+      "color": {"r" : 0, "g" : 0, "b" : 0, "a" : 255},
+      "font": "sassoon_sans_regular",
+      "fontSize": 32,
+      "constraints": [
+        "color"
+      ]
+    },
+    "keyboardShortcut": {
+      "configurable": true,
+      "name": "cardTextBox.png",
+      "size": "{300, 300}",
+      "constraints": [
+        "imageName,size"
+      ]
+    },
+    "studentControl": {
+      "configurable": true,
+      "name": "cardTextBox.png",
+      "size": "{300, 300}",
+      "constraints": [
+        "imageName,size"
+      ]
+    },
+    "helpOptions": {
+      "configurable": true,
+      "name": "cardTextBox.png",
+      "size": "{300, 300}",
+      "constraints": [
+        "imageName,size"
+      ]
+    }
+  },
+  "animation": {
+    "flashCardGlow": {
+      "configurable": true,
+      "name": "cardTakeOut",
+      "frameCount" : 15,
+      "sound" : "cardTakeOut.mp3",
+      "size": "{100,100}",
+      "position": {"x" : 256, "y" : 512},
+      "animationPath": "{100,100},{200,200}",
+      "constraints": [
+        "imageName, size, animationPath"
+      ]
+    },
+    "cardTakeOut": {
+      "configurable": true,
+      "name": "HelloWorld.png",
+      "imageName": "magicHat_1_HelloWorld.png",
+      "size": "{100,100}",
+      "animationPath": [{"x" : 200, "y" : 224.5},{"x" : 190, "y" : 750},{"x" : 680, "y" : 380}],
+      "constraints": [
+        "imageName, size,animationPath"
+      ]
+    },
+    "magicWand": {
+      "configurable": true,
+      "name": "HelloWorld.png",
+      "imageName": "magicHat_1_HelloWorld.png",
+      "size": "{100,100}",
+      "animationPath": "{100,100},{200,200}",
+      "constraints": [
+        "imageName, size, animationPath"
+      ]
+    }
+  },
+  "carouselAssets": [
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_Book.png",
+      "sound": "abc.mp3",
+      "name": "Book.png",
+      "cardValue": "book",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_cat.png",
+      "sound": "abc.mp3",
+      "name": "cat.png",
+      "cardValue": "cat",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_dog.png",
+      "sound": "abc.mp3",
+      "name": "dog.png",
+      "cardValue": "dog",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_flupeSad.png",
+      "sound": "abc.mp3",
+      "name": "flupeSad.png",
+      "cardValue": "sad",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_house.png",
+      "sound": "abc.mp3",
+      "name": "house.png",
+      "cardValue": "house",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_paulHappy.png",
+      "sound": "abc.mp3",
+      "name": "paulHappy.png",
+      "cardValue": "happy",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_rat.png",
+      "sound": "abc.mp3",
+      "name": "rat.png",
+      "cardValue": "rat",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_sheep.png",
+      "sound": "abc.mp3",
+      "name": "sheep.png",
+      "cardValue": "sheep",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_sing.png",
+      "sound": "abc.mp3",
+      "name": "sing.png",
+      "cardValue": "sing",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_tree.png",
+      "sound": "abc.mp3",
+      "name": "tree.png",
+      "cardValue": "tree",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    },
+    {
+      "configurable": true,
+      "imageName": "magicHat_1_tub.png",
+      "sound": "abc.mp3",
+      "name": "tub.png",
+      "cardValue": "tub",
+      "size": {
+        "width": 350,
+        "height": 350
+      },
+      "constraints": [
+        "imageName, sound, size"
+      ]
+    }
+  ],
+  "keyboardShortcuts": [
+    {
+      "key": "K",
+      "text": "Go To..",
+      "isEnable": true,
+      "methodName": {}
+    }
+  ],
+
+  "helpOption": [
+    {
+      "key": "K",
+      "text": "Go To..",
+      "isEnable": true
+    }
+  ],
+  "learningRating": [
+    {
+      "name": "Visual",
+      "status": "High",
+      "rating": ""
+    },
+    {
+      "name": "Audio",
+      "status": "High",
+      "rating": ""
+    },
+    {
+      "name": "Kinesthetic",
+      "status": "None",
+      "rating": ""
+    },
+    {
+      "name": "Gamification",
+      "status": "low",
+      "rating": ""
+    },
+    {
+      "name": "Speaking",
+      "status": "High",
+      "rating": ""
+    },
+    {
+      "name": "Reading",
+      "status": "Medium",
+      "rating": ""
+    },
+    {
+      "name": "Writing",
+      "status": "Low",
+      "rating": ""
+    }
+  ],
+  "resources": {
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+         "background.png",
+         "ant.png",
+         "bat.png",
+         "bee.png",
+         "cat.png",
+         "crow.png",
+         "dog.png",
+         "frog.png",
+         "wordHolder.png",
+         "carouselImage.png",
+         "HatFront.png",
+         "HatBack.png",
+         "BagFront.png",
+         "BagBack.png",
+         "ApronFront.png",
+         "ApronBack.png",
+         "cellGlow.png",
+         "Book.png",
+         "flupeSad.png",
+         "house.png",
+         "paulHappy.png",
+         "rat.png",
+         "sheep.png",
+         "sing.png",
+         "tub.png",
+         "tree.png"
+      ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": [
+        "cardTakeOut.mp3"
+      ]
+    },
+    "animationFrames": {
+      "basePath": "AnimationFrames/",
+      "animation": [
+        {
+          "Name": "Card Take Out",
+          "frameCount": 15,
+          "frameInitial": "cardTakeOut/magicHat_cardTakeOut_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}
