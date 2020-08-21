@@ -17,6 +17,7 @@ Resources.add({
 const activitySchema = new Schema({
     name: { type: String, index: true, unique: true },
     path: { type: String },
+    iconUrl: { type: String },
     configData: { type: Object, default: {} },
     templateId: { type: String, ref: 'activity' },
     // resFolders: [Resources],
