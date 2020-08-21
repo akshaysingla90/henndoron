@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE } = require(`../../../utils/constants`);
 //load controllers
-const { getServerResponse, loginUser, createAndUpdateUser,getGameData } = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
+const { getServerResponse, loginUser, createAndUpdateUser, getGameData, uploadFile} = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
 
 let routes = [
 	{
@@ -64,6 +64,23 @@ let routes = [
 		},
 		// auth: [USER_ROLE.STUDENT, USER_ROLE.TEACHER],
 		handler: getGameData
+	},
+	{
+		method: 'POST',
+		path: '/v1/uploadFile',
+		joiSchemaForSwagger: {
+			headers: {
+			    'authorization': Joi.string().required().description('User \'s JWT token.')
+			},
+			formData: {
+				file: Joi.file({name:"file"})
+			},
+			group: 'File',
+			description: 'Route to upload a file.',
+			model: 'FILE_UPLOAD'
+		},
+		auth: [USER_ROLE.STUDENT, USER_ROLE.TEACHER, USER_ROLE.ADMIN],
+		handler: uploadFile
 	}
 ];
 

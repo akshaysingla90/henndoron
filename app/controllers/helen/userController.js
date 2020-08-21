@@ -102,5 +102,14 @@ userController.getGameData = async (payload) => {
 
 };
 
+/**
+ * function to upload the file to the s3 
+ * @param {*} payload 
+ */
+userController.uploadFile = async (payload) => {
+  let fileUrl = await SERVICES.fileUploadService.uploadFileToS3(payload, payload.file.originalname);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.FILE_UPLOADED_SUCCESSFULLY), { fileUrl })
+}
+
 /* export userController */
 module.exports = userController;

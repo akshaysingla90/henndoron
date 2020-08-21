@@ -81,7 +81,7 @@ var defaults = {
     s3Bucket: {
         accessKeyId: process.env.ACCESS_KEY_ID || 'access-key-id',
         secretAccessKey: process.env.SECRET_ACCESS_KEY || 'secret-access-key',
-        zipBucketName: process.env.S3_BUCKET_NAME || 'bucket-name'
+        bucketName: process.env.S3_BUCKET_NAME || 'bucket-name'
     },
     REDIS: {
         PORT: process.env.REDIS_PORT || '6379',

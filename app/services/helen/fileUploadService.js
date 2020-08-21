@@ -14,7 +14,7 @@ const HELPERS = require("../../helpers");
 fileUploadService.uploadFileToS3 = (payload, fileName, bucketName) => {
     return new Promise((resolve, reject) => {
         s3Bucket.upload({
-            Bucket: bucketName,
+            Bucket: bucketName || CONFIG.s3Bucket.bucketName,
             Key: fileName,
             Body: payload.file.buffer,
             ACL: 'public-read',
