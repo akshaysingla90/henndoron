@@ -87,6 +87,12 @@ module.exports = {
   ACTIVITY_CLONED_SUCCESSFULLY: "Activity cloned successfully",
   ACTIVITIES_FETCHED_SUCCESSFULLY: "Activities fetched successfully",
   ACTIVITY_FETCHED_SUCCESSFULLY: "Activity fetched successfully",
+  ACTIVITY_DELETED_SUCCESSFULLY: "Activity deleted successfully",
   ACTIVITY_DOESNOT_EXISTS:"Activity with this id doesn't exist",
-  RESOURCES_UPLOAD_SUCCESSFULLY:"Resource uploaded successfully"
+  RESOURCES_UPLOAD_SUCCESSFULLY:"Resource uploaded successfully",
+  LESSONS_FETCHED_SUCCESSFULLY:"Lessons fetched successfully",
+  LESSON_FETCHED_SUCCESSFULLY:"Lesson fetched successfully",
+  LESSONS_DOESNOT_EXISTS:"Lessons doesn't exist",
+  LESSON_DELETED_SUCCESSFULLY:"Lessons deleted successfully",
+  COURSES_FETCHED_SUCCESSFULLY: "Courses fetched successfully",
 };

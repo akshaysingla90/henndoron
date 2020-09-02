@@ -15,6 +15,7 @@ const lessonSchema = new Schema({
   path: { type: String },
   decription: { type: String },
   lessonNumber: { type: Number },
+  episodeNumber: { type: Schema.Types.ObjectId },
   activityIds: [{ type: Schema.Types.ObjectId }],
   courseId: { type: Schema.Types.ObjectId },
   status: { type: Number, enum: [LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED] }

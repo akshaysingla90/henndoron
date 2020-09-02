@@ -8,9 +8,9 @@ const dbUtils = require(`../../utils/dbUtils`);
 const COMMON_FUN = require('../../utils/utils');
 const SERVICES = require('../../services');
 const { USER_ROLE } = require('../../utils/constants');
-const { ACTIVITY_DIRECTORY_PATH, BASE_PATH } = require('../../../config').COCOS_PROJECT_PATH;
+const { ACTIVITY_PREVIEW_PATH, BASE_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const path = require('path');
-const activityPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
+const activityPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
 
 module.exports = async function (app) {
 

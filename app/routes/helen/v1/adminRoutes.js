@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE } = require(`../../../utils/constants`);
 //load controllers
-const { cloneActivity, getActivities, getActivity, addResourceFiles } = require(`../../../controllers/${CONFIG.PLATFORM}/adminController`);
+const { cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity } = require(`../../../controllers/${CONFIG.PLATFORM}/adminController`);
 
 let routes = [
   {
@@ -30,6 +30,23 @@ let routes = [
     handler: cloneActivity
   },
   {
+    method: 'POST',
+    path: '/v1/admin/activities/duplicate/:activityId',
+    joiSchemaForSwagger: {
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
+      params: {
+        activityId: Joi.string().optional().description('Activity Id to clone.')
+      },
+      group: 'Admin',
+      description: 'Route to copy an existing activity',
+      model: 'Auth Tool'
+    },
+    auth: USER_ROLE.ADMIN,
+    handler: duplicateActivity
+  },
+  {
     method: 'GET',
     path: '/v1/admin/activities',
     joiSchemaForSwagger: {
@@ -37,9 +54,11 @@ let routes = [
         'authorization': Joi.string().required().description('User\'s JWT token.')
       },
       query: {
+        //pagination 
+        counter: Joi.number().min(1).default(1).description('Page Counter'),
+        limit: Joi.number().min(0).default(10).description('Page Limit'),
         //TODO PAGINATION AND FILTERS AND SORTING ORDER
-        type: Joi.number().valid(ACTIVITY_TYPE.CLONED, ACTIVITY_TYPE.TEMPLATE).description('1 => TEMPLATE,2 => CLONED'),
-
+        type: Joi.number().valid(ACTIVITY_TYPE.SMALL, ACTIVITY_TYPE.MEDIUM, ACTIVITY_TYPE.GAME).description('1 => SMALL,2 => MEDIUM,3 => GAME'),
       },
       group: 'Admin',
       description: 'Route to get activities',
@@ -85,12 +104,29 @@ let routes = [
         }
       },
       group: 'Admin',
-      description: 'Route to create a new activity',
+      description: 'Route to upload resource of an activity',
       model: 'Auth Tool'
     },
     auth: USER_ROLE.ADMIN,
     handler: addResourceFiles
-  }
+  },
+  {
+    method: 'DELETE',
+    path: '/v1/admin/activities/:id',
+    joiSchemaForSwagger: {
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
+      params: {
+        id: Joi.string().required().description('Activity\'s Id.')
+      },
+      group: 'Activity Auth Tool',
+      description: 'Route to delete activity by its id',
+      model: 'Delete_Activity'
+    },
+    auth: USER_ROLE.ADMIN,
+    handler: deleteActivity
+  },
 ];
 
 module.exports = routes;

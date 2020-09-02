@@ -28,10 +28,14 @@ var defaults = {
         SENDER_EMAIL: 'contact@demo.in'
     },
     COCOS_PROJECT_PATH: {
+        TEMPLATE_ACTIVITY_PATH: '/template-activities',
+        TEMPLATE_ACTIVITY_PREVIEW:'/template-activity-preview',
         BASE_PATH: '/HelenDron-Cocos2d',
-        ACTIVITY_DIRECTORY_PATH: '/HelenDoron/res/Activity',        
-        ACTIVITY_RESOURCE_DIRECTORY_PATH:'/res',        
-        ACTIVITY_CONFIG_PATH:'/config.json',        
+        ACTIVITY_DIRECTORY_PATH:'/cloned-activities',
+        ACTIVITY_PREVIEW_PATH:'/activity-preview',
+        ACTIVITY_RESOURCE_DIRECTORY_PATH:'/res',   
+        ACTIVITY_CONFIG_PATH:'/config.json',
+        LESSON_PATH:'/lesson-created'       
     },
     SMTP: {
         TRANSPORT: {

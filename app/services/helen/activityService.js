@@ -1,6 +1,6 @@
 const CONFIG = require('../../../config');
 const activityModel = require(`../../models/${CONFIG.PLATFORM}/activityModel`);
-
+const dbUtils = require('../../utils/dbUtils')
 let activityService = {};
 
 /**
@@ -20,8 +20,13 @@ activityService.getActivity = async (criteria, projection) => {
 /**
  * function to fetch all Activities.
  */
-activityService.getActivities = async (criteria, projection) => {
-  return await activityModel.find(criteria, projection).lean();
+activityService.getActivities = async (payload, projection) => {
+  let query = [
+    { $match: payload.criteria },
+    ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit)
+  ]
+  let { items: activities, totalCount } = (await activityModel.aggregate(query))[0] || { items: [], totalCount: 0 }
+  return { activities, totalCount };
 };
 
 /**
@@ -34,8 +39,8 @@ activityService.updateActivity = async (criteria, dataToUpdate) => {
 /**
  * function to remove Activity .
  */
-activityService.removeActivity = async (_id) => {
-  return await activityModel.findOneAndRemove({ _id });
+activityService.removeActivity = async (criteria) => {
+  return await activityModel.findOneAndRemove(criteria);
 };
 
 module.exports = activityService;
