@@ -1,5 +1,6 @@
 {
   "properties": {
+    "externalRewards": true,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_COUNTING_1/",
     "number": "1",
@@ -12,8 +13,8 @@
       "timestamp": "",
       "triggers": ""
     },
-    "controls" : {
-      "mouse" : true,
+    "controls": {
+      "mouse": true,
       "turnBased": true
     },
     "teacherTipsNotes": {
@@ -21,12 +22,12 @@
       "timestamp": "",
       "triggers": ""
     },
-    "description" : "",
+    "description": "",
     "allocatedTime": 10,
     "studentPreview": false,
-    "preLoaded" : false
+    "preLoaded": false
   },
-  "jsList" : [
+  "jsList": [
     "res/Activity/ACTIVITY_COUNTING_1/src/Counting.js"
   ],
   "teacherScripts": {
@@ -192,7 +193,7 @@
   },
   "gameInfo": {
     "isCounting": true,
-    "countingObject" : 3
+    "countingObject": 3
   },
   "graphicalAssets": {
     "background": {
@@ -235,7 +236,7 @@
         "a": 255
       },
       "countFontSize": 40,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.4,
       "size": "{960, 649}",
       "constraints": [
@@ -243,7 +244,6 @@
         "size"
       ]
     },
-
     {
       "name": "Bin",
       "configurable": true,
@@ -264,7 +264,7 @@
         "a": 255
       },
       "countFontSize": 40,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.3,
       "size": "{960, 649}",
       "constraints": [
@@ -292,7 +292,7 @@
         "a": 255
       },
       "countFontSize": 40,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.35,
       "size": "{960, 649}",
       "constraints": [
@@ -320,7 +320,7 @@
         "a": 255
       },
       "countFontSize": 40,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.275,
       "size": "{960, 649}",
       "constraints": [
@@ -348,7 +348,7 @@
         "a": 255
       },
       "countFontSize": 32,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.2,
       "size": "{960, 649}",
       "constraints": [
@@ -377,7 +377,7 @@
       },
       "countFontSize": 16,
       "countFontSize": 32,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.2,
       "constraints": [
         "name",
@@ -404,7 +404,7 @@
         "a": 255
       },
       "countFontSize": 32,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.225,
       "size": "{960, 649}",
       "constraints": [
@@ -432,7 +432,7 @@
         "a": 255
       },
       "countFontSize": 32,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.35,
       "size": "{960, 649}",
       "constraints": [
@@ -460,7 +460,7 @@
         "a": 255
       },
       "countFontSize": 32,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.35,
       "size": "{960, 649}",
       "constraints": [
@@ -488,7 +488,7 @@
         "a": 255
       },
       "countFontSize": 32,
-      "countFont" : "sassoon_sans_regular",
+      "countFont": "sassoon_sans_regular",
       "scale": 0.25,
       "size": "{960, 649}",
       "constraints": [
@@ -501,29 +501,29 @@
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [
-          "playground.png",
-          "backpack_hidden.png",
-          "backpack_revealed.png",
-          "bin_hidden.png",
-          "bin_revealed.png",
-          "book_hidden.png",
-          "book_revealed.png",
-          "bowl_hidden.png",
-          "bowl_revealed.png",
-          "box01_hidden.png",
-          "box01_revealed.png",
-          "box02_hidden.png",
-          "box02_revealed.png",
-          "hat01_hidden.png",
-          "hat01_revealed.png",
-          "hat02_hidden.png",
-          "hat02_revealed.png",
-          "hole_hidden.png",
-          "hole_revealed.png",
-          "trunk_hidden.png",
-          "trunk_revealed.png",
-          "btn_disable.png",
-          "btn_enable.png"
+        "playground.png",
+        "backpack_hidden.png",
+        "backpack_revealed.png",
+        "bin_hidden.png",
+        "bin_revealed.png",
+        "book_hidden.png",
+        "book_revealed.png",
+        "bowl_hidden.png",
+        "bowl_revealed.png",
+        "box01_hidden.png",
+        "box01_revealed.png",
+        "box02_hidden.png",
+        "box02_revealed.png",
+        "hat01_hidden.png",
+        "hat01_revealed.png",
+        "hat02_hidden.png",
+        "hat02_revealed.png",
+        "hole_hidden.png",
+        "hole_revealed.png",
+        "trunk_hidden.png",
+        "trunk_revealed.png",
+        "btn_disable.png",
+        "btn_enable.png"
       ]
     },
     "sounds": {

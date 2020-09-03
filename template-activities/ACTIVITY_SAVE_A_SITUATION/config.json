@@ -1,5 +1,6 @@
 {
   "properties": {
+    "externalRewards": false,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_SAVE_A_SITUATION/",
     "number": "1",
@@ -12,8 +13,8 @@
       "timestamp": "",
       "triggers": ""
     },
-    "controls" : {
-      "mouse" : true,
+    "controls": {
+      "mouse": true,
       "turnBased": true
     },
     "teacherTipsNotes": {
@@ -21,12 +22,12 @@
       "timestamp": "",
       "triggers": ""
     },
-    "description" : "",
+    "description": "",
     "allocatedTime": 10,
     "studentPreview": false,
-    "preLoaded" : false
+    "preLoaded": false
   },
-  "jsList" : [
+  "jsList": [
     "res/Activity/ACTIVITY_SAVE_A_SITUATION/src/SaveASituation.js"
   ],
   "teacherScripts": {
@@ -162,150 +163,212 @@
       {
         "configurable": true,
         "name": "bg03.png",
-        "size": {"width":2048,"height": 247},
-        "position" : {"x": 0,"y": 15},
-        "movingOffset" : {"x" : 0.8  , "y": 1},
-        "scale" : 1,
+        "size": {
+          "width": 2048,
+          "height": 247
+        },
+        "position": {
+          "x": 0,
+          "y": 15
+        },
+        "movingOffset": {
+          "x": 0.8,
+          "y": 1
+        },
+        "scale": 1,
         "constraints": [
           "name",
           "size"
         ]
       },
-
       {
         "configurable": true,
         "name": "bg04.png",
-        "size": {"width":2048,"height": 247},
-        "position" : {"x": 0,"y": -20},
-
-        "scale" : 1,
+        "size": {
+          "width": 2048,
+          "height": 247
+        },
+        "position": {
+          "x": 0,
+          "y": -20
+        },
+        "scale": 1,
         "constraints": [
           "name",
           "size"
         ]
       },
-
       {
         "configurable": true,
         "name": "bg05.png",
-        "size": {"width":2048,"height": 246},
-        "position" : {"x": 0,"y": -120},
-        "movingOffset" : {"x" : 1 , "y":  1},
-        "scale" : 1,
+        "size": {
+          "width": 2048,
+          "height": 246
+        },
+        "position": {
+          "x": 0,
+          "y": -120
+        },
+        "movingOffset": {
+          "x": 1,
+          "y": 1
+        },
+        "scale": 1,
         "constraints": [
           "name",
           "size"
         ]
       }
     ],
-
     "land": {
       "configurable": true,
       "name": "bg02.png",
-      "size": {"width":2048,"height": 640},
-      "position" : {"x": 0,"y": 200},
-      "scale" : 1.4,
+      "size": {
+        "width": 2048,
+        "height": 640
+      },
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "scale": 1.4,
       "constraints": [
         "name",
         "size"
       ]
     },
-
     "winLand": {
       "configurable": true,
       "name": "bg02_win.png",
-      "size": {"width":2048,"height": 246},
-      "position" : {"x": 0,"y": 200},
-      "scale" : 1,
+      "size": {
+        "width": 2048,
+        "height": 246
+      },
+      "position": {
+        "x": 0,
+        "y": 200
+      },
+      "scale": 1,
       "constraints": [
         "name",
         "size"
       ]
     },
-
     "background": {
       "configurable": true,
       "name": "bg01.png",
-      "size": {"width":961, "height": 641},
+      "size": {
+        "width": 961,
+        "height": 641
+      },
       "constraints": [
         "name",
         "size"
       ]
     },
-
-
     "tubBack": {
       "configurable": true,
       "name": "tub01.png",
-      "size": {"width" :512  , "height":512},
-      "position" : {"x": 400,"y": 300},
+      "size": {
+        "width": 512,
+        "height": 512
+      },
+      "position": {
+        "x": 400,
+        "y": 300
+      },
       "scale": 0.7,
       "constraints": [
         "name",
         "size"
       ]
     },
-
-    "water" : {
+    "water": {
       "configurable": true,
-      "color": {"r" : 48 , "g":154 , "b" : 203},
-      "size": {"width" :400  , "height":330},
-      "position" : {"x": 50,"y": 0},
+      "color": {
+        "r": 48,
+        "g": 154,
+        "b": 203
+      },
+      "size": {
+        "width": 400,
+        "height": 330
+      },
+      "position": {
+        "x": 50,
+        "y": 0
+      },
       "constraints": [
         "name",
         "size"
       ]
-
     },
-
-
-    "openCursor" : {
+    "openCursor": {
       "configurable": true,
       "name": "open_pincer_fingers_pointer.png",
-      "size": {"width" :420  , "height":330},
+      "size": {
+        "width": 420,
+        "height": 330
+      },
       "constraints": [
         "name",
         "size"
       ]
-
     },
-
-    "closeCursor" : {
+    "closeCursor": {
       "configurable": true,
       "name": "closed_pincer_fingers_pointer.png",
-      "size": {"width" :420  , "height":330},
-      "position" : {"x": 50,"y": 0},
+      "size": {
+        "width": 420,
+        "height": 330
+      },
+      "position": {
+        "x": 50,
+        "y": 0
+      },
       "constraints": [
         "name",
         "size"
       ]
-
     },
-
-    "winAnimation" : {
+    "winAnimation": {
       "configurable": true,
       "name": "pincer.png",
-      "size": {"width" :150  , "height":101},
+      "size": {
+        "width": 150,
+        "height": 101
+      },
       "scale": 1,
       "constraints": [
         "name",
         "size"
-  ]
+      ]
     },
-
-    "animals" : [
+    "animals": [
       {
         "configurable": true,
         "name": "sheep_regular.png",
-        "sad" : "sheep_loose.png",
-        "happy" : "sheep_win.png",
-        "size": {"width" :512  , "height":512},
-        "position" : {"x": 380,"y": 370},
-        "wPosition" : {"x" :  475, "y" : 138},
-        "wScale"    :0.4,
+        "sad": "sheep_loose.png",
+        "happy": "sheep_win.png",
+        "size": {
+          "width": 512,
+          "height": 512
+        },
+        "position": {
+          "x": 380,
+          "y": 370
+        },
+        "wPosition": {
+          "x": 475,
+          "y": 138
+        },
+        "wScale": 0.4,
         "scale": 0.8,
-        "maskInfo" : {
-          "pos" : {"x":  460, "y":  300},
+        "maskInfo": {
+          "pos": {
+            "x": 460,
+            "y": 300
+          },
           "radius": 150
         },
         "constraints": [
@@ -318,13 +381,25 @@
         "name": "dog_regular.png",
         "sad": "dog_loose.png",
         "happy": "dog_win.png",
-        "size": {"width" :512  , "height":512},
-        "position" : {"x": 145,"y": 440},
-        "wPosition" : {"x" :  315, "y" :  143},
-        "wScale"    : 0.2,
+        "size": {
+          "width": 512,
+          "height": 512
+        },
+        "position": {
+          "x": 145,
+          "y": 440
+        },
+        "wPosition": {
+          "x": 315,
+          "y": 143
+        },
+        "wScale": 0.2,
         "scale": 0.8,
-        "maskInfo" : {
-          "pos" : {"x":  305, "y":  320},
+        "maskInfo": {
+          "pos": {
+            "x": 305,
+            "y": 320
+          },
           "radius": 170
         },
         "constraints": [
@@ -332,19 +407,30 @@
           "size"
         ]
       },
-
       {
         "configurable": true,
         "name": "cat_regular.png",
         "sad": "cat_loose.png",
         "happy": "cat_win.png",
-        "size": {"width" :512  , "height":512},
-        "position" : {"x": 220,"y": 410},
-        "wPosition" : {"x" :  350, "y" : 145},
-        "wScale"    : 0.2,
+        "size": {
+          "width": 512,
+          "height": 512
+        },
+        "position": {
+          "x": 220,
+          "y": 410
+        },
+        "wPosition": {
+          "x": 350,
+          "y": 145
+        },
+        "wScale": 0.2,
         "scale": 0.8,
-        "maskInfo" : {
-          "pos" : {"x":  350, "y":  250},
+        "maskInfo": {
+          "pos": {
+            "x": 350,
+            "y": 250
+          },
           "radius": 100
         },
         "constraints": [
@@ -357,13 +443,25 @@
         "name": "rat_regular.png",
         "sad": "rat_loose.png",
         "happy": "rat_win.png",
-        "size": {"width" :512  , "height":512},
-        "position" : {"x": 310,"y": 430},
-        "wPosition" : {"x" :  420, "y" :  138},
-        "wScale"    : 0.15,
+        "size": {
+          "width": 512,
+          "height": 512
+        },
+        "position": {
+          "x": 310,
+          "y": 430
+        },
+        "wPosition": {
+          "x": 420,
+          "y": 138
+        },
+        "wScale": 0.15,
         "scale": 0.8,
-        "maskInfo" : {
-          "pos" : {"x":  410, "y":  223},
+        "maskInfo": {
+          "pos": {
+            "x": 410,
+            "y": 223
+          },
           "radius": 80
         },
         "constraints": [
@@ -371,10 +469,7 @@
           "size"
         ]
       }
-
-
     ],
-
     "goButton": {
       "configurable": true,
       "disabledImage": "go_button_disabled.png",
@@ -382,7 +477,10 @@
       "pushedImage": "go_button_pushed.png",
       "title": "GO!",
       "size": "{960, 649}",
-      "position" : {"x": 600,"y": 204.5},
+      "position": {
+        "x": 600,
+        "y": 204.5
+      },
       "scale": 0.5,
       "constraints": [
         "name",
@@ -396,7 +494,10 @@
       "pushedImage": "go_button_pushed.png",
       "title": "STOP!",
       "size": "{960, 649}",
-      "position" : {"x": 600,"y": 204.5},
+      "position": {
+        "x": 600,
+        "y": 204.5
+      },
       "scale": 0.5,
       "constraints": [
         "name",
@@ -407,7 +508,10 @@
       "configurable": true,
       "name": "carouselImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "scale": 1,
       "constraints": [
         "imageName, size, position"
@@ -417,13 +521,15 @@
       "configurable": true,
       "name": "carouselBorderImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "scale": 1,
       "constraints": [
         "imageName, size, position"
       ]
     },
-
     "carouselBoxCardBackground": {
       "configurable": true,
       "name": "cellBg.png",
@@ -434,7 +540,12 @@
     },
     "carouselBoxCardText": {
       "configurable": true,
-      "color": {"r" : 0, "g" : 0, "b" : 0, "a" : 255},
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 255
+      },
       "font": "sans-serif",
       "fontSize": 16,
       "constraints": [
@@ -443,7 +554,12 @@
     },
     "carouselBoxHighlight": {
       "configurable": true,
-      "color": {"r" : 148, "g" : 122, "b" : 58, "a" : 100},
+      "color": {
+        "r": 148,
+        "g": 122,
+        "b": 58,
+        "a": 100
+      },
       "constraints": [
         "color"
       ]
@@ -455,33 +571,40 @@
         "imageName"
       ]
     },
-
     "popUp": {
       "configurable": true,
       "name": "pop_up_bg.png",
-      "position" : {"x":  450, "y": 320
+      "position": {
+        "x": 450,
+        "y": 320
       },
-      "size" : {"width" : 429  , "height": 256 },
+      "size": {
+        "width": 429,
+        "height": 256
+      },
       "constraints": [
         "imageName"
       ]
     },
-
     "next": {
-      "configurable" : true,
-      "normal"         : "next_botton_idle.png",
-      "pressed"      :  "next_botton_pushed.png",
-      "size"         : {"width" :  166, "height" : 75 }
+      "configurable": true,
+      "normal": "next_botton_idle.png",
+      "pressed": "next_botton_pushed.png",
+      "size": {
+        "width": 166,
+        "height": 75
+      }
     },
-
     "replay": {
-    "configurable" : true,
-    "normal"         : "replay_botton_idle.png",
-    "pressed"      : "replay_botton_pushed.png",
-    "size"         : {"width" :  166, "height" : 75 }
-  }
+      "configurable": true,
+      "normal": "replay_botton_idle.png",
+      "pressed": "replay_botton_pushed.png",
+      "size": {
+        "width": 166,
+        "height": 75
+      }
+    }
   },
-
   "audioAssets": {
     "tapHiddenObject": {
       "configurable": true,
@@ -491,50 +614,49 @@
       ]
     }
   },
-
-  "levels" : [
+  "levels": [
     {
       "carouselAssets": [
         {
           "configurable": true,
-          "name" : "item_tree.png",
+          "name": "item_tree.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.25,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 300,
-              "y" : 265,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.25,
+          "holeInfo": {
+            "coordinates": {
+              "x": 300,
+              "y": 265,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "tree",
-            "scale" : 0.28
+            "filledImage": "tree",
+            "scale": 0.28
           },
-
           "constraints": [
-            "imageName, scale, size", "holeInfo"
+            "imageName, scale, size",
+            "holeInfo"
           ]
         },
         {
           "configurable": true,
-          "name" : "item_book.png",
+          "name": "item_book.png",
           "size": {
             "width": 50,
             "height": 54
           },
-          "scale" : 0.25,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 358,
-              "y" : 194,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.25,
+          "holeInfo": {
+            "coordinates": {
+              "x": 358,
+              "y": 194,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "book",
-            "scale" : 0.28
+            "filledImage": "book",
+            "scale": 0.28
           },
           "constraints": [
             "imageName, sound, size"
@@ -542,21 +664,21 @@
         },
         {
           "configurable": true,
-          "name" : "item_house.png",
+          "name": "item_house.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.25,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 397,
-              "y" : 275,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.25,
+          "holeInfo": {
+            "coordinates": {
+              "x": 397,
+              "y": 275,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "house",
-            "scale" : 0.29
+            "filledImage": "house",
+            "scale": 0.29
           },
           "constraints": [
             "imageName, sound, size"
@@ -564,22 +686,21 @@
         },
         {
           "configurable": true,
-          "name" : "item_hat.png",
-
+          "name": "item_hat.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.75,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 465,
-              "y" : 200,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.75,
+          "holeInfo": {
+            "coordinates": {
+              "x": 465,
+              "y": 200,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "hat",
-            "scale" : 0.3
+            "filledImage": "hat",
+            "scale": 0.3
           },
           "constraints": [
             "imageName, sound, size"
@@ -587,21 +708,21 @@
         },
         {
           "configurable": true,
-          "name" : "item_stickers.png",
+          "name": "item_stickers.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.75,
-          "holeInfo" : {
-            "coordinates" : {
-                "x" : 497,
-              "y" : 285,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.75,
+          "holeInfo": {
+            "coordinates": {
+              "x": 497,
+              "y": 285,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "stickers",
-            "scale" : 0.25
+            "filledImage": "stickers",
+            "scale": 0.25
           },
           "constraints": [
             "imageName, sound, size"
@@ -611,58 +732,64 @@
       "tubFront": {
         "configurable": true,
         "name": "tub02.png",
-        "size": {"width":512, "height": 512},
-        "position" : {"x": 400,"y": 300},
+        "size": {
+          "width": 512,
+          "height": 512
+        },
+        "position": {
+          "x": 400,
+          "y": 300
+        },
         "scale": 0.7,
         "constraints": [
           "name",
           "size"
         ]
       },
-      "rateOfWaterFilling" : 2
+      "rateOfWaterFilling": 2
     },
     {
       "carouselAssets": [
         {
           "configurable": true,
-          "name" : "item_tree.png",
+          "name": "item_tree.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.25,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 300,
-              "y" : 265,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.25,
+          "holeInfo": {
+            "coordinates": {
+              "x": 300,
+              "y": 265,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "tree",
-            "scale" : 0.28
+            "filledImage": "tree",
+            "scale": 0.28
           },
-
           "constraints": [
-            "imageName, scale, size", "holeInfo"
+            "imageName, scale, size",
+            "holeInfo"
           ]
         },
         {
           "configurable": true,
-          "name" : "item_book.png",
+          "name": "item_book.png",
           "size": {
             "width": 50,
             "height": 54
           },
-          "scale" : 0.25,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 358,
-              "y" : 194,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.25,
+          "holeInfo": {
+            "coordinates": {
+              "x": 358,
+              "y": 194,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "book",
-            "scale" : 0.28
+            "filledImage": "book",
+            "scale": 0.28
           },
           "constraints": [
             "imageName, sound, size"
@@ -670,21 +797,21 @@
         },
         {
           "configurable": true,
-          "name" : "item_house.png",
+          "name": "item_house.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.25,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 397,
-              "y" : 275,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.25,
+          "holeInfo": {
+            "coordinates": {
+              "x": 397,
+              "y": 275,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "house",
-            "scale" : 0.29
+            "filledImage": "house",
+            "scale": 0.29
           },
           "constraints": [
             "imageName, sound, size"
@@ -692,22 +819,21 @@
         },
         {
           "configurable": true,
-          "name" : "item_hat.png",
-
+          "name": "item_hat.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.75,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 465,
-              "y" : 200,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.75,
+          "holeInfo": {
+            "coordinates": {
+              "x": 465,
+              "y": 200,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "hat",
-            "scale" : 0.3
+            "filledImage": "hat",
+            "scale": 0.3
           },
           "constraints": [
             "imageName, sound, size"
@@ -715,21 +841,21 @@
         },
         {
           "configurable": true,
-          "name" : "item_stickers.png",
+          "name": "item_stickers.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.75,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 497,
-              "y" : 285,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.75,
+          "holeInfo": {
+            "coordinates": {
+              "x": 497,
+              "y": 285,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "stickers",
-            "scale" : 0.25
+            "filledImage": "stickers",
+            "scale": 0.25
           },
           "constraints": [
             "imageName, sound, size"
@@ -739,58 +865,64 @@
       "tubFront": {
         "configurable": true,
         "name": "tub02.png",
-        "size": {"width":512, "height": 512},
-        "position" : {"x": 400,"y": 300},
+        "size": {
+          "width": 512,
+          "height": 512
+        },
+        "position": {
+          "x": 400,
+          "y": 300
+        },
         "scale": 0.7,
         "constraints": [
           "name",
           "size"
         ]
       },
-      "rateOfWaterFilling" : 2
+      "rateOfWaterFilling": 2
     },
     {
       "carouselAssets": [
         {
           "configurable": true,
-          "name" : "item_tree.png",
+          "name": "item_tree.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.25,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 300,
-              "y" : 265,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.25,
+          "holeInfo": {
+            "coordinates": {
+              "x": 300,
+              "y": 265,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "tree",
-            "scale" : 0.28
+            "filledImage": "tree",
+            "scale": 0.28
           },
-
           "constraints": [
-            "imageName, scale, size", "holeInfo"
+            "imageName, scale, size",
+            "holeInfo"
           ]
         },
         {
           "configurable": true,
-          "name" : "item_book.png",
+          "name": "item_book.png",
           "size": {
             "width": 50,
             "height": 54
           },
-          "scale" : 0.25,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 358,
-              "y" : 194,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.25,
+          "holeInfo": {
+            "coordinates": {
+              "x": 358,
+              "y": 194,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "book",
-            "scale" : 0.28
+            "filledImage": "book",
+            "scale": 0.28
           },
           "constraints": [
             "imageName, sound, size"
@@ -798,21 +930,21 @@
         },
         {
           "configurable": true,
-          "name" : "item_house.png",
+          "name": "item_house.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.25,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 397,
-              "y" : 275,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.25,
+          "holeInfo": {
+            "coordinates": {
+              "x": 397,
+              "y": 275,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "house",
-            "scale" : 0.29
+            "filledImage": "house",
+            "scale": 0.29
           },
           "constraints": [
             "imageName, sound, size"
@@ -820,22 +952,21 @@
         },
         {
           "configurable": true,
-          "name" : "item_hat.png",
-
+          "name": "item_hat.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.75,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 465,
-              "y" : 200,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.75,
+          "holeInfo": {
+            "coordinates": {
+              "x": 465,
+              "y": 200,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "hat",
-            "scale" : 0.3
+            "filledImage": "hat",
+            "scale": 0.3
           },
           "constraints": [
             "imageName, sound, size"
@@ -843,21 +974,21 @@
         },
         {
           "configurable": true,
-          "name" : "item_stickers.png",
+          "name": "item_stickers.png",
           "size": {
             "width": 350,
             "height": 350
           },
-          "scale" : 0.75,
-          "holeInfo" : {
-            "coordinates" : {
-              "x" : 497,
-              "y" : 285,
-              "width" : 350,
-              "height" : 350
+          "scale": 0.75,
+          "holeInfo": {
+            "coordinates": {
+              "x": 497,
+              "y": 285,
+              "width": 350,
+              "height": 350
             },
-            "filledImage"   : "stickers",
-            "scale" : 0.25
+            "filledImage": "stickers",
+            "scale": 0.25
           },
           "constraints": [
             "imageName, sound, size"
@@ -867,40 +998,50 @@
       "tubFront": {
         "configurable": true,
         "name": "tub02.png",
-        "size": {"width":512, "height": 512},
-        "position" : {"x": 400,"y": 300},
+        "size": {
+          "width": 512,
+          "height": 512
+        },
+        "position": {
+          "x": 400,
+          "y": 300
+        },
         "scale": 0.7,
         "constraints": [
           "name",
           "size"
         ]
       },
-      "rateOfWaterFilling" : 2
+      "rateOfWaterFilling": 2
     }
-
-
-
   ],
-
   "animation": {
     "tubWater": {
       "configurable": true,
       "name": "tubWaterLine",
       "frameCount": 5,
       "size": "{512,512}",
-       "position" : {"x": 400,"y": 300},
-      "scale" : 0.7,
+      "position": {
+        "x": 400,
+        "y": 300
+      },
+      "scale": 0.7,
       "constraints": [
         "imageName, size, animationPath"
       ]
     },
-
-    "animalWaterLine" : {
+    "animalWaterLine": {
       "configurable": true,
       "name": "animals_waterline_loop_",
       "frameCount": 5,
-      "size": {"width" :512  , "height":512},
-      "position" : {"x": 310,"y": 430},
+      "size": {
+        "width": 512,
+        "height": 512
+      },
+      "position": {
+        "x": 310,
+        "y": 430
+      },
       "scale": 0.7,
       "constraints": [
         "name",
@@ -908,40 +1049,51 @@
         "animationPath"
       ]
     },
-
-    "winAnimation" : {
+    "winAnimation": {
       "configurable": true,
       "name": "magicHat_cardTakeOut_",
       "frameCount": 15,
-      "size": {"width" :512  , "height":512},
-      "position" : {"x": 400,"y": 450},
+      "size": {
+        "width": 512,
+        "height": 512
+      },
+      "position": {
+        "x": 400,
+        "y": 450
+      },
       "constraints": [
         "name",
         "size",
         "animationPath"
       ]
     },
-
-    "tubWaterCircle" : {
+    "tubWaterCircle": {
       "configurable": true,
       "name": "tub_watecircle_loop_",
       "frameCount": 12,
-      "size": {"width" :512  , "height":512},
-      "position" : {"x": 395,"y": 300},
-      "scale"  : 0.7,
+      "size": {
+        "width": 512,
+        "height": 512
+      },
+      "position": {
+        "x": 395,
+        "y": 300
+      },
+      "scale": 0.7,
       "constraints": [
         "name",
         "size",
         "animationPath"
       ]
     },
-
-
-    "waterInTub" : {
+    "waterInTub": {
       "configurable": true,
       "name": "tub_fillwaterline_loop_",
       "frameCount": 24,
-      "size": {"width" :512  , "height":512},
+      "size": {
+        "width": 512,
+        "height": 512
+      },
       "constraints": [
         "name",
         "size",
@@ -949,7 +1101,6 @@
       ]
     }
   },
-
   "resources": {
     "sprites": {
       "basePath": "res/Sprite/",

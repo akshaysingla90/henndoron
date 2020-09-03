@@ -1,5 +1,6 @@
 {
   "properties": {
+    "externalRewards": true,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_BAP_1/",
     "number": "1",
@@ -25,7 +26,7 @@
     "description": "",
     "allocatedTime": 10,
     "studentPreview": true,
-    "preLoaded" : false
+    "preLoaded": false
   },
   "jsList": [
     "res/Activity/ACTIVITY_BAP_1/src/BackgroundAndPen.js"
@@ -158,16 +159,14 @@
         "size"
       ]
     },
-    "btn_next":{
+    "btn_next": {
       "name": "btn_next.png",
       "size": "{100, 30}"
     },
-
-    "btn_previous":{
+    "btn_previous": {
       "name": "btn_previous.png",
       "size": "{100, 30}"
     },
-
     "clear_enable": {
       "name": "btn_enable.png",
       "size": "{100, 30}"
@@ -273,7 +272,6 @@
         "btn_next.png",
         "btn_previous.png",
         "eraser_icon.png"
-
       ]
     }
   }

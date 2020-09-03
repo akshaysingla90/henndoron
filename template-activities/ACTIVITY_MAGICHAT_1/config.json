@@ -1,19 +1,20 @@
 {
   "properties": {
+    "externalRewards": true,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_MAGICHAT_1/",
     "number": "1",
     "name": "magicHat_1",
     "namespace": "magicHat_1",
     "activityName": "Magic Hat",
-    "layerName" : "HDMagicHatLayer",
+    "layerName": "HDMagicHatLayer",
     "teacherScriptsNotes": {
       "notes": "Ask to identify notes",
       "timestamp": "",
       "triggers": ""
     },
-    "controls" : {
-      "mouse" : true,
+    "controls": {
+      "mouse": true,
       "turnBased": true
     },
     "teacherTipsNotes": {
@@ -21,7 +22,7 @@
       "timestamp": "",
       "triggers": ""
     },
-    "description" : "",
+    "description": "",
     "allocatedTime": 100,
     "studentPreview": false
   },
@@ -41,7 +42,10 @@
       "configurable": true,
       "name": "HatFront.png",
       "size": "{300, 300}",
-      "position": {"x" : 240, "y" : 324.5},
+      "position": {
+        "x": 240,
+        "y": 324.5
+      },
       "constraints": [
         "imageName, size, position"
       ]
@@ -50,7 +54,10 @@
       "configurable": true,
       "name": "HatBack.png",
       "size": "{300, 300}",
-      "position": {"x" : 240, "y" : 324.5},
+      "position": {
+        "x": 240,
+        "y": 324.5
+      },
       "constraints": [
         "imageName, size, position"
       ]
@@ -59,7 +66,10 @@
       "configurable": true,
       "name": "HelloWorld.png",
       "size": "{300, 300}",
-      "position": {"x" : 576, "y" : 324.5},
+      "position": {
+        "x": 576,
+        "y": 324.5
+      },
       "constraints": [
         "imageName, size, position"
       ]
@@ -76,7 +86,10 @@
       "configurable": true,
       "name": "wordHolder.png",
       "size": "{290, 95}",
-      "position": {"x" : 700, "y" : 200},
+      "position": {
+        "x": 700,
+        "y": 200
+      },
       "constraints": [
         "imageName, size, position"
       ]
@@ -85,7 +98,10 @@
       "configurable": true,
       "name": "carouselImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "constraints": [
         "imageName, size, position"
       ]
@@ -95,35 +111,58 @@
       "name": "carouselBorderImage.png",
       "imageName": "magicHat_1_carouselBorderImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "constraints": [
         "imageName, size, position"
       ]
     },
     "carouselBackground": {
       "configurable": true,
-      "color": {"r" : 60, "g" : 92, "b" : 113, "a" : 0},
+      "color": {
+        "r": 60,
+        "g": 92,
+        "b": 113,
+        "a": 0
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxBackground": {
       "configurable": true,
-      "color": {"r" : 78, "g" : 106, "b" : 125, "a" : 0},
+      "color": {
+        "r": 78,
+        "g": 106,
+        "b": 125,
+        "a": 0
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxCardBackground": {
       "configurable": true,
-      "color": {"r" : 44, "g" : 59, "b" : 69, "a" : 0},
+      "color": {
+        "r": 44,
+        "g": 59,
+        "b": 69,
+        "a": 0
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxCardText": {
       "configurable": true,
-      "color": {"r" : 0, "g" : 0, "b" : 0, "a" : 255},
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 255
+      },
       "font": "sassoon_sans_regular",
       "fontSize": 16,
       "constraints": [
@@ -132,7 +171,12 @@
     },
     "carouselBoxHighlight": {
       "configurable": true,
-      "color": {"r" : 148, "g" : 95, "b" : 56, "a" : 100},
+      "color": {
+        "r": 148,
+        "g": 95,
+        "b": 56,
+        "a": 100
+      },
       "constraints": [
         "color"
       ]
@@ -146,7 +190,12 @@
     },
     "answerCardText": {
       "configurable": true,
-      "color": {"r" : 0, "g" : 0, "b" : 0, "a" : 255},
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 255
+      },
       "font": "sassoon_sans_regular",
       "fontSize": 32,
       "constraints": [
@@ -182,10 +231,13 @@
     "flashCardGlow": {
       "configurable": true,
       "name": "cardTakeOut",
-      "frameCount" : 15,
-      "sound" : "cardTakeOut.mp3",
+      "frameCount": 15,
+      "sound": "cardTakeOut.mp3",
       "size": "{100,100}",
-      "position": {"x" : 256, "y" : 512},
+      "position": {
+        "x": 256,
+        "y": 512
+      },
       "animationPath": "{100,100},{200,200}",
       "constraints": [
         "imageName, size, animationPath"
@@ -196,7 +248,20 @@
       "name": "HelloWorld.png",
       "imageName": "magicHat_1_HelloWorld.png",
       "size": "{100,100}",
-      "animationPath": [{"x" : 200, "y" : 224.5},{"x" : 190, "y" : 750},{"x" : 680, "y" : 380}],
+      "animationPath": [
+        {
+          "x": 200,
+          "y": 224.5
+        },
+        {
+          "x": 190,
+          "y": 750
+        },
+        {
+          "x": 680,
+          "y": 380
+        }
+      ],
       "constraints": [
         "imageName, size,animationPath"
       ]
@@ -283,7 +348,6 @@
         "imageName, sound, size"
       ]
     },
-
     {
       "configurable": true,
       "imageName": "magicHat_1_paulHappy.png",
@@ -377,7 +441,6 @@
       "methodName": {}
     }
   ],
-
   "helpOption": [
     {
       "key": "K",
@@ -426,32 +489,32 @@
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [
-         "background.png",
-         "ant.png",
-         "bat.png",
-         "bee.png",
-         "cat.png",
-         "crow.png",
-         "dog.png",
-         "frog.png",
-         "wordHolder.png",
-         "carouselImage.png",
-         "HatFront.png",
-         "HatBack.png",
-         "BagFront.png",
-         "BagBack.png",
-         "ApronFront.png",
-         "ApronBack.png",
-         "cellGlow.png",
-         "Book.png",
-         "flupeSad.png",
-         "house.png",
-         "paulHappy.png",
-         "rat.png",
-         "sheep.png",
-         "sing.png",
-         "tub.png",
-         "tree.png"
+        "background.png",
+        "ant.png",
+        "bat.png",
+        "bee.png",
+        "cat.png",
+        "crow.png",
+        "dog.png",
+        "frog.png",
+        "wordHolder.png",
+        "carouselImage.png",
+        "HatFront.png",
+        "HatBack.png",
+        "BagFront.png",
+        "BagBack.png",
+        "ApronFront.png",
+        "ApronBack.png",
+        "cellGlow.png",
+        "Book.png",
+        "flupeSad.png",
+        "house.png",
+        "paulHappy.png",
+        "rat.png",
+        "sheep.png",
+        "sing.png",
+        "tub.png",
+        "tree.png"
       ]
     },
     "sounds": {

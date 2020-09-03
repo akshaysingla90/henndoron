@@ -1,5 +1,6 @@
 {
   "properties": {
+    "externalRewards": false,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_FLASHLIGHT_1/",
     "number": "1",
@@ -13,25 +14,25 @@
       "timestamp": "",
       "triggers": ""
     },
-    "controls" : {
-      "mouse" : true,
-      "turnBased":false
+    "controls": {
+      "mouse": true,
+      "turnBased": false
     },
     "teacherTipsNotes": {
       "tips": "Don't ask about bag",
       "timestamp": "",
       "triggers": ""
     },
-    "description" : "",
+    "description": "",
     "allocatedTime": 10,
     "studentPreview": false,
-    "preLoaded" : false
+    "preLoaded": false
   },
   "jsList": [
     "res/Activity/ACTIVITY_FLASHLIGHT_1/src/Flashlight.js"
   ],
   "teacherScripts": {
-    "moduleStart":{
+    "moduleStart": {
       "ops": [
         {
           "attributes": {
@@ -174,7 +175,7 @@
     ]
   },
   "teacherTips": {
-    "moduleStart":{
+    "moduleStart": {
       "ops": [
         {
           "insert": "You can act out words!\n- Movement for "

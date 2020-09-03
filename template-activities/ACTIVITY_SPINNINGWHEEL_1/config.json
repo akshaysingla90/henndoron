@@ -1,5 +1,6 @@
 {
   "properties": {
+    "externalRewards": true,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_SPINNINGWHEEL_1/",
     "number": "1",
@@ -12,8 +13,8 @@
       "timestamp": "",
       "triggers": ""
     },
-    "controls" : {
-      "mouse" : true,
+    "controls": {
+      "mouse": true,
       "turnBased": true
     },
     "teacherTipsNotes": {
@@ -21,16 +22,16 @@
       "timestamp": "",
       "triggers": ""
     },
-    "description" : "",
+    "description": "",
     "allocatedTime": 10,
     "studentPreview": false,
-    "preLoaded" : false
+    "preLoaded": false
   },
-  "jsList" : [
+  "jsList": [
     "res/Activity/ACTIVITY_SPINNINGWHEEL_1/src/SpinningWheel.js"
   ],
   "teacherScripts": {
-    "moduleStart":{
+    "moduleStart": {
       "ops": [
         {
           "attributes": {
@@ -91,7 +92,7 @@
         }
       ]
     },
-    "onGoButton":{
+    "onGoButton": {
       "ops": [
         {
           "attributes": {
@@ -204,7 +205,7 @@
   },
   "gameInfo": {
     "isCounting": true,
-    "countingObject" : 3
+    "countingObject": 3
   },
   "graphicalAssets": {
     "background": {
@@ -219,9 +220,20 @@
     "targetBackground": {
       "configurable": true,
       "name": "targetBg.png",
-      "backgroundColor": {"r": 255,"g": 255,"b": 255,"a": 255},
-      "size": {"width":200,"height": 200},
-      "position" : {"x": 520,"y": 224.5},
+      "backgroundColor": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 255
+      },
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "position": {
+        "x": 520,
+        "y": 224.5
+      },
       "scale": 0.5,
       "constraints": [
         "name",
@@ -231,8 +243,14 @@
     "spinningWheelBase": {
       "configurable": true,
       "name": "wheel_4.png",
-      "size": {"width":300, "height": 300},
-      "position" : {"x": 250,"y": 374.5},
+      "size": {
+        "width": 300,
+        "height": 300
+      },
+      "position": {
+        "x": 250,
+        "y": 374.5
+      },
       "scale": 0.8,
       "constraints": [
         "name",
@@ -242,8 +260,14 @@
     "spinningCenter": {
       "configurable": true,
       "name": "wheel_center.png",
-      "size": {"width":300, "height": 300},
-      "position" : {"x": 150,"y": 162.25},
+      "size": {
+        "width": 300,
+        "height": 300
+      },
+      "position": {
+        "x": 150,
+        "y": 162.25
+      },
       "scale": 0.15,
       "constraints": [
         "name",
@@ -254,7 +278,10 @@
       "configurable": true,
       "name": "wheel_arrow.png",
       "size": "{960, 649}",
-      "position" : {"x": 250,"y": 324.5},
+      "position": {
+        "x": 250,
+        "y": 324.5
+      },
       "scale": 0.25,
       "constraints": [
         "name",
@@ -268,7 +295,10 @@
       "pushedImage": "go_button_pushed.png",
       "title": "",
       "size": "{960, 649}",
-      "position" : {"x": 650,"y":204.5},
+      "position": {
+        "x": 650,
+        "y": 204.5
+      },
       "scale": 0.5,
       "constraints": [
         "name",
@@ -282,7 +312,10 @@
       "pushedImage": "stop_button_pushed.png",
       "title": "",
       "size": "{960, 649}",
-      "position" : {"x": 650,"y": 104.5},
+      "position": {
+        "x": 650,
+        "y": 104.5
+      },
       "scale": 0.5,
       "constraints": [
         "name",
@@ -293,7 +326,10 @@
       "configurable": true,
       "name": "carouselImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "scale": 1,
       "constraints": [
         "imageName, size, position"
@@ -303,7 +339,10 @@
       "configurable": true,
       "name": "carouselBorderImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "scale": 1,
       "constraints": [
         "imageName, size, position"
@@ -311,28 +350,48 @@
     },
     "carouselBackground": {
       "configurable": true,
-      "color": {"r" : 60, "g" : 92, "b" : 113, "a" : 0},
+      "color": {
+        "r": 60,
+        "g": 92,
+        "b": 113,
+        "a": 0
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxBackground": {
       "configurable": true,
-      "color": {"r" : 78, "g" : 106, "b" : 125, "a" : 0},
+      "color": {
+        "r": 78,
+        "g": 106,
+        "b": 125,
+        "a": 0
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxCardBackground": {
       "configurable": true,
-      "color": {"r" : 44, "g" : 59, "b" : 69, "a" : 0},
+      "color": {
+        "r": 44,
+        "g": 59,
+        "b": 69,
+        "a": 0
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxCardText": {
       "configurable": true,
-      "color": {"r" : 0, "g" : 0, "b" : 0, "a" : 0},
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 0
+      },
       "font": "sans-serif",
       "fontSize": 16,
       "constraints": [
@@ -341,7 +400,12 @@
     },
     "carouselBoxHighlight": {
       "configurable": true,
-      "color": {"r" : 148, "g" : 122, "b" : 58, "a" : 100},
+      "color": {
+        "r": 148,
+        "g": 122,
+        "b": 58,
+        "a": 100
+      },
       "constraints": [
         "color"
       ]
@@ -356,7 +420,10 @@
     "animationWinLossSprite": {
       "configurable": true,
       "title": "STOP!",
-      "position" : {"x": 600,"y": 204.5},
+      "position": {
+        "x": 600,
+        "y": 204.5
+      },
       "scale": 1,
       "constraints": [
         "name",
@@ -385,7 +452,7 @@
         "width": 350,
         "height": 350
       },
-      "scale" : 1,
+      "scale": 1,
       "constraints": [
         "imageName, sound, size"
       ]
@@ -395,13 +462,13 @@
       "sound": "abc.mp3",
       "name": "bat.png",
       "cardValue": "bat",
-       "nameImage": false,
+      "nameImage": false,
       "nameImageName": "",
       "size": {
         "width": 350,
         "height": 350
       },
-      "scale" : 1,
+      "scale": 1,
       "constraints": [
         "imageName, sound, size"
       ]
@@ -417,7 +484,7 @@
         "width": 350,
         "height": 350
       },
-      "scale" : 1,
+      "scale": 1,
       "constraints": [
         "imageName, sound, size"
       ]
@@ -433,13 +500,12 @@
         "width": 350,
         "height": 350
       },
-      "scale" : 1,
+      "scale": 1,
       "constraints": [
         "imageName, sound, size"
       ]
     }
   ],
-
   "carouselAssets": [
     {
       "configurable": true,
@@ -452,7 +518,7 @@
         "width": 350,
         "height": 350
       },
-      "scale" : 0.75,
+      "scale": 0.75,
       "constraints": [
         "imageName, sound, size"
       ]
@@ -468,7 +534,7 @@
         "width": 350,
         "height": 350
       },
-      "scale" : 0.75,
+      "scale": 0.75,
       "constraints": [
         "imageName, sound, size"
       ]
@@ -484,7 +550,7 @@
         "width": 350,
         "height": 350
       },
-      "scale" : 0.75,
+      "scale": 0.75,
       "constraints": [
         "imageName, sound, size"
       ]
@@ -500,7 +566,7 @@
         "width": 350,
         "height": 350
       },
-      "scale" : 0.75,
+      "scale": 0.75,
       "constraints": [
         "imageName, sound, size"
       ]

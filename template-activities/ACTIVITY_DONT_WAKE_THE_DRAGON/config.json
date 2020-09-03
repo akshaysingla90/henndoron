@@ -1,27 +1,28 @@
 {
   "properties": {
+    "externalRewards": false,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_DONT_WAKE_THE_DRAGON/",
     "number": "1",
     "name": "MainLayer",
     "namespace": "DontWakeTheDragon",
     "activityName": "Don't Wake The Dragon",
-    "layerName" : "MainLayer",
+    "layerName": "MainLayer",
     "teacherScriptsNotes": {
       "notes": "Ask to identify notes",
       "timestamp": "",
       "triggers": ""
     },
-    "controls" : {
+    "controls": {
       "mouse": true,
       "turnBased": true
     },
-    "description" : "",
+    "description": "",
     "allocatedTime": 10,
     "studentPreview": false,
-    "preLoaded" : false
+    "preLoaded": false
   },
-  "jsList" : [
+  "jsList": [
     "res/Activity/ACTIVITY_DONT_WAKE_THE_DRAGON/src/main.js"
   ],
   "teacherScripts": {
@@ -146,7 +147,6 @@
       "openFingers": "open_pincer_fingers_pointer.png",
       "closedFingers": "closed_pincer_fingers_pointer.png"
     },
-
     "character": {
       "animation": {
         "DragonSleep": {
@@ -176,34 +176,46 @@
         }
       }
     },
-
     "treasurePile": {
       "imageName": "treasurePile.png"
     },
-
     "treasureItems": [
       {
         "imageName": "Item_book.png",
-        "position": { "x": 241, "y": 380 }
+        "position": {
+          "x": 241,
+          "y": 380
+        }
       },
       {
         "imageName": "Item_hat.png",
-        "position": { "x": 396, "y": 170 }
+        "position": {
+          "x": 396,
+          "y": 170
+        }
       },
       {
         "imageName": "Item_house.png",
-        "position": { "x": 744, "y": 240 }
+        "position": {
+          "x": 744,
+          "y": 240
+        }
       },
       {
         "imageName": "Item_tree.png",
-        "position": { "x": 197, "y": 285 }
+        "position": {
+          "x": 197,
+          "y": 285
+        }
       },
       {
         "imageName": "Item_stickers.png",
-        "position": { "x": 722, "y": 142 }
+        "position": {
+          "x": 722,
+          "y": 142
+        }
       }
     ],
-
     "buttons": {
       "reset": {
         "idleImage": "btn_enable.png",
@@ -215,17 +227,17 @@
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [
-         "background.png",
-         "closed_pincer_fingers_pointer.png",
-         "Item_book.png",
-         "Item_hat.png",
-         "Item_house.png",
-         "Item_tree.png",
-         "Item_stickers.png",
-         "open_pincer_fingers_pointer.png",
-         "player_treasure_chest.png",
-         "treasurePile.png",
-         "student_answer.png"
+        "background.png",
+        "closed_pincer_fingers_pointer.png",
+        "Item_book.png",
+        "Item_hat.png",
+        "Item_house.png",
+        "Item_tree.png",
+        "Item_stickers.png",
+        "open_pincer_fingers_pointer.png",
+        "player_treasure_chest.png",
+        "treasurePile.png",
+        "student_answer.png"
       ]
     },
     "animationFrames": {
@@ -248,7 +260,8 @@
           "frameCount": 35,
           "frameInitial": "dragon_sleep01/dragon_sleep01_",
           "extension": ".png"
-        },{
+        },
+        {
           "Name": "Dragon Sleep02",
           "frameCount": 24,
           "frameInitial": "dragon_sleep02/dragon_sleep02_",

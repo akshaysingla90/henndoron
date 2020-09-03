@@ -1,5 +1,6 @@
 {
   "properties": {
+    "externalRewards": false,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_BUILD_SOMETHING_1/",
     "number": "1",
@@ -13,8 +14,8 @@
       "timestamp": "",
       "triggers": ""
     },
-    "controls" : {
-      "mouse" : true,
+    "controls": {
+      "mouse": true,
       "turnBased": false
     },
     "teacherTipsNotes": {
@@ -22,10 +23,10 @@
       "timestamp": "",
       "triggers": ""
     },
-    "description" : "",
+    "description": "",
     "allocatedTime": 10,
     "studentPreview": false,
-    "preLoaded" : false
+    "preLoaded": false
   },
   "jsList": [
     "res/Activity/ACTIVITY_BUILD_SOMETHING_1/src/BuildSomething.js"
@@ -129,8 +130,7 @@
         }
       ]
     },
-
-    "TargetAssembledSuccessfully":{
+    "TargetAssembledSuccessfully": {
       "ops": [
         {
           "attributes": {
@@ -166,23 +166,23 @@
     }
   },
   "gameInfo": {
-    "isolatedNodes" : 3,
-    "assembleObjectInfo" : [
+    "isolatedNodes": 3,
+    "assembleObjectInfo": [
       {
         "name": "dwarf",
-         "partsCount":  6,
-         "animationFrameCount": 16,
-         "fps":  12,
-         "animationPath": "dwarf_animation/dwarf_animation_"
+        "partsCount": 6,
+        "animationFrameCount": 16,
+        "fps": 12,
+        "animationPath": "dwarf_animation/dwarf_animation_"
       },
       {
         "name": "king",
-        "partsCount":  6,
+        "partsCount": 6,
         "animationPath": "king_animation/king_animation_"
       },
       {
         "name": "knight",
-        "partsCount":  6,
+        "partsCount": 6,
         "animationPath": "knight_animation/knight_animation_"
       }
     ]
@@ -201,7 +201,10 @@
       "configurable": true,
       "name": "carouselImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "constraints": [
         "imageName, size, position"
       ]
@@ -211,35 +214,58 @@
       "name": "carouselBorderImage.png",
       "imageName": "magicHat_1_carouselBorderImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "constraints": [
         "imageName, size, position"
       ]
     },
     "carouselBackground": {
       "configurable": true,
-      "color": {"r" : 60, "g" : 92, "b" : 113, "a" : 255},
+      "color": {
+        "r": 60,
+        "g": 92,
+        "b": 113,
+        "a": 255
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxBackground": {
       "configurable": true,
-      "color": {"r" : 78, "g" : 106, "b" : 125, "a" : 255},
+      "color": {
+        "r": 78,
+        "g": 106,
+        "b": 125,
+        "a": 255
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxCardBackground": {
       "configurable": true,
-      "color": {"r" : 78, "g" : 106, "b" : 125, "a" : 255},
+      "color": {
+        "r": 78,
+        "g": 106,
+        "b": 125,
+        "a": 255
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxCardText": {
       "configurable": true,
-      "color": {"r" : 0, "g" : 0, "b" : 0, "a" : 255},
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 255
+      },
       "font": "sans-serif",
       "fontSize": 16,
       "constraints": [
@@ -248,7 +274,12 @@
     },
     "carouselBoxHighlight": {
       "configurable": true,
-      "color": {"r" : 148, "g" : 95, "b" : 56, "a" : 100},
+      "color": {
+        "r": 148,
+        "g": 95,
+        "b": 56,
+        "a": 100
+      },
       "constraints": [
         "color"
       ]
@@ -260,7 +291,10 @@
       "pushedImage": "start_pressed.png",
       "title": "",
       "size": "{960, 649}",
-      "position" : {"x": 240,"y":100},
+      "position": {
+        "x": 240,
+        "y": 100
+      },
       "scale": 1,
       "constraints": [
         "name",
@@ -273,7 +307,10 @@
       "idleImage": "stop_idle.png",
       "pushedImage": "stop_pressed.png",
       "title": "",
-      "position" : {"x": 480,"y": 100},
+      "position": {
+        "x": 480,
+        "y": 100
+      },
       "scale": 1,
       "constraints": [
         "name",
@@ -286,7 +323,10 @@
       "idleImage": "reset_idle.png",
       "pushedImage": "reset_pressed.png",
       "title": "",
-      "position" : {"x": 720,"y": 100},
+      "position": {
+        "x": 720,
+        "y": 100
+      },
       "scale": 1,
       "constraints": [
         "name",
@@ -297,7 +337,10 @@
       "configurable": true,
       "name": "carouselImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "constraints": [
         "imageName, size, position"
       ]
@@ -307,35 +350,58 @@
       "name": "carouselBorderImage.png",
       "imageName": "magicHat_1_carouselBorderImage.png",
       "size": "{290, 95}",
-      "position": {"x" : 768, "y" : 454.3},
+      "position": {
+        "x": 768,
+        "y": 454.3
+      },
       "constraints": [
         "imageName, size, position"
       ]
     },
     "carouselBackground": {
       "configurable": true,
-      "color": {"r" : 60, "g" : 92, "b" : 113, "a" : 0},
+      "color": {
+        "r": 60,
+        "g": 92,
+        "b": 113,
+        "a": 0
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxBackground": {
       "configurable": true,
-      "color": {"r" : 78, "g" : 106, "b" : 125, "a" : 0},
+      "color": {
+        "r": 78,
+        "g": 106,
+        "b": 125,
+        "a": 0
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxCardBackground": {
       "configurable": true,
-      "color": {"r" : 44, "g" : 59, "b" : 69, "a" : 0},
+      "color": {
+        "r": 44,
+        "g": 59,
+        "b": 69,
+        "a": 0
+      },
       "constraints": [
         "color"
       ]
     },
     "carouselBoxCardText": {
       "configurable": true,
-      "color": {"r" : 0, "g" : 0, "b" : 0, "a" : 255},
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 255
+      },
       "font": "sans-serif",
       "fontSize": 16,
       "constraints": [
@@ -344,7 +410,12 @@
     },
     "carouselBoxHighlight": {
       "configurable": true,
-      "color": {"r" : 148, "g" : 95, "b" : 56, "a" : 100},
+      "color": {
+        "r": 148,
+        "g": 95,
+        "b": 56,
+        "a": 100
+      },
       "constraints": [
         "color"
       ]
@@ -356,12 +427,14 @@
         "imageName"
       ]
     },
-
     "frame": {
       "configurable": true,
       "name": "reward_screen_frame.png",
       "title": "",
-      "position" : {"x": 960,"y": 640},
+      "position": {
+        "x": 960,
+        "y": 640
+      },
       "constraints": [
         "name",
         "size"
@@ -389,7 +462,10 @@
       "configurable": true,
       "name": "looseScreen",
       "imageName": "looseScreen.png",
-      "usernamePosition": {"x": 480,"y": 72},
+      "usernamePosition": {
+        "x": 480,
+        "y": 72
+      },
       "constraints": [
         "imageName"
       ]
@@ -398,7 +474,10 @@
       "configurable": true,
       "name": "winScreen",
       "imageName": "winScreen.png",
-      "usernamePosition": {"x": 480,"y": 72},
+      "usernamePosition": {
+        "x": 480,
+        "y": 72
+      },
       "constraints": [
         "imageName"
       ]
@@ -413,8 +492,8 @@
         "x": 50,
         "y": 205
       },
-      "localZOrder" : 10,
-      "snappingPoints" : [
+      "localZOrder": 10,
+      "snappingPoints": [
         {
           "x": 185,
           "y": 265
@@ -422,7 +501,7 @@
         {
           "x": 110,
           "y": 40,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_torso",
             "point": {
               "x": 85,
@@ -431,7 +510,7 @@
           }
         }
       ],
-      "tag" : 0,
+      "tag": 0,
       "constraints": [
         "name",
         "size"
@@ -445,12 +524,12 @@
         "x": 100,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 10,
           "y": 135,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_torso",
             "point": {
               "x": 135,
@@ -463,7 +542,7 @@
           "y": 40
         }
       ],
-      "tag" : 1,
+      "tag": 1,
       "constraints": [
         "name",
         "size"
@@ -477,8 +556,8 @@
         "x": 150,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 20,
           "y": 30
@@ -486,7 +565,7 @@
         {
           "x": 30,
           "y": 125,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_torso",
             "point": {
               "x": 30,
@@ -495,7 +574,7 @@
           }
         }
       ],
-      "tag" : 2,
+      "tag": 2,
       "constraints": [
         "name",
         "size"
@@ -509,12 +588,12 @@
         "x": 200,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 75,
           "y": 135,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_torso",
             "point": {
               "x": 30,
@@ -527,7 +606,7 @@
           "y": 40
         }
       ],
-      "tag" : 3,
+      "tag": 3,
       "constraints": [
         "name",
         "size"
@@ -541,12 +620,12 @@
         "x": 250,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 40,
           "y": 140,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_torso",
             "point": {
               "x": 125,
@@ -573,12 +652,12 @@
         "x": 700,
         "y": 205
       },
-      "localZOrder" : 9,
-      "snappingPoints" : [
+      "localZOrder": 9,
+      "snappingPoints": [
         {
           "x": 85,
           "y": 155,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_head",
             "point": {
               "x": 110,
@@ -589,7 +668,7 @@
         {
           "x": 30,
           "y": 105,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_righthand",
             "point": {
               "x": 75,
@@ -600,7 +679,7 @@
         {
           "x": 135,
           "y": 105,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_lefthand",
             "point": {
               "x": 10,
@@ -611,7 +690,7 @@
         {
           "x": 30,
           "y": 25,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_rightleg",
             "point": {
               "x": 40,
@@ -622,7 +701,7 @@
         {
           "x": 125,
           "y": 25,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "dwarf_leftleg",
             "point": {
               "x": 30,
@@ -631,7 +710,7 @@
           }
         }
       ],
-      "tag" : 5,
+      "tag": 5,
       "constraints": [
         "name",
         "size"
@@ -645,8 +724,8 @@
         "x": 41,
         "y": 140
       },
-      "localZOrder" : 10,
-      "snappingPoints" : [
+      "localZOrder": 10,
+      "snappingPoints": [
         {
           "x": 100,
           "y": 220
@@ -654,7 +733,7 @@
         {
           "x": 100,
           "y": 30,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_torso",
             "point": {
               "x": 120,
@@ -663,7 +742,7 @@
           }
         }
       ],
-      "tag" : 6,
+      "tag": 6,
       "constraints": [
         "name",
         "size"
@@ -677,8 +756,8 @@
         "x": 800,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 20,
           "y": 160
@@ -686,7 +765,7 @@
         {
           "x": 125,
           "y": 35,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_torso",
             "point": {
               "x": 30,
@@ -695,7 +774,7 @@
           }
         }
       ],
-      "tag" : 7,
+      "tag": 7,
       "constraints": [
         "name",
         "size"
@@ -709,12 +788,12 @@
         "x": 850,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 40,
           "y": 150,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_torso",
             "point": {
               "x": 175,
@@ -727,7 +806,7 @@
           "y": 30
         }
       ],
-      "tag" : 8,
+      "tag": 8,
       "constraints": [
         "name",
         "size"
@@ -741,8 +820,8 @@
         "x": 900,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 125,
           "y": 155
@@ -750,7 +829,7 @@
         {
           "x": 30,
           "y": 40,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_torso",
             "point": {
               "x": 60,
@@ -759,7 +838,7 @@
           }
         }
       ],
-      "tag" : 9,
+      "tag": 9,
       "constraints": [
         "name",
         "size"
@@ -773,12 +852,12 @@
         "x": 150,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 45,
           "y": 150,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_torso",
             "point": {
               "x": 65,
@@ -791,7 +870,7 @@
           "y": 30
         }
       ],
-      "tag" : 10,
+      "tag": 10,
       "constraints": [
         "name",
         "size"
@@ -805,12 +884,12 @@
         "x": 200,
         "y": 205
       },
-      "localZOrder" : 9,
-      "snappingPoints" : [
+      "localZOrder": 9,
+      "snappingPoints": [
         {
           "x": 120,
           "y": 270,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_head",
             "point": {
               "x": 100,
@@ -821,7 +900,7 @@
         {
           "x": 60,
           "y": 200,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_righthand",
             "point": {
               "x": 125,
@@ -832,7 +911,7 @@
         {
           "x": 180,
           "y": 200,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_lefthand",
             "point": {
               "x": 20,
@@ -843,7 +922,7 @@
         {
           "x": 65,
           "y": 45,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_rightleg",
             "point": {
               "x": 45,
@@ -854,7 +933,7 @@
         {
           "x": 175,
           "y": 45,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "king_leftleg",
             "point": {
               "x": 40,
@@ -863,7 +942,7 @@
           }
         }
       ],
-      "tag" : 11,
+      "tag": 11,
       "constraints": [
         "name",
         "size"
@@ -877,8 +956,8 @@
         "x": 250,
         "y": 205
       },
-      "localZOrder" : 10,
-      "snappingPoints" : [
+      "localZOrder": 10,
+      "snappingPoints": [
         {
           "x": 95,
           "y": 215
@@ -886,7 +965,7 @@
         {
           "x": 95,
           "y": 20,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_torso",
             "point": {
               "x": 110,
@@ -895,7 +974,7 @@
           }
         }
       ],
-      "tag" : 12,
+      "tag": 12,
       "constraints": [
         "name",
         "size"
@@ -909,8 +988,8 @@
         "x": 700,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 10,
           "y": 145
@@ -918,7 +997,7 @@
         {
           "x": 95,
           "y": 30,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_torso",
             "point": {
               "x": 170,
@@ -927,7 +1006,7 @@
           }
         }
       ],
-      "tag" : 13,
+      "tag": 13,
       "constraints": [
         "name",
         "size"
@@ -941,12 +1020,12 @@
         "x": 750,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 25,
           "y": 135,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_torso",
             "point": {
               "x": 190,
@@ -973,12 +1052,12 @@
         "x": 800,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 110,
           "y": 160,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_torso",
             "point": {
               "x": 45,
@@ -1005,12 +1084,12 @@
         "x": 850,
         "y": 205
       },
-      "localZOrder" : 8,
-      "snappingPoints" : [
+      "localZOrder": 8,
+      "snappingPoints": [
         {
           "x": 48,
           "y": 140,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_torso",
             "point": {
               "x": 35,
@@ -1023,7 +1102,7 @@
           "y": 45
         }
       ],
-      "tag" : 16,
+      "tag": 16,
       "constraints": [
         "name",
         "size"
@@ -1037,12 +1116,12 @@
         "x": 900,
         "y": 205
       },
-      "localZOrder" : 9,
-      "snappingPoints" : [
+      "localZOrder": 9,
+      "snappingPoints": [
         {
           "x": 110,
           "y": 215,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_head",
             "point": {
               "x": 95,
@@ -1053,7 +1132,7 @@
         {
           "x": 45,
           "y": 150,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_righthand",
             "point": {
               "x": 110,
@@ -1064,7 +1143,7 @@
         {
           "x": 170,
           "y": 150,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_lefthand",
             "point": {
               "x": 10,
@@ -1075,7 +1154,7 @@
         {
           "x": 35,
           "y": 30,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_rightleg",
             "point": {
               "x": 48,
@@ -1086,7 +1165,7 @@
         {
           "x": 190,
           "y": 30,
-          "snapDetails" : {
+          "snapDetails": {
             "name": "knight_leftleg",
             "point": {
               "x": 25,
@@ -1095,7 +1174,7 @@
           }
         }
       ],
-      "tag" : 17,
+      "tag": 17,
       "constraints": [
         "name",
         "size"
@@ -1137,7 +1216,6 @@
         "x": 480,
         "y": 400
       },
-
       "constraints": [
         "name",
         "size"
