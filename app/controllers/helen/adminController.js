@@ -1,7 +1,7 @@
 "use strict";
 const HELPERS = require("../../helpers");
-const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, ACTIVITY_TYPE, RESOURCE_TYPE } = require('../../utils/constants');
-const { ACTIVITY_DIRECTORY_PATH, ACTIVITY_RESOURCE_DIRECTORY_PATH, BASE_PATH, ACTIVITY_CONFIG_PATH } = require('../../../config').COCOS_PROJECT_PATH;
+const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS } = require('../../utils/constants');
+const { ACTIVITY_PREVIEW_PATH, TEMPLATE_ACTIVITY_PREVIEW, TEMPLATE_ACTIVITY_PATH, ACTIVITY_DIRECTORY_PATH, ACTIVITY_RESOURCE_DIRECTORY_PATH, BASE_PATH, ACTIVITY_CONFIG_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const SERVICES = require('../../services');
 const fs = require('fs-extra');
 const path = require('path');
@@ -15,16 +15,22 @@ let adminController = {};
  */
 
 adminController.cloneActivity = async (payload) => {
-  const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.activityId }, { _id: 1, path: 1 });
-  const sourcePath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path);
+  const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.activityId });
+  let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
+    ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
+    : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
+
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${payload.name}`)
   let newActivity = {
     name: payload.name,
     path: `/${payload.name}`,
-    configData: payload.configData,
+    status: ACTIVITY_STATUS.DRAFT,
     type: ACTIVITY_TYPE.CLONED,
-    templateId: sourceActivity._id
+    templateId: sourceActivity._id,
+    description: payload.description,
+    iconUrl: sourceActivity.iconUrl,
   }
+  //create new activity in database 
   const { id: activityId } = await SERVICES.activityService.createActivity(newActivity);
 
   let re = new RegExp(sourcePath + ACTIVITY_RESOURCE_DIRECTORY_PATH);
@@ -45,10 +51,11 @@ adminController.cloneActivity = async (payload) => {
  * @param {*} payload 
  */
 adminController.getActivities = async (payload) => {
-  let criteria = {};
-  if (payload.type) criteria.type = payload.type;
-  let activities = await SERVICES.activityService.getActivities(criteria, { name: 1, type: 1, _id: 1 });
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_FETCHED_SUCCESSFULLY), { activities });
+  payload.criteria = {};
+  payload.skip = (payload.counter - 1) * payload.limit;
+  if (payload.type) payload.criteria.type = payload.type;
+  let activities = await SERVICES.activityService.getActivities(payload, { path: 0 });
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_FETCHED_SUCCESSFULLY), activities);
 }
 
 /**
@@ -58,6 +65,16 @@ adminController.getActivities = async (payload) => {
 adminController.getActivity = async (payload) => {
   let activity = await SERVICES.activityService.getActivity({ _id: payload.id }, NORMAL_PROJECTION);
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  let activityPath = activity.status == ACTIVITY_STATUS.TEMPLATE
+    ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, activity.path)
+    : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, activity.path);
+  let configData = await (new Promise((resolve, reject) => {
+    fs.readFile(activityPath + ACTIVITY_CONFIG_PATH, 'utf-8', (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  }))
+  activity.configData = JSON.parse(configData);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_FETCHED_SUCCESSFULLY), { activity });
 }
 
@@ -114,6 +131,95 @@ adminController.addResourceFiles = async (payload) => {
   fs.writeFileSync(configPath, JSON.stringify(dataToWrite));
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.RESOURCES_UPLOAD_SUCCESSFULLY));
 }
+
+/**
+ * function to delete the activity draft/published by its id
+ * @param {*} payload 
+ */
+adminController.deleteActivity = async (payload) => {
+  let activity = await SERVICES.activityService.removeActivity({ _id: payload.id, status: { $ne: ACTIVITY_STATUS.TEMPLATE } });
+  if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_DELETED_SUCCESSFULLY));
+}
+
+/**
+ * function to duplicate a Activity from existing activity
+ */
+
+adminController.duplicateActivity = async (payload) => {
+  const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.activityId, status: { $ne: ACTIVITY_STATUS.TEMPLATE } });
+  let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
+    ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
+    : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
+  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${sourceActivity.name} (COPY)`);
+  //create new activity in database 
+  let newActivity = {
+    name: `${sourceActivity.name} (COPY)`,
+    path: `/${sourceActivity.name} (COPY)`,
+    status: ACTIVITY_STATUS.DRAFT,
+    type: sourceActivity.type,
+    templateId: sourceActivity._id,
+    description: sourceActivity.description,
+    iconUrl: sourceActivity.iconUrl,
+  }
+  const activity = await SERVICES.activityService.createActivity(newActivity);
+  // Copying Directory
+  await fs.copy(sourcePath, destinationPath);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_CLONED_SUCCESSFULLY), { activity });
+};
+
+/**
+ * function to create preview acitivity
+ */
+
+adminController.previewActivity = async (payload) => {
+  const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.activityId });
+  const sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
+    ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
+    : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
+
+  const previewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
+  const templatePreviewPath = path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PREVIEW}`)
+  const destinationPath = `${previewPath}/res/Activity/${sourceActivity.name}`;
+
+  // Copying Preview template Directory
+  await fs.emptyDir(previewPath);
+  await fs.copy(templatePreviewPath, previewPath,);
+
+  //Copying the activity to the preview folder
+  await fs.copy(sourcePath, destinationPath);
+
+  //Update project.json
+  let projectData = await (new Promise((resolve, reject) => {
+    fs.readFile(`${templatePreviewPath}/project.json`, 'utf-8', (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  }))
+  projectData = JSON.parse(projectData);
+  projectData.jsList.push(`res/Activity/${sourceActivity.name}/src/index.js`);
+  fs.writeFileSync(`${previewPath}/project.json`, JSON.stringify(projectData));
+
+  //Update lesson-config
+  let configData = await (new Promise((resolve, reject) => {
+    fs.readFile(`${sourcePath}/${ACTIVITY_CONFIG_PATH}`, 'utf-8', (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  }))
+  configData = JSON.parse(configData);
+  let lessonObj = { ...configData.properties, resources: configData.resources };
+  let lessonConfigData = await (new Promise((resolve, reject) => {
+    fs.readFile(`${templatePreviewPath}/res/lesson-config.json`, 'utf-8', (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  }))
+  lessonConfigData = JSON.parse(lessonConfigData);
+  lessonConfigData.activityGame = [lessonObj];
+  fs.writeFileSync(`${previewPath}/res/lesson-config.json`, JSON.stringify(lessonConfigData));
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_CLONED_SUCCESSFULLY));
+};
 
 /* export adminController */
 module.exports = adminController;

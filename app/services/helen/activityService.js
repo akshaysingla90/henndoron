@@ -23,7 +23,15 @@ activityService.getActivity = async (criteria, projection) => {
 activityService.getActivities = async (payload, projection) => {
   let query = [
     { $match: payload.criteria },
-    ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit)
+    ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit),
+    {
+      $lookup: {
+        from: 'course',
+        localField:'courseId',
+        foreignField: '_id',
+        as: 'course',
+      }
+    }
   ]
   let { items: activities, totalCount } = (await activityModel.aggregate(query))[0] || { items: [], totalCount: 0 }
   return { activities, totalCount };

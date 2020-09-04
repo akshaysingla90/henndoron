@@ -10,7 +10,8 @@ const SERVICES = require('../../services');
 const { USER_ROLE } = require('../../utils/constants');
 const { ACTIVITY_PREVIEW_PATH, BASE_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const path = require('path');
-const activityPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
+const activityPreviewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
+const activityPath = path.join(__dirname, `../../../template-activities`);
 
 module.exports = async function (app) {
 
@@ -42,9 +43,11 @@ module.exports = async function (app) {
     // app.use('/public', express.static('public'));
     // app.use('/uploads', express.static('uploads'));
 
-    app.use('/activity', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
-    app.use('/activity', express.static(activityPath));
+    app.use('/activity-preview', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
+    app.use('/activity-preview', express.static(activityPreviewPath));
 
+    app.use('/activity-resources', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
+    app.use('/activity-resources', express.static(activityPath));
 
     // initialize mongodb 
     await require('../db_mongo')();

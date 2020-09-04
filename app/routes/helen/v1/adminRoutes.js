@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE } = require(`../../../utils/constants`);
 //load controllers
-const { cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity } = require(`../../../controllers/${CONFIG.PLATFORM}/adminController`);
+const { cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity } = require(`../../../controllers/${CONFIG.PLATFORM}/adminController`);
 
 let routes = [
   {
@@ -37,7 +37,7 @@ let routes = [
         'authorization': Joi.string().required().description('User\'s JWT token.')
       },
       params: {
-        activityId: Joi.string().optional().description('Activity Id to clone.')
+        activityId: Joi.string().required().description('Activity Id to clone.')
       },
       group: 'Admin',
       description: 'Route to copy an existing activity',
@@ -126,6 +126,23 @@ let routes = [
     },
     auth: USER_ROLE.ADMIN,
     handler: deleteActivity
+  },
+  {
+    method: 'POST',
+    path: '/v1/admin/activities/preview/:activityId',
+    joiSchemaForSwagger: {
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
+      params: {
+        activityId: Joi.string().required().description('Activity Id to clone.')
+      },
+      group: 'Admin',
+      description: 'Route to create preview activity',
+      model: 'Auth Tool'
+    },
+    auth: USER_ROLE.ADMIN,
+    handler: previewActivity
   },
 ];
 
