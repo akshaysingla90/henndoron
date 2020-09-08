@@ -13,7 +13,8 @@ activityService.createActivity = async (activity) => {
 /**
  * function to fetch Activity by its id.
  */
-activityService.getActivity = async (criteria, projection) => {
+activityService.getActivity = async (criteria, projection, options) => {
+  if (options && options.instance) return await activityModel.findOne(criteria, projection);
   return await activityModel.findOne(criteria, projection).lean();
 };
 
@@ -27,7 +28,7 @@ activityService.getActivities = async (payload, projection) => {
     {
       $lookup: {
         from: 'course',
-        localField:'courseId',
+        localField: 'courseId',
         foreignField: '_id',
         as: 'course',
       }
@@ -41,7 +42,7 @@ activityService.getActivities = async (payload, projection) => {
  * function to update user's Activity in the database.
  */
 activityService.updateActivity = async (criteria, dataToUpdate) => {
-  return await activityModel.findOneAndUpdate(criteria, dataToUpdate, { new: true, upsert: true, useFindAndModify:false }).lean();
+  return await activityModel.findOneAndUpdate(criteria, dataToUpdate, { new: true, upsert: true, useFindAndModify: false }).lean();
 };
 
 /**

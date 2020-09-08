@@ -11,11 +11,11 @@ const path = require('path');
 let adminController = {};
 
 /**
- * function to clone a Activity from existing activity
+ * function to clone a Activity from existing activity 
  */
 
 adminController.cloneActivity = async (payload) => {
-  const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.activityId });
+  const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.templateId });
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
@@ -23,12 +23,15 @@ adminController.cloneActivity = async (payload) => {
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${payload.name}`)
   let newActivity = {
     name: payload.name,
-    path: `/${payload.name}`,
+    path: `/${payload.name}${Date.now()}`,
     status: ACTIVITY_STATUS.DRAFT,
-    type: ACTIVITY_TYPE.CLONED,
+    type: sourceActivity.type,
     templateId: sourceActivity._id,
     description: payload.description,
     iconUrl: sourceActivity.iconUrl,
+    courseId: payload.courseId,
+    lessonNumber: payload.lessonNumber,
+    episodeNumber: payload.episodeNumber
   }
   //create new activity in database 
   const { id: activityId } = await SERVICES.activityService.createActivity(newActivity);
@@ -47,6 +50,18 @@ adminController.cloneActivity = async (payload) => {
 };
 
 /**
+ * function to edit a draft
+ */
+
+adminController.editActivity = async (payload) => {
+  let activity = await SERVICES.activityService.getActivity({ _id: payload.activityId, status: ACTIVITY_STATUS.DRAFT }, NORMAL_PROJECTION, { instance: true });
+  if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  await SERVICES.activityService.updateActivity({ _id: payload.activityId }, payload);
+  await fs.writeFileSync(destinationPath + ACTIVITY_CONFIG_PATH, JSON.stringify(payload.configData));
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_UPDATED_SUCCESSFULLY));
+};
+
+/**
  * function to get all the activities
  * @param {*} payload 
  */
@@ -56,6 +71,18 @@ adminController.getActivities = async (payload) => {
   if (payload.type) payload.criteria.type = payload.type;
   let activities = await SERVICES.activityService.getActivities(payload, { path: 0 });
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_FETCHED_SUCCESSFULLY), activities);
+}
+
+/**
+ * function to get publish activity by its id
+ * @param {*} payload 
+ */
+adminController.publishActivity = async (payload) => {
+  let activity = await SERVICES.activityService.getActivity({ _id: payload.id, status: ACTIVITY_STATUS.DRAFT }, NORMAL_PROJECTION, { instance: true });
+  if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  activity.status = ACTIVITY_STATUS.PUBLISHED;
+  await activity.save();
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_FETCHED_SUCCESSFULLY), { activity });
 }
 
 /**
@@ -147,20 +174,21 @@ adminController.deleteActivity = async (payload) => {
  */
 
 adminController.duplicateActivity = async (payload) => {
-  const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.activityId, status: { $ne: ACTIVITY_STATUS.TEMPLATE } });
+  const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.activityId });
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${sourceActivity.name} (COPY)`);
+  const suffix = Date.now();
+  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${sourceActivity.name}${suffix}`);
   //create new activity in database 
   let newActivity = {
     name: `${sourceActivity.name} (COPY)`,
-    path: `/${sourceActivity.name} (COPY)`,
+    path: `/${sourceActivity.name}${suffix}`,
     status: ACTIVITY_STATUS.DRAFT,
     type: sourceActivity.type,
     templateId: sourceActivity._id,
     description: sourceActivity.description,
-    iconUrl: sourceActivity.iconUrl,
+    iconUrl: sourceActivity.iconUrl
   }
   const activity = await SERVICES.activityService.createActivity(newActivity);
   // Copying Directory
@@ -180,7 +208,7 @@ adminController.previewActivity = async (payload) => {
 
   const previewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
   const templatePreviewPath = path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PREVIEW}`)
-  const destinationPath = `${previewPath}/res/Activity/${sourceActivity.name}`;
+  const destinationPath = `${previewPath}/res/Activity${sourceActivity.path}`;
 
   // Copying Preview template Directory
   await fs.emptyDir(previewPath);
@@ -218,7 +246,7 @@ adminController.previewActivity = async (payload) => {
   lessonConfigData = JSON.parse(lessonConfigData);
   lessonConfigData.activityGame = [lessonObj];
   fs.writeFileSync(`${previewPath}/res/lesson-config.json`, JSON.stringify(lessonConfigData));
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_CLONED_SUCCESSFULLY));
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_PREVIEW_CREATED_SUCCESSFULLY));
 };
 
 /* export adminController */
