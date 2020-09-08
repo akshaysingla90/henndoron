@@ -44,7 +44,7 @@ module.exports = async function (app) {
     // app.use('/public', express.static('public'));
     // app.use('/uploads', express.static('uploads'));
 
-    app.use('/activity-preview', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
+    // app.use('/activity-preview', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
     app.use('/activity-preview', express.static(activityPreviewPath));
 
     app.use('/template-resources', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
