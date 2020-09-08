@@ -1,50 +1,50 @@
 /**
  * This file contain logic for Counting game module
  **/
-var ACTIVITY_COUNTING_1 =  {};
-ACTIVITY_COUNTING_1.Tag  =  {
-    baseHiddenObject : 100,
+var ACTIVITY_COUNTING_1 = {};
+ACTIVITY_COUNTING_1.Tag = {
+    baseHiddenObject: 100,
     baseCountText: 200,
     resetButton: 201
 }
 
 ACTIVITY_COUNTING_1.socketEvents = {
     SHOW_CARD: 1,
-    RESET:2
+    RESET: 2
 }
 ACTIVITY_COUNTING_1.socketEventKey = {
-    singleEvent         : "SingleEvent"
+    singleEvent: "SingleEvent"
 }
-ACTIVITY_COUNTING_1.ref= null;
+ACTIVITY_COUNTING_1.ref = null;
 
 ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
-    self : null,
-    baseLayer:null,
+    self: null,
+    baseLayer: null,
     revealedObjects: [],
-    isStudentInteractionEnable : false,
-    storedData : null,
+    isStudentInteractionEnable: false,
+    storedData: null,
 
-    ctor : function () {
+    ctor: function () {
         this._super();
     },
 
-    onEnter : function () {
+    onEnter: function () {
         this._super();
         let ref = this;
         ACTIVITY_COUNTING_1.ref = this;
-        cc.loader.loadJson ("res/Activity/ACTIVITY_COUNTING_1/config.json",function(error, config){
+        cc.loader.loadJson("res/Activity/ACTIVITY_COUNTING_1/config.json", function (error, config) {
             ACTIVITY_COUNTING_1.ref.config = config;
-            ACTIVITY_COUNTING_1.ref.resourcePath = "res/Activity/"+"ACTIVITY_COUNTING_1/res/"
-            ACTIVITY_COUNTING_1.ref.soundPath =   ACTIVITY_COUNTING_1.ref.resourcePath + "Sound/";
+            ACTIVITY_COUNTING_1.ref.resourcePath = "res/Activity/" + "ACTIVITY_COUNTING_1/res/"
+            ACTIVITY_COUNTING_1.ref.soundPath = ACTIVITY_COUNTING_1.ref.resourcePath + "Sound/";
             ACTIVITY_COUNTING_1.ref.animationBasePath = ACTIVITY_COUNTING_1.ref.resourcePath + "AnimationFrames/";
             ACTIVITY_COUNTING_1.ref.spriteBasePath = ACTIVITY_COUNTING_1.ref.resourcePath + "Sprite/";
-            ACTIVITY_COUNTING_1.ref.isTeacherView =  HDAppManager.isTeacherView;
+            ACTIVITY_COUNTING_1.ref.isTeacherView = HDAppManager.isTeacherView;
             ACTIVITY_COUNTING_1.ref.isCountingEnabled = ACTIVITY_COUNTING_1.ref.config.gameInfo.isCounting;
 
             ACTIVITY_COUNTING_1.ref.isStudentInteractionEnable = ACTIVITY_COUNTING_1.ref.isTeacherView ? true : false;
             ref.setupUI();
             ref.loadAudio();
-            if(ACTIVITY_COUNTING_1.ref.storedData) {
+            if (ACTIVITY_COUNTING_1.ref.storedData) {
                 ACTIVITY_COUNTING_1.ref.syncData(ACTIVITY_COUNTING_1.ref.storedData)
             }
             ACTIVITY_COUNTING_1.ref.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.moduleStart.ops);
@@ -52,7 +52,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
         });
     },
 
-    onExit : function () {
+    onExit: function () {
         this._super();
         ACTIVITY_COUNTING_1.ref.revealedObjects.length = 0;
         ACTIVITY_COUNTING_1.ref.storedDat = null;
@@ -61,28 +61,27 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
     /**
      * To create initial UI for teacher and student.
      **/
-    setupUI :  function () {
-        this.setBackground( ACTIVITY_COUNTING_1.ref.spriteBasePath + ACTIVITY_COUNTING_1.ref.config.graphicalAssets.background.name);
-        this.baseLayer = this.createColourLayer(cc.color(0,0,0,0),cc.winSize.width,cc.winSize.height,cc.p(0,0),this, 1);
+    setupUI: function () {
+        this.setBackground(ACTIVITY_COUNTING_1.ref.spriteBasePath + ACTIVITY_COUNTING_1.ref.config.graphicalAssets.background.name);
+        this.baseLayer = this.createColourLayer(cc.color(0, 0, 0, 0), cc.winSize.width, cc.winSize.height, cc.p(0, 0), this, 1);
         this.setupHiddenUI();
-        if(ACTIVITY_COUNTING_1.ref.isTeacherView && !ACTIVITY_COUNTING_1.ref.storedData) { //Set only for Teacher
+        if (ACTIVITY_COUNTING_1.ref.isTeacherView && !ACTIVITY_COUNTING_1.ref.storedData) { //Set only for Teacher
             this.updateRoomData();
         }
-        this.addResetButton();
     },
     /**
      * To load game audio
      **/
-    loadAudio : function() {
+    loadAudio: function () {
         cc.loader.load(ACTIVITY_COUNTING_1.ref.soundPath + ACTIVITY_COUNTING_1.ref.config.audioAssets.tapHiddenObject.name);
     },
     /**
      * setupHiddenUI: Set up initial UI where objects are hidden.
      */
-    setupHiddenUI : function() {
+    setupHiddenUI: function () {
         var hiddenObjects = ACTIVITY_COUNTING_1.ref.config.countingData;
-        if(hiddenObjects && hiddenObjects.length > 0) {
-            for(let index = 0; index < hiddenObjects.length; index++) {
+        if (hiddenObjects && hiddenObjects.length > 0) {
+            for (let index = 0; index < hiddenObjects.length; index++) {
                 this.createHiddenObject(hiddenObjects[index], index);
             }
         }
@@ -92,11 +91,11 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * @param data
      * @param index
      */
-    createHiddenObject : function(data, index) {
-        var hiddenButton = this.createButton(ACTIVITY_COUNTING_1.ref.spriteBasePath+data.defaultImageName, ACTIVITY_COUNTING_1.ref.spriteBasePath+data.defaultImageName,"",8,ACTIVITY_COUNTING_1.Tag.baseHiddenObject+index,data.position, this.baseLayer, this,ACTIVITY_COUNTING_1.ref.spriteBasePath+data.revealImageName);
+    createHiddenObject: function (data, index) {
+        var hiddenButton = this.createButton(ACTIVITY_COUNTING_1.ref.spriteBasePath + data.defaultImageName, ACTIVITY_COUNTING_1.ref.spriteBasePath + data.defaultImageName, "", 8, ACTIVITY_COUNTING_1.Tag.baseHiddenObject + index, data.position, this.baseLayer, this, ACTIVITY_COUNTING_1.ref.spriteBasePath + data.revealImageName);
         hiddenButton.setScale(data.scale)
-        if(ACTIVITY_COUNTING_1.ref.isCountingEnabled) {
-            var countText = this.createTTFLabel("",data.countFont,data.countFontSize,cc.color(data.countTextColor.r,data.countTextColor.g,data.countTextColor.b,data.countTextColor.a) ,data.countTextPosition,this.baseLayer);
+        if (ACTIVITY_COUNTING_1.ref.isCountingEnabled) {
+            var countText = this.createTTFLabel("", data.countFont, data.countFontSize, cc.color(data.countTextColor.r, data.countTextColor.g, data.countTextColor.b, data.countTextColor.a), data.countTextPosition, this.baseLayer);
             countText.tag = ACTIVITY_COUNTING_1.Tag.baseCountText + index;
             countText.setLocalZOrder(10);
             countText.setVisible(false);
@@ -106,20 +105,31 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
     /**
      * updateRoomData: This will be update room data which is required for game state management.
      */
-    updateRoomData: function() {
-        SocketManager.emitCutomEvent("SingleEvent", {'eventType':HDSocketEventType.UPDATE_ROOM_DATA,'roomId': HDAppManager.roomId ,'data':  {"roomId":HDAppManager.roomId,"roomData": {"activity":  ACTIVITY_COUNTING_1.ref.config.properties.namespace,"data": ACTIVITY_COUNTING_1.ref.revealedObjects,"activityStartTime" : HDAppManager.getActivityStartTime() }}},null);
+    updateRoomData: function () {
+        SocketManager.emitCutomEvent("SingleEvent", {
+            'eventType': HDSocketEventType.UPDATE_ROOM_DATA,
+            'roomId': HDAppManager.roomId,
+            'data': {
+                "roomId": HDAppManager.roomId,
+                "roomData": {
+                    "activity": ACTIVITY_COUNTING_1.ref.config.properties.namespace,
+                    "data": ACTIVITY_COUNTING_1.ref.revealedObjects,
+                    "activityStartTime": HDAppManager.getActivityStartTime()
+                }
+            }
+        }, null);
     },
 
     /**
      * syncData: This will update game state according to current game state of other users.
      * @param data
      */
-    syncData: function(data) {
-        if(!ACTIVITY_COUNTING_1.ref.config) {
+    syncData: function (data) {
+        if (!ACTIVITY_COUNTING_1.ref.config) {
             ACTIVITY_COUNTING_1.ref.storedData = data;
             return;
         }
-        if(data && data.length != 0) {
+        if (data && data.length != 0) {
             ACTIVITY_COUNTING_1.ref.syncAllObjects(data);
             ACTIVITY_COUNTING_1.ref.storedData = null;
         }
@@ -128,8 +138,8 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * socketListener: This will receive all the emitted socket events.
      * @param res
      */
-    socketListener : function(res){
-        if(!ACTIVITY_COUNTING_1.ref) {
+    socketListener: function (res) {
+        if (!ACTIVITY_COUNTING_1.ref) {
             return;
         }
         switch (res.eventType) {
@@ -149,9 +159,9 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * @param res
      */
     gameEvents: function (res) {
-        switch ( res.eventType) {
+        switch (res.eventType) {
             case ACTIVITY_COUNTING_1.socketEvents.SHOW_CARD:
-                if(res.data.username != HDAppManager.username) {
+                if (res.data.username != HDAppManager.username) {
                     ACTIVITY_COUNTING_1.ref.updateHiddenObjectList(res.data.tag);
                 }
                 break;
@@ -164,13 +174,19 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * updateStudentTurn: This will emit event to change student turn.
      * @param userName
      */
-    updateStudentTurn : function(userName) {
-        if(ACTIVITY_COUNTING_1.ref.isTeacherView) {
-            if(!userName) {
-                this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER,{"roomId":HDAppManager.roomId, "users":[]});
+    updateStudentTurn: function (userName) {
+        if (ACTIVITY_COUNTING_1.ref.isTeacherView) {
+            if (!userName) {
+                this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
+                    "roomId": HDAppManager.roomId,
+                    "users": []
+                });
             } else {
                 this.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.onMouseEnable.ops);
-                this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER,{"roomId":HDAppManager.roomId, "users":[{userName: userName}]});
+                this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
+                    "roomId": HDAppManager.roomId,
+                    "users": [{ userName: userName }]
+                });
             }
         }
     },
@@ -180,16 +196,16 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      */
     studentTurn: function (res) {
         let users = res.users;
-        if(ACTIVITY_COUNTING_1.ref.isTeacherView) {
+        if (ACTIVITY_COUNTING_1.ref.isTeacherView) {
             //Check for this
         } else {
-            if(users.length == 0) {
+            if (users.length == 0) {
                 ACTIVITY_COUNTING_1.ref.isStudentInteractionEnable = false;
                 return;
             }
-            for(let index = 0; index < users.length; index++) {
+            for (let index = 0; index < users.length; index++) {
                 let obj = users[index];
-                if(obj.userName == HDAppManager.username) {
+                if (obj.userName == HDAppManager.username) {
                     ACTIVITY_COUNTING_1.ref.isStudentInteractionEnable = true;
                     break;
                 } else {
@@ -202,7 +218,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * disableInteraction: This  will update student interaction and go button state.
      * @param enable
      */
-    disableInteraction : function (enable) {
+    disableInteraction: function (enable) {
         ACTIVITY_COUNTING_1.ref.isStudentInteractionEnable = enable;
     },
     /**
@@ -210,41 +226,38 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * @param type - Event Type
      * @param data - Data to sent
      */
-    emitSocketEvent : function(type, data){
-        SocketManager.emitCutomEvent(ACTIVITY_COUNTING_1.socketEventKey.singleEvent, {'eventType': type, 'roomId':HDAppManager.roomId, 'data':data},null);
+    emitSocketEvent: function (type, data) {
+        SocketManager.emitCutomEvent(ACTIVITY_COUNTING_1.socketEventKey.singleEvent, {
+            'eventType': type,
+            'roomId': HDAppManager.roomId,
+            'data': data
+        }, null);
     },
     /**
      * buttonCallback: This method handles button callback.
      * @param sender
      * @param type
      */
-    buttonCallback : function (sender, type) {
-        let button      = sender;
-        let buttonTag   = button.tag ;
+    buttonCallback: function (sender, type) {
+        let button = sender;
+        let buttonTag = button.tag;
         switch (type) {
             case ccui.Widget.TOUCH_ENDED:
-                switch(buttonTag) {
+                switch (buttonTag) {
                     case ACTIVITY_COUNTING_1.Tag.resetButton:
-                        if(this.revealedObjects.length > 0) {
-                            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-                                'eventType': ACTIVITY_COUNTING_1.socketEvents.RESET,
-                                'data': null
-                            });
-                        }
+
                         break;
                     default:
                         if (ACTIVITY_COUNTING_1.ref.isStudentInteractionEnable) {
                             var revealedObject = ACTIVITY_COUNTING_1.ref.config.countingData[sender.tag - ACTIVITY_COUNTING_1.Tag.baseHiddenObject];
                             ACTIVITY_COUNTING_1.ref.revealedObjects.push(revealedObject);
                             this.showHiddenObject(sender.tag);
-                            //Emit Event
                             ACTIVITY_COUNTING_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                                 'eventType': ACTIVITY_COUNTING_1.socketEvents.SHOW_CARD,
-                                'data': {"tag": sender.tag, "username": HDAppManager.username}
+                                'data': { "tag": sender.tag, "username": HDAppManager.username }
                             });
-                            if(!ACTIVITY_COUNTING_1.ref.isTeacherView) {
-                                ACTIVITY_COUNTING_1.ref.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, {"roomId": HDAppManager.roomId});
-
+                            if (!ACTIVITY_COUNTING_1.ref.isTeacherView) {
+                                ACTIVITY_COUNTING_1.ref.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, { "roomId": HDAppManager.roomId });
                             }
                             ACTIVITY_COUNTING_1.ref.updateRoomData();
                         }
@@ -257,27 +270,36 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * showHiddenObject: This will show hidden object.
      * @param index
      */
-    showHiddenObject : function(index) {
+    showHiddenObject: function (index) {
         var objectSelected = ACTIVITY_COUNTING_1.ref.baseLayer.getChildByTag(index);
         objectSelected.setEnabled(false);
-        if(ACTIVITY_COUNTING_1.ref.isCountingEnabled) {
+        if (ACTIVITY_COUNTING_1.ref.isCountingEnabled) {
             var textTag = index - ACTIVITY_COUNTING_1.Tag.baseHiddenObject;
-            var textObject = ACTIVITY_COUNTING_1.ref.baseLayer.getChildByTag(ACTIVITY_COUNTING_1.Tag.baseCountText+textTag);
+            var textObject = ACTIVITY_COUNTING_1.ref.baseLayer.getChildByTag(ACTIVITY_COUNTING_1.Tag.baseCountText + textTag);
             textObject.setString(ACTIVITY_COUNTING_1.ref.revealedObjects.length);
             textObject.setVisible(true);
         }
+        if (ACTIVITY_COUNTING_1.ref.isTeacherView) {
+            if (ACTIVITY_COUNTING_1.ref.revealedObjects.length == 1) {
+                this.parent.setResetButtonActive(true);
+            } else if (ACTIVITY_COUNTING_1.ref.revealedObjects.length == 0) {
+                this.parent.setResetButtonActive(false);
+            }
+        }
+
     },
     /**
      * updateHiddenObjectList: This will update the hidden object.
      * @param index
      */
-    updateHiddenObjectList : function (index) {
-        var revealedObject = ACTIVITY_COUNTING_1.ref.config.countingData[index -ACTIVITY_COUNTING_1.Tag.baseHiddenObject];
-        if(this.alreadyPresent(revealedObject)) {
+    updateHiddenObjectList: function (index) {
+        var revealedObject = ACTIVITY_COUNTING_1.ref.config.countingData[index - ACTIVITY_COUNTING_1.Tag.baseHiddenObject];
+        if (this.alreadyPresent(revealedObject)) {
             return;
         }
         ACTIVITY_COUNTING_1.ref.revealedObjects.push(revealedObject);
         ACTIVITY_COUNTING_1.ref.showHiddenObject(index);
+
     },
 
     /**
@@ -285,9 +307,9 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * @param currentObject
      * @returns {boolean}
      */
-    alreadyPresent: function(currentObject) {
+    alreadyPresent: function (currentObject) {
         var objects = ACTIVITY_COUNTING_1.ref.revealedObjects;
-        for(let index = 0; index< objects.length; index++) {
+        for (let index = 0; index < objects.length; index++) {
             if (objects[index].name == currentObject.name) {
                 return true;
             }
@@ -298,14 +320,14 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * syncAllObjects: This will sync the data according to game state.
      * @param revealedList
      */
-    syncAllObjects : function(revealedList) {
+    syncAllObjects: function (revealedList) {
         var hiddenObjects = ACTIVITY_COUNTING_1.ref.config.countingData;
-        if(hiddenObjects && hiddenObjects.length > 0 && revealedList && revealedList.length > 0) {
-            for(let indexRevealed = 0; indexRevealed < revealedList.length; indexRevealed++) {
+        if (hiddenObjects && hiddenObjects.length > 0 && revealedList && revealedList.length > 0) {
+            for (let indexRevealed = 0; indexRevealed < revealedList.length; indexRevealed++) {
                 var currentRevealedObject = revealedList[indexRevealed];
-                for(let indexHidden = 0; indexHidden < hiddenObjects.length; indexHidden++) {
-                    if(currentRevealedObject.name == hiddenObjects[indexHidden].name) {
-                        ACTIVITY_COUNTING_1.ref.updateHiddenObjectList(ACTIVITY_COUNTING_1.Tag.baseHiddenObject+indexHidden);
+                for (let indexHidden = 0; indexHidden < hiddenObjects.length; indexHidden++) {
+                    if (currentRevealedObject.name == hiddenObjects[indexHidden].name) {
+                        ACTIVITY_COUNTING_1.ref.updateHiddenObjectList(ACTIVITY_COUNTING_1.Tag.baseHiddenObject + indexHidden);
                     }
                 }
             }
@@ -315,13 +337,13 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * triggerScript: To trigger the script
      * @param message
      */
-    triggerScript: function(message) {
-        if(this.parent) {
+    triggerScript: function (message) {
+        if (this.parent) {
             this.parent.showScriptMessage(message);
         }
     },
-    triggerTip: function(message) {
-        if(this.parent) {
+    triggerTip: function (message) {
+        if (this.parent) {
             this.parent.showTipMessage(message.ops);
         }
     },
@@ -331,44 +353,41 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * @param location
      * @returns {boolean}
      */
-    mouseControlEnable : function(location){
+    mouseControlEnable: function (location) {
         var obj = this.getChildByTag(ACTIVITY_COUNTING_1.Tag.resetButton);
-        if(obj && cc.rectContainsPoint(obj.getBoundingBox(), obj.getParent().convertToNodeSpace(location)) && this.isStudentInteractionEnable && obj.isEnabled()) {
+        if (obj && cc.rectContainsPoint(obj.getBoundingBox(), obj.getParent().convertToNodeSpace(location)) && this.isStudentInteractionEnable && obj.isEnabled()) {
             return true;
         }
         return false;
     },
-    /**
-     * addResetButton: This method add reset button for teacher.
-     */
-     addResetButton: function () {
-        if(ACTIVITY_COUNTING_1.ref.isTeacherView) {
-            let resetButton = this.createButton(ACTIVITY_COUNTING_1.ref.spriteBasePath + "btn_enable.png",ACTIVITY_COUNTING_1.ref.spriteBasePath + "btn_enable.png", "Reset",
-                16, ACTIVITY_COUNTING_1.Tag.resetButton, cc.p(this.getContentSize().width * 0.085,
-                    this.getContentSize().height * 0.15), this);
-            resetButton.setTitleColor(cc.color(0, 0, 0, 255));
-            // resetButton.setScale(0.7, 0.7);
-            resetButton.setLocalZOrder(1000);
-        }
-     },
+
 
     /**
      * resetUI: This will reset the UI.
      */
-    resetUI: function() {
+    resetUI: function () {
         var hiddenObjects = ACTIVITY_COUNTING_1.ref.config.countingData;
         this.revealedObjects.length = 0;
-        if(hiddenObjects && hiddenObjects.length > 0) {
-            for(let index = 0; index < hiddenObjects.length; index++) {
+        if (hiddenObjects && hiddenObjects.length > 0) {
+            for (let index = 0; index < hiddenObjects.length; index++) {
                 var obj = ACTIVITY_COUNTING_1.ref.baseLayer.getChildByTag(ACTIVITY_COUNTING_1.Tag.baseHiddenObject + index);
                 obj.setEnabled(true);
-                var textObject = ACTIVITY_COUNTING_1.ref.baseLayer.getChildByTag(ACTIVITY_COUNTING_1.Tag.baseCountText+index);
+                var textObject = ACTIVITY_COUNTING_1.ref.baseLayer.getChildByTag(ACTIVITY_COUNTING_1.Tag.baseCountText + index);
                 textObject.setString("");
                 textObject.setVisible(false);
             }
         }
-        if(ACTIVITY_COUNTING_1.ref.isTeacherView) {
+        if (ACTIVITY_COUNTING_1.ref.isTeacherView) {
             ACTIVITY_COUNTING_1.ref.updateRoomData();
+        }
+    },
+
+    reset: function () {
+        if (this.revealedObjects.length > 0) {
+            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+                'eventType': ACTIVITY_COUNTING_1.socketEvents.RESET,
+                'data': null
+            });
         }
     }
 });

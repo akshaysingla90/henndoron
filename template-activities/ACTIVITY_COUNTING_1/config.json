@@ -1,6 +1,5 @@
 {
   "properties": {
-    "externalRewards": true,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_COUNTING_1/",
     "number": "1",

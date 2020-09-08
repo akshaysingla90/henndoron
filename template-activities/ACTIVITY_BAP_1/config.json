@@ -1,6 +1,5 @@
 {
   "properties": {
-    "externalRewards": true,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_BAP_1/",
     "number": "1",
@@ -182,6 +181,21 @@
     "drawMode_disable": {
       "name": "btn_disable.png",
       "size": "{100, 30}"
+    },
+    "eraser_icon": {
+      "name": "eraser_icon.png"
+    },
+    "cursor_pencil": {
+      "name": "cursor_pencil.png"
+    },
+    "cursor_eraser.png": {
+      "name": "cursor_eraser.png"
+    },
+    "eraser": {
+      "name": "eraser.png"
+    },
+    "palette_sidebar": {
+      "name": "palette_sidebar.png"
     },
     "color": [
       {

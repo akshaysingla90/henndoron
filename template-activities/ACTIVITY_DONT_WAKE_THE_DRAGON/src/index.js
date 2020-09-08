@@ -79,7 +79,8 @@ DontWakeTheDragon.Dragon = cc.Sprite.extend({
     this.playAnimation(this.animationStage);
   },
 
-  onExit: function () {},
+  onExit: function () {
+  },
 
   getAnimationStage: function () {
     return this.animationStage;
@@ -88,7 +89,7 @@ DontWakeTheDragon.Dragon = cc.Sprite.extend({
   _createAnimationAction: function (animationAction) {
     const data =
       DontWakeTheDragon.MainLayerRef.config.graphicalAssets.character.animation[
-        animationAction
+      animationAction
       ];
     const animate = HDUtility.runFrameAnimation(
       DontWakeTheDragon.animationPath + data.frameInitial,
@@ -147,9 +148,9 @@ DontWakeTheDragon.Dragon = cc.Sprite.extend({
     switch (stage) {
       case DontWakeTheDragon.DragonWakeUpStages
         .TOTALLY_STILL_AND_IN_A_DEEP_SLEEP: {
-        this.playStage_1_Animation();
-        break;
-      }
+          this.playStage_1_Animation();
+          break;
+        }
       case DontWakeTheDragon.DragonWakeUpStages.MOVING_SLIGHTLY_IN_SLEEP: {
         this.playStage_2_Animation();
         break;
@@ -221,7 +222,8 @@ DontWakeTheDragon.TreasureChest = cc.Sprite.extend({
     this.addChild(label);
   },
 
-  onExit: function () {},
+  onExit: function () {
+  },
 
   getUserName: function () {
     return this.userName;
@@ -284,7 +286,8 @@ DontWakeTheDragon.TreasureItem = cc.Sprite.extend({
     this._super();
   },
 
-  onExit: function () {},
+  onExit: function () {
+  },
 
   getInitialPosition: function () {
     return this.initialPosition;
@@ -330,9 +333,9 @@ DontWakeTheDragon.TreasureChests = HDBaseLayer.extend({
     if (treasureChestObj.itemTag) {
       treasureItemSpriteRef = new cc.Sprite(
         DontWakeTheDragon.resourcePath +
-          DontWakeTheDragon.MainLayerRef.config.graphicalAssets.treasureItems[
-            treasureChestObj.itemTag
-          ].imageName
+        DontWakeTheDragon.MainLayerRef.config.graphicalAssets.treasureItems[
+          treasureChestObj.itemTag
+        ].imageName
       );
       treasureItemSpriteRef.setScale(
         64 / treasureItemSpriteRef.width,
@@ -356,11 +359,10 @@ DontWakeTheDragon.TreasureChests = HDBaseLayer.extend({
   },
 
   _repositionTreasurechests: function () {
-    if(this.getChildren().length <= 4){
+    if (this.getChildren().length <= 4) {
       this.horizontalPadding = 105;
-    }
-    else {
-      this.horizontalPadding =  cc.lerp(105, 2, (this.getChildren().length - 1) / (8 - 1) );
+    } else {
+      this.horizontalPadding = cc.lerp(105, 2, (this.getChildren().length - 1) / (8 - 1));
     }
 
     this.nextItem_X_Position = 0;
@@ -380,7 +382,8 @@ DontWakeTheDragon.TreasureChests = HDBaseLayer.extend({
     this._super();
   },
 
-  onExit: function () {},
+  onExit: function () {
+  },
 
   getTreasureChestByStudentName: function (name) {
     return this.getChildByTag(name);
@@ -400,9 +403,12 @@ DontWakeTheDragon.TreasureChests = HDBaseLayer.extend({
 });
 
 DontWakeTheDragon.TreasureItemDelegate = cc.Class.extend({
-  onTreasureItemClicked: function (itemTag) {},
-  onTreasureItemDragged: function (itemTag, location) {},
-  onTreasureItemReleased: function (itemTag) {},
+  onTreasureItemClicked: function (itemTag) {
+  },
+  onTreasureItemDragged: function (itemTag, location) {
+  },
+  onTreasureItemReleased: function (itemTag) {
+  },
 });
 
 // ========================== TreasurePile ===============================
@@ -494,7 +500,7 @@ DontWakeTheDragon.TreasurePile = HDBaseLayer.extend({
 
   putBackTreasureItem: function (itemTag) {
     let item = this.getChildByTag(itemTag);
-    if(item) {
+    if (item) {
       this.reorderChild(item, 1);
       item.putBack();
     }
@@ -647,8 +653,8 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
   _setUpUI: function () {
     let bgSprite = this.setBackground(
       DontWakeTheDragon.resourcePath +
-        DontWakeTheDragon.MainLayerRef.config.graphicalAssets.background
-          .imageName
+      DontWakeTheDragon.MainLayerRef.config.graphicalAssets.background
+        .imageName
     );
     bgSprite.setLocalZOrder(this.Z_ORDER_BACKGROUND);
     this._createTreasurePile(this.delegate);
@@ -706,13 +712,13 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
   _repositionTreasureChests: function () {
     const treasureChests = this.getChildByTag(this.TAG_TREASURE_CHESTS);
     console.log(cc.lerp(
-        this.treasureChestsMax_X_Pos, this.treasureChestsMin_X_Pos,
-        (Object.keys(this.tempStudentsTreasureChests).length - 1) / (this.maxTreasureChests - 1)));
+      this.treasureChestsMax_X_Pos, this.treasureChestsMin_X_Pos,
+      (Object.keys(this.tempStudentsTreasureChests).length - 1) / (this.maxTreasureChests - 1)));
 
     treasureChests.setPosition(cc.p(cc.lerp(
-        this.treasureChestsMax_X_Pos, this.treasureChestsMin_X_Pos,
-        (Object.keys(this.tempStudentsTreasureChests).length - 1) / (this.maxTreasureChests - 1)),
-        this.height * 0.025));
+      this.treasureChestsMax_X_Pos, this.treasureChestsMin_X_Pos,
+      (Object.keys(this.tempStudentsTreasureChests).length - 1) / (this.maxTreasureChests - 1)),
+      this.height * 0.025));
 
   },
 
@@ -743,7 +749,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
           studentsTreasureChests: this.studentsTreasureChests,
           treasureItems: this.treasureItems,
         },
-        activityStartTime : HDAppManager.getActivityStartTime()
+        activityStartTime: HDAppManager.getActivityStartTime()
       },
     });
   },
@@ -771,8 +777,8 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     if (this._checkItemForIntersectionWithTreasureChest(itemTag)) {
       this.getChildByTag(this.TAG_TREASURE_PILE).releaseTreasureItem();
       this._setOpenPincerFingersCursor(true);
-      if(HDAppManager.isTeacherView){
-          this.getParent().getParent().setResetButtonActive(true);
+      if (HDAppManager.isTeacherView) {
+        this.getParent().getParent().setResetButtonActive(true);
       }
     } else {
       this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
@@ -787,29 +793,28 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
 
   _dropItemInChest: function (itemTag, treasureChest) {
     const treasureItem = this.getChildByTag(
-        this.TAG_TREASURE_PILE
+      this.TAG_TREASURE_PILE
     ).getTreasureItemByTag(itemTag);
     this.getChildByTag(this.TAG_TREASURE_PILE).removeTreasureItemByTag(
-        itemTag
+      itemTag
     );
     treasureChest.takeInTreasureItem(treasureItem);
     let data = {
-        roomId: HDAppManager.roomId,
-        userName: HDAppManager.username,
-        itemTag: itemTag,
+      roomId: HDAppManager.roomId,
+      userName: HDAppManager.username,
+      itemTag: itemTag,
     };
-    if(HDAppManager.isTeacherView){
+    if (HDAppManager.isTeacherView) {
       data.type = DontWakeTheDragon.teacherEvents.TREASURE_ITEM_DROPPED_IN_CHEST_BY_TEACHER,
-      data.studentName = treasureChest.tag;
-    }
-    else{
+        data.studentName = treasureChest.tag;
+    } else {
       data.type = DontWakeTheDragon.studentEvents.TREASURE_ITEM_DROPPED_IN_CHEST
     }
-    this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, data );
-    if(!HDAppManager.isTeacherView){
-        this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, {
-            roomId: HDAppManager.roomId,
-        });
+    this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, data);
+    if (!HDAppManager.isTeacherView) {
+      this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, {
+        roomId: HDAppManager.roomId,
+      });
     }
 
     this.updateTreasureItemsState(itemTag, HDAppManager.isTeacherView ? treasureChest.tag : HDAppManager.username);
@@ -820,13 +825,13 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     const treasurechests = this.getChildByTag(this.TAG_TREASURE_CHESTS);
     const treasureChestLocalBoundingBox = treasureChest.getBoundingBox();
     const worldSpace = treasurechests.convertToWorldSpace(
-        treasureChest.getPosition()
+      treasureChest.getPosition()
     );
     const treasureChestWorldBoundingBox = cc.rect(
-        worldSpace.x,
-        worldSpace.y,
-        treasureChestLocalBoundingBox.width,
-        treasureChestLocalBoundingBox.height
+      worldSpace.x,
+      worldSpace.y,
+      treasureChestLocalBoundingBox.width,
+      treasureChestLocalBoundingBox.height
     );
     return cc.rectIntersectsRect(treasureItem.getBoundingBox(), treasureChestWorldBoundingBox);
   },
@@ -835,14 +840,14 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
   _checkItemForIntersectionWithTreasureChest: function (itemTag) {
     const treasurechests = this.getChildByTag(this.TAG_TREASURE_CHESTS);
     const treasureItem = this.getChildByTag(
-        this.TAG_TREASURE_PILE
+      this.TAG_TREASURE_PILE
     ).getTreasureItemByTag(itemTag);
     if (HDAppManager.isTeacherView) {
       let allTreasureChests = treasurechests.getAllTreasureChests();
       for (let i = 0; i < allTreasureChests.length; ++i) {
         let isIntersected = this._compareRectsOfItemAndChest(treasureItem, allTreasureChests[i]);
-        if(isIntersected){
-            this._dropItemInChest(itemTag, allTreasureChests[i]);
+        if (isIntersected) {
+          this._dropItemInChest(itemTag, allTreasureChests[i]);
           return true;
         }
 
@@ -850,14 +855,13 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
       return false;
     } else {
       const treasureChest = treasurechests.getTreasureChestByStudentName(
-          HDAppManager.username
+        HDAppManager.username
       );
       let isIntersected = this._compareRectsOfItemAndChest(treasureItem, treasureChest);
       if (isIntersected) {
         this._dropItemInChest(itemTag, treasureChest);
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     }
@@ -1016,19 +1020,19 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
             break;
           }
           case DontWakeTheDragon.teacherEvents.TREASURE_ITEM_DROPPED_IN_CHEST_BY_TEACHER: {
-            const {userName, studentName, itemTag} = data;
+            const { userName, studentName, itemTag } = data;
             if (userName !== HDAppManager.username) {
               const treasurechests = this.getChildByTag(
-                  this.TAG_TREASURE_CHESTS
+                this.TAG_TREASURE_CHESTS
               );
               const treasureChest = treasurechests.getTreasureChestByStudentName(
-                  studentName
+                studentName
               );
               const treasureItem = this.getChildByTag(
-                  this.TAG_TREASURE_PILE
+                this.TAG_TREASURE_PILE
               ).getTreasureItemByTag(itemTag);
               this.getChildByTag(
-                  this.TAG_TREASURE_PILE
+                this.TAG_TREASURE_PILE
               ).removeTreasureItemByTag(itemTag);
               treasureChest.takeInTreasureItem(treasureItem);
               this.updateTreasureItemsState(itemTag, studentName);
@@ -1135,8 +1139,8 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
   _setClosedPincerFingersCursor: function () {
     this.isCustomCursorTexture = true;
     this.customCursorTextureUrl =
-        (DontWakeTheDragon.MainLayerRef.config.preLoaded ? DontWakeTheDragon.resourcePath  : "AsyncActivity/" + DontWakeTheDragon.resourcePath ) +
-        DontWakeTheDragon.MainLayerRef.config.graphicalAssets.cursor
+      (DontWakeTheDragon.MainLayerRef.config.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
+      DontWakeTheDragon.MainLayerRef.config.graphicalAssets.cursor
         .closedFingers;
   },
 
@@ -1144,7 +1148,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     if (flag) {
       this.isCustomCursorTexture = true;
       this.customCursorTextureUrl =
-          (DontWakeTheDragon.MainLayerRef.config.preLoaded ? DontWakeTheDragon.resourcePath  : "AsyncActivity/" + DontWakeTheDragon.resourcePath ) +
+        (DontWakeTheDragon.MainLayerRef.config.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
         DontWakeTheDragon.MainLayerRef.config.graphicalAssets.cursor
           .openFingers;
     } else {
@@ -1174,20 +1178,20 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     ).removeTreasureItemsOfAllTreasureChests();
   },
 
-  onMouseDown : function (event) {
+  onMouseDown: function (event) {
 
     var tPile = this.getChildByTag(this.TAG_TREASURE_PILE);
 
     console.log("on mouse down", tPile);
-    if(tPile){
+    if (tPile) {
       tPile.handleMouseDown(event.getLocation());
     }
 
   },
 
-  onMouseMove : function (event) {
+  onMouseMove: function (event) {
     var tPile = this.getChildByTag(this.TAG_TREASURE_PILE);
-    if(tPile){
+    if (tPile) {
       tPile.handleMouseMove(event.getLocation());
     }
   },
@@ -1209,12 +1213,13 @@ DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
     this.setInteractionEnabled(true);
     this.showScriptMessage(DontWakeTheDragon.MainLayerRef.config.teacherScripts.moduleStart);
     this.showTipMessage(DontWakeTheDragon.MainLayerRef.config.teacherTips.moduleStart);
-    if(this.state && this.state.treasureItems.length < DontWakeTheDragon.MainLayerRef.config.graphicalAssets.treasureItems.length){
+    if (this.state && this.state.treasureItems.length < DontWakeTheDragon.MainLayerRef.config.graphicalAssets.treasureItems.length) {
       this.getParent().getParent().setResetButtonActive(true);
     }
   },
 
-  onExit: function () {},
+  onExit: function () {
+  },
 
   showScriptMessage: function (msg) {
     this.getParent().getParent().showScriptMessage(msg.ops);
@@ -1227,7 +1232,8 @@ DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
   buttonCallback: function (sender, type) {
     switch (type) {
       case ccui.Widget.TOUCH_ENDED:
-        switch (sender.getTag()) {}
+        switch (sender.getTag()) {
+        }
         break;
     }
   },
@@ -1237,12 +1243,13 @@ DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
     this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
       roomId: HDAppManager.roomId,
       type:
-      DontWakeTheDragon.teacherEvents.DONT_WAKE_THE_DRAGON_RESET_GAME,
+        DontWakeTheDragon.teacherEvents.DONT_WAKE_THE_DRAGON_RESET_GAME,
     });
     this.updateRoomData();
   },
 
-  setUpUI: function () {},
+  setUpUI: function () {
+  },
 
   onNotificationReceived: function (event) {
     this._super(event);
@@ -1260,13 +1267,13 @@ DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
       users: userName ? [{ userName: userName }] : [],
     });
   },
-  onMouseDown : function (event) {
+  onMouseDown: function (event) {
     console.log("on mouse down in teacher");
     this._super(event);
 
   },
 
-  onMouseMove : function (event) {
+  onMouseMove: function (event) {
     this._super(event);
   }
 });
@@ -1284,7 +1291,8 @@ DontWakeTheDragon.StudentViewLayer = DontWakeTheDragon.CommonLayer.extend({
     this.setInteractionEnabled(false);
   },
 
-  onExit: function () {},
+  onExit: function () {
+  },
 
   handleStudentTurn: function (users = [{ userName: "" }]) {
     this.setInteractionEnabled(
@@ -1306,9 +1314,9 @@ DontWakeTheDragon.StudentViewLayer = DontWakeTheDragon.CommonLayer.extend({
         switch (type) {
           case DontWakeTheDragon.teacherEvents
             .DONT_WAKE_THE_DRAGON_RESET_GAME: {
-            this.resetGame();
-            break;
-          }
+              this.resetGame();
+              break;
+            }
         }
         break;
       }
@@ -1319,12 +1327,12 @@ DontWakeTheDragon.StudentViewLayer = DontWakeTheDragon.CommonLayer.extend({
     return this.updateMouseCursor(location);
   },
 
-  onMouseDown : function (event) {
+  onMouseDown: function (event) {
     this._super(event);
 
   },
 
-  onMouseMove : function (event) {
+  onMouseMove: function (event) {
     this._super(event);
   }
 
@@ -1388,41 +1396,41 @@ DontWakeTheDragon.MainLayer = cc.Layer.extend({
     this.state = data;
   },
 
-  touchEventListener : function (touch, event){
+  touchEventListener: function (touch, event) {
     switch (event._eventCode) {
       case cc.EventTouch.EventCode.BEGAN:
-        if(this.delegate){
+        if (this.delegate) {
           this.delegate.onMouseDown(touch);
         }
         break;
       case cc.EventTouch.EventCode.MOVED:
-        if(this.delegate){
+        if (this.delegate) {
           this.delegate.onMouseMove(touch);
         }
         break;
       case cc.EventTouch.EventCode.ENDED:
-        if(this.delegate){
+        if (this.delegate) {
           this.delegate.onMouseDown(touch);
         }
         break;
 
       case cc.EventTouch.EventCode.CANCELLED:
-        if(this.delegate){
+        if (this.delegate) {
           this.delegate.onMouseDown(touch);
         }
     }
   },
 
-  mouseEventListener : function (event) {
+  mouseEventListener: function (event) {
     switch (event._eventType) {
       case cc.EventMouse.DOWN:
-        if(this.delegate){
+        if (this.delegate) {
           this.delegate.onMouseDown(event);
         }
         //this.onMouseDown(event);
         break;
       case cc.EventMouse.MOVE:
-        if(this.delegate){
+        if (this.delegate) {
           this.delegate.onMouseMove(event);
         }
         //this.onMouseMove(event);
@@ -1440,9 +1448,8 @@ DontWakeTheDragon.MainLayer = cc.Layer.extend({
   onEnter: function () {
     this._super();
   },
-  onExit: function () {},
-
-
+  onExit: function () {
+  },
 
 
 });

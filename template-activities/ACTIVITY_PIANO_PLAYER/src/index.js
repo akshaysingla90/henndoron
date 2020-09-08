@@ -73,7 +73,7 @@ PianoPlayer.PianoKey = ccui.Button.extend({
     this._super();
   },
 
-  onExit: function () {},
+  onExit: function () { },
 
   _createUI: function (displayImage) {
     let dispImageSprite = new cc.Sprite(displayImage);
@@ -123,7 +123,7 @@ PianoPlayer.PianoKeyDelegate = cc.Class.extend({
   onPianoKeyClicked: function (pianoKey) {
     // pianoKey being instance of class PianoKey
   },
-  onWordClicked: function (idx) {},
+  onWordClicked: function (idx) { },
 });
 
 // ========================== Piano ===============================
@@ -182,7 +182,7 @@ PianoPlayer.Piano = cc.Sprite.extend({
     this._super();
   },
 
-  onExit: function () {},
+  onExit: function () { },
 
   _assignHeightToSheetWords: function () {
     let containerHeight = this.getChildByTag(
@@ -269,8 +269,8 @@ PianoPlayer.Piano = cc.Sprite.extend({
           i === 0
             ? 0
             : sheetWordsColorLayers[i - 1].width +
-                sheetWordsColorLayers[i - 1].x +
-                this.sheetWordsHoizontalSpacing,
+            sheetWordsColorLayers[i - 1].x +
+            this.sheetWordsHoizontalSpacing,
           colorLayer.getUserData()
         )
       );
@@ -365,8 +365,8 @@ PianoPlayer.Piano = cc.Sprite.extend({
         pianoKeyButton.setPosition(
           cc.p(
             prevPianoButton.x +
-              prevPianoButton.width * prevPianoButton.scaleX +
-              h_Padding,
+            prevPianoButton.width * prevPianoButton.scaleX +
+            h_Padding,
             0
           )
         );
@@ -467,7 +467,7 @@ PianoPlayer.Student = HDBaseLayer.extend({
   onEnter: function () {
     this._super();
   },
-  onExit: function () {},
+  onExit: function () { },
 
   _createClickedKeySprite: function (clickedKeyImage) {
     let sprite = new cc.Sprite(clickedKeyImage);
@@ -550,7 +550,7 @@ PianoPlayer.StudentsList = HDBaseLayer.extend({
   onEnter: function () {
     this._super();
   },
-  onExit: function () {},
+  onExit: function () { },
 
   setStudentsList: function (list = [{ userId: "", userName: "" }]) {
     // retains previous items
@@ -604,8 +604,8 @@ PianoPlayer.StudentsList = HDBaseLayer.extend({
     const { userName } = student;
     let studentSprite = new PianoPlayer.Student(
       PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets
-          .student_answer.imageName,
+      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets
+        .student_answer.imageName,
       userName,
       student.displayImage,
       HDConstants.Sassoon_Regular,
@@ -717,7 +717,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
       PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
         this.currentSongIdx
       ].correctSequence.length -
-        1
+      1
     ) {
       ++this.currentNoteIdx;
       this.emitNextWordEvent();
@@ -769,8 +769,8 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
   createPiano: function (delegate) {
     var pianoSprite = new PianoPlayer.Piano(
       PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.background
-          .imageName,
+      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.background
+        .imageName,
       PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.pianoKeys,
       delegate,
       PianoPlayer.resourcePath,
@@ -823,7 +823,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
             activity:
               PianoPlayer.MainPianoPlayerLayerRef.config.properties.namespace,
             data: data,
-            activityStartTime : HDAppManager.getActivityStartTime()
+            activityStartTime: HDAppManager.getActivityStartTime()
           },
         },
       },
@@ -917,7 +917,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
     this.lightUpSheetWord(this.currentNoteIdx);
   },
 
-  onExit: function () {},
+  onExit: function () { },
 
   updateStudentInteractionStatus: function (userName, status) {
     SocketManager.emitCutomEvent(
@@ -984,7 +984,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
 
     if (
       PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
-        this.currentSongIdx + 1
+      this.currentSongIdx + 1
       ]
     ) {
       this.addNextButton();
@@ -994,11 +994,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   addStartButton: function () {
     var startButton = this.createButton(
       PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-          .startButton.idleImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
+        .startButton.idleImage,
       PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-          .startButton.pressedImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
+        .startButton.pressedImage,
       "",
       0,
       this.TAG_START_BUTTON,
@@ -1010,11 +1010,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   addNextButton: function () {
     var nextButton = this.createButton(
       PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-          .nextButton.idleImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
+        .nextButton.idleImage,
       PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-          .nextButton.pressedImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
+        .nextButton.pressedImage,
       "",
       0,
       this.TAG_NEXT_BUTTON,
@@ -1027,11 +1027,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   addPlayButton: function () {
     let playSongButton = this.createButton(
       PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-          .playButton.idleImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
+        .playButton.idleImage,
       PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-          .playButton.pressedImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
+        .playButton.pressedImage,
       "",
       0,
       this.TAG_PLAY_BUTTON,
@@ -1219,7 +1219,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
             this.launchNextSong();
             if (
               !PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
-                this.currentSongIdx + 1
+              this.currentSongIdx + 1
               ]
             ) {
               button.setVisible(false);
@@ -1270,7 +1270,7 @@ PianoPlayer.StudentViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
     this.setPianoKeysEnabled(false);
   },
 
-  onExit: function () {},
+  onExit: function () { },
 
   onSongStopped: function () {
     this.setPianoKeysEnabled(this.interactionEnabled);
@@ -1395,7 +1395,7 @@ PianoPlayer.MainPianoPlayerLayer = cc.Layer.extend({
     }
   },
 
-  touchEventListener : function (touch, event){
+  touchEventListener: function (touch, event) {
     if (!HDAppManager.isTeacherView)
       return;
 
@@ -1405,20 +1405,20 @@ PianoPlayer.MainPianoPlayerLayer = cc.Layer.extend({
       case cc.EventTouch.EventCode.MOVED:
         break;
       case cc.EventTouch.EventCode.ENDED:
-        if(PianoPlayer.delegate){
+        if (PianoPlayer.delegate) {
           PianoPlayer.delegate.onMouseDown(touch);
         }
         break;
     }
   },
 
-  mouseEventListener : function (event) {
+  mouseEventListener: function (event) {
     if (!HDAppManager.isTeacherView)
       return;
 
     switch (event._eventType) {
       case cc.EventMouse.DOWN:
-        if(PianoPlayer.delegate){
+        if (PianoPlayer.delegate) {
           PianoPlayer.delegate.onMouseDown(event);
         }
         break;
@@ -1450,5 +1450,5 @@ PianoPlayer.MainPianoPlayerLayer = cc.Layer.extend({
   onEnter: function () {
     this._super();
   },
-  onExit: function () {},
+  onExit: function () { },
 });

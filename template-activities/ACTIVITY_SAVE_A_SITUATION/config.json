@@ -1,6 +1,5 @@
 {
   "properties": {
-    "externalRewards": false,
     "configurable": true,
     "url": "res/Activity/ACTIVITY_SAVE_A_SITUATION/",
     "number": "1",
