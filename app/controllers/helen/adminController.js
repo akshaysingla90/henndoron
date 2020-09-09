@@ -249,6 +249,16 @@ adminController.previewActivity = async (payload) => {
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_PREVIEW_CREATED_SUCCESSFULLY));
 };
 
+/**
+ * function to get all the courses
+ * @param {*} payload 
+ */
+adminController.getCourses = async (payload) => {
+  let criteria = {};
+  let courses = await SERVICES.activityService.getCourses(criteria, NORMAL_PROJECTION);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.COURSES_FETCHED_SUCCESSFULLY), { courses });
+}
+
 /* export adminController */
 module.exports = adminController;
 

@@ -2,6 +2,7 @@ const CONSTANTS = require('../utils/constants');
 const MODELS = require('../models/index');
 const MONGOOSE = require('mongoose');
 const activities = require('../data-db/activityConfig.json')
+const courses = require('../data-db/course.json')
 let dbUtils = {};
 
 /**
@@ -65,6 +66,11 @@ dbUtils.migrateDatabase = async () => {
     await dbUtils.addInitialTemplateActivities();
     updatedVersion = 3;
   }
+  if (version < 4) {
+    //adding course data
+    await dbUtils.addInitialCourses();
+    updatedVersion = 4;
+  }
   if (updatedVersion !== version)
     await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: updatedVersion }, { upsert: true });
 
@@ -76,6 +82,13 @@ dbUtils.migrateDatabase = async () => {
  */
 dbUtils.addInitialTemplateActivities = async () => {
   await MODELS.activityModel.insertMany(activities);
+};
+
+/**
+ *  function to add initial courses.
+ */
+dbUtils.addInitialCourses = async () => {
+  await MODELS.courseModel.insertMany(courses);
 };
 
 module.exports = dbUtils;

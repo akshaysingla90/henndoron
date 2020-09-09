@@ -1,5 +1,5 @@
 const CONFIG = require('../../../config');
-const activityModel = require(`../../models/${CONFIG.PLATFORM}/activityModel`);
+const { activityModel, courseModel} = require(`../../models`);
 const dbUtils = require('../../utils/dbUtils')
 let activityService = {};
 
@@ -52,4 +52,10 @@ activityService.removeActivity = async (criteria) => {
   return await activityModel.findOneAndRemove(criteria);
 };
 
+/**
+ * function to fetch all Courses.
+ */
+activityService.getCourses = async (criteria, projection) => {
+  return await courseModel.find(criteria, projection).lean();
+};
 module.exports = activityService;

@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE } = require(`../../../utils/constants`);
 //load controllers
-const { editActivity,cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/${CONFIG.PLATFORM}/adminController`);
+const { getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/${CONFIG.PLATFORM}/adminController`);
 
 let routes = [
   {
@@ -168,7 +168,7 @@ let routes = [
       params: {
         id: Joi.string().required().description('Activity\'s Id.')
       },
-      group: 'Activity Auth Tool',
+      group: 'Admin',
       description: 'Route to delete activity by its id',
       model: 'Delete_Activity'
     },
@@ -191,6 +191,20 @@ let routes = [
     },
     auth: USER_ROLE.ADMIN,
     handler: previewActivity
+  },
+  {
+    method: 'GET',
+    path: '/v1/admin/course',
+    joiSchemaForSwagger: {
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
+      group: 'Course',
+      description: 'Route to get courses',
+      model: 'Get_Course'
+    },
+    auth: USER_ROLE.ADMIN,
+    handler: getCourses
   },
 ];
 
