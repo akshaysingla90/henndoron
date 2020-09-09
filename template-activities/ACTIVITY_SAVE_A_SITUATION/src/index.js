@@ -105,7 +105,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
             } else {
                 console.log("error", error)
             }
-            ACTIVITY_SAVE_A_SITUATION.ref.triggerScript(ACTIVITY_SAVE_A_SITUATION.ref.config.teacherScripts.moduleStart.ops);
+            ACTIVITY_SAVE_A_SITUATION.ref.triggerScript(ACTIVITY_SAVE_A_SITUATION.ref.config.teacherScripts.data.moduleStart.content.ops);
         })
     },
     onExit() {
@@ -126,7 +126,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
         }
 
         this.createCliper();
-        this.setBackground(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.background.name);
+        this.setBackground(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.background.sections.background.imageName);
         this.addParallaxEffect();
         this.setWaterLoopAnimation();
         this.setTub();
@@ -150,25 +150,25 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     },
 
     addParallaxEffect: function () {
-        var wavesInfo = ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.waves;
+        var wavesInfo = ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.waves.data;
         this.parallaxNode = new cc.ParallaxNode();
         var movingOffset = [cc.p(0.5, 1), cc.p(0.7, 1), cc.p(0.9, 1)];
         var index = 0;
         for (var item of wavesInfo) {
-            var river = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + item.name);
+            var river = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + item.imageName);
             river.setAnchorPoint(0, 0);
             this.parallaxNode.addChild(river, index + 1, movingOffset[index], item.position);
-            var river2 = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + item.name);
+            var river2 = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + item.imageName);
             river2.setAnchorPoint(0, 0);
             this.parallaxNode.addChild(river2, index + 1, movingOffset[index], cc.p(river.width, item.position.y));
         }
 
-        var land1 = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.land.name);
+        var land1 = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.land.imageName);
         land1.setAnchorPoint(0, 0);
         land1.setTag(ACTIVITY_SAVE_A_SITUATION.Tag.Land1);
         this.parallaxNode.addChild(land1, -1, cc.p(0.7, 1), cc.p(0, 0));
 
-        var land2 = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.land.name);
+        var land2 = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.land.imageName);
         land2.setAnchorPoint(0, 0);
         land2.setTag(ACTIVITY_SAVE_A_SITUATION.Tag.Land2);
         this.parallaxNode.addChild(land2, -1, cc.p(0.7, 1), cc.p(land1.width, 0));
@@ -180,37 +180,37 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     },
 
     setWaterLoopAnimation: function () {
-        var waterLoop = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tub_watercircle_12fps_png_seq/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWaterCircle.name + "0011.png", ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWaterCircle.position, this);
-        waterLoop.setScale(ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWaterCircle.scale);
+        var waterLoop = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tub_watercircle_12fps_png_seq/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWaterCircle.name + "0011.png", ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWaterCircle.position, this);
+        waterLoop.setScale(ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWaterCircle.scale);
         waterLoop.setTag(ACTIVITY_SAVE_A_SITUATION.Tag.WaterLoopAnimation);
-        var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tub_watercircle_12fps_png_seq/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWaterCircle.name, ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWaterCircle.frameCount, 0.1, ".png", 1);
+        var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tub_watercircle_12fps_png_seq/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWaterCircle.name, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWaterCircle.frameCount, 0.1, ".png", 1);
         waterLoop.runAction(cc.repeatForever(animation));
     },
 
     setTub: function () {
-        this.tubBack = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.tubBack.name, ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.tubBack.position, this.cliper);
-        this.tubBack.setScale(ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.tubBack.scale);
+        this.tubBack = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.tubBack.imageName, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.tubBack.position, this.cliper);
+        this.tubBack.setScale(ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.tubBack.scale);
         this.placeAnimals();
         this.setUpWater();
 
-        this.tubFront = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.levels[this.currentLevel].tubFront.name, ACTIVITY_SAVE_A_SITUATION.ref.config.levels[this.currentLevel].tubFront.position, this.cliper);
-        this.tubFront.setScale(ACTIVITY_SAVE_A_SITUATION.ref.config.levels[this.currentLevel].tubFront.scale);
+        this.tubFront = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[this.currentLevel].tubFront.imageName, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[this.currentLevel].tubFront.position, this.cliper);
+        this.tubFront.setScale(ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[this.currentLevel].tubFront.scale);
 
     },
 
     setWaterAnimations: function () {
         // water line animations
-        this.baseAnimationSprite = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tubWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWater.name + "0001.png", ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWater.position, this);
-        this.baseAnimationSprite.setScale(ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWater.scale);
+        this.baseAnimationSprite = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tubWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWater.name + "0001.png", ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWater.position, this);
+        this.baseAnimationSprite.setScale(ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWater.scale);
         this.baseAnimationSprite.setLocalZOrder(3);
 
-        var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tubWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWater.name, ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWater.frameCount, 0.1, ".png", cc.REPEAT_FOREVER);
+        var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tubWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWater.name, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWater.frameCount, 0.1, ".png", cc.REPEAT_FOREVER);
         this.baseAnimationSprite.runAction(animation);
     },
 
     setHolesData: function () {
         let initalTag = 0;
-        for (var item of ACTIVITY_SAVE_A_SITUATION.ref.config.levels[this.currentLevel].carouselAssets) {
+        for (var item of ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[this.currentLevel].carouselAssets) {
             var filledItem = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + item.name);
             filledItem.setPosition(this.tubFront.convertToNodeSpace(cc.p(item.holeInfo.coordinates.x, item.holeInfo.coordinates.y)));
             filledItem.setName(item.holeInfo.filledImage);
@@ -235,11 +235,11 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     },
 
     setUpWater: function () {
-        let waves = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tub_waterFill/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.waterInTub.name + "0001.png", cc.p(ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.water.size.width * 0.6, -3), this.tubBack);
+        let waves = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tub_waterFill/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.waterInTub.name + "0001.png", cc.p(ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.water.size.width * 0.6, -3), this.tubBack);
         waves.setAnchorPoint(0.5, 0);
         waves.setTag(ACTIVITY_SAVE_A_SITUATION.Tag.Waves);
         console.log(this.water);
-        this.water = this.createColourLayer(cc.color(ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.water.color.r, ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.water.color.g, ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.water.color.b), ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.water.size.width, ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.water.size.height, ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.water.position, this.tubBack);
+        this.water = this.createColourLayer(cc.color(ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.water.color.r, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.water.color.g, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.water.color.b), ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.water.size.width, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.water.size.height, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.water.position, this.tubBack);
         this.water.setScaleX(1);
         this.water.setScaleY(0);
         this.water.setAnchorPoint(0.5, 0);
@@ -264,7 +264,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     },
 
     placeAnimals: function () {
-        for (var item of ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.animals) {
+        for (var item of ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animals.data) {
             let animal = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + item.name, item.position, this.tubBack);
             animal.setScale(item.scale);
             this.animalArray.push(animal);
@@ -272,7 +272,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     },
 
     startWaterFilling(state) {
-        var rateOfFilling = ACTIVITY_SAVE_A_SITUATION.ref.config.levels[this.currentLevel].rateOfWaterFilling * 60;
+        var rateOfFilling = ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[this.currentLevel].rateOfWaterFilling * 60;
         this.startTime = this.lastSavedState && this.lastSavedState.startTime != 0 ? this.lastSavedState.startTime : new Date().getTime();
 
         var delay = this.calculateElapsedTime();
@@ -335,7 +335,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
         let waves = this.tubBack.getChildByTag(ACTIVITY_SAVE_A_SITUATION.Tag.Waves);
         this.water.runAction(cc.sequence(cc.scaleTo(rateOfFilling, 1, 1), cc.callFunc(this.onTubFilled, this)));
         waves.runAction(new cc.sequence(cc.moveBy(rateOfFilling - rateOfFilling * 0.1, 0, this.water.height * 0.9 - this.water.height * this.water.getScaleY()), cc.callFunc(this.increaseWaveScale, this, rateOfFilling * 0.1)));
-        var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tub_waterFill/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.waterInTub.name, ACTIVITY_SAVE_A_SITUATION.ref.config.animation.waterInTub.frameCount, 0.1, ".png", 1);
+        var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tub_waterFill/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.waterInTub.name, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.waterInTub.frameCount, 0.1, ".png", 1);
         waves.runAction(cc.repeatForever(animation));
     },
 
@@ -354,7 +354,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     },
 
     onTubFilled: function (ref, data) {
-        this.gameEndTime = this.water.getScaleY() * ACTIVITY_SAVE_A_SITUATION.ref.config.levels[this.currentLevel].rateOfWaterFilling * 60;
+        this.gameEndTime = this.water.getScaleY() * ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[this.currentLevel].rateOfWaterFilling * 60;
         this.stopLandParallax();
         this.getChildByTag(ACTIVITY_SAVE_A_SITUATION.Tag.WaterLoopAnimation).setVisible(false);
         this.changeAnimalsTexture(false);
@@ -368,9 +368,9 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     },
 
     changeAnimalsTexture: function (isHappy) {
-        for (var index in ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.animals) {
+        for (var index in ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animals.data) {
             let position = this.animalArray[index].getPosition();
-            this.animalArray[index].setTexture(!isHappy ? ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.animals[index].sad : ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.animals[index].happy);
+            this.animalArray[index].setTexture(!isHappy ? ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animals.data[index].sad : ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animals.data[index].happy);
             let positionY = isHappy ? position.y + 60 : position.y + 45;
             this.animalArray[index].setPosition(position.x, positionY);
         }
@@ -383,9 +383,9 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
 
         // animals are in sequence // sheep , dog, cat, rat
         let movePos = [cc.p(40, 40), cc.p(-40, 40), cc.p(-20, 15), cc.p(0, -5)]
-        for (var i in ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.animals) {
+        for (var i in ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animals.data) {
 
-            let animalInfo = ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.animals[i];
+            let animalInfo = ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animals.data[i];
             let item = this.animalArray[i]
             let newPos = item.parent.convertToWorldSpace(item.getPosition());
             let scale = item.setScale(0.5);
@@ -402,11 +402,11 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
             clipper.addChild(item);
 
             this.addChild(clipper, 3);
-            let waterAnimation = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "animalWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.animalWaterLine.name + "0001.png", animalInfo.wPosition, this);
+            let waterAnimation = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "animalWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.animalWaterLine.name + "0001.png", animalInfo.wPosition, this);
             waterAnimation.setScale(animalInfo.wScale);
             waterAnimation.setAnchorPoint(0.5, 0);
             waterAnimation.setLocalZOrder(3);
-            var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "animalWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.animalWaterLine.name, ACTIVITY_SAVE_A_SITUATION.ref.config.animation.animalWaterLine.frameCount, 0.1, ".png", cc.REPEAT_FOREVER);
+            var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "animalWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.animalWaterLine.name, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.animalWaterLine.frameCount, 0.1, ".png", cc.REPEAT_FOREVER);
             waterAnimation.runAction(animation);
             clipper.runAction(new cc.moveBy(2, movePos[i]));
             waterAnimation.runAction(new cc.moveBy(2, movePos[i]));
@@ -443,13 +443,13 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
         }
 
         let hPadding = 20;
-        var carouselBaseImage = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.carouselBackgroundBorderImage.name, cc.p(position.x - 10, position.y), this);
+        var carouselBaseImage = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.carouselBackgroundBorderImage.imageName, cc.p(position.x - 10, position.y), this);
         carouselBaseImage.setAnchorPoint(0, 0);
         carouselBaseImage.setLocalZOrder(3);
         carouselBaseImage.setScale((width + hPadding) / carouselBaseImage.width, this.carouselHeight.height / carouselBaseImage.height);
     },
     getWidthOfCarousel: function () {
-        let cellWidthSize = this.carouselWidth * ACTIVITY_SAVE_A_SITUATION.ref.config.levels[ACTIVITY_SAVE_A_SITUATION.ref.currentLevel].carouselAssets.length;
+        let cellWidthSize = this.carouselWidth * ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[ACTIVITY_SAVE_A_SITUATION.ref.currentLevel].carouselAssets.length;
 
         let maxWidth = this.carouselWidth * this.visibleObject;//this.winSize.width * 0.6
         if (cellWidthSize > maxWidth) {
@@ -473,7 +473,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
             cardCell = new ACTIVITY_SAVE_A_SITUATION.CardCell(cellSize);
         }
         cardCell.tag = idx;
-        cardCell.createUI(idx, ACTIVITY_SAVE_A_SITUATION.ref.config.levels[this.currentLevel].carouselAssets[idx]);
+        cardCell.createUI(idx, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[this.currentLevel].carouselAssets[idx]);
         if (this.lastSavedState && this.lastSavedState.holesInfo[idx]) {
             cardCell.enableClipper();
         }
@@ -481,7 +481,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
         return cardCell;
     },
     numberOfCellsInTableView: function (table) {
-        return ACTIVITY_SAVE_A_SITUATION.ref.config.levels[this.currentLevel].carouselAssets.length;
+        return ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[this.currentLevel].carouselAssets.length;
     },
 
     tableCellTouched: function (table, cell) {
@@ -607,7 +607,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
             this.totalHoles--;
             this.filledHoles[data] = 1;
             if (this.totalHoles == 0 && (this.isStudentInteractionEnable || this.isTeacherView)) {
-                this.gameEndTime = this.water.getScaleY() * ACTIVITY_SAVE_A_SITUATION.ref.config.levels[this.currentLevel].rateOfWaterFilling * 60;
+                this.gameEndTime = this.water.getScaleY() * ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data[this.currentLevel].rateOfWaterFilling * 60;
                 ACTIVITY_SAVE_A_SITUATION.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                     'eventType': ACTIVITY_SAVE_A_SITUATION.socketEvents.LEVEL_OVER,
                     'data': true
@@ -756,8 +756,8 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
 
     changeMouseCursorImage: function () {
         if (!HDAppManager.isTeacherView && this.isStudentInteractionEnable) {
-            var cursorPath = (ACTIVITY_SAVE_A_SITUATION.ref.config.preLoaded ? ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath : "AsyncActivity/" + ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath);
-            this.MouseTextureUrl = !this.selectedObject.isVisible() ? cursorPath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.openCursor.name : cursorPath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.closeCursor.name;
+            var cursorPath = (ACTIVITY_SAVE_A_SITUATION.ref.config.properties.preLoaded ? ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath : "AsyncActivity/" + ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath);
+            this.MouseTextureUrl = !this.selectedObject.isVisible() ? cursorPath + ACTIVITY_SAVE_A_SITUATION.ref.config.cursors.data.openFingers.imageName : cursorPath + ACTIVITY_SAVE_A_SITUATION.ref.config.cursors.data.closedFingers.imageName;
         } else {
             this.customTexture = false;
             this.MouseTextureUrl = "";
@@ -984,9 +984,9 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
         this.tubBack.getChildByTag(ACTIVITY_SAVE_A_SITUATION.Tag.Waves).stopAllActions();
 
         if (!this.hasWinAnimationPlayed) {
-            let winAnimation = this.addSprite("res/LessonResources/emptyImage.png", ACTIVITY_SAVE_A_SITUATION.ref.config.animation.winAnimation.position, this);
+            let winAnimation = this.addSprite("res/LessonResources/emptyImage.png", ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.winAnimation.position, this);
             winAnimation.setLocalZOrder(5);
-            let action = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "cardTakeOut/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.winAnimation.name, 15, 0.1, ".png", 1);
+            let action = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "cardTakeOut/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.winAnimation.name, 15, 0.1, ".png", 1);
             this.changeAnimalsTexture(true);
             winAnimation.runAction(action);
             this.hasWinAnimationPlayed = true;
@@ -998,7 +998,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
         this.baseAnimationSprite.removeFromParent();
         this.baseAnimationSprite.setPosition(this.tubFront.width * 0.5, this.tubFront.height * 0.515);
         this.baseAnimationSprite.setScale(this.tubFront.width / this.baseAnimationSprite.width);
-        var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tubWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWater.name, ACTIVITY_SAVE_A_SITUATION.ref.config.animation.tubWater.frameCount, 0.1, ".png", cc.REPEAT_FOREVER);
+        var animation = HDUtility.runFrameAnimation(ACTIVITY_SAVE_A_SITUATION.ref.animationFrames + "tubWaterline/" + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWater.name, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.animation.data.tubWater.frameCount, 0.1, ".png", cc.REPEAT_FOREVER);
         this.tubFront.addChild(this.baseAnimationSprite);
         this.baseAnimationSprite.runAction(animation);
         this.getChildByTag(ACTIVITY_SAVE_A_SITUATION.Tag.CurrentLand).runAction(cc.moveBy(1.5, -200, 0));
@@ -1017,7 +1017,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
                     let pos = this.parallaxNode.convertToWorldSpace(node._child.getPosition()).x + node._child.width;
                     if (pos > 1500 && pos < 1980) {
                         this.hasTextureChanged = true;
-                        node._child.setTexture(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.winLand.name);
+                        node._child.setTexture(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.winLand.imageName);
                     }
                     if (this.hasTextureChanged && pos > 960 && pos < 1200) {
                         let child = node._child;
@@ -1055,7 +1055,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     },
 
     isLastLevel: function () {
-        if (this.currentLevel == ACTIVITY_SAVE_A_SITUATION.ref.config.levels.length - 1) {
+        if (this.currentLevel == ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.levels.data.length - 1) {
             return true;
         } else {
             return false;
@@ -1070,7 +1070,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
 
     showResultPopUp: function (ref, isWin) {
         if (this.isTeacherView && this.getChildByTag(ACTIVITY_SAVE_A_SITUATION.Tag.PopUP) == null && !this.hasNewRoundStarted) {
-            var popup = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.popUp.name, ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.popUp.position, this);
+            var popup = this.addSprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.popUp.imageName, ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.popUp.position, this);
             popup.setLocalZOrder(5);
             popup.setTag(ACTIVITY_SAVE_A_SITUATION.Tag.PopUP);
 
@@ -1084,13 +1084,13 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
             timeString += second > 9 ? second : "0" + second;
 
             this.createTTFLabel(timeString, HDConstants.Sassoon_Medium, 50, HDConstants.Black, cc.p(popup.width * 0.55, popup.height * 0.65), popup)
-            var nextButton = this.createButton(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.next.normal, ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.next.pressed, null, null, ACTIVITY_SAVE_A_SITUATION.Tag.NextButton, cc.p(popup.width * 0.75, popup.height * 0.2), popup, this, null);
+            var nextButton = this.createButton(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.buttons.data.next.enableState, ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.buttons.data.next.pushedState, null, null, ACTIVITY_SAVE_A_SITUATION.Tag.NextButton, cc.p(popup.width * 0.75, popup.height * 0.2), popup, this, null);
 
             if (this.isLastLevel() || !isWin) {
                 nextButton.setOpacity(150);
                 nextButton.setTouchEnabled(false);
             }
-            this.createButton(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.replay.normal, ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.replay.pressed, null, null, ACTIVITY_SAVE_A_SITUATION.Tag.ReplayButton, cc.p(popup.width * 0.25, popup.height * 0.2), popup, this, null);
+            this.createButton(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.buttons.data.replay.enableState, ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.buttons.data.replay.pushedState, null, null, ACTIVITY_SAVE_A_SITUATION.Tag.ReplayButton, cc.p(popup.width * 0.25, popup.height * 0.2), popup, this, null);
         }
     },
 
@@ -1159,7 +1159,7 @@ ACTIVITY_SAVE_A_SITUATION.CardCell = cc.TableViewCell.extend({
         cardBg.addChild(this.nameLable, 5);
 
         let color = new cc.Color(255, 251, 119, 100);
-        this.highlightLayer = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.graphicalAssets.carouselGlowBoxCard.name);
+        this.highlightLayer = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION.ref.config.assets.sections.carouselGlowBoxCard.name);
         this.highlightLayer.setPosition(cardBg.width * 0.5, cardBg.height * 0.5);
         this.highlightLayer.setColor(color);
         this.highlightLayer.setScale(cardBg.width * 0.8 / this.highlightLayer.width, cardBg.height * 0.85 / this.highlightLayer.height);

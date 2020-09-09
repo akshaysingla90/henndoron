@@ -68,7 +68,8 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * loadSpriteFrames: To load animation sprites.
      */
     loadSpriteFrames: function () {
-        HDUtility.addSpriteFrames(magicHat_1.animationPath + "cardTakeOut/magicHat_cardTakeOut_", magicHat_1.config.animation.flashCardGlow.frameCount, "magicHat_cardTakeOut_", ".png");
+        HDUtility.addSpriteFrames(magicHat_1.animationPath + "cardTakeOut/magicHat_cardTakeOut_", magicHat_1.config.assets.sections.flashCardGlow.frameCount, "magicHat_cardTakeOut_", ".png");
+
     },
     /**
      * To get reduced size of each sprite  to a percent.
@@ -82,7 +83,8 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * setupUI: To setup UI for teacher and student.
      */
     setupUI: function () {
-        this.setBackground(magicHat_1.resourcePath + magicHat_1.config.graphicalAssets.background.name);
+        this.setBackground(magicHat_1.resourcePath + magicHat_1.config.background.sections.background.imageName);
+
         this.setBaseFlashCard();//To set cup, hat etc
         this.setAnswerCard("");
         this.answerCard.setVisible(false);
@@ -97,21 +99,21 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      */
     setBaseFlashCard: function () {
         //Front
-        this.flashCardBaseFront = this.createButton(magicHat_1.resourcePath + magicHat_1.config.graphicalAssets.flashCardFront.name, magicHat_1.resourcePath + magicHat_1.config.graphicalAssets.flashCardFront.name, null, 0, magicHat_1.Tag.flashCard, magicHat_1.config.graphicalAssets.flashCardFront.position, this, this);
+        this.flashCardBaseFront = this.createButton(magicHat_1.resourcePath + magicHat_1.config.assets.sections.flashCardFront.imageName, magicHat_1.resourcePath + magicHat_1.config.assets.sections.flashCardFront.imageName, null, 0, magicHat_1.Tag.flashCard, magicHat_1.config.assets.sections.flashCardFront.position, this, this);
         this.flashCardBaseFront.setLocalZOrder(3);
         var scaleFactorX = this.getReducedSize(this.winSize.width) / this.flashCardBaseFront.getContentSize().width;
         var scaleFactoyY = this.getReducedSize(this.winSize.width) / this.flashCardBaseFront.getContentSize().height;
         this.flashCardBaseFront.setScaleX(scaleFactorX);
         this.flashCardBaseFront.setScaleY(scaleFactoyY);
         //Back
-        this.flashCardBaseBack = this.createButton(magicHat_1.resourcePath + magicHat_1.config.graphicalAssets.flashCardBack.name, magicHat_1.resourcePath + magicHat_1.config.graphicalAssets.flashCardBack.name, null, 0, magicHat_1.Tag.flashCard, magicHat_1.config.graphicalAssets.flashCardBack.position, this, this);
+        this.flashCardBaseBack = this.createButton(magicHat_1.resourcePath + magicHat_1.config.assets.sections.flashCardBack.imageName, magicHat_1.resourcePath + magicHat_1.config.assets.sections.flashCardBack.imageName, null, 0, magicHat_1.Tag.flashCard, magicHat_1.config.assets.sections.flashCardBack.position, this, this);
         this.flashCardBaseBack.setLocalZOrder(1);
         var scaleFactorX = this.getReducedSize(this.winSize.width) / this.flashCardBaseBack.getContentSize().width;
         var scaleFactoyY = this.getReducedSize(this.winSize.width) / this.flashCardBaseBack.getContentSize().height;
         this.flashCardBaseBack.setScaleX(scaleFactorX);
         this.flashCardBaseBack.setScaleY(scaleFactoyY);
 
-        var animationObject = magicHat_1.config.animation.flashCardGlow;
+        var animationObject = magicHat_1.config.assets.sections.flashCardGlow;
         var baseAnimationSprite = magicHat_1.ref.addSprite("res/LessonResources/emptyImage.png", cc.p(animationObject.position.x, animationObject.position.y), magicHat_1.ref.flashCardBaseFront);
         baseAnimationSprite.tag = magicHat_1.Tag.animation;
         baseAnimationSprite.setVisible(false);
@@ -121,10 +123,11 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * @param name
      */
     setAnswerCard: function (name) {
-        this.answerCard = this.addSprite(magicHat_1.resourcePath + magicHat_1.config.graphicalAssets.currentCardDescriptionBox.name, magicHat_1.config.graphicalAssets.currentCardDescriptionBox.position, this);
-        this.answerCardText = this.createTTFLabel(name, HDConstants.Sassoon_Regular, magicHat_1.config.graphicalAssets.answerCardText.fontSize, cc.color(magicHat_1.config.graphicalAssets.answerCardText.color.r, magicHat_1.config.graphicalAssets.answerCardText.color.g, magicHat_1.config.graphicalAssets.answerCardText.color.b), cc.p(this.answerCard._contentSize.width * 0.5, this.answerCard._contentSize.height * 0.5), this.answerCard);
-        if (magicHat_1.config.graphicalAssets.answerCardText.font)
-            this.answerCardText.setFontName(magicHat_1.config.graphicalAssets.answerCardText.font)
+        this.answerCard = this.addSprite(magicHat_1.resourcePath + magicHat_1.config.assets.sections.currentCardDescriptionBox.imageName, magicHat_1.config.assets.sections.currentCardDescriptionBox.position, this);
+        this.answerCardText = this.createTTFLabel(name, HDConstants.Sassoon_Regular, magicHat_1.config.assets.sections.answerCardText.fontSize, cc.color(magicHat_1.config.assets.sections.answerCardText.color.r, magicHat_1.config.assets.sections.answerCardText.color.g, magicHat_1.config.assets.sections.answerCardText.color.b), cc.p(this.answerCard._contentSize.width * 0.5, this.answerCard._contentSize.height * 0.5), this.answerCard);
+        console.log('answer is ', this.answerCardText);
+        if (magicHat_1.config.assets.sections.answerCardText.font)
+            this.answerCardText.setFontName(magicHat_1.config.assets.sections.answerCardText.font)
         this.answerCard.setScale(0.7);
     },
     /**
@@ -135,8 +138,9 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
         var cardValue = null;
         if (this.cardQueue.length != 0) {
             let obj = this.cardQueue[0];
-            imageName = obj.name;
-            cardValue = obj.cardValue;
+            imageName = obj.imageName;
+            cardValue = obj.label;
+            console.log('valuee of carde ids ', cardValue);
         } else {
             return;
         }
@@ -153,7 +157,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
             magicHat_1.ref.answerCard.setVisible(false);
         });
 
-        let animationObj = magicHat_1.config.animation.cardTakeOut;
+        let animationObj = magicHat_1.config.assets.sections.cardTakeOut;
         let actionOffFromScreen = null;
         if (this.currentCard != null) {
             actionOffFromScreen = cc.MoveTo.create(0.5, cc.p(1200, this.flashCardBaseFront.getPosition().y));
@@ -181,9 +185,9 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
         let actionMove = cc.spawn([actionMove1, actionScale]);
 
         let playGlowAnimation = cc.callFunc(function () {
-            cc.audioEngine.playEffect(magicHat_1.soundPath + magicHat_1.config.animation.flashCardGlow.sound);
+            cc.audioEngine.playEffect(magicHat_1.soundPath + magicHat_1.config.assets.sections.cardTakeOutSound.sound);
 
-            let animation = HDUtility.runFrameAnimation(magicHat_1.animationPath + "cardTakeOut/magicHat_cardTakeOut_", magicHat_1.config.animation.flashCardGlow.frameCount, 0.1, ".png", 1);
+            let animation = HDUtility.runFrameAnimation(magicHat_1.animationPath + "cardTakeOut/magicHat_cardTakeOut_", magicHat_1.config.assets.sections.flashCardGlow.frameCount, 0.1, ".png", 1);
             let baseAnimationSprite = magicHat_1.ref.flashCardBaseFront.getChildByTag(magicHat_1.Tag.animation);
             baseAnimationSprite.stopAllActions();
             baseAnimationSprite.setVisible(true);
@@ -239,9 +243,9 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
         let position = cc.p(this.getPositionForTableView(), 0);
         let width = this.getWidthOfCarousel();
 
-        let baseColorLayer = this.createColourLayer(cc.color(magicHat_1.config.graphicalAssets.carouselBackground.color.r, magicHat_1.config.graphicalAssets.carouselBackground.color.g, magicHat_1.config.graphicalAssets.carouselBackground.color.b, magicHat_1.config.graphicalAssets.carouselBackground.color.a), width, this.carouselHeight, position, this, 5);
+        let baseColorLayer = this.createColourLayer(cc.color(magicHat_1.config.assets.sections.carouselBackground.color.r, magicHat_1.config.assets.sections.carouselBackground.color.g, magicHat_1.config.assets.sections.carouselBackground.color.b, magicHat_1.config.assets.sections.carouselBackground.color.a), width, this.carouselHeight, position, this, 5);
 
-        let carouselBaseImage = this.addSprite(magicHat_1.resourcePath + magicHat_1.config.graphicalAssets.carouselBackgroundImage.name, cc.p(position.x - 10, position.y), this);
+        let carouselBaseImage = this.addSprite(magicHat_1.resourcePath + magicHat_1.config.assets.sections.carouselBackgroundImage.imageName, cc.p(position.x - 10, position.y), this);
         carouselBaseImage.setLocalZOrder(3);
         let scaleX = (baseColorLayer._contentSize.width + 20) / carouselBaseImage._contentSize.width;
         let scaleY = (baseColorLayer._contentSize.height + 40) / carouselBaseImage._contentSize.height;
@@ -249,7 +253,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
         carouselBaseImage.setScaleY(scaleY);
         carouselBaseImage.setAnchorPoint(0, 0);
 
-        let carouselBorderImage = this.addSprite(magicHat_1.resourcePath + magicHat_1.config.graphicalAssets.carouselBackgroundBorderImage.name, cc.p(position.x - 10, position.y), this);
+        let carouselBorderImage = this.addSprite(magicHat_1.resourcePath + magicHat_1.config.assets.sections.carouselBackgroundBorderImage.imageName, cc.p(position.x - 10, position.y), this);
         carouselBorderImage.setLocalZOrder(5);
         carouselBorderImage.setScaleX(scaleX);
         carouselBorderImage.setScaleY(scaleY);
@@ -271,7 +275,8 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * @returns {number}
      */
     getWidthOfCarousel: function () {
-        let cellWidthSize = this.carouselHeight * magicHat_1.config.carouselAssets.length;
+        let cellWidthSize = this.carouselHeight * magicHat_1.config.assets.sections.carouselAssets.data.length;
+        console.log('carousal assets  ', magicHat_1.config.assets.sections.carouselAssets.data.length);
         let maxWidth = this.carouselHeight * 5;//this.winSize.width * 0.6
         if (cellWidthSize > maxWidth) {
             return maxWidth
@@ -327,7 +332,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
             cardCell = new magicHat_1.HDCardCell(cellSize);
         }
         cardCell.tag = idx;
-        cardCell.createUI(idx, magicHat_1.config.carouselAssets[idx], cardCell, this.isCellSelected(magicHat_1.config.carouselAssets[idx]));
+        cardCell.createUI(idx, magicHat_1.config.assets.sections.carouselAssets.data[idx], cardCell, this.isCellSelected(magicHat_1.config.assets.sections.carouselAssets.data[idx]));
         return cardCell;
     },
 
@@ -337,7 +342,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * @returns {*}
      */
     numberOfCellsInTableView: function (table) {
-        return magicHat_1.config.carouselAssets.length;
+        return magicHat_1.config.assets.sections.carouselAssets.data.length;
     },
     /**
      * tableCellTouched: To perform action when cell is touched.
@@ -380,8 +385,8 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * @returns {number}
      */
     getIndexOfCurrentElement: function (data) {
-        for (var index = 0; index < magicHat_1.config.carouselAssets.length; index++) {
-            if (data.name == magicHat_1.config.carouselAssets[index].name) {
+        for (var index = 0; index < magicHat_1.config.assets.sections.carouselAssets.data.length; index++) {
+            if (data.name == magicHat_1.config.assets.sections.carouselAssets.data[index].imageName) {
                 return index;
             }
         }
@@ -403,6 +408,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
                         if (this.isStudentInteractionEnable) {
                             if (this.cardQueue.length > 0) {
                                 let obj = this.cardQueue[0];
+                                console.log('object is', obj);
                                 this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                                     'eventType': magicHat_1.socketEvents.SHOW_FLASH_CARD,
                                     'data': obj
@@ -429,6 +435,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
                     "roomId": HDAppManager.roomId,
                     "users": []
                 });
+
             } else {
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
@@ -472,7 +479,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * @param index
      */
     addCardToQueue: function (index) {
-        let obj = magicHat_1.config.carouselAssets[index];
+        let obj = magicHat_1.config.assets.sections.carouselAssets.data[index];
         if (magicHat_1.ref.cardQueue == null) {
             magicHat_1.ref.cardQueue = [];
         }
@@ -523,7 +530,6 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * @param res
      */
     studentTurn: function (res) {
-        console.log(" student turn ", res);
         let users = res.users;
         if (!magicHat_1.ref.isTeacher) {
             if (users.length == 0) {
@@ -602,6 +608,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * @param res
      */
     gameEvents: function (res) {
+        console.log('type of event ', res.eventType);
         switch (res.eventType) {
             case magicHat_1.socketEvents.ADD_CARD_TO_QUEUE:
                 magicHat_1.ref.addCardToQueue(res.data);
@@ -641,14 +648,14 @@ magicHat_1.HDCardCell = cc.TableViewCell.extend({
         this.tag = idx;
         this.removeAllChildren(true);
 
-        let colourLayer = new cc.LayerColor(cc.color(magicHat_1.config.graphicalAssets.carouselBoxBackground.color.r, magicHat_1.config.graphicalAssets.carouselBoxBackground.color.g, magicHat_1.config.graphicalAssets.carouselBoxBackground.color.b, magicHat_1.config.graphicalAssets.carouselBoxBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this._contentSize.height - this.cellVerticalPadding);
+        let colourLayer = new cc.LayerColor(cc.color(magicHat_1.config.assets.sections.carouselBoxBackground.color.r, magicHat_1.config.assets.sections.carouselBoxBackground.color.g, magicHat_1.config.assets.sections.carouselBoxBackground.color.b, magicHat_1.config.assets.sections.carouselBoxBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this._contentSize.height - this.cellVerticalPadding);
         colourLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.5));
         parent.addChild(colourLayer, 2);
+        console.log('data is ', data);
+        var scaleFactorX = colourLayer._contentSize.width / data.dimensions.width;
+        var scaleFactorY = colourLayer._contentSize.height / data.dimensions.height;
 
-        var scaleFactorX = colourLayer._contentSize.width / data.size.width;
-        var scaleFactorY = colourLayer._contentSize.height / data.size.height;
-
-        let cardElementImage = cc.Sprite.create(magicHat_1.resourcePath + data.name);
+        let cardElementImage = cc.Sprite.create(magicHat_1.resourcePath + data.imageName);
         cardElementImage.setContentSize(cc.size(colourLayer._contentSize.width, colourLayer._contentSize.height));
         cardElementImage.setPosition(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.5);
         cardElementImage.setAnchorPoint(0, 0);
@@ -656,16 +663,16 @@ magicHat_1.HDCardCell = cc.TableViewCell.extend({
         cardElementImage.setScaleY(scaleFactorY);
         parent.addChild(cardElementImage, 3);
 
-        let textBaseLayer = new cc.LayerColor(cc.color(magicHat_1.config.graphicalAssets.carouselBoxCardBackground.color.r, magicHat_1.config.graphicalAssets.carouselBoxCardBackground.color.g, magicHat_1.config.graphicalAssets.carouselBoxCardBackground.color.b, magicHat_1.config.graphicalAssets.carouselBoxCardBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this.cardTextHeight);
+        let textBaseLayer = new cc.LayerColor(cc.color(magicHat_1.config.assets.sections.carouselBoxCardBackground.color.r, magicHat_1.config.assets.sections.carouselBoxCardBackground.color.g, magicHat_1.config.assets.sections.carouselBoxCardBackground.color.b, magicHat_1.config.assets.sections.carouselBoxCardBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this.cardTextHeight);
         textBaseLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this._contentSize.height - this.cellVerticalPadding - this.cardTextHeight));
         parent.addChild(textBaseLayer, 4);
 
-        let labelCardText = cc.LabelTTF.create(data.cardValue, magicHat_1.config.graphicalAssets.carouselBoxCardText.font, magicHat_1.config.graphicalAssets.carouselBoxCardText.fontSize, cc.size(0., 0), cc.TEXT_ALIGNMENT_CENTER);
+        let labelCardText = cc.LabelTTF.create(data.label, magicHat_1.config.assets.sections.carouselBoxCardText.font, magicHat_1.config.assets.sections.carouselBoxCardText.fontSize, cc.size(0., 0), cc.TEXT_ALIGNMENT_CENTER);
         labelCardText.setPosition(cc.p(textBaseLayer._contentSize.width * 0.5, textBaseLayer._contentSize.height * 0.5));
-        labelCardText.setColor(cc.color(magicHat_1.config.graphicalAssets.carouselBoxCardText.color.r, magicHat_1.config.graphicalAssets.carouselBoxCardText.color.g, magicHat_1.config.graphicalAssets.carouselBoxCardText.color.b, magicHat_1.config.graphicalAssets.carouselBoxCardText.color.a));
+        labelCardText.setColor(cc.color(magicHat_1.config.assets.sections.carouselBoxCardText.color.r, magicHat_1.config.assets.sections.carouselBoxCardText.color.g, magicHat_1.config.assets.sections.carouselBoxCardText.color.b, magicHat_1.config.assets.sections.carouselBoxCardText.color.a));
         textBaseLayer.addChild(labelCardText, 5);
 
-        this.highlightLayer = new cc.LayerColor(cc.color(magicHat_1.config.graphicalAssets.carouselBoxHighlight.color.r, magicHat_1.config.graphicalAssets.carouselBoxHighlight.color.g, magicHat_1.config.graphicalAssets.carouselBoxHighlight.color.b, magicHat_1.config.graphicalAssets.carouselBoxHighlight.color.a), this._contentSize.width, this._contentSize.height);
+        this.highlightLayer = new cc.LayerColor(cc.color(magicHat_1.config.assets.sections.carouselBoxHighlight.color.r, magicHat_1.config.assets.sections.carouselBoxHighlight.color.g, magicHat_1.config.assets.sections.carouselBoxHighlight.color.b, magicHat_1.config.assets.sections.carouselBoxHighlight.color.a), this._contentSize.width, this._contentSize.height);
         this.highlightLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.5));
         parent.addChild(this.highlightLayer, 10);
 

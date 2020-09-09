@@ -89,13 +89,13 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             ACTIVITY_BUILD_SOMETHING_1.spriteBasePath = ACTIVITY_BUILD_SOMETHING_1.resourcePath + "Sprite/";
             ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView = HDAppManager.isTeacherView;
             ACTIVITY_BUILD_SOMETHING_1.ref.isStudentInteractionEnable = ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView;
-            ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.dismantledObject];
+            ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data];
             ACTIVITY_BUILD_SOMETHING_1.ref.setupUI();
 
             if (ACTIVITY_BUILD_SOMETHING_1.ref.storedData) {
                 ACTIVITY_BUILD_SOMETHING_1.ref.syncData(ACTIVITY_BUILD_SOMETHING_1.ref.storedData)
             }
-            ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.moduleStart);
+            ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart);
 
         });
 
@@ -187,15 +187,16 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
      */
     setupOptionButtons: function () {
         if (ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView) {
-            let startButtonObject = ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.startButton;
-            let startButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.idleImage, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.pushedImage, "", 32, ACTIVITY_BUILD_SOMETHING_1.Tag.startButton, cc.p(this.getContentSize().width * 0.09,
-                this.getContentSize().height * 0.2), this, this, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.disabledImage);
+            let startButtonObject = ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.startButton;
+            let startButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.enableState, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.pushedState, "", 32, ACTIVITY_BUILD_SOMETHING_1.Tag.startButton, cc.p(this.getContentSize().width * 0.09,
+                this.getContentSize().height * 0.2), this, this, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.disableState);
+            //console.log('butto position ',startButton.getPosition());
             startButton.setScale(startButtonObject.scale);
             startButton.setEnabled(true);
             startButton.setLocalZOrder(10);
             this.handIconUI.push(startButton);
-            let stopButtonObject = ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.stopButton;
-            let stopButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + stopButtonObject.idleImage, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + stopButtonObject.pushedImage, "", 32, ACTIVITY_BUILD_SOMETHING_1.Tag.stopButton, startButton.getPosition(), this, this, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + stopButtonObject.disabledImage);
+            let stopButtonObject = ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.stopButton;
+            let stopButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + stopButtonObject.enableState, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + stopButtonObject.pushedState, "", 32, ACTIVITY_BUILD_SOMETHING_1.Tag.stopButton, startButton.getPosition(), this, this, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + stopButtonObject.disableState);
             stopButton.setScale(stopButtonObject.scale);
             stopButton.setEnabled(false);
             stopButton.setLocalZOrder(10);
@@ -221,7 +222,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                 "roomId": HDAppManager.roomId,
                 "roomData": {
                     "activity": ACTIVITY_BUILD_SOMETHING_1.config.properties.namespace,
-                    "data": {"gameState": ACTIVITY_BUILD_SOMETHING_1.ref.gameState, "usersData": data},
+                    "data": { "gameState": ACTIVITY_BUILD_SOMETHING_1.ref.gameState, "usersData": data },
                     "activityStartTime": HDAppManager.getActivityStartTime()
                 },
             }
@@ -367,7 +368,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             return;
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.MOVE_POSITION,
-            'data': {'userName': HDAppManager.userName, 'position': position, 'index': index, 'event': event}
+            'data': { 'userName': HDAppManager.userName, 'position': position, 'index': index, 'event': event }
         });
     },
 
@@ -375,7 +376,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         if (!ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView) {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.USER_DATA,
-                'data': {'userName': HDAppManager.userName, 'UIData': this.userDataForSync}
+                'data': { 'userName': HDAppManager.userName, 'UIData': this.userDataForSync }
             });
         }
     },
@@ -534,7 +535,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
 
     attachPoint: function (loc, index) {
         var connectionObject = ACTIVITY_BUILD_SOMETHING_1.ref.assembledList[index];
-        var connectionObjectData = ACTIVITY_BUILD_SOMETHING_1.config.dismantledObject[connectionObject.getUserData().tag];
+        var connectionObjectData = ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data[connectionObject.getUserData().tag];
         var clickedItemData = ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject[ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject];
         var attachToLocation = null; //Point from already placed objects
         var attachFromLocation = null; // Point from current clicked object.
@@ -643,15 +644,15 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         }
         if (this.currentIsolatedNode < ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.isolatedNodes) {
             this.currentIsolatedNode++;
-            return {"isIsolatedNode": true};
+            return { "isIsolatedNode": true };
         }
-        return {"isIsolatedNode": false, "nodeContainsPoint": false}
+        return { "isIsolatedNode": false, "nodeContainsPoint": false }
     },
     updateStudentInteraction: function (username, status) {
         if (this.isTeacherView) {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 "eventType": ACTIVITY_BUILD_SOMETHING_1.socketEventKey.STUDENT_INTERACTION,
-                "data": {"userName": username, "status": status}
+                "data": { "userName": username, "status": status }
             });
         }
     },
@@ -732,7 +733,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             } else {
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
-                    "users": [{userName: userName}]
+                    "users": [{ userName: userName }]
                 });
             }
         }
@@ -808,10 +809,10 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             }
         }
         if (!isFound) {
-            ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.push({"userName": res.userName, "data": res.data.UIData});
+            ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.push({ "userName": res.userName, "data": res.data.UIData });
         } else {
             ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.splice(indexData, 1);
-            ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.push({"userName": res.userName, "data": res.data.UIData});
+            ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.push({ "userName": res.userName, "data": res.data.UIData });
         }
     },
 
@@ -911,7 +912,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                     break;
 
                 case ACTIVITY_BUILD_SOMETHING_1.gameState.START: {
-                    const {usersData} = data;
+                    const { usersData } = data;
                     let user = usersData.find(user => user.userName === HDAppManager.username);
                     if (user) {
                         ACTIVITY_BUILD_SOMETHING_1.ref.createUIForData(HDAppManager.username, user.data, this);
@@ -983,7 +984,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         ACTIVITY_BUILD_SOMETHING_1.ref.initialPosition = null;
         if (ACTIVITY_BUILD_SOMETHING_1.ref.tableView) {
             ACTIVITY_BUILD_SOMETHING_1.ref.draggableObject.length = 0;
-            ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.dismantledObject];
+            ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data];
             ACTIVITY_BUILD_SOMETHING_1.ref.tableView.reloadData();
         }
 
@@ -993,7 +994,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             if (this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer))
                 this.removeChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
             if (this.isTeacherView) {
-                ACTIVITY_BUILD_SOMETHING_1.ref.parent.updateScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.moduleStart.ops);
+                ACTIVITY_BUILD_SOMETHING_1.ref.parent.updateScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.content.ops);
             }
         }
 
@@ -1037,7 +1038,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     },
 
     getDismantledObjectIndex: function (name) {
-        let dismantledData = ACTIVITY_BUILD_SOMETHING_1.config.dismantledObject;
+        let dismantledData = ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data;
         for (let index = 0; index < dismantledData.length; index++) {
             var curObject = dismantledData[index];
             if (curObject.name == name) {
@@ -1164,10 +1165,10 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         let position = cc.p(this.getPositionForTableView(), 0);
         let width = this.getWidthOfCarousel();
 
-        let baseColorLayer = this.createColourLayer(cc.color(ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBackground.color.r, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBackground.color.g, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBackground.color.b, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBackground.color.a), width, this.carouselHeight, position, this, 5);
+        let baseColorLayer = this.createColourLayer(cc.color(ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBackground.color.r, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBackground.color.g, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBackground.color.b, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBackground.color.a), width, this.carouselHeight, position, this, 5);
         baseColorLayer.setTag(ACTIVITY_BUILD_SOMETHING_1.Tag.carouselBaseImage);
 
-        let carouselBaseImage = this.addSprite(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBackgroundImage.name, cc.p(position.x - 10, position.y), this);
+        let carouselBaseImage = this.addSprite(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBackgroundImage.imageName, cc.p(position.x - 10, position.y), this);
         carouselBaseImage.setLocalZOrder(1);
         let scaleX = (baseColorLayer._contentSize.width + 20) / carouselBaseImage._contentSize.width;
         let scaleY = (baseColorLayer._contentSize.height + 40) / carouselBaseImage._contentSize.height;
@@ -1175,19 +1176,19 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         carouselBaseImage.setScaleY(scaleY);
         carouselBaseImage.setAnchorPoint(0, 0);
 
-        let carouselBorderImage = this.addSprite(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBackgroundBorderImage.name, cc.p(position.x - 10, position.y), this);
+        let carouselBorderImage = this.addSprite(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBackgroundBorderImage.imageName, cc.p(position.x - 10, position.y), this);
         carouselBorderImage.setLocalZOrder(5);
         carouselBorderImage.setScaleX(scaleX);
         carouselBorderImage.setScaleY(scaleY);
         carouselBorderImage.setAnchorPoint(0, 0);
 
 
-        let leftButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.leftMoveButton.idleImage, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.leftMoveButton.pushedImage, "", 8, ACTIVITY_BUILD_SOMETHING_1.Tag.leftButton, cc.p(position.x, position.y), baseColorLayer, null, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.leftMoveButton.idleImage);
+        let leftButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.leftMoveButton.enableState, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.leftMoveButton.pushedState, "", 8, ACTIVITY_BUILD_SOMETHING_1.Tag.leftButton, cc.p(position.x, position.y), baseColorLayer, null, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.leftMoveButton.enableState);
         leftButton.setLocalZOrder(2);
         leftButton.setPosition(cc.p(leftButton.getContentSize().width * 0.5, leftButton.getContentSize().height * 0.5 + 14));
         leftButton.setSwallowTouches(false);
 
-        let rightButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.rightMoveButton.idleImage, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.rightMoveButton.pushedImage, "", 8, ACTIVITY_BUILD_SOMETHING_1.Tag.rightButton, cc.p(leftButton.getPositionX() + (width - leftButton.getContentSize().width), leftButton.getContentSize().height * 0.5 + 14), baseColorLayer, null, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.rightMoveButton.idleImage);
+        let rightButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.rightMoveButton.enableState, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.rightMoveButton.pushedState, "", 8, ACTIVITY_BUILD_SOMETHING_1.Tag.rightButton, cc.p(leftButton.getPositionX() + (width - leftButton.getContentSize().width), leftButton.getContentSize().height * 0.5 + 14), baseColorLayer, null, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.rightMoveButton.enableState);
         rightButton.setLocalZOrder(2);
         rightButton.setSwallowTouches(false);
         this.tableView = new cc.TableView(this, cc.size(width - (leftButton.getContentSize().width * 2), this.carouselHeight + 11));
@@ -1319,7 +1320,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         if (ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView && ACTIVITY_BUILD_SOMETHING_1.ref.gameState == ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO) {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.SCROLL_OFFSET,
-                'data': {'userName': HDAppManager.userName, "offset": offset}
+                'data': { 'userName': HDAppManager.userName, "offset": offset }
             });
         }
     },
@@ -1327,7 +1328,6 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     moveCellObject: function (cell, position) {
         ACTIVITY_BUILD_SOMETHING_1.ref.tableView._dragging = false;
         cell.stopAllActions();
-        console.log("moveCellObject   ", ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem);
         let completedAnimation = cc.callFunc(function () {
             if (ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem)
                 return;
@@ -1395,17 +1395,17 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         if (filteredArray.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.length && filteredArray.every(item => item.isCorrect && item.data.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.find(obj => obj.name === item.nodeName).partsCount)) {
             isAllCorrect = true;
         }
-        this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"]);
+        this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"]);
         var bg = this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
         if (bg) {
             this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer).removeAllChildren();
-            bg.setTexture(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + (isAllCorrect ? ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.winBG.imageName : ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.looseBG.imageName));
+            bg.setTexture(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + (isAllCorrect ? ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.winBG.imageName : ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.looseBG.imageName));
         } else {
-            bg = this.addSprite(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + (isAllCorrect ? ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.winBG.imageName : ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.looseBG.imageName), cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5), this);
+            bg = this.addSprite(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + (isAllCorrect ? ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.winBG.imageName : ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.looseBG.imageName), cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5), this);
             bg.setLocalZOrder(30);
             bg.setTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
         }
-        var position = isAllCorrect ? ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.winBG.usernamePosition : ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.looseBG.usernamePosition;
+        var position = isAllCorrect ? ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.winBG.usernamePosition : ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.looseBG.usernamePosition;
         this.createUIForData(res.userName, res.data, bg);
         var touchPrevention = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + "close.png", null, null, null, null, cc.p(bg.width * 0.5, bg.height * 0.5), bg, this, null);
         touchPrevention.setScale(this.width / touchPrevention.width, this.height / touchPrevention.height);
@@ -1435,7 +1435,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         this.resetScreen();
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.RESET_UI,
-            'data': {'userName': HDAppManager.userName}
+            'data': { 'userName': HDAppManager.userName }
         });
         this.gameState = ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO;
         ACTIVITY_BUILD_SOMETHING_1.ref.updateRoomData();
@@ -1473,7 +1473,7 @@ ACTIVITY_BUILD_SOMETHING_1.HDCardCell = cc.TableViewCell.extend({
         this.tag = idx;
         this.removeAllChildren(true);
 
-        let colourLayer = new cc.LayerColor(cc.color(ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxBackground.color.r, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxBackground.color.g, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxBackground.color.b, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxBackground.color.a), this.width - this.cellHorizontalPadding, this.height - this.cellVerticalPadding);
+        let colourLayer = new cc.LayerColor(cc.color(ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxBackground.color.r, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxBackground.color.g, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxBackground.color.b, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxBackground.color.a), this.width - this.cellHorizontalPadding, this.height - this.cellVerticalPadding);
         colourLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.5));
         parent.addChild(colourLayer, 5);
 
@@ -1487,13 +1487,13 @@ ACTIVITY_BUILD_SOMETHING_1.HDCardCell = cc.TableViewCell.extend({
         this.cardElementImage.setScaleY(scaleFactorY);
         parent.addChild(this.cardElementImage, 6);
 
-        let textBaseLayer = new cc.LayerColor(cc.color(ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardBackground.color.r, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardBackground.color.g, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardBackground.color.b, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this.cardTextHeight);
+        let textBaseLayer = new cc.LayerColor(cc.color(ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardBackground.color.r, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardBackground.color.g, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardBackground.color.b, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this.cardTextHeight);
         textBaseLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this._contentSize.height - this.cellVerticalPadding - this.cardTextHeight));
         parent.addChild(textBaseLayer, 7);
 
-        let labelCardText = cc.LabelTTF.create(data.cardValue, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardText.font, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardText.fontSize, cc.size(0., 0), cc.TEXT_ALIGNMENT_CENTER);
+        let labelCardText = cc.LabelTTF.create(data.cardValue, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardText.font, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardText.fontSize, cc.size(0., 0), cc.TEXT_ALIGNMENT_CENTER);
         labelCardText.setPosition(cc.p(textBaseLayer._contentSize.width * 0.5, textBaseLayer._contentSize.height * 0.5));
-        labelCardText.setColor(cc.color(ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardText.color.r, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardText.color.g, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardText.color.b, ACTIVITY_BUILD_SOMETHING_1.config.graphicalAssets.carouselBoxCardText.color.a));
+        labelCardText.setColor(cc.color(ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardText.color.r, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardText.color.g, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardText.color.b, ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.carouselBoxCardText.color.a));
         textBaseLayer.addChild(labelCardText, 8);
 
         if (isSelected) {

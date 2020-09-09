@@ -88,7 +88,7 @@ DontWakeTheDragon.Dragon = cc.Sprite.extend({
 
   _createAnimationAction: function (animationAction) {
     const data =
-      DontWakeTheDragon.MainLayerRef.config.graphicalAssets.character.animation[
+      DontWakeTheDragon.MainLayerRef.config.assets.sections.animation.data[
       animationAction
       ];
     const animate = HDUtility.runFrameAnimation(
@@ -330,10 +330,11 @@ DontWakeTheDragon.TreasureChests = HDBaseLayer.extend({
     treasureChestObj = { name: "", itemTag: "" }
   ) {
     let treasureItemSpriteRef = null;
+    console.log('treasue', treasureChestObj);
     if (treasureChestObj.itemTag) {
       treasureItemSpriteRef = new cc.Sprite(
         DontWakeTheDragon.resourcePath +
-        DontWakeTheDragon.MainLayerRef.config.graphicalAssets.treasureItems[
+        DontWakeTheDragon.MainLayerRef.config.assets.sections.treasureItems.data[
           treasureChestObj.itemTag
         ].imageName
       );
@@ -653,7 +654,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
   _setUpUI: function () {
     let bgSprite = this.setBackground(
       DontWakeTheDragon.resourcePath +
-      DontWakeTheDragon.MainLayerRef.config.graphicalAssets.background
+      DontWakeTheDragon.MainLayerRef.config.background.sections.background
         .imageName
     );
     bgSprite.setLocalZOrder(this.Z_ORDER_BACKGROUND);
@@ -666,7 +667,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
       this.treasureItems = this.state.treasureItems;
       this.initialDragonAnimationStage = this.state.dragonAnimationStage;
     } else {
-      this.treasureItems = DontWakeTheDragon.MainLayerRef.config.graphicalAssets.treasureItems.map(
+      this.treasureItems = DontWakeTheDragon.MainLayerRef.config.assets.sections.treasureItems.data.map(
         (item, idx) => {
           return Object.assign(item, { tag: idx });
         }
@@ -724,7 +725,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
 
   _createTreasurePile: function (delegate) {
     let treasurePileSprite = new DontWakeTheDragon.TreasurePile(
-      DontWakeTheDragon.MainLayerRef.config.graphicalAssets.treasurePile.imageName,
+      DontWakeTheDragon.MainLayerRef.config.assets.sections.treasurePile.imageName,
       this.treasureItems,
       this,
       DontWakeTheDragon.resourcePath,
@@ -1140,8 +1141,8 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     this.isCustomCursorTexture = true;
     this.customCursorTextureUrl =
       (DontWakeTheDragon.MainLayerRef.config.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
-      DontWakeTheDragon.MainLayerRef.config.graphicalAssets.cursor
-        .closedFingers;
+      DontWakeTheDragon.MainLayerRef.config.cursors.data
+        .closedFingers.imageName;
   },
 
   _setOpenPincerFingersCursor: function (flag) {
@@ -1149,8 +1150,8 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
       this.isCustomCursorTexture = true;
       this.customCursorTextureUrl =
         (DontWakeTheDragon.MainLayerRef.config.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
-        DontWakeTheDragon.MainLayerRef.config.graphicalAssets.cursor
-          .openFingers;
+        DontWakeTheDragon.MainLayerRef.config.cursors.data
+          .openFingers.imageName;
     } else {
       this.isCustomCursorTexture = false;
       this.customCursorTextureUrl = "";
@@ -1164,7 +1165,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
         delete this.studentsTreasureChests[i].itemTag;
       }
     }
-    this.treasureItems = DontWakeTheDragon.MainLayerRef.config.graphicalAssets.treasureItems.map(
+    this.treasureItems = DontWakeTheDragon.MainLayerRef.config.assets.sections.treasureItems.data.map(
       (item, idx) => {
         return Object.assign(item, { tag: idx });
       }
@@ -1211,9 +1212,9 @@ DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
   onEnter: function () {
     this._super();
     this.setInteractionEnabled(true);
-    this.showScriptMessage(DontWakeTheDragon.MainLayerRef.config.teacherScripts.moduleStart);
-    this.showTipMessage(DontWakeTheDragon.MainLayerRef.config.teacherTips.moduleStart);
-    if (this.state && this.state.treasureItems.length < DontWakeTheDragon.MainLayerRef.config.graphicalAssets.treasureItems.length) {
+    this.showScriptMessage(DontWakeTheDragon.MainLayerRef.config.teacherScripts.data.moduleStart);
+    this.showTipMessage(DontWakeTheDragon.MainLayerRef.config.teacherTips.data.moduleStart);
+    if (this.state && this.state.treasureItems.length < DontWakeTheDragon.MainLayerRef.config.assets.sections.treasureItems.data.length) {
       this.getParent().getParent().setResetButtonActive(true);
     }
   },
@@ -1222,11 +1223,11 @@ DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
   },
 
   showScriptMessage: function (msg) {
-    this.getParent().getParent().showScriptMessage(msg.ops);
+    this.getParent().getParent().showScriptMessage(msg.content.ops);
   },
 
   showTipMessage: function (msg) {
-    this.getParent().getParent().showTipMessage(msg.ops);
+    this.getParent().getParent().showTipMessage(msg.content.ops);
   },
 
   buttonCallback: function (sender, type) {

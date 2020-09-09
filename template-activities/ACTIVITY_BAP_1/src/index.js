@@ -82,7 +82,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                 ref.updateRoomData();
                 ref.isStudentInteractionEnable = true;
             }
-            ref.triggerTip(config.teacherTips.moduleStart);
+            ref.triggerTip(config.teacherTips.data.moduleStart);
         });
     },
 
@@ -108,15 +108,15 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     triggerScriptByCurrentSlideIdx: function () {
         switch (this.curImageIdx) {
             case 0: {
-                this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.slide_1.ops);
+                this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_1.content.ops);
                 break;
             }
             case 1: {
-                this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.slide_2.ops);
+                this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_2.content.ops);
                 break;
             }
             case 2: {
-                this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.slide_3.ops);
+                this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_3.content.ops);
                 break;
             }
             default: {
@@ -128,7 +128,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
     triggerTip: function (message) {
         if (this.parent) {
-            this.parent.showTipMessage(message.ops);
+            this.parent.showTipMessage(message.content.ops);
         }
     },
 
@@ -444,14 +444,14 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     colorPanel: function () {
-        let colorPanel = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.palette_sidebar.name, cc.p(0, this.getContentSize().height * 0.5), this);
+        let colorPanel = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + "palette_sidebar.png", cc.p(0, this.getContentSize().height * 0.5), this);
         colorPanel.setLocalZOrder(1000);
         colorPanel.setAnchorPoint(0, 0.5);
         this.handIconUI.push(colorPanel);
-        let colorInfo = ACTIVITY_BAP_1.config.graphicalAssets.color;
+        let colorInfo = ACTIVITY_BAP_1.config.assets.sections.color.data;
         let positionInY = [0.93, 0.82, 0.72, 0.615, 0.51, 0.407, 0.305, 0.202, 0.102]
         for (let i = 0; i < colorInfo.length; ++i) {
-            let button = this.createButton(ACTIVITY_BAP_1.spriteBasePath + colorInfo[i].name, ACTIVITY_BAP_1.spriteBasePath + colorInfo[i].name, "", 0, i, cc.p(colorPanel.getContentSize().width * 0.475, colorPanel.getContentSize().height * positionInY[i]), colorPanel, this);
+            let button = this.createButton(ACTIVITY_BAP_1.spriteBasePath + colorInfo[i].imageName, ACTIVITY_BAP_1.spriteBasePath + colorInfo[i].imageName, "", 0, i, cc.p(colorPanel.getContentSize().width * 0.475, colorPanel.getContentSize().height * positionInY[i]), colorPanel, this);
             button.addTouchEventListener(this.selectedColorCallback, this);
             button.setScale(0.42);
             button.initialScale = 0.42;
@@ -462,7 +462,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         }
 
         //Eraser
-        let eraser = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.eraser_icon.name, ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.eraser_icon.name, "", 0, colorInfo.length, cc.p(colorPanel.getContentSize().width * 0.472, colorPanel.getContentSize().height * 0.072), colorPanel, this);
+        let eraser = this.createButton(ACTIVITY_BAP_1.spriteBasePath + "eraser_icon.png", ACTIVITY_BAP_1.spriteBasePath + "eraser_icon.png", "", 0, colorInfo.length, cc.p(colorPanel.getContentSize().width * 0.472, colorPanel.getContentSize().height * 0.072), colorPanel, this);
         eraser.addTouchEventListener(this.selectedColorCallback, this);
         eraser.setScale(0.46);
         eraser.initialScale = 0.46;
@@ -482,17 +482,17 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                 if (sender.rgb) {
                     this.selectedColor = cc.color(sender.rgb.r, sender.rgb.g, sender.rgb.b, 255);
                     this.erasing = false;
-                    this.MouseTextureUrl = (ACTIVITY_BAP_1.config.preLoaded ? ACTIVITY_BAP_1.spriteBasePath : "AsyncActivity/" + ACTIVITY_BAP_1.spriteBasePath) + ACTIVITY_BAP_1.config.graphicalAssets.cursor_pencil.name;
+                    this.MouseTextureUrl = (ACTIVITY_BAP_1.config.properties.preLoaded ? ACTIVITY_BAP_1.spriteBasePath : "AsyncActivity/" + ACTIVITY_BAP_1.spriteBasePath) + "cursor_pencil.png";
                 } else {
                     this.erasing = true;
-                    this.MouseTextureUrl = (ACTIVITY_BAP_1.config.preLoaded ? ACTIVITY_BAP_1.spriteBasePath : "AsyncActivity/" + ACTIVITY_BAP_1.spriteBasePath) + ACTIVITY_BAP_1.config.graphicalAssets.cursor_eraser.name;
+                    this.MouseTextureUrl = (ACTIVITY_BAP_1.config.properties.preLoaded ? ACTIVITY_BAP_1.spriteBasePath : "AsyncActivity/" + ACTIVITY_BAP_1.spriteBasePath) + "cursor_eraser.png";
                 }
                 break;
         }
     },
 
     createEraser: function () {
-        this.eraser = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.eraser.name, cc.p(this.getContentSize().width * 0.6, this.getContentSize().height * 0.6), this);
+        this.eraser = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + "eraser.png", cc.p(this.getContentSize().width * 0.6, this.getContentSize().height * 0.6), this);
         this.eraser.setScale(1);
         this.eraser.setOpacity(0);
         this.eraser.setAnchorPoint(0, 1);
@@ -500,18 +500,18 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     backgroundWithControl: function () {
-        this.playGround = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.backgrounds.images[0], cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5), this);
+        this.playGround = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[0], cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5), this);
         let slidIndexHeight = this.getContentSize().height * 0.88;
         if (this.isTeacherView) {
-            let nextButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.btn_next.name,
-                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.btn_next.name, "", 0, ACTIVITY_BAP_1.Tag.NextImage,
+            let nextButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.btn_next.name,
+                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.btn_next.name, "", 0, ACTIVITY_BAP_1.Tag.NextImage,
                 cc.p(this.getContentSize().width * 0.57, slidIndexHeight), this);
             this.handIconUI.push(nextButton);
             //back
             nextButton.setScale(0.4);
             nextButton.setLocalZOrder(1000);
-            let prevButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.btn_previous.name,
-                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.btn_previous.name, "", 0, ACTIVITY_BAP_1.Tag.PrevImage,
+            let prevButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.btn_previous.name,
+                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.btn_previous.name, "", 0, ACTIVITY_BAP_1.Tag.PrevImage,
                 cc.p(this.getContentSize().width * 0.43, slidIndexHeight), this);
             prevButton.setScale(0.4);
             this.handIconUI.push(prevButton);
@@ -525,8 +525,8 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             // clearButton.setLocalZOrder(1000);
             // this.handIconUI.push(clearButton);
 
-            let drawMode = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.drawMode_enable.name,
-                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.drawMode_enable.name, "Individual Mode",
+            let drawMode = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.drawMode_enable.name,
+                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.drawMode_enable.name, "Individual Mode",
                 16, ACTIVITY_BAP_1.Tag.DrawMode, cc.p(this.getContentSize().width * 0.915,
                     this.getContentSize().height * 0.15), this);
             drawMode.setTitleColor(cc.color(0, 0, 0, 255));
@@ -537,7 +537,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
 
 
             //countLabel
-            let countLabel = this.createTTFLabel("Slide 1 of " + ACTIVITY_BAP_1.config.graphicalAssets.backgrounds.images.length,
+            let countLabel = this.createTTFLabel("Slide 1 of " + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length,
                 HDConstants.Sassoon_Regular, 16, HDConstants.Black,
                 cc.p(this.getContentSize().width * 0.5, slidIndexHeight), this);
             countLabel.setAnchorPoint(cc.p(0.5, 0.65));
@@ -837,7 +837,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         if (this.playGround.getNumberOfRunningActions() > 0)
             return;
         this.curImageIdx += (increase ? 1 : -1);
-        this.curImageIdx = HDUtility.clampANumber(this.curImageIdx, 0, ACTIVITY_BAP_1.config.graphicalAssets.backgrounds.images.length - 1)
+        this.curImageIdx = HDUtility.clampANumber(this.curImageIdx, 0, ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length - 1)
         this.updateImage(this.curImageIdx);
         if (this.isTeacherView) {
             this.emitSocketEvent(HDSocketEventType.EDIT_ROOM_DATA, {
@@ -863,13 +863,13 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         if (this.isTeacherView) {
             this.getChildByTag(ACTIVITY_BAP_1.Tag.PrevImage).setOpacity(this.curImageIdx === 0 ? 100 : 255);
             this.getChildByTag(ACTIVITY_BAP_1.Tag.PrevImage).setTouchEnabled(this.curImageIdx !== 0);
-            this.getChildByTag(ACTIVITY_BAP_1.Tag.NextImage).setOpacity(this.curImageIdx === ACTIVITY_BAP_1.config.graphicalAssets.backgrounds.images.length - 1 ? 100 : 255);
-            this.getChildByTag(ACTIVITY_BAP_1.Tag.NextImage).setTouchEnabled(this.curImageIdx !== ACTIVITY_BAP_1.config.graphicalAssets.backgrounds.images.length - 1);
-            this.getChildByTag(ACTIVITY_BAP_1.Tag.CountLabel).setString("Slide " + (this.curImageIdx + 1) + " of " + ACTIVITY_BAP_1.config.graphicalAssets.backgrounds.images.length);
+            this.getChildByTag(ACTIVITY_BAP_1.Tag.NextImage).setOpacity(this.curImageIdx === ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length - 1 ? 100 : 255);
+            this.getChildByTag(ACTIVITY_BAP_1.Tag.NextImage).setTouchEnabled(this.curImageIdx !== ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length - 1);
+            this.getChildByTag(ACTIVITY_BAP_1.Tag.CountLabel).setString("Slide " + (this.curImageIdx + 1) + " of " + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length);
         }
-        if (this.playGround && ACTIVITY_BAP_1.config.graphicalAssets.backgrounds.images[ACTIVITY_BAP_1.ref.curImageIdx]) {
+        if (this.playGround && ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[ACTIVITY_BAP_1.ref.curImageIdx]) {
             this.playGround.runAction(new cc.Sequence(new cc.FadeOut(0.2), new cc.callFunc(() => {
-                ACTIVITY_BAP_1.ref.playGround.setTexture(new cc.Sprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.backgrounds.images[ACTIVITY_BAP_1.ref.curImageIdx]).getTexture());
+                ACTIVITY_BAP_1.ref.playGround.setTexture(new cc.Sprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[ACTIVITY_BAP_1.ref.curImageIdx]).getTexture());
                 ACTIVITY_BAP_1.ref.playGround.runAction(new cc.FadeIn(0.1));
                 if (ACTIVITY_BAP_1.ref.getChildByTag(ACTIVITY_BAP_1.Tag.boardInitialTag + ACTIVITY_BAP_1.ref.curImageIdx)) {
                     ACTIVITY_BAP_1.ref.getChildByTag(ACTIVITY_BAP_1.Tag.boardInitialTag + ACTIVITY_BAP_1.ref.curImageIdx).setVisible(true);

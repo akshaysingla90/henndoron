@@ -47,8 +47,8 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
             if (ACTIVITY_COUNTING_1.ref.storedData) {
                 ACTIVITY_COUNTING_1.ref.syncData(ACTIVITY_COUNTING_1.ref.storedData)
             }
-            ACTIVITY_COUNTING_1.ref.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.moduleStart.ops);
-            ACTIVITY_COUNTING_1.ref.triggerTip(ACTIVITY_COUNTING_1.ref.config.teacherTips.moduleStart);
+            ACTIVITY_COUNTING_1.ref.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.moduleStart.content.ops);
+            ACTIVITY_COUNTING_1.ref.triggerTip(ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart);
         });
     },
 
@@ -62,7 +62,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * To create initial UI for teacher and student.
      **/
     setupUI: function () {
-        this.setBackground(ACTIVITY_COUNTING_1.ref.spriteBasePath + ACTIVITY_COUNTING_1.ref.config.graphicalAssets.background.name);
+        this.setBackground(ACTIVITY_COUNTING_1.ref.spriteBasePath + ACTIVITY_COUNTING_1.ref.config.background.sections.background.imageName);
         this.baseLayer = this.createColourLayer(cc.color(0, 0, 0, 0), cc.winSize.width, cc.winSize.height, cc.p(0, 0), this, 1);
         this.setupHiddenUI();
         if (ACTIVITY_COUNTING_1.ref.isTeacherView && !ACTIVITY_COUNTING_1.ref.storedData) { //Set only for Teacher
@@ -73,13 +73,13 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * To load game audio
      **/
     loadAudio: function () {
-        cc.loader.load(ACTIVITY_COUNTING_1.ref.soundPath + ACTIVITY_COUNTING_1.ref.config.audioAssets.tapHiddenObject.name);
+        cc.loader.load(ACTIVITY_COUNTING_1.ref.soundPath + ACTIVITY_COUNTING_1.ref.config.assets.sections.tapHiddenObject.sound);
     },
     /**
      * setupHiddenUI: Set up initial UI where objects are hidden.
      */
     setupHiddenUI: function () {
-        var hiddenObjects = ACTIVITY_COUNTING_1.ref.config.countingData;
+        var hiddenObjects = ACTIVITY_COUNTING_1.ref.config.assets.sections.countingItems.data;
         if (hiddenObjects && hiddenObjects.length > 0) {
             for (let index = 0; index < hiddenObjects.length; index++) {
                 this.createHiddenObject(hiddenObjects[index], index);
@@ -182,7 +182,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
                     "users": []
                 });
             } else {
-                this.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.onMouseEnable.ops);
+                this.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.onMouseEnable.content.ops);
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
                     "users": [{ userName: userName }]
@@ -249,7 +249,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
                         break;
                     default:
                         if (ACTIVITY_COUNTING_1.ref.isStudentInteractionEnable) {
-                            var revealedObject = ACTIVITY_COUNTING_1.ref.config.countingData[sender.tag - ACTIVITY_COUNTING_1.Tag.baseHiddenObject];
+                            var revealedObject = ACTIVITY_COUNTING_1.ref.config.assets.sections.countingItems.data[sender.tag - ACTIVITY_COUNTING_1.Tag.baseHiddenObject];
                             ACTIVITY_COUNTING_1.ref.revealedObjects.push(revealedObject);
                             this.showHiddenObject(sender.tag);
                             ACTIVITY_COUNTING_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
@@ -293,7 +293,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * @param index
      */
     updateHiddenObjectList: function (index) {
-        var revealedObject = ACTIVITY_COUNTING_1.ref.config.countingData[index - ACTIVITY_COUNTING_1.Tag.baseHiddenObject];
+        var revealedObject = ACTIVITY_COUNTING_1.ref.config.assets.sections.countingItems.data[index - ACTIVITY_COUNTING_1.Tag.baseHiddenObject];
         if (this.alreadyPresent(revealedObject)) {
             return;
         }
@@ -321,12 +321,12 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
      * @param revealedList
      */
     syncAllObjects: function (revealedList) {
-        var hiddenObjects = ACTIVITY_COUNTING_1.ref.config.countingData;
+        var hiddenObjects = ACTIVITY_COUNTING_1.ref.config.assets.sections.countingItems.data;
         if (hiddenObjects && hiddenObjects.length > 0 && revealedList && revealedList.length > 0) {
             for (let indexRevealed = 0; indexRevealed < revealedList.length; indexRevealed++) {
                 var currentRevealedObject = revealedList[indexRevealed];
                 for (let indexHidden = 0; indexHidden < hiddenObjects.length; indexHidden++) {
-                    if (currentRevealedObject.name == hiddenObjects[indexHidden].name) {
+                    if (currentRevealedObject.name == hiddenObjects[indexHidden].defaultImageName) {
                         ACTIVITY_COUNTING_1.ref.updateHiddenObjectList(ACTIVITY_COUNTING_1.Tag.baseHiddenObject + indexHidden);
                     }
                 }

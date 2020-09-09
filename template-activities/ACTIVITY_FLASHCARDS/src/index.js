@@ -275,27 +275,27 @@ Flashcards.CommonFlashCardsLayer = HDBaseLayer.extend({
     this.setUpCommonUI();
     if (
       state >= 0 &&
-      Flashcards.MainFlashCardsLayerRef.config.currentTheme ===
-      Flashcards.MainFlashCardsLayerRef.config.theme.billboards
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.theme.billboards
     ) {
       this.driveToNextBillboard(
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets[
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
           state
-        ].previewImageName,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets[
+        ].imageName,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
           state
         ].label
       );
     } else if (
       state >= 0 &&
-      Flashcards.MainFlashCardsLayerRef.config.currentTheme ===
-      Flashcards.MainFlashCardsLayerRef.config.theme.bookOfRhymes
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
     ) {
       this.turnBookPage(
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets[
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
           state
-        ].previewImageName,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets[
+        ].imageName,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
           state
         ].label
       );
@@ -304,62 +304,61 @@ Flashcards.CommonFlashCardsLayer = HDBaseLayer.extend({
   setUpCommonUI: function () {
     this.addBackground();
     if (
-      Flashcards.MainFlashCardsLayerRef.config.currentTheme !==
-      Flashcards.MainFlashCardsLayerRef.config.theme.bookOfRhymes
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue !==
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
     ) {
       this.setWordHolder(
         this.state >= 0
-          ? Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
-            .carouselAssets[this.state].label
+          ? Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[this.state].label
           : ""
       );
     } else {
       // for book of rhymes show only label for now ,
     }
     if (
-      Flashcards.MainFlashCardsLayerRef.config.currentTheme ===
-      Flashcards.MainFlashCardsLayerRef.config.theme.classic
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.theme.classic
     ) {
       this.renderInitialSelectedFlashcardItem();
     }
   },
   addBackground: function () {
     if (
-      Flashcards.MainFlashCardsLayerRef.config.currentTheme ===
-      Flashcards.MainFlashCardsLayerRef.config.theme.bookOfRhymes
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
     ) {
       var book = new Flashcards.Book(
         Flashcards.resourcePath +
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.background
+        Flashcards.MainFlashCardsLayerRef.config.background.sections.background
           .imageName,
         undefined,
         "",
         cc.p(
           HDAppManager.isTeacherView
-            ? Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+            ? Flashcards.MainFlashCardsLayerRef.config.assets.sections
               .BookOfRhymesWordLabel.teacher.position.x
-            : Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+            : Flashcards.MainFlashCardsLayerRef.config.assets.sections
               .BookOfRhymesWordLabel.student.position.x,
           HDAppManager.isTeacherView
-            ? Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+            ? Flashcards.MainFlashCardsLayerRef.config.assets.sections
               .BookOfRhymesWordLabel.teacher.position.y
-            : Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+            : Flashcards.MainFlashCardsLayerRef.config.assets.sections
               .BookOfRhymesWordLabel.student.position.y
         ),
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.BookOfRhymesWordLabel.font,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.BookOfRhymesWordLabel.fontSize,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabel.font,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabel.fontSize,
         cc.color(
-          Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+          Flashcards.MainFlashCardsLayerRef.config.assets.sections
             .BookOfRhymesWordLabel.color.r,
-          Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+          Flashcards.MainFlashCardsLayerRef.config.assets.sections
             .BookOfRhymesWordLabel.color.g,
-          Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+          Flashcards.MainFlashCardsLayerRef.config.assets.sections
             .BookOfRhymesWordLabel.color.b,
-          Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+          Flashcards.MainFlashCardsLayerRef.config.assets.sections
             .BookOfRhymesWordLabel.color.a
         ),
         Flashcards.soundPath +
-        Flashcards.MainFlashCardsLayerRef.config.sounds.pageFlip
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.swipe.sound
       );
       book.setTag(this.bookTag);
       this.addChild(book);
@@ -367,18 +366,20 @@ Flashcards.CommonFlashCardsLayer = HDBaseLayer.extend({
     } else {
       var bgSpriteRef = this.setBackground(
         Flashcards.resourcePath +
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.background
+        Flashcards.MainFlashCardsLayerRef.config.background.sections.background
           .imageName
       );
       bgSpriteRef.setLocalZOrder(-1);
     }
   },
   renderInitialSelectedFlashcardItem: function () {
+
+    console.log('state of images ', this.state);
     var selectedFlashCardItemSprite = this.addSprite(
       Flashcards.resourcePath +
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets[
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
         this.state >= 0 ? this.state : 0
-      ].previewImageName,
+      ].imageName,
       cc.p(
         this.getContentSize().width * 0.5,
         this.getContentSize().height * 0.5
@@ -423,19 +424,19 @@ Flashcards.CommonFlashCardsLayer = HDBaseLayer.extend({
     var billBoard = new Flashcards.BillboardSprite(
       this,
       Flashcards.resourcePath +
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.billboard
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.billboard
         .imageName,
       Flashcards.resourcePath + imageName,
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.billboard.position.y,
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.billboard.position.y,
       0.5,
       () => this.onBillboardEnterd(word),
       Flashcards.soundPath +
-      Flashcards.MainFlashCardsLayerRef.config.sounds.swipe,
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.swipe.sound,
       cc.p(
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
-          .billboardDisplayImage.position.x,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
-          .billboardDisplayImage.position.y
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
+          .billboardDisplayImage.animationPath[0],
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
+          .billboardDisplayImage.animationPath[1]
       )
     );
     this.billboardQueue.push(billBoard);
@@ -448,17 +449,17 @@ Flashcards.CommonFlashCardsLayer = HDBaseLayer.extend({
     }
   },
   showSyncData: function (texture, textData) {
-    switch (Flashcards.MainFlashCardsLayerRef.config.currentTheme) {
-      case Flashcards.MainFlashCardsLayerRef.config.theme.classic: {
+    switch (Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue) {
+      case Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.theme.classic: {
         this.updateFlashcardItemImage(texture);
         this.updateWordHolderText(textData);
         break;
       }
-      case Flashcards.MainFlashCardsLayerRef.config.theme.billboards: {
+      case Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.theme.billboards: {
         this.driveToNextBillboard(texture, textData);
         break;
       }
-      case Flashcards.MainFlashCardsLayerRef.config.theme.bookOfRhymes: {
+      case Flashcards.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes: {
         this.turnBookPage(texture, textData);
         break;
       }
@@ -472,18 +473,18 @@ Flashcards.CommonFlashCardsLayer = HDBaseLayer.extend({
   setWordHolder: function (initialLabelString) {
     var wordHolderSprite = this.addSprite(
       Flashcards.resourcePath +
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
         .imageName,
       cc.p(
         HDAppManager.isTeacherView
-          ? Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+          ? Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
             .teacher.position.x
-          : Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+          : Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
             .student.position.x,
         HDAppManager.isTeacherView
-          ? Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+          ? Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
             .teacher.position.y
-          : Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+          : Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
             .student.position.y
       ),
       this
@@ -494,24 +495,24 @@ Flashcards.CommonFlashCardsLayer = HDBaseLayer.extend({
 
     var label = this.createTTFLabel(
       initialLabelString,
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
         .wordLabel.font,
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
         .wordLabel.fontSize,
       cc.color(
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
           .wordLabel.color.r,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
           .wordLabel.color.g,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
           .wordLabel.color.b,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
           .wordLabel.color.a
       ),
       cc.p(
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
           .wordLabel.position.x,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.wordHolder
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
           .wordLabel.position.y
       ),
       wordHolderSprite
@@ -562,13 +563,12 @@ Flashcards.TeacherViewLayer = Flashcards.CommonFlashCardsLayer.extend({
     var x_position = this.sideBottomBar_X_position;
     var width = this.maxSideBottomBarWidth;
     if (
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data
         .length < this.visibleFlashCardItemsCount
     ) {
       width =
         (this.maxSideBottomBarWidth *
-          Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
-            .carouselAssets.length) /
+          Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length) /
         this.visibleFlashCardItemsCount;
       x_position =
         (this.maxSideBottomBarWidth - width) / 2 +
@@ -586,7 +586,7 @@ Flashcards.TeacherViewLayer = Flashcards.CommonFlashCardsLayer.extend({
 
     var tableViewBgSprite = this.addSprite(
       Flashcards.resourcePath +
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections
         .carouselBackground.imageName,
       cc.p(0, 0),
       tableViewBackgroundColorLayer
@@ -615,10 +615,9 @@ Flashcards.TeacherViewLayer = Flashcards.CommonFlashCardsLayer.extend({
   tableCellSizeForIndex: function (table, idx) {
     return cc.size(
       table.width /
-      (Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets
+      (Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data
         .length < this.visibleFlashCardItemsCount
-        ? Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
-          .carouselAssets.length
+        ? Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length
         : this.visibleFlashCardItemsCount),
       table.height
     );
@@ -632,7 +631,7 @@ Flashcards.TeacherViewLayer = Flashcards.CommonFlashCardsLayer.extend({
       cell = new Flashcards.FlashCardItem();
     }
     cell.createItem(
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets[
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
       idx
       ],
       cellSize,
@@ -641,8 +640,7 @@ Flashcards.TeacherViewLayer = Flashcards.CommonFlashCardsLayer.extend({
     return cell;
   },
   numberOfCellsInTableView: function (table) {
-    return Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
-      .carouselAssets.length;
+    return Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length;
   },
   tableCellTouched: function (table, cell) {
     var previouslySelectedFlashCardItemIdx = this.selectedFlashCardItemIdx;
@@ -652,10 +650,10 @@ Flashcards.TeacherViewLayer = Flashcards.CommonFlashCardsLayer.extend({
     ) {
       this.selectedFlashCardItemIdx = cell.getIdx();
       this.showSyncData(
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets[
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
           cell.getIdx()
-        ].previewImageName,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselAssets[
+        ].imageName,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
           cell.getIdx()
         ].label
       );
@@ -677,10 +675,11 @@ Flashcards.TeacherViewLayer = Flashcards.CommonFlashCardsLayer.extend({
           eventType: Flashcards.teacherEvents.FLASH_CARDS_NEXT_ITEM,
           roomId: HDAppManager.roomId,
           data:
-            Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
-              .carouselAssets[cell.getIdx()],
+            Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[cell.getIdx()],
         },
+
         () => undefined
+
       );
 
       // updated update room data
@@ -697,6 +696,7 @@ Flashcards.TeacherViewLayer = Flashcards.CommonFlashCardsLayer.extend({
               data: this.selectedFlashCardItemIdx,
             },
           },
+
         },
         null
       );
@@ -744,16 +744,16 @@ Flashcards.FlashCardItem = cc.TableViewCell.extend({
     var r, g, b, a;
     if (isSelected) {
       r =
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
           .carouselItemHighlighted.color.r;
       g =
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
           .carouselItemHighlighted.color.g;
       b =
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
           .carouselItemHighlighted.color.b;
       a =
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
           .carouselItemHighlighted.color.a;
     } else {
       r = 0;
@@ -769,7 +769,7 @@ Flashcards.FlashCardItem = cc.TableViewCell.extend({
     );
     var itemBgSprite = new cc.Sprite(
       Flashcards.resourcePath +
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections
         .carouselForeground.imageName
     );
     itemBgSprite.setScale(
@@ -788,7 +788,7 @@ Flashcards.FlashCardItem = cc.TableViewCell.extend({
     );
     itemBgColorLayer.addChild(itemBgSprite);
     var itemSpriteRef = Flashcards.teacherViewLayerRef.addSprite(
-      Flashcards.resourcePath + item.thumbnailImageName,
+      Flashcards.resourcePath + item.imageName,
       cc.p(
         itemBgColorLayer.getContentSize().width * 0.5,
         itemBgColorLayer.getContentSize().height * 0.5
@@ -803,10 +803,10 @@ Flashcards.FlashCardItem = cc.TableViewCell.extend({
     );
     var itemNameColorLayer = Flashcards.teacherViewLayerRef.createColourLayer(
       new cc.Color(
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselItemLabelBackground.color.r,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselItemLabelBackground.color.g,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselItemLabelBackground.color.b,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselItemLabelBackground.color.a
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.r,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.g,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.b,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.a
       ),
       itemBgColorLayer.getContentSize().width,
       itemBgColorLayer.getContentSize().height * 0.25,
@@ -816,18 +816,18 @@ Flashcards.FlashCardItem = cc.TableViewCell.extend({
     );
     Flashcards.teacherViewLayerRef.createTTFLabel(
       item.label,
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselItemLabel
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel
         .font,
-      Flashcards.MainFlashCardsLayerRef.config.graphicalAssets.carouselItemLabel
+      Flashcards.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel
         .fontSize,
       cc.color(
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
           .carouselItemLabel.color.r,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
           .carouselItemLabel.color.g,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
           .carouselItemLabel.color.b,
-        Flashcards.MainFlashCardsLayerRef.config.graphicalAssets
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections
           .carouselItemLabel.color.a
       ),
       cc.p(
@@ -846,9 +846,11 @@ Flashcards.StudentViewLayer = Flashcards.CommonFlashCardsLayer.extend({
   },
   onNotificationReceived: function (event) {
     const { eventType, data } = event;
+    console.log('image name', data.previewImageName);
     switch (eventType) {
       case Flashcards.teacherEvents.FLASH_CARDS_NEXT_ITEM: {
         this.showSyncData(data.previewImageName, data.label);
+
         break;
       }
       default: {

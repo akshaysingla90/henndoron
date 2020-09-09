@@ -1,609 +1,574 @@
 {
   "properties": {
-    "configurable": true,
-    "url": "res/Activity/ACTIVITY_SPINNINGWHEEL_1/",
-    "number": "1",
-    "name": "SpinningWheel",
-    "namespace": "ACTIVITY_SPINNINGWHEEL_1",
-    "layerName": "SpinningWheelLayer",
+    "component": "infoCard",
     "activityName": "Spinning Wheel",
-    "teacherScriptsNotes": {
-      "notes": "Ask to identify notes",
-      "timestamp": "",
-      "triggers": ""
-    },
+    "description": "game desc. here",
+    "allocatedTime": 10,
     "controls": {
       "mouse": true,
       "turnBased": true
     },
-    "teacherTipsNotes": {
-      "tips": "Don't ask about bag",
-      "timestamp": "",
-      "triggers": ""
-    },
-    "description": "",
-    "allocatedTime": 10,
+    "externalRewards": true,
     "studentPreview": false,
-    "preLoaded": false
+    "url": "res/Activity/ACTIVITY_SPINNINGWHEEL_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": false,
+    "namespace": "ACTIVITY_SPINNINGWHEEL_1",
+    "layerName": "SpinningWheelLayer"
   },
-  "jsList": [
-    "res/Activity/ACTIVITY_SPINNINGWHEEL_1/src/SpinningWheel.js"
-  ],
   "teacherScripts": {
-    "moduleStart": {
-      "ops": [
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Circle/point to the images inside the wheel while the student reviews words."
-        },
-        {
-          "attributes": {
-            "underline": true,
-            "italic": true
-          },
-          "insert": " "
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "What do you see here?"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": " "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "I see (a tub, a house, a tree, a book, sad Paul, glad Paul)."
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Circle/point to the image to the right of the wheel."
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "What do you see here? I see______. Let’s spin the wheel and find the match!"
-        },
-        {
-          "insert": "\n\n"
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "moduleStart",
+        "description": "this will trigger when module starts",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Circle/point to the images inside the wheel while the student reviews words."
+            },
+            {
+              "attributes": {
+                "underline": true,
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What do you see here?"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I see (a tub, a house, a tree, a book, sad Paul, glad Paul)."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Circle/point to the image to the right of the wheel."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "What do you see here? I see______. Let’s spin the wheel and find the match!"
+            },
+            {
+              "insert": "\n\n"
+            }
+          ]
         }
-      ]
-    },
-    "onGoButton": {
-      "ops": [
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Click the Go! button to start the wheel. "
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "Stop! "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "What’s this?"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": " "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "I know!"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": " "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "This is a"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "______. Is it a match? Yes/No"
-        },
-        {
-          "insert": "\n\n"
+      },
+      "onGoButton": {
+        "UIName": "GoButtonClicked",
+        "description": "this will trigger when GO button is clicked",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Click the Go! button to start the wheel. "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Stop! "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What’s this?"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I know!"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "This is a"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "______. Is it a match? Yes/No"
+            },
+            {
+              "insert": "\n\n"
+            }
+          ]
         }
-      ]
-    },
-    "onMouseEnable": {
-      "ops": [
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "Now it’s your turn! Can you spin the wheel? Yes, I can spin the wheel! "
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Choose an image in the sidebar for the wheel to stop on."
-        },
-        {
-          "insert": " \n\n"
-        },
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Student clicks the Go! Button. "
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "What’s this? I know! This is a______. Is it a match? Yes/No. "
-        },
-        {
-          "insert": "\n\n\n"
+      },
+      "onMouseEnable": {
+        "UIName": "onMouseEnable",
+        "description": "this will trigger when module starts",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Now it’s your turn! Can you spin the wheel? Yes, I can spin the wheel! "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Choose an image in the sidebar for the wheel to stop on."
+            },
+            {
+              "insert": " \n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Student clicks the Go! Button. "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "What’s this? I know! This is a______. Is it a match? Yes/No. "
+            },
+            {
+              "insert": "\n\n\n"
+            }
+          ]
         }
-      ]
+      }
     }
   },
   "teacherTips": {
-    "moduleStart": {
-      "ops": [
-        {
-          "insert": "- Circle or point to the image on the right so student can see that they must match that image with the one in the wheel. \n- You choose when the student gets it right. Make the wheel land on the incorrect answer a few times to review more words.\n- Use gestures for spin and stop to help students understand the activity. \n- Don’t forget to praise their efforts!  \n"
+    "component": "tipsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "moduleStart",
+        "description": "this will trigger when activity starts ",
+        "content": {
+          "ops": [
+            {
+              "insert": "- Circle or point to the image on the right so student can see that they must match that image with the one in the wheel. \n- You choose when the student gets it right. Make the wheel land on the incorrect answer a few times to review more words.\n- Use gestures for spin and stop to help students understand the activity. \n- Don’t forget to praise their efforts!  \n"
+            }
+          ]
         }
-      ]
+      }
     }
   },
-  "gameInfo": {
-    "isCounting": true,
-    "countingObject": 3
-  },
-  "graphicalAssets": {
-    "background": {
-      "configurable": true,
-      "name": "bg.png",
-      "size": "{960, 649}",
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "targetBackground": {
-      "configurable": true,
-      "name": "targetBg.png",
-      "backgroundColor": {
-        "r": 255,
-        "g": 255,
-        "b": 255,
-        "a": 255
-      },
-      "size": {
-        "width": 200,
-        "height": 200
-      },
-      "position": {
-        "x": 520,
-        "y": 224.5
-      },
-      "scale": 0.5,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "spinningWheelBase": {
-      "configurable": true,
-      "name": "wheel_4.png",
-      "size": {
-        "width": 300,
-        "height": 300
-      },
-      "position": {
-        "x": 250,
-        "y": 374.5
-      },
-      "scale": 0.8,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "spinningCenter": {
-      "configurable": true,
-      "name": "wheel_center.png",
-      "size": {
-        "width": 300,
-        "height": 300
-      },
-      "position": {
-        "x": 150,
-        "y": 162.25
-      },
-      "scale": 0.15,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "spinningWheelTop": {
-      "configurable": true,
-      "name": "wheel_arrow.png",
-      "size": "{960, 649}",
-      "position": {
-        "x": 250,
-        "y": 324.5
-      },
-      "scale": 0.25,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "goButton": {
-      "configurable": true,
-      "disabledImage": "go_button_disabled.png",
-      "idleImage": "go_button_idle.png",
-      "pushedImage": "go_button_pushed.png",
-      "title": "",
-      "size": "{960, 649}",
-      "position": {
-        "x": 650,
-        "y": 204.5
-      },
-      "scale": 0.5,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "stopButton": {
-      "configurable": true,
-      "disabledImage": "stop_button_disabled.png",
-      "idleImage": "stop_button_idle.png",
-      "pushedImage": "stop_button_pushed.png",
-      "title": "",
-      "size": "{960, 649}",
-      "position": {
-        "x": 650,
-        "y": 104.5
-      },
-      "scale": 0.5,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "carouselBackgroundImage": {
-      "configurable": true,
-      "name": "carouselImage.png",
-      "size": "{290, 95}",
-      "position": {
-        "x": 768,
-        "y": 454.3
-      },
-      "scale": 1,
-      "constraints": [
-        "imageName, size, position"
-      ]
-    },
-    "carouselBackgroundBorderImage": {
-      "configurable": true,
-      "name": "carouselBorderImage.png",
-      "size": "{290, 95}",
-      "position": {
-        "x": 768,
-        "y": 454.3
-      },
-      "scale": 1,
-      "constraints": [
-        "imageName, size, position"
-      ]
-    },
-    "carouselBackground": {
-      "configurable": true,
-      "color": {
-        "r": 60,
-        "g": 92,
-        "b": 113,
-        "a": 0
-      },
-      "constraints": [
-        "color"
-      ]
-    },
-    "carouselBoxBackground": {
-      "configurable": true,
-      "color": {
-        "r": 78,
-        "g": 106,
-        "b": 125,
-        "a": 0
-      },
-      "constraints": [
-        "color"
-      ]
-    },
-    "carouselBoxCardBackground": {
-      "configurable": true,
-      "color": {
-        "r": 44,
-        "g": 59,
-        "b": 69,
-        "a": 0
-      },
-      "constraints": [
-        "color"
-      ]
-    },
-    "carouselBoxCardText": {
-      "configurable": true,
-      "color": {
-        "r": 0,
-        "g": 0,
-        "b": 0,
-        "a": 0
-      },
-      "font": "sans-serif",
-      "fontSize": 16,
-      "constraints": [
-        "color"
-      ]
-    },
-    "carouselBoxHighlight": {
-      "configurable": true,
-      "color": {
-        "r": 148,
-        "g": 122,
-        "b": 58,
-        "a": 100
-      },
-      "constraints": [
-        "color"
-      ]
-    },
-    "carouselGlowBoxCard": {
-      "configurable": true,
-      "name": "cellGlow.png",
-      "constraints": [
-        "imageName"
-      ]
-    },
-    "animationWinLossSprite": {
-      "configurable": true,
-      "title": "STOP!",
-      "position": {
-        "x": 600,
-        "y": 204.5
-      },
-      "scale": 1,
-      "constraints": [
-        "name",
-        "position"
-      ]
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg.png",
+        "dimensions": {
+          "width": 960,
+          "height": 649
+        }
+      }
     }
   },
-  "audioAssets": {
-    "tapHiddenObject": {
-      "configurable": true,
-      "name": "tap.mp3",
-      "constraints": [
-        "name"
-      ]
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "goButton": {
+        "UIName": "Go Button",
+        "enableState": "go_button_idle.png",
+        "pushedState": "go_button_pushed.png",
+        "disableState": "go_button_disabled.png",
+        "position": {
+          "x": 650,
+          "y": 204.5
+        },
+        "scale": 0.5
+      },
+      "stopButton": {
+        "UIName": "Stop Button",
+        "enableState": "stop_button_idle.png",
+        "pushedState": "stop_button_pushed.png",
+        "disableState": "stop_button_disabled.png",
+        "position": {
+          "x": 650,
+          "y": 104.5
+        },
+        "scale": 0.5
+      }
     }
   },
-  "targetAssets": [
-    {
-      "configurable": true,
-      "sound": "abc.mp3",
-      "name": "ant.png",
-      "nameImage": false,
-      "nameImageName": "",
-      "cardValue": "ant",
-      "size": {
-        "width": 350,
-        "height": 350
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "targetBackground": {
+        "component": "image",
+        "UIName": "Target Background",
+        "imageName": "targetBg.png",
+        "backgroundColor": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "dimensions": {
+          "width": 200,
+          "height": 200
+        },
+        "position": {
+          "x": 520,
+          "y": 224.5
+        },
+        "scale": 0.5
       },
-      "scale": 1,
-      "constraints": [
-        "imageName, sound, size"
-      ]
-    },
-    {
-      "configurable": true,
-      "sound": "abc.mp3",
-      "name": "bat.png",
-      "cardValue": "bat",
-      "nameImage": false,
-      "nameImageName": "",
-      "size": {
-        "width": 350,
-        "height": 350
+      "spinningWheelBase": {
+        "component": "image",
+        "UIName": "Spinning Wheel Base",
+        "imageName": "wheel_4.png",
+        "dimensions": {
+          "width": 300,
+          "height": 300
+        },
+        "position": {
+          "x": 250,
+          "y": 374.5
+        },
+        "scale": 0.8
       },
-      "scale": 1,
-      "constraints": [
-        "imageName, sound, size"
-      ]
-    },
-    {
-      "configurable": true,
-      "sound": "abc.mp3",
-      "name": "bee.png",
-      "cardValue": "bee",
-      "nameImage": false,
-      "nameImageName": "",
-      "size": {
-        "width": 350,
-        "height": 350
+      "spinningCenter": {
+        "component": "image",
+        "UIName": "Spinning Center",
+        "imageName": "wheel_center.png",
+        "dimensions": {
+          "width": 300,
+          "height": 300
+        },
+        "position": {
+          "x": 150,
+          "y": 162.25
+        },
+        "scale": 0.15
       },
-      "scale": 1,
-      "constraints": [
-        "imageName, sound, size"
-      ]
-    },
-    {
-      "configurable": true,
-      "sound": "abc.mp3",
-      "name": "crow.png",
-      "cardValue": "crow",
-      "nameImage": false,
-      "nameImageName": "",
-      "size": {
-        "width": 350,
-        "height": 350
+      "spinningWheelTop": {
+        "component": "image",
+        "UIName": "Spinning WheelTop",
+        "imageName": "wheel_arrow.png",
+        "position": {
+          "x": 250,
+          "y": 324.5
+        },
+        "scale": 0.25
       },
-      "scale": 1,
-      "constraints": [
-        "imageName, sound, size"
-      ]
-    }
-  ],
-  "carouselAssets": [
-    {
-      "configurable": true,
-      "sound": "abc.mp3",
-      "name": "ant.png",
-      "nameImage": false,
-      "nameImageName": "",
-      "cardValue": "ant",
-      "size": {
-        "width": 350,
-        "height": 350
+      "carouselBackgroundImage": {
+        "component": "image",
+        "UIName": "Carousel Background Image",
+        "imageName": "carouselImage.png",
+        "position": {
+          "x": 768,
+          "y": 454.3
+        },
+        "dimensions": {
+          "width": 290,
+          "height": 95
+        }
       },
-      "scale": 0.75,
-      "constraints": [
-        "imageName, sound, size"
-      ]
-    },
-    {
-      "configurable": true,
-      "sound": "abc.mp3",
-      "name": "bat.png",
-      "nameImage": false,
-      "nameImageName": "",
-      "cardValue": "bat",
-      "size": {
-        "width": 350,
-        "height": 350
+      "carouselBackgroundBorderImage": {
+        "component": "image",
+        "UIName": "Carousel Background Border Image",
+        "imageName": "carouselBorderImage.png",
+        "position": {
+          "x": 768,
+          "y": 454.3
+        },
+        "dimensions": {
+          "width": 290,
+          "height": 95
+        }
       },
-      "scale": 0.75,
-      "constraints": [
-        "imageName, sound, size"
-      ]
-    },
-    {
-      "configurable": true,
-      "sound": "abc.mp3",
-      "name": "bee.png",
-      "nameImage": false,
-      "nameImageName": "",
-      "cardValue": "bee",
-      "size": {
-        "width": 350,
-        "height": 350
+      "carouselBackground": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": {
+          "r": 60,
+          "g": 92,
+          "b": 113,
+          "a": 0
+        },
+        "constraints": [
+          "color"
+        ]
       },
-      "scale": 0.75,
-      "constraints": [
-        "imageName, sound, size"
-      ]
-    },
-    {
-      "configurable": true,
-      "sound": "abc.mp3",
-      "name": "crow.png",
-      "nameImage": false,
-      "nameImageName": "",
-      "cardValue": "crow",
-      "size": {
-        "width": 350,
-        "height": 350
+      "carouselBoxBackground": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": {
+          "r": 78,
+          "g": 106,
+          "b": 125,
+          "a": 0
+        },
+        "constraints": [
+          "color"
+        ]
       },
-      "scale": 0.75,
-      "constraints": [
-        "imageName, sound, size"
-      ]
-    }
-  ],
-  "animation": {
-    "win": {
-      "configurable": true,
-      "name": "cardTakeOut",
-      "frameCount": 15,
-      "sound": "cardTakeOut.mp3",
-      "size": "{100,100}",
-      "position": {
-        "x": 256,
-        "y": 512
+      "carouselBoxCardBackground": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": {
+          "r": 44,
+          "g": 59,
+          "b": 69,
+          "a": 0
+        },
+        "constraints": [
+          "color"
+        ]
       },
-      "animationPath": "{100,100},{200,200}",
-      "constraints": [
-        "imageName, size, animationPath"
-      ]
-    },
-    "loss": {
-      "configurable": true,
-      "name": "cardTakeOut",
-      "frameCount": 15,
-      "sound": "cardTakeOut.mp3",
-      "size": "{100,100}",
-      "position": {
-        "x": 256,
-        "y": 512
+      "carouselBoxCardText": {
+        "component": "text",
+        "UIName": "carousel Box Card Text",
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0
+        },
+        "font": "sassoon_sans_regular",
+        "fontSize": 16
       },
-      "animationPath": "{100,100},{200,200}",
-      "constraints": [
-        "imageName, size, animationPath"
+      "carouselBoxHighlight": {
+        "component": "colorPicker",
+        "UIName": "carousel Box Highlight",
+        "color": {
+          "r": 148,
+          "g": 95,
+          "b": 56,
+          "a": 100
+        }
+      },
+      "animationWinLossSprite": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "title": "STOP!",
+        "position": {
+          "x": 600,
+          "y": 204.5
+        },
+        "scale": 1,
+        "constraints": [
+          "name",
+          "position"
+        ]
+      },
+      "tapHiddenObject": {
+        "component": "sound",
+        "UIName": "tap Hidden Object Sound",
+        "sound": "tap.mp3"
+      },
+      "carouselAssets": {
+        "component": "carouselItems",
+        "dimensions": {
+          "width": 350,
+          "height": 350
+        },
+        "data": [
+          {
+            "imageName": "ant.png",
+            "dimensions": {
+              "width": 350,
+              "height": 350
+            },
+            "scale": "1",
+            "label": "ant"
+          },
+          {
+            "imageName": "bat.png",
+            "dimensions": {
+              "width": 350,
+              "height": 350
+            },
+            "scale": "1",
+            "label": "bat"
+          },
+          {
+            "imageName": "bee.png",
+            "dimensions": {
+              "width": 350,
+              "height": 350
+            },
+            "scale": "1",
+            "label": "bee"
+          },
+          {
+            "imageName": "crow.png",
+            "dimensions": {
+              "width": 350,
+              "height": 350
+            },
+            "scale": "1",
+            "label": "crow"
+          }
+        ]
+      },
+      "win": {
+        "component": "animation",
+        "UIName": "win",
+        "name": "cardTakeOut",
+        "frameCount": 15,
+        "size": "{100,100}",
+        "position": {
+          "x": 256,
+          "y": 512
+        },
+        "animationPath": "{100,100},{200,200}",
+        "constraints": [
+          "imageName, size, animationPath"
+        ]
+      },
+      "loss": {
+        "component": "animation",
+        "UIName": "loss",
+        "name": "cardTakeOut",
+        "frameCount": 15,
+        "size": "{100,100}",
+        "position": {
+          "x": 256,
+          "y": 512
+        },
+        "animationPath": "{100,100},{200,200}",
+        "constraints": [
+          "imageName, size, animationPath"
+        ]
+      },
+      "gameInfo": {
+        "isCounting": true,
+        "countingObject": 3
+      },
+      "targetAssets": [
+        {
+          "configurable": true,
+          "sound": "abc.mp3",
+          "name": "ant.png",
+          "nameImage": false,
+          "nameImageName": "",
+          "cardValue": "ant",
+          "size": {
+            "width": 350,
+            "height": 350
+          },
+          "scale": 1,
+          "constraints": [
+            "imageName, sound, size"
+          ]
+        },
+        {
+          "configurable": true,
+          "sound": "abc.mp3",
+          "name": "bat.png",
+          "cardValue": "bat",
+          "nameImage": false,
+          "nameImageName": "",
+          "size": {
+            "width": 350,
+            "height": 350
+          },
+          "scale": 1,
+          "constraints": [
+            "imageName, sound, size"
+          ]
+        },
+        {
+          "configurable": true,
+          "sound": "abc.mp3",
+          "name": "bee.png",
+          "cardValue": "bee",
+          "nameImage": false,
+          "nameImageName": "",
+          "size": {
+            "width": 350,
+            "height": 350
+          },
+          "scale": 1,
+          "constraints": [
+            "imageName, sound, size"
+          ]
+        },
+        {
+          "configurable": true,
+          "sound": "abc.mp3",
+          "name": "crow.png",
+          "cardValue": "crow",
+          "nameImage": false,
+          "nameImageName": "",
+          "size": {
+            "width": 350,
+            "height": 350
+          },
+          "scale": 1,
+          "constraints": [
+            "imageName, sound, size"
+          ]
+        }
       ]
     }
   },
   "resources": {
+    "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [

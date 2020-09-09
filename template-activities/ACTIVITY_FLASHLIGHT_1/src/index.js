@@ -67,11 +67,14 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             }
 
             if (ACTIVITY_FLASHLIGHT_1.ref.isTeacherView && !ACTIVITY_FLASHLIGHT_1.ref.storedData) {
-                ACTIVITY_FLASHLIGHT_1.ref.updateRoomData({ "freezeInfo": { "position": "", "name": "" }, "circleData": this.circleSyncData });
+                ACTIVITY_FLASHLIGHT_1.ref.updateRoomData({
+                    "freezeInfo": { "position": "", "name": "" },
+                    "circleData": this.circleSyncData
+                });
             }
             ACTIVITY_FLASHLIGHT_1.ref.loadSpriteFrames();
-            ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.moduleStart.ops);
-            ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.moduleStart);
+            ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.moduleStart.content.ops);
+            ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data.moduleStart);
         });
     },
 
@@ -113,7 +116,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         if (this.isTeacherView) {
             this.animationSprite = this.addSprite("res/LessonResources/emptyImage.png", cc.p(cc.winSize.width * 0.5, cc.winSize.height * 0.5), this);
             this.animationSprite.setLocalZOrder(2);
-            this.animationSprite.setScale(ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.animationSprite.scale);
+            this.animationSprite.setScale(ACTIVITY_FLASHLIGHT_1.config.resources.animationSprite.scale);
             this.playAnimation();
             this.createTeacherCircle();
         }
@@ -123,22 +126,32 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         }
     },
     backgroundWithControl: function () {
-        this.playGround = this.addSprite(ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.background.name, cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5), this);
+        this.playGround = this.addSprite(ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.background.sections.background.imageName, cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5), this);
         this.playGround.setLocalZOrder(-2);
     },
 
 
     loadSpriteFrames: function () {
-        HDUtility.addSpriteFrames(ACTIVITY_FLASHLIGHT_1.animationPath + "Granny_Fix_celebrating/celebrating_", ACTIVITY_FLASHLIGHT_1.config.animation.celebrating.frameCount, "celebrating_", ".png");
-        HDUtility.addSpriteFrames(ACTIVITY_FLASHLIGHT_1.animationPath + "Granny_Fix_idle/idle_", ACTIVITY_FLASHLIGHT_1.config.animation.idle.frameCount, "idle_", ".png");
-        HDUtility.addSpriteFrames(ACTIVITY_FLASHLIGHT_1.animationPath + "Granny_Fix_run_left/run_left_", ACTIVITY_FLASHLIGHT_1.config.animation.run_left.frameCount, "run_left_", ".png");
-        HDUtility.addSpriteFrames(ACTIVITY_FLASHLIGHT_1.animationPath + "Granny_Fix_run_right/run_right_", ACTIVITY_FLASHLIGHT_1.config.animation.run_right.frameCount, "run_right_", ".png");
-
+        HDUtility.addSpriteFrames(ACTIVITY_FLASHLIGHT_1.animationPath + "Granny_Fix_celebrating/celebrating_", ACTIVITY_FLASHLIGHT_1.config.resources.animationFrames.animation[0].frameCount, "celebrating_", ".png");
+        HDUtility.addSpriteFrames(ACTIVITY_FLASHLIGHT_1.animationPath + "Granny_Fix_idle/idle_", ACTIVITY_FLASHLIGHT_1.config.resources.animationFrames.animation[1].frameCount, "idle_", ".png");
+        HDUtility.addSpriteFrames(ACTIVITY_FLASHLIGHT_1.animationPath + "Granny_Fix_run_left/run_left_", ACTIVITY_FLASHLIGHT_1.config.resources.animationFrames.animation[2].frameCount, "run_left_", ".png");
+        HDUtility.addSpriteFrames(ACTIVITY_FLASHLIGHT_1.animationPath + "Granny_Fix_run_right/run_right_", ACTIVITY_FLASHLIGHT_1.config.resources.animationFrames.animation[3].frameCount, "run_right_", ".png");
     },
 
     updateRoomData: function (data) {
         if (ACTIVITY_FLASHLIGHT_1.config) {
-            SocketManager.emitCutomEvent("SingleEvent", { 'eventType': HDSocketEventType.UPDATE_ROOM_DATA, 'roomId': HDAppManager.roomId, 'data': { "roomId": HDAppManager.roomId, "roomData": { "activity": ACTIVITY_FLASHLIGHT_1.config.properties.namespace, "data": data, "activityStartTime": HDAppManager.getActivityStartTime() } } }, null);
+            SocketManager.emitCutomEvent("SingleEvent", {
+                'eventType': HDSocketEventType.UPDATE_ROOM_DATA,
+                'roomId': HDAppManager.roomId,
+                'data': {
+                    "roomId": HDAppManager.roomId,
+                    "roomData": {
+                        "activity": ACTIVITY_FLASHLIGHT_1.config.properties.namespace,
+                        "data": data,
+                        "activityStartTime": HDAppManager.getActivityStartTime()
+                    }
+                }
+            }, null);
         }
     },
 
@@ -205,13 +218,11 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             return;
         switch (res.eventType) {
             case HDSocketEventType.DISABLE_STUDENT_INTERACTION:
-                ACTIVITY_FLASHLIGHT_1.ref.disableChildInteraction();
                 break;
             case HDSocketEventType.DISABLE_INTERACTION:
                 ACTIVITY_FLASHLIGHT_1.ref.disableInteraction(res.data);
                 break;
             case HDSocketEventType.RECEIVE_GRADES:
-                ACTIVITY_FLASHLIGHT_1.ref.receiveGrades();
                 break;
             case HDSocketEventType.STUDENT_STATUS:
                 ACTIVITY_FLASHLIGHT_1.ref.studentStatus(res.data);
@@ -257,7 +268,10 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         if (this.isTeacherView) {
             this.updateMouseStatus(username, status);
             this.checkToShowTeacherCircle();
-            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, { "eventType": ACTIVITY_FLASHLIGHT_1.socketEventKey.STUDENT_INTERACTION, "data": { "userName": username, "status": status } });
+            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+                "eventType": ACTIVITY_FLASHLIGHT_1.socketEventKey.STUDENT_INTERACTION,
+                "data": { "userName": username, "status": status }
+            });
         }
     },
 
@@ -286,21 +300,21 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
                     this.isStudentInteractionEnable = false;
                 }
             }
-            if (this.isStudentInteractionEnable) {
-                this.circle.setPosition(this.teacherPreviousPosition);
-                this.teacherPreviousPosition = null;
-            } else {
-                this.teacherPreviousPosition = this.circle.getPosition();
-            }
         }
     },
 
     updateStudentTurn: function (userName) {
         if (this.isTeacher) {
             if (!userName) {
-                this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, { "roomId": HDAppManager.roomId, "users": [] });
+                this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
+                    "roomId": HDAppManager.roomId,
+                    "users": []
+                });
             } else {
-                this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, { "roomId": HDAppManager.roomId, "users": [{ userName: userName }] });
+                this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
+                    "roomId": HDAppManager.roomId,
+                    "users": [{ userName: userName }]
+                });
             }
         }
     },
@@ -333,9 +347,11 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             ACTIVITY_FLASHLIGHT_1.ref.unFreezeCircle();
             ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze = false;
             ACTIVITY_FLASHLIGHT_1.ref.removeButton();
-            // cc.log("Users",data.users, this.circleSyncData);
             this.circleSyncData.length = 0;
-            ACTIVITY_FLASHLIGHT_1.ref.updateRoomData({ "freezeInfo": { "position": "", "name": "" }, "circleData": this.circleSyncData });
+            ACTIVITY_FLASHLIGHT_1.ref.updateRoomData({
+                "freezeInfo": { "position": "", "name": "" },
+                "circleData": this.circleSyncData
+            });
         }
 
     },
@@ -376,7 +392,10 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         } else {
             this.circle.setPosition(HDUtility.clampANumber(position.x, this.circle.getContentSize().width * 0.5, this.getContentSize().width - this.circle.getContentSize().width * 0.5), HDUtility.clampANumber(position.y, this.circle.getContentSize().height * 0.5, this.getContentSize().height - this.circle.getContentSize().height * 0.5));
         }
-        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, { 'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.MOVE_CIRCLE, 'data': { 'userName': HDAppManager.userName, 'position': position, "fromTeacher": fromTeacher } });
+        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+            'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.MOVE_CIRCLE,
+            'data': { 'userName': HDAppManager.userName, 'position': position, "fromTeacher": fromTeacher }
+        });
     },
 
     /**
@@ -388,20 +407,28 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         this.freezePosition = position;
         if (ACTIVITY_FLASHLIGHT_1.ref.parent)
             ACTIVITY_FLASHLIGHT_1.ref.parent.setStudentPanelActive(false);
-        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, { 'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.FREEZE_ALL_CIRCLE, 'data': { 'userName': studentName, 'position': position } });
-        this.updateRoomData({ "freezeInfo": { "position": position, "studentName": studentName }, "circleData": this.circleSyncData });
+        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+            'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.FREEZE_ALL_CIRCLE,
+            'data': { 'userName': studentName, 'position': position }
+        });
+        this.updateRoomData({
+            "freezeInfo": { "position": position, "studentName": studentName },
+            "circleData": this.circleSyncData
+        });
     },
 
     unFreezeAllCircle: function (position, studentName, isCorrect) {
         this.updateRoomData({ "circleData": this.circleSyncData });
-        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, { 'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.UNFREEZE_ALL_CIRCLE, 'data': { 'userName': studentName, 'position': position, "isCorrect": isCorrect } });
+        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+            'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.UNFREEZE_ALL_CIRCLE,
+            'data': { 'userName': studentName, 'position': position, "isCorrect": isCorrect }
+        });
     },
 
     freezeCircle: function (params) {
         if (ACTIVITY_FLASHLIGHT_1.ref.isTeacherView || !ACTIVITY_FLASHLIGHT_1.ref.circle) {
             return;
         }
-        let position = params.position == 0 ? cc.p(cc.winSize.width * 0.5, cc.winSize.height * 0.5) : params.position;
         this.isCircleFreeze = true;
         this.previousPosition = this.circle.getPosition();
         this.circle.runAction(cc.sequence(cc.moveTo(0.5,
@@ -416,14 +443,12 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         if (ACTIVITY_FLASHLIGHT_1.ref.isTeacherView || !ACTIVITY_FLASHLIGHT_1.ref.circle || !ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze) {
             return;
         }
-
         this.currentPosition = params ? params.position : cc.p(ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionY(),
             ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionY());
         this.unfreezeCircle(params ? params.isCorrect : false);
     },
 
     updateStudentCircle: function () {
-        var tempJoinList = this.joinedStudentList.users;
         var removeCircleList = [];
 
         for (let index = 0; index < this.circleList.length; index++) {
@@ -471,6 +496,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
                     this.getContentSize().height - circle.getContentSize())));
             var name = this.circle ? this.circle.getName() : "";
             circle.setTitleText(name);
+            circle.setLocalZOrder(1000);
         }
         if (!this.isTeacherView || (this.isTeacherView && !this.isCircleFreeze)) {
             this.circle = circle;
@@ -507,7 +533,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
 
     moveCircleListener: function (params) {
         if (params.data.fromTeacher) {
-            if (!this.isTeacherView) {
+            if (!this.isTeacherView && this.circle) {
                 this.circle.setPosition(HDUtility.clampANumber(params.data.position.x, this.circle.getContentSize().width * 0.5, this.getContentSize().width - this.circle.getContentSize().width * 0.5), HDUtility.clampANumber(params.data.position.y, this.circle.getContentSize().height * 0.5, this.getContentSize().height - this.circle.getContentSize().height * 0.48));
 
             }
@@ -560,9 +586,12 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         this.masK.setPosition(positionNew);
         this.animationSprite = this.addSprite("res/LessonResources/emptyImage.png", cc.p(cc.winSize.width * 0.5, cc.winSize.height * 0.5), this.masK);
         this.animationSprite.setLocalZOrder(2);
-        this.animationSprite.setScale(ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.animationSprite.scale);
+        this.animationSprite.setScale(ACTIVITY_FLASHLIGHT_1.config.resources.animationSprite.scale);
         this.addChild(this.masK, 5);
-        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, { 'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.ADD_CIRCLE, 'data': { 'username': HDAppManager.username, "position": this.circle.getPosition() } });
+        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+            'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.ADD_CIRCLE,
+            'data': { 'username': HDAppManager.username, "position": this.circle.getPosition() }
+        });
     },
 
     emitSocketEvent: function (eventType, data) {
@@ -607,7 +636,6 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             ACTIVITY_FLASHLIGHT_1.ref.freezePosition = syncData.freezeInfo.position;
         }
         if (!ACTIVITY_FLASHLIGHT_1.ref.isTeacherView && ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze) {
-            let position = ACTIVITY_FLASHLIGHT_1.ref.freezePosition == "" ? cc.p(cc.winSize.width * 0.5, cc.winSize.height * 0.5) : ACTIVITY_FLASHLIGHT_1.ref.freezePosition;
             ACTIVITY_FLASHLIGHT_1.ref.freezeCircle({ "position": ACTIVITY_FLASHLIGHT_1.ref.freezePosition });
         }
     },
@@ -647,7 +675,6 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
                     case ACTIVITY_FLASHLIGHT_1.Tag.teacherCircle:
                         if (ACTIVITY_FLASHLIGHT_1.ref.isTeacherView && (!ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze) && (ACTIVITY_FLASHLIGHT_1.ref.teacherCircle.isVisible())) {
                             this.isCircleFreeze = true;
-                            this.previousPosition = this.teacherCircle.getPosition();
                             this.teacherCircle.runAction(cc.sequence(cc.moveTo(0.5,
                                 cc.p(HDUtility.clampANumber(this.teacherCircle.getPosition().x, this.teacherCircle.getContentSize().width * 0.75,
                                     this.getContentSize().width - this.teacherCircle.getContentSize().width * 0.75),
@@ -665,24 +692,23 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
     },
 
     addOptionButton: function (sender) {
-        this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.onRedCircle);
+        this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.onRedCircle);
         sender.setTouchEnabled(false);
         this.circle = sender;
         this.runAction(cc.sequence(cc.delayTime(0.5), cc.callFunc((sender) => {
             if (!ACTIVITY_FLASHLIGHT_1.ref.circle) {
                 return;
             }
-            var tick = ACTIVITY_FLASHLIGHT_1.ref.createButton(ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.tick.name, ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.tick.name, "", 48, ACTIVITY_FLASHLIGHT_1.Tag.tickButton, cc.p(ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionX() + ACTIVITY_FLASHLIGHT_1.ref.circle.getContentSize().width * 0.15, ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionY() - (ACTIVITY_FLASHLIGHT_1.ref.circle.getContentSize().height * 0.5)), ACTIVITY_FLASHLIGHT_1.ref.getParent(), ACTIVITY_FLASHLIGHT_1.ref, ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.tick.name);
-            var cancel = ACTIVITY_FLASHLIGHT_1.ref.createButton(ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.cross.name, ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.cross.name, "", 48, ACTIVITY_FLASHLIGHT_1.Tag.cancelButton, cc.p(ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionX() - ACTIVITY_FLASHLIGHT_1.ref.circle.getContentSize().width * 0.15, ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionY() - (ACTIVITY_FLASHLIGHT_1.ref.circle.getContentSize().height * 0.5)), ACTIVITY_FLASHLIGHT_1.ref.getParent(), ACTIVITY_FLASHLIGHT_1.ref, ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.cross.name);
+            var tick = ACTIVITY_FLASHLIGHT_1.ref.createButton(ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.assets.sections.tick.imageName, ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.assets.sections.tick.imageName, "", 48, ACTIVITY_FLASHLIGHT_1.Tag.tickButton, cc.p(ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionX() + ACTIVITY_FLASHLIGHT_1.ref.circle.getContentSize().width * 0.15, ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionY() - (ACTIVITY_FLASHLIGHT_1.ref.circle.getContentSize().height * 0.5)), ACTIVITY_FLASHLIGHT_1.ref.getParent(), ACTIVITY_FLASHLIGHT_1.ref, ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.assets.sections.tick.imageName);
+            var cancel = ACTIVITY_FLASHLIGHT_1.ref.createButton(ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.assets.sections.cross.imageName, ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.assets.sections.cross.imageName, "", 48, ACTIVITY_FLASHLIGHT_1.Tag.cancelButton, cc.p(ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionX() - ACTIVITY_FLASHLIGHT_1.ref.circle.getContentSize().width * 0.15, ACTIVITY_FLASHLIGHT_1.ref.circle.getPositionY() - (ACTIVITY_FLASHLIGHT_1.ref.circle.getContentSize().height * 0.5)), ACTIVITY_FLASHLIGHT_1.ref.getParent(), ACTIVITY_FLASHLIGHT_1.ref, ACTIVITY_FLASHLIGHT_1.spriteBasePath + ACTIVITY_FLASHLIGHT_1.config.assets.sections.cross.imageName);
             tick.setLocalZOrder(12);
             cancel.setLocalZOrder(12);
-            tick.setScale(ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.tick.scale);
-            cancel.setScale(ACTIVITY_FLASHLIGHT_1.config.graphicalAssets.cross.scale);
+            tick.setScale(ACTIVITY_FLASHLIGHT_1.config.assets.sections.tick.scale);
+            cancel.setScale(ACTIVITY_FLASHLIGHT_1.config.assets.sections.cross.scale);
         }, this)));
     },
 
     removeOptionButton: function (sender) {
-        var parent = sender.getParent();
         var options = sender.tag == ACTIVITY_FLASHLIGHT_1.Tag.tickButton ? this.getParent().getChildByTag(ACTIVITY_FLASHLIGHT_1.Tag.cancelButton) : this.getParent().getChildByTag(ACTIVITY_FLASHLIGHT_1.Tag.tickButton);
         sender.removeFromParent();
         options.removeFromParent();
@@ -705,14 +731,15 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         if (this.teacherCircle.isVisible()) {
             return;
         }
+        this.circle = sender;
         for (var index = 0; index < this.circleList.length; index++) {
             var currentObject = this.circleList[index];
             currentObject.prevPos = currentObject.getPosition();
+            currentObject.setTitleText("");
             currentObject.runAction(cc.sequence(cc.scaleTo(0.25, 1.5),
                 cc.moveTo(0.25,
                     cc.p(HDUtility.clampANumber(position.x, currentObject.getContentSize().width * 0.75, this.getContentSize().width - currentObject.getContentSize().width * 0.75),
                         HDUtility.clampANumber(position.y, currentObject.getContentSize().height * 0.70, this.getContentSize().height - currentObject.getContentSize())))));
-            currentObject.setTitleText("");
         }
         this.circle.setTitleText(this.circle.getName());
         this.currentPosition = this.teacherCircle.isVisible() ? this.teacherCircle.getPosition() : this.circle.position;
@@ -739,7 +766,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             destinationPosition = cc.p(destinationPosition.x, HDUtility.clampANumber(destinationPosition.y - 90, 100, this.getContentSize().height - 240));
         }
         ACTIVITY_FLASHLIGHT_1.ref.animationSprite.setVisible(true);
-        let idleAnim = HDUtility.runFrameAnimation(ACTIVITY_FLASHLIGHT_1.animationBasePath + "Granny_Fix_idle" + "/" + "idle_", ACTIVITY_FLASHLIGHT_1.config.animation.idle.frameCount, 0.05, ".png", 100000);
+        let idleAnim = HDUtility.runFrameAnimation(ACTIVITY_FLASHLIGHT_1.animationBasePath + "Granny_Fix_idle" + "/" + "idle_", ACTIVITY_FLASHLIGHT_1.config.resources.animationFrames.animation[1].frameCount, 0.05, ".png", 100000);
         idleAnim.setTag(142584);
         let actionSeq = [];
         let animation = null;
@@ -747,16 +774,16 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             for (let index = 0; index < animationIndex.length; index++) {
                 switch (animationIndex[index]) {
                     case ACTIVITY_FLASHLIGHT_1.animation.celebration:
-                        animation = HDUtility.runFrameAnimation(ACTIVITY_FLASHLIGHT_1.animationBasePath + "Granny_Fix_celebrating" + "/" + "celebrating_", ACTIVITY_FLASHLIGHT_1.config.animation.celebrating.frameCount, 0.1, ".png", 1);
+                        animation = HDUtility.runFrameAnimation(ACTIVITY_FLASHLIGHT_1.animationBasePath + "Granny_Fix_celebrating" + "/" + "celebrating_", ACTIVITY_FLASHLIGHT_1.config.resources.animationFrames.animation[0].frameCount, 0.1, ".png", 1);
                         actionSeq.push(animation);
                         break;
                     case ACTIVITY_FLASHLIGHT_1.animation.move_left:
-                        animation = HDUtility.runFrameAnimation(ACTIVITY_FLASHLIGHT_1.animationBasePath + "Granny_Fix_run_left" + "/" + "run_left_", ACTIVITY_FLASHLIGHT_1.config.animation.run_left.frameCount, 0.1, ".png", 1);
+                        animation = HDUtility.runFrameAnimation(ACTIVITY_FLASHLIGHT_1.animationBasePath + "Granny_Fix_run_left" + "/" + "run_left_", ACTIVITY_FLASHLIGHT_1.config.resources.animationFrames.animation[2].frameCount, 0.1, ".png", 1);
                         var spawnAction = new cc.Spawn(cc.moveTo(0.75, cc.p(destinationPosition.x, destinationPosition.y)), animation);
                         actionSeq.push(spawnAction);
                         break;
                     case ACTIVITY_FLASHLIGHT_1.animation.move_right:
-                        animation = HDUtility.runFrameAnimation(ACTIVITY_FLASHLIGHT_1.animationBasePath + "Granny_Fix_run_right" + "/" + "run_right_", ACTIVITY_FLASHLIGHT_1.config.animation.run_right.frameCount, 0.1, ".png", 1);
+                        animation = HDUtility.runFrameAnimation(ACTIVITY_FLASHLIGHT_1.animationBasePath + "Granny_Fix_run_right" + "/" + "run_right_", ACTIVITY_FLASHLIGHT_1.config.resources.animationFrames.animation[3].frameCount, 0.1, ".png", 1);
                         var spawnAction = new cc.Spawn(cc.moveTo(0.75, cc.p(destinationPosition.x, destinationPosition.y)), animation);
                         actionSeq.push(spawnAction);
                         break;
@@ -773,37 +800,24 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
                             cc.delayTime(0.1),
                             cc.callFunc(() => {
                                 ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze = false;
-                                // if( ACTIVITY_FLASHLIGHT_1.ref.parent)
-                                //     ACTIVITY_FLASHLIGHT_1.ref.parent.setStudentPanelActive(true);
-                                console.log("ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze ", ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze);
                             }, this)));
-                    } if (ACTIVITY_FLASHLIGHT_1.ref.circle && ACTIVITY_FLASHLIGHT_1.ref.previousPosition) {
+                    }
+                    if (ACTIVITY_FLASHLIGHT_1.ref.circle && ACTIVITY_FLASHLIGHT_1.ref.previousPosition) {
                         ACTIVITY_FLASHLIGHT_1.ref.circle.runAction(cc.sequence(cc.scaleTo(0.25, 1),
                             cc.moveTo(0.5, ACTIVITY_FLASHLIGHT_1.ref.previousPosition), cc.delayTime(0.1),
                             cc.callFunc(() => {
                                 ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze = false;
-                                console.log("ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze ", ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze);
                             }, this)));
                     }
                 } else {
                     ACTIVITY_FLASHLIGHT_1.ref.animationSprite.setVisible(true);
-                    // if(ACTIVITY_FLASHLIGHT_1.ref.isTeacherView && ACTIVITY_FLASHLIGHT_1.ref.teacherCircle.isVisible()){
-                    //     ACTIVITY_FLASHLIGHT_1.ref.teacherCircle.runAction(cc.sequence(cc.scaleTo(0.25, 1),
-                    //         cc.delayTime(0.1),
-                    //         cc.callFunc(() => {
-                    //             ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze = false;
-                    //             console.log("ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze ", ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze);
-                    //         }, this)));
-                    // } else {
                     if (ACTIVITY_FLASHLIGHT_1.ref.circle) {
                         ACTIVITY_FLASHLIGHT_1.ref.circle.runAction(cc.sequence(cc.scaleTo(0.25, 1),
                             cc.moveTo(0.5, ACTIVITY_FLASHLIGHT_1.ref.previousPosition), cc.delayTime(0.1),
                             cc.callFunc(() => {
                                 ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze = false;
-                                console.log("ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze ", ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze);
                             }, this)));
                     }
-                    // }
                 }
             });
             actionSeq.push(completionfunction);

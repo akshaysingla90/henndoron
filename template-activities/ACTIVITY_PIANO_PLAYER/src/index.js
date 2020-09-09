@@ -604,7 +604,7 @@ PianoPlayer.StudentsList = HDBaseLayer.extend({
     const { userName } = student;
     let studentSprite = new PianoPlayer.Student(
       PianoPlayer.resourcePath +
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections
         .student_answer.imageName,
       userName,
       student.displayImage,
@@ -714,7 +714,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
   moveToNextWord: function () {
     if (
       this.currentNoteIdx <
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].correctSequence.length -
       1
@@ -747,12 +747,12 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
     ++this.currentSongIdx;
     let piano = this.getChildByTag(this.TAG_PIANO);
     piano.setDisplayImagesOfPianoKeys(
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].pianoKeyIconImages
     );
     piano.setSheetWords(
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].correctSequence
     );
@@ -769,20 +769,20 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
   createPiano: function (delegate) {
     var pianoSprite = new PianoPlayer.Piano(
       PianoPlayer.resourcePath +
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.background
+      PianoPlayer.MainPianoPlayerLayerRef.config.background.sections.background
         .imageName,
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.pianoKeys,
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.pianoKeys.data,
       delegate,
       PianoPlayer.resourcePath,
       PianoPlayer.soundPath,
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.feedback.keyPressedCorrectImage,
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.feedback.keyPressedIncorrectImage,
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.keyPressedCorrectImage.imageName,
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.keyPressedIncorrectImage.imageName,
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].correctSequence,
       HDAppManager.isTeacherView,
       delegate,
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].pianoKeyIconImages
     );
@@ -800,7 +800,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
     if (this.isFeedbackActivated) {
       isCorrect =
         pianoKey.getWord() ===
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+        PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
           this.currentSongIdx
         ].correctSequence[this.currentNoteIdx];
       if (isCorrect) {
@@ -841,7 +841,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
     this.lightUpSheetWord(0);
     this.songPlayingCurrentNote = 0;
     let wordLength =
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].correctSequence.length;
     this.songPlayingInterval = setInterval(() => {
@@ -851,7 +851,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
         return;
       }
       let word =
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+        PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
           this.currentSongIdx
         ].correctSequence[this.songPlayingCurrentNote];
       let pianoKey = this.getChildByTag(this.TAG_PIANO).getPianoKeyByWord(word);
@@ -868,7 +868,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
       this.currentNoteIdx = HDUtility.clampANumber(
         this.songPlayingCurrentNote,
         0,
-        PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+        PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
           this.currentSongIdx
         ].correctSequence.length - 1
       );
@@ -912,8 +912,8 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   onEnter: function () {
     this._super();
     this.getStudentsList();
-    this.showScriptMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherScripts.moduleStart);
-    this.showTipMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherTips.moduleStart);
+    this.showScriptMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherScripts.data.moduleStart);
+    this.showTipMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherTips.data.moduleStart);
     this.lightUpSheetWord(this.currentNoteIdx);
   },
 
@@ -959,11 +959,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   },
 
   showScriptMessage: function (msg) {
-    this.getParent().getParent().showScriptMessage(msg.ops);
+    this.getParent().getParent().showScriptMessage(msg.content.ops);
   },
 
   showTipMessage: function (msg) {
-    this.getParent().getParent().showTipMessage(msg.ops);
+    this.getParent().getParent().showTipMessage(msg.content.ops);
   },
 
   getStudentsList: function () {
@@ -983,7 +983,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
     }
 
     if (
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
       this.currentSongIdx + 1
       ]
     ) {
@@ -994,11 +994,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   addStartButton: function () {
     var startButton = this.createButton(
       PianoPlayer.resourcePath +
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-        .startButton.idleImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+        .startButton.enableState,
       PianoPlayer.resourcePath +
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-        .startButton.pressedImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+        .startButton.pushedState,
       "",
       0,
       this.TAG_START_BUTTON,
@@ -1010,11 +1010,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   addNextButton: function () {
     var nextButton = this.createButton(
       PianoPlayer.resourcePath +
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-        .nextButton.idleImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+        .nextButton.enableState,
       PianoPlayer.resourcePath +
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-        .nextButton.pressedImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+        .nextButton.pushedState,
       "",
       0,
       this.TAG_NEXT_BUTTON,
@@ -1027,11 +1027,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   addPlayButton: function () {
     let playSongButton = this.createButton(
       PianoPlayer.resourcePath +
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-        .playButton.idleImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+        .playButton.enableState,
       PianoPlayer.resourcePath +
-      PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.buttons
-        .playButton.pressedImage,
+      PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+        .playButton.pushedState,
       "",
       0,
       this.TAG_PLAY_BUTTON,
@@ -1194,8 +1194,8 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
               wordIdx: this.currentNoteIdx,
               feedbackActivated: true,
             });
-            this.showScriptMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherScripts.startButtonClicked);
-            this.showTipMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherTips.startButtonClicked);
+            this.showScriptMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherScripts.data.startButtonClicked);
+            this.showTipMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherTips.data.startButtonClicked);
             sender.setVisible(false);
             this.addPlayButton();
             break;
@@ -1218,7 +1218,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
             ).clearClickedKeyImagesOfAllStudents();
             this.launchNextSong();
             if (
-              !PianoPlayer.MainPianoPlayerLayerRef.config.graphicalAssets.songs[
+              !PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
               this.currentSongIdx + 1
               ]
             ) {

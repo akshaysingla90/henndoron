@@ -1,331 +1,346 @@
 {
   "properties": {
-    "configurable": true,
-    "url": "res/Activity/ACTIVITY_FLASHLIGHT_1/",
-    "number": "1",
-    "renderMode": 1,
-    "name": "Flash Light",
-    "namespace": "ACTIVITY_FLASHLIGHT_1",
-    "layerName": "flashlight",
+    "component": "infoCard",
     "activityName": "Flashlight",
-    "teacherScriptsNotes": {
-      "notes": "Ask to identify notes",
-      "timestamp": "",
-      "triggers": ""
-    },
+    "description": "game desc. here",
+    "allocatedTime": 10,
     "controls": {
       "mouse": true,
       "turnBased": false
     },
-    "teacherTipsNotes": {
-      "tips": "Don't ask about bag",
-      "timestamp": "",
-      "triggers": ""
-    },
-    "description": "",
-    "allocatedTime": 10,
+    "externalRewards": false,
     "studentPreview": false,
-    "preLoaded": false
+    "url": "res/Activity/ACTIVITY_FLASHLIGHT_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": false,
+    "namespace": "ACTIVITY_FLASHLIGHT_1",
+    "layerName": "flashlight"
   },
-  "jsList": [
-    "res/Activity/ACTIVITY_FLASHLIGHT_1/src/Flashlight.js"
-  ],
   "teacherScripts": {
-    "moduleStart": {
-      "ops": [
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "The students screens are dark - they can only see the area inside the red circle(s) on your screen. "
-        },
-        {
-          "insert": "\n"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "We’re at Granny Fix’s house! She needs (object). "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "Where is"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": " (object)? "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "I can’t see"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": " (object)! "
-        },
-        {
-          "insert": "\n"
-        },
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Ask students to move their mouse around i.e. shine their torch."
-        },
-        {
-          "insert": "\n"
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "Shine! "
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "Shine your light. "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "What can you see"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "? "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "Look!"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": " "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "Is that a"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": " "
-        },
-        {
-          "insert": "(object)? \n"
-        },
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Click on the red circle representing the student’s mouse"
-        },
-        {
-          "insert": "\n\n\n"
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "moduleStart",
+        "description": "this will trigger when module starts",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "The students screens are dark - they can only see the area inside the red circle(s) on your screen. "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "We’re at Granny Fix’s house! She needs (object). "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Where is"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " (object)? "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I can’t see"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " (object)! "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Ask students to move their mouse around i.e. shine their torch."
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Shine! "
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Shine your light. "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What can you see"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "? "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Look!"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Is that a"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "(object)? \n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Click on the red circle representing the student’s mouse"
+            },
+            {
+              "insert": "\n\n\n"
+            }
+          ]
         }
-      ]
-    },
-    "onRedCircle": [
-      {
-        "attributes": {
-          "italic": true
-        },
-        "insert": "Is this what Granny Fix is looking for?"
       },
-      {
-        "insert": "\nIf not, click the X and keep looking. If yes, click the tick.\n"
-      },
-      {
-        "attributes": {
-          "italic": true
-        },
-        "insert": "Hurray! Granny Fix has found her (object)!"
-      },
-      {
-        "insert": "\nSelect a new object to find and repeat.\n\n"
+      "onRedCircle": {
+        "UIName": "onRedCircle",
+        "description": "this will trigger when module starts",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Is this what Granny Fix is looking for?"
+            },
+            {
+              "insert": "\nIf not, click the X and keep looking. If yes, click the tick.\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Hurray! Granny Fix has found her (object)!"
+            },
+            {
+              "insert": "\nSelect a new object to find and repeat.\n\n"
+            }
+          ]
+        }
       }
-    ]
+    }
   },
   "teacherTips": {
-    "moduleStart": {
-      "ops": [
-        {
-          "insert": "You can act out words!\n- Movement for "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "shine"
-        },
-        {
-          "insert": ": open and close hands quickly showing how something shines. \n- Movement for "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "look"
-        },
-        {
-          "insert": ":"
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": " "
-        },
-        {
-          "insert": "place hands cupped over the eyes and point forward.\n- Movement for "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "I see"
-        },
-        {
-          "insert": ":"
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": " "
-        },
-        {
-          "insert": "Point to yourself and point to one eye. \n\n\n"
+    "component": "tipsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "moduleStart",
+        "description": "this will trigger when activity starts ",
+        "content": {
+          "ops": [
+            {
+              "insert": "You can act out words!\n- Movement for "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "shine"
+            },
+            {
+              "insert": ": open and close hands quickly showing how something shines. \n- Movement for "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "look"
+            },
+            {
+              "insert": ":"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "place hands cupped over the eyes and point forward.\n- Movement for "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I see"
+            },
+            {
+              "insert": ":"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "Point to yourself and point to one eye. \n\n\n"
+            }
+          ]
         }
-      ]
+      }
     }
   },
-  "graphicalAssets": {
-    "background": {
-      "configurable": true,
-      "name": "bg.png",
-      "size": "{960, 640}",
-      "constraints": [
-        "size"
-      ]
-    },
-    "tick": {
-      "configurable": true,
-      "name": "tick.png",
-      "scale": 0.35,
-      "size": "{960, 640}",
-      "constraints": [
-        "size"
-      ]
-    },
-    "cross": {
-      "configurable": true,
-      "name": "cross.png",
-      "scale": 0.35,
-      "size": "{960, 640}",
-      "constraints": [
-        "size"
-      ]
-    },
-    "animationSprite": {
-      "scale": 0.75
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg.png",
+        "dimensions": {
+          "width": 960,
+          "height": 649
+        }
+      }
     }
   },
-  "animation": {
-    "idle": {
-      "configurable": true,
-      "name": "idle",
-      "frameCount": 16,
-      "sound": "cardTakeOut.mp3",
-      "size": "{100,100}",
-      "position": {
-        "x": 256,
-        "y": 512
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "tick": {
+        "component": "image",
+        "UIName": "Tick",
+        "scale": 0.35,
+        "imageName": "tick.png"
       },
-      "animationPath": "{100,100},{200,200}",
-      "constraints": [
-        "imageName, size, animationPath"
-      ]
-    },
-    "celebrating": {
-      "configurable": true,
-      "name": "celebrating",
-      "frameCount": 32,
-      "sound": "cardTakeOut.mp3",
-      "size": "{100,100}",
-      "position": {
-        "x": 256,
-        "y": 512
+      "cross": {
+        "component": "image",
+        "UIName": "Cross",
+        "scale": 0.35,
+        "imageName": "cross.png"
       },
-      "animationPath": "{100,100},{200,200}",
-      "constraints": [
-        "imageName, size, animationPath"
-      ]
-    },
-    "run_left": {
-      "configurable": true,
-      "name": "run_left",
-      "frameCount": 11,
-      "sound": "cardTakeOut.mp3",
-      "size": "{100,100}",
-      "position": {
-        "x": 256,
-        "y": 512
-      },
-      "animationPath": "{100,100},{200,200}",
-      "constraints": [
-        "imageName, size, animationPath"
-      ]
-    },
-    "run_right": {
-      "configurable": true,
-      "name": "run_right",
-      "frameCount": 11,
-      "sound": "cardTakeOut.mp3",
-      "size": "{100,100}",
-      "position": {
-        "x": 256,
-        "y": 512
-      },
-      "animationPath": "{100,100},{200,200}",
-      "constraints": [
-        "imageName, size, animationPath"
-      ]
+      "animation": {
+        "component": "animationGroup",
+        "data": {
+          "idle": {
+            "configurable": true,
+            "UIName": "Granny Idle",
+            "name": "idle",
+            "frameCount": 16,
+            "sound": "cardTakeOut.mp3",
+            "size": "{100,100}",
+            "position": {
+              "x": 256,
+              "y": 512
+            },
+            "animationPath": "{100,100},{200,200}",
+            "constraints": [
+              "imageName, size, animationPath"
+            ]
+          },
+          "celebrating": {
+            "configurable": true,
+            "UIName": "Granny Celebrating",
+            "name": "celebrating",
+            "frameCount": 32,
+            "sound": "cardTakeOut.mp3",
+            "size": "{100,100}",
+            "position": {
+              "x": 256,
+              "y": 512
+            },
+            "animationPath": "{100,100},{200,200}",
+            "constraints": [
+              "imageName, size, animationPath"
+            ]
+          },
+          "run_left": {
+            "configurable": true,
+            "name": "run_left",
+            "UIName": "Granny run left",
+            "frameCount": 11,
+            "sound": "cardTakeOut.mp3",
+            "size": "{100,100}",
+            "position": {
+              "x": 256,
+              "y": 512
+            },
+            "animationPath": "{100,100},{200,200}",
+            "constraints": [
+              "imageName, size, animationPath"
+            ]
+          },
+          "run_right": {
+            "configurable": true,
+            "name": "run_right",
+            "UIName": "granny run right",
+            "frameCount": 11,
+            "sound": "cardTakeOut.mp3",
+            "size": "{100,100}",
+            "position": {
+              "x": 256,
+              "y": 512
+            },
+            "animationPath": "{100,100},{200,200}",
+            "constraints": [
+              "imageName, size, animationPath"
+            ]
+          }
+        }
+      }
     }
   },
   "resources": {
+    "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [
@@ -371,6 +386,9 @@
           "extension": ".png"
         }
       ]
+    },
+    "animationSprite": {
+      "scale": 0.75
     }
   }
 }

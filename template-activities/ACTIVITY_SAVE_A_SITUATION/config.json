@@ -1,1106 +1,1104 @@
 {
   "properties": {
-    "configurable": true,
-    "url": "res/Activity/ACTIVITY_SAVE_A_SITUATION/",
-    "number": "1",
-    "name": "Saveasituation",
-    "namespace": "ACTIVITY_SAVE_A_SITUATION",
-    "layerName": "SaveASituation",
+    "component": "infoCard",
     "activityName": "Save A Situation",
-    "teacherScriptsNotes": {
-      "notes": "Ask to identify notes",
-      "timestamp": "",
-      "triggers": ""
-    },
+    "description": "game desc. here",
+    "allocatedTime": 10,
     "controls": {
       "mouse": true,
       "turnBased": true
     },
-    "teacherTipsNotes": {
-      "tips": "Don't ask about bag",
-      "timestamp": "",
-      "triggers": ""
-    },
-    "description": "",
-    "allocatedTime": 10,
+    "externalRewards": false,
     "studentPreview": false,
-    "preLoaded": false
+    "url": "res/Activity/ACTIVITY_SAVE_A_SITUATION/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": false,
+    "namespace": "ACTIVITY_SAVE_A_SITUATION",
+    "layerName": "SaveASituation"
   },
-  "jsList": [
-    "res/Activity/ACTIVITY_SAVE_A_SITUATION/src/SaveASituation.js"
-  ],
   "teacherScripts": {
-    "moduleStart": {
-      "ops": [
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "Oh no! Something’s gone wrong! "
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "The dog, the cat, and the sheep are in the tub! But there are "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "holes"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": " in the tub! Let’s "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "plug the tub!"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": " What can we use to plug the tub?"
-        },
-        {
-          "insert": " \n\n"
-        },
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Enable student mouse."
-        },
-        {
-          "insert": " \n\n"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "We can plug the tub with a"
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": " tree/book/house/hat/stickers"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "! Do you want a ___? YES - I want a ____."
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Click on the item in your sidebar to ‘give’ it to the student. This will make it draggable in the students sidebar."
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "Click and drag to plug the hole in the tub!"
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Repeat for all holes in the tub."
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "Wonderful! You plugged the tub with a "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "tree/book/house/hat/stickers"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "! "
-        },
-        {
-          "insert": "\n"
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "moduleStart",
+        "description": "this will trigger when module starts",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Oh no! Something’s gone wrong! "
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "The dog, the cat, and the sheep are in the tub! But there are "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "holes"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " in the tub! Let’s "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "plug the tub!"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " What can we use to plug the tub?"
+            },
+            {
+              "insert": " \n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Enable student mouse."
+            },
+            {
+              "insert": " \n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "We can plug the tub with a"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": " tree/book/house/hat/stickers"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "! Do you want a ___? YES - I want a ____."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Click on the item in your sidebar to ‘give’ it to the student. This will make it draggable in the students sidebar."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Click and drag to plug the hole in the tub!"
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Repeat for all holes in the tub."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Wonderful! You plugged the tub with a "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "tree/book/house/hat/stickers"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "! "
+            },
+            {
+              "insert": "\n"
+            }
+          ]
         }
-      ]
+      }
     }
   },
-  "graphicalAssets": {
-    "waves": [
-      {
-        "configurable": true,
-        "name": "bg03.png",
-        "size": {
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg01.png",
+        "dimensions": {
+          "width": 960,
+          "height": 649
+        }
+      }
+    }
+  },
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "next": {
+        "UIName": "nextButton",
+        "enableState": "next_botton_idle.png",
+        "pushedState": "next_botton_pushed.png",
+        "dimensions": {
+          "width": 166,
+          "height": 75
+        }
+      },
+      "replay": {
+        "UIName": "replayButton",
+        "enableState": "replay_botton_idle.png",
+        "pushedState": "replay_botton_pushed.png",
+        "dimensions": {
+          "width": 166,
+          "height": 75
+        }
+      }
+    }
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "waves": {
+        "component": "imageGroup",
+        "data": [
+          {
+            "configurable": true,
+            "imageName": "bg03.png",
+            "dimensions": {
+              "width": 2048,
+              "height": 247
+            },
+            "position": {
+              "x": 0,
+              "y": 15
+            },
+            "movingOffset": {
+              "x": 0.8,
+              "y": 1
+            },
+            "scale": 1,
+            "constraints": [
+              "name",
+              "size"
+            ]
+          },
+          {
+            "configurable": true,
+            "imageName": "bg04.png",
+            "dimensions": {
+              "width": 2048,
+              "height": 247
+            },
+            "position": {
+              "x": 0,
+              "y": -20
+            },
+            "scale": 1,
+            "constraints": [
+              "name",
+              "size"
+            ]
+          },
+          {
+            "configurable": true,
+            "imageName": "bg05.png",
+            "dimensions": {
+              "width": 2048,
+              "height": 246
+            },
+            "position": {
+              "x": 0,
+              "y": -120
+            },
+            "movingOffset": {
+              "x": 1,
+              "y": 1
+            },
+            "scale": 1,
+            "constraints": [
+              "name",
+              "size"
+            ]
+          }
+        ]
+      },
+      "land": {
+        "component": "image",
+        "UIName": "Land",
+        "imageName": "bg02.png",
+        "dimensions": {
           "width": 2048,
-          "height": 247
+          "height": 640
         },
         "position": {
           "x": 0,
-          "y": 15
+          "y": 200
         },
-        "movingOffset": {
-          "x": 0.8,
-          "y": 1
-        },
-        "scale": 1,
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "scale": 1.4
       },
-      {
-        "configurable": true,
-        "name": "bg04.png",
-        "size": {
-          "width": 2048,
-          "height": 247
-        },
-        "position": {
-          "x": 0,
-          "y": -20
-        },
-        "scale": 1,
-        "constraints": [
-          "name",
-          "size"
-        ]
-      },
-      {
-        "configurable": true,
-        "name": "bg05.png",
-        "size": {
+      "winLand": {
+        "component": "image",
+        "UIName": "Winland",
+        "imageName": "bg02_win.png",
+        "dimensions": {
           "width": 2048,
           "height": 246
         },
         "position": {
           "x": 0,
-          "y": -120
+          "y": 200
         },
-        "movingOffset": {
-          "x": 1,
-          "y": 1
+        "scale": 1
+      },
+      "tubBack": {
+        "component": "image",
+        "UIName": "tubBack",
+        "imageName": "tub01.png",
+        "dimensions": {
+          "width": 512,
+          "height": 512
+        },
+        "position": {
+          "x": 400,
+          "y": 300
+        },
+        "scale": 0.7
+      },
+      "water": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": {
+          "r": 48,
+          "g": 154,
+          "b": 203
+        },
+        "size": {
+          "width": 400,
+          "height": 330
+        },
+        "position": {
+          "x": 50,
+          "y": 0
+        },
+        "constraints": [
+          "name",
+          "size"
+        ]
+      },
+      "winAnimation": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "name": "pincer.png",
+        "size": {
+          "width": 150,
+          "height": 101
         },
         "scale": 1,
         "constraints": [
           "name",
           "size"
         ]
-      }
-    ],
-    "land": {
-      "configurable": true,
-      "name": "bg02.png",
-      "size": {
-        "width": 2048,
-        "height": 640
       },
-      "position": {
-        "x": 0,
-        "y": 200
-      },
-      "scale": 1.4,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "winLand": {
-      "configurable": true,
-      "name": "bg02_win.png",
-      "size": {
-        "width": 2048,
-        "height": 246
-      },
-      "position": {
-        "x": 0,
-        "y": 200
-      },
-      "scale": 1,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "background": {
-      "configurable": true,
-      "name": "bg01.png",
-      "size": {
-        "width": 961,
-        "height": 641
-      },
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "tubBack": {
-      "configurable": true,
-      "name": "tub01.png",
-      "size": {
-        "width": 512,
-        "height": 512
-      },
-      "position": {
-        "x": 400,
-        "y": 300
-      },
-      "scale": 0.7,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "water": {
-      "configurable": true,
-      "color": {
-        "r": 48,
-        "g": 154,
-        "b": 203
-      },
-      "size": {
-        "width": 400,
-        "height": 330
-      },
-      "position": {
-        "x": 50,
-        "y": 0
-      },
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "openCursor": {
-      "configurable": true,
-      "name": "open_pincer_fingers_pointer.png",
-      "size": {
-        "width": 420,
-        "height": 330
-      },
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "closeCursor": {
-      "configurable": true,
-      "name": "closed_pincer_fingers_pointer.png",
-      "size": {
-        "width": 420,
-        "height": 330
-      },
-      "position": {
-        "x": 50,
-        "y": 0
-      },
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "winAnimation": {
-      "configurable": true,
-      "name": "pincer.png",
-      "size": {
-        "width": 150,
-        "height": 101
-      },
-      "scale": 1,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "animals": [
-      {
-        "configurable": true,
-        "name": "sheep_regular.png",
-        "sad": "sheep_loose.png",
-        "happy": "sheep_win.png",
-        "size": {
-          "width": 512,
-          "height": 512
-        },
-        "position": {
-          "x": 380,
-          "y": 370
-        },
-        "wPosition": {
-          "x": 475,
-          "y": 138
-        },
-        "wScale": 0.4,
-        "scale": 0.8,
-        "maskInfo": {
-          "pos": {
-            "x": 460,
-            "y": 300
+      "animals": {
+        "component": "animals",
+        "data": [
+          {
+            "configurable": true,
+            "name": "sheep_regular.png",
+            "sad": "sheep_loose.png",
+            "happy": "sheep_win.png",
+            "size": {
+              "width": 512,
+              "height": 512
+            },
+            "position": {
+              "x": 380,
+              "y": 370
+            },
+            "wPosition": {
+              "x": 475,
+              "y": 138
+            },
+            "wScale": 0.4,
+            "scale": 0.8,
+            "maskInfo": {
+              "pos": {
+                "x": 460,
+                "y": 300
+              },
+              "radius": 150
+            },
+            "constraints": [
+              "name",
+              "size"
+            ]
           },
-          "radius": 150
-        },
-        "constraints": [
-          "name",
-          "size"
+          {
+            "configurable": true,
+            "name": "dog_regular.png",
+            "sad": "dog_loose.png",
+            "happy": "dog_win.png",
+            "size": {
+              "width": 512,
+              "height": 512
+            },
+            "position": {
+              "x": 145,
+              "y": 440
+            },
+            "wPosition": {
+              "x": 315,
+              "y": 143
+            },
+            "wScale": 0.2,
+            "scale": 0.8,
+            "maskInfo": {
+              "pos": {
+                "x": 305,
+                "y": 320
+              },
+              "radius": 170
+            },
+            "constraints": [
+              "name",
+              "size"
+            ]
+          },
+          {
+            "configurable": true,
+            "name": "cat_regular.png",
+            "sad": "cat_loose.png",
+            "happy": "cat_win.png",
+            "size": {
+              "width": 512,
+              "height": 512
+            },
+            "position": {
+              "x": 220,
+              "y": 410
+            },
+            "wPosition": {
+              "x": 350,
+              "y": 145
+            },
+            "wScale": 0.2,
+            "scale": 0.8,
+            "maskInfo": {
+              "pos": {
+                "x": 350,
+                "y": 250
+              },
+              "radius": 100
+            },
+            "constraints": [
+              "name",
+              "size"
+            ]
+          },
+          {
+            "configurable": true,
+            "name": "rat_regular.png",
+            "sad": "rat_loose.png",
+            "happy": "rat_win.png",
+            "size": {
+              "width": 512,
+              "height": 512
+            },
+            "position": {
+              "x": 310,
+              "y": 430
+            },
+            "wPosition": {
+              "x": 420,
+              "y": 138
+            },
+            "wScale": 0.15,
+            "scale": 0.8,
+            "maskInfo": {
+              "pos": {
+                "x": 410,
+                "y": 223
+              },
+              "radius": 80
+            },
+            "constraints": [
+              "name",
+              "size"
+            ]
+          }
         ]
       },
-      {
-        "configurable": true,
-        "name": "dog_regular.png",
-        "sad": "dog_loose.png",
-        "happy": "dog_win.png",
-        "size": {
-          "width": 512,
-          "height": 512
+      "carouselBackgroundImage": {
+        "component": "image",
+        "UIName": "CAROUSEL BACKGROUND IMAGE",
+        "imageName": "carouselImage.png",
+        "dimensions": {
+          "width": 290,
+          "height": 95
         },
         "position": {
-          "x": 145,
-          "y": 440
-        },
-        "wPosition": {
-          "x": 315,
-          "y": 143
-        },
-        "wScale": 0.2,
-        "scale": 0.8,
-        "maskInfo": {
-          "pos": {
-            "x": 305,
-            "y": 320
-          },
-          "radius": 170
-        },
-        "constraints": [
-          "name",
-          "size"
-        ]
+          "x": 768,
+          "y": 454.3
+        }
       },
-      {
-        "configurable": true,
-        "name": "cat_regular.png",
-        "sad": "cat_loose.png",
-        "happy": "cat_win.png",
-        "size": {
-          "width": 512,
-          "height": 512
+      "carouselBackgroundBorderImage": {
+        "component": "image",
+        "UIName": "CAROUSEL BACKGROUND BORDER IMAGE",
+        "imageName": "carouselBorderImage.png",
+        "dimensions": {
+          "width": 290,
+          "height": 95
         },
         "position": {
-          "x": 220,
-          "y": 410
-        },
-        "wPosition": {
-          "x": 350,
-          "y": 145
-        },
-        "wScale": 0.2,
-        "scale": 0.8,
-        "maskInfo": {
-          "pos": {
-            "x": 350,
-            "y": 250
-          },
-          "radius": 100
+          "x": 768,
+          "y": 454.3
+        }
+      },
+      "carouselBackground": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": {
+          "r": 60,
+          "g": 92,
+          "b": 113,
+          "a": 0
         },
         "constraints": [
-          "name",
-          "size"
+          "color"
         ]
       },
-      {
+      "carouselBoxBackground": {
+        "ignoreForAuthToolUI": true,
         "configurable": true,
-        "name": "rat_regular.png",
-        "sad": "rat_loose.png",
-        "happy": "rat_win.png",
-        "size": {
-          "width": 512,
-          "height": 512
+        "color": {
+          "r": 78,
+          "g": 106,
+          "b": 125,
+          "a": 0
+        },
+        "constraints": [
+          "color"
+        ]
+      },
+      "carouselBoxCardBackground": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": {
+          "r": 44,
+          "g": 59,
+          "b": 69,
+          "a": 0
+        },
+        "constraints": [
+          "color"
+        ]
+      },
+      "carouselBoxCardText": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 255
+        },
+        "font": "sassoon_sans_regular",
+        "fontSize": 16,
+        "constraints": [
+          "color"
+        ]
+      },
+      "carouselBoxHighlight": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": {
+          "r": 148,
+          "g": 95,
+          "b": 56,
+          "a": 100
+        },
+        "constraints": [
+          "color"
+        ]
+      },
+      "carouselGlowBoxCard": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "name": "cellBGlow.png",
+        "constraints": [
+          "imageName"
+        ]
+      },
+      "popUp": {
+        "component": "image",
+        "UIName": "popUp",
+        "imageName": "pop_up_bg.png",
+        "dimensions": {
+          "width": 429,
+          "height": 256
         },
         "position": {
-          "x": 310,
-          "y": 430
-        },
-        "wPosition": {
-          "x": 420,
-          "y": 138
-        },
-        "wScale": 0.15,
-        "scale": 0.8,
-        "maskInfo": {
-          "pos": {
-            "x": 410,
-            "y": 223
+          "x": 450,
+          "y": 320
+        }
+      },
+      "levels": {
+        "component": "levels",
+        "data": [
+          {
+            "carouselAssets": [
+              {
+                "configurable": true,
+                "name": "item_tree.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.25,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 300,
+                    "y": 265,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "tree",
+                  "scale": 0.28
+                },
+                "constraints": [
+                  "imageName, scale, size",
+                  "holeInfo"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_book.png",
+                "size": {
+                  "width": 50,
+                  "height": 54
+                },
+                "scale": 0.25,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 358,
+                    "y": 194,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "book",
+                  "scale": 0.28
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_house.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.25,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 397,
+                    "y": 275,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "house",
+                  "scale": 0.29
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_hat.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.75,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 465,
+                    "y": 200,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "hat",
+                  "scale": 0.3
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_stickers.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.75,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 497,
+                    "y": 285,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "stickers",
+                  "scale": 0.25
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              }
+            ],
+            "tubFront": {
+              "UIName": "tubFront",
+              "imageName": "tub02.png",
+              "dimensions": {
+                "width": 512,
+                "height": 512
+              },
+              "position": {
+                "x": 400,
+                "y": 300
+              },
+              "scale": 0.7,
+              "constraints": [
+                "name",
+                "size"
+              ]
+            },
+            "rateOfWaterFilling": 2
           },
-          "radius": 80
-        },
-        "constraints": [
-          "name",
-          "size"
+          {
+            "carouselAssets": [
+              {
+                "configurable": true,
+                "name": "item_tree.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.25,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 300,
+                    "y": 265,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "tree",
+                  "scale": 0.28
+                },
+                "constraints": [
+                  "imageName, scale, size",
+                  "holeInfo"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_book.png",
+                "size": {
+                  "width": 50,
+                  "height": 54
+                },
+                "scale": 0.25,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 358,
+                    "y": 194,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "book",
+                  "scale": 0.28
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_house.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.25,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 397,
+                    "y": 275,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "house",
+                  "scale": 0.29
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_hat.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.75,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 465,
+                    "y": 200,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "hat",
+                  "scale": 0.3
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_stickers.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.75,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 497,
+                    "y": 285,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "stickers",
+                  "scale": 0.25
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              }
+            ],
+            "tubFront": {
+              "UIName": "tubFront",
+              "imageName": "tub02.png",
+              "dimensions": {
+                "width": 512,
+                "height": 512
+              },
+              "position": {
+                "x": 400,
+                "y": 300
+              },
+              "scale": 0.7,
+              "constraints": [
+                "name",
+                "size"
+              ]
+            },
+            "rateOfWaterFilling": 2
+          },
+          {
+            "carouselAssets": [
+              {
+                "configurable": true,
+                "name": "item_tree.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.25,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 300,
+                    "y": 265,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "tree",
+                  "scale": 0.28
+                },
+                "constraints": [
+                  "imageName, scale, size",
+                  "holeInfo"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_book.png",
+                "size": {
+                  "width": 50,
+                  "height": 54
+                },
+                "scale": 0.25,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 358,
+                    "y": 194,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "book",
+                  "scale": 0.28
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_house.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.25,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 397,
+                    "y": 275,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "house",
+                  "scale": 0.29
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_hat.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.75,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 465,
+                    "y": 200,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "hat",
+                  "scale": 0.3
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              },
+              {
+                "configurable": true,
+                "name": "item_stickers.png",
+                "size": {
+                  "width": 350,
+                  "height": 350
+                },
+                "scale": 0.75,
+                "holeInfo": {
+                  "coordinates": {
+                    "x": 497,
+                    "y": 285,
+                    "width": 350,
+                    "height": 350
+                  },
+                  "filledImage": "stickers",
+                  "scale": 0.25
+                },
+                "constraints": [
+                  "imageName, sound, size"
+                ]
+              }
+            ],
+            "tubFront": {
+              "UIName": "tubFront",
+              "imageName": "tub02.png",
+              "dimensions": {
+                "width": 512,
+                "height": 512
+              },
+              "position": {
+                "x": 400,
+                "y": 300
+              },
+              "scale": 0.7,
+              "constraints": [
+                "name",
+                "size"
+              ]
+            },
+            "rateOfWaterFilling": 2
+          }
         ]
-      }
-    ],
-    "goButton": {
-      "configurable": true,
-      "disabledImage": "go_button_disabled.png",
-      "idleImage": "go_button_idle.png",
-      "pushedImage": "go_button_pushed.png",
-      "title": "GO!",
-      "size": "{960, 649}",
-      "position": {
-        "x": 600,
-        "y": 204.5
       },
-      "scale": 0.5,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "stopButton": {
-      "configurable": true,
-      "disabledImage": "go_button_disabled.png",
-      "idleImage": "go_button_idle.png",
-      "pushedImage": "go_button_pushed.png",
-      "title": "STOP!",
-      "size": "{960, 649}",
-      "position": {
-        "x": 600,
-        "y": 204.5
-      },
-      "scale": 0.5,
-      "constraints": [
-        "name",
-        "size"
-      ]
-    },
-    "carouselBackgroundImage": {
-      "configurable": true,
-      "name": "carouselImage.png",
-      "size": "{290, 95}",
-      "position": {
-        "x": 768,
-        "y": 454.3
-      },
-      "scale": 1,
-      "constraints": [
-        "imageName, size, position"
-      ]
-    },
-    "carouselBackgroundBorderImage": {
-      "configurable": true,
-      "name": "carouselBorderImage.png",
-      "size": "{290, 95}",
-      "position": {
-        "x": 768,
-        "y": 454.3
-      },
-      "scale": 1,
-      "constraints": [
-        "imageName, size, position"
-      ]
-    },
-    "carouselBoxCardBackground": {
-      "configurable": true,
-      "name": "cellBg.png",
-      "size": "{90, 81}",
-      "constraints": [
-        "imageName, size, position"
-      ]
-    },
-    "carouselBoxCardText": {
-      "configurable": true,
-      "color": {
-        "r": 0,
-        "g": 0,
-        "b": 0,
-        "a": 255
-      },
-      "font": "sans-serif",
-      "fontSize": 16,
-      "constraints": [
-        "color"
-      ]
-    },
-    "carouselBoxHighlight": {
-      "configurable": true,
-      "color": {
-        "r": 148,
-        "g": 122,
-        "b": 58,
-        "a": 100
-      },
-      "constraints": [
-        "color"
-      ]
-    },
-    "carouselGlowBoxCard": {
-      "configurable": true,
-      "name": "cellBGlow.png",
-      "constraints": [
-        "imageName"
-      ]
-    },
-    "popUp": {
-      "configurable": true,
-      "name": "pop_up_bg.png",
-      "position": {
-        "x": 450,
-        "y": 320
-      },
-      "size": {
-        "width": 429,
-        "height": 256
-      },
-      "constraints": [
-        "imageName"
-      ]
-    },
-    "next": {
-      "configurable": true,
-      "normal": "next_botton_idle.png",
-      "pressed": "next_botton_pushed.png",
-      "size": {
-        "width": 166,
-        "height": 75
-      }
-    },
-    "replay": {
-      "configurable": true,
-      "normal": "replay_botton_idle.png",
-      "pressed": "replay_botton_pushed.png",
-      "size": {
-        "width": 166,
-        "height": 75
+      "animation": {
+        "component": "animationGroup",
+        "data": {
+          "tubWater": {
+            "configurable": true,
+            "UIName": "tubWaterLine",
+            "name": "tubWaterLine",
+            "frameCount": 5,
+            "size": "{512,512}",
+            "position": {
+              "x": 400,
+              "y": 300
+            },
+            "scale": 0.7,
+            "constraints": [
+              "imageName, size, animationPath"
+            ]
+          },
+          "animalWaterLine": {
+            "configurable": true,
+            "UIName": "animals_waterline",
+            "name": "animals_waterline_loop_",
+            "frameCount": 5,
+            "size": {
+              "width": 512,
+              "height": 512
+            },
+            "position": {
+              "x": 310,
+              "y": 430
+            },
+            "scale": 0.7,
+            "constraints": [
+              "name",
+              "size",
+              "animationPath"
+            ]
+          },
+          "winAnimation": {
+            "UIName": "winAnimation",
+            "configurable": true,
+            "name": "magicHat_cardTakeOut_",
+            "frameCount": 15,
+            "size": {
+              "width": 512,
+              "height": 512
+            },
+            "position": {
+              "x": 400,
+              "y": 450
+            },
+            "constraints": [
+              "name",
+              "size",
+              "animationPath"
+            ]
+          },
+          "tubWaterCircle": {
+            "UIName": "tubWaterCircle",
+            "configurable": true,
+            "name": "tub_watecircle_loop_",
+            "frameCount": 12,
+            "size": {
+              "width": 512,
+              "height": 512
+            },
+            "position": {
+              "x": 395,
+              "y": 300
+            },
+            "scale": 0.7,
+            "constraints": [
+              "name",
+              "size",
+              "animationPath"
+            ]
+          },
+          "waterInTub": {
+            "UIName": "tub_fillwaterline",
+            "configurable": true,
+            "name": "tub_fillwaterline_loop_",
+            "frameCount": 24,
+            "size": {
+              "width": 512,
+              "height": 512
+            },
+            "constraints": [
+              "name",
+              "size",
+              "animationPath"
+            ]
+          }
+        }
       }
     }
   },
-  "audioAssets": {
-    "tapHiddenObject": {
-      "configurable": true,
-      "name": "tap.mp3",
-      "constraints": [
-        "name"
-      ]
-    }
-  },
-  "levels": [
-    {
-      "carouselAssets": [
-        {
-          "configurable": true,
-          "name": "item_tree.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.25,
-          "holeInfo": {
-            "coordinates": {
-              "x": 300,
-              "y": 265,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "tree",
-            "scale": 0.28
-          },
-          "constraints": [
-            "imageName, scale, size",
-            "holeInfo"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_book.png",
-          "size": {
-            "width": 50,
-            "height": 54
-          },
-          "scale": 0.25,
-          "holeInfo": {
-            "coordinates": {
-              "x": 358,
-              "y": 194,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "book",
-            "scale": 0.28
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_house.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.25,
-          "holeInfo": {
-            "coordinates": {
-              "x": 397,
-              "y": 275,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "house",
-            "scale": 0.29
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_hat.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.75,
-          "holeInfo": {
-            "coordinates": {
-              "x": 465,
-              "y": 200,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "hat",
-            "scale": 0.3
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_stickers.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.75,
-          "holeInfo": {
-            "coordinates": {
-              "x": 497,
-              "y": 285,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "stickers",
-            "scale": 0.25
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "openFingers": {
+        "UIName": "Open Fingers",
+        "imageName": "open_pincer_fingers_pointer.png",
+        "dimensions": {
+          "width": 50,
+          "height": 50
         }
-      ],
-      "tubFront": {
-        "configurable": true,
-        "name": "tub02.png",
-        "size": {
-          "width": 512,
-          "height": 512
-        },
-        "position": {
-          "x": 400,
-          "y": 300
-        },
-        "scale": 0.7,
-        "constraints": [
-          "name",
-          "size"
-        ]
       },
-      "rateOfWaterFilling": 2
-    },
-    {
-      "carouselAssets": [
-        {
-          "configurable": true,
-          "name": "item_tree.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.25,
-          "holeInfo": {
-            "coordinates": {
-              "x": 300,
-              "y": 265,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "tree",
-            "scale": 0.28
-          },
-          "constraints": [
-            "imageName, scale, size",
-            "holeInfo"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_book.png",
-          "size": {
-            "width": 50,
-            "height": 54
-          },
-          "scale": 0.25,
-          "holeInfo": {
-            "coordinates": {
-              "x": 358,
-              "y": 194,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "book",
-            "scale": 0.28
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_house.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.25,
-          "holeInfo": {
-            "coordinates": {
-              "x": 397,
-              "y": 275,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "house",
-            "scale": 0.29
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_hat.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.75,
-          "holeInfo": {
-            "coordinates": {
-              "x": 465,
-              "y": 200,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "hat",
-            "scale": 0.3
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_stickers.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.75,
-          "holeInfo": {
-            "coordinates": {
-              "x": 497,
-              "y": 285,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "stickers",
-            "scale": 0.25
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
+      "closedFingers": {
+        "UIName": "Closed Fingers",
+        "imageName": "closed_pincer_fingers_pointer.png",
+        "dimensions": {
+          "width": 50,
+          "height": 50
         }
-      ],
-      "tubFront": {
-        "configurable": true,
-        "name": "tub02.png",
-        "size": {
-          "width": 512,
-          "height": 512
-        },
-        "position": {
-          "x": 400,
-          "y": 300
-        },
-        "scale": 0.7,
-        "constraints": [
-          "name",
-          "size"
-        ]
-      },
-      "rateOfWaterFilling": 2
-    },
-    {
-      "carouselAssets": [
-        {
-          "configurable": true,
-          "name": "item_tree.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.25,
-          "holeInfo": {
-            "coordinates": {
-              "x": 300,
-              "y": 265,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "tree",
-            "scale": 0.28
-          },
-          "constraints": [
-            "imageName, scale, size",
-            "holeInfo"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_book.png",
-          "size": {
-            "width": 50,
-            "height": 54
-          },
-          "scale": 0.25,
-          "holeInfo": {
-            "coordinates": {
-              "x": 358,
-              "y": 194,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "book",
-            "scale": 0.28
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_house.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.25,
-          "holeInfo": {
-            "coordinates": {
-              "x": 397,
-              "y": 275,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "house",
-            "scale": 0.29
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_hat.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.75,
-          "holeInfo": {
-            "coordinates": {
-              "x": 465,
-              "y": 200,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "hat",
-            "scale": 0.3
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "name": "item_stickers.png",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 0.75,
-          "holeInfo": {
-            "coordinates": {
-              "x": 497,
-              "y": 285,
-              "width": 350,
-              "height": 350
-            },
-            "filledImage": "stickers",
-            "scale": 0.25
-          },
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        }
-      ],
-      "tubFront": {
-        "configurable": true,
-        "name": "tub02.png",
-        "size": {
-          "width": 512,
-          "height": 512
-        },
-        "position": {
-          "x": 400,
-          "y": 300
-        },
-        "scale": 0.7,
-        "constraints": [
-          "name",
-          "size"
-        ]
-      },
-      "rateOfWaterFilling": 2
-    }
-  ],
-  "animation": {
-    "tubWater": {
-      "configurable": true,
-      "name": "tubWaterLine",
-      "frameCount": 5,
-      "size": "{512,512}",
-      "position": {
-        "x": 400,
-        "y": 300
-      },
-      "scale": 0.7,
-      "constraints": [
-        "imageName, size, animationPath"
-      ]
-    },
-    "animalWaterLine": {
-      "configurable": true,
-      "name": "animals_waterline_loop_",
-      "frameCount": 5,
-      "size": {
-        "width": 512,
-        "height": 512
-      },
-      "position": {
-        "x": 310,
-        "y": 430
-      },
-      "scale": 0.7,
-      "constraints": [
-        "name",
-        "size",
-        "animationPath"
-      ]
-    },
-    "winAnimation": {
-      "configurable": true,
-      "name": "magicHat_cardTakeOut_",
-      "frameCount": 15,
-      "size": {
-        "width": 512,
-        "height": 512
-      },
-      "position": {
-        "x": 400,
-        "y": 450
-      },
-      "constraints": [
-        "name",
-        "size",
-        "animationPath"
-      ]
-    },
-    "tubWaterCircle": {
-      "configurable": true,
-      "name": "tub_watecircle_loop_",
-      "frameCount": 12,
-      "size": {
-        "width": 512,
-        "height": 512
-      },
-      "position": {
-        "x": 395,
-        "y": 300
-      },
-      "scale": 0.7,
-      "constraints": [
-        "name",
-        "size",
-        "animationPath"
-      ]
-    },
-    "waterInTub": {
-      "configurable": true,
-      "name": "tub_fillwaterline_loop_",
-      "frameCount": 24,
-      "size": {
-        "width": 512,
-        "height": 512
-      },
-      "constraints": [
-        "name",
-        "size",
-        "animationPath"
-      ]
+      }
     }
   },
   "resources": {
+    "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [

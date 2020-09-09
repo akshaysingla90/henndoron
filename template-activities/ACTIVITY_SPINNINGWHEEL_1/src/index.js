@@ -64,7 +64,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             ACTIVITY_SPINNINGWHEEL_1.ref.animationBasePath = ACTIVITY_SPINNINGWHEEL_1.ref.resourcePath + "AnimationFrames/";
             ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath = ACTIVITY_SPINNINGWHEEL_1.ref.resourcePath + "Sprite/";
             ACTIVITY_SPINNINGWHEEL_1.ref.isTeacherView = HDAppManager.isTeacherView;
-            ACTIVITY_SPINNINGWHEEL_1.ref.isCountingEnabled = ACTIVITY_SPINNINGWHEEL_1.ref.config.gameInfo.isCounting
+            ACTIVITY_SPINNINGWHEEL_1.ref.isCountingEnabled = ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.gameInfo.isCounting
             ACTIVITY_SPINNINGWHEEL_1.ref.isStudentInteractionEnable = ACTIVITY_SPINNINGWHEEL_1.ref.isTeacherView ? true : false;
             ref.setupUI();
             ref.loadAudio();
@@ -72,8 +72,8 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             if (ACTIVITY_SPINNINGWHEEL_1.ref.storedData) {
                 ACTIVITY_SPINNINGWHEEL_1.ref.syncData(ACTIVITY_SPINNINGWHEEL_1.ref.storedData)
             }
-            ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.moduleStart);
-            ref.triggerTip(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherTips.moduleStart);
+            ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.moduleStart);
+            ref.triggerTip(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherTips.data.moduleStart);
         });
     },
 
@@ -88,7 +88,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * setupUI : To create UI for teacher and student.
      */
     setupUI: function () {
-        this.setBackground(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.background.name);
+        this.setBackground(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.background.sections.background.imageName);
         this.baseLayer = this.createColourLayer(cc.color(0, 0, 0, 0), cc.winSize.width, cc.winSize.height, cc.p(0, 0), this, 1);
         this.setupTarget();
         this.setupSpinningWheel();
@@ -97,7 +97,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             this.setCardContent();
         }
         //AnimationBaseSprite
-        var animationSprite = ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.animationWinLossSprite;
+        var animationSprite = ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.animationWinLossSprite;
         var animationBaseLayer = this.addSprite("res/LessonResources/emptyImage.png", animationSprite.position, this.baseLayer);
         animationBaseLayer.tag = ACTIVITY_SPINNINGWHEEL_1.Tag.animationSprite;
         animationBaseLayer.setLocalZOrder(100);
@@ -107,26 +107,26 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * loadAudio: To load audio files.
      */
     loadAudio: function () {
-        cc.loader.load(ACTIVITY_SPINNINGWHEEL_1.ref.soundPath + ACTIVITY_SPINNINGWHEEL_1.ref.config.audioAssets.tapHiddenObject.name);
+        cc.loader.load(ACTIVITY_SPINNINGWHEEL_1.ref.soundPath + ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.tapHiddenObject.sound);
     },
 
     /**
      * loadSpriteFrames: To load animation sprite frames.
      */
     loadSpriteFrames: function () {
-        HDUtility.addSpriteFrames(ACTIVITY_SPINNINGWHEEL_1.ref.animationBasePath + "Win/object_pulled_out_animation_", ACTIVITY_SPINNINGWHEEL_1.ref.config.animation.win.frameCount, "object_pulled_out_animation_", ".png");
-        HDUtility.addSpriteFrames(ACTIVITY_SPINNINGWHEEL_1.ref.animationBasePath + "Loss/object_pulled_out_animation_", ACTIVITY_SPINNINGWHEEL_1.ref.config.animation.loss.frameCount, "object_pulled_out_animation_", ".png");
+        HDUtility.addSpriteFrames(ACTIVITY_SPINNINGWHEEL_1.ref.animationBasePath + "Win/object_pulled_out_animation_", ACTIVITY_SPINNINGWHEEL_1.ref.config.resources.animationFrames.animation[0].frameCount, "object_pulled_out_animation_", ".png");
+        HDUtility.addSpriteFrames(ACTIVITY_SPINNINGWHEEL_1.ref.animationBasePath + "Loss/object_pulled_out_animation_", ACTIVITY_SPINNINGWHEEL_1.ref.config.resources.animationFrames.animation[1].frameCount, "object_pulled_out_animation_", ".png");
     },
 
     /**
      * setupTarget: To setup target image base view.
      */
     setupTarget: function () {
-        var targetBaseObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.targetBackground;
+        var targetBaseObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetBackground;
         var targetSprite;
-        if (targetBaseObject.name.length > 0) {
+        if (targetBaseObject.imageName.length > 0) {
             var targetPosition = ACTIVITY_SPINNINGWHEEL_1.ref.isTeacherView ? targetBaseObject.position : cc.p(cc.winSize.width * 0.7, cc.winSize.height * 0.75);
-            targetSprite = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + targetBaseObject.name, targetPosition, this);
+            targetSprite = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + targetBaseObject.imageName, targetPosition, this);
             targetSprite.tag = ACTIVITY_SPINNINGWHEEL_1.Tag.targetBase;
             var targetPosition = ACTIVITY_SPINNINGWHEEL_1.ref.isTeacherView ? cc.p(cc.winSize.width * 0.55, cc.winSize.height * 0.85 - targetSprite.getContentSize().height * targetBaseObject.scale) : cc.p(cc.winSize.width * 0.6, cc.winSize.height * 0.75 - targetSprite.getContentSize().height * targetBaseObject.scale);
             targetSprite.setPosition(targetPosition);
@@ -141,8 +141,8 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         targetImage.tag = ACTIVITY_SPINNINGWHEEL_1.Tag.targetImage;
         targetImage.setScale(2.5);
         var targetName;
-        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.targetAssets[0].nameImage) {
-            targetName = this.createTTFLabel(ACTIVITY_SPINNINGWHEEL_1.ref.config.targetAssets[0].nameImageName, cc.p(targetSprite.getContentSize().width * 0.5, targetSprite.getContentSize().height * 0.7), targetSprite);
+        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[0].nameImage) {
+            targetName = this.createTTFLabel(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[0].nameImageName, cc.p(targetSprite.getContentSize().width * 0.5, targetSprite.getContentSize().height * 0.7), targetSprite);
             targetName.setVisible(false);
         } else {
             targetName = this.createTTFLabel("", "sassoon_sans_medium", 70, cc.p(0, 0, 0, 255), cc.p(targetSprite.getContentSize().width * 0.5, targetSprite.getContentSize().height * 0.69), targetSprite);
@@ -157,8 +157,8 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * setupOptionButtons : This is to set option go and stop button for student only.
      */
     setupOptionButtons: function () {
-        var goButtonObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.goButton;
-        goButton = this.createButton(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + goButtonObject.idleImage, ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + goButtonObject.pushedImage, "", 32, ACTIVITY_SPINNINGWHEEL_1.Tag.goButton, goButtonObject.position, this, this, ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + goButtonObject.disabledImage);
+        var goButtonObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.buttons.data.goButton;
+        goButton = this.createButton(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + goButtonObject.enableState, ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + goButtonObject.pushedState, "", 32, ACTIVITY_SPINNINGWHEEL_1.Tag.goButton, goButtonObject.position, this, this, ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + goButtonObject.disableState);
         goButton.setScale(goButtonObject.scale);
         var targetBase = this.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.targetBase);
         var goPosition = cc.p(targetBase.getPositionX() + goButton.getContentSize().width * 0.5 * goButton.getScale(), targetBase.getPositionY() - 20);
@@ -166,8 +166,8 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         goButton.setEnabled(this.isGoButtonEnabled());
         this.handIconUI.push(goButton);
 
-        var stopButtonObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.stopButton;
-        var stopButton = this.createButton(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + stopButtonObject.idleImage, ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + stopButtonObject.pushedImage, "", 32, ACTIVITY_SPINNINGWHEEL_1.Tag.stopButton, stopButtonObject.position, this, this, ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + stopButtonObject.disabledImage);
+        var stopButtonObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.buttons.data.stopButton;
+        var stopButton = this.createButton(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + stopButtonObject.enableState, ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + stopButtonObject.pushedState, "", 32, ACTIVITY_SPINNINGWHEEL_1.Tag.stopButton, stopButtonObject.position, this, this, ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + stopButtonObject.disableState);
         stopButton.setScale(stopButtonObject.scale);
         var stopPosition = goButton.getPosition();
         stopButton.setPosition(stopPosition);
@@ -182,23 +182,23 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
     setupTargetImage: function () {
         var targetBase = this.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.targetBase);
         var targetImage = targetBase.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.targetImage);
-        if (!ACTIVITY_SPINNINGWHEEL_1.ref.config.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].name) {
+        if (!ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].name) {
             return;
         }
-        var sprite = new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].name);
+        var sprite = new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].name);
         targetImage.setTexture(sprite.getTexture());
-        targetImage.setScale(ACTIVITY_SPINNINGWHEEL_1.ref.config.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].scale * 2.5);
+        targetImage.setScale(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].scale * 2.5);
 
-        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].nameImage) {
+        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].nameImage) {
             let sprite = targetBase.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.targetIndexLabel)
             if (sprite && sprite.setTexture) {
                 sprite.setVisible(true);
-                sprite.setTexture(new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.config.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].nameImageName).getTexture());
+                sprite.setTexture(new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].nameImageName).getTexture());
             }
         } else {
             var tempLabel = targetBase.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.targetIndexLabel);
             tempLabel.setVisible(false);
-            tempLabel.setString(ACTIVITY_SPINNINGWHEEL_1.ref.config.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].cardValue);
+            tempLabel.setString(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].cardValue);
         }
     },
 
@@ -206,22 +206,22 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * setupSpinningWheel: This will setup base spinning wheel.
      */
     setupSpinningWheel: function () {
-        var spinningWheelBaseObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.spinningWheelBase;
-        var spinningWheelCenterObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.spinningCenter;
-        var spinningWheelTopObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.spinningWheelTop;
+        var spinningWheelBaseObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelBase;
+        var spinningWheelCenterObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningCenter;
+        var spinningWheelTopObject = ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelTop;
 
         var position = ACTIVITY_SPINNINGWHEEL_1.ref.isTeacherView ? spinningWheelBaseObject.position : cc.p(cc.winSize.width * 0.3, cc.winSize.height * 0.5);
 
-        var spinningWheelBase = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + spinningWheelBaseObject.name, position, this);
+        var spinningWheelBase = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + spinningWheelBaseObject.imageName, position, this);
         spinningWheelBase.tag = ACTIVITY_SPINNINGWHEEL_1.Tag.spinningWheelBase;
         spinningWheelBase.setScale(spinningWheelBaseObject.scale);
         this.setWheelObject(spinningWheelBase);
 
-        var spinningWheelCenter = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + spinningWheelCenterObject.name, cc.p(spinningWheelBase.getContentSize().width * 0.5, spinningWheelBase.getContentSize().height * 0.5), spinningWheelBase);
+        var spinningWheelCenter = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + spinningWheelCenterObject.imageName, cc.p(spinningWheelBase.getContentSize().width * 0.5, spinningWheelBase.getContentSize().height * 0.5), spinningWheelBase);
         spinningWheelCenter.setScale(spinningWheelCenterObject.scale);
 
         var topPosition = cc.p(spinningWheelBase.getPositionX(), spinningWheelBase.getPositionY() + spinningWheelBase.getContentSize().height * spinningWheelBaseObject.scale * 0.5);
-        var spinningWheelTop = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + spinningWheelTopObject.name, topPosition, this);
+        var spinningWheelTop = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + spinningWheelTopObject.imageName, topPosition, this);
         spinningWheelTop.setScale(spinningWheelTopObject.scale);
         spinningWheelTop.setLocalZOrder(100);
     },
@@ -230,14 +230,16 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * @param baseSprite: Base spinning wheel.
      */
     setWheelObject: function (baseSprite) {
-        var wheelItems = ACTIVITY_SPINNINGWHEEL_1.ref.config.carouselAssets;
+        var wheelItems = ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data;
         for (let index = 0; index < wheelItems.length; index++) {
             var currentWheelItem = wheelItems[index];
-            var position = this.getItemPositionOnWheel(index, wheelItems.length, baseSprite);
-            var wheelItemSprite = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + currentWheelItem.name, position, baseSprite);
+            let position = this.getItemPositionOnWheel(index, wheelItems.length, baseSprite);
+            console.log('position is  ', position);
+            var wheelItemSprite = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + currentWheelItem.imageName, position, baseSprite);
             wheelItemSprite.setScale(currentWheelItem.scale * 1.5);
-            console.log(" index ", index, " angle ", this.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.carouselAssets.length, index));
-            wheelItemSprite.setRotation(-this.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.carouselAssets.length, index));
+            console.log('updated position is  ', wheelItemSprite.getPosition());
+            //  console.log(" index ", index, " angle ", this.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length, index));
+            wheelItemSprite.setRotation(-this.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length, index));
         }
     },
     /**
@@ -445,7 +447,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
                     "roomId": HDAppManager.roomId,
                     "users": [{ userName: userName }]
                 });
-                ACTIVITY_SPINNINGWHEEL_1.ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.onMouseEnable);
+                ACTIVITY_SPINNINGWHEEL_1.ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.onMouseEnable);
             }
         }
     },
@@ -593,7 +595,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         this.enableGoButton(false);
         this.enableStopButton(ACTIVITY_SPINNINGWHEEL_1.ref.isStopButtonEnabled());
 
-        ACTIVITY_SPINNINGWHEEL_1.ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.onGoButton);
+        ACTIVITY_SPINNINGWHEEL_1.ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.onGoButton);
         ACTIVITY_SPINNINGWHEEL_1.ref.isRotating = true;
         if (ACTIVITY_SPINNINGWHEEL_1.ref.parent)
             ACTIVITY_SPINNINGWHEEL_1.ref.parent.setStudentPanelActive(!ACTIVITY_SPINNINGWHEEL_1.ref.isRotating);
@@ -662,7 +664,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             var neoRotation = (rotation + speed) % 360;
             wheel.setRotation(neoRotation);
             if (ACTIVITY_SPINNINGWHEEL_1.ref.speed < 3) {
-                var selectedItemAngle = ACTIVITY_SPINNINGWHEEL_1.ref.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.carouselAssets.length, ACTIVITY_SPINNINGWHEEL_1.ref.cardQueue[0]);
+                var selectedItemAngle = ACTIVITY_SPINNINGWHEEL_1.ref.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length, ACTIVITY_SPINNINGWHEEL_1.ref.cardQueue[0]);
                 if (wheel.getRotationX() < selectedItemAngle + 5 && wheel.getRotationX() > selectedItemAngle - 5) {
                     ACTIVITY_SPINNINGWHEEL_1.ref.stopActionByTag(111);
                     ACTIVITY_SPINNINGWHEEL_1.ref.speed = 4;
@@ -699,13 +701,13 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             //Animation Effect
             var animationSprite = new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.animationBasePath + "Win/object_pulled_out_animation_0001.png");
             if (isCorrectAnswer) {
-                var animation = HDUtility.runFrameAnimation(ACTIVITY_SPINNINGWHEEL_1.ref.animationBasePath + "Win/object_pulled_out_animation_", ACTIVITY_SPINNINGWHEEL_1.ref.config.animation.win.frameCount, 0.1, ".png", 1);
+                var animation = HDUtility.runFrameAnimation(ACTIVITY_SPINNINGWHEEL_1.ref.animationBasePath + "Win/object_pulled_out_animation_", ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.win.frameCount, 0.1, ".png", 1);
                 animationSprite.setPosition(cc.p(ACTIVITY_SPINNINGWHEEL_1.ref.getContentSize().width * 0.5, ACTIVITY_SPINNINGWHEEL_1.ref.getContentSize().height * 0.5));
                 ACTIVITY_SPINNINGWHEEL_1.ref.addChild(animationSprite)
                 animationSprite.runAction(animation);
             } else {
             }
-            cc.audioEngine.playEffect(ACTIVITY_SPINNINGWHEEL_1.ref.soundPath + ACTIVITY_SPINNINGWHEEL_1.ref.config.audioAssets.tapHiddenObject.name);
+            cc.audioEngine.playEffect(ACTIVITY_SPINNINGWHEEL_1.ref.soundPath + ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.tapHiddenObject.sound);
         });
 
         let updateTarget = cc.callFunc(function () {
@@ -747,7 +749,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * setupNextTarget: This will setup next target image.
      */
     setupNextTarget: function () {
-        if (ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex + 1 >= ACTIVITY_SPINNINGWHEEL_1.ref.config.targetAssets.length) {
+        if (ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex + 1 >= ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets.length) {
             ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex = 0;
             ACTIVITY_SPINNINGWHEEL_1.ref.setupTargetImage();
             return;
@@ -805,9 +807,9 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         let width = this.getWidthOfCarousel();
         var tableMargin = 0;
 
-        let baseColorLayer = this.createColourLayer(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBackground.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBackground.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBackground.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBackground.color.a), width, this.carouselHeight, position, this, 1);
-        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBackgroundImage.name != "") {
-            let carouselBaseImage = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBackgroundImage.name, cc.p(position.x - 10, position.y), this);
+        let baseColorLayer = this.createColourLayer(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBackground.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBackground.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBackground.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBackground.color.a), width, this.carouselHeight, position, this, 1);
+        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBackgroundImage.imageName != "") {
+            let carouselBaseImage = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBackgroundImage.imageName, cc.p(position.x - 10, position.y), this);
             carouselBaseImage.setLocalZOrder(3);
             let scaleX = (baseColorLayer._contentSize.width + 20) / carouselBaseImage._contentSize.width;
             let scaleY = (baseColorLayer._contentSize.height + 40) / carouselBaseImage._contentSize.height;
@@ -815,7 +817,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             carouselBaseImage.setScaleY(scaleY);
             carouselBaseImage.setAnchorPoint(0, 0);
 
-            let carouselBorderImage = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBackgroundBorderImage.name, cc.p(position.x - 10, position.y), this);
+            let carouselBorderImage = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBackgroundBorderImage.imageName, cc.p(position.x - 10, position.y), this);
             carouselBorderImage.setLocalZOrder(5);
             carouselBorderImage.setScaleX(scaleX);
             carouselBorderImage.setScaleY(scaleY);
@@ -841,7 +843,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * @returns {number}
      */
     getWidthOfCarousel: function () {
-        let cellWidthSize = this.carouselHeight * ACTIVITY_SPINNINGWHEEL_1.ref.config.carouselAssets.length;
+        let cellWidthSize = this.carouselHeight * ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length;
         let maxWidth = this.carouselHeight * 5; //this.winSize.width * 0.6
         if (cellWidthSize > maxWidth) {
             return maxWidth - 12;
@@ -895,7 +897,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             cardCell = new ACTIVITY_SPINNINGWHEEL_1.HDCardCell(cellSize);
         }
         cardCell.tag = idx;
-        cardCell.createUI(idx, ACTIVITY_SPINNINGWHEEL_1.ref.config.carouselAssets[idx], cardCell, this.isCellSelected(idx));
+        cardCell.createUI(idx, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[idx], cardCell, this.isCellSelected(idx));
         return cardCell;
     },
 
@@ -905,7 +907,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * @returns {*}
      */
     numberOfCellsInTableView: function (table) {
-        return ACTIVITY_SPINNINGWHEEL_1.ref.config.carouselAssets.length;
+        return ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length;
     },
 
     /**
@@ -953,11 +955,13 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * @returns {number}
      */
     getIndexOfCurrentElement: function (data) {
-        for (var index = 0; index < ACTIVITY_SPINNINGWHEEL_1.ref.config.carouselAssets.length; index++) {
-            if (data.name == ACTIVITY_SPINNINGWHEEL_1.ref.config.carouselAssets[index].name) {
+        for (var index = 0; index < ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length; index++) {
+            if (data.imageName == ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[index].imageName) {
+                console.log('index is ', index);
                 return index;
             }
         }
+        console.log('index is ', index);
         return -1;
     },
 
@@ -1021,12 +1025,12 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      */
     triggerScript: function (message) {
         if (this.parent) {
-            this.parent.showScriptMessage(message.ops);
+            this.parent.showScriptMessage(message.content.ops);
         }
     },
     triggerTip: function (message) {
         if (this.parent) {
-            this.parent.showTipMessage(message.ops);
+            this.parent.showTipMessage(message.content.ops);
         }
     },
     /**
@@ -1062,24 +1066,24 @@ ACTIVITY_SPINNINGWHEEL_1.HDCardCell = cc.TableViewCell.extend({
         this.tag = idx;
         this.removeAllChildren(true);
 
-        let colourLayer = new cc.LayerColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxBackground.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxBackground.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxBackground.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this._contentSize.height - this.cellVerticalPadding);
+        let colourLayer = new cc.LayerColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxBackground.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxBackground.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxBackground.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this._contentSize.height - this.cellVerticalPadding);
         colourLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.5));
         parent.addChild(colourLayer, 2);
 
-        let cardElementImage = new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + data.name);
+        let cardElementImage = new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + data.imageName);
         cardElementImage.setContentSize(cc.size(colourLayer._contentSize.width, colourLayer._contentSize.height));
         cardElementImage.setPosition(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.5);
         cardElementImage.setAnchorPoint(0, 0);
         parent.addChild(cardElementImage, 3);
 
-        let textBaseLayer = new cc.LayerColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardBackground.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardBackground.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardBackground.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this.cardTextHeight);
+        let textBaseLayer = new cc.LayerColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this.cardTextHeight);
         textBaseLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this._contentSize.height - this.cellVerticalPadding - this.cardTextHeight));
-
-        let labelCardText = cc.LabelTTF.create(data.cardValue, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardText.font, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardText.fontSize, cc.size(0., 0), cc.TEXT_ALIGNMENT_CENTER);
+        //   console.log('data is   ',data);
+        let labelCardText = cc.LabelTTF.create(data.label, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.font, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.fontSize, cc.size(0., 0), cc.TEXT_ALIGNMENT_CENTER);
         labelCardText.setPosition(cc.p(textBaseLayer._contentSize.width * 0.5, textBaseLayer._contentSize.height * 0.5));
-        labelCardText.setColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardText.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardText.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardText.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxCardText.color.a));
+        labelCardText.setColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.color.a));
 
-        this.highlightLayer = new cc.LayerColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxHighlight.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxHighlight.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxHighlight.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.graphicalAssets.carouselBoxHighlight.color.a), this._contentSize.width, this._contentSize.height);
+        this.highlightLayer = new cc.LayerColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxHighlight.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxHighlight.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxHighlight.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxHighlight.color.a), this._contentSize.width, this._contentSize.height);
         this.highlightLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.5));
         parent.addChild(this.highlightLayer, 10);
 

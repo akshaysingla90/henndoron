@@ -1,270 +1,382 @@
 {
   "properties": {
-    "configurable": true,
-    "url": "res/Activity/ACTIVITY_BAP_1/",
-    "number": "1",
-    "renderMode": 1,
-    "name": "Background and pen",
-    "namespace": "ACTIVITY_BAP_1",
-    "layerName": "BackgroundAndPenLayer",
+    "component": "infoCard",
     "activityName": "Background And Pen",
-    "teacherScriptsNotes": {
-      "notes": "Ask to identify notes",
-      "timestamp": "",
-      "triggers": ""
-    },
+    "description": "game desc. here",
+    "allocatedTime": 10,
     "controls": {
       "mouse": true,
-      "turnBased": false
+      "turnBased": true
     },
-    "teacherTipsNotes": {
-      "tips": "Don't ask about bag",
-      "timestamp": "",
-      "triggers": ""
-    },
-    "description": "",
-    "allocatedTime": 10,
+    "externalRewards": true,
     "studentPreview": true,
-    "preLoaded": false
+    "url": "res/Activity/ACTIVITY_BAP_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": false,
+    "namespace": "ACTIVITY_BAP_1",
+    "layerName": "BackgroundAndPenLayer"
   },
-  "jsList": [
-    "res/Activity/ACTIVITY_BAP_1/src/BackgroundAndPen.js"
-  ],
   "teacherScripts": {
-    "slide_1": {
-      "ops": [
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Start by clapping 5 times then use fingers to count."
-        },
-        {
-          "insert": "\n\n\n"
+    "component": "scriptsCard",
+    "data": {
+      "slide_1": {
+        "UIName": "slide_1",
+        "description": "this will trigger when slide 1 opens ",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "background": "transparent",
+                "color": "#000000"
+              },
+              "insert": "Start by clapping 5 times then use fingers to count."
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": true
+              },
+              "insert": "Let’s count! One, two, three, four, five!"
+            },
+            {
+              "insert": "\n\n\n"
+            }
+          ]
         }
-      ]
-    },
-    "slide_2": {
-      "ops": [
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Circle/point to the sheep."
-        },
-        {
-          "insert": "\n\n"
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "What do you see? I see sheep"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "! Are the sheep "
-        },
-        {
-          "attributes": {
-            "italic": true,
-            "bold": true
-          },
-          "insert": "sad or glad"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "? The sheep are glad! Let’s count the sheep."
-        },
-        {
-          "insert": " \n"
+      },
+      "slide_2": {
+        "UIName": "slide_2",
+        "description": "this will trigger when slide 2 opens ",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "background": "transparent",
+                "color": "#000000"
+              },
+              "insert": "Circle/point to the sheep."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": true
+              },
+              "insert": "What do you see? I see sheep"
+            },
+            {
+              "attributes": {
+                "background": "transparent",
+                "color": "#000000",
+                "italic": true
+              },
+              "insert": "! Are the sheep "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": true
+              },
+              "insert": "sad or glad"
+            },
+            {
+              "attributes": {
+                "background": "transparent",
+                "color": "#000000",
+                "italic": true
+              },
+              "insert": "? The sheep are glad! Let’s count the sheep."
+            },
+            {
+              "insert": "\n"
+            }
+          ]
         }
-      ]
-    },
-    "slide_3": {
-      "ops": [
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Write numbers under the sheep while counting. "
-        },
-        {
-          "insert": "\n"
-        },
-        {
-          "attributes": {
-            "italic": true
-          },
-          "insert": "One sheep, two sheep, three sheep, four sheep, five sheep! Can you count the sheep? Write and count!"
-        },
-        {
-          "insert": " "
-        },
-        {
-          "attributes": {
-            "bold": true
-          },
-          "insert": "   "
-        },
-        {
-          "insert": "\n"
-        },
-        {
-          "attributes": {
-            "underline": true
-          },
-          "insert": "Encourage student to count and write numbers. "
-        },
-        {
-          "attributes": {
-            "underline": true,
-            "bold": true
-          },
-          "insert": " "
-        },
-        {
-          "insert": "\n"
+      },
+      "slide_3": {
+        "UIName": "slide_3",
+        "description": "this will trigger when slide 3 opens ",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Write numbers under the sheep while counting. "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "One sheep, two sheep, three sheep, four sheep, five sheep! Can you count the sheep? Write and count!"
+            },
+            {
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "bold": true
+              },
+              "insert": "   "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Encourage student to count and write numbers. "
+            },
+            {
+              "attributes": {
+                "underline": true,
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "\n"
+            }
+          ]
         }
-      ]
+      }
     }
   },
   "teacherTips": {
-    "moduleStart": {
-      "ops": [
-        {
-          "insert": "- You can count with their body by clapping five times, then counting with the hand by showing five fingers. Alternatively, tap your head and shoulders!\n- If the student is too young to write the numbers, the item can be circled while counting. \n- Remember to erase the notations you make before the students turn to count, write or circle.    \n- Put emphasis on the “S” in cats so student understands that the word changes when there is more than one. \n\n"
-        }
-      ]
+    "component": "tipsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "moduleStart",
+        "description": "this will trigger when activity starts ",
+        "content": "You can count with their body by clapping five times, then counting with the hand by showing five fingers. Alternatively, tap your head and shoulders!\nIf the student is too young to write the numbers, the item can be circled while counting.\nRemember to erase the notations you make before the students turn to count, write or circle.\nPut emphasis on the “S” in cats so student understands that the word changes when there is more than one."
+      }
     }
   },
-  "graphicalAssets": {
-    "backgrounds": {
-      "configurable": true,
-      "name": "background",
-      "size": "{960, 640}",
-      "images": [
-        "background_1.png",
-        "background_1.png",
-        "background_1.png"
-      ],
-      "constraints": [
-        "imageName",
-        "size"
-      ]
-    },
-    "btn_next": {
-      "name": "btn_next.png",
-      "size": "{100, 30}"
-    },
-    "btn_previous": {
-      "name": "btn_previous.png",
-      "size": "{100, 30}"
-    },
-    "clear_enable": {
-      "name": "btn_enable.png",
-      "size": "{100, 30}"
-    },
-    "clear_disable": {
-      "name": "btn_disable.png",
-      "size": "{100, 30}"
-    },
-    "drawMode_enable": {
-      "name": "btn_enable.png",
-      "size": "{100, 30}"
-    },
-    "drawMode_disable": {
-      "name": "btn_disable.png",
-      "size": "{100, 30}"
-    },
-    "eraser_icon": {
-      "name": "eraser_icon.png"
-    },
-    "cursor_pencil": {
-      "name": "cursor_pencil.png"
-    },
-    "cursor_eraser.png": {
-      "name": "cursor_eraser.png"
-    },
-    "eraser": {
-      "name": "eraser.png"
-    },
-    "palette_sidebar": {
-      "name": "palette_sidebar.png"
-    },
-    "color": [
-      {
-        "name": "colour_black.png",
-        "rgb": {
-          "r": 0,
-          "g": 0,
-          "b": 0
-        }
-      },
-      {
-        "name": "colour_red.png",
-        "rgb": {
-          "r": 255,
-          "g": 0,
-          "b": 0
-        }
-      },
-      {
-        "name": "colour_blue.png",
-        "rgb": {
-          "r": 0,
-          "g": 0,
-          "b": 255
-        }
-      },
-      {
-        "name": "colour_green.png",
-        "rgb": {
-          "r": 0,
-          "g": 255,
-          "b": 0
-        }
-      },
-      {
-        "name": "colour_yellow.png",
-        "rgb": {
-          "r": 255,
-          "g": 255,
-          "b": 0
-        }
-      },
-      {
-        "name": "colour_pink.png",
-        "rgb": {
-          "r": 240,
-          "g": 80,
-          "b": 143
-        }
-      },
-      {
-        "name": "colour_orange.png",
-        "rgb": {
-          "r": 255,
-          "g": 165,
-          "b": 0
-        }
-      },
-      {
-        "name": "colour_white.png",
-        "rgb": {
-          "r": 255,
-          "g": 255,
-          "b": 255
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "backgroundSlides": {
+        "component": "backgroundSlides",
+        "UIName": "BACKGROUND SLIDES",
+        "images": [
+          "background_1.png",
+          "background_1.png",
+          "background_1.png"
+        ],
+        "dimensions": {
+          "width": 960,
+          "height": 649
         }
       }
-    ]
+    }
+  },
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "clear": {
+        "UIName": "Clear Button",
+        "title": "Clear",
+        "enableState": "btn_enable.png",
+        "pushedState": "btn_enable.png",
+        "disableState": "btn_disable.png",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "dimensions": {
+          "width": 139,
+          "height": 32
+        }
+      },
+      "drawMode": {
+        "UIName": "Draw Mode Button",
+        "title": [
+          "Shared Mode",
+          "Individual Mode"
+        ],
+        "enableState": "btn_enable.png",
+        "pushedState": "btn_enable.png",
+        "disableState": "btn_disable.png",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "dimensions": {
+          "width": 139,
+          "height": 32
+        }
+      }
+    }
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "colorPaletteBase": {
+        "component": "image",
+        "UIName": "Color Palette Base",
+        "imageName": "palette_sidebar.png",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "dimensions": {
+          "width": 69,
+          "height": 410
+        }
+      },
+      "eraser": {
+        "component": "button",
+        "UIName": "Eraser",
+        "enableState": "eraser_icon.png",
+        "pushedState": "eraser_icon.png",
+        "disableState": "eraser_icon.png",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "dimensions": {
+          "width": 110,
+          "height": 66
+        }
+      },
+      "color": {
+        "component": "colorPalette",
+        "dimensions": {
+          "width": 93,
+          "height": 92
+        },
+        "data": [
+          {
+            "name": "",
+            "imageName": "colour_black.png",
+            "rgb": {
+              "r": 0,
+              "g": 0,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_red.png",
+            "rgb": {
+              "r": 255,
+              "g": 0,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_blue.png",
+            "rgb": {
+              "r": 0,
+              "g": 0,
+              "b": 255
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_green.png",
+            "rgb": {
+              "r": 0,
+              "g": 255,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_yellow.png",
+            "rgb": {
+              "r": 255,
+              "g": 255,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_pink.png",
+            "rgb": {
+              "r": 240,
+              "g": 80,
+              "b": 143
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_orange.png",
+            "rgb": {
+              "r": 255,
+              "g": 165,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_white.png",
+            "rgb": {
+              "r": 255,
+              "g": 255,
+              "b": 255
+            }
+          }
+        ]
+      }
+    }
+  },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "btn_next": {
+        "name": "btn_next.png",
+        "size": "{100, 30}"
+      },
+      "btn_previous": {
+        "name": "btn_previous.png",
+        "size": "{100, 30}"
+      },
+      "drawMode_enable": {
+        "name": "btn_enable.png",
+        "size": "{100, 30}"
+      },
+      "drawMode_disable": {
+        "name": "btn_disable.png",
+        "size": "{100, 30}"
+      },
+      "drawCursor": {
+        "UIName": "DRAW CURSOR",
+        "imageName": "",
+        "dimensions": {
+          "width": 50,
+          "height": 50
+        }
+      },
+      "eraserCursor": {
+        "UIName": "ERASER CURSOR",
+        "imageName": "",
+        "dimensions": {
+          "width": 50,
+          "height": 50
+        }
+      }
+    }
   },
   "resources": {
+    "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [
