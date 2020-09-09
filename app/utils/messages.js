@@ -92,6 +92,7 @@ module.exports = {
   ACTIVITY_PREVIEW_CREATED_SUCCESSFULLY: "Activity preview created successfully",
   ACTIVITY_DOESNOT_EXISTS:"Activity with this id doesn't exist",
   RESOURCES_UPLOAD_SUCCESSFULLY:"Resource uploaded successfully",
+  RESOURCES_DELETED_SUCCESSFULLY:"Resource deleted successfully",
   LESSONS_FETCHED_SUCCESSFULLY:"Lessons fetched successfully",
   LESSON_FETCHED_SUCCESSFULLY:"Lesson fetched successfully",
   LESSONS_DOESNOT_EXISTS:"Lessons doesn't exist",

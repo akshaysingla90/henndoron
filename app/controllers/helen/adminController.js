@@ -110,53 +110,45 @@ adminController.getActivity = async (payload) => {
  * @param {*} payload 
  */
 adminController.addResourceFiles = async (payload) => {
-  let activity = await SERVICES.activityService.getActivity({ _id: payload.id }, { path: 1, configData: 1 });
+  let activity = await SERVICES.activityService.getActivity({ _id: payload.id }, { path: 1 });
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   let destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}${activity.path}`);
-  let configPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}${activity.path}/${ACTIVITY_CONFIG_PATH}`);
-  let resources = { ...(activity.configData.resources || {}) };
-  let resourceNames = payload.files.map(file => file.originalname);
   switch (payload.type) {
     case RESOURCE_TYPE.ANIMATION_FRAMES.VALUE:
       destinationPath = destinationPath + '/' + RESOURCE_TYPE.ANIMATION_FRAMES.BASE_PATH + `/${payload.animationFramePath}`;
-      let fileName = payload.files[0].originalname.toString();
-      let fileExtension = fileName.substr(fileName.lastIndexOf('.'));
-      const animation = {
-        "Name": payload.animationName,
-        "frameCount": payload.files.length,
-        "frameInitial": payload.animationFrameInitial,
-        "extension": fileExtension
-      };
-      if (resources.animationFrames) {
-        resources.animationFrames.animation.push(animation);
-      } else {
-        resources.animationFrames = {
-          basePath: RESOURCE_TYPE.ANIMATION_FRAMES.BASE_PATH,
-          animation: [animation]
-        }
-      }
       break;
     case RESOURCE_TYPE.SOUND.VALUE:
-      resources.sound = {
-        basePath: RESOURCE_TYPE.SOUND.BASE_PATH,
-        audio: resourceNames
-      }
       destinationPath = destinationPath + '/' + RESOURCE_TYPE.SOUND.BASE_PATH
       break;
     case RESOURCE_TYPE.SPRITE.VALUE:
-      resources.sprites = {
-        basePath: RESOURCE_TYPE.SPRITE.BASE_PATH,
-        images: resourceNames
-      }
       destinationPath = destinationPath + '/' + RESOURCE_TYPE.SPRITE.BASE_PATH
       break;
   }
-  await SERVICES.activityService.updateActivity({ _id: payload.id }, { "configData.resources": resources });
   await SERVICES.fileUploadService.uploadMultipleFilesToLocal(payload, destinationPath);
-  let dataToWrite = activity.configData;
-  dataToWrite.resources = resources;
-  fs.writeFileSync(configPath, JSON.stringify(dataToWrite));
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.RESOURCES_UPLOAD_SUCCESSFULLY));
+}
+
+/**
+ * function to delete batch of files in a activity resource
+ * @param {*} payload 
+ */
+adminController.deleteResourceFiles = async (payload) => {
+  let activity = await SERVICES.activityService.getActivity({ _id: payload.id }, { path: 1 });
+  if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  let destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}${activity.path}`);
+  switch (payload.type) {
+    case RESOURCE_TYPE.ANIMATION_FRAMES.VALUE:
+      destinationPath = destinationPath + '/' + RESOURCE_TYPE.ANIMATION_FRAMES.BASE_PATH + `/${payload.animationFramePath}`;
+      break;
+    case RESOURCE_TYPE.SOUND.VALUE:
+      destinationPath = destinationPath + '/' + RESOURCE_TYPE.SOUND.BASE_PATH
+      break;
+    case RESOURCE_TYPE.SPRITE.VALUE:
+      destinationPath = destinationPath + '/' + RESOURCE_TYPE.SPRITE.BASE_PATH
+      break;
+  }
+  await SERVICES.fileUploadService.deleteMultipleFilesFromLocal(payload, destinationPath);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.RESOURCES_DELETED_SUCCESSFULLY));
 }
 
 /**

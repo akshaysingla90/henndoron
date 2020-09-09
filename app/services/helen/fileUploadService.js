@@ -100,4 +100,22 @@ fileUploadService.uploadMultipleFilesToLocal = async (payload, pathToUpload) => 
     return Promise.all(promises);
 };
 
+/**
+ * function to delete the multiple files from local
+ */
+
+fileUploadService.deleteMultipleFilesFromLocal = async (payload, pathToDelete) => {
+    let directoryPath = pathToDelete;
+    const promises = payload.fileNames.map(fileName => {
+        let fileDeletePath = `${directoryPath}/${fileName}`;
+        return new Promise((resolve, reject) => {
+            fs.unlink(fileDeletePath, err => {
+                if (err) reject(err)
+                else resolve('ok');
+            });
+        });
+    });
+    return Promise.all(promises);
+}
+
 module.exports = fileUploadService;

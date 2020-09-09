@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE } = require(`../../../utils/constants`);
 //load controllers
-const { getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/${CONFIG.PLATFORM}/adminController`);
+const { deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
 
 let routes = [
   {
@@ -205,6 +205,28 @@ let routes = [
     },
     auth: USER_ROLE.ADMIN,
     handler: getCourses
+  },
+  {
+    method: 'DELETE',
+    path: '/v1/admin/activities/:id/files-delete',
+    joiSchemaForSwagger: {
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
+      params: {
+        id: Joi.string().required().description('Activity\'s Id.')
+      },
+      body: {
+        fileNames: Joi.array().items(Joi.string().required()).description(' File\'s name'),
+        animationFramePath: Joi.string().optional().description('animationFrame Folder\'s path'),
+        type: Joi.number().required().valid(RESOURCE_TYPE.SOUND.VALUE, RESOURCE_TYPE.ANIMATION_FRAMES.VALUE, RESOURCE_TYPE.SPRITE.VALUE).description('1 => SPRITE,2 => SOUND 3 => ANIMATION_FRAME'),
+      },
+      group: 'Admin',
+      description: 'Route to delete resource of an activity',
+      model: 'Delete_Resource'
+    },
+    auth: USER_ROLE.ADMIN,
+    handler: deleteResourceFiles
   },
 ];
 
