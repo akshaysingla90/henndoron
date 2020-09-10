@@ -34,7 +34,7 @@ adminController.cloneActivity = async (payload) => {
     episodeNumber: payload.episodeNumber
   }
   //create new activity in database 
-  const { id: activityId } = await SERVICES.activityService.createActivity(newActivity);
+  const activity = await SERVICES.activityService.createActivity(newActivity);
 
   let re = new RegExp(sourcePath + ACTIVITY_RESOURCE_DIRECTORY_PATH);
   const filterFunc = (filePath) => {
@@ -46,7 +46,7 @@ adminController.cloneActivity = async (payload) => {
   await fs.writeFileSync(destinationPath + ACTIVITY_CONFIG_PATH, JSON.stringify(payload.configData));
 
   console.log('Copying complete!');
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_CLONED_SUCCESSFULLY), { activityId });
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_CLONED_SUCCESSFULLY), { activity });
 };
 
 /**
