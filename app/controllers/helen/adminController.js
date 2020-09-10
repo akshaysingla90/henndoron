@@ -19,11 +19,11 @@ adminController.cloneActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-
-  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${payload.name}`)
+  const suffix = Date.now();
+  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${payload.name}${suffix}`);
   let newActivity = {
     name: payload.name,
-    path: `/${payload.name}${Date.now()}`,
+    path: `/${payload.name}${suffix}`,
     status: ACTIVITY_STATUS.DRAFT,
     type: sourceActivity.type,
     templateId: sourceActivity._id,
