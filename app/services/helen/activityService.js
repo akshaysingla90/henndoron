@@ -24,16 +24,22 @@ activityService.getActivity = async (criteria, projection, options) => {
 activityService.getActivities = async (payload, projection) => {
   let query = [
     { $match: payload.criteria },
-    ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit),
     {
       $lookup: {
-        from: 'course',
-        localField: 'courseId',
-        foreignField: '_id',
-        as: 'course',
+        from: 'courses',
+        let: { id: "$courseId" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$_id", "$$id"] } } },
+          { $project: { "iconUrl": 1 } }
+        ],
+        as: 'courses',
       }
-    }
-  ]
+    },
+    { $unwind: { path: "$courses", preserveNullAndEmptyArrays: true } },
+    { $addFields: { courseIcon: "$courses.iconUrl" } },
+    { $project: { courses: 0, courseId: 0 } },
+    ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit)  
+  ];
   let { items: activities, totalCount } = (await activityModel.aggregate(query))[0] || { items: [], totalCount: 0 }
   return { activities, totalCount };
 };
