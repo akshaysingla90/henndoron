@@ -183,6 +183,7 @@
         "component": "animation",
         "UIName": "Flash card glow animation",
         "name": "cardTakeOut",
+        "extension": ".png",
         "size": "{100,100}",
         "position": {
           "x": 256,
@@ -350,7 +351,7 @@
       ]
     },
     "animationFrames": {
-      "basePath": "AnimationFrames/",
+      "basePath": "res/AnimationFrames/",
       "animation": [
         {
           "Name": "Card Take Out",
