@@ -20,7 +20,7 @@ let routes = [
       body: {
         name: Joi.string().description('Activity name.'),
         description: Joi.string().required().description('Activity description.'),
-        courseId: Joi.number().required().description('courseId.'),
+        courseId: Joi.string().required().description('courseId.'),
         lessonNumber: Joi.number().required().description('Activity Cdescription.'),
         episodeNumber: Joi.number().required().description('Activity episode.'),
 
@@ -146,8 +146,6 @@ let routes = [
         fileArray: Joi.fileArray({ name: 'assets', description: 'Files Array', maxCount: 20 }),
         body: {
           animationFramePath: Joi.string().optional().description('animationFrame Folder\'s path'),
-          animationName: Joi.string().optional().description('animationName for config.json'),
-          animationFrameInitial: Joi.string().optional().description('Animation asset folder\'s path'),
           type: Joi.number().required().valid(RESOURCE_TYPE.SOUND.VALUE, RESOURCE_TYPE.ANIMATION_FRAMES.VALUE, RESOURCE_TYPE.SPRITE.VALUE).description('1 => SPRITE,2 => SOUND 3 => ANIMATION_FRAME'),
         }
       },
