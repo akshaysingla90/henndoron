@@ -178,10 +178,11 @@
         "sound": "cardTakeOut.mp3"
       },
       "flashCardGlow": {
+        "frameCount": 15,
+        "frameInitial": "cardTakeOut/magicHat_cardTakeOut_",
         "component": "animation",
         "UIName": "Flash card glow animation",
         "name": "cardTakeOut",
-        "frameCount": 15,
         "size": "{100,100}",
         "position": {
           "x": 256,
