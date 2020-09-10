@@ -217,7 +217,7 @@ adminController.previewActivity = async (payload) => {
     });
   }))
   projectData = JSON.parse(projectData);
-  projectData.jsList.push(`res/Activity/${sourceActivity.name}/src/index.js`);
+  projectData.jsList.push(`res/Activity${sourceActivity.path}/src/index.js`);
   fs.writeFileSync(`${previewPath}/project.json`, JSON.stringify(projectData));
 
   //Update lesson-config

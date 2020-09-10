@@ -48,7 +48,7 @@ let routes = [
       body: {
         name: Joi.string().description('Activity name.'),
         description: Joi.string().optional().description('Activity description.'),
-        courseId: Joi.number().optional().description('courseId.'),
+        courseId: Joi.string().optional().description('courseId.'),
         lessonNumber: Joi.number().optional().description('Activity Lesson Number.'),
         episodeNumber: Joi.number().optional().description('Activity episode Number.'),
         configData: Joi.object({}).unknown().description('Activity Config Data.'),
