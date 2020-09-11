@@ -48,12 +48,13 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
 
         this.joinedStudentList.length = 0;
         magicHat_1.ref = this;
-        cc.loader.loadJson("res/Activity/ACTIVITY_MAGICHAT_1/config.json", function (error, config) {
+        let activityName = 'ACTIVITY_NAME_PLACEHOLDER';
+        cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             magicHat_1.config = config;
             magicHat_1.ref.config = config;
-            magicHat_1.resourcePath = "res/Activity/" + "ACTIVITY_MAGICHAT_1/res/Sprite/";
-            magicHat_1.soundPath = "res/Activity/" + "ACTIVITY_MAGICHAT_1/res/Sound/";
-            magicHat_1.animationPath = "res/Activity/" + "ACTIVITY_MAGICHAT_1/res/AnimationFrames/";
+            magicHat_1.resourcePath = "res/Activity/" + "" + activityName + "/res/Sprite/";
+            magicHat_1.soundPath = "res/Activity/" + "" + activityName + "/res/Sound/";
+            magicHat_1.animationPath = "res/Activity/" + "" + activityName + "/res/AnimationFrames/";
             magicHat_1.ref.isStudentInteractionEnable = magicHat_1.ref.isTeacher ? true : false;
             magicHat_1.ref.loadSpriteFrames();
             magicHat_1.ref.setupUI();
