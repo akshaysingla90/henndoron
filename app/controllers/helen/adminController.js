@@ -1,9 +1,10 @@
 "use strict";
 const HELPERS = require("../../helpers");
 const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS } = require('../../utils/constants');
-const { ACTIVITY_PREVIEW_PATH, TEMPLATE_ACTIVITY_PREVIEW, TEMPLATE_ACTIVITY_PATH, ACTIVITY_DIRECTORY_PATH, ACTIVITY_RESOURCE_DIRECTORY_PATH, BASE_PATH, ACTIVITY_CONFIG_PATH } = require('../../../config').COCOS_PROJECT_PATH;
+const { ACTIVITY_SRC_PATH, ACTIVITY_PREVIEW_PATH, TEMPLATE_ACTIVITY_PREVIEW, TEMPLATE_ACTIVITY_PATH, ACTIVITY_DIRECTORY_PATH, ACTIVITY_RESOURCE_DIRECTORY_PATH, BASE_PATH, ACTIVITY_CONFIG_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const SERVICES = require('../../services');
 const fs = require('fs-extra');
+const replace = require('replace-in-file');
 const path = require('path');
 /**************************************************
  ***** Auth controller for authentication logic ***
@@ -19,11 +20,11 @@ adminController.cloneActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-  const suffix = Date.now();
-  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${payload.name}${suffix}`);
+  const activityPath = `${payload.name}${Date.now()}`;
+  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activityPath}`);
   let newActivity = {
     name: payload.name,
-    path: `/${payload.name}${suffix}`,
+    path: `/${activityPath}`,
     status: ACTIVITY_STATUS.DRAFT,
     type: sourceActivity.type,
     templateId: sourceActivity._id,
@@ -43,6 +44,22 @@ adminController.cloneActivity = async (payload) => {
   }
   // Copying Directory
   await fs.copy(sourcePath, destinationPath, { filter: filterFunc });
+
+  // Change index.js 
+  let textToReplace = new RegExp('ACTIVITY_NAME_PLACEHOLDER', 'g');
+  let namespaceToReplace = new RegExp(payload.configData.properties.namespace, 'g');
+  let textToWrite = activityPath;
+
+  const options = {
+    files: destinationPath + ACTIVITY_SRC_PATH,
+    from: [textToReplace, namespaceToReplace],
+    to: [textToWrite, textToWrite]
+  };
+  await replace(options);
+
+  //Creating config.json for activity  
+  payload.configData.properties.url = `res/Activity/${activityPath}`
+  payload.configData.properties.namespace = `${activityPath}`
   await fs.writeFileSync(destinationPath + ACTIVITY_CONFIG_PATH, JSON.stringify(payload.configData));
 
   console.log('Copying complete!');
@@ -170,21 +187,46 @@ adminController.duplicateActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-  const suffix = Date.now();
-  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${sourceActivity.name}${suffix}`);
+  const activityPath = `${sourceActivity.name}${Date.now()}`;
+  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activityPath}`);
   //create new activity in database 
   let newActivity = {
     name: `${sourceActivity.name} (COPY)`,
-    path: `/${sourceActivity.name}${suffix}`,
+    path: `/${activityPath}`,
     status: ACTIVITY_STATUS.DRAFT,
     type: sourceActivity.type,
     templateId: sourceActivity._id,
     description: sourceActivity.description,
     iconUrl: sourceActivity.iconUrl
   }
+  const alreadyExist = await SERVICES.activityService.getActivity({ templateId: sourceActivity._id, name: newActivity.name });
+  if (alreadyExist) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_ALREADY_EXISTS_WITH_THIS_NAME, ERROR_TYPES.BAD_REQUEST);
   const activity = await SERVICES.activityService.createActivity(newActivity);
   // Copying Directory
   await fs.copy(sourcePath, destinationPath);
+  let configData = await (new Promise((resolve, reject) => {
+    fs.readFile(sourcePath + ACTIVITY_CONFIG_PATH, 'utf-8', (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  }))
+  configData = JSON.parse(configData);
+
+  // Change index.js 
+  let textToReplace = new RegExp('ACTIVITY_NAME_PLACEHOLDER', 'g');
+  let namespaceToReplace = new RegExp(configData.properties.namespace, 'g');
+  let textToWrite = activityPath;
+  const options = {
+    files: destinationPath + ACTIVITY_SRC_PATH,
+    from: [textToReplace, namespaceToReplace],
+    to: [textToWrite, textToWrite]
+  };
+  await replace(options);
+
+  //Creating config.json for activity
+  configData.properties.namespace = `${activityPath}`
+  configData.properties.url = `res/Activity/${activityPath}/`
+  await fs.writeFileSync(destinationPath + ACTIVITY_CONFIG_PATH, JSON.stringify(configData));
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_CLONED_SUCCESSFULLY), { activity });
 };
 

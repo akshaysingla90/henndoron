@@ -91,6 +91,7 @@ module.exports = {
   ACTIVITY_DELETED_SUCCESSFULLY: "Activity deleted successfully",
   ACTIVITY_PREVIEW_CREATED_SUCCESSFULLY: "Activity preview created successfully",
   ACTIVITY_DOESNOT_EXISTS:"Activity with this id doesn't exist",
+  ACTIVITY_ALREADY_EXISTS_WITH_THIS_NAME:'Activity already exists with this name',
   RESOURCES_UPLOAD_SUCCESSFULLY:"Resource uploaded successfully",
   RESOURCES_DELETED_SUCCESSFULLY:"Resource deleted successfully",
   LESSONS_FETCHED_SUCCESSFULLY:"Lessons fetched successfully",

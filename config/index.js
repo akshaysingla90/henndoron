@@ -35,6 +35,7 @@ var defaults = {
         ACTIVITY_PREVIEW_PATH:'/activity-preview',
         ACTIVITY_RESOURCE_DIRECTORY_PATH:'/res',   
         ACTIVITY_CONFIG_PATH:'/config.json',
+        ACTIVITY_SRC_PATH: '/src/index.js',
         LESSON_PATH:'/lesson-created'       
     },
     SMTP: {
