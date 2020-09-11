@@ -103,47 +103,47 @@ for(var ff in fontFile){
 }
 
 //--------Magic Hat
-var magicHatSpriteBasePath = "res/Activity/ACTIVITY_MAGICHAT_1/res/Sprite/";
-var magicHatAnimationFrames = "res/Activity/ACTIVITY_MAGICHAT_1/res/AnimationFrames/";
-var magicHatSoundPath = "res/Activity/ACTIVITY_MAGICHAT_1/res/Sound/";
-var magicHatRes = [
-    magicHatSpriteBasePath + "background.png",
-    magicHatSpriteBasePath + "ant.png",
-    magicHatSpriteBasePath + "bat.png",
-    magicHatSpriteBasePath + "bee.png",
-    magicHatSpriteBasePath + "cat.png",
-    magicHatSpriteBasePath + "crow.png",
-    magicHatSpriteBasePath + "dog.png",
-    magicHatSpriteBasePath + "frog.png",
-    magicHatSpriteBasePath + "wordHolder.png",
-    magicHatSpriteBasePath + "carouselImage.png",
-    magicHatSpriteBasePath + "carouselBorderImage.png",
-    magicHatSpriteBasePath + "HatFront.png",
-    magicHatSpriteBasePath + "HatBack.png",
-    magicHatSpriteBasePath + "BagFront.png",
-    magicHatSpriteBasePath + "BagBack.png",
-    magicHatSpriteBasePath + "ApronFront.png",
-    magicHatSpriteBasePath + "ApronBack.png",
-    magicHatSpriteBasePath + "cellGlow.png",
-    magicHatSpriteBasePath + "Book.png",
-    magicHatSpriteBasePath + "flupeSad.png",
-    magicHatSpriteBasePath + "house.png",
-    magicHatSpriteBasePath + "paulHappy.png",
-    magicHatSpriteBasePath + "rat.png",
-    magicHatSpriteBasePath + "sheep.png",
-    magicHatSpriteBasePath + "sing.png",
-    magicHatSpriteBasePath + "tub.png",
-    magicHatSpriteBasePath + "tree.png",
+// var magicHatSpriteBasePath = "res/Activity/ACTIVITY_MAGICHAT_1/res/Sprite/";
+// var magicHatAnimationFrames = "res/Activity/ACTIVITY_MAGICHAT_1/res/AnimationFrames/";
+// var magicHatSoundPath = "res/Activity/ACTIVITY_MAGICHAT_1/res/Sound/";
+// var magicHatRes = [
+//     magicHatSpriteBasePath + "background.png",
+//     magicHatSpriteBasePath + "ant.png",
+//     magicHatSpriteBasePath + "bat.png",
+//     magicHatSpriteBasePath + "bee.png",
+//     magicHatSpriteBasePath + "cat.png",
+//     magicHatSpriteBasePath + "crow.png",
+//     magicHatSpriteBasePath + "dog.png",
+//     magicHatSpriteBasePath + "frog.png",
+//     magicHatSpriteBasePath + "wordHolder.png",
+//     magicHatSpriteBasePath + "carouselImage.png",
+//     magicHatSpriteBasePath + "carouselBorderImage.png",
+//     magicHatSpriteBasePath + "HatFront.png",
+//     magicHatSpriteBasePath + "HatBack.png",
+//     magicHatSpriteBasePath + "BagFront.png",
+//     magicHatSpriteBasePath + "BagBack.png",
+//     magicHatSpriteBasePath + "ApronFront.png",
+//     magicHatSpriteBasePath + "ApronBack.png",
+//     magicHatSpriteBasePath + "cellGlow.png",
+//     magicHatSpriteBasePath + "Book.png",
+//     magicHatSpriteBasePath + "flupeSad.png",
+//     magicHatSpriteBasePath + "house.png",
+//     magicHatSpriteBasePath + "paulHappy.png",
+//     magicHatSpriteBasePath + "rat.png",
+//     magicHatSpriteBasePath + "sheep.png",
+//     magicHatSpriteBasePath + "sing.png",
+//     magicHatSpriteBasePath + "tub.png",
+//     magicHatSpriteBasePath + "tree.png",
 
-    magicHatSoundPath + "cardTakeOut.mp3",
-]
-for(let i = 1; i <= 15; ++i) {
-    counter = (i < 10 ? "000" + i : "00"+i);
-    magicHatRes.push(magicHatAnimationFrames + "cardTakeOut/magicHat_cardTakeOut_" + counter + ".png");
-}
-for(var k in magicHatRes){
-    resources.push(magicHatRes[k]);
-}
+//     magicHatSoundPath + "cardTakeOut.mp3",
+// ]
+// for(let i = 1; i <= 15; ++i) {
+//     counter = (i < 10 ? "000" + i : "00"+i);
+//     magicHatRes.push(magicHatAnimationFrames + "cardTakeOut/magicHat_cardTakeOut_" + counter + ".png");
+// }
+// for(var k in magicHatRes){
+//     resources.push(magicHatRes[k]);
+// }
 //-----------FlashCard
 // var flashcardSpriteBasePath  = "res/Activity/ACTIVITY_FLASHCARDS/res/Sprite/";
 // var flashcardSoundBasePath = "res/Activity/ACTIVITY_FLASHCARDS/res/Sound/";
