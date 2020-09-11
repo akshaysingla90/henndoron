@@ -15,7 +15,7 @@ Resources.add({
 });
 
 const activitySchema = new Schema({
-    name: { type: String, index: true, unique: true },
+    name: { type: String, index: true },
     path: { type: String },
     description: { type: String },
     iconUrl: { type: String },
