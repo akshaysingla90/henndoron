@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 const CONFIG = require('../../../config');
 const fileUploadService = {};
@@ -80,9 +81,7 @@ fileUploadService.uploadFile = async (payload, pathToUpload, pathOnServer) => {
 fileUploadService.uploadMultipleFilesToLocal = async (payload, pathToUpload) => {
     let directoryPath = pathToUpload;
     // create user's directory if not present.
-    if (!fs.existsSync(directoryPath)) {
-        fs.mkdirSync(directoryPath, { recursive: true });
-    }
+    fse.ensureDirSync(directoryPath);
     const promises = payload.files.map(file => {
         let fileSavePath = `${directoryPath}/${file.originalname}`;
         const writeStream = fs.createWriteStream(fileSavePath);

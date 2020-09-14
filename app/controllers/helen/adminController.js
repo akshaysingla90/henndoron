@@ -132,7 +132,7 @@ adminController.addResourceFiles = async (payload) => {
   let destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}${activity.path}`);
   switch (payload.type) {
     case RESOURCE_TYPE.ANIMATION_FRAMES.VALUE:
-      destinationPath = destinationPath + '/' + RESOURCE_TYPE.ANIMATION_FRAMES.BASE_PATH + `/${payload.animationFramePath}`;
+      destinationPath = destinationPath + '/' + RESOURCE_TYPE.ANIMATION_FRAMES.BASE_PATH + `${payload.animationFramePath}`;
       break;
     case RESOURCE_TYPE.SOUND.VALUE:
       destinationPath = destinationPath + '/' + RESOURCE_TYPE.SOUND.BASE_PATH
