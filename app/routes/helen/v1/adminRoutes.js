@@ -26,7 +26,7 @@ let routes = [
 
 
         configData: Joi.object({}).unknown().description('Activity Config Data.'),
-        exactResources: Joi.boolean().default(false).description(' true if want exact resources')
+        exactResources: Joi.boolean().default(true).description(' true if want exact resources')
       },
       group: 'Admin',
       description: 'Route to create a new activity save draft',
