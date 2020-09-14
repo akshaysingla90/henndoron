@@ -58,7 +58,7 @@ adminController.cloneActivity = async (payload) => {
   await replace(options);
 
   //Creating config.json for activity  
-  payload.configData.properties.url = `res/Activity/${activityPath}`
+  payload.configData.properties.url = `res/Activity/${activityPath}/`
   payload.configData.properties.namespace = `${activityPath}`
   await fs.writeFileSync(destinationPath + ACTIVITY_CONFIG_PATH, JSON.stringify(payload.configData));
 
