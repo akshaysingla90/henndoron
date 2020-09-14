@@ -364,7 +364,31 @@
         "UIName": "Win BG",
         "imageName": "winScreen.png"
       },
+      "gameInfo": {
+        "component": "animationGroup",
+        "data": {
+          "dwarf": {
+            "name": "dwarf",
+            "partsCount": 6,
+            "animationFrameCount": 16,
+            "fps": 12,
+            "animationPath": "dwarf_animation/dwarf_animation_"
+          },
+          "king": {
+            "name": "king",
+            "partsCount": 6,
+            "animationPath": "king_animation/king_animation_"
+          },
+          "knight": {
+            "name": "knight",
+            "partsCount": 6,
+            "animationPath": "knight_animation/knight_animation_"
+          }
+        },
+        "isolatedNodes": 3
+      },
       "dismantledObject": {
+        "component": "dismantledObjects",
         "UIName": "dismantledObjects",
         "data": [
           {

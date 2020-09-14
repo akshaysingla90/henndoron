@@ -57,9 +57,10 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         ACTIVITY_SPINNINGWHEEL_1.ref = this;
         ACTIVITY_SPINNINGWHEEL_1.ref.animationCompleted = true;
         this.cardQueue.length = 0;
-        cc.loader.loadJson("res/Activity/ACTIVITY_SPINNINGWHEEL_1/config.json", function (error, config) {
+        let activityName = 'ACTIVITY_SPINNINGWHEEL_1';
+        cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             ACTIVITY_SPINNINGWHEEL_1.ref.config = config;
-            ACTIVITY_SPINNINGWHEEL_1.ref.resourcePath = "res/Activity/" + "ACTIVITY_SPINNINGWHEEL_1/res/"
+            ACTIVITY_SPINNINGWHEEL_1.ref.resourcePath = "res/Activity/" + "" + activityName + "/res/"
             ACTIVITY_SPINNINGWHEEL_1.ref.soundPath = ACTIVITY_SPINNINGWHEEL_1.ref.resourcePath + "Sound/";
             ACTIVITY_SPINNINGWHEEL_1.ref.animationBasePath = ACTIVITY_SPINNINGWHEEL_1.ref.resourcePath + "AnimationFrames/";
             ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath = ACTIVITY_SPINNINGWHEEL_1.ref.resourcePath + "Sprite/";
@@ -141,8 +142,8 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         targetImage.tag = ACTIVITY_SPINNINGWHEEL_1.Tag.targetImage;
         targetImage.setScale(2.5);
         var targetName;
-        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[0].nameImage) {
-            targetName = this.createTTFLabel(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[0].nameImageName, cc.p(targetSprite.getContentSize().width * 0.5, targetSprite.getContentSize().height * 0.7), targetSprite);
+        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[0].nameImage) {
+            targetName = this.createTTFLabel(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[0].nameImageName, cc.p(targetSprite.getContentSize().width * 0.5, targetSprite.getContentSize().height * 0.7), targetSprite);
             targetName.setVisible(false);
         } else {
             targetName = this.createTTFLabel("", "sassoon_sans_medium", 70, cc.p(0, 0, 0, 255), cc.p(targetSprite.getContentSize().width * 0.5, targetSprite.getContentSize().height * 0.69), targetSprite);
@@ -182,23 +183,23 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
     setupTargetImage: function () {
         var targetBase = this.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.targetBase);
         var targetImage = targetBase.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.targetImage);
-        if (!ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].name) {
+        if (!ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].imageName) {
             return;
         }
-        var sprite = new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].name);
+        var sprite = new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].imageName);
         targetImage.setTexture(sprite.getTexture());
-        targetImage.setScale(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].scale * 2.5);
+        targetImage.setScale(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].scale * 2.5);
 
-        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].nameImage) {
+        if (ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].nameImage) {
             let sprite = targetBase.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.targetIndexLabel)
             if (sprite && sprite.setTexture) {
                 sprite.setVisible(true);
-                sprite.setTexture(new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].nameImageName).getTexture());
+                sprite.setTexture(new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].nameImageName).getTexture());
             }
         } else {
             var tempLabel = targetBase.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.targetIndexLabel);
             tempLabel.setVisible(false);
-            tempLabel.setString(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].cardValue);
+            tempLabel.setString(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex].label);
         }
     },
 
@@ -749,7 +750,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      * setupNextTarget: This will setup next target image.
      */
     setupNextTarget: function () {
-        if (ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex + 1 >= ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.targetAssets.length) {
+        if (ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex + 1 >= ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length) {
             ACTIVITY_SPINNINGWHEEL_1.ref.currentTargetIndex = 0;
             ACTIVITY_SPINNINGWHEEL_1.ref.setupTargetImage();
             return;

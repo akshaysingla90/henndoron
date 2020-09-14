@@ -68,9 +68,10 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         this._super();
         let ref = this;
         ACTIVITY_BAP_1.ref = this;
-        cc.loader.loadJson("res/Activity/ACTIVITY_BAP_1/config.json", function (error, config) {
+        let activityName = 'ACTIVITY_BAP_1';
+        cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             ACTIVITY_BAP_1.config = config;
-            ACTIVITY_BAP_1.resourcePath = "res/Activity/" + "ACTIVITY_BAP_1/res/"
+            ACTIVITY_BAP_1.resourcePath = "res/Activity/" + "" + activityName + "/res/"
             ACTIVITY_BAP_1.soundPath = ACTIVITY_BAP_1.resourcePath + "Sound/";
             ACTIVITY_BAP_1.animationBasePath = ACTIVITY_BAP_1.resourcePath + "AnimationFrames/";
             ACTIVITY_BAP_1.spriteBasePath = ACTIVITY_BAP_1.resourcePath + "Sprite/";

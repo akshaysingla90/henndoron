@@ -1366,13 +1366,14 @@ PianoPlayer.MainPianoPlayerLayer = cc.Layer.extend({
     this._super();
     var self = this;
     PianoPlayer.MainPianoPlayerLayerRef = this;
+    let activityName = 'ACTIVITY_PIANO_PLAYER';
     cc.loader.loadJson(
-      "res/Activity/ACTIVITY_PIANO_PLAYER/config.json",
+      "res/Activity/" + activityName + "/config.json",
       function (error, data) {
         self.config = data;
         PianoPlayer.resourcePath =
-          "res/Activity/ACTIVITY_PIANO_PLAYER/res/Sprite/";
-        PianoPlayer.soundPath = "res/Activity/ACTIVITY_PIANO_PLAYER/res/Sound/";
+          "res/Activity/" + "" + activityName + "/res/Sprite/";
+        PianoPlayer.soundPath = "res/Activity/" + "" + activityName + "/res/Sound/";
         if (HDAppManager.isTeacherView) {
           var teacherViewLayer = new PianoPlayer.TeacherViewLayer(self.state);
           teacherViewLayer.setTag(1);

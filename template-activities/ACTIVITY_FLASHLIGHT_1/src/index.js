@@ -52,9 +52,10 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
     onEnter: function () {
         this._super();
         ACTIVITY_FLASHLIGHT_1.ref = this;
-        cc.loader.loadJson("res/Activity/ACTIVITY_FLASHLIGHT_1/config.json", function (error, config) {
+        let activityName = 'ACTIVITY_FLASHLIGHT_1';
+        cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             ACTIVITY_FLASHLIGHT_1.config = config;
-            ACTIVITY_FLASHLIGHT_1.resourcePath = "res/Activity/" + "ACTIVITY_FLASHLIGHT_1/res/"
+            ACTIVITY_FLASHLIGHT_1.resourcePath = "res/Activity/" + "" + activityName + "/res/"
             ACTIVITY_FLASHLIGHT_1.soundPath = ACTIVITY_FLASHLIGHT_1.resourcePath + "Sound/";
             ACTIVITY_FLASHLIGHT_1.animationBasePath = ACTIVITY_FLASHLIGHT_1.resourcePath + "AnimationFrames/";
             ACTIVITY_FLASHLIGHT_1.spriteBasePath = ACTIVITY_FLASHLIGHT_1.resourcePath + "Sprite/";
@@ -68,7 +69,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
 
             if (ACTIVITY_FLASHLIGHT_1.ref.isTeacherView && !ACTIVITY_FLASHLIGHT_1.ref.storedData) {
                 ACTIVITY_FLASHLIGHT_1.ref.updateRoomData({
-                    "freezeInfo": { "position": "", "name": "" },
+                    "freezeInfo": {"position": "", "name": ""},
                     "circleData": this.circleSyncData
                 });
             }
@@ -270,7 +271,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             this.checkToShowTeacherCircle();
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 "eventType": ACTIVITY_FLASHLIGHT_1.socketEventKey.STUDENT_INTERACTION,
-                "data": { "userName": username, "status": status }
+                "data": {"userName": username, "status": status}
             });
         }
     },
@@ -313,7 +314,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             } else {
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
-                    "users": [{ userName: userName }]
+                    "users": [{userName: userName}]
                 });
             }
         }
@@ -349,7 +350,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             ACTIVITY_FLASHLIGHT_1.ref.removeButton();
             this.circleSyncData.length = 0;
             ACTIVITY_FLASHLIGHT_1.ref.updateRoomData({
-                "freezeInfo": { "position": "", "name": "" },
+                "freezeInfo": {"position": "", "name": ""},
                 "circleData": this.circleSyncData
             });
         }
@@ -394,7 +395,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         }
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.MOVE_CIRCLE,
-            'data': { 'userName': HDAppManager.userName, 'position': position, "fromTeacher": fromTeacher }
+            'data': {'userName': HDAppManager.userName, 'position': position, "fromTeacher": fromTeacher}
         });
     },
 
@@ -409,19 +410,19 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             ACTIVITY_FLASHLIGHT_1.ref.parent.setStudentPanelActive(false);
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.FREEZE_ALL_CIRCLE,
-            'data': { 'userName': studentName, 'position': position }
+            'data': {'userName': studentName, 'position': position}
         });
         this.updateRoomData({
-            "freezeInfo": { "position": position, "studentName": studentName },
+            "freezeInfo": {"position": position, "studentName": studentName},
             "circleData": this.circleSyncData
         });
     },
 
     unFreezeAllCircle: function (position, studentName, isCorrect) {
-        this.updateRoomData({ "circleData": this.circleSyncData });
+        this.updateRoomData({"circleData": this.circleSyncData});
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.UNFREEZE_ALL_CIRCLE,
-            'data': { 'userName': studentName, 'position': position, "isCorrect": isCorrect }
+            'data': {'userName': studentName, 'position': position, "isCorrect": isCorrect}
         });
     },
 
@@ -553,12 +554,12 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         this.circleSyncData.length = 0;
         for (let index = 0; index < this.circleList.length; index++) {
             var circle = this.circleList[index];
-            let data = { "username": circle.getName(), "position": circle.getPosition() };
+            let data = {"username": circle.getName(), "position": circle.getPosition()};
             if (!this.alreadyPresent(data.username)) {
                 this.circleSyncData.push(data);
             }
         }
-        this.updateRoomData({ "circleData": this.circleSyncData });
+        this.updateRoomData({"circleData": this.circleSyncData});
     },
 
     alreadyPresent: function (username) {
@@ -590,7 +591,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
         this.addChild(this.masK, 5);
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             'eventType': ACTIVITY_FLASHLIGHT_1.socketEventKey.ADD_CIRCLE,
-            'data': { 'username': HDAppManager.username, "position": this.circle.getPosition() }
+            'data': {'username': HDAppManager.username, "position": this.circle.getPosition()}
         });
     },
 
@@ -636,7 +637,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
             ACTIVITY_FLASHLIGHT_1.ref.freezePosition = syncData.freezeInfo.position;
         }
         if (!ACTIVITY_FLASHLIGHT_1.ref.isTeacherView && ACTIVITY_FLASHLIGHT_1.ref.isCircleFreeze) {
-            ACTIVITY_FLASHLIGHT_1.ref.freezeCircle({ "position": ACTIVITY_FLASHLIGHT_1.ref.freezePosition });
+            ACTIVITY_FLASHLIGHT_1.ref.freezeCircle({"position": ACTIVITY_FLASHLIGHT_1.ref.freezePosition});
         }
     },
 

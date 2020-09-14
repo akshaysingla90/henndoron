@@ -93,10 +93,11 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
         // loading config file
         this.setContentSize(this.winSize);
         ACTIVITY_SAVE_A_SITUATION.ref = this;
-        cc.loader.loadJson("res/Activity/ACTIVITY_SAVE_A_SITUATION/config.json", function (error, config) {
+        let activityName = 'ACTIVITY_SAVE_A_SITUATION';
+        cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             if (!error) {
                 ACTIVITY_SAVE_A_SITUATION.ref.config = config;
-                ACTIVITY_SAVE_A_SITUATION.ref.resourcePath = "res/Activity/" + "ACTIVITY_SAVE_A_SITUATION/res/"
+                ACTIVITY_SAVE_A_SITUATION.ref.resourcePath = "res/Activity/" + "" + activityName + "/res/"
                 ACTIVITY_SAVE_A_SITUATION.ref.spriteBasePath = ACTIVITY_SAVE_A_SITUATION.ref.resourcePath + "Sprite/";
                 ACTIVITY_SAVE_A_SITUATION.ref.animationFrames = ACTIVITY_SAVE_A_SITUATION.ref.resourcePath + "AnimationFrames/";
                 ACTIVITY_SAVE_A_SITUATION.ref.isTeacherView = HDAppManager.isTeacherView;
@@ -282,7 +283,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
                 this.startTime = new Date().getTime();
                 this.updateWaterFillingInfo(ACTIVITY_SAVE_A_SITUATION.WaterFillingStates.STARTED);
                 break;
-            case ACTIVITY_SAVE_A_SITUATION.WaterFillingStates.STARTED:
+            case  ACTIVITY_SAVE_A_SITUATION.WaterFillingStates.STARTED:
                 if (delay < rateOfFilling + 1) {
                     let scale = delay / rateOfFilling;
                     this.water.setScaleY(scale);
@@ -297,7 +298,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
                     this.updateRoomData();
                 }
                 break;
-            case ACTIVITY_SAVE_A_SITUATION.WaterFillingStates.PAUSED:
+            case  ACTIVITY_SAVE_A_SITUATION.WaterFillingStates.PAUSED:
                 this.water.setScaleY(this.lastSavedState.scale);
                 this.tubBack.getChildByTag(ACTIVITY_SAVE_A_SITUATION.Tag.Waves).setPositionY(this.water.height * this.lastSavedState.scale - 5);
                 rateOfFilling = rateOfFilling - (rateOfFilling * this.lastSavedState.scale);
@@ -519,7 +520,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
                 });
                 if ((this.isStudentInteractionEnable) && !isDemo) {
 
-                    this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, { "roomId": HDAppManager.roomId });
+                    this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, {"roomId": HDAppManager.roomId});
                 }
                 break;
             }
@@ -741,7 +742,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
         return this.interactableObject;
     },
     mouseTexture: function () {
-        return { 'hasCustomTexture': this.customTexture, 'textureUrl': this.MouseTextureUrl };
+        return {'hasCustomTexture': this.customTexture, 'textureUrl': this.MouseTextureUrl};
     },
     updateMouseIcon: function (location) {
         this.changeMouseCursorImage();
@@ -896,7 +897,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
             } else {
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
-                    "users": [{ userName: userName }]
+                    "users": [{userName: userName}]
                 });
             }
         }
@@ -953,7 +954,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     onAnimationEnd: function (ref, isWin) {
         ACTIVITY_SAVE_A_SITUATION.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             'eventType': ACTIVITY_SAVE_A_SITUATION.socketEvents.ANIMATION_ENDED_ACK,
-            'data': { name: HDAppManager.username, endState: isWin }
+            'data': {name: HDAppManager.username, endState: isWin}
         });
     },
 
@@ -1098,7 +1099,7 @@ ACTIVITY_SAVE_A_SITUATION.SaveASituation = HDBaseLayer.extend({
     buttonCallback: function (sender, type) {
         if (type == ccui.Widget.TOUCH_ENDED) {
             switch (sender.getTag()) {
-                case ACTIVITY_SAVE_A_SITUATION.Tag.NextButton:
+                case ACTIVITY_SAVE_A_SITUATION.Tag.NextButton :
                     this.startNewLevel(sender.parent, this.currentLevel + 1);
                     sender.parent.removeFromParent();
                     break;

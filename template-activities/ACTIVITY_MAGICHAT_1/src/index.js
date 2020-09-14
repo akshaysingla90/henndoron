@@ -48,7 +48,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
 
         this.joinedStudentList.length = 0;
         magicHat_1.ref = this;
-        let activityName = 'ACTIVITY_NAME_PLACEHOLDER';
+        let activityName = 'ACTIVITY_MAGICHAT_1';
         cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             magicHat_1.config = config;
             magicHat_1.ref.config = config;
@@ -59,6 +59,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
             magicHat_1.ref.loadSpriteFrames();
             magicHat_1.ref.setupUI();
         });
+
     },
 
     onExit: function () {
@@ -126,7 +127,6 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
     setAnswerCard: function (name) {
         this.answerCard = this.addSprite(magicHat_1.resourcePath + magicHat_1.config.assets.sections.currentCardDescriptionBox.imageName, magicHat_1.config.assets.sections.currentCardDescriptionBox.position, this);
         this.answerCardText = this.createTTFLabel(name, HDConstants.Sassoon_Regular, magicHat_1.config.assets.sections.answerCardText.fontSize, cc.color(magicHat_1.config.assets.sections.answerCardText.color.r, magicHat_1.config.assets.sections.answerCardText.color.g, magicHat_1.config.assets.sections.answerCardText.color.b), cc.p(this.answerCard._contentSize.width * 0.5, this.answerCard._contentSize.height * 0.5), this.answerCard);
-        console.log('answer is ', this.answerCardText);
         if (magicHat_1.config.assets.sections.answerCardText.font)
             this.answerCardText.setFontName(magicHat_1.config.assets.sections.answerCardText.font)
         this.answerCard.setScale(0.7);
@@ -141,7 +141,6 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
             let obj = this.cardQueue[0];
             imageName = obj.imageName;
             cardValue = obj.label;
-            console.log('valuee of carde ids ', cardValue);
         } else {
             return;
         }
@@ -277,7 +276,6 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      */
     getWidthOfCarousel: function () {
         let cellWidthSize = this.carouselHeight * magicHat_1.config.assets.sections.carouselAssets.data.length;
-        console.log('carousal assets  ', magicHat_1.config.assets.sections.carouselAssets.data.length);
         let maxWidth = this.carouselHeight * 5;//this.winSize.width * 0.6
         if (cellWidthSize > maxWidth) {
             return maxWidth
@@ -387,7 +385,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      */
     getIndexOfCurrentElement: function (data) {
         for (var index = 0; index < magicHat_1.config.assets.sections.carouselAssets.data.length; index++) {
-            if (data.name == magicHat_1.config.assets.sections.carouselAssets.data[index].imageName) {
+            if (data.imageName == magicHat_1.config.assets.sections.carouselAssets.data[index].imageName) {
                 return index;
             }
         }
@@ -409,7 +407,6 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
                         if (this.isStudentInteractionEnable) {
                             if (this.cardQueue.length > 0) {
                                 let obj = this.cardQueue[0];
-                                console.log('object is', obj);
                                 this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                                     'eventType': magicHat_1.socketEvents.SHOW_FLASH_CARD,
                                     'data': obj
@@ -552,7 +549,6 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * updateRoomData: This will be update room data which is required for game state management.
      */
     updateRoomData: function () {
-        console.log("update room data magic hat");
         SocketManager.emitCutomEvent("SingleEvent", {
             'eventType': HDSocketEventType.UPDATE_ROOM_DATA,
             'roomId': HDAppManager.roomId,
@@ -609,7 +605,6 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      * @param res
      */
     gameEvents: function (res) {
-        console.log('type of event ', res.eventType);
         switch (res.eventType) {
             case magicHat_1.socketEvents.ADD_CARD_TO_QUEUE:
                 magicHat_1.ref.addCardToQueue(res.data);
@@ -652,7 +647,6 @@ magicHat_1.HDCardCell = cc.TableViewCell.extend({
         let colourLayer = new cc.LayerColor(cc.color(magicHat_1.config.assets.sections.carouselBoxBackground.color.r, magicHat_1.config.assets.sections.carouselBoxBackground.color.g, magicHat_1.config.assets.sections.carouselBoxBackground.color.b, magicHat_1.config.assets.sections.carouselBoxBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this._contentSize.height - this.cellVerticalPadding);
         colourLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.5));
         parent.addChild(colourLayer, 2);
-        console.log('data is ', data);
         var scaleFactorX = colourLayer._contentSize.width / data.dimensions.width;
         var scaleFactorY = colourLayer._contentSize.height / data.dimensions.height;
 

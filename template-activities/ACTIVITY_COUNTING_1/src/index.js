@@ -32,9 +32,10 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
         this._super();
         let ref = this;
         ACTIVITY_COUNTING_1.ref = this;
-        cc.loader.loadJson("res/Activity/ACTIVITY_COUNTING_1/config.json", function (error, config) {
+        let activityName = 'ACTIVITY_COUNTING_1';
+        cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             ACTIVITY_COUNTING_1.ref.config = config;
-            ACTIVITY_COUNTING_1.ref.resourcePath = "res/Activity/" + "ACTIVITY_COUNTING_1/res/"
+            ACTIVITY_COUNTING_1.ref.resourcePath = "res/Activity/" + "" + activityName + "/res/"
             ACTIVITY_COUNTING_1.ref.soundPath = ACTIVITY_COUNTING_1.ref.resourcePath + "Sound/";
             ACTIVITY_COUNTING_1.ref.animationBasePath = ACTIVITY_COUNTING_1.ref.resourcePath + "AnimationFrames/";
             ACTIVITY_COUNTING_1.ref.spriteBasePath = ACTIVITY_COUNTING_1.ref.resourcePath + "Sprite/";
@@ -185,7 +186,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
                 this.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.onMouseEnable.content.ops);
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
-                    "users": [{ userName: userName }]
+                    "users": [{userName: userName}]
                 });
             }
         }
@@ -254,10 +255,10 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
                             this.showHiddenObject(sender.tag);
                             ACTIVITY_COUNTING_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                                 'eventType': ACTIVITY_COUNTING_1.socketEvents.SHOW_CARD,
-                                'data': { "tag": sender.tag, "username": HDAppManager.username }
+                                'data': {"tag": sender.tag, "username": HDAppManager.username}
                             });
                             if (!ACTIVITY_COUNTING_1.ref.isTeacherView) {
-                                ACTIVITY_COUNTING_1.ref.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, { "roomId": HDAppManager.roomId });
+                                ACTIVITY_COUNTING_1.ref.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, {"roomId": HDAppManager.roomId});
                             }
                             ACTIVITY_COUNTING_1.ref.updateRoomData();
                         }

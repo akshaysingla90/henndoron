@@ -51,9 +51,10 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
         this._super();
         let ref = this;
         ACTIVITY_CWC_1.ref = this;
-        cc.loader.loadJson("res/Activity/ACTIVITY_CWC_1/config.json", function (error, config) {
+        let activityName = 'ACTIVITY_CWC_1';
+        cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             ACTIVITY_CWC_1.config = config;
-            ACTIVITY_CWC_1.resourcePath = "res/Activity/ACTIVITY_CWC_1/res/"
+            ACTIVITY_CWC_1.resourcePath = "res/Activity/" + "" + activityName + "/res/"
             ACTIVITY_CWC_1.soundPath = ACTIVITY_CWC_1.resourcePath + "Sound/";
             ACTIVITY_CWC_1.animationBasePath = ACTIVITY_CWC_1.resourcePath + "AnimationFrames/";
             ACTIVITY_CWC_1.spriteBasePath = ACTIVITY_CWC_1.resourcePath + "Sprite/";

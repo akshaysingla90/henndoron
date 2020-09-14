@@ -260,12 +260,6 @@
         "component": "image",
         "UIName": "Target Background",
         "imageName": "targetBg.png",
-        "backgroundColor": {
-          "r": 255,
-          "g": 255,
-          "b": 255,
-          "a": 255
-        },
         "dimensions": {
           "width": 200,
           "height": 200
@@ -429,38 +423,30 @@
         "data": [
           {
             "imageName": "ant.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
-            "scale": "1",
+            "nameImage": false,
+            "nameImageName": "",
+            "scale": 1,
             "label": "ant"
           },
           {
             "imageName": "bat.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
-            "scale": "1",
+            "nameImage": false,
+            "nameImageName": "",
+            "scale": 1,
             "label": "bat"
           },
           {
             "imageName": "bee.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
-            "scale": "1",
+            "nameImage": false,
+            "nameImageName": "",
+            "scale": 1,
             "label": "bee"
           },
           {
             "imageName": "crow.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
-            "scale": "1",
+            "nameImage": false,
+            "nameImageName": "",
+            "scale": 1,
             "label": "crow"
           }
         ]
@@ -498,73 +484,7 @@
       "gameInfo": {
         "isCounting": true,
         "countingObject": 3
-      },
-      "targetAssets": [
-        {
-          "configurable": true,
-          "sound": "abc.mp3",
-          "name": "ant.png",
-          "nameImage": false,
-          "nameImageName": "",
-          "cardValue": "ant",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 1,
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "sound": "abc.mp3",
-          "name": "bat.png",
-          "cardValue": "bat",
-          "nameImage": false,
-          "nameImageName": "",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 1,
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "sound": "abc.mp3",
-          "name": "bee.png",
-          "cardValue": "bee",
-          "nameImage": false,
-          "nameImageName": "",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 1,
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        },
-        {
-          "configurable": true,
-          "sound": "abc.mp3",
-          "name": "crow.png",
-          "cardValue": "crow",
-          "nameImage": false,
-          "nameImageName": "",
-          "size": {
-            "width": 350,
-            "height": 350
-          },
-          "scale": 1,
-          "constraints": [
-            "imageName, sound, size"
-          ]
-        }
-      ]
+      }
     }
   },
   "resources": {

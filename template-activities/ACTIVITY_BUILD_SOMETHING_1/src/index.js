@@ -80,10 +80,11 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     onEnter: function () {
         this._super();
         ACTIVITY_BUILD_SOMETHING_1.ref = this;
-        cc.loader.loadJson("res/Activity/ACTIVITY_BUILD_SOMETHING_1/config.json", function (error, config) {
+        let activityName = 'ACTIVITY_BUILD_SOMETHING_1';
+        cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             ACTIVITY_BUILD_SOMETHING_1.configData = config
             ACTIVITY_BUILD_SOMETHING_1.config = JSON.parse(JSON.stringify(config));
-            ACTIVITY_BUILD_SOMETHING_1.resourcePath = "res/Activity/" + "ACTIVITY_BUILD_SOMETHING_1/res/"
+            ACTIVITY_BUILD_SOMETHING_1.resourcePath = "res/Activity/" + "" + activityName + "/res/"
             ACTIVITY_BUILD_SOMETHING_1.soundPath = ACTIVITY_BUILD_SOMETHING_1.resourcePath + "Sound/";
             ACTIVITY_BUILD_SOMETHING_1.animationBasePath = ACTIVITY_BUILD_SOMETHING_1.resourcePath + "AnimationFrames/";
             ACTIVITY_BUILD_SOMETHING_1.spriteBasePath = ACTIVITY_BUILD_SOMETHING_1.resourcePath + "Sprite/";
@@ -190,7 +191,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             let startButtonObject = ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.startButton;
             let startButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.enableState, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.pushedState, "", 32, ACTIVITY_BUILD_SOMETHING_1.Tag.startButton, cc.p(this.getContentSize().width * 0.09,
                 this.getContentSize().height * 0.2), this, this, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.disableState);
-            //console.log('butto position ',startButton.getPosition());
+           //console.log('butto position ',startButton.getPosition());
             startButton.setScale(startButtonObject.scale);
             startButton.setEnabled(true);
             startButton.setLocalZOrder(10);
@@ -222,7 +223,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                 "roomId": HDAppManager.roomId,
                 "roomData": {
                     "activity": ACTIVITY_BUILD_SOMETHING_1.config.properties.namespace,
-                    "data": { "gameState": ACTIVITY_BUILD_SOMETHING_1.ref.gameState, "usersData": data },
+                    "data": {"gameState": ACTIVITY_BUILD_SOMETHING_1.ref.gameState, "usersData": data},
                     "activityStartTime": HDAppManager.getActivityStartTime()
                 },
             }
@@ -368,7 +369,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             return;
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.MOVE_POSITION,
-            'data': { 'userName': HDAppManager.userName, 'position': position, 'index': index, 'event': event }
+            'data': {'userName': HDAppManager.userName, 'position': position, 'index': index, 'event': event}
         });
     },
 
@@ -376,7 +377,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         if (!ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView) {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.USER_DATA,
-                'data': { 'userName': HDAppManager.userName, 'UIData': this.userDataForSync }
+                'data': {'userName': HDAppManager.userName, 'UIData': this.userDataForSync}
             });
         }
     },
@@ -644,15 +645,15 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         }
         if (this.currentIsolatedNode < ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.isolatedNodes) {
             this.currentIsolatedNode++;
-            return { "isIsolatedNode": true };
+            return {"isIsolatedNode": true};
         }
-        return { "isIsolatedNode": false, "nodeContainsPoint": false }
+        return {"isIsolatedNode": false, "nodeContainsPoint": false}
     },
     updateStudentInteraction: function (username, status) {
         if (this.isTeacherView) {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 "eventType": ACTIVITY_BUILD_SOMETHING_1.socketEventKey.STUDENT_INTERACTION,
-                "data": { "userName": username, "status": status }
+                "data": {"userName": username, "status": status}
             });
         }
     },
@@ -733,7 +734,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             } else {
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
-                    "users": [{ userName: userName }]
+                    "users": [{userName: userName}]
                 });
             }
         }
@@ -809,10 +810,10 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             }
         }
         if (!isFound) {
-            ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.push({ "userName": res.userName, "data": res.data.UIData });
+            ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.push({"userName": res.userName, "data": res.data.UIData});
         } else {
             ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.splice(indexData, 1);
-            ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.push({ "userName": res.userName, "data": res.data.UIData });
+            ACTIVITY_BUILD_SOMETHING_1.ref.allUserData.push({"userName": res.userName, "data": res.data.UIData});
         }
     },
 
@@ -912,7 +913,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                     break;
 
                 case ACTIVITY_BUILD_SOMETHING_1.gameState.START: {
-                    const { usersData } = data;
+                    const {usersData} = data;
                     let user = usersData.find(user => user.userName === HDAppManager.username);
                     if (user) {
                         ACTIVITY_BUILD_SOMETHING_1.ref.createUIForData(HDAppManager.username, user.data, this);
@@ -1141,7 +1142,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     updateButtonVisibility: function (tag, visible) {
         var button = this.getChildByTag(tag);
         button.setVisible(visible);
-        button.setEnabled(visible);
+         button.setEnabled(visible);
     },
 
     /**
@@ -1320,7 +1321,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         if (ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView && ACTIVITY_BUILD_SOMETHING_1.ref.gameState == ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO) {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.SCROLL_OFFSET,
-                'data': { 'userName': HDAppManager.userName, "offset": offset }
+                'data': {'userName': HDAppManager.userName, "offset": offset}
             });
         }
     },
@@ -1435,7 +1436,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         this.resetScreen();
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.RESET_UI,
-            'data': { 'userName': HDAppManager.userName }
+            'data': {'userName': HDAppManager.userName}
         });
         this.gameState = ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO;
         ACTIVITY_BUILD_SOMETHING_1.ref.updateRoomData();
