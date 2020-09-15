@@ -145,8 +145,14 @@ let routes = [
       formData: {
         fileArray: Joi.fileArray({ name: 'assets', description: 'Files Array', maxCount: 20 }),
         body: {
-          animationFramePath: Joi.string().optional().description('animationFrame Folder\'s path'),
           type: Joi.number().required().valid(RESOURCE_TYPE.SOUND.VALUE, RESOURCE_TYPE.ANIMATION_FRAMES.VALUE, RESOURCE_TYPE.SPRITE.VALUE).description('1 => SPRITE,2 => SOUND 3 => ANIMATION_FRAME'),
+          // animationFramePath: Joi.string().optional().description('animationFrame Folder\'s path'),
+          animationFramePath: Joi.string().description('animationFrame Folder\'s path')
+            .when('type', {
+              is: RESOURCE_TYPE.ANIMATION_FRAMES.VALUE,
+              then: Joi.string().required(),
+              otherwise: Joi.forbidden()
+            }),
         }
       },
       group: 'Admin',
@@ -216,8 +222,13 @@ let routes = [
       },
       body: {
         fileNames: Joi.array().items(Joi.string().required()).description(' File\'s name'),
-        animationFramePath: Joi.string().optional().description('animationFrame Folder\'s path'),
         type: Joi.number().required().valid(RESOURCE_TYPE.SOUND.VALUE, RESOURCE_TYPE.ANIMATION_FRAMES.VALUE, RESOURCE_TYPE.SPRITE.VALUE).description('1 => SPRITE,2 => SOUND 3 => ANIMATION_FRAME'),
+        animationFramePath: Joi.string().description('animationFrame Folder\'s path')
+          .when('type', {
+            is: RESOURCE_TYPE.ANIMATION_FRAMES.VALUE,
+            then: Joi.string().required(),
+            otherwise: Joi.forbidden()
+          }),
       },
       group: 'Admin',
       description: 'Route to delete resource of an activity',
