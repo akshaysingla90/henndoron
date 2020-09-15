@@ -526,8 +526,8 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             // clearButton.setLocalZOrder(1000);
             // this.handIconUI.push(clearButton);
 
-            let drawMode = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.drawMode_enable.name,
-                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.drawMode_enable.name, "Individual Mode",
+            let drawMode = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState,
+                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState, "Individual Mode",
                 16, ACTIVITY_BAP_1.Tag.DrawMode, cc.p(this.getContentSize().width * 0.915,
                     this.getContentSize().height * 0.15), this);
             drawMode.setTitleColor(cc.color(0, 0, 0, 255));

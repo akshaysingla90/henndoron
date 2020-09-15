@@ -318,6 +318,15 @@
         "UIName": "ERASER CURSOR",
         "imageName": "cursor_eraser.png",
         "dimensions": { "width": 50, "height": 50 }
+      },
+      "btn_next":{
+        "name": "btn_next.png",
+        "size": "{100, 30}"
+      },
+
+      "btn_previous":{
+        "name": "btn_previous.png",
+        "size": "{100, 30}"
       }
     }
   },

@@ -339,6 +339,10 @@
         "UIName": "tap Hidden Object Sound",
         "sound": "tap.mp3"
       },
+      "gameInfo": {
+        "isCounting": true,
+        "countingObject" : 3
+      },
 
       "carouselAssets": {
         "component": "carouselItems",
@@ -346,18 +350,22 @@
         "data": [
           {
             "imageName": "ant.png",
+            "scale": 1,
             "label": "ant"
           },
           {
             "imageName": "bat.png",
+            "scale": 1,
             "label": "bat"
           },
           {
             "imageName": "bee.png",
+            "scale": 1,
             "label": "bee"
           },
           {
             "imageName": "crow.png",
+            "scale": 1,
             "label": "crow"
           }
         ]

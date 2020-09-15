@@ -472,19 +472,15 @@ Flashcards.CommonFlashCardsLayer = HDBaseLayer.extend({
   setWordHolder: function (initialLabelString) {
     var wordHolderSprite = this.addSprite(
         Flashcards.resourcePath +
-        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolderTeacher
             .imageName,
         cc.p(
             HDAppManager.isTeacherView
-                ? Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                    .teacher.position.x
-                : Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                    .student.position.x,
+                ? Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolderTeacher.position.x
+                : Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolderStudent.position.x,
             HDAppManager.isTeacherView
-                ? Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                    .teacher.position.y
-                : Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                    .student.position.y
+                ? Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolderTeacher.position.y
+                : Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolderStudent.position.y
         ),
         this
     );
@@ -494,25 +490,17 @@ Flashcards.CommonFlashCardsLayer = HDBaseLayer.extend({
 
     var label = this.createTTFLabel(
         initialLabelString,
-        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-            .wordLabel.font,
-        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-            .wordLabel.fontSize,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.font,
+        Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.fontSize,
         cc.color(
-            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                .wordLabel.color.r,
-            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                .wordLabel.color.g,
-            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                .wordLabel.color.b,
-            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                .wordLabel.color.a
+            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.r,
+            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.g,
+            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.b,
+            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.a
         ),
         cc.p(
-            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                .wordLabel.position.x,
-            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordHolder
-                .wordLabel.position.y
+            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordLabelStudent.position.x,
+            Flashcards.MainFlashCardsLayerRef.config.assets.sections.wordLabelStudent.position.y
         ),
         wordHolderSprite
     );
