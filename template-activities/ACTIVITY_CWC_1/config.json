@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Character Conversation",
+    "activityPath": "ACTIVITY_CWC_1",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {

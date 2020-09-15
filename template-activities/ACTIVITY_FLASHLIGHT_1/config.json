@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Flashlight",
+    "activityPath": "ACTIVITY_FLASHLIGHT_1",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {

@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Piano Player",
+    "activityPath": "ACTIVITY_PIANO_PLAYER",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {

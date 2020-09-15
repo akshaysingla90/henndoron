@@ -3,6 +3,7 @@
     "component": "infoCard",
     "activityName": "Flashcards",
     "description": "game desc. here",
+    "activityPath": "ACTIVITY_FLASHCARDS",
     "allocatedTime": 10,
     "controls": {
       "mouse": false,

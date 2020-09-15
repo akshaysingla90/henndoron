@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Background And Pen",
+    "activityPath": "ACTIVITY_BAP_1",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {

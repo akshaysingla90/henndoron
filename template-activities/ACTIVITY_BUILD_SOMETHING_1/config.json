@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Build Something",
+    "activityPath": "ACTIVITY_BUILD_SOMETHING_1",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {

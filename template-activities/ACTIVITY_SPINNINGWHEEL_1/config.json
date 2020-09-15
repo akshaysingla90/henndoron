@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Spinning Wheel",
+    "activityPath": "ACTIVITY_SPINNINGWHEEL_1",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {

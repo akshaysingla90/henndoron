@@ -3,6 +3,7 @@
     "component": "infoCard",
     "activityName": "Counting",
     "description": "game desc. here",
+    "activityPath": "ACTIVITY_COUNTING_1",
     "allocatedTime": 10,
     "controls": {
       "mouse": true,

@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Save A Situation",
+    "activityPath": "ACTIVITY_SAVE_A_SITUATION",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {
