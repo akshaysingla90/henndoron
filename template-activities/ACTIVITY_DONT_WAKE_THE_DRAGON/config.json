@@ -120,6 +120,7 @@
       }
     }
   },
+
   "teacherTips": {
     "component": "tipsCard",
     "data": {
@@ -152,10 +153,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "background.png",
-        "dimensions": {
-          "width": 960,
-          "height": 649
-        }
+        "dimensions": { "width": 960, "height": 649 }
       }
     }
   },
@@ -197,52 +195,35 @@
           }
         }
       },
+
       "treasurePile": {
         "component": "image",
         "UIName": "Treasure Pile",
         "imageName": "treasurePile.png",
-        "dimensions": {
-          "width": 960,
-          "height": 640
-        }
+        "dimensions": { "width": 960, "height": 640 }
       },
       "treasureItems": {
         "component": "treasureItems",
         "data": [
           {
             "imageName": "Item_book.png",
-            "position": {
-              "x": 241,
-              "y": 380
-            }
+            "position": { "x": 241, "y": 380 }
           },
           {
             "imageName": "Item_hat.png",
-            "position": {
-              "x": 396,
-              "y": 170
-            }
+            "position": { "x": 396, "y": 170 }
           },
           {
             "imageName": "Item_house.png",
-            "position": {
-              "x": 744,
-              "y": 240
-            }
+            "position": { "x": 744, "y": 240 }
           },
           {
             "imageName": "Item_tree.png",
-            "position": {
-              "x": 197,
-              "y": 285
-            }
+            "position": { "x": 197, "y": 285 }
           },
           {
             "imageName": "Item_stickers.png",
-            "position": {
-              "x": 722,
-              "y": 142
-            }
+            "position": { "x": 722, "y": 142 }
           }
         ]
       }
@@ -254,18 +235,12 @@
       "openFingers": {
         "UIName": "Open Fingers",
         "imageName": "open_pincer_fingers_pointer.png",
-        "dimensions": {
-          "width": 50,
-          "height": 50
-        }
+        "dimensions": { "width": 50, "height": 50 }
       },
       "closedFingers": {
         "UIName": "Closed Fingers",
         "imageName": "closed_pincer_fingers_pointer.png",
-        "dimensions": {
-          "width": 50,
-          "height": 50
-        }
+        "dimensions": { "width": 50, "height": 50 }
       }
     }
   },

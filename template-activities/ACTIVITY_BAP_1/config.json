@@ -17,6 +17,7 @@
     "namespace": "ACTIVITY_BAP_1",
     "layerName": "BackgroundAndPenLayer"
   },
+
   "teacherScripts": {
     "component": "scriptsCard",
     "data": {
@@ -168,24 +169,19 @@
       }
     }
   },
+
   "background": {
     "component": "backgroundCard",
     "sections": {
       "backgroundSlides": {
         "component": "backgroundSlides",
         "UIName": "BACKGROUND SLIDES",
-        "images": [
-          "background_1.png",
-          "background_1.png",
-          "background_1.png"
-        ],
-        "dimensions": {
-          "width": 960,
-          "height": 649
-        }
+        "images": ["background_1.png", "background_1.png", "background_1.png"],
+        "dimensions": { "width": 960, "height": 649 }
       }
     }
   },
+
   "buttons": {
     "component": "buttonsCard",
     "data": {
@@ -195,35 +191,21 @@
         "enableState": "btn_enable.png",
         "pushedState": "btn_enable.png",
         "disableState": "btn_disable.png",
-        "position": {
-          "x": 0,
-          "y": 0
-        },
-        "dimensions": {
-          "width": 139,
-          "height": 32
-        }
+        "position": { "x": 0, "y": 0 },
+        "dimensions": { "width": 139, "height": 32 }
       },
       "drawMode": {
         "UIName": "Draw Mode Button",
-        "title": [
-          "Shared Mode",
-          "Individual Mode"
-        ],
+        "title": ["Shared Mode", "Individual Mode"],
         "enableState": "btn_enable.png",
         "pushedState": "btn_enable.png",
         "disableState": "btn_disable.png",
-        "position": {
-          "x": 0,
-          "y": 0
-        },
-        "dimensions": {
-          "width": 139,
-          "height": 32
-        }
+        "position": { "x": 0, "y": 0 },
+        "dimensions": { "width": 139, "height": 32 }
       }
     }
   },
+
   "assets": {
     "component": "assetsCard",
     "sections": {
@@ -231,14 +213,8 @@
         "component": "image",
         "UIName": "Color Palette Base",
         "imageName": "palette_sidebar.png",
-        "position": {
-          "x": 0,
-          "y": 0
-        },
-        "dimensions": {
-          "width": 69,
-          "height": 410
-        }
+        "position": { "x": 0, "y": 0 },
+        "dimensions": { "width": 69, "height": 410 }
       },
       "eraser": {
         "component": "button",
@@ -246,21 +222,12 @@
         "enableState": "eraser_icon.png",
         "pushedState": "eraser_icon.png",
         "disableState": "eraser_icon.png",
-        "position": {
-          "x": 0,
-          "y": 0
-        },
-        "dimensions": {
-          "width": 110,
-          "height": 66
-        }
+        "position": { "x": 0, "y": 0 },
+        "dimensions": { "width": 110, "height": 66 }
       },
       "color": {
         "component": "colorPalette",
-        "dimensions": {
-          "width": 93,
-          "height": 92
-        },
+        "dimensions": { "width": 93, "height": 92 },
         "data": [
           {
             "name": "",
@@ -341,40 +308,19 @@
   "cursors": {
     "component": "cursorsCard",
     "data": {
-      "btn_next": {
-        "name": "btn_next.png",
-        "size": "{100, 30}"
-      },
-      "btn_previous": {
-        "name": "btn_previous.png",
-        "size": "{100, 30}"
-      },
-      "drawMode_enable": {
-        "name": "btn_enable.png",
-        "size": "{100, 30}"
-      },
-      "drawMode_disable": {
-        "name": "btn_disable.png",
-        "size": "{100, 30}"
-      },
       "drawCursor": {
         "UIName": "DRAW CURSOR",
-        "imageName": "",
-        "dimensions": {
-          "width": 50,
-          "height": 50
-        }
+        "imageName": "cursor_pencil.png",
+        "dimensions": { "width": 50, "height": 50 }
       },
       "eraserCursor": {
         "UIName": "ERASER CURSOR",
-        "imageName": "",
-        "dimensions": {
-          "width": 50,
-          "height": 50
-        }
+        "imageName": "cursor_eraser.png",
+        "dimensions": { "width": 50, "height": 50 }
       }
     }
   },
+
   "resources": {
     "ignoreForAuthToolUI": true,
     "sprites": {

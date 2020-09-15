@@ -24,10 +24,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "background.png",
-        "dimensions": {
-          "width": 960,
-          "height": 649
-        }
+        "dimensions": { "width": 960, "height": 649 }
       }
     }
   },
@@ -38,279 +35,170 @@
         "component": "image",
         "UIName": "FLASH CARD FRONT",
         "imageName": "HatFront.png",
-        "dimensions": {
-          "width": 300,
-          "height": 300
-        },
-        "position": {
-          "x": 240,
-          "y": 324.5
-        }
+        "dimensions": { "width": 300, "height": 300 },
+        "position": { "x": 240, "y": 324.5 }
       },
       "flashCardBack": {
         "component": "image",
         "UIName": "FLASH CARD BACK",
         "imageName": "HatBack.png",
-        "dimensions": {
-          "width": 300,
-          "height": 300
-        },
-        "position": {
-          "x": 240,
-          "y": 324.5
-        }
+        "dimensions": { "width": 300, "height": 300 },
+        "position": { "x": 240, "y": 324.5 }
       },
+
       "currentCardDescriptionBox": {
         "UIName": "Word Holder",
         "component": "image",
         "imageName": "wordHolder.png",
-        "dimensions": {
-          "width": 290,
-          "height": 95
-        },
-        "position": {
-          "x": 700,
-          "y": 200
-        }
+        "dimensions": { "width": 290, "height": 95 },
+        "position": { "x": 700, "y": 200 }
       },
       "carouselBackgroundImage": {
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND IMAGE",
         "imageName": "carouselImage.png",
-        "dimensions": {
-          "width": 290,
-          "height": 95
-        },
-        "position": {
-          "x": 768,
-          "y": 454.3
-        }
+        "dimensions": { "width": 290, "height": 95 },
+        "position": { "x": 768, "y": 454.3 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND BORDER IMAGE",
         "imageName": "carouselBorderImage.png",
-        "dimensions": {
-          "width": 290,
-          "height": 95
-        },
-        "position": {
-          "x": 768,
-          "y": 454.3
-        }
+        "dimensions": { "width": 290, "height": 95 },
+        "position": { "x": 768, "y": 454.3 }
       },
       "carouselBackground": {
         "ignoreForAuthToolUI": true,
         "configurable": true,
-        "color": {
-          "r": 60,
-          "g": 92,
-          "b": 113,
-          "a": 0
-        },
-        "constraints": [
-          "color"
-        ]
+        "color": { "r": 60, "g": 92, "b": 113, "a": 0 },
+        "constraints": ["color"]
       },
       "carouselBoxBackground": {
         "ignoreForAuthToolUI": true,
         "configurable": true,
-        "color": {
-          "r": 78,
-          "g": 106,
-          "b": 125,
-          "a": 0
-        },
-        "constraints": [
-          "color"
-        ]
+        "color": { "r": 78, "g": 106, "b": 125, "a": 0 },
+        "constraints": ["color"]
       },
       "carouselBoxCardBackground": {
         "ignoreForAuthToolUI": true,
         "configurable": true,
-        "color": {
-          "r": 44,
-          "g": 59,
-          "b": 69,
-          "a": 0
-        },
-        "constraints": [
-          "color"
-        ]
+        "color": { "r": 44, "g": 59, "b": 69, "a": 0 },
+        "constraints": ["color"]
       },
       "carouselBoxCardText": {
         "component": "text",
         "UIName": "carousel Box Card Text",
-        "color": {
-          "r": 0,
-          "g": 0,
-          "b": 0,
-          "a": 255
-        },
+        "color": { "r": 0, "g": 0, "b": 0, "a": 255 },
         "font": "sassoon_sans_regular",
         "fontSize": 16
       },
       "carouselBoxHighlight": {
         "component": "colorPicker",
         "UIName": "carousel Box Highlight",
-        "color": {
-          "r": 148,
-          "g": 95,
-          "b": 56,
-          "a": 100
-        }
+        "color": { "r": 148, "g": 95, "b": 56, "a": 100 }
       },
+
       "answerCardText": {
         "component": "text",
         "UIName": "answer Card Text",
-        "color": {
-          "r": 0,
-          "g": 0,
-          "b": 0,
-          "a": 255
-        },
+        "color": { "r": 0, "g": 0, "b": 0, "a": 255 },
         "font": "sassoon_sans_regular",
         "fontSize": 32
       },
+
       "cardTakeOutSound": {
         "component": "sound",
         "UIName": "Card take out sound",
         "sound": "cardTakeOut.mp3"
       },
+
       "flashCardGlow": {
-        "frameCount": 15,
-        "frameInitial": "cardTakeOut/magicHat_cardTakeOut_",
         "component": "animation",
         "UIName": "Flash card glow animation",
         "name": "cardTakeOut",
+        "frameCount": 15,
         "extension": ".png",
+        "frameInitial": "cardTakeOut/magicHat_cardTakeOut_",
         "size": "{100,100}",
-        "position": {
-          "x": 256,
-          "y": 512
-        },
+        "position": { "x": 256, "y": 512 },
         "animationPath": "{100,100},{200,200}",
-        "constraints": [
-          "imageName, size, animationPath"
-        ]
+        "constraints": ["imageName, size, animationPath"]
       },
       "cardTakeOut": {
         "component": "cardTakeOutPath",
         "UIName": "Card take out path",
         "animationPath": [
-          {
-            "x": 200,
-            "y": 224.5
-          },
-          {
-            "x": 190,
-            "y": 750
-          },
-          {
-            "x": 680,
-            "y": 380
-          }
+          { "x": 200, "y": 224.5 },
+          { "x": 190, "y": 750 },
+          { "x": 680, "y": 380 }
         ]
       },
+
       "carouselAssets": {
         "component": "carouselItems",
-        "dimensions": {
-          "width": 350,
-          "height": 350
-        },
+        "dimensions": { "width": 350, "height": 350 },
         "data": [
           {
             "imageName": "Book.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "book"
           },
           {
             "imageName": "cat.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "cat"
           },
           {
             "imageName": "dog.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "dog"
           },
           {
             "imageName": "flupeSad.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "sad"
           },
           {
             "imageName": "house.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "house"
           },
+
           {
             "imageName": "paulHappy.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "happy"
           },
           {
             "imageName": "rat.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "rat"
           },
           {
             "imageName": "sheep.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "sheep"
           },
           {
             "imageName": "sing.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "sing"
           },
           {
             "imageName": "tree.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "tree"
           },
           {
             "imageName": "tub.png",
-            "dimensions": {
-              "width": 350,
-              "height": 350
-            },
+            "dimensions": { "width": 350, "height": 350 },
             "label": "tub"
           }
         ]
       }
     }
   },
+
   "resources": {
     "ignoreForAuthToolUI": true,
     "sprites": {
@@ -346,15 +234,13 @@
     },
     "sounds": {
       "basePath": "res/Sound/",
-      "audio": [
-        "cardTakeOut.mp3"
-      ]
+      "audio": ["cardTakeOut.mp3"]
     },
     "animationFrames": {
       "basePath": "res/AnimationFrames/",
       "animation": [
         {
-          "Name": "Card Take Out",
+          "Name": "cardTakeOut",
           "frameCount": 15,
           "frameInitial": "cardTakeOut/magicHat_cardTakeOut_",
           "extension": ".png"

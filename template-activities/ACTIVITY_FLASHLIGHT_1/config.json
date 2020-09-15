@@ -173,6 +173,7 @@
       }
     }
   },
+
   "teacherTips": {
     "component": "tipsCard",
     "data": {
@@ -246,10 +247,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "bg.png",
-        "dimensions": {
-          "width": 960,
-          "height": 649
-        }
+        "dimensions": { "width": 960, "height": 649 }
       }
     }
   },
@@ -276,6 +274,8 @@
             "UIName": "Granny Idle",
             "name": "idle",
             "frameCount": 16,
+            "frameInitial": "Granny_Fix_idle/idle_",
+            "extension": ".png",
             "sound": "cardTakeOut.mp3",
             "size": "{100,100}",
             "position": {
@@ -283,15 +283,15 @@
               "y": 512
             },
             "animationPath": "{100,100},{200,200}",
-            "constraints": [
-              "imageName, size, animationPath"
-            ]
+            "constraints": ["imageName, size, animationPath"]
           },
           "celebrating": {
             "configurable": true,
             "UIName": "Granny Celebrating",
             "name": "celebrating",
             "frameCount": 32,
+            "frameInitial": "Granny_Fix_celebrating/celebrating_",
+            "extension": ".png",
             "sound": "cardTakeOut.mp3",
             "size": "{100,100}",
             "position": {
@@ -299,15 +299,15 @@
               "y": 512
             },
             "animationPath": "{100,100},{200,200}",
-            "constraints": [
-              "imageName, size, animationPath"
-            ]
+            "constraints": ["imageName, size, animationPath"]
           },
           "run_left": {
             "configurable": true,
             "name": "run_left",
             "UIName": "Granny run left",
             "frameCount": 11,
+            "frameInitial": "Granny_Fix_run_left/run_left_",
+            "extension": ".png",
             "sound": "cardTakeOut.mp3",
             "size": "{100,100}",
             "position": {
@@ -315,15 +315,15 @@
               "y": 512
             },
             "animationPath": "{100,100},{200,200}",
-            "constraints": [
-              "imageName, size, animationPath"
-            ]
+            "constraints": ["imageName, size, animationPath"]
           },
           "run_right": {
             "configurable": true,
             "name": "run_right",
             "UIName": "granny run right",
             "frameCount": 11,
+            "frameInitial": "Granny_Fix_run_right/run_right_",
+            "extension": ".png",
             "sound": "cardTakeOut.mp3",
             "size": "{100,100}",
             "position": {
@@ -331,9 +331,7 @@
               "y": 512
             },
             "animationPath": "{100,100},{200,200}",
-            "constraints": [
-              "imageName, size, animationPath"
-            ]
+            "constraints": ["imageName, size, animationPath"]
           }
         }
       }
@@ -343,20 +341,11 @@
     "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
-      "images": [
-        "circle.png",
-        "redCircle.png",
-        "bg.png",
-        "tick.png",
-        "cross.png",
-        "blackImage.png"
-      ]
+      "images": ["circle.png", "redCircle.png", "bg.png", "tick.png", "cross.png", "blackImage.png"]
     },
     "sounds": {
       "basePath": "res/Sound/",
-      "audio": [
-        "object_pulled_out_animation_sound.mp3"
-      ]
+      "audio": ["object_pulled_out_animation_sound.mp3"]
     },
     "animationFrames": {
       "basePath": "res/AnimationFrames/",

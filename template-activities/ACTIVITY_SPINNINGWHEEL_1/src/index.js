@@ -235,11 +235,11 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         for (let index = 0; index < wheelItems.length; index++) {
             var currentWheelItem = wheelItems[index];
             let position = this.getItemPositionOnWheel(index, wheelItems.length, baseSprite);
-            console.log('position is  ', position);
-            var wheelItemSprite = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + currentWheelItem.imageName, position, baseSprite);
+            console.log('position is  ',position);
+            var wheelItemSprite = this.addSprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + currentWheelItem.imageName,position, baseSprite);
             wheelItemSprite.setScale(currentWheelItem.scale * 1.5);
-            console.log('updated position is  ', wheelItemSprite.getPosition());
-            //  console.log(" index ", index, " angle ", this.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length, index));
+            console.log('updated position is  ',wheelItemSprite.getPosition());
+          //  console.log(" index ", index, " angle ", this.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length, index));
             wheelItemSprite.setRotation(-this.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length, index));
         }
     },
@@ -446,7 +446,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             } else {
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
-                    "users": [{ userName: userName }]
+                    "users": [{userName: userName}]
                 });
                 ACTIVITY_SPINNINGWHEEL_1.ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.onMouseEnable);
             }
@@ -714,7 +714,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         let updateTarget = cc.callFunc(function () {
             ACTIVITY_SPINNINGWHEEL_1.ref.setupNextTarget();
             if (ACTIVITY_SPINNINGWHEEL_1.ref.isStudentInteractionEnable && !ACTIVITY_SPINNINGWHEEL_1.ref.isTeacherView) {
-                ACTIVITY_SPINNINGWHEEL_1.ref.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, { "roomId": HDAppManager.roomId });
+                ACTIVITY_SPINNINGWHEEL_1.ref.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, {"roomId": HDAppManager.roomId});
             }
             if (!ACTIVITY_SPINNINGWHEEL_1.ref.isTeacherView) {
                 ACTIVITY_SPINNINGWHEEL_1.ref.isRotating = false;
@@ -958,11 +958,11 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
     getIndexOfCurrentElement: function (data) {
         for (var index = 0; index < ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length; index++) {
             if (data.imageName == ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data[index].imageName) {
-                console.log('index is ', index);
+                console.log('index is ',index);
                 return index;
             }
         }
-        console.log('index is ', index);
+        console.log('index is ',index);
         return -1;
     },
 
@@ -1079,7 +1079,7 @@ ACTIVITY_SPINNINGWHEEL_1.HDCardCell = cc.TableViewCell.extend({
 
         let textBaseLayer = new cc.LayerColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this.cardTextHeight);
         textBaseLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this._contentSize.height - this.cellVerticalPadding - this.cardTextHeight));
-        //   console.log('data is   ',data);
+ //   console.log('data is   ',data);
         let labelCardText = cc.LabelTTF.create(data.label, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.font, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.fontSize, cc.size(0., 0), cc.TEXT_ALIGNMENT_CENTER);
         labelCardText.setPosition(cc.p(textBaseLayer._contentSize.width * 0.5, textBaseLayer._contentSize.height * 0.5));
         labelCardText.setColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardText.color.a));

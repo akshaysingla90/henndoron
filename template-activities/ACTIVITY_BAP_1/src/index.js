@@ -71,7 +71,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         let activityName = 'ACTIVITY_BAP_1';
         cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             ACTIVITY_BAP_1.config = config;
-            ACTIVITY_BAP_1.resourcePath = "res/Activity/" + "" + activityName + "/res/"
+            ACTIVITY_BAP_1.resourcePath = "res/Activity/"+ "" + activityName + "/res/"
             ACTIVITY_BAP_1.soundPath = ACTIVITY_BAP_1.resourcePath + "Sound/";
             ACTIVITY_BAP_1.animationBasePath = ACTIVITY_BAP_1.resourcePath + "AnimationFrames/";
             ACTIVITY_BAP_1.spriteBasePath = ACTIVITY_BAP_1.resourcePath + "Sprite/";
@@ -88,7 +88,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     fetchGameData: function () {
-        HDNetworkHandler.get(HDAPIKey.GameData, { "roomId": HDAppManager.roomId }, true, (err, res) => {
+        HDNetworkHandler.get(HDAPIKey.GameData, {"roomId": HDAppManager.roomId}, true, (err, res) => {
         });
     },
 
@@ -208,7 +208,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                 "roomId": HDAppManager.roomId,
                 "roomData": {
                     "activity": ACTIVITY_BAP_1.config.properties.namespace,
-                    "data": { 'dataArray': this.lineSyncData, 'slideIndex': this.curImageIdx },
+                    "data": {'dataArray': this.lineSyncData, 'slideIndex': this.curImageIdx},
                     "activityStartTime": HDAppManager.getActivityStartTime()
                 }
             }
@@ -224,7 +224,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         if (this.isTeacherView) {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 "eventType": ACTIVITY_BAP_1.socketEventKey.STUDENT_INTERACTION,
-                "data": { "userName": username, "status": status }
+                "data": {"userName": username, "status": status}
             });
         }
     },
@@ -285,7 +285,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         if (!ACTIVITY_BAP_1.ref.isStudentInteractionEnable)
             return;
         if (ACTIVITY_BAP_1.ref.isDrawing) {
-            ACTIVITY_BAP_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, { 'eventType': ACTIVITY_BAP_1.socketEventKey.DRAWING_PAUSE });
+            ACTIVITY_BAP_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {'eventType': ACTIVITY_BAP_1.socketEventKey.DRAWING_PAUSE});
         }
         if (ACTIVITY_BAP_1.ref.erasing) {
             ACTIVITY_BAP_1.ref.isErasing = false;
@@ -368,7 +368,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             } else {
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
-                    "users": [{ userName: userName }]
+                    "users": [{userName: userName}]
                 });
             }
         }
@@ -615,7 +615,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         }
         this.allLineInfo[userName][imageIndex].push({
             'obj': node,
-            'info': { 'tag': node.getTag(), "slideIndex": imageIndex, "userName": userName }
+            'info': {'tag': node.getTag(), "slideIndex": imageIndex, "userName": userName}
         });
         if (this.isTeacherView) {
             if (this.allLineInfo[userName][imageIndex].length == 1) {
@@ -641,7 +641,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                 "tag": node.getTag(),
                 "source": JSON.stringify(last),
                 "dest": JSON.stringify(cur),
-                "color": { "r": color.r, "g": color.g, "b": color.b, "a": color.a },
+                "color": {"r": color.r, "g": color.g, "b": color.b, "a": color.a},
                 "slideIndex": imageIndex,
                 "userName": userName
             });
@@ -790,7 +790,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             }
         }
         if (this.isTeacherView) {
-            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, { "eventType": ACTIVITY_BAP_1.socketEventKey.CLEAR });
+            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {"eventType": ACTIVITY_BAP_1.socketEventKey.CLEAR});
             let keys = Object.keys(this.allLineInfo);
             let arrayToPush = [];
             for (let i = 0; i < keys.length; ++i) {
@@ -848,7 +848,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             });
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 'eventType': ACTIVITY_BAP_1.socketEventKey.CHANGE_SLIDE,
-                'data': { 'index': this.curImageIdx }
+                'data': {'index': this.curImageIdx}
             });
             this.triggerScriptByCurrentSlideIdx();
         }
@@ -940,7 +940,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     emitDrawModeEvent: function () {
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             "eventType": ACTIVITY_BAP_1.socketEventKey.DRAW_MODE,
-            "data": { "status": this.sharedMode }
+            "data": {"status": this.sharedMode}
         });
     },
 
@@ -960,7 +960,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
      * @returns {{textureUrl: (null|string), hasCustomTexture: boolean}}
      */
     mouseTexture: function () {
-        return { 'hasCustomTexture': this.customTexture, 'textureUrl': this.MouseTextureUrl };
+        return {'hasCustomTexture': this.customTexture, 'textureUrl': this.MouseTextureUrl};
     },
 
     /**

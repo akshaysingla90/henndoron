@@ -17,6 +17,7 @@
     "namespace": "Flashcards",
     "layerName": "MainFlashCardsLayer"
   },
+
   "background": {
     "component": "backgroundCard",
     "sections": {
@@ -24,10 +25,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "flashcards_billboardBackground.png",
-        "dimensions": {
-          "width": 960,
-          "height": 649
-        }
+        "dimensions": { "width": 960, "height": 649 }
       }
     }
   },
@@ -38,18 +36,10 @@
         "component": "select",
         "UIName": "theme",
         "options": [
-          {
-            "label": "classic",
-            "value": 1
-          },
-          {
-            "label": "billboards",
-            "value": 2
-          },
-          {
-            "label": "bookOfRhymes",
-            "value": 3
-          }
+          { "label": "classic", "value": 1 },
+
+          { "label": "billboards", "value": 2 },
+          { "label": "bookOfRhymes", "value": 3 }
         ],
         "currentValue": 2,
         "theme": {
@@ -58,152 +48,69 @@
           "bookOfRhymes": 3
         }
       },
+
       "billboard": {
         "component": "image",
         "UIName": "BILLBOARD IMAGE",
         "imageName": "flashcards_billboard.png",
-        "position": {
-          "y": 288
-        },
-        "dimensions": {
-          "width": 960,
-          "height": 640
-        }
+        "position": { "y": 288 },
+        "dimensions": { "width": 960, "height": 640 }
       },
       "billboardDisplayImage": {
         "component": "cardTakeOutPath",
         "UIName": "billboard DisplayImage position",
-        "animationPath": [
-          {
-            "x": 456,
-            "y": 384
-          }
-        ]
+        "animationPath": [{ "x": 456, "y": 384 }]
       },
-      "wordHolder": {
-        "ignoreForAuthToolUI": true,
-        "configurable": true,
-        "imageName": "flashcards_wordHolder.png",
-        "imageSize": {
-          "width": 300,
-          "height": 300
-        },
-        "student": {
-          "position": {
-            "x": 480,
-            "y": 544
-          }
-        },
-        "teacher": {
-          "position": {
-            "x": 480,
-            "y": 544
-          }
-        },
-        "wordLabel": {
-          "font": "sassoon_sans_regular",
-          "fontSize": 50,
-          "color": {
-            "r": 0,
-            "g": 0,
-            "b": 0,
-            "a": 255
-          },
-          "position": {
-            "x": 145,
-            "y": 44.65
-          }
-        }
-      },
+
       "wordHolderTeacher": {
         "component": "image",
         "UIName": "word Holder Teacher Side",
         "imageName": "flashcards_wordHolder.png",
-        "dimensions": {
-          "width": 300,
-          "height": 300
-        },
-        "position": {
-          "x": 480,
-          "y": 544
-        }
+        "dimensions": { "width": 300, "height": 300 },
+        "position": { "x": 480, "y": 544 }
       },
+
       "wordHolderStudent": {
         "component": "image",
         "UIName": "word Holder Student Side",
         "imageName": "flashcards_wordHolder.png",
-        "dimensions": {
-          "width": 300,
-          "height": 300
-        },
-        "position": {
-          "x": 480,
-          "y": 544
-        }
+        "dimensions": { "width": 300, "height": 300 },
+        "position": { "x": 480, "y": 544 }
       },
+
       "wordLabelteacher": {
         "UIName": "word Label teacher side",
         "component": "text",
         "font": "sassoon_sans_regular",
         "fontSize": 50,
-        "color": {
-          "r": 0,
-          "g": 0,
-          "b": 0,
-          "a": 255
-        },
-        "position": {
-          "x": 145,
-          "y": 44.65
-        }
+        "color": { "r": 0, "g": 0, "b": 0, "a": 255 },
+        "position": { "x": 145, "y": 44.65 }
       },
+
       "wordLabelStudent": {
         "UIName": "word Label student side",
         "component": "text",
         "font": "sassoon_sans_regular",
         "fontSize": 50,
-        "color": {
-          "r": 0,
-          "g": 0,
-          "b": 0,
-          "a": 255
-        },
-        "position": {
-          "x": 145,
-          "y": 44.65
-        }
+        "color": { "r": 0, "g": 0, "b": 0, "a": 255 },
+        "position": { "x": 145, "y": 44.65 }
       },
+
       "BookOfRhymesWordLabelTeacher": {
         "component": "text",
         "UIName": "BookOfRhymes WordLabel Teacher",
         "font": "sassoon_sans_regular",
         "fontSize": 50,
-        "color": {
-          "r": 124,
-          "g": 99,
-          "b": 81,
-          "a": 255
-        },
-        "position": {
-          "x": 480,
-          "y": 532
-        }
+        "color": { "r": 124, "g": 99, "b": 81, "a": 255 },
+        "position": { "x": 480, "y": 532 }
       },
       "BookOfRhymesWordLabelStudent": {
         "component": "text",
         "UIName": "BookOfRhymes WordLabel Student",
         "font": "sassoon_sans_regular",
         "fontSize": 50,
-        "color": {
-          "r": 124,
-          "g": 99,
-          "b": 81,
-          "a": 255
-        },
-        "position": {
-          "x": 480,
-          "y": 90
-        }
+        "color": { "r": 124, "g": 99, "b": 81, "a": 255 },
+        "position": { "x": 480, "y": 90 }
       },
       "carouselBackground": {
         "component": "image",
@@ -215,37 +122,23 @@
         "UIName": "carousel Foreground",
         "imageName": "flashcards_panelForeground.png"
       },
+
       "carouselItemLabel": {
         "component": "text",
         "UIName": "carousel Item Label",
         "font": "sassoon_sans_regular",
         "fontSize": 12,
-        "color": {
-          "r": 255,
-          "g": 255,
-          "b": 255,
-          "a": 255
-        }
+        "color": { "r": 255, "g": 255, "b": 255, "a": 255 }
       },
       "carouselItemLabelBackground": {
         "component": "colorPicker",
         "UIName": "carousel Item Label Background",
-        "color": {
-          "r": 58,
-          "g": 76,
-          "b": 88,
-          "a": 159.375
-        }
+        "color": { "r": 58, "g": 76, "b": 88, "a": 159.375 }
       },
       "carouselItemHighlighted": {
         "component": "colorPicker",
         "UIName": "carousel Item Highlight color",
-        "color": {
-          "r": 167,
-          "g": 115,
-          "b": 67,
-          "a": 159.375
-        }
+        "color": { "r": 167, "g": 115, "b": 67, "a": 159.375 }
       },
       "pageFlip": {
         "component": "sound",
@@ -259,10 +152,7 @@
       },
       "carouselAssets": {
         "component": "carouselItems",
-        "dimensions": {
-          "width": 350,
-          "height": 350
-        },
+        "dimensions": { "width": 350, "height": 350 },
         "data": [
           {
             "imageName": "flashcards_dog.png",
@@ -314,10 +204,7 @@
     },
     "sounds": {
       "basePath": "res/Sound/",
-      "audio": [
-        "flashcards_pageFlip.mp3",
-        "flashcards_swipe.mp3"
-      ]
+      "audio": ["flashcards_pageFlip.mp3", "flashcards_swipe.mp3"]
     }
   }
 }

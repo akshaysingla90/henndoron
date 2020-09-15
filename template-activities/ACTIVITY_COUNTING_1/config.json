@@ -203,10 +203,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "playground.png",
-        "dimensions": {
-          "width": 960,
-          "height": 649
-        }
+        "dimensions": { "width": 960, "height": 649 }
       }
     }
   },
@@ -222,6 +219,7 @@
         "UIName": "tap Hidden Object Sound",
         "sound": "tap.mp3"
       },
+
       "countingItems": {
         "component": "countingItems",
         "data": [
@@ -248,10 +246,7 @@
             "countFont": "sassoon_sans_regular",
             "scale": 0.4,
             "size": "{960, 649}",
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Bin",
@@ -276,10 +271,7 @@
             "countFont": "sassoon_sans_regular",
             "scale": 0.3,
             "size": "{960, 649}",
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Book",
@@ -304,10 +296,7 @@
             "countFont": "sassoon_sans_regular",
             "scale": 0.35,
             "size": "{960, 649}",
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Bowl",
@@ -332,10 +321,7 @@
             "countFont": "sassoon_sans_regular",
             "scale": 0.275,
             "size": "{960, 649}",
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Box01",
@@ -360,10 +346,7 @@
             "countFont": "sassoon_sans_regular",
             "scale": 0.2,
             "size": "{960, 649}",
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Box02",
@@ -387,10 +370,7 @@
             "countFontSize": 32,
             "countFont": "sassoon_sans_regular",
             "scale": 0.2,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Hat01",
@@ -415,10 +395,7 @@
             "countFont": "sassoon_sans_regular",
             "scale": 0.225,
             "size": "{960, 649}",
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Hat02",
@@ -443,10 +420,7 @@
             "countFont": "sassoon_sans_regular",
             "scale": 0.35,
             "size": "{960, 649}",
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Hole",
@@ -471,10 +445,7 @@
             "countFont": "sassoon_sans_regular",
             "scale": 0.35,
             "size": "{960, 649}",
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Trunk",
@@ -499,10 +470,7 @@
             "countFont": "sassoon_sans_regular",
             "scale": 0.25,
             "size": "{960, 649}",
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           }
         ]
       }
@@ -540,9 +508,7 @@
     },
     "sounds": {
       "basePath": "res/Sound/",
-      "audio": [
-        "tap.mp3"
-      ]
+      "audio": ["tap.mp3"]
     }
   }
 }

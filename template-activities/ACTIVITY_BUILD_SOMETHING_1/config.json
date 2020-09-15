@@ -196,10 +196,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "background.png",
-        "dimensions": {
-          "width": 960,
-          "height": 649
-        }
+        "dimensions": { "width": 960, "height": 649 }
       }
     }
   },
@@ -212,10 +209,7 @@
         "pushedState": "start_pressed.png",
         "disableState": "start_idle.png",
         "scale": 1,
-        "position": {
-          "x": 240,
-          "y": 100
-        }
+        "position": { "x": 240, "y": 100 }
       },
       "stopButton": {
         "UIName": "Stop Button",
@@ -223,10 +217,7 @@
         "pushedState": "stop_pressed.png",
         "disableState": "stop_idle.png",
         "scale": 1,
-        "position": {
-          "x": 480,
-          "y": 100
-        }
+        "position": { "x": 480, "y": 100 }
       },
       "leftMoveButton": {
         "UIName": "Left Move Button",
@@ -247,102 +238,53 @@
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND IMAGE",
         "imageName": "carouselImage.png",
-        "dimensions": {
-          "width": 290,
-          "height": 95
-        },
-        "position": {
-          "x": 768,
-          "y": 454.3
-        }
+        "dimensions": { "width": 290, "height": 95 },
+        "position": { "x": 768, "y": 454.3 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND BORDER IMAGE",
         "imageName": "carouselBorderImage.png",
-        "dimensions": {
-          "width": 290,
-          "height": 95
-        },
-        "position": {
-          "x": 768,
-          "y": 454.3
-        }
+        "dimensions": { "width": 290, "height": 95 },
+        "position": { "x": 768, "y": 454.3 }
       },
       "carouselBackground": {
         "ignoreForAuthToolUI": true,
         "configurable": true,
-        "color": {
-          "r": 60,
-          "g": 92,
-          "b": 113,
-          "a": 0
-        },
-        "constraints": [
-          "color"
-        ]
+        "color": { "r": 60, "g": 92, "b": 113, "a": 0 },
+        "constraints": ["color"]
       },
       "carouselBoxBackground": {
         "ignoreForAuthToolUI": true,
         "configurable": true,
-        "color": {
-          "r": 78,
-          "g": 106,
-          "b": 125,
-          "a": 0
-        },
-        "constraints": [
-          "color"
-        ]
+        "color": { "r": 78, "g": 106, "b": 125, "a": 0 },
+        "constraints": ["color"]
       },
       "carouselBoxCardBackground": {
         "ignoreForAuthToolUI": true,
         "configurable": true,
-        "color": {
-          "r": 44,
-          "g": 59,
-          "b": 69,
-          "a": 0
-        },
-        "constraints": [
-          "color"
-        ]
+        "color": { "r": 44, "g": 59, "b": 69, "a": 0 },
+        "constraints": ["color"]
       },
       "carouselBoxCardText": {
         "ignoreForAuthToolUI": true,
         "configurable": true,
-        "color": {
-          "r": 0,
-          "g": 0,
-          "b": 0,
-          "a": 255
-        },
+        "color": { "r": 0, "g": 0, "b": 0, "a": 255 },
         "font": "sassoon_sans_regular",
         "fontSize": 16,
-        "constraints": [
-          "color"
-        ]
+        "constraints": ["color"]
       },
       "carouselBoxHighlight": {
         "ignoreForAuthToolUI": true,
         "configurable": true,
-        "color": {
-          "r": 148,
-          "g": 95,
-          "b": 56,
-          "a": 100
-        },
-        "constraints": [
-          "color"
-        ]
+        "color": { "r": 148, "g": 95, "b": 56, "a": 100 },
+        "constraints": ["color"]
       },
       "carouselGlowBoxCard": {
         "ignoreForAuthToolUI": true,
         "configurable": true,
         "name": "cellGlow.png",
-        "constraints": [
-          "imageName"
-        ]
+        "constraints": ["imageName"]
       },
       "frame": {
         "component": "image",
@@ -372,17 +314,26 @@
             "partsCount": 6,
             "animationFrameCount": 16,
             "fps": 12,
-            "animationPath": "dwarf_animation/dwarf_animation_"
+            "animationPath": "dwarf_animation/dwarf_animation_",
+            "frameCount": 16,
+            "frameInitial": "dwarf_animation/dwarf_animation_",
+            "extension": ".png"
           },
           "king": {
             "name": "king",
             "partsCount": 6,
-            "animationPath": "king_animation/king_animation_"
+            "animationPath": "king_animation/king_animation_",
+            "frameCount": 16,
+            "frameInitial": "king_animation/king_animation_",
+            "extension": ".png"
           },
           "knight": {
             "name": "knight",
             "partsCount": 6,
-            "animationPath": "knight_animation/knight_animation_"
+            "animationPath": "knight_animation/knight_animation_",
+            "frameCount": 16,
+            "frameInitial": "knight_animation/knight_animation_",
+            "extension": ".png"
           }
         },
         "isolatedNodes": 3
@@ -418,10 +369,7 @@
               }
             ],
             "tag": 0,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "dwarf_lefthand",
@@ -450,10 +398,7 @@
               }
             ],
             "tag": 1,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "dwarf_leftleg",
@@ -482,10 +427,7 @@
               }
             ],
             "tag": 2,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "dwarf_righthand",
@@ -514,10 +456,7 @@
               }
             ],
             "tag": 3,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "dwarf_rightleg",
@@ -546,10 +485,7 @@
               }
             ],
             "tag": 4,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "dwarf_torso",
@@ -618,10 +554,7 @@
               }
             ],
             "tag": 5,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "king_head",
@@ -650,10 +583,7 @@
               }
             ],
             "tag": 6,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "king_lefthand",
@@ -682,10 +612,7 @@
               }
             ],
             "tag": 7,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "king_leftleg",
@@ -714,10 +641,7 @@
               }
             ],
             "tag": 8,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "king_righthand",
@@ -746,10 +670,7 @@
               }
             ],
             "tag": 9,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "king_rightleg",
@@ -778,10 +699,7 @@
               }
             ],
             "tag": 10,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "king_torso",
@@ -850,10 +768,7 @@
               }
             ],
             "tag": 11,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "knight_head",
@@ -882,10 +797,7 @@
               }
             ],
             "tag": 12,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "knight_lefthand",
@@ -914,10 +826,7 @@
               }
             ],
             "tag": 13,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "knight_leftleg",
@@ -946,10 +855,7 @@
               }
             ],
             "tag": 14,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "knight_righthand",
@@ -978,10 +884,7 @@
               }
             ],
             "tag": 15,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "knight_rightleg",
@@ -1010,10 +913,7 @@
               }
             ],
             "tag": 16,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "knight_torso",
@@ -1082,10 +982,7 @@
               }
             ],
             "tag": 17,
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           }
         ]
       },
@@ -1100,10 +997,7 @@
               "x": 350,
               "y": 450
             },
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Object2",
@@ -1113,10 +1007,7 @@
               "x": 480,
               "y": 425
             },
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Object3",
@@ -1126,10 +1017,8 @@
               "x": 480,
               "y": 400
             },
-            "constraints": [
-              "name",
-              "size"
-            ]
+
+            "constraints": ["name", "size"]
           },
           {
             "name": "Object4",
@@ -1139,10 +1028,7 @@
               "x": 480,
               "y": 375
             },
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           },
           {
             "name": "Object5",
@@ -1152,10 +1038,7 @@
               "x": 430,
               "y": 375
             },
-            "constraints": [
-              "name",
-              "size"
-            ]
+            "constraints": ["name", "size"]
           }
         ]
       }

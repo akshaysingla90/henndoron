@@ -49,10 +49,10 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
 
     onEnter: function () {
         this._super();
-        let ref = this;
+         let ref = this;
         ACTIVITY_CWC_1.ref = this;
         let activityName = 'ACTIVITY_CWC_1';
-        cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
+        cc.loader.loadJson("res/Activity/"+ activityName +"/config.json", function (error, config) {
             ACTIVITY_CWC_1.config = config;
             ACTIVITY_CWC_1.resourcePath = "res/Activity/" + "" + activityName + "/res/"
             ACTIVITY_CWC_1.soundPath = ACTIVITY_CWC_1.resourcePath + "Sound/";
@@ -73,6 +73,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
             ref.triggerScript(config.teacherScripts.data.moduleStart.content.ops);
             ref.triggerTip(config.teacherTips.data.moduleStart);
         });
+
 
         this.cellArray = [];
     },
@@ -418,7 +419,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
         let idleAnimFolder = folder;
         this.idelAnim = cc.callFunc(() => {
             let randNum = Math.ceil(Math.random() * 2 + 1);
-            console.log('Random Number ', randNum);
+            console.log('Random Number ',randNum);
             sprite.runAction(new cc.Sequence(HDUtility.runFrameAnimation(ACTIVITY_CWC_1.animationBasePath + idleAnimFolder + "/" + "RestPose0" + randNum + "/" + idleAnimName + "_restpose0" + randNum + "_", ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key]["animation"]["RestPose0" + randNum].frameCount, idleAnimSpeed, ".png", false), cc.callFunc(this.repeatAnimation, this,
                 {
                     "sprite": sprite,

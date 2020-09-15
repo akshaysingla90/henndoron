@@ -125,6 +125,7 @@
       }
     }
   },
+
   "teacherTips": {
     "component": "tipsCard",
     "data": {
@@ -159,10 +160,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "bg.png",
-        "dimensions": {
-          "width": 960,
-          "height": 649
-        }
+        "dimensions": { "width": 960, "height": 649 }
       }
     }
   },
@@ -390,15 +388,7 @@
     },
     "sounds": {
       "basePath": "res/Sound/",
-      "audio": [
-        "a-5.mp3",
-        "b-5.mp3",
-        "c-5.mp3",
-        "d-5.mp3",
-        "e-5.mp3",
-        "f-5.mp3",
-        "g-5.mp3"
-      ]
+      "audio": ["a-5.mp3", "b-5.mp3", "c-5.mp3", "d-5.mp3", "e-5.mp3", "f-5.mp3", "g-5.mp3"]
     }
   }
 }

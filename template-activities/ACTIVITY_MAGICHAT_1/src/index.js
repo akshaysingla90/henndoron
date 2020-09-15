@@ -412,7 +412,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
                                     'data': obj
                                 });
                                 if (!this.isTeacher) {
-                                    this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, { "roomId": HDAppManager.roomId });
+                                    this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, {"roomId": HDAppManager.roomId});
                                 }
                             }
                         }
@@ -437,7 +437,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
             } else {
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
-                    "users": [{ userName: userName }]
+                    "users": [{userName: userName}]
                 });
             }
         }
