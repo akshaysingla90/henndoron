@@ -1,6 +1,6 @@
 'use strict';
 const CONFIG = require('../../../config')
-const roomModel = require(`../../models/${CONFIG.PLATFORM}/roomModel`);
+const roomModel = require(`../../models/helen/roomModel`);
 
 let roomService = {};
 

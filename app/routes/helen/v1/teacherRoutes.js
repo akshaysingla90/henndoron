@@ -1,10 +1,9 @@
 'use strict';
 
 const { Joi } = require('../../../utils/joiUtils');
-const CONFIG = require('../../../../config');
 const { USER_ROLE } = require(`../../../utils/constants`);
 //load controllers
-const { saveRewardPoints } = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
+const { saveRewardPoints } = require(`../../../controllers/helen/userController`);
 
 let routes = [
     {

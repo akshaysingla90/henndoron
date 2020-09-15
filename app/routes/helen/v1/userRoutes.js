@@ -1,10 +1,9 @@
 'use strict';
 
 const { Joi } = require('../../../utils/joiUtils');
-const CONFIG = require('../../../../config');
 const { USER_ROLE } = require(`../../../utils/constants`);
 //load controllers
-const { getServerResponse, loginUser, createAndUpdateUser, getGameData, uploadFile} = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
+const { getServerResponse, loginUser, createAndUpdateUser, getGameData, uploadFile} = require(`../../../controllers/helen/userController`);
 
 let routes = [
 	{

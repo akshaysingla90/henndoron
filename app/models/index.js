@@ -5,10 +5,10 @@ const CONFIG = require('../../config');
  ********* independently ********
  ********************************/
 module.exports = {
-    userModel: require(`../models/${CONFIG.PLATFORM}/userModel`),
-    roomModel: require(`../models/${CONFIG.PLATFORM}/roomModel`),
-    versionModel: require(`../models/${CONFIG.PLATFORM}/versionModel`),
-    activityModel: require(`../models/${CONFIG.PLATFORM}/activityModel`),
-    lessonModel: require(`../models/${CONFIG.PLATFORM}/lessonModel`),
-    courseModel: require(`../models/${CONFIG.PLATFORM}/courseModel`)
+    userModel: require(`../models/helen/userModel`),
+    roomModel: require(`../models/helen/roomModel`),
+    versionModel: require(`../models/helen/versionModel`),
+    activityModel: require(`../models/helen/activityModel`),
+    lessonModel: require(`../models/helen/lessonModel`),
+    courseModel: require(`../models/helen/courseModel`)
 };

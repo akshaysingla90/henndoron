@@ -1,6 +1,6 @@
 'use strict';
 const CONFIG = require('../../../config')
-const userModel = require(`../../models/${CONFIG.PLATFORM}/userModel`);
+const userModel = require(`../../models/helen/userModel`);
 const utils = require(`../../utils/utils`);
 
 let socketService = {};
