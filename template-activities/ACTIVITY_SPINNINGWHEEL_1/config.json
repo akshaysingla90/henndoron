@@ -340,8 +340,9 @@
         "sound": "tap.mp3"
       },
       "gameInfo": {
+        "ignoreForAuthToolUI": true,
         "isCounting": true,
-        "countingObject" : 3
+        "countingObject": 3
       },
 
       "carouselAssets": {
