@@ -5,7 +5,7 @@ var PianoPlayer = {
   soundPath: "",
 };
 
-PianoPlayer.updateRoomData = {
+ACTIVITY_PIANO_PLAYER_1.updateRoomData = {
   songIdx: 0,
   wordIdx: 0,
   feedbackActivated: false,
@@ -18,10 +18,10 @@ note:-
 events mentioned in teacherEvents are emitted from teacher side and should be subscribed from student side.
 Similarly events mentioned in studentEvents are emitted from student side and should be subscribed from teacher side
  */
-PianoPlayer.socketEventKey = {
+ACTIVITY_PIANO_PLAYER_1.socketEventKey = {
   singleEvent: "SingleEvent",
 };
-PianoPlayer.teacherEvents = {
+ACTIVITY_PIANO_PLAYER_1.teacherEvents = {
   PIANO_PLAYER_NEXT_SONG: "PIANO_PLAYER_NEXT_SONG",
   PIANO_PLAYER_ACTIVATE_FEEDBACK: "PIANO_PLAYER_ACTIVATE_FEEDBACK",
   PIANO_PLAYER_TEACHER_CLICK: "PIANO_PLAYER_TEACHER_CLICK",
@@ -29,11 +29,11 @@ PianoPlayer.teacherEvents = {
   PIANO_PLAYER_STUDENT_INTERACTION: "PIANO_PLAYER_STUDENT_INTERACTION",
   PIANO_PLAYER_PLAY_SONG: "PIANO_PLAYER_PLAY_SONG",
 };
-PianoPlayer.studentEvents = {
+ACTIVITY_PIANO_PLAYER_1.studentEvents = {
   PIANO_PLAYER_STUDENT_CLICK: "PIANO_PLAYER_STUDENT_CLICK",
 };
 
-PianoPlayer.SubscriptionNotification = cc.Class.extend({
+ACTIVITY_PIANO_PLAYER_1.SubscriptionNotification = cc.Class.extend({
   onNotificationReceived: function (event) {
     const { eventType, data } = event;
     const { type } = data;
@@ -41,7 +41,7 @@ PianoPlayer.SubscriptionNotification = cc.Class.extend({
 });
 
 // ========================== PianoKey ===============================
-PianoPlayer.PianoKey = ccui.Button.extend({
+ACTIVITY_PIANO_PLAYER_1.PianoKey = ccui.Button.extend({
   idleImage: "",
   audio: "",
   word: "",
@@ -119,7 +119,7 @@ PianoPlayer.PianoKey = ccui.Button.extend({
   },
 });
 
-PianoPlayer.PianoKeyDelegate = cc.Class.extend({
+ACTIVITY_PIANO_PLAYER_1.PianoKeyDelegate = cc.Class.extend({
   onPianoKeyClicked: function (pianoKey) {
     // pianoKey being instance of class PianoKey
   },
@@ -127,7 +127,7 @@ PianoPlayer.PianoKeyDelegate = cc.Class.extend({
 });
 
 // ========================== Piano ===============================
-PianoPlayer.Piano = cc.Sprite.extend({
+ACTIVITY_PIANO_PLAYER_1.Piano = cc.Sprite.extend({
   delegate: null,
   pianoKeyButtons: [],
   TAG_PIANO_KEYS_HOLDER: 1,
@@ -345,7 +345,7 @@ PianoPlayer.Piano = cc.Sprite.extend({
     let pianoKeysHolder = this.getChildByTag(this.TAG_PIANO_KEYS_HOLDER);
     let h_Padding = pianoKeysHolder.width * 0.0068;
     pianoKeys.map((pianoKey, idx) => {
-      let pianoKeyButton = new PianoPlayer.PianoKey(
+      let pianoKeyButton = new ACTIVITY_PIANO_PLAYER_1.PianoKey(
         this.imagePath + pianoKey.idleImage,
         this.imagePath + pianoKey.pressedImage,
         this.imagePath + pianoKeyIconImages[idx].imageName,
@@ -445,7 +445,7 @@ PianoPlayer.Piano = cc.Sprite.extend({
 });
 
 // ========================== Student ===============================
-PianoPlayer.Student = HDBaseLayer.extend({
+ACTIVITY_PIANO_PLAYER_1.Student = HDBaseLayer.extend({
   TAG_CLICKED_KEY_IMAGE: 1,
   TAG_FEEDBACK_LAYER_COLOR: 2,
   ctor: function (
@@ -539,7 +539,7 @@ PianoPlayer.Student = HDBaseLayer.extend({
 });
 
 // ========================== StudentsList ===============================
-PianoPlayer.StudentsList = HDBaseLayer.extend({
+ACTIVITY_PIANO_PLAYER_1.StudentsList = HDBaseLayer.extend({
   studentsList: {},
   nextStudent_X_Pos: 0,
   h_padding: 4.8,
@@ -602,9 +602,9 @@ PianoPlayer.StudentsList = HDBaseLayer.extend({
 
   _makeStudent: function (student, position) {
     const { userName } = student;
-    let studentSprite = new PianoPlayer.Student(
-      PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections
+    let studentSprite = new ACTIVITY_PIANO_PLAYER_1.Student(
+      ACTIVITY_PIANO_PLAYER_1.resourcePath +
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections
           .student_answer.imageName,
       userName,
       student.displayImage,
@@ -632,7 +632,7 @@ PianoPlayer.StudentsList = HDBaseLayer.extend({
 });
 
 // ========================== Common Layer for student & teacher ===============================
-PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
+ACTIVITY_PIANO_PLAYER_1.CommonPianoPlayerLayer = HDBaseLayer.extend({
   isFeedbackActivated: false,
   TAG_PIANO: 1,
   currentNoteIdx: 0,
@@ -714,7 +714,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
   moveToNextWord: function () {
     if (
       this.currentNoteIdx <
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].correctSequence.length -
         1
@@ -747,12 +747,12 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
     ++this.currentSongIdx;
     let piano = this.getChildByTag(this.TAG_PIANO);
     piano.setDisplayImagesOfPianoKeys(
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].pianoKeyIconImages
     );
     piano.setSheetWords(
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].correctSequence
     );
@@ -767,22 +767,22 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
   },
 
   createPiano: function (delegate) {
-    var pianoSprite = new PianoPlayer.Piano(
-      PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.background.sections.background
+    var pianoSprite = new ACTIVITY_PIANO_PLAYER_1.Piano(
+      ACTIVITY_PIANO_PLAYER_1.resourcePath +
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.background.sections.background
           .imageName,
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.pianoKeys.data,
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.pianoKeys.data,
       delegate,
-      PianoPlayer.resourcePath,
-      PianoPlayer.soundPath,
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.keyPressedCorrectImage.imageName,
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.keyPressedIncorrectImage.imageName,
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+      ACTIVITY_PIANO_PLAYER_1.resourcePath,
+      ACTIVITY_PIANO_PLAYER_1.soundPath,
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.keyPressedCorrectImage.imageName,
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.keyPressedIncorrectImage.imageName,
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].correctSequence,
       HDAppManager.isTeacherView,
       delegate,
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].pianoKeyIconImages
     );
@@ -800,7 +800,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
     if (this.isFeedbackActivated) {
       isCorrect =
         pianoKey.getWord() ===
-        PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
           this.currentSongIdx
         ].correctSequence[this.currentNoteIdx];
       if (isCorrect) {
@@ -821,7 +821,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
           roomId: HDAppManager.roomId,
           roomData: {
             activity:
-              PianoPlayer.MainPianoPlayerLayerRef.config.properties.namespace,
+              ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.properties.namespace,
             data: data,
             activityStartTime : HDAppManager.getActivityStartTime()
           },
@@ -841,7 +841,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
     this.lightUpSheetWord(0);
     this.songPlayingCurrentNote = 0;
     let wordLength =
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx
       ].correctSequence.length;
     this.songPlayingInterval = setInterval(() => {
@@ -851,7 +851,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
         return;
       }
       let word =
-        PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
           this.currentSongIdx
         ].correctSequence[this.songPlayingCurrentNote];
       let pianoKey = this.getChildByTag(this.TAG_PIANO).getPianoKeyByWord(word);
@@ -868,7 +868,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
       this.currentNoteIdx = HDUtility.clampANumber(
         this.songPlayingCurrentNote,
         0,
-        PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
           this.currentSongIdx
         ].correctSequence.length - 1
       );
@@ -888,7 +888,7 @@ PianoPlayer.CommonPianoPlayerLayer = HDBaseLayer.extend({
 });
 
 // ========================== Teacher Layer ===============================
-PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
+ACTIVITY_PIANO_PLAYER_1.TeacherViewLayer = ACTIVITY_PIANO_PLAYER_1.CommonPianoPlayerLayer.extend({
   TAG_START_BUTTON: 5,
   TAG_NEXT_BUTTON: 2,
   TAG_STUDENTS_LIST_LAYER: 3,
@@ -912,8 +912,8 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   onEnter: function () {
     this._super();
     this.getStudentsList();
-    this.showScriptMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherScripts.data.moduleStart);
-    this.showTipMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherTips.data.moduleStart);
+    this.showScriptMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data.moduleStart);
+    this.showTipMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data.moduleStart);
     this.lightUpSheetWord(this.currentNoteIdx);
   },
 
@@ -921,13 +921,13 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
 
   updateStudentInteractionStatus: function (userName, status) {
     SocketManager.emitCutomEvent(
-      PianoPlayer.socketEventKey.singleEvent,
+      ACTIVITY_PIANO_PLAYER_1.socketEventKey.singleEvent,
       {
         eventType: HDSocketEventType.GAME_MESSAGE,
         roomId: HDAppManager.roomId,
         data: {
           roomId: HDAppManager.roomId,
-          type: PianoPlayer.teacherEvents.PIANO_PLAYER_STUDENT_INTERACTION,
+          type: ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_STUDENT_INTERACTION,
           userName: userName,
           status: status,
         },
@@ -938,13 +938,13 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
 
   emitNextWordEvent: function () {
     SocketManager.emitCutomEvent(
-      PianoPlayer.socketEventKey.singleEvent,
+      ACTIVITY_PIANO_PLAYER_1.socketEventKey.singleEvent,
       {
         eventType: HDSocketEventType.GAME_MESSAGE,
         roomId: HDAppManager.roomId,
         data: {
           roomId: HDAppManager.roomId,
-          type: PianoPlayer.teacherEvents.PIANO_PLAYER_NEXT_WORD,
+          type: ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_NEXT_WORD,
           wordIdx: this.currentNoteIdx,
         },
       },
@@ -967,7 +967,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   },
 
   getStudentsList: function () {
-    SocketManager.emitCutomEvent(PianoPlayer.socketEventKey.singleEvent, {
+    SocketManager.emitCutomEvent(ACTIVITY_PIANO_PLAYER_1.socketEventKey.singleEvent, {
       eventType: HDSocketEventType.STUDENT_STATUS,
       data: {
         roomId: HDAppManager.roomId,
@@ -983,7 +983,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
     }
 
     if (
-      PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+      ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
         this.currentSongIdx + 1
       ]
     ) {
@@ -993,11 +993,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
 
   addStartButton: function () {
     var startButton = this.createButton(
-      PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+      ACTIVITY_PIANO_PLAYER_1.resourcePath +
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.buttons.data
           .startButton.enableState,
-      PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+      ACTIVITY_PIANO_PLAYER_1.resourcePath +
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.buttons.data
           .startButton.pushedState,
       "",
       0,
@@ -1009,11 +1009,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
 
   addNextButton: function () {
     var nextButton = this.createButton(
-      PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+      ACTIVITY_PIANO_PLAYER_1.resourcePath +
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.buttons.data
           .nextButton.enableState,
-      PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+      ACTIVITY_PIANO_PLAYER_1.resourcePath +
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.buttons.data
           .nextButton.pushedState,
       "",
       0,
@@ -1026,11 +1026,11 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   // button to play song in regular time
   addPlayButton: function () {
     let playSongButton = this.createButton(
-      PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+      ACTIVITY_PIANO_PLAYER_1.resourcePath +
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.buttons.data
           .playButton.enableState,
-      PianoPlayer.resourcePath +
-        PianoPlayer.MainPianoPlayerLayerRef.config.buttons.data
+      ACTIVITY_PIANO_PLAYER_1.resourcePath +
+        ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.buttons.data
           .playButton.pushedState,
       "",
       0,
@@ -1047,22 +1047,22 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
     switch (eventType) {
       case HDSocketEventType.GAME_MESSAGE: {
         switch (type) {
-          case PianoPlayer.studentEvents.PIANO_PLAYER_STUDENT_CLICK: {
+          case ACTIVITY_PIANO_PLAYER_1.studentEvents.PIANO_PLAYER_STUDENT_CLICK: {
             if (isCorrect) {
               if (
-                ++PianoPlayer.delegate.totalCorrect ===
-                PianoPlayer.delegate.currentStudentsList.length
+                ++ACTIVITY_PIANO_PLAYER_1.delegate.totalCorrect ===
+                ACTIVITY_PIANO_PLAYER_1.delegate.currentStudentsList.length
               ) {
-                PianoPlayer.delegate.totalCorrect = 0;
-                PianoPlayer.delegate.moveToNextWord();
+                ACTIVITY_PIANO_PLAYER_1.delegate.totalCorrect = 0;
+                ACTIVITY_PIANO_PLAYER_1.delegate.moveToNextWord();
               }
             }
-            PianoPlayer.delegate.updateStudentClickedImage(
+            ACTIVITY_PIANO_PLAYER_1.delegate.updateStudentClickedImage(
               userName,
               displayImage,
               isCorrect
             );
-            PianoPlayer.delegate.studentAnswers[userName] = {
+            ACTIVITY_PIANO_PLAYER_1.delegate.studentAnswers[userName] = {
               userName: userName,
               displayImage: displayImage,
               isCorrect: isCorrect,
@@ -1073,7 +1073,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
         break;
       }
       case HDSocketEventType.STUDENT_STATUS: {
-        PianoPlayer.delegate.updateStudentsList(
+        ACTIVITY_PIANO_PLAYER_1.delegate.updateStudentsList(
           data.users.filter((user) => user.userName !== HDAppManager.username)
         );
       }
@@ -1116,7 +1116,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
   },
 
   createStudentsList: function (list) {
-    let studentsList = new PianoPlayer.StudentsList(list);
+    let studentsList = new ACTIVITY_PIANO_PLAYER_1.StudentsList(list);
     studentsList.setTag(this.TAG_STUDENTS_LIST_LAYER);
     studentsList.setLocalZOrder(2);
     studentsList.setPosition(cc.p(this.width * 0.17, this.height * 0.01));
@@ -1177,13 +1177,13 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
           case this.TAG_START_BUTTON: {
             this.isFeedbackActivated = true;
             SocketManager.emitCutomEvent(
-              PianoPlayer.socketEventKey.singleEvent,
+              ACTIVITY_PIANO_PLAYER_1.socketEventKey.singleEvent,
               {
                 eventType: HDSocketEventType.GAME_MESSAGE,
                 roomId: HDAppManager.roomId,
                 data: {
                   type:
-                    PianoPlayer.teacherEvents.PIANO_PLAYER_ACTIVATE_FEEDBACK,
+                    ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_ACTIVATE_FEEDBACK,
                   wordIdx: this.currentNoteIdx,
                   roomId: HDAppManager.roomId,
                 },
@@ -1194,20 +1194,20 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
               wordIdx: this.currentNoteIdx,
               feedbackActivated: true,
             });
-            this.showScriptMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherScripts.data.startButtonClicked);
-            this.showTipMessage(PianoPlayer.MainPianoPlayerLayerRef.config.teacherTips.data.startButtonClicked);
+            this.showScriptMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data.startButtonClicked);
+            this.showTipMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data.startButtonClicked);
             sender.setVisible(false);
             this.addPlayButton();
             break;
           }
           case this.TAG_NEXT_BUTTON: {
             SocketManager.emitCutomEvent(
-              PianoPlayer.socketEventKey.singleEvent,
+              ACTIVITY_PIANO_PLAYER_1.socketEventKey.singleEvent,
               {
                 eventType: HDSocketEventType.GAME_MESSAGE,
                 roomId: HDAppManager.roomId,
                 data: {
-                  type: PianoPlayer.teacherEvents.PIANO_PLAYER_NEXT_SONG,
+                  type: ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_NEXT_SONG,
                   roomId: HDAppManager.roomId,
                 },
               }
@@ -1218,7 +1218,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
             ).clearClickedKeyImagesOfAllStudents();
             this.launchNextSong();
             if (
-              !PianoPlayer.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
+              !ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.assets.sections.songs.data[
                 this.currentSongIdx + 1
               ]
             ) {
@@ -1233,12 +1233,12 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
             this.getChildByTag(this.TAG_NEXT_BUTTON) &&
               this.getChildByTag(this.TAG_NEXT_BUTTON).setTouchEnabled(false);
             SocketManager.emitCutomEvent(
-              PianoPlayer.socketEventKey.singleEvent,
+              ACTIVITY_PIANO_PLAYER_1.socketEventKey.singleEvent,
               {
                 eventType: HDSocketEventType.GAME_MESSAGE,
                 roomId: HDAppManager.roomId,
                 data: {
-                  type: PianoPlayer.teacherEvents.PIANO_PLAYER_PLAY_SONG,
+                  type: ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_PLAY_SONG,
                   roomId: HDAppManager.roomId,
                 },
               }
@@ -1253,7 +1253,7 @@ PianoPlayer.TeacherViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
 });
 
 // ========================== Student Layer ===============================
-PianoPlayer.StudentViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
+ACTIVITY_PIANO_PLAYER_1.StudentViewLayer = ACTIVITY_PIANO_PLAYER_1.CommonPianoPlayerLayer.extend({
   state: undefined,
   blockedOnCorrectAnswer: false,
   interactionEnabled: false,
@@ -1281,40 +1281,40 @@ PianoPlayer.StudentViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
     switch (eventType) {
       case HDSocketEventType.GAME_MESSAGE: {
         switch (data.type) {
-          case PianoPlayer.teacherEvents.PIANO_PLAYER_ACTIVATE_FEEDBACK: {
-            PianoPlayer.delegate.isFeedbackActivated = true;
-            PianoPlayer.delegate.currentNoteIdx = data.wordIdx;
-            PianoPlayer.delegate.lightUpSheetWord(data.wordIdx);
+          case ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_ACTIVATE_FEEDBACK: {
+            ACTIVITY_PIANO_PLAYER_1.delegate.isFeedbackActivated = true;
+            ACTIVITY_PIANO_PLAYER_1.delegate.currentNoteIdx = data.wordIdx;
+            ACTIVITY_PIANO_PLAYER_1.delegate.lightUpSheetWord(data.wordIdx);
             break;
           }
-          case PianoPlayer.teacherEvents.PIANO_PLAYER_NEXT_SONG: {
+          case ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_NEXT_SONG: {
             if (this.blockedOnCorrectAnswer) {
-              PianoPlayer.delegate.setPianoKeysEnabled(true);
+              ACTIVITY_PIANO_PLAYER_1.delegate.setPianoKeysEnabled(true);
               this.blockedOnCorrectAnswer = false;
               this.interactionEnabled = true;
             }
-            PianoPlayer.delegate.launchNextSong();
+            ACTIVITY_PIANO_PLAYER_1.delegate.launchNextSong();
             break;
           }
-          case PianoPlayer.teacherEvents.PIANO_PLAYER_NEXT_WORD: {
-            PianoPlayer.delegate.currentNoteIdx = data.wordIdx;
-            PianoPlayer.delegate.lightUpSheetWord(data.wordIdx);
+          case ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_NEXT_WORD: {
+            ACTIVITY_PIANO_PLAYER_1.delegate.currentNoteIdx = data.wordIdx;
+            ACTIVITY_PIANO_PLAYER_1.delegate.lightUpSheetWord(data.wordIdx);
             if (this.blockedOnCorrectAnswer) {
-              PianoPlayer.delegate.setPianoKeysEnabled(true);
+              ACTIVITY_PIANO_PLAYER_1.delegate.setPianoKeysEnabled(true);
               this.interactionEnabled = true;
             }
             this.blockedOnCorrectAnswer = false;
             break;
           }
-          case PianoPlayer.teacherEvents.PIANO_PLAYER_STUDENT_INTERACTION: {
+          case ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_STUDENT_INTERACTION: {
             const { userName, status } = data;
             if (userName === HDAppManager.username) {
-              PianoPlayer.delegate.setPianoKeysEnabled(status);
+              ACTIVITY_PIANO_PLAYER_1.delegate.setPianoKeysEnabled(status);
               this.interactionEnabled = status;
             }
             break;
           }
-          case PianoPlayer.teacherEvents.PIANO_PLAYER_PLAY_SONG: {
+          case ACTIVITY_PIANO_PLAYER_1.teacherEvents.PIANO_PLAYER_PLAY_SONG: {
             this.setPianoKeysEnabled(false);
             this.playCurrentSong(this.onSongStopped.bind(this));
           }
@@ -1335,13 +1335,13 @@ PianoPlayer.StudentViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
     }
     if (this.getIsFeedbackActivated()) {
       SocketManager.emitCutomEvent(
-        PianoPlayer.socketEventKey.singleEvent,
+        ACTIVITY_PIANO_PLAYER_1.socketEventKey.singleEvent,
         {
           eventType: HDSocketEventType.GAME_MESSAGE,
           roomId: HDAppManager.roomId,
           data: {
             roomId: HDAppManager.roomId,
-            type: PianoPlayer.studentEvents.PIANO_PLAYER_STUDENT_CLICK,
+            type: ACTIVITY_PIANO_PLAYER_1.studentEvents.PIANO_PLAYER_STUDENT_CLICK,
             userName: HDAppManager.username,
             displayImage: pianoKey.getDisplayImage(),
             isCorrect: isCorrect,
@@ -1359,30 +1359,30 @@ PianoPlayer.StudentViewLayer = PianoPlayer.CommonPianoPlayerLayer.extend({
 });
 
 // ========================== Main Layer ===============================
-PianoPlayer.MainPianoPlayerLayer = cc.Layer.extend({
+ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayer = cc.Layer.extend({
   state: undefined,
   config: null,
   ctor: function () {
     this._super();
     var self = this;
-    PianoPlayer.MainPianoPlayerLayerRef = this;
+    ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef = this;
     let activityName = 'ACTIVITY_PIANO_PLAYER';
     cc.loader.loadJson(
       "res/Activity/" + activityName + "/config.json",
       function (error, data) {
         self.config = data;
-        PianoPlayer.resourcePath =
+        ACTIVITY_PIANO_PLAYER_1.resourcePath =
           "res/Activity/" + ""+ activityName +  "/res/Sprite/";
-        PianoPlayer.soundPath = "res/Activity/" + ""+ activityName +  "/res/Sound/";
+        ACTIVITY_PIANO_PLAYER_1.soundPath = "res/Activity/" + ""+ activityName +  "/res/Sound/";
         if (HDAppManager.isTeacherView) {
-          var teacherViewLayer = new PianoPlayer.TeacherViewLayer(self.state);
+          var teacherViewLayer = new ACTIVITY_PIANO_PLAYER_1.TeacherViewLayer(self.state);
           teacherViewLayer.setTag(1);
-          PianoPlayer.delegate = teacherViewLayer;
+          ACTIVITY_PIANO_PLAYER_1.delegate = teacherViewLayer;
           self.addChild(teacherViewLayer);
         } else {
-          var studentViewLayer = new PianoPlayer.StudentViewLayer(self.state);
+          var studentViewLayer = new ACTIVITY_PIANO_PLAYER_1.StudentViewLayer(self.state);
           studentViewLayer.setTag(2);
-          PianoPlayer.delegate = studentViewLayer;
+          ACTIVITY_PIANO_PLAYER_1.delegate = studentViewLayer;
           self.addChild(studentViewLayer);
         }
         self.connectSocket();
@@ -1406,8 +1406,8 @@ PianoPlayer.MainPianoPlayerLayer = cc.Layer.extend({
       case cc.EventTouch.EventCode.MOVED:
         break;
       case cc.EventTouch.EventCode.ENDED:
-        if(PianoPlayer.delegate){
-          PianoPlayer.delegate.onMouseDown(touch);
+        if(ACTIVITY_PIANO_PLAYER_1.delegate){
+          ACTIVITY_PIANO_PLAYER_1.delegate.onMouseDown(touch);
         }
         break;
     }
@@ -1419,8 +1419,8 @@ PianoPlayer.MainPianoPlayerLayer = cc.Layer.extend({
 
     switch (event._eventType) {
       case cc.EventMouse.DOWN:
-        if(PianoPlayer.delegate){
-          PianoPlayer.delegate.onMouseDown(event);
+        if(ACTIVITY_PIANO_PLAYER_1.delegate){
+          ACTIVITY_PIANO_PLAYER_1.delegate.onMouseDown(event);
         }
         break;
       case cc.EventMouse.MOVE:
@@ -1432,20 +1432,20 @@ PianoPlayer.MainPianoPlayerLayer = cc.Layer.extend({
 
 
   socketListener: function (event) {
-    if (PianoPlayer.delegate)
-      PianoPlayer.delegate.onNotificationReceived(event);
+    if (ACTIVITY_PIANO_PLAYER_1.delegate)
+      ACTIVITY_PIANO_PLAYER_1.delegate.onNotificationReceived(event);
   },
 
   mouseControlEnable: function (location) {
-    if (PianoPlayer.delegate)
-      return PianoPlayer.delegate.mouseControlEnable(location);
+    if (ACTIVITY_PIANO_PLAYER_1.delegate)
+      return ACTIVITY_PIANO_PLAYER_1.delegate.mouseControlEnable(location);
   },
   updateStudentInteraction: function (username, status) {
-    PianoPlayer.delegate.updateStudentInteractionStatus(username, status);
+    ACTIVITY_PIANO_PLAYER_1.delegate.updateStudentInteractionStatus(username, status);
   },
 
   syncData: function (data) {
-    PianoPlayer.MainPianoPlayerLayerRef.state = data;
+    ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.state = data;
   },
 
   onEnter: function () {
