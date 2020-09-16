@@ -93,7 +93,7 @@ adminController.getActivities = async (payload) => {
   payload.criteria = {};
   payload.skip = (payload.counter - 1) * payload.limit;
   if (payload.type) payload.criteria.type = payload.type;
-  let activities = await SERVICES.activityService.getActivities(payload, { path: 0 });
+  let activities = await SERVICES.activityService.getActivities(payload);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_FETCHED_SUCCESSFULLY), activities);
 }
 
