@@ -55,7 +55,7 @@ module.exports = async function (app) {
     app.use('/activity-resources', express.static(activityPath));
 
     /** Used logger middleware for each api call **/
-    app.use(apiLooger);
+    // app.use(apiLooger);
 
     // initialize mongodb 
     await require('../db_mongo')();

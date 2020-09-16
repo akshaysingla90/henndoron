@@ -14,6 +14,12 @@ const uploadMiddleware = multer();
 
 let routeUtils = {};
 
+/** middleware for api's logging with deployment mode */
+let apiLooger = (req, res, next) => {
+  console.log(`\x1b[32m` + `api hitted ${req.url} ${req.method} ${process.env.NODE_ENV}`);
+  next();
+};
+
 /**
  * function to create routes in the express.
  */
@@ -24,6 +30,7 @@ routeUtils.route = async (app, routes = []) => {
       const multerMiddleware = getMulterMiddleware(route.joiSchemaForSwagger.formData);
       middlewares = [multerMiddleware];
     }
+    middlewares.push(apiLooger);
     middlewares.push(getValidatorMiddleware(route));
     if (route.auth) {
       if (typeof route.auth === 'string') route.auth = [route.auth];
