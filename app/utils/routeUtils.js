@@ -16,7 +16,7 @@ let routeUtils = {};
 
 /** middleware for api's logging with deployment mode */
 let apiLooger = (req, res, next) => {
-  console.log(`\x1b[32m` + `api hitted ${req.url} ${req.method} ${process.env.NODE_ENV}`);
+  console.log(`\x1b[32m` + `api hitted ${(new Date()).toLocaleTimeString()} ${req.url} ${req.method} ${process.env.NODE_ENV}`);
   next();
 };
 
