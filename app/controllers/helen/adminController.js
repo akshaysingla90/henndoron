@@ -49,7 +49,10 @@ adminController.cloneActivity = async (payload) => {
   let pathToReplace = payload.configData.properties.activityPath;
   let namespaceToReplace = payload.configData.properties.namespace;
   let textToWrite = activityPath;
-
+  console.log('------- In SAVE DRAFT ------');
+  console.log('pathToReplace => ', pathToReplace);
+  console.log('namespaceToReplace => ', namespaceToReplace);
+  console.log('textToWrite => ', textToWrite);
   const options = {
     files: destinationPath + ACTIVITY_SRC_PATH,
     from: () => pathToReplace == namespaceToReplace
@@ -220,6 +223,10 @@ adminController.duplicateActivity = async (payload) => {
   let pathToReplace = configData.properties.activityPath;
   let namespaceToReplace = configData.properties.namespace;
   let textToWrite = activityPath;
+  console.log('------- In DUPLICATEC COPY ------');
+  console.log('pathToReplace => ', pathToReplace);
+  console.log('namespaceToReplace => ', namespaceToReplace);
+  console.log('textToWrite => ', textToWrite);
   const options = {
     files: destinationPath + ACTIVITY_SRC_PATH,
     from: () => pathToReplace == namespaceToReplace
