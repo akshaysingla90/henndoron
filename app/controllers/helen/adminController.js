@@ -99,7 +99,7 @@ adminController.getActivities = async (payload) => {
  * @param {*} payload 
  */
 adminController.publishActivity = async (payload) => {
-  let activity = await SERVICES.activityService.getActivity({ _id: payload.id, status: ACTIVITY_STATUS.DRAFT }, NORMAL_PROJECTION, { instance: true });
+  let activity = await SERVICES.activityService.getActivity({ _id: payload.activityId, status: ACTIVITY_STATUS.DRAFT }, NORMAL_PROJECTION, { instance: true });
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   activity.status = ACTIVITY_STATUS.PUBLISHED;
   await activity.save();
