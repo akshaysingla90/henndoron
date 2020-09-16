@@ -65,7 +65,7 @@
   },
   {
     "name": "ACTIVITY_PIANO_PLAYER",
-    "path": "/ACTIVITY_PIANO_PLAYER",
+    "path": "/ACTIVITY_PIANO_PLAYER_1",
     "type": 1,
     "description": "Students enjoy playing the piano by clicking on keys to practice words, letters, or numbers.The teacher says certain words, and the student has to press the corresponding key based on the pictures.As the correct key is pressed, the key turns green. If the incorrect key is pressed, it turns red. When the miceare disabled, the students see whatever the teacher clicks on the teacher's keyboard. When the mice are enabledand all the students are playing their own keyboard, the teacher is shown live feedback when a student gets aword right or wrong",
     "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Piano.png",
