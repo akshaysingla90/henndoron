@@ -46,14 +46,16 @@ adminController.cloneActivity = async (payload) => {
   await fs.copy(sourcePath, destinationPath, { filter: filterFunc });
 
   // Change index.js 
-  let pathToReplace = new RegExp(`${payload.configData.properties.activityPath}`, 'g');
-  let namespaceToReplace = new RegExp(payload.configData.properties.namespace, 'g');
+  let pathToReplace = payload.configData.properties.activityPath;
+  let namespaceToReplace = payload.configData.properties.namespace;
   let textToWrite = activityPath;
 
   const options = {
     files: destinationPath + ACTIVITY_SRC_PATH,
-    from: [pathToReplace, namespaceToReplace],
-    to: [textToWrite, textToWrite]
+    from: () => pathToReplace == namespaceToReplace
+      ? new RegExp(pathToReplace, 'g')
+      : [new RegExp(pathToReplace, 'g'), new RegExp(namespaceToReplace, 'g')],
+    to: textToWrite
   };
   await replace(options);
 
@@ -215,13 +217,15 @@ adminController.duplicateActivity = async (payload) => {
   configData = JSON.parse(configData);
 
   // Change index.js 
-  let pathToReplace = new RegExp(`${configData.properties.activityPath}`, 'g');
-  let namespaceToReplace = new RegExp(configData.properties.namespace, 'g');
+  let pathToReplace = configData.properties.activityPath;
+  let namespaceToReplace = configData.properties.namespace;
   let textToWrite = activityPath;
   const options = {
     files: destinationPath + ACTIVITY_SRC_PATH,
-    from: [pathToReplace, namespaceToReplace],
-    to: [textToWrite, textToWrite]
+    from: () => pathToReplace == namespaceToReplace
+      ? new RegExp(pathToReplace, 'g')
+      : [new RegExp(pathToReplace, 'g'), new RegExp(namespaceToReplace, 'g')],
+    to: textToWrite
   };
   await replace(options);
 
