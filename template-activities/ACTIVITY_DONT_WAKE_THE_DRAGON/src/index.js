@@ -1,5 +1,5 @@
 // NameSpace for this activity
-var DontWakeTheDragon = {
+var ACTIVITY_DONT_WAKE_THE_DRAGON = {
     // resourcePath: "res/Activity/ACTIVITY_DONT_WAKE_THE_DRAGON/res/Sprite/",
     // soundPath: "res/Activity/ACTIVITY_DONT_WAKE_THE_DRAGON/res/Sound/",
     // animationPath:
@@ -15,49 +15,49 @@ Similarly events mentioned in studentEvents are emitted from student side and sh
  */
 
 // update room data format
-// DontWakeTheDragon.updateRoomData = {
+// ACTIVITY_DONT_WAKE_THE_DRAGON.updateRoomData = {
 //   dragonAnimationStage: 1,
 //   studentTurn: "chicmic_9",
 //   studentsTreasureItems: { chicmic_9: [item_1_Tag, item_2_Tag_2] }, // tags should be the index of array in treasureItems array in config file (in order they appear)
 //   treasureItems: [item_1_Tag, item2_Tag_2],
 // };
 
-DontWakeTheDragon.socketEventKey = {
+ACTIVITY_DONT_WAKE_THE_DRAGON.socketEventKey = {
     singleEvent: "SingleEvent",
 };
-DontWakeTheDragon.teacherEvents = {
+ACTIVITY_DONT_WAKE_THE_DRAGON.teacherEvents = {
     DONT_WAKE_THE_DRAGON_RESET_GAME: "DONT_WAKE_THE_DRAGON_RESET_GAME",
     TREASURE_ITEM_DROPPED_IN_CHEST_BY_TEACHER: 'TREASURE_ITEM_DROPPED_IN_CHEST_BY_TEACHER'
 };
-DontWakeTheDragon.studentEvents = {
+ACTIVITY_DONT_WAKE_THE_DRAGON.studentEvents = {
     TREASURE_ITEM_DRAGGED: "TREASURE_ITEM_DRAGGED",
     TREASURE_ITEM_DROPPED: "TREASURE_ITEM_DROPPED",
     TREASURE_ITEM_DROPPED_IN_CHEST: "TREASURE_ITEM_DROPPED_IN_CHEST",
     DRAGON_ANIMATION_STAGE: "DRAGON_ANIMATION_STAGE",
 };
 
-DontWakeTheDragon.SubscriptionNotification = cc.Class.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.SubscriptionNotification = cc.Class.extend({
     onNotificationReceived: function (event) {
         const {eventType, data} = event;
         const {type} = data;
     },
 });
 
-DontWakeTheDragon.PERFORM_DRAGON_ANIMATION_DISTANCE = 50; // pixels
+ACTIVITY_DONT_WAKE_THE_DRAGON.PERFORM_DRAGON_ANIMATION_DISTANCE = 50; // pixels
 
 // difference between dragon's position and treasure item's position in pixels
-DontWakeTheDragon.DistanceFromDragon = {
+ACTIVITY_DONT_WAKE_THE_DRAGON.DistanceFromDragon = {
     CLOSE: 200,
     VERY_CLOSE: 300,
 };
 
-DontWakeTheDragon.DragonWakeUpProbabilities = {
+ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpProbabilities = {
     ITEMS_AROUND_DRAGON: 0.05,
     ITEMS_PARTIALLY_UNDERNEATH_DRAGON: 0.3,
     ITEMS_DIRECTLY_UNDERNEATH_DRAGON: 0.9,
 };
 
-DontWakeTheDragon.DragonWakeUpStages = {
+ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpStages = {
     TOTALLY_STILL_AND_IN_A_DEEP_SLEEP: 1,
     MOVING_SLIGHTLY_IN_SLEEP: 2,
     ONE_EYE_OPEN_BUT_STILL_SLEEPY: 3,
@@ -65,7 +65,7 @@ DontWakeTheDragon.DragonWakeUpStages = {
 };
 
 // ========================== Dragon ===============================
-DontWakeTheDragon.Dragon = cc.Sprite.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.Dragon = cc.Sprite.extend({
     animationStage: 1,
     animationSpeed: 0.065,
     currentAction: null,
@@ -88,11 +88,11 @@ DontWakeTheDragon.Dragon = cc.Sprite.extend({
 
     _createAnimationAction: function (animationAction) {
         const data =
-            DontWakeTheDragon.MainLayerRef.config.assets.sections.animation.data[
+            ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.assets.sections.animation.data[
                 animationAction
                 ];
         const animate = HDUtility.runFrameAnimation(
-            DontWakeTheDragon.animationPath + data.frameInitial,
+            ACTIVITY_DONT_WAKE_THE_DRAGON.animationPath + data.frameInitial,
             data.frameCount,
             this.animationSpeed,
             ".png",
@@ -146,20 +146,20 @@ DontWakeTheDragon.Dragon = cc.Sprite.extend({
 
     playAnimation(stage) {
         switch (stage) {
-            case DontWakeTheDragon.DragonWakeUpStages
+            case ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpStages
                 .TOTALLY_STILL_AND_IN_A_DEEP_SLEEP: {
                 this.playStage_1_Animation();
                 break;
             }
-            case DontWakeTheDragon.DragonWakeUpStages.MOVING_SLIGHTLY_IN_SLEEP: {
+            case ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpStages.MOVING_SLIGHTLY_IN_SLEEP: {
                 this.playStage_2_Animation();
                 break;
             }
-            case DontWakeTheDragon.DragonWakeUpStages.ONE_EYE_OPEN_BUT_STILL_SLEEPY: {
+            case ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpStages.ONE_EYE_OPEN_BUT_STILL_SLEEPY: {
                 this.playStage_3_Animation();
                 break;
             }
-            case DontWakeTheDragon.DragonWakeUpStages.WAKE: {
+            case ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpStages.WAKE: {
                 this.playStage_4_Animation();
                 break;
             }
@@ -171,7 +171,7 @@ DontWakeTheDragon.Dragon = cc.Sprite.extend({
 });
 
 // ========================== TreasureChest ===============================
-DontWakeTheDragon.TreasureChest = cc.Sprite.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.TreasureChest = cc.Sprite.extend({
     treasureItemSpriteRef: null,
     userName: "",
     TAG_DROP_ANIMATION_SPRITE: 1,
@@ -179,7 +179,7 @@ DontWakeTheDragon.TreasureChest = cc.Sprite.extend({
     Z_ORDER_TREASURE_CHEST_SPRITE: 1,
     Z_ORDER_TREASURE_ITEM_SPRITE: 2,
     ctor: function (userName, treasureItemSpriteRef) {
-        this._super(DontWakeTheDragon.resourcePath + "student_answer.png");
+        this._super(ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath + "student_answer.png");
         this.setOpacity(0);
         this.userName = userName;
         this.treasureItemSpriteRef = treasureItemSpriteRef;
@@ -189,7 +189,7 @@ DontWakeTheDragon.TreasureChest = cc.Sprite.extend({
     _setUpUI: function () {
         this._createNameLabel();
         let treasureChestSprite = new cc.Sprite(
-            DontWakeTheDragon.resourcePath + "player_treasure_chest.png"
+            ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath + "player_treasure_chest.png"
         );
         treasureChestSprite.setPosition(cc.p(this.width * 0.6, this.height * 0.7));
         this.addChild(treasureChestSprite, this.Z_ORDER_TREASURE_CHEST_SPRITE);
@@ -234,7 +234,7 @@ DontWakeTheDragon.TreasureChest = cc.Sprite.extend({
             this.TAG_DROP_ANIMATION_SPRITE
         );
         let animateAction = HDUtility.runFrameAnimation(
-            DontWakeTheDragon.animationPath + "cardTakeOut/magicHat_cardTakeOut_",
+            ACTIVITY_DONT_WAKE_THE_DRAGON.animationPath + "cardTakeOut/magicHat_cardTakeOut_",
             15,
             0.05,
             ".png",
@@ -261,7 +261,7 @@ DontWakeTheDragon.TreasureChest = cc.Sprite.extend({
 });
 
 // ========================== TreasureItem ===============================
-DontWakeTheDragon.TreasureItem = cc.Sprite.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.TreasureItem = cc.Sprite.extend({
     initialPosition: null,
     dropActionDuration: 0.1,
     putBackAction: null,
@@ -307,7 +307,7 @@ DontWakeTheDragon.TreasureItem = cc.Sprite.extend({
 });
 
 // ========================== TreasureChests ===============================
-DontWakeTheDragon.TreasureChests = HDBaseLayer.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.TreasureChests = HDBaseLayer.extend({
     horizontalPadding: 105,
     nextItem_X_Position: 0,
     itemScaleFactor: 80,
@@ -333,8 +333,8 @@ DontWakeTheDragon.TreasureChests = HDBaseLayer.extend({
         console.log('treasue',treasureChestObj);
         if (treasureChestObj.itemTag) {
             treasureItemSpriteRef = new cc.Sprite(
-                DontWakeTheDragon.resourcePath +
-                DontWakeTheDragon.MainLayerRef.config.assets.sections.treasureItems.data[
+                ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath +
+                ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.assets.sections.treasureItems.data[
                     treasureChestObj.itemTag
                     ].imageName
             );
@@ -343,7 +343,7 @@ DontWakeTheDragon.TreasureChests = HDBaseLayer.extend({
                 64 / treasureItemSpriteRef.height
             );
         }
-        const treasureChest = new DontWakeTheDragon.TreasureChest(
+        const treasureChest = new ACTIVITY_DONT_WAKE_THE_DRAGON.TreasureChest(
             treasureChestObj.name,
             treasureItemSpriteRef
         );
@@ -403,7 +403,7 @@ DontWakeTheDragon.TreasureChests = HDBaseLayer.extend({
     },
 });
 
-DontWakeTheDragon.TreasureItemDelegate = cc.Class.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.TreasureItemDelegate = cc.Class.extend({
     onTreasureItemClicked: function (itemTag) {
     },
     onTreasureItemDragged: function (itemTag, location) {
@@ -413,7 +413,7 @@ DontWakeTheDragon.TreasureItemDelegate = cc.Class.extend({
 });
 
 // ========================== TreasurePile ===============================
-DontWakeTheDragon.TreasurePile = HDBaseLayer.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.TreasurePile = HDBaseLayer.extend({
     Z_ORDER_TREASURE_ITEM: 1, // make it 4 when pick up but drop to 1 when released
     Z_ORDER_TREASURE_PILE: 2,
     Z_ORDER_DRAGON: 3,
@@ -449,7 +449,7 @@ DontWakeTheDragon.TreasurePile = HDBaseLayer.extend({
     },
 
     _createDragon: function (initialDragonAnimationState) {
-        let dragonSprite = new DontWakeTheDragon.Dragon(
+        let dragonSprite = new ACTIVITY_DONT_WAKE_THE_DRAGON.Dragon(
             initialDragonAnimationState
         );
         dragonSprite.setPosition(cc.p(this.width * 0.5, this.height * 0.5));
@@ -516,7 +516,7 @@ DontWakeTheDragon.TreasurePile = HDBaseLayer.extend({
         resourcePath
     ) {
         treasureItems.map((item, idx) => {
-            let treasureItemSprite = new DontWakeTheDragon.TreasureItem(
+            let treasureItemSprite = new ACTIVITY_DONT_WAKE_THE_DRAGON.TreasureItem(
                 resourcePath + item.imageName,
                 cc.p(item.position.x, item.position.y)
             );
@@ -603,7 +603,7 @@ DontWakeTheDragon.TreasurePile = HDBaseLayer.extend({
 });
 
 // ========================== Common Layer for student & teacher ===============================
-DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.CommonLayer = HDBaseLayer.extend({
     state: null,
     Z_ORDER_BACKGROUND: 1,
     Z_ORDER_TREASURE_PILE: 2,
@@ -653,8 +653,8 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
 
     _setUpUI: function () {
         let bgSprite = this.setBackground(
-            DontWakeTheDragon.resourcePath +
-            DontWakeTheDragon.MainLayerRef.config.background.sections.background
+            ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath +
+            ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.background.sections.background
                 .imageName
         );
         bgSprite.setLocalZOrder(this.Z_ORDER_BACKGROUND);
@@ -667,7 +667,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
             this.treasureItems = this.state.treasureItems;
             this.initialDragonAnimationStage = this.state.dragonAnimationStage;
         } else {
-            this.treasureItems = DontWakeTheDragon.MainLayerRef.config.assets.sections.treasureItems.data.map(
+            this.treasureItems = ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.assets.sections.treasureItems.data.map(
                 (item, idx) => {
                     return Object.assign(item, {tag: idx});
                 }
@@ -693,7 +693,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     },
 
     emitSocketEvent: function (type, data) {
-        SocketManager.emitCutomEvent(DontWakeTheDragon.socketEventKey.singleEvent, {
+        SocketManager.emitCutomEvent(ACTIVITY_DONT_WAKE_THE_DRAGON.socketEventKey.singleEvent, {
             eventType: type,
             roomId: HDAppManager.roomId,
             data: data,
@@ -701,7 +701,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     },
 
     _createTreasureChests: function () {
-        const treasureChests = new DontWakeTheDragon.TreasureChests(
+        const treasureChests = new ACTIVITY_DONT_WAKE_THE_DRAGON.TreasureChests(
             this.tempStudentsTreasureChests
         );
         treasureChests.setTag(this.TAG_TREASURE_CHESTS);
@@ -724,11 +724,11 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     },
 
     _createTreasurePile: function (delegate) {
-        let treasurePileSprite = new DontWakeTheDragon.TreasurePile(
-            DontWakeTheDragon.MainLayerRef.config.assets.sections.treasurePile.imageName,
+        let treasurePileSprite = new ACTIVITY_DONT_WAKE_THE_DRAGON.TreasurePile(
+            ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.assets.sections.treasurePile.imageName,
             this.treasureItems,
             this,
-            DontWakeTheDragon.resourcePath,
+            ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath,
             this.initialDragonAnimationStage
         );
         treasurePileSprite.setPosition(cc.p(0, 0));
@@ -741,7 +741,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
         this.emitSocketEvent(HDSocketEventType.UPDATE_ROOM_DATA, {
             roomId: HDAppManager.roomId,
             roomData: {
-                activity: DontWakeTheDragon.MainLayerRef.config.properties.namespace,
+                activity: ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.properties.namespace,
                 data: {
                     dragonAnimationStage: this.getChildByTag(
                         this.TAG_TREASURE_PILE
@@ -769,7 +769,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
                 cc.pDistance(
                     clickedItem.getPosition(),
                     clickedItem.getInitialPosition()
-                ) >= DontWakeTheDragon.PERFORM_DRAGON_ANIMATION_DISTANCE
+                ) >= ACTIVITY_DONT_WAKE_THE_DRAGON.PERFORM_DRAGON_ANIMATION_DISTANCE
             ) {
                 this.performDragonAnimation(itemTag);
                 this.isDragonAnimationDone = true;
@@ -784,7 +784,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
         } else {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 roomId: HDAppManager.roomId,
-                type: DontWakeTheDragon.studentEvents.TREASURE_ITEM_DRAGGED,
+                type: ACTIVITY_DONT_WAKE_THE_DRAGON.studentEvents.TREASURE_ITEM_DRAGGED,
                 userName: HDAppManager.username,
                 itemTag: itemTag,
                 location: {x: location.x, y: location.y},
@@ -806,10 +806,10 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
             itemTag: itemTag,
         };
         if (HDAppManager.isTeacherView) {
-            data.type = DontWakeTheDragon.teacherEvents.TREASURE_ITEM_DROPPED_IN_CHEST_BY_TEACHER,
+            data.type = ACTIVITY_DONT_WAKE_THE_DRAGON.teacherEvents.TREASURE_ITEM_DROPPED_IN_CHEST_BY_TEACHER,
                 data.studentName = treasureChest.tag;
         } else {
-            data.type = DontWakeTheDragon.studentEvents.TREASURE_ITEM_DROPPED_IN_CHEST
+            data.type = ACTIVITY_DONT_WAKE_THE_DRAGON.studentEvents.TREASURE_ITEM_DROPPED_IN_CHEST
         }
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, data);
         if (!HDAppManager.isTeacherView) {
@@ -873,7 +873,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
         this._setOpenPincerFingersCursor(true);
         //this.dropItemIntoChest(itemTag, HDAppManager.username);
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-            type: DontWakeTheDragon.studentEvents.TREASURE_ITEM_DROPPED,
+            type: ACTIVITY_DONT_WAKE_THE_DRAGON.studentEvents.TREASURE_ITEM_DROPPED,
             roomId: HDAppManager.roomId,
             userName: HDAppManager.username,
             itemTag: itemTag,
@@ -900,19 +900,19 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
             let animationStage;
             if (this.closeCalls === 1) {
                 animationStage =
-                    DontWakeTheDragon.DragonWakeUpStages.MOVING_SLIGHTLY_IN_SLEEP;
+                    ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpStages.MOVING_SLIGHTLY_IN_SLEEP;
             } else if (this.closeCalls === 2) {
                 animationStage =
-                    DontWakeTheDragon.DragonWakeUpStages.ONE_EYE_OPEN_BUT_STILL_SLEEPY;
+                    ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpStages.ONE_EYE_OPEN_BUT_STILL_SLEEPY;
             } else if (this.closeCalls === 3) {
                 this.closeCalls = 0;
-                animationStage = DontWakeTheDragon.DragonWakeUpStages.WAKE;
+                animationStage = ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpStages.WAKE;
             }
             this.playDragonAnimation(animationStage);
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 dragonAnimationStage: animationStage,
                 roomId: HDAppManager.roomId,
-                type: DontWakeTheDragon.studentEvents.DRAGON_ANIMATION_STAGE,
+                type: ACTIVITY_DONT_WAKE_THE_DRAGON.studentEvents.DRAGON_ANIMATION_STAGE,
                 userName: HDAppManager.username,
                 closeCalls: this.closeCalls,
             });
@@ -931,22 +931,22 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
             this.getChildByTag(this.TAG_TREASURE_PILE).getDragonPosition(),
             item.getPosition()
         );
-        if (distance <= DontWakeTheDragon.DistanceFromDragon.VERY_CLOSE) {
+        if (distance <= ACTIVITY_DONT_WAKE_THE_DRAGON.DistanceFromDragon.VERY_CLOSE) {
             closeCall = this._isCloseCall(
-                DontWakeTheDragon.DragonWakeUpProbabilities
+                ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpProbabilities
                     .ITEMS_DIRECTLY_UNDERNEATH_DRAGON
             );
         } else if (
-            distance > DontWakeTheDragon.DistanceFromDragon.VERY_CLOSE &&
-            distance <= DontWakeTheDragon.DistanceFromDragon.CLOSE
+            distance > ACTIVITY_DONT_WAKE_THE_DRAGON.DistanceFromDragon.VERY_CLOSE &&
+            distance <= ACTIVITY_DONT_WAKE_THE_DRAGON.DistanceFromDragon.CLOSE
         ) {
             closeCall = this._isCloseCall(
-                DontWakeTheDragon.DragonWakeUpProbabilities
+                ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpProbabilities
                     .ITEMS_PARTIALLY_UNDERNEATH_DRAGON
             );
         } else {
             closeCall = this._isCloseCall(
-                DontWakeTheDragon.DragonWakeUpProbabilities.ITEMS_AROUND_DRAGON
+                ACTIVITY_DONT_WAKE_THE_DRAGON.DragonWakeUpProbabilities.ITEMS_AROUND_DRAGON
             );
         }
 
@@ -970,7 +970,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
         switch (eventType) {
             case HDSocketEventType.GAME_MESSAGE: {
                 switch (type) {
-                    case DontWakeTheDragon.studentEvents.TREASURE_ITEM_DRAGGED: {
+                    case ACTIVITY_DONT_WAKE_THE_DRAGON.studentEvents.TREASURE_ITEM_DRAGGED: {
                         const {userName, itemTag, location} = data;
                         if (userName !== HDAppManager.username) {
                             this.getChildByTag(this.TAG_TREASURE_PILE).dragTreasureItem(
@@ -980,7 +980,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
                         }
                         break;
                     }
-                    case DontWakeTheDragon.studentEvents.DRAGON_ANIMATION_STAGE: {
+                    case ACTIVITY_DONT_WAKE_THE_DRAGON.studentEvents.DRAGON_ANIMATION_STAGE: {
                         const {dragonAnimationStage, userName, closeCalls} = data;
                         if (userName !== HDAppManager.username) {
                             this.playDragonAnimation(dragonAnimationStage);
@@ -988,7 +988,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
                         }
                         break;
                     }
-                    case DontWakeTheDragon.studentEvents.TREASURE_ITEM_DROPPED: {
+                    case ACTIVITY_DONT_WAKE_THE_DRAGON.studentEvents.TREASURE_ITEM_DROPPED: {
                         const {itemTag, userName} = data;
                         if (userName !== HDAppManager.username) {
                             //this.dropItemIntoChest(itemTag, userName);
@@ -999,7 +999,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
 
                         break;
                     }
-                    case DontWakeTheDragon.studentEvents.TREASURE_ITEM_DROPPED_IN_CHEST: {
+                    case ACTIVITY_DONT_WAKE_THE_DRAGON.studentEvents.TREASURE_ITEM_DROPPED_IN_CHEST: {
                         const {userName, itemTag} = data;
                         if (userName !== HDAppManager.username) {
                             const treasurechests = this.getChildByTag(
@@ -1020,7 +1020,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
                         }
                         break;
                     }
-                    case DontWakeTheDragon.teacherEvents.TREASURE_ITEM_DROPPED_IN_CHEST_BY_TEACHER: {
+                    case ACTIVITY_DONT_WAKE_THE_DRAGON.teacherEvents.TREASURE_ITEM_DROPPED_IN_CHEST_BY_TEACHER: {
                         const {userName, studentName, itemTag} = data;
                         if (userName !== HDAppManager.username) {
                             const treasurechests = this.getChildByTag(
@@ -1140,8 +1140,8 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     _setClosedPincerFingersCursor: function () {
         this.isCustomCursorTexture = true;
         this.customCursorTextureUrl =
-            (DontWakeTheDragon.MainLayerRef.config.properties.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
-            DontWakeTheDragon.MainLayerRef.config.cursors.data
+            (ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.properties.preLoaded ? ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath : "AsyncActivity/" + ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath) +
+            ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.cursors.data
                 .closedFingers.imageName;
     },
 
@@ -1149,8 +1149,8 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
         if (flag) {
             this.isCustomCursorTexture = true;
             this.customCursorTextureUrl =
-                (DontWakeTheDragon.MainLayerRef.config.properties.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
-                DontWakeTheDragon.MainLayerRef.config.cursors.data
+                (ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.properties.preLoaded ? ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath : "AsyncActivity/" + ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath) +
+                ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.cursors.data
                     .openFingers.imageName;
         } else {
             this.isCustomCursorTexture = false;
@@ -1165,14 +1165,14 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
                 delete this.studentsTreasureChests[i].itemTag;
             }
         }
-        this.treasureItems = DontWakeTheDragon.MainLayerRef.config.assets.sections.treasureItems.data.map(
+        this.treasureItems = ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.assets.sections.treasureItems.data.map(
             (item, idx) => {
                 return Object.assign(item, {tag: idx});
             }
         );
         this.getChildByTag(this.TAG_TREASURE_PILE).setTreasureItems(
             this.treasureItems,
-            DontWakeTheDragon.resourcePath
+            ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath
         );
         this.getChildByTag(
             this.TAG_TREASURE_CHESTS
@@ -1200,7 +1200,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
 });
 
 // ========================== Teacher Layer ===============================
-DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.TeacherViewLayer = ACTIVITY_DONT_WAKE_THE_DRAGON.CommonLayer.extend({
     state: null,
     TAG_RESET_BUTTON: 1,
     ctor: function (state) {
@@ -1212,9 +1212,9 @@ DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
     onEnter: function () {
         this._super();
         this.setInteractionEnabled(true);
-        this.showScriptMessage(DontWakeTheDragon.MainLayerRef.config.teacherScripts.data.moduleStart);
-        this.showTipMessage(DontWakeTheDragon.MainLayerRef.config.teacherTips.data.moduleStart);
-        if (this.state && this.state.treasureItems.length < DontWakeTheDragon.MainLayerRef.config.assets.sections.treasureItems.data.length) {
+        this.showScriptMessage(ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.teacherScripts.data.moduleStart);
+        this.showTipMessage(ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.teacherTips.data.moduleStart);
+        if (this.state && this.state.treasureItems.length < ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef.config.assets.sections.treasureItems.data.length) {
             this.getParent().getParent().setResetButtonActive(true);
         }
     },
@@ -1244,7 +1244,7 @@ DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             roomId: HDAppManager.roomId,
             type:
-            DontWakeTheDragon.teacherEvents.DONT_WAKE_THE_DRAGON_RESET_GAME,
+            ACTIVITY_DONT_WAKE_THE_DRAGON.teacherEvents.DONT_WAKE_THE_DRAGON_RESET_GAME,
         });
         this.updateRoomData();
     },
@@ -1280,7 +1280,7 @@ DontWakeTheDragon.TeacherViewLayer = DontWakeTheDragon.CommonLayer.extend({
 });
 
 // ========================== Student Layer ===============================
-DontWakeTheDragon.StudentViewLayer = DontWakeTheDragon.CommonLayer.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.StudentViewLayer = ACTIVITY_DONT_WAKE_THE_DRAGON.CommonLayer.extend({
     state: undefined,
     ctor: function (state) {
         this._super(this, state);
@@ -1313,7 +1313,7 @@ DontWakeTheDragon.StudentViewLayer = DontWakeTheDragon.CommonLayer.extend({
             }
             case HDSocketEventType.GAME_MESSAGE: {
                 switch (type) {
-                    case DontWakeTheDragon.teacherEvents
+                    case ACTIVITY_DONT_WAKE_THE_DRAGON.teacherEvents
                         .DONT_WAKE_THE_DRAGON_RESET_GAME: {
                         this.resetGame();
                         break;
@@ -1340,13 +1340,13 @@ DontWakeTheDragon.StudentViewLayer = DontWakeTheDragon.CommonLayer.extend({
 });
 
 // ========================== Main Layer ===============================
-DontWakeTheDragon.MainLayer = cc.Layer.extend({
+ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayer = cc.Layer.extend({
     state: undefined,
     config: null,
     delegate: null,
     ctor: function () {
         this._super();
-        DontWakeTheDragon.MainLayerRef = this;
+        ACTIVITY_DONT_WAKE_THE_DRAGON.MainLayerRef = this;
         this.state = undefined;
         const self = this;
         let activityName = 'ACTIVITY_DONT_WAKE_THE_DRAGON';
@@ -1355,20 +1355,20 @@ DontWakeTheDragon.MainLayer = cc.Layer.extend({
             data
         ) {
             self.config = data;
-            DontWakeTheDragon.resourcePath= "res/Activity/" + ""+ activityName +  "/res/Sprite/";
-            DontWakeTheDragon.soundPath= "res/Activity/" + ""+ activityName +  "/res/Sound/";
-            DontWakeTheDragon.animationPath=
+            ACTIVITY_DONT_WAKE_THE_DRAGON.resourcePath= "res/Activity/" + ""+ activityName +  "/res/Sprite/";
+            ACTIVITY_DONT_WAKE_THE_DRAGON.soundPath= "res/Activity/" + ""+ activityName +  "/res/Sound/";
+            ACTIVITY_DONT_WAKE_THE_DRAGON.animationPath=
             "res/Activity/ACTIVITY_DONT_WAKE_THE_DRAGON/res/AnimationFrames/";
-            DontWakeTheDragon.configFilePath= "res/Activity/" + ""+ activityName +  "/config.json";
+            ACTIVITY_DONT_WAKE_THE_DRAGON.configFilePath= "res/Activity/" + ""+ activityName +  "/config.json";
 
             if (HDAppManager.isTeacherView) {
-                const teacherViewLayer = new DontWakeTheDragon.TeacherViewLayer(
+                const teacherViewLayer = new ACTIVITY_DONT_WAKE_THE_DRAGON.TeacherViewLayer(
                     self.state
                 );
                 self.delegate = teacherViewLayer;
                 self.addChild(teacherViewLayer);
             } else {
-                const studentViewLayer = new DontWakeTheDragon.StudentViewLayer(
+                const studentViewLayer = new ACTIVITY_DONT_WAKE_THE_DRAGON.StudentViewLayer(
                     self.state
                 );
                 self.delegate = studentViewLayer;

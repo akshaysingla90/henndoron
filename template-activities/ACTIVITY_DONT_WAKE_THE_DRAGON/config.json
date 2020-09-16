@@ -15,7 +15,7 @@
     "number": 1,
     "renderMode": 1,
     "preLoaded": true,
-    "namespace": "DontWakeTheDragon",
+    "namespace": "ACTIVITY_DONT_WAKE_THE_DRAGON",
     "layerName": "MainLayer"
   },
   "teacherScripts": {
