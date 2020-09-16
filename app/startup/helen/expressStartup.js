@@ -27,8 +27,6 @@ module.exports = async function (app) {
         next();
     };
 
-    /** Used logger middleware for each api call **/
-    app.use(apiLooger);
 
     /********************************
     ***** For handling CORS Error ***
@@ -55,6 +53,9 @@ module.exports = async function (app) {
     
     app.use('/activity-resources', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
     app.use('/activity-resources', express.static(activityPath));
+
+    /** Used logger middleware for each api call **/
+    app.use(apiLooger);
 
     // initialize mongodb 
     await require('../db_mongo')();
