@@ -1367,7 +1367,7 @@ ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayer = cc.Layer.extend({
     this._super();
     var self = this;
     ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef = this;
-    let activityName = 'ACTIVITY_PIANO_PLAYER';
+    let activityName = 'ACTIVITY_PIANO_PLAYER_1';
     cc.loader.loadJson(
       "res/Activity/" + activityName + "/config.json",
       function (error, data) {
