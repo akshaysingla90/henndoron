@@ -53,11 +53,11 @@ adminController.cloneActivity = async (payload) => {
   console.log('pathToReplace => ', pathToReplace);
   console.log('namespaceToReplace => ', namespaceToReplace);
   console.log('textToWrite => ', textToWrite);
+
+  let fromReplace = pathToReplace == namespaceToReplace ? new RegExp(pathToReplace, 'g') : [new RegExp(pathToReplace, 'g'), new RegExp(namespaceToReplace, 'g')];
   const options = {
     files: destinationPath + ACTIVITY_SRC_PATH,
-    from: () => pathToReplace == namespaceToReplace
-      ? new RegExp(pathToReplace, 'g')
-      : [new RegExp(pathToReplace, 'g'), new RegExp(namespaceToReplace, 'g')],
+    from: fromReplace,
     to: textToWrite
   };
   await replace(options);
@@ -227,11 +227,10 @@ adminController.duplicateActivity = async (payload) => {
   console.log('pathToReplace => ', pathToReplace);
   console.log('namespaceToReplace => ', namespaceToReplace);
   console.log('textToWrite => ', textToWrite);
+  let fromReplace = pathToReplace == namespaceToReplace ? new RegExp(pathToReplace, 'g') : [new RegExp(pathToReplace, 'g'), new RegExp(namespaceToReplace, 'g')];
   const options = {
     files: destinationPath + ACTIVITY_SRC_PATH,
-    from: () => pathToReplace == namespaceToReplace
-      ? new RegExp(pathToReplace, 'g')
-      : [new RegExp(pathToReplace, 'g'), new RegExp(namespaceToReplace, 'g')],
+    from: fromReplace,
     to: textToWrite
   };
   await replace(options);
