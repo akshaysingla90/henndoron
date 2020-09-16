@@ -504,15 +504,15 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         this.playGround = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[0], cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5), this);
         let slidIndexHeight = this.getContentSize().height * 0.88;
         if (this.isTeacherView) {
-            let nextButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.btn_next.name,
-                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.btn_next.name, "", 0, ACTIVITY_BAP_1.Tag.NextImage,
+            let nextButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.btn_next.imageName,
+                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.btn_next.imageName, "", 0, ACTIVITY_BAP_1.Tag.NextImage,
                 cc.p(this.getContentSize().width * 0.57, slidIndexHeight), this);
             this.handIconUI.push(nextButton);
             //back
             nextButton.setScale(0.4);
             nextButton.setLocalZOrder(1000);
-            let prevButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.btn_previous.name,
-                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.cursors.data.btn_previous.name, "", 0, ACTIVITY_BAP_1.Tag.PrevImage,
+            let prevButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.btn_previous.imageName,
+                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.btn_previous.imageName, "", 0, ACTIVITY_BAP_1.Tag.PrevImage,
                 cc.p(this.getContentSize().width * 0.43, slidIndexHeight), this);
             prevButton.setScale(0.4);
             this.handIconUI.push(prevButton);

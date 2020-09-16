@@ -14,7 +14,7 @@
     "url": "res/Activity/ACTIVITY_BAP_1/",
     "number": 1,
     "renderMode": 1,
-    "preLoaded": false,
+    "preLoaded": true,
     "namespace": "ACTIVITY_BAP_1",
     "layerName": "BackgroundAndPenLayer"
   },
@@ -203,6 +203,15 @@
         "disableState": "btn_disable.png",
         "position": { "x": 0, "y": 0 },
         "dimensions": { "width": 139, "height": 32 }
+      },
+      "btn_next":{
+        "imageName": "btn_next.png",
+        "size": "{100, 30}"
+      },
+
+      "btn_previous":{
+        "imageName": "btn_previous.png",
+        "size": "{100, 30}"
       }
     }
   },

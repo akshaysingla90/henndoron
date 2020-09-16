@@ -14,9 +14,9 @@
     "url": "res/Activity/ACTIVITY_FLASHLIGHT_1/",
     "number": 1,
     "renderMode": 1,
-    "preLoaded": false,
+    "preLoaded": true,
     "namespace": "ACTIVITY_FLASHLIGHT_1",
-    "layerName": "flashlight"
+    "layerName": "Flashlight"
   },
   "teacherScripts": {
     "component": "scriptsCard",

@@ -11,12 +11,12 @@
     },
     "externalRewards": false,
     "studentPreview": false,
-    "url": "http://cocosteam.s3.us-east-2.amazonaws.com/Helen-Doron-Dev/res/ACTIVITY_CWC_1/",
+    "url": "res/Activity/ACTIVITY_CWC_1/",
     "number": 1,
     "renderMode": 1,
-    "preLoaded": false,
+    "preLoaded": true,
     "namespace": "ACTIVITY_CWC_1",
-    "layerName": "conversationLayer"
+    "layerName": "CharacterConversationLayer"
   },
   "teacherScripts": {
     "component": "scriptsCard",
@@ -459,7 +459,31 @@
     "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
-      "images": ["nat.png", "polly.png", "playground.png"]
+      "images": [
+        "btn_down.png",
+        "Characters_play.png",
+        "Characters_play_hover.png",
+        "Characters_play_click.png",
+        "Characters_popup.png",
+        "Characters_popup1.png",
+        "Characters_popup_down.png",
+        "Characters_popup_middle.png",
+        "Characters_popup_top.png",
+        "Characters_popup_top_arrow.png",
+        "Demo_Character_rectangle.png",
+        "Demo_Character_rectangle_with play.png",
+        "dotted_line_popup.png",
+        "dotted_line_popup_select.png",
+        "Flupe.png",
+        "Grnanny_fix.png",
+        "nat.png",
+        "playground.png",
+        "polly.png",
+        "Poul.png",
+        "selectBG.png"
+
+
+      ]
     },
     "sounds": {
       "basePath": "res/Sound/",
@@ -562,7 +586,7 @@
         {
           "Name": "Poul Restpose03",
           "frameCount": 25,
-          "frameInitial": "Poul/RestPose02/Poul_restpose03_",
+          "frameInitial": "Poul/RestPose03/Poul_restpose03_",
           "extension": ".png"
         }
       ]

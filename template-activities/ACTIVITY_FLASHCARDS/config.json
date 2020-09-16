@@ -14,7 +14,7 @@
     "url": "res/Activity/ACTIVITY_FLASHCARDS/",
     "number": 1,
     "renderMode": 1,
-    "preLoaded": false,
+    "preLoaded": true,
     "namespace": "Flashcards",
     "layerName": "MainFlashCardsLayer"
   },

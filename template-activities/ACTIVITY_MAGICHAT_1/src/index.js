@@ -213,6 +213,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
             baseAnimationSprite.setVisible(false);
 
             magicHat_1.ref.animationCompleted = true
+
             var lastIndex = magicHat_1.ref.cardQueue.length == 0 ? -1 : magicHat_1.ref.getIndexOfCurrentElement(magicHat_1.ref.cardQueue[0]);
             magicHat_1.ref.removeCardDataFromQueue(magicHat_1.ref.cardQueue[0]);
             if (lastIndex != -1 && magicHat_1.ref.tableView) {
@@ -229,7 +230,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      */
     removeCardDataFromQueue: function (data) {
         for (let i = 0; i < this.cardQueue.length; i++) {
-            if (this.cardQueue[i].name == data.name) {
+            if (this.cardQueue[i].imageName == data.imageName) {
                 this.cardQueue.splice(i, 1);
                 break;
             }
@@ -301,7 +302,7 @@ magicHat_1.HDMagicHatLayer = HDBaseLayer.extend({
      */
     isCellSelected: function (data) {
         for (let index in this.cardQueue) {
-            if (data.name == this.cardQueue[index].name) {
+            if (data.imageName == this.cardQueue[index].imageName) {
                 return true;
             }
         }

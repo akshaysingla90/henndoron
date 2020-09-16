@@ -14,7 +14,7 @@
     "url": "res/Activity/ACTIVITY_SPINNINGWHEEL_1/",
     "number": 1,
     "renderMode": 1,
-    "preLoaded": false,
+    "preLoaded": true,
     "namespace": "ACTIVITY_SPINNINGWHEEL_1",
     "layerName": "SpinningWheelLayer"
   },

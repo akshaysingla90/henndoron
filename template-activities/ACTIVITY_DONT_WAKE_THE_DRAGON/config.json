@@ -14,7 +14,7 @@
     "url": "res/Activity/ACTIVITY_DONT_WAKE_THE_DRAGON/",
     "number": 1,
     "renderMode": 1,
-    "preLoaded": false,
+    "preLoaded": true,
     "namespace": "DontWakeTheDragon",
     "layerName": "MainLayer"
   },

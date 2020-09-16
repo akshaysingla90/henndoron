@@ -14,9 +14,9 @@
     "url": "res/Activity/ACTIVITY_COUNTING_1/",
     "number": 1,
     "renderMode": 1,
-    "preLoaded": false,
+    "preLoaded": true,
     "namespace": "ACTIVITY_COUNTING_1",
-    "layerName": "countingLayer"
+    "layerName": "CountingLayer"
   },
   "teacherScripts": {
     "component": "scriptsCard",

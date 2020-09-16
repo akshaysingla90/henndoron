@@ -1140,7 +1140,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
     _setClosedPincerFingersCursor: function () {
         this.isCustomCursorTexture = true;
         this.customCursorTextureUrl =
-            (DontWakeTheDragon.MainLayerRef.config.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
+            (DontWakeTheDragon.MainLayerRef.config.properties.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
             DontWakeTheDragon.MainLayerRef.config.cursors.data
                 .closedFingers.imageName;
     },
@@ -1149,7 +1149,7 @@ DontWakeTheDragon.CommonLayer = HDBaseLayer.extend({
         if (flag) {
             this.isCustomCursorTexture = true;
             this.customCursorTextureUrl =
-                (DontWakeTheDragon.MainLayerRef.config.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
+                (DontWakeTheDragon.MainLayerRef.config.properties.preLoaded ? DontWakeTheDragon.resourcePath : "AsyncActivity/" + DontWakeTheDragon.resourcePath) +
                 DontWakeTheDragon.MainLayerRef.config.cursors.data
                     .openFingers.imageName;
         } else {
