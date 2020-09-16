@@ -1,5 +1,6 @@
 // NameSpace for this activity
-var PianoPlayer = {
+var ACTIVITY_PIANO_PLAYER_1 ;
+ ACTIVITY_PIANO_PLAYER_1 = {
   delegate: null, // teacherViewLayerRef / studentViewLayerRef
   resourcePath: "",
   soundPath: "",
