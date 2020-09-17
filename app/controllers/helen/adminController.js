@@ -81,8 +81,11 @@ adminController.editActivity = async (payload) => {
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   await SERVICES.activityService.updateActivity({ _id: payload.activityId }, payload);
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activity.path}`);
-  console.log(payload.configData.properties);
-  console.log('------ Properties -----');
+  // console.log(payload.configData.properties);
+  // console.log('------ Properties -----');
+  payload.configData.properties.activityPath = activity.path;
+  payload.configData.properties.url = `res/Activity/${activity.path}/`
+  payload.configData.properties.namespace = activity.path;
   await fs.writeFileSync(destinationPath + ACTIVITY_CONFIG_PATH, JSON.stringify(payload.configData));
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_UPDATED_SUCCESSFULLY));
 };
