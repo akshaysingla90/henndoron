@@ -83,9 +83,9 @@ adminController.editActivity = async (payload) => {
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activity.path}`);
   // console.log(payload.configData.properties);
   // console.log('------ Properties -----');
-  payload.configData.properties.activityPath = activity.path;
-  payload.configData.properties.url = `res/Activity/${activity.path}/`
-  payload.configData.properties.namespace = activity.path;
+  payload.configData.properties.activityPath = activity.path.slice(1);
+  payload.configData.properties.url = `res/Activity/${activity.path.slice(1)}/`
+  payload.configData.properties.namespace = activity.path.slice(1);
   await fs.writeFileSync(destinationPath + ACTIVITY_CONFIG_PATH, JSON.stringify(payload.configData));
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_UPDATED_SUCCESSFULLY));
 };
