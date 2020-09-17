@@ -32,16 +32,16 @@
     "status": 1
   },
   {
-    "name": "ACTIVITY_DONT_WAKE_THE_DRAGON",
-    "path": "/ACTIVITY_DONT_WAKE_THE_DRAGON",
+    "name": "ACTIVITY_DONT_WAKE_THE_DRAGON_1",
+    "path": "/ACTIVITY_DONT_WAKE_THE_DRAGON_1",
     "type": 1,
     "description": "There is an animation of sleeping, snoring dragon. It’s chest rises and falls with it’s breathing.There are items under the dragon in a pile of treasure. The student should pick an object,say what it is, and then drag that object from under the sleeping monster. At some point,removing one of the objects will wake the monster and ‘scare’ the students. it is highly engagingbecause it works with emotions of excitement and nerves. ",
     "iconUrl": "https://helen-doron-s3uploads.s3.amazonaws.com/icon_activity_Dragon.png",
     "status": 1
   },
   {
-    "name": "ACTIVITY_FLASHCARDS",
-    "path": "/ACTIVITY_FLASHCARDS",
+    "name": "ACTIVITY_FLASHCARDS_1",
+    "path": "/ACTIVITY_FLASH_CARDS_1",
     "type": 1,
     "description": "There are 6 images at the bottom of the screen in a bottom sidebar. The teacher canselect any item in the sidebar by clicking it, which triggers the display of a new flashcardcontaining that item. The currently displayed item is marked in the bottom-sidebar by the selecteditem having a highlighted background in the sidebar. Flashcard items are displayed in a bottom sidebarand the text associated with each flashcard item is displayed above each object. Any item can beselected multiple times, there are no limitations on this. The activity ends when the teacher clicksto enter the next module. In Student View, images are displayed inside billboards within a scene.",
     "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Flashcards_01.png",
@@ -57,23 +57,23 @@
   },
   {
     "name": "ACTIVITY_MAGICHAT_1",
-    "path": "/ACTIVITY_MAGICHAT_1",
+    "path": "/ACTIVITY_MAGIC_HAT_1",
     "type": 1,
     "description": "This is a simple activity, for learning vocabulary. The student pulls large objectsout of a small bag or hat. Teachers have a carousel along the bottom of thescreen, displaying the items in the bag/hat. Clicking on an item makes it thenext item to be pulled out of the hat. The teacher can select any itemin the carousel by clicking it, which sets that item as the next item to be pulledfrom the hat/bag. Any item can be selected multiple times. When the studentclicks the bag the object jumps out of the bag/hat and lands on a table or on thefloor next to it.",
     "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Magic_Hat.png",
     "status": 1
   },
   {
-    "name": "ACTIVITY_PIANO_PLAYER",
-    "path": "/ACTIVITY_PIANO_PLAYER",
+    "name": "ACTIVITY_PIANO_PLAYER_1",
+    "path": "/ACTIVITY_PIANO_PLAYER_1",
     "type": 1,
     "description": "Students enjoy playing the piano by clicking on keys to practice words, letters, or numbers.The teacher says certain words, and the student has to press the corresponding key based on the pictures.As the correct key is pressed, the key turns green. If the incorrect key is pressed, it turns red. When the miceare disabled, the students see whatever the teacher clicks on the teacher's keyboard. When the mice are enabledand all the students are playing their own keyboard, the teacher is shown live feedback when a student gets aword right or wrong",
     "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Piano.png",
     "status": 1
   },
   {
-    "name": "ACTIVITY_SAVE_A_SITUATION",
-    "path": "/ACTIVITY_SAVE_A_SITUATION",
+    "name": "ACTIVITY_SAVE_A_SITUATION_1",
+    "path": "/ACTIVITY_SAVE_A_SITUATION_1",
     "type": 1,
     "description": "There is a tub in water, and the tub has holes shaped like objects.The tub has holes in it, each shaped like a different object. When they drag it toa position that overlaps with the hole in the tab that correlates to that item, itautomatically fits in the whole.When the student succeeds in plugging all the holesin the tub, the land finishes, and then the tub floats out to sea.This game can havemultiple levels, each with different shapes missing from the tub, and different objectsin the sidebar. There is no button to move to the next level, it happens automaticallywhen the previous level was completed successfully.",
     "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Situation.png",
