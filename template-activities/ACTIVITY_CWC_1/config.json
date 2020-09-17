@@ -155,8 +155,8 @@
     "component": "tipsCard",
     "data": {
       "moduleStart": {
-        "UIName": "moduleStart",
-        "description": "this will trigger when activity starts ",
+        "UIName": "Module Start",
+        "description": "This will trigger when activity starts.",
         "content": {
           "ops": [
             {
@@ -201,7 +201,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "playground.png",
-        "dimensions": { "width": 960, "height": 649 }
+        "dimensions": { "width": 960, "height": 640 }
       }
     }
   },
@@ -219,8 +219,8 @@
               "x": 230,
               "y": 330
             },
-            "size": "{960, 649}",
-            "constraints": ["imageName", "size"],
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["imageName", "dimensions"],
             "audioData": [
               {
                 "text": "Hello",
@@ -299,8 +299,8 @@
               "x": 480,
               "y": 330
             },
-            "size": "{960, 649}",
-            "constraints": ["imageName", "size"],
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["imageName", "dimensions"],
             "audioData": [
               {
                 "text": "Hello",
@@ -379,8 +379,8 @@
               "x": 740,
               "y": 330
             },
-            "size": "{960, 649}",
-            "constraints": ["imageName", "size"],
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["imageName", "dimensions"],
             "audioData": [
               {
                 "text": "Hello",

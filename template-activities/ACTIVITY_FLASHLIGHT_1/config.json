@@ -179,8 +179,8 @@
     "component": "tipsCard",
     "data": {
       "moduleStart": {
-        "UIName": "moduleStart",
-        "description": "this will trigger when activity starts ",
+        "UIName": "Module Start",
+        "description": "This will trigger when activity starts.",
         "content": {
           "ops": [
             {
@@ -248,7 +248,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "bg.png",
-        "dimensions": { "width": 960, "height": 649 }
+        "dimensions": { "width": 960, "height": 640 }
       }
     }
   },
@@ -259,13 +259,15 @@
         "component": "image",
         "UIName": "Tick",
         "scale": 0.35,
-        "imageName": "tick.png"
+        "imageName": "tick.png",
+        "dimensions": { "width": 100, "height": 100 }
       },
       "cross": {
         "component": "image",
         "UIName": "Cross",
         "scale": 0.35,
-        "imageName": "cross.png"
+        "imageName": "cross.png",
+        "dimensions": { "width": 100, "height": 100 }
       },
       "animation": {
         "component": "animationGroup",
@@ -278,13 +280,13 @@
             "frameInitial": "Granny_Fix_idle/idle_",
             "extension": ".png",
             "sound": "cardTakeOut.mp3",
-            "size": "{100,100}",
+            "dimensions": { "width": 512, "height": 512 },
             "position": {
               "x": 256,
               "y": 512
             },
             "animationPath": "{100,100},{200,200}",
-            "constraints": ["imageName, size, animationPath"]
+            "constraints": ["imageName, dimensions, animationPath"]
           },
           "celebrating": {
             "configurable": true,
@@ -294,13 +296,13 @@
             "frameInitial": "Granny_Fix_celebrating/celebrating_",
             "extension": ".png",
             "sound": "cardTakeOut.mp3",
-            "size": "{100,100}",
+            "dimensions": { "width": 512, "height": 512 },
             "position": {
               "x": 256,
               "y": 512
             },
             "animationPath": "{100,100},{200,200}",
-            "constraints": ["imageName, size, animationPath"]
+            "constraints": ["imageName, dimensions, animationPath"]
           },
           "run_left": {
             "configurable": true,
@@ -310,13 +312,13 @@
             "frameInitial": "Granny_Fix_run_left/run_left_",
             "extension": ".png",
             "sound": "cardTakeOut.mp3",
-            "size": "{100,100}",
+            "dimensions": { "width": 512, "height": 512 },
             "position": {
               "x": 256,
               "y": 512
             },
             "animationPath": "{100,100},{200,200}",
-            "constraints": ["imageName, size, animationPath"]
+            "constraints": ["imageName, dimensions, animationPath"]
           },
           "run_right": {
             "configurable": true,
@@ -326,13 +328,13 @@
             "frameInitial": "Granny_Fix_run_right/run_right_",
             "extension": ".png",
             "sound": "cardTakeOut.mp3",
-            "size": "{100,100}",
+            "dimensions": { "width": 512, "height": 512 },
             "position": {
               "x": 256,
               "y": 512
             },
             "animationPath": "{100,100},{200,200}",
-            "constraints": ["imageName, size, animationPath"]
+            "constraints": ["imageName, dimensions, animationPath"]
           }
         }
       }

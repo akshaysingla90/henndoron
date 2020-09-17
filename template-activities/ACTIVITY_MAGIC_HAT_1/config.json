@@ -2,7 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Magic Hat",
-    "activityPath": "ACTIVITY_MAGICHAT_1",
+    "activityPath": "ACTIVITY_MAGIC_HAT_1",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {
@@ -11,11 +11,11 @@
     },
     "externalRewards": true,
     "studentPreview": false,
-    "url": "res/Activity/ACTIVITY_MAGICHAT_1/",
+    "url": "res/Activity/ACTIVITY_MAGIC_HAT_1/",
     "number": 1,
     "renderMode": 1,
     "preLoaded": true,
-    "namespace": "magicHat_1",
+    "namespace": "ACTIVITY_MAGIC_HAT_1",
     "layerName": "HDMagicHatLayer"
   },
   "background": {

@@ -2,7 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Piano Player",
-    "activityPath": "ACTIVITY_PIANO_PLAYER_1",
+    "activityPath": "ACTIVITY_PIANO_PLAYER",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {
@@ -11,11 +11,11 @@
     },
     "externalRewards": false,
     "studentPreview": false,
-    "url": "res/Activity/ACTIVITY_PIANO_PLAYER_1/",
+    "url": "res/Activity/ACTIVITY_PIANO_PLAYER/",
     "number": 1,
     "renderMode": 1,
     "preLoaded": true,
-    "namespace": "ACTIVITY_PIANO_PLAYER_1",
+    "namespace": "PianoPlayer",
     "layerName": "MainPianoPlayerLayer"
   },
   "teacherScripts": {

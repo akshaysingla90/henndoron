@@ -3,7 +3,7 @@
     "component": "infoCard",
     "activityName": "Flashcards",
     "description": "game desc. here",
-    "activityPath": "ACTIVITY_FLASHCARDS",
+    "activityPath": "ACTIVITY_FLASH_CARDS_1",
     "allocatedTime": 10,
     "controls": {
       "mouse": false,
@@ -11,11 +11,11 @@
     },
     "externalRewards": true,
     "studentPreview": false,
-    "url": "res/Activity/ACTIVITY_FLASHCARDS/",
+    "url": "res/Activity/ACTIVITY_FLASH_CARDS_1/",
     "number": 1,
     "renderMode": 1,
     "preLoaded": true,
-    "namespace": "Flashcards",
+    "namespace": "ACTIVITY_FLASH_CARDS_1",
     "layerName": "MainFlashCardsLayer"
   },
 

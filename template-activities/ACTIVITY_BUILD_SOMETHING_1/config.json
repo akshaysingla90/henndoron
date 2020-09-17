@@ -197,7 +197,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "background.png",
-        "dimensions": { "width": 960, "height": 649 }
+        "dimensions": { "width": 960, "height": 640 }
       }
     }
   },
@@ -210,7 +210,8 @@
         "pushedState": "start_pressed.png",
         "disableState": "start_idle.png",
         "scale": 1,
-        "position": { "x": 240, "y": 100 }
+        "position": { "x": 240, "y": 100 },
+        "dimensions": { "width": 94, "height": 64 }
       },
       "stopButton": {
         "UIName": "Stop Button",
@@ -218,17 +219,20 @@
         "pushedState": "stop_pressed.png",
         "disableState": "stop_idle.png",
         "scale": 1,
-        "position": { "x": 480, "y": 100 }
+        "position": { "x": 480, "y": 100 },
+        "dimensions": { "width": 94, "height": 64 }
       },
       "leftMoveButton": {
         "UIName": "Left Move Button",
         "enableState": "left_arrow_idle.png",
-        "pushedState": "left_arrow_pushed.png"
+        "pushedState": "left_arrow_pushed.png",
+        "dimensions": { "width": 66, "height": 130 }
       },
       "rightMoveButton": {
         "UIName": "Right Move Button",
         "enableState": "right_arrow_idle.png",
-        "pushedState": "right_arrow_pushed.png"
+        "pushedState": "right_arrow_pushed.png",
+        "dimensions": { "width": 66, "height": 130 }
       }
     }
   },
@@ -239,14 +243,14 @@
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND IMAGE",
         "imageName": "carouselImage.png",
-        "dimensions": { "width": 290, "height": 95 },
+        "dimensions": { "width": 681, "height": 121 },
         "position": { "x": 768, "y": 454.3 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND BORDER IMAGE",
         "imageName": "carouselBorderImage.png",
-        "dimensions": { "width": 290, "height": 95 },
+        "dimensions": { "width": 681, "height": 121 },
         "position": { "x": 768, "y": 454.3 }
       },
       "carouselBackground": {
@@ -290,7 +294,8 @@
       "frame": {
         "component": "image",
         "UIName": "Frame",
-        "imageName": "reward_screen_frame.png"
+        "imageName": "reward_screen_frame.png",
+        "dimensions": { "width": 174, "height": 178 }
       },
       "usernamePosition": {
         "ignoreForAuthToolUI": true,
@@ -300,12 +305,14 @@
       "looseBG": {
         "component": "image",
         "UIName": "Loose BG",
-        "imageName": "looseScreen"
+        "imageName": "looseScreen",
+        "dimensions": { "width": 960, "height": 640 }
       },
       "winBG": {
         "component": "image",
         "UIName": "Win BG",
-        "imageName": "winScreen.png"
+        "imageName": "winScreen.png",
+        "dimensions": { "width": 960, "height": 640 }
       },
       "gameInfo": {
         "component": "animationGroup",
@@ -351,6 +358,7 @@
               "x": 50,
               "y": 205
             },
+
             "localZOrder": 10,
             "snappingPoints": [
               {

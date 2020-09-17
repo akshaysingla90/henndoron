@@ -2,7 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Save A Situation",
-    "activityPath": "ACTIVITY_SAVE_A_SITUATION",
+    "activityPath": "ACTIVITY_SAVE_A_SITUATION_1",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {
@@ -11,11 +11,11 @@
     },
     "externalRewards": false,
     "studentPreview": false,
-    "url": "res/Activity/ACTIVITY_SAVE_A_SITUATION/",
+    "url": "res/Activity/ACTIVITY_SAVE_A_SITUATION_1/",
     "number": 1,
     "renderMode": 1,
     "preLoaded": true,
-    "namespace": "ACTIVITY_SAVE_A_SITUATION",
+    "namespace": "ACTIVITY_SAVE_A_SITUATION_1",
     "layerName": "SaveASituation"
   },
   "teacherScripts": {

@@ -185,8 +185,8 @@
     "component": "tipsCard",
     "data": {
       "moduleStart": {
-        "UIName": "moduleStart",
-        "description": "this will trigger when activity starts ",
+        "UIName": "Module Start",
+        "description": "This will trigger when activity starts.",
         "content": {
           "ops": [
             {
@@ -204,7 +204,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "playground.png",
-        "dimensions": { "width": 960, "height": 649 }
+        "dimensions": { "width": 960, "height": 640 }
       }
     }
   },
@@ -246,7 +246,7 @@
             "countFontSize": 40,
             "countFont": "sassoon_sans_regular",
             "scale": 0.4,
-            "size": "{960, 649}",
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           },
           {
@@ -271,7 +271,7 @@
             "countFontSize": 40,
             "countFont": "sassoon_sans_regular",
             "scale": 0.3,
-            "size": "{960, 649}",
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           },
           {
@@ -296,7 +296,7 @@
             "countFontSize": 40,
             "countFont": "sassoon_sans_regular",
             "scale": 0.35,
-            "size": "{960, 649}",
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           },
           {
@@ -321,7 +321,7 @@
             "countFontSize": 40,
             "countFont": "sassoon_sans_regular",
             "scale": 0.275,
-            "size": "{960, 649}",
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           },
           {
@@ -346,7 +346,7 @@
             "countFontSize": 32,
             "countFont": "sassoon_sans_regular",
             "scale": 0.2,
-            "size": "{960, 649}",
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           },
           {
@@ -371,6 +371,7 @@
             "countFontSize": 32,
             "countFont": "sassoon_sans_regular",
             "scale": 0.2,
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           },
           {
@@ -395,7 +396,7 @@
             "countFontSize": 32,
             "countFont": "sassoon_sans_regular",
             "scale": 0.225,
-            "size": "{960, 649}",
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           },
           {
@@ -420,7 +421,7 @@
             "countFontSize": 32,
             "countFont": "sassoon_sans_regular",
             "scale": 0.35,
-            "size": "{960, 649}",
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           },
           {
@@ -445,7 +446,7 @@
             "countFontSize": 32,
             "countFont": "sassoon_sans_regular",
             "scale": 0.35,
-            "size": "{960, 649}",
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           },
           {
@@ -470,7 +471,7 @@
             "countFontSize": 32,
             "countFont": "sassoon_sans_regular",
             "scale": 0.25,
-            "size": "{960, 649}",
+            "dimensions": { "width": 512, "height": 512 },
             "constraints": ["name", "size"]
           }
         ]

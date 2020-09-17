@@ -201,8 +201,8 @@
     "component": "tipsCard",
     "data": {
       "moduleStart": {
-        "UIName": "moduleStart",
-        "description": "this will trigger when activity starts ",
+        "UIName": "Module Start",
+        "description": "This will trigger when activity starts.",
         "content": {
           "ops": [
             {
@@ -220,7 +220,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "bg.png",
-        "dimensions": { "width": 960, "height": 649 }
+        "dimensions": { "width": 961, "height": 641 }
       }
     }
   },
@@ -232,6 +232,7 @@
         "enableState": "go_button_idle.png",
         "pushedState": "go_button_pushed.png",
         "disableState": "go_button_disabled.png",
+        "dimensions": { "width": 512, "height": 167 },
         "position": { "x": 650, "y": 204.5 },
         "scale": 0.5
       },
@@ -240,6 +241,7 @@
         "enableState": "stop_button_idle.png",
         "pushedState": "stop_button_pushed.png",
         "disableState": "stop_button_disabled.png",
+        "dimensions": { "width": 512, "height": 167 },
         "position": { "x": 650, "y": 104.5 },
         "scale": 0.5
       }
@@ -253,7 +255,7 @@
         "component": "image",
         "UIName": "Target Background",
         "imageName": "targetBg.png",
-        "dimensions": { "width": 200, "height": 200 },
+        "dimensions": { "width": 512, "height": 512 },
         "position": { "x": 520, "y": 224.5 },
         "scale": 0.5
       },
@@ -261,7 +263,7 @@
         "component": "image",
         "UIName": "Spinning Wheel Base",
         "imageName": "wheel_4.png",
-        "dimensions": { "width": 300, "height": 300 },
+        "dimensions": { "width": 512, "height": 512 },
         "position": { "x": 250, "y": 374.5 },
         "scale": 0.8
       },
@@ -269,7 +271,7 @@
         "component": "image",
         "UIName": "Spinning Center",
         "imageName": "wheel_center.png",
-        "dimensions": { "width": 300, "height": 300 },
+        "dimensions": { "width": 512, "height": 512 },
         "position": { "x": 150, "y": 162.25 },
         "scale": 0.15
       },
@@ -277,6 +279,7 @@
         "component": "image",
         "UIName": "Spinning WheelTop",
         "imageName": "wheel_arrow.png",
+        "dimensions": { "width": 512, "height": 512 },
         "position": { "x": 250, "y": 324.5 },
         "scale": 0.25
       },
@@ -285,14 +288,14 @@
         "UIName": "Carousel Background Image",
         "imageName": "carouselImage.png",
         "position": { "x": 768, "y": 454.3 },
-        "dimensions": { "width": 290, "height": 95 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "Carousel Background Border Image",
         "imageName": "carouselBorderImage.png",
         "position": { "x": 768, "y": 454.3 },
-        "dimensions": { "width": 290, "height": 95 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackground": {
         "ignoreForAuthToolUI": true,
@@ -347,7 +350,7 @@
 
       "carouselAssets": {
         "component": "carouselItems",
-        "dimensions": { "width": 350, "height": 350 },
+        "dimensions": { "width": 72, "height": 72 },
         "data": [
           {
             "imageName": "ant.png",
@@ -378,10 +381,10 @@
         "frameCount": 15,
         "frameInitial": "Win/object_pulled_out_animation_",
         "extension": ".png",
-        "size": "{100,100}",
+        "dimensions": { "width": 1920, "height": 1280 },
         "position": { "x": 256, "y": 512 },
         "animationPath": "{100,100},{200,200}",
-        "constraints": ["imageName, size, animationPath"]
+        "constraints": ["imageName, dimensions, animationPath"]
       },
       "loss": {
         "component": "animation",
@@ -390,10 +393,10 @@
         "frameCount": 15,
         "frameInitial": "Loss/object_pulled_out_animation_",
         "extension": ".png",
-        "size": "{100,100}",
+        "dimensions": { "width": 1920, "height": 1280 },
         "position": { "x": 256, "y": 512 },
         "animationPath": "{100,100},{200,200}",
-        "constraints": ["imageName, size, animationPath"]
+        "constraints": ["imageName, dimensions, animationPath"]
       }
     }
   },
