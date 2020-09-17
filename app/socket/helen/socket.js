@@ -243,7 +243,7 @@ let joinRoom = async (socket, data, io) => {
     roomInfoWithUserInfo = roomInfoWithUserInfo[0] || {};
     let allUsers = [...roomInfoWithUserInfo.users];
     let onlineUsers = onlineUsersFromAllUsers(allUsers);
-    socket.join(v);
+    socket.join(roomId);
     data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId, rewards: (userInfo || {}).rewards || 0, startAt: roomInfoWithUserInfo.startAt || -1 };
     // number of online users,roomdata, roomId ,startAt : lesson start time , his rewards
     socket.emit('SingleEvent', data);
