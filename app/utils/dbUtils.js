@@ -61,16 +61,19 @@ dbUtils.migrateDatabase = async () => {
     // await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: 2 }, { upsert: true });
     updatedVersion = 2;
   }
+
   if (version < 3) {
-    //adding template activity's configData
-    await dbUtils.addInitialTemplateActivities();
-    updatedVersion = 3;
-  }
-  if (version < 4) {
     //adding course data
     await dbUtils.addInitialCourses();
+    updatedVersion = 3;
+  }
+  
+  if (version < 4) {
+    //adding template activity's configData
+    await dbUtils.addInitialTemplateActivities();
     updatedVersion = 4;
   }
+
   if (updatedVersion !== version)
     await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: updatedVersion }, { upsert: true });
 
