@@ -18,7 +18,7 @@ let routes = [
         templateId: Joi.string().optional().description('Activity Id to clone.'),
       },
       body: {
-        name: Joi.string().description('Activity name.'),
+        name: Joi.string().regex(/^[a-z0-9_]+$/i).error(new Error('Activity name should contain only alphanumeric chracters')).description('Activity name.'),
         description: Joi.string().required().description('Activity description.'),
         courseId: Joi.string().required().description('courseId.'),
         lessonNumber: Joi.number().required().description('Activity Cdescription.'),
@@ -46,7 +46,7 @@ let routes = [
         activityId: Joi.string().optional().description('Draft activity Id.')
       },
       body: {
-        name: Joi.string().description('Activity name.'),
+        name: Joi.string().regex(/^[a-z0-9_]+$/i).error(new Error('Activity name should contain only alphanumeric chracters')).description('Activity name.'),
         description: Joi.string().optional().description('Activity description.'),
         courseId: Joi.string().optional().description('courseId.'),
         lessonNumber: Joi.number().optional().description('Activity Lesson Number.'),
