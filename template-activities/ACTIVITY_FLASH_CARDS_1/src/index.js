@@ -336,14 +336,14 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
           cc.p(
               HDAppManager.isTeacherView
                   ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                      .BookOfRhymesWordLabel.teacher.position.x
+                      .BookOfRhymesWordLabelTeacher.position.x
                   : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                      .BookOfRhymesWordLabel.student.position.x,
+                      .BookOfRhymesWordLabelStudent.position.x,
               HDAppManager.isTeacherView
                   ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                      .BookOfRhymesWordLabel.teacher.position.y
+                      .BookOfRhymesWordLabelTeacher.position.y
                   : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                      .BookOfRhymesWordLabel.student.position.y
+                      .BookOfRhymesWordLabelStudent.position.y
           ),
           ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabel.font,
           ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabel.fontSize,
