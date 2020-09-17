@@ -103,7 +103,7 @@ cc.game.onStart = function(){
 
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
-    HDAppManager.appRunMode =  AppMode.Staging;
+    HDAppManager.appRunMode =  AppMode.Development;
     //
     cc.loader.loadJson("res/lesson-config.json",function(error, data){
         cc.log(data);// data is the json object
