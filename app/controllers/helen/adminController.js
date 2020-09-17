@@ -35,7 +35,7 @@ adminController.cloneActivity = async (payload) => {
     episodeNumber: payload.episodeNumber
   }
   //create new activity in database 
-  const activity = await SERVICES.activityService.createActivity(newActivity);
+  const activity = (await SERVICES.activityService.createActivity(newActivity))._doc;
 
   let re = new RegExp(sourcePath + ACTIVITY_RESOURCE_DIRECTORY_PATH);
   const filterFunc = (filePath) => {
