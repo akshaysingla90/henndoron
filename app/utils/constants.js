@@ -15,9 +15,9 @@ CONSTANTS.USER_ROLE = {
 };
 
 CONSTANTS.RESOURCE_TYPE = {
-  SPRITE: { VALUE: 1, BASE_PATH: 'res/Sprite/' },
-  SOUND: { VALUE: 2, BASE_PATH: 'res/Sound/' },
-  ANIMATION_FRAMES: { VALUE: 3, BASE_PATH: 'res/AnimationFrames/' }
+  SPRITE: { VALUE: 1, BASE_PATH: '/res/Sprite' },
+  SOUND: { VALUE: 2, BASE_PATH: '/res/Sound' },
+  ANIMATION_FRAMES: { VALUE: 3, BASE_PATH: '/res/AnimationFrames' }
 };
 
 CONSTANTS.ACTIVITY_TYPE = {
