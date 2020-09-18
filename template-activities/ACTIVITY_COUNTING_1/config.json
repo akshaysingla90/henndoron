@@ -128,7 +128,7 @@
         }
       },
       "onMouseEnable": {
-        "UIName": "onMouseEnable",
+        "UIName": "On Mouse Enable",
         "description": "This will trigger when teacher enables student mouse.",
         "content": {
           "ops": [
@@ -217,7 +217,7 @@
     "sections": {
       "tapHiddenObject": {
         "component": "sound",
-        "UIName": "tap Hidden Object Sound",
+        "UIName": "Tap Hidden Object Sound",
         "sound": "tap.mp3"
       },
 

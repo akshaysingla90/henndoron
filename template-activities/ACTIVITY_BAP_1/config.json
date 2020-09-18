@@ -23,7 +23,7 @@
     "component": "scriptsCard",
     "data": {
       "slide_1": {
-        "UIName": "slide_1",
+        "UIName": "Slide_1",
         "description": "This will trigger when slide 1 opens.",
         "content": {
           "ops": [
@@ -53,7 +53,7 @@
         }
       },
       "slide_2": {
-        "UIName": "slide_2",
+        "UIName": "Slide_2",
         "description": "This will trigger when slide 2 opens.",
         "content": {
           "ops": [
@@ -108,7 +108,7 @@
         }
       },
       "slide_3": {
-        "UIName": "slide_3",
+        "UIName": "Slide_3",
         "description": "This will trigger when slide 3 opens.",
         "content": {
           "ops": [

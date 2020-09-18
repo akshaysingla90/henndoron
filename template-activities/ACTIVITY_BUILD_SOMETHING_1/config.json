@@ -348,7 +348,7 @@
       },
       "dismantledObject": {
         "component": "dismantledObjects",
-        "UIName": "dismantledObjects",
+        "UIName": "Dismantled Objects",
         "data": [
           {
             "name": "dwarf_head",

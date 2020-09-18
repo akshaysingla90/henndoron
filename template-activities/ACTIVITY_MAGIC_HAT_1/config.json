@@ -88,20 +88,20 @@
       },
       "carouselBoxCardText": {
         "component": "text",
-        "UIName": "carousel Box Card Text",
+        "UIName": "Carousel Box Card Text",
         "color": { "r": 0, "g": 0, "b": 0, "a": 255 },
         "font": "sassoon_sans_regular",
         "fontSize": 16
       },
       "carouselBoxHighlight": {
         "component": "colorPicker",
-        "UIName": "carousel Box Highlight",
+        "UIName": "Carousel Box Highlight",
         "color": { "r": 148, "g": 95, "b": 56, "a": 100 }
       },
 
       "answerCardText": {
         "component": "text",
-        "UIName": "answer Card Text",
+        "UIName": "Answer Card Text",
         "color": { "r": 0, "g": 0, "b": 0, "a": 255 },
         "font": "sassoon_sans_regular",
         "fontSize": 32
@@ -149,6 +149,9 @@
 
       "carouselAssets": {
         "component": "carouselItems",
+        "allowDelete": true,
+        "allowAdd": true,
+        "allowAdd": true,
         "dimensions": { "width": 350, "height": 350 },
         "data": [
           {

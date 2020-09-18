@@ -168,13 +168,13 @@
     "component": "buttonsCard",
     "data": {
       "next": {
-        "UIName": "nextButton",
+        "UIName": "Next Button",
         "enableState": "next_botton_idle.png",
         "pushedState": "next_botton_pushed.png",
         "dimensions": { "width": 166, "height": 75 }
       },
       "replay": {
-        "UIName": "replayButton",
+        "UIName": "Replay Button",
         "enableState": "replay_botton_idle.png",
         "pushedState": "replay_botton_pushed.png",
         "dimensions": { "width": 166, "height": 75 }
@@ -236,7 +236,7 @@
       },
       "tubBack": {
         "component": "image",
-        "UIName": "tubBack",
+        "UIName": "TubBack",
         "imageName": "tub01.png",
         "dimensions": { "width": 512, "height": 512 },
         "position": { "x": 400, "y": 300 },
@@ -382,7 +382,7 @@
       },
       "popUp": {
         "component": "image",
-        "UIName": "popUp",
+        "UIName": "PopUp",
         "imageName": "pop_up_bg.png",
         "dimensions": { "width": 429, "height": 256 },
         "position": { "x": 450, "y": 320 }
@@ -497,7 +497,7 @@
               }
             ],
             "tubFront": {
-              "UIName": "tubFront",
+              "UIName": "TubFront",
               "imageName": "tub02.png",
               "dimensions": { "width": 512, "height": 512 },
               "position": { "x": 400, "y": 300 },
@@ -612,7 +612,7 @@
               }
             ],
             "tubFront": {
-              "UIName": "tubFront",
+              "UIName": "TubFront",
               "imageName": "tub02.png",
               "dimensions": { "width": 512, "height": 512 },
               "position": { "x": 400, "y": 300 },
@@ -727,7 +727,7 @@
               }
             ],
             "tubFront": {
-              "UIName": "tubFront",
+              "UIName": "TubFront",
               "imageName": "tub02.png",
               "dimensions": { "width": 512, "height": 512 },
               "position": { "x": 400, "y": 300 },
@@ -743,7 +743,7 @@
         "data": {
           "tubWater": {
             "configurable": true,
-            "UIName": "tubWaterLine",
+            "UIName": "TubWaterLine",
             "name": "tubWaterLine",
             "frameCount": 5,
             "dimensions": { "width": 512, "height": 512 },
@@ -780,7 +780,7 @@
           },
 
           "tubWaterCircle": {
-            "UIName": "tubWaterCircle",
+            "UIName": "TubWaterCircle",
             "configurable": true,
             "name": "tub_watecircle_loop_",
             "frameCount": 12,
@@ -793,7 +793,7 @@
           },
 
           "waterInTub": {
-            "UIName": "tub_fillwaterline",
+            "UIName": "Tub_fillwaterline",
             "configurable": true,
             "name": "tub_fillwaterline_loop_",
             "frameCount": 24,

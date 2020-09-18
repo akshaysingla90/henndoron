@@ -55,7 +55,7 @@
         }
       },
       "startButtonClicked": {
-        "UIName": "startButtonClicked",
+        "UIName": "Start Button Clicked",
         "description": "This will trigger when module starts.",
         "content": {
           "ops": [
@@ -142,7 +142,7 @@
         }
       },
       "startButtonClicked": {
-        "UIName": "startButtonClicked",
+        "UIName": "Start Button Clicked",
         "description": "this will trigger when activity starts ",
         "content": {
           "ops": [
@@ -169,19 +169,19 @@
     "component": "buttonsCard",
     "data": {
       "startButton": {
-        "UIName": "startButton",
+        "UIName": "Start Button",
         "enableState": "start_idle.png",
         "pushedState": "start_pressed.png",
         "dimensions": { "width": 104, "height": 70 }
       },
       "nextButton": {
-        "UIName": "nextButton",
+        "UIName": "Next Button",
         "enableState": "next_idle.png",
         "pushedState": "next_pressed.png",
         "dimensions": { "width": 104, "height": 70 }
       },
       "playButton": {
-        "UIName": "playButton",
+        "UIName": "Play Button",
         "enableState": "play_idle.png",
         "pushedState": "play_pressed.png",
         "dimensions": { "width": 104, "height": 70 }
@@ -332,19 +332,19 @@
       },
       "keyPressedCorrectImage": {
         "component": "image",
-        "UIName": "keyPressedCorrectImage",
+        "UIName": "KeyPressedCorrectImage",
         "imageName": "key_pressed_correct.png",
         "dimensions": { "width": 120, "height": 170 }
       },
       "keyPressedIncorrectImage": {
         "component": "image",
-        "UIName": "keyPressedIncorrectImage",
+        "UIName": "KeyPressedIncorrectImage",
         "imageName": "key_pressed_incorrect.png",
         "dimensions": { "width": 120, "height": 170 }
       },
       "student_answer": {
         "component": "image",
-        "UIName": "student_answer",
+        "UIName": "Student_answer",
         "imageName": "student_answer.png",
         "dimensions": { "width": 75, "height": 75 }
       }

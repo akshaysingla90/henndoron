@@ -88,7 +88,7 @@
         }
       },
       "onSoundPlayed": {
-        "UIName": "onSoundPlayed",
+        "UIName": "On Sound Played",
         "description": "This will trigger when slide 2 opens.",
         "content": {
           "ops": [
