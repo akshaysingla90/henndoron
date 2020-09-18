@@ -74,8 +74,13 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
                 });
             }
             ACTIVITY_FLASHLIGHT_1.ref.loadSpriteFrames();
-            ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.moduleStart.content.ops);
-            ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data.moduleStart);
+        //    ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.moduleStart.content.ops);
+          //  ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data.moduleStart);
+            ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.moduleStart.enable && ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.moduleStart.content.ops);
+            // console.log('log is ',ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
+            if(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data.moduleStart.enable) {
+                ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data.moduleStart.content.ops);
+            }
         });
     },
 
@@ -108,7 +113,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
     },
     triggerTip: function (message) {
         if (this.parent) {
-            this.parent.showTipMessage(message.ops);
+            this.parent.showTipMessage(message);
         }
     },
 
@@ -693,7 +698,9 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
     },
 
     addOptionButton: function (sender) {
-        this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.onRedCircle);
+       // this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.onRedCircle);
+        ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.onRedCircle.enable && this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.onRedCircle.content.ops);
+
         sender.setTouchEnabled(false);
         this.circle = sender;
         this.runAction(cc.sequence(cc.delayTime(0.5), cc.callFunc((sender) => {

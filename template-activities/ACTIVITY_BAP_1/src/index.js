@@ -83,7 +83,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                 ref.updateRoomData();
                 ref.isStudentInteractionEnable = true;
             }
-            ref.triggerTip(config.teacherTips.data.moduleStart);
+            config.teacherTips.data.moduleStart.enable && ref.triggerTip(config.teacherTips.data.moduleStart);
         });
     },
 
@@ -107,29 +107,15 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         }
     },
     triggerScriptByCurrentSlideIdx: function () {
-        //witch (this.curImageIdx) {
-            let  content = ACTIVITY_BAP_1.config.teacherScripts.data["slide_"+ (this.curImageIdx + 1 )].content.ops
-            this.triggerScript(content);
-        // case 0: {
-            //     this.triggerScript();
-            //     break;
-            // }
-            // case 1: {
-            //     this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_2.content.ops);
-            //     break;
-            // }
-            // case 2: {
-            //     this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_3.content.ops);
-            //     break;
-            // }
-            // default: {
-            //     throw new Error(`Invalid slide index: ${this.curImageIdx}`);
-            // }
-        // }
+            if ( ACTIVITY_BAP_1.config.teacherScripts.data["slide_"+ (this.curImageIdx + 1 )].enable) {
+                let content = ACTIVITY_BAP_1.config.teacherScripts.data["slide_" + (this.curImageIdx + 1)].content.ops
+                this.triggerScript(content);
+            }
+
     },
     triggerTip: function (message) {
         if (this.parent) {
-            this.parent.showTipMessage(message.content.ops);
+            this.parent.showTipMessage(message);
         }
     },
 

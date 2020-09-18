@@ -23,6 +23,7 @@
     "data": {
       "moduleStart": {
         "UIName": "Module Start",
+        "enable": true,
         "description": "This will trigger when module starts.",
         "content": {
           "ops": [
@@ -89,6 +90,7 @@
       },
       "onSoundPlayed": {
         "UIName": "On Sound Played",
+        "enable": true,
         "description": "This will trigger when slide 2 opens.",
         "content": {
           "ops": [
@@ -156,6 +158,7 @@
     "data": {
       "moduleStart": {
         "UIName": "Module Start",
+        "enable": true,
         "description": "This will trigger when activity starts.",
         "content": {
           "ops": [

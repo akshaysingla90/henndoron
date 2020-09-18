@@ -139,6 +139,7 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
         var cardValue = null;
         if (this.cardQueue.length != 0) {
             let obj = this.cardQueue[0];
+            console.log('image name ',obj.imageName);
             imageName = obj.imageName;
             cardValue = obj.label;
         } else {
@@ -307,6 +308,7 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
      */
     isCellSelected: function (data) {
         for (let index in this.cardQueue) {
+            console.log('index ',this.cardQueue.length);
             if (data.imageName == this.cardQueue[index].imageName) {
                 return true;
             }
@@ -355,7 +357,7 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
      * @param cell
      */
     tableCellTouched: function (table, cell) {
-
+        console.log("cell is ",cell.tag);
         cell.stopAllActions();
         let completedAnimation = cc.callFunc(function () {
             if (ACTIVITY_MAGIC_HAT_1.ref.isCellSelected(cell.cellData)) {
@@ -369,6 +371,7 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
             } else {
                 cell.highlightLayer.setVisible(true);
                 var lastIndex = ACTIVITY_MAGIC_HAT_1.ref.cardQueue.length == 0 ? -1 : ACTIVITY_MAGIC_HAT_1.ref.getIndexOfCurrentElement(ACTIVITY_MAGIC_HAT_1.ref.cardQueue[0]);
+                console.log("cell is ",cell.tag);
                 ACTIVITY_MAGIC_HAT_1.ref.addCardToQueue(cell.tag);
                 if (lastIndex != -1) {
                     ACTIVITY_MAGIC_HAT_1.ref.tableView.updateCellAtIndex(lastIndex);

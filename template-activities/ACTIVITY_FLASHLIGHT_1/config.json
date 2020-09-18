@@ -23,6 +23,7 @@
     "data": {
       "moduleStart": {
         "UIName": "Module Start",
+        "enable": true,
         "description": "This will trigger when module starts.",
         "content": {
           "ops": [
@@ -148,6 +149,7 @@
       },
       "onRedCircle": {
         "UIName": "On Red Circle",
+        "enable": true,
         "description": "This will trigger when module starts.",
         "content": {
           "ops": [
@@ -180,6 +182,7 @@
     "data": {
       "moduleStart": {
         "UIName": "Module Start",
+        "enable": true,
         "description": "This will trigger when activity starts.",
         "content": {
           "ops": [

@@ -49,8 +49,10 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
                 ACTIVITY_COUNTING_1.ref.syncData(ACTIVITY_COUNTING_1.ref.storedData)
             }
             ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.moduleStart.enable && ACTIVITY_COUNTING_1.ref.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.moduleStart.content.ops);
-          console.log('log is ',ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
-            ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.enable && ACTIVITY_COUNTING_1.ref.triggerTip(ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
+         // console.log('log is ',ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
+            if(ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.enable) {
+                ACTIVITY_COUNTING_1.ref.triggerTip(ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
+            }
         });
     },
 
@@ -346,7 +348,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
     },
     triggerTip: function (message) {
         if (this.parent) {
-            this.parent.showTipMessage(message.ops);
+            this.parent.showTipMessage(message);
         }
     },
     /**

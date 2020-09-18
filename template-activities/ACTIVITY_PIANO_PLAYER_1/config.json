@@ -23,6 +23,7 @@
     "data": {
       "moduleStart": {
         "UIName": "Module Start",
+        "enable": true,
         "description": "This will trigger when module starts.",
         "content": {
           "ops": [
@@ -56,6 +57,7 @@
       },
       "startButtonClicked": {
         "UIName": "Start Button Clicked",
+        "enable": true,
         "description": "This will trigger when module starts.",
         "content": {
           "ops": [
@@ -132,6 +134,7 @@
     "data": {
       "moduleStart": {
         "UIName": "Module Start",
+        "enable": true,
         "description": "This will trigger when activity starts.",
         "content": {
           "ops": [
@@ -143,6 +146,7 @@
       },
       "startButtonClicked": {
         "UIName": "Start Button Clicked",
+        "enable": true,
         "description": "this will trigger when activity starts ",
         "content": {
           "ops": [
