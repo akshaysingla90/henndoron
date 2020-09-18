@@ -144,13 +144,13 @@ adminController.addResourceFiles = async (payload) => {
   let destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}${activity.path}`);
   switch (payload.type) {
     case RESOURCE_TYPE.ANIMATION_FRAMES.VALUE:
-      destinationPath = destinationPath  + RESOURCE_TYPE.ANIMATION_FRAMES.BASE_PATH + `/${payload.animationFramePath}`;
+      destinationPath = destinationPath + RESOURCE_TYPE.ANIMATION_FRAMES.BASE_PATH + `/${payload.animationFramePath}`;
       break;
     case RESOURCE_TYPE.SOUND.VALUE:
-      destinationPath = destinationPath  + RESOURCE_TYPE.SOUND.BASE_PATH
+      destinationPath = destinationPath + RESOURCE_TYPE.SOUND.BASE_PATH
       break;
     case RESOURCE_TYPE.SPRITE.VALUE:
-      destinationPath = destinationPath  + RESOURCE_TYPE.SPRITE.BASE_PATH
+      destinationPath = destinationPath + RESOURCE_TYPE.SPRITE.BASE_PATH
       break;
   }
   await SERVICES.fileUploadService.uploadMultipleFilesToLocal(payload, destinationPath);
@@ -167,13 +167,13 @@ adminController.deleteResourceFiles = async (payload) => {
   let destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}${activity.path}`);
   switch (payload.type) {
     case RESOURCE_TYPE.ANIMATION_FRAMES.VALUE:
-      destinationPath = destinationPath +  RESOURCE_TYPE.ANIMATION_FRAMES.BASE_PATH + `/${payload.animationFramePath}`;
+      destinationPath = destinationPath + RESOURCE_TYPE.ANIMATION_FRAMES.BASE_PATH + `/${payload.animationFramePath}`;
       break;
     case RESOURCE_TYPE.SOUND.VALUE:
-      destinationPath = destinationPath +  RESOURCE_TYPE.SOUND.BASE_PATH
+      destinationPath = destinationPath + RESOURCE_TYPE.SOUND.BASE_PATH
       break;
     case RESOURCE_TYPE.SPRITE.VALUE:
-      destinationPath = destinationPath +  RESOURCE_TYPE.SPRITE.BASE_PATH
+      destinationPath = destinationPath + RESOURCE_TYPE.SPRITE.BASE_PATH
       break;
   }
   await SERVICES.fileUploadService.deleteMultipleFilesFromLocal(payload, destinationPath);
@@ -187,6 +187,10 @@ adminController.deleteResourceFiles = async (payload) => {
 adminController.deleteActivity = async (payload) => {
   let activity = await SERVICES.activityService.removeActivity({ _id: payload.id, status: { $ne: ACTIVITY_STATUS.TEMPLATE } });
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  let activityPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, activity.path);
+  fs.removeSync(activityPath);
+  let previewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}${activity.path}`);
+  fs.removeSync(previewPath);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_DELETED_SUCCESSFULLY));
 }
 
