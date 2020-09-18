@@ -24,7 +24,7 @@
     "data": {
       "slide_1": {
         "UIName": "slide_1",
-        "description": "this will trigger when slide 1 opens ",
+        "description": "This will trigger when slide 1 opens.",
         "content": {
           "ops": [
             {
@@ -54,7 +54,7 @@
       },
       "slide_2": {
         "UIName": "slide_2",
-        "description": "this will trigger when slide 2 opens ",
+        "description": "This will trigger when slide 2 opens.",
         "content": {
           "ops": [
             {
@@ -109,7 +109,7 @@
       },
       "slide_3": {
         "UIName": "slide_3",
-        "description": "this will trigger when slide 3 opens ",
+        "description": "This will trigger when slide 3 opens.",
         "content": {
           "ops": [
             {

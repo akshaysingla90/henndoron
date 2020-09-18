@@ -22,8 +22,8 @@
     "component": "scriptsCard",
     "data": {
       "moduleStart": {
-        "UIName": "moduleStart",
-        "description": "this will trigger when module starts",
+        "UIName": "Module Start",
+        "description": "This will trigger when module starts.",
         "content": {
           "ops": [
             {
@@ -129,7 +129,7 @@
       },
       "onMouseEnable": {
         "UIName": "onMouseEnable",
-        "description": "this will trigger when teacher enables student mouse",
+        "description": "This will trigger when teacher enables student mouse.",
         "content": {
           "ops": [
             {

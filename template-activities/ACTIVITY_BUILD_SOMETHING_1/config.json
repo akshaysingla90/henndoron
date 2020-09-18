@@ -22,8 +22,8 @@
     "component": "scriptsCard",
     "data": {
       "moduleStart": {
-        "UIName": "moduleStart",
-        "description": "this will trigger when module starts",
+        "UIName": "Module Start",
+        "description": "This will trigger when module starts.",
         "content": {
           "ops": [
             {

@@ -345,17 +345,23 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
                   : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
                       .BookOfRhymesWordLabelStudent.position.y
           ),
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabel.font,
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabel.fontSize,
+          HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.font:
+              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.font,
+          HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.fontSize:
+              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.fontSize,
           cc.color(
-              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabel.color.r,
-              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabel.color.g,
-              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabel.color.b,
-              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabel.color.a
+              HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
+                      .BookOfRhymesWordLabelTeacher.color.r:ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
+                  .BookOfRhymesWordLabelStudent.color.r,
+              HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
+                  .BookOfRhymesWordLabelTeacher.color.g:ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
+                  .BookOfRhymesWordLabelStudent.color.g,
+              HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
+                  .BookOfRhymesWordLabelTeacher.color.b:ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
+                  .BookOfRhymesWordLabelStudent.color.b,
+              HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
+                  .BookOfRhymesWordLabelTeacher.color.a:ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
+                  .BookOfRhymesWordLabelStudent.color.a,
           ),
           ACTIVITY_FLASH_CARDS_1.soundPath +
           ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.swipe.sound

@@ -22,8 +22,8 @@
     "component": "scriptsCard",
     "data": {
       "moduleStart": {
-        "UIName": "moduleStart",
-        "description": "this will trigger when module starts",
+        "UIName": "module Start",
+        "description": "This will trigger when module starts.",
         "content": {
           "ops": [
             {
@@ -148,7 +148,7 @@
       },
       "onRedCircle": {
         "UIName": "onRedCircle",
-        "description": "this will trigger when module starts",
+        "description": "This will trigger when module starts.",
         "content": {
           "ops": [
             {

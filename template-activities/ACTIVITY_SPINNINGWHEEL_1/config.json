@@ -22,8 +22,8 @@
     "component": "scriptsCard",
     "data": {
       "moduleStart": {
-        "UIName": "moduleStart",
-        "description": "this will trigger when module starts",
+        "UIName": "Module Start",
+        "description": "This will trigger when module starts.",
         "content": {
           "ops": [
             {
@@ -88,7 +88,7 @@
       },
       "onGoButton": {
         "UIName": "GoButtonClicked",
-        "description": "this will trigger when GO button is clicked",
+        "description": "This will trigger when GO button is clicked.",
         "content": {
           "ops": [
             {
@@ -153,7 +153,7 @@
       },
       "onMouseEnable": {
         "UIName": "onMouseEnable",
-        "description": "this will trigger when module starts",
+        "description": "This will trigger when module starts.",
         "content": {
           "ops": [
             {
@@ -377,7 +377,7 @@
       "win": {
         "component": "animation",
         "UIName": "win",
-        "name": "cardTakeOut",
+        "name": "Win Object Pulled Out Animation",
         "frameCount": 15,
         "frameInitial": "Win/object_pulled_out_animation_",
         "extension": ".png",
@@ -389,7 +389,7 @@
       "loss": {
         "component": "animation",
         "UIName": "loss",
-        "name": "cardTakeOut",
+        "name": "Loss Object Pulled Out Animation",
         "frameCount": 15,
         "frameInitial": "Loss/object_pulled_out_animation_",
         "extension": ".png",
@@ -434,13 +434,13 @@
       "basePath": "res/AnimationFrames/",
       "animation": [
         {
-          "Name": "Win Object Pulled Out Animation",
+          "name": "Win Object Pulled Out Animation",
           "frameCount": 15,
           "frameInitial": "Win/object_pulled_out_animation_",
           "extension": ".png"
         },
         {
-          "Name": "Loss Object Pulled Out Animation",
+          "name": "Loss Object Pulled Out Animation",
           "frameCount": 15,
           "frameInitial": "Loss/object_pulled_out_animation_",
           "extension": ".png"
