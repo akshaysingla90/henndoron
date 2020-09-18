@@ -143,7 +143,7 @@ let routes = [
         id: Joi.string().required().description('Activity\'s Id.')
       },
       formData: {
-        fileArray: Joi.fileArray({ name: 'assets', description: 'Files Array', maxCount: 20 }),
+        fileArray: Joi.fileArray({ name: 'assets', description: 'Files Array', maxCount: 50 }),
         body: {
           type: Joi.number().required().valid(RESOURCE_TYPE.SOUND.VALUE, RESOURCE_TYPE.ANIMATION_FRAMES.VALUE, RESOURCE_TYPE.SPRITE.VALUE).description('1 => SPRITE,2 => SOUND 3 => ANIMATION_FRAME'),
           // animationFramePath: Joi.string().optional().description('animationFrame Folder\'s path'),
