@@ -12,5 +12,6 @@ module.exports = {
     sessionService: require(`./helen/sessionService`),
     socketService: require(`./helen/socketService`),
     fileUploadService: require(`./helen/fileUploadService`),
-    roomService: require(`./helen/roomService`)
+    roomService: require(`./helen/roomService`),
+    lessonService: require(`./helen/lessonService`)
 };
