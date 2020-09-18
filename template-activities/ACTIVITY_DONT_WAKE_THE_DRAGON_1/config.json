@@ -1,0 +1,311 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Don't Wake The Dragon",
+    "description": "game desc. here",
+    "activityPath": "ACTIVITY_DONT_WAKE_THE_DRAGON_1",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": true
+    },
+    "externalRewards": false,
+    "studentPreview": false,
+    "url": "res/Activity/ACTIVITY_DONT_WAKE_THE_DRAGON_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_DONT_WAKE_THE_DRAGON_1",
+    "layerName": "MainLayer"
+  },
+  "teacherScripts": {
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "A dragon! Be careful! SHHH - Don’t wake the dragon. "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I want the hat!"
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Take first item from under the dragon. "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "What do you want?"
+            },
+            {
+              "insert": "  "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I want the (tree, book, house)"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "!"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "SHH – Don’t wake the dragon! "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Student drags the item from under the dragon."
+            },
+            {
+              "insert": " \n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "What have you got? I’ve got a ____! "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Continue like this until the dragon wakes up."
+            },
+            {
+              "insert": "\n\n\n\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+
+  "teacherTips": {
+    "component": "tipsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when activity starts.",
+        "content": {
+          "ops": [
+            {
+              "insert": "- Teacher and student click on the images and drag them into the treasure chest until the dragon 'wakes up’.\n - If there are duplicate items, use them to practice counting!\n- Use suspenseful and surprised TPR when playing this game. \n- There is some new language that they "
+            },
+            {
+              "attributes": {
+                "bold": true
+              },
+              "insert": "only"
+            },
+            {
+              "insert": " need to know for this game that we don’t need to emphasize. \n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "background.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "animation": {
+        "component": "animationGroup",
+        "data": {
+          "DragonSleep": {
+            "UIName": "DragonSleep",
+            "frameCount": 35,
+            "frameInitial": "dragon_sleep01/dragon_sleep01_",
+            "extension": ".png"
+          },
+          "DragonAlertStage1": {
+            "UIName": "DragonAlertStage 1",
+            "frameCount": 24,
+            "frameInitial": "dragon_sleep02/dragon_sleep02_",
+            "extension": ".png"
+          },
+          "DragonAlertStage2": {
+            "UIName": "DragonAlertStage 2",
+            "frameCount": 24,
+            "frameInitial": "dragon_sleep03/dragon_sleep03_",
+            "extension": ".png"
+          },
+          "DragonAwake": {
+            "UIName": "DragonAwake",
+            "frameCount": 48,
+            "frameInitial": "dragon_awake/dragon_awake_",
+            "extension": ".png"
+          },
+          "DragonBackToSleep": {
+            "UIName": "DragonBackToSleep",
+            "frameCount": 38,
+            "frameInitial": "dragon_back_to_sleep/dragon_back_to_sleep_",
+            "extension": ".png"
+          }
+        }
+      },
+
+      "treasurePile": {
+        "component": "image",
+        "UIName": "Treasure Pile",
+        "imageName": "treasurePile.png",
+        "dimensions": { "width": 960, "height": 640 }
+      },
+      "treasureItems": {
+        "component": "treasureItems",
+        "dimensions": { "width": 350, "height": 350 },
+        "data": [
+          {
+            "imageName": "Item_book.png",
+            "position": { "x": 241, "y": 380 }
+          },
+          {
+            "imageName": "Item_hat.png",
+            "position": { "x": 396, "y": 170 }
+          },
+          {
+            "imageName": "Item_house.png",
+            "position": { "x": 744, "y": 240 }
+          },
+          {
+            "imageName": "Item_tree.png",
+            "position": { "x": 197, "y": 285 }
+          },
+          {
+            "imageName": "Item_stickers.png",
+            "position": { "x": 722, "y": 142 }
+          }
+        ]
+      }
+    }
+  },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "openFingers": {
+        "UIName": "Open Fingers",
+        "imageName": "open_pincer_fingers_pointer.png",
+        "dimensions": { "width": 32, "height": 32 }
+      },
+      "closedFingers": {
+        "UIName": "Closed Fingers",
+        "imageName": "closed_pincer_fingers_pointer.png",
+        "dimensions": { "width": 32, "height": 32 }
+      }
+    }
+  },
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "background.png",
+        "closed_pincer_fingers_pointer.png",
+        "Item_book.png",
+        "Item_hat.png",
+        "Item_house.png",
+        "Item_tree.png",
+        "Item_stickers.png",
+        "open_pincer_fingers_pointer.png",
+        "player_treasure_chest.png",
+        "treasurePile.png",
+        "student_answer.png"
+      ]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "Name": "Card Take Out",
+          "frameCount": 15,
+          "frameInitial": "cardTakeOut/magicHat_cardTakeOut_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Dragon Awake",
+          "frameCount": 48,
+          "frameInitial": "dragon_awake/dragon_awake_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Dragon Sleep01",
+          "frameCount": 35,
+          "frameInitial": "dragon_sleep01/dragon_sleep01_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Dragon Sleep02",
+          "frameCount": 24,
+          "frameInitial": "dragon_sleep02/dragon_sleep02_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Dragon Sleep03",
+          "frameCount": 24,
+          "frameInitial": "dragon_sleep03/dragon_sleep03_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Dragon Back To Sleep",
+          "frameCount": 38,
+          "frameInitial": "dragon_back_to_sleep/dragon_back_to_sleep_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}

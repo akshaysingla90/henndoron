@@ -1,7 +1,8 @@
 const CONSTANTS = require('../utils/constants');
 const MODELS = require('../models/index');
 const MONGOOSE = require('mongoose');
-
+const activities = require('../data-db/activityConfig.json')
+const courses = require('../data-db/course.json')
 let dbUtils = {};
 
 /**
@@ -15,6 +16,24 @@ dbUtils.checkValidReference = async (document, referenceMapping) => {
     }
   }
 };
+
+/**
+ * create pagination condition for aggregateQuery with sort.
+ *
+ * @param {JSON} sort valid mongodb sort condition Object.
+ * @param {Number} skip no. of documents to skip.
+ * @param {Number} limit no. of documents to return.
+ * @returns {Promise<[JSON]>} aggregate pipeline queries for pagination.
+ */
+
+dbUtils.paginateWithTotalCount = (sort, skip, limit) => {
+  let condition = [
+    ...(!!sort ? [{ $sort: sort }] : []),
+    { $group: { _id: null, items: { $push: '$$ROOT' }, totalCount: { $sum: 1 } } },
+    { $addFields: { items: { $slice: ['$items', skip, limit] } } },
+  ]
+  return condition;
+}
 
 /**
  * Funcion to migrate database.
@@ -42,10 +61,37 @@ dbUtils.migrateDatabase = async () => {
     // await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: 2 }, { upsert: true });
     updatedVersion = 2;
   }
+
+  if (version < 3) {
+    //adding course data
+    await dbUtils.addInitialCourses();
+    updatedVersion = 3;
+  }
+  
+  if (version < 4) {
+    //adding template activity's configData
+    await dbUtils.addInitialTemplateActivities();
+    updatedVersion = 4;
+  }
+
   if (updatedVersion !== version)
     await MODELS.versionModel.findOneAndUpdate({}, { dbVersion: updatedVersion }, { upsert: true });
 
   return;
+};
+
+/**
+ *  function to add initial template activities.
+ */
+dbUtils.addInitialTemplateActivities = async () => {
+  await MODELS.activityModel.insertMany(activities);
+};
+
+/**
+ *  function to add initial courses.
+ */
+dbUtils.addInitialCourses = async () => {
+  await MODELS.courseModel.insertMany(courses);
 };
 
 module.exports = dbUtils;

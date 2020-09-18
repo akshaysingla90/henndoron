@@ -1,0 +1,30 @@
+{
+    "project_type"  :   "javascript",
+    "debugMode"     :   1,
+    "showFPS"       :   false,
+    "frameRate"     :   60,
+    "noCache"       :   false,
+    "id"            :   "gameCanvas",
+    "renderMode"    :   1,
+    "engineDir"     :   "frameworks/cocos2d-html5",
+    "modules"       :   ["cocos2d", "ccui", "extensions"],
+    "jsList"        :   [
+        "src/services/peerjs.min.js",
+        "src/services/axios.min.js",
+        "src/resource.js",
+        "src/Base/HDBaseLayer.js",
+        "src/Base/HDBaseScene.js",
+        "src/Base/app.js",
+        "src/ViewController/HDLesson.js",
+        "src/View/HDCustomLabel.js",
+        "src/Utility/CMProcessIndicator.js",
+        "src/Utility/HDAppManager.js",
+        "src/Utility/HDConstants.js",
+        "src/Utility/HDLoadImagesAsynchronous.js",
+        "src/Utility/HDNetworkConfig.js",
+        "src/Utility/HDSoundManager.js",
+        "src/Utility/HDUtility.js",
+        "src/Utility/HDNetworkHandler.js",
+        "src/Utility/HDSocketManager.js"
+    ]
+}

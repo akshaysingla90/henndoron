@@ -27,6 +27,17 @@ var defaults = {
         API_KEY: 'dummy',
         SENDER_EMAIL: 'contact@demo.in'
     },
+    COCOS_PROJECT_PATH: {
+        TEMPLATE_ACTIVITY_PATH: '/template-activities',
+        TEMPLATE_ACTIVITY_PREVIEW:'/template-activity-preview',
+        BASE_PATH: '/HelenDron-Cocos2d',
+        ACTIVITY_DIRECTORY_PATH:'/cloned-activities',
+        ACTIVITY_PREVIEW_PATH:'/activity-preview',
+        ACTIVITY_RESOURCE_DIRECTORY_PATH:'/res',   
+        ACTIVITY_CONFIG_PATH:'/config.json',
+        ACTIVITY_SRC_PATH: '/src/index.js',
+        LESSON_PATH:'/lesson-created'       
+    },
     SMTP: {
         TRANSPORT: {
             host: process.env.NODEMAILER_HOST || `node-mailer-host-name`,
@@ -75,7 +86,7 @@ var defaults = {
     s3Bucket: {
         accessKeyId: process.env.ACCESS_KEY_ID || 'access-key-id',
         secretAccessKey: process.env.SECRET_ACCESS_KEY || 'secret-access-key',
-        zipBucketName: process.env.S3_BUCKET_NAME || 'bucket-name'
+        bucketName: process.env.S3_BUCKET_NAME || 'bucket-name'
     },
     REDIS: {
         PORT: process.env.REDIS_PORT || '6379',

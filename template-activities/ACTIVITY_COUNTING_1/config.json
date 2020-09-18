@@ -1,0 +1,520 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Counting",
+    "description": "game desc. here",
+    "activityPath": "ACTIVITY_COUNTING_1",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": true
+    },
+    "externalRewards": true,
+    "studentPreview": false,
+    "url": "res/Activity/ACTIVITY_COUNTING_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_COUNTING_1",
+    "layerName": "CountingLayer"
+  },
+  "teacherScripts": {
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Who do you see? "
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Do you see a "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "(boy/girl)"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "? Let’s look for the "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "(boys/girls)!"
+            },
+            {
+              "attributes": {
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Click on one of the objects to reveal the hidden images."
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Who do I see here? I see a (boy/girl) here!  "
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Now it’s your turn. Do you see a "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "(boy/girl)"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "? "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Enable student’s mouse"
+            },
+            {
+              "insert": "\n\n\n\n"
+            }
+          ]
+        }
+      },
+      "onMouseEnable": {
+        "UIName": "On Mouse Enable",
+        "description": "This will trigger when teacher enables student mouse.",
+        "enable": true,
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Student clicks on objects to reveal the hidden images behind them."
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Who do you see here? I see a (boy/girl) here."
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Use the same sentence each time an image is revealed, then count all the images separately."
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "One boy/girl, two boys/girls, three boys/girls..."
+            },
+            {
+              "insert": "\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "teacherTips": {
+    "component": "tipsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "description": "This will trigger when activity starts.",
+        "enable": true,
+        "content": {
+          "ops": [
+            {
+              "insert": "- If counting, put a strong emphasis on plurals by exaggerating the changes to the word in plural, and making sure the student repeats it properly.  \n- You may use fingers when counting.\n- If the student gets stuck, click objects to reveal the hidden images.\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "playground.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+  "gameInfo": {
+    "ignoreForAuthToolUI": true,
+    "isCounting": true
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "tapHiddenObject": {
+        "component": "sound",
+        "UIName": "Tap Hidden Object Sound",
+        "sound": "tap.mp3"
+      },
+
+      "countingItems": {
+        "component": "countingItems",
+        "dimensions": { "width": 512, "height": 512 },
+        "data": [
+          {
+            "name": "Backpack",
+            "configurable": true,
+            "defaultImageName": "backpack_hidden.png",
+            "revealImageName": "backpack_revealed.png",
+            "position": {
+              "x": 444,
+              "y": 205
+            },
+            "countTextPosition": {
+              "x": 500,
+              "y": 140
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 40,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.4,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          },
+          {
+            "name": "Bin",
+            "configurable": true,
+            "defaultImageName": "bin_hidden.png",
+            "revealImageName": "bin_revealed.png",
+            "position": {
+              "x": 450,
+              "y": 420
+            },
+            "countTextPosition": {
+              "x": 490,
+              "y": 375
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 40,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.3,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          },
+          {
+            "name": "Book",
+            "configurable": true,
+            "defaultImageName": "book_hidden.png",
+            "revealImageName": "book_revealed.png",
+            "position": {
+              "x": 720,
+              "y": 130
+            },
+            "countTextPosition": {
+              "x": 670,
+              "y": 75
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 40,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.35,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          },
+          {
+            "name": "Bowl",
+            "configurable": true,
+            "defaultImageName": "bowl_hidden.png",
+            "revealImageName": "bowl_revealed.png",
+            "position": {
+              "x": 300,
+              "y": 272
+            },
+            "countTextPosition": {
+              "x": 260,
+              "y": 230
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 40,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.275,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          },
+          {
+            "name": "Box01",
+            "configurable": true,
+            "defaultImageName": "box01_hidden.png",
+            "revealImageName": "box01_revealed.png",
+            "position": {
+              "x": 304,
+              "y": 405
+            },
+            "countTextPosition": {
+              "x": 276,
+              "y": 372
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 32,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.2,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          },
+          {
+            "name": "Box02",
+            "configurable": true,
+            "defaultImageName": "box02_hidden.png",
+            "revealImageName": "box02_revealed.png",
+            "position": {
+              "x": 719,
+              "y": 304
+            },
+            "countTextPosition": {
+              "x": 748,
+              "y": 270
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 32,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.2,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          },
+          {
+            "name": "Hat01",
+            "configurable": true,
+            "defaultImageName": "hat01_hidden.png",
+            "revealImageName": "hat01_revealed.png",
+            "position": {
+              "x": 574,
+              "y": 321
+            },
+            "countTextPosition": {
+              "x": 605,
+              "y": 285
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 32,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.225,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          },
+          {
+            "name": "Hat02",
+            "configurable": true,
+            "defaultImageName": "hat02_hidden.png",
+            "revealImageName": "hat02_revealed.png",
+            "position": {
+              "x": 150,
+              "y": 185
+            },
+            "countTextPosition": {
+              "x": 100,
+              "y": 130
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 32,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.35,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          },
+          {
+            "name": "Hole",
+            "configurable": true,
+            "defaultImageName": "hole_hidden.png",
+            "revealImageName": "hole_revealed.png",
+            "position": {
+              "x": 860,
+              "y": 271
+            },
+            "countTextPosition": {
+              "x": 810,
+              "y": 217
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 32,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.35,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          },
+          {
+            "name": "Trunk",
+            "configurable": true,
+            "defaultImageName": "trunk_hidden.png",
+            "revealImageName": "trunk_revealed.png",
+            "position": {
+              "x": 105,
+              "y": 378
+            },
+            "countTextPosition": {
+              "x": 70,
+              "y": 338
+            },
+            "countTextColor": {
+              "r": 197,
+              "g": 53,
+              "b": 57,
+              "a": 255
+            },
+            "countFontSize": 32,
+            "countFont": "sassoon_sans_regular",
+            "scale": 0.25,
+            "dimensions": { "width": 512, "height": 512 },
+            "constraints": ["name", "size"]
+          }
+        ]
+      }
+    }
+  },
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "playground.png",
+        "backpack_hidden.png",
+        "backpack_revealed.png",
+        "bin_hidden.png",
+        "bin_revealed.png",
+        "book_hidden.png",
+        "book_revealed.png",
+        "bowl_hidden.png",
+        "bowl_revealed.png",
+        "box01_hidden.png",
+        "box01_revealed.png",
+        "box02_hidden.png",
+        "box02_revealed.png",
+        "hat01_hidden.png",
+        "hat01_revealed.png",
+        "hat02_hidden.png",
+        "hat02_revealed.png",
+        "hole_hidden.png",
+        "hole_revealed.png",
+        "trunk_hidden.png",
+        "trunk_revealed.png",
+        "btn_disable.png",
+        "btn_enable.png"
+      ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": ["tap.mp3"]
+    }
+  }
+}

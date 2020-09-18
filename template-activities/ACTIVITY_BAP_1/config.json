@@ -1,0 +1,378 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Background And Pen",
+    "activityPath": "ACTIVITY_BAP_1",
+    "description": "game desc. here",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": true
+    },
+    "externalRewards": true,
+    "studentPreview": true,
+    "url": "res/Activity/ACTIVITY_BAP_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_BAP_1",
+    "layerName": "BackgroundAndPenLayer"
+  },
+
+  "teacherScripts": {
+    "component": "scriptsCard",
+    "data": {
+      "slide_1": {
+        "UIName": "Slide_1",
+        "enable": true,
+        "description": "This will trigger when slide 1 opens.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "background": "transparent",
+                "color": "#000000"
+              },
+              "insert": "Start by clapping 5 times then use fingers to count."
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": true
+              },
+              "insert": "Let’s count! One, two, three, four, five!"
+            },
+            {
+              "insert": "\n\n\n"
+            }
+          ]
+        }
+      },
+      "slide_2": {
+        "UIName": "Slide_2",
+        "enable": true,
+        "description": "This will trigger when slide 2 opens.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "background": "transparent",
+                "color": "#000000"
+              },
+              "insert": "Circle/point to the sheep."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": true
+              },
+              "insert": "What do you see? I see sheep"
+            },
+            {
+              "attributes": {
+                "background": "transparent",
+                "color": "#000000",
+                "italic": true
+              },
+              "insert": "! Are the sheep "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": true
+              },
+              "insert": "sad or glad"
+            },
+            {
+              "attributes": {
+                "background": "transparent",
+                "color": "#000000",
+                "italic": true
+              },
+              "insert": "? The sheep are glad! Let’s count the sheep."
+            },
+            {
+              "insert": "\n"
+            }
+          ]
+        }
+      },
+      "slide_3": {
+        "UIName": "Slide_3",
+        "enable": true,
+        "description": "This will trigger when slide 3 opens.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Write numbers under the sheep while counting. "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "One sheep, two sheep, three sheep, four sheep, five sheep! Can you count the sheep? Write and count!"
+            },
+            {
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "bold": true
+              },
+              "insert": "   "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Encourage student to count and write numbers. "
+            },
+            {
+              "attributes": {
+                "underline": true,
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "teacherTips": {
+    "component": "tipsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when activity starts.",
+        "content": {
+
+          "ops":
+          [
+            {
+              "insert": "You can count with their body by clapping five times, then counting with the hand by showing five fingers. Alternatively, tap your head and shoulders!"
+            }, {"insert": "\n"}, {"insert": "If the student is too young to write the numbers, the item can be circled while counting."},
+            {"insert":  "\n"},{"insert":"Remember to erase the notations you make before the students turn to count, write or circle."},
+            {"insert":"\n"},
+            {"insert":"Put emphasis on the “S” in cats so student understands that the word changes when there is more than one."}
+
+          ]
+        }
+      }
+    }
+  },
+
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "backgroundSlides": {
+        "component": "backgroundSlides",
+        "UIName": "BACKGROUND SLIDES",
+        "images": ["background_1.png", "background_2.png", "background_3.png"],
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "clear": {
+        "UIName": "Clear Button",
+        "title": "Clear",
+        "enableState": "btn_enable.png",
+        "pushedState": "btn_enable.png",
+        "disableState": "btn_disable.png",
+        "position": { "x": 0, "y": 0 },
+        "dimensions": { "width": 139, "height": 32 }
+      },
+      "drawMode": {
+        "UIName": "Draw Mode Button",
+        "title": ["Shared Mode", "Individual Mode"],
+        "enableState": "btn_enable.png",
+        "pushedState": "btn_enable.png",
+        "disableState": "btn_disable.png",
+        "position": { "x": 0, "y": 0 },
+        "dimensions": { "width": 139, "height": 32 }
+      },
+      "btn_next":{
+        "UIName": "Next Button",
+        "enableState": "btn_next.png",
+        "dimensions": { "width": 100, "height": 100 }
+      },
+
+      "btn_previous":{
+        "UIName": "Previous Button",
+        "enableState": "btn_previous.png",
+        "dimensions": { "width": 100, "height": 100 }
+      }
+    }
+  },
+
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "colorPaletteBase": {
+        "component": "image",
+        "UIName": "Color Palette Base",
+        "imageName": "palette_sidebar.png",
+        "dimensions": { "width": 69, "height": 410 }
+      },
+      "eraser": {
+        "component": "button",
+        "UIName": "Eraser",
+        "enableState": "eraser_icon.png",
+        "pushedState": "eraser_icon.png",
+        "disableState": "eraser_icon.png",
+        "dimensions": { "width": 110, "height": 86 }
+      },
+      "color": {
+        "component": "colorPalette",
+        "dimensions": { "width": 93, "height": 92 },
+        "data": [
+          {
+            "name": "",
+            "imageName": "colour_black.png",
+            "rgb": {
+              "r": 0,
+              "g": 0,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_red.png",
+            "rgb": {
+              "r": 255,
+              "g": 0,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_blue.png",
+            "rgb": {
+              "r": 0,
+              "g": 0,
+              "b": 255
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_green.png",
+            "rgb": {
+              "r": 0,
+              "g": 255,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_yellow.png",
+            "rgb": {
+              "r": 255,
+              "g": 255,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_pink.png",
+            "rgb": {
+              "r": 240,
+              "g": 80,
+              "b": 143
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_orange.png",
+            "rgb": {
+              "r": 255,
+              "g": 165,
+              "b": 0
+            }
+          },
+          {
+            "name": "",
+            "imageName": "colour_white.png",
+            "rgb": {
+              "r": 255,
+              "g": 255,
+              "b": 255
+            }
+          }
+        ]
+      }
+    }
+  },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "drawCursor": {
+        "UIName": "DRAW CURSOR",
+        "imageName": "cursor_pencil.png",
+        "dimensions": { "width": 72, "height": 72 }
+      },
+      "eraserCursor": {
+        "UIName": "ERASER CURSOR",
+        "imageName": "cursor_eraser.png",
+        "dimensions": { "width": 72, "height": 72 }
+      }
+    }
+  },
+
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "eraser.png",
+        "background_1.png",
+        "background_2.png",
+        "background_3.png",
+        "cursor_eraser.png",
+        "cursor_pencil.png",
+        "palette_sidebar.png",
+        "colour_black.png",
+        "colour_blue.png",
+        "colour_green.png",
+        "colour_orange.png",
+        "colour_pink.png",
+        "colour_red.png",
+        "colour_white.png",
+        "colour_yellow.png",
+        "btn_disable.png",
+        "btn_enable.png",
+        "btn_next.png",
+        "btn_previous.png",
+        "eraser_icon.png"
+      ]
+    }
+  }
+}

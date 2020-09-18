@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 const CONFIG = require('../../../config');
 const fileUploadService = {};
@@ -14,7 +15,7 @@ const HELPERS = require("../../helpers");
 fileUploadService.uploadFileToS3 = (payload, fileName, bucketName) => {
     return new Promise((resolve, reject) => {
         s3Bucket.upload({
-            Bucket: bucketName,
+            Bucket: bucketName || CONFIG.s3Bucket.bucketName,
             Key: fileName,
             Body: payload.file.buffer,
             ACL: 'public-read',
@@ -73,5 +74,54 @@ fileUploadService.uploadFile = async (payload, pathToUpload, pathOnServer) => {
     }
     throw HELPERS.responseHelper.createErrorResponse(MESSAGES.INVALID_FILE_TYPE, ERROR_TYPES.BAD_REQUEST);
 };
+
+/**
+ * function to upload file to local server.
+ */
+fileUploadService.uploadMultipleFilesToLocal = async (payload, pathToUpload) => {
+    console.log('uploading multiple files ', payload.files.length);
+    let directoryPath = pathToUpload;
+    // create user's directory if not present.
+    fse.ensureDirSync(directoryPath);
+    const promises = payload.files.map(file => {
+        console.log(file.originalname);
+        let fileSavePath = `${directoryPath}/${file.originalname}`;
+        const writeStream = fs.createWriteStream(fileSavePath);
+        return new Promise((resolve, reject) => {
+            writeStream.write(file.buffer);
+            writeStream.on('error', reject);
+            writeStream.end(err => {
+                if (err) reject(err)
+                else {
+                    resolve(file.originalname);
+                }
+            });
+        });
+    });
+    return Promise.all(promises);
+};
+
+/**
+ * function to delete the multiple files from local
+ */
+
+fileUploadService.deleteMultipleFilesFromLocal = async (payload, pathToDelete) => {
+    console.log('deleting multiple files ');
+    let directoryPath = pathToDelete;
+    let promises = [];
+    for (let index = 0; index < payload.fileNames.length; index++) {
+        let fileName = payload.fileNames[index];
+        let fileDeletePath = `${directoryPath}/${fileName}`;
+        if (!fs.existsSync(fileDeletePath)) continue;
+        let promise = new Promise((resolve, reject) => {
+            fs.unlink(fileDeletePath, err => {
+                if (err) reject(err)
+                else resolve('ok');
+            });
+        });
+        promises[index] = promise;
+    }
+    return Promise.all(promises);
+}
 
 module.exports = fileUploadService;

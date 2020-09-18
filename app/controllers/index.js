@@ -5,5 +5,7 @@ const CONFIG = require('../../config');
  ********* independently ********
  ********************************/
 module.exports = {
-    userController: require(`./${CONFIG.PLATFORM}/userController`)
+    userController: require(`./helen/userController`),
+    adminController: require(`./helen/adminController`),
+    lessonController: require(`./helen/lessonController`)
 };

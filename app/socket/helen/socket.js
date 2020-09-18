@@ -46,12 +46,17 @@ socketConnection.connect = function (io, p2p) {
                 socket.leave(room._id.toString());
                 let dataToUpdate = {};
                 if (room.currentTurnUserId && room.currentTurnUserId.toString() == socket.id) {
+                    //remove the currentTurn so that new turn can be choose from friend end 
                     dataToUpdate = { $unset: { currentTurnUserId: 1 } };
                     io.in(room._id.toString()).emit('SingleEvent', { data: { users: [] }, eventType: SOCKET_EVENTS_TYPES.STUDENT_TURN });
                 }
+                // set the user status to offline
                 let updatedRoom = await roomService.updateRoom({ _id: room._id, 'users.userId': socket.id }, { 'users.$.isOnline': false, ...dataToUpdate }, { lean: true, new: true });
+                // aggregate user info with the users name 
                 let latestRoomInfo = (await roomService.getRoomWithUsersInfo({ _id: room._id }))[0];
+                //filter online users adn remove off line users
                 let onlineUsers = onlineUsersFromAllUsers(latestRoomInfo.users);
+                // send data of the online users to all the room members
                 io.in(latestRoomInfo._id.toString()).emit('SingleEvent', { data: { users: onlineUsers, roomId: room._id, teacherId: updatedRoom.createdBy }, eventType: SOCKET_EVENTS_TYPES.STUDENT_STATUS });
             }
         });
@@ -129,6 +134,9 @@ socketConnection.connect = function (io, p2p) {
                     }
                     let updatedRoom = await roomService.updateRoom(criteria, dataToUpdate, { new: true });
                     return;
+                } else if (data.eventType === SOCKET_EVENTS_TYPES.SAVE_GAME_DATA) {
+                    let roomId = ((data || {}).data || {}).roomId;
+                    await roomService.updateRoom({ _id: roomId }, { $set: { startAt: Date.now() } });
                 }
                 else {
                     if (data.roomId) {
@@ -174,20 +182,20 @@ let leaveAllPreviousRooms = async (socket, io) => {
     await roomService.updateMany({ 'users.userId': socket.id }, { 'users.$.isOnline': false }, { lean: true, new: true });
 
 };
-
+// teacher fire this event 
 let createRoom = async (socket, data) => {
+    // leave all the room as user can be part of single room at one time 
     await leaveAllPreviousRooms(socket, io);
     let roomNumber = await roomService.getRoom({}, {}, { sort: { createdAt: -1 } });
     //create room.
     let dataToSave = {
         createdBy: socket.id,
         users: [{ userId: socket.id }],
-        createdBy: socket.id,
-        capacity: ((data || {}).data || {}).capacity,
+        capacity: ((data || {}).data || {}).capacity, //room strength currently static from front end  
         _id: '1'
     };
     if (roomNumber) {
-        dataToSave['_id'] = parseInt(roomNumber._id) + 1;
+        dataToSave['_id'] = parseInt(roomNumber._id) + 1; //logic to increment room _id
         dataToSave._id.toString();
     }
     let roomInfo = await roomService.createRoom(dataToSave);
@@ -197,8 +205,11 @@ let createRoom = async (socket, data) => {
     socket.emit('SingleEvent', data);
 };
 
+// we get userType  here
 let joinRoom = async (socket, data, io) => {
+    //reconnecting old user or new user 
     await leaveAllPreviousRooms(socket, io);
+    // along with the user rewards
     let userInfo = await userService.getUser({ _id: socket.id }, {}, { lean: true });
     let roomId = ((data || {}).data || {}).roomId;
     let roomInfo = await roomService.getRoom({ _id: roomId, lessonStatus: LESSON_STATUS.ON_GOING }, {}, { lean: true });
@@ -219,10 +230,11 @@ let joinRoom = async (socket, data, io) => {
     let dataToUpdateWhenTeacherLogin = {};
     let starColor = -1;
     if (data.data && data.data.userType === USER_TYPES.TEACHER) {
-        dataToUpdateWhenTeacherLogin[`createdBy`] = socket.id;
+        dataToUpdateWhenTeacherLogin[`createdBy`] = socket.id; //it is just teacher id
     } else {
         starColor = roomInfo.users.length - 1;
     }
+    //set online if user already member else push into the users of the room
     let updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': socket.id }, { 'users.$.isOnline': true, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
     if (!updatedRoom) {
         updatedRoom = await roomService.updateRoom({ _id: roomId, 'users.userId': { $ne: socket.id } }, { $push: { users: { userId: socket.id, starColor } }, ...dataToUpdateWhenTeacherLogin }, { lean: true, new: true });
@@ -232,11 +244,12 @@ let joinRoom = async (socket, data, io) => {
     let allUsers = [...roomInfoWithUserInfo.users];
     let onlineUsers = onlineUsersFromAllUsers(allUsers);
     socket.join(roomId);
-    data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId, rewards: (userInfo || {}).rewards || 0 };
+    data.data = { numberOfUsers: onlineUsers.length, roomData: roomInfoWithUserInfo.roomData || {}, roomId, rewards: (userInfo || {}).rewards || 0, startAt: roomInfoWithUserInfo.startAt || -1 };
+    // number of online users,roomdata, roomId ,startAt : lesson start time , his rewards
     socket.emit('SingleEvent', data);
 
     data.data = { users: onlineUsers, roomId, teacherId: roomInfoWithUserInfo.createdBy };
-    data.eventType = SOCKET_EVENTS_TYPES.STUDENT_STATUS;
+    data.eventType = SOCKET_EVENTS_TYPES.STUDENT_STATUS; // call whenver any user join/leave the room as online users number is changed
     io.in(roomId).emit('SingleEvent', data);
 };
 

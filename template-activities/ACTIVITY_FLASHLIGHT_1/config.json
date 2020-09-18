@@ -1,0 +1,389 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Flashlight",
+    "activityPath": "ACTIVITY_FLASHLIGHT_1",
+    "description": "game desc. here",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": false
+    },
+    "externalRewards": false,
+    "studentPreview": false,
+    "url": "res/Activity/ACTIVITY_FLASHLIGHT_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_FLASHLIGHT_1",
+    "layerName": "Flashlight"
+  },
+  "teacherScripts": {
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "The students screens are dark - they can only see the area inside the red circle(s) on your screen. "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "We’re at Granny Fix’s house! She needs (object). "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Where is"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " (object)? "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I can’t see"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " (object)! "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Ask students to move their mouse around i.e. shine their torch."
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Shine! "
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Shine your light. "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What can you see"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "? "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Look!"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Is that a"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "(object)? \n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Click on the red circle representing the student’s mouse"
+            },
+            {
+              "insert": "\n\n\n"
+            }
+          ]
+        }
+      },
+      "onRedCircle": {
+        "UIName": "On Red Circle",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Is this what Granny Fix is looking for?"
+            },
+            {
+              "insert": "\nIf not, click the X and keep looking. If yes, click the tick.\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Hurray! Granny Fix has found her (object)!"
+            },
+            {
+              "insert": "\nSelect a new object to find and repeat.\n\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+
+  "teacherTips": {
+    "component": "tipsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when activity starts.",
+        "content": {
+          "ops": [
+            {
+              "insert": "You can act out words!\n- Movement for "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "shine"
+            },
+            {
+              "insert": ": open and close hands quickly showing how something shines. \n- Movement for "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "look"
+            },
+            {
+              "insert": ":"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "place hands cupped over the eyes and point forward.\n- Movement for "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I see"
+            },
+            {
+              "insert": ":"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "Point to yourself and point to one eye. \n\n\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "tick": {
+        "component": "image",
+        "UIName": "Tick",
+        "scale": 0.35,
+        "imageName": "tick.png",
+        "dimensions": { "width": 100, "height": 100 }
+      },
+      "cross": {
+        "component": "image",
+        "UIName": "Cross",
+        "scale": 0.35,
+        "imageName": "cross.png",
+        "dimensions": { "width": 100, "height": 100 }
+      },
+      "animation": {
+        "component": "animationGroup",
+        "data": {
+          "idle": {
+            "configurable": true,
+            "UIName": "Granny Idle",
+            "name": "idle",
+            "frameCount": 16,
+            "frameInitial": "Granny_Fix_idle/idle_",
+            "extension": ".png",
+            "sound": "cardTakeOut.mp3",
+            "dimensions": { "width": 512, "height": 512 },
+            "position": {
+              "x": 256,
+              "y": 512
+            },
+            "animationPath": "{100,100},{200,200}",
+            "constraints": ["imageName, dimensions, animationPath"]
+          },
+          "celebrating": {
+            "configurable": true,
+            "UIName": "Granny Celebrating",
+            "name": "celebrating",
+            "frameCount": 32,
+            "frameInitial": "Granny_Fix_celebrating/celebrating_",
+            "extension": ".png",
+            "sound": "cardTakeOut.mp3",
+            "dimensions": { "width": 512, "height": 512 },
+            "position": {
+              "x": 256,
+              "y": 512
+            },
+            "animationPath": "{100,100},{200,200}",
+            "constraints": ["imageName, dimensions, animationPath"]
+          },
+          "run_left": {
+            "configurable": true,
+            "name": "run_left",
+            "UIName": "Granny run left",
+            "frameCount": 11,
+            "frameInitial": "Granny_Fix_run_left/run_left_",
+            "extension": ".png",
+            "sound": "cardTakeOut.mp3",
+            "dimensions": { "width": 512, "height": 512 },
+            "position": {
+              "x": 256,
+              "y": 512
+            },
+            "animationPath": "{100,100},{200,200}",
+            "constraints": ["imageName, dimensions, animationPath"]
+          },
+          "run_right": {
+            "configurable": true,
+            "name": "run_right",
+            "UIName": "granny run right",
+            "frameCount": 11,
+            "frameInitial": "Granny_Fix_run_right/run_right_",
+            "extension": ".png",
+            "sound": "cardTakeOut.mp3",
+            "dimensions": { "width": 512, "height": 512 },
+            "position": {
+              "x": 256,
+              "y": 512
+            },
+            "animationPath": "{100,100},{200,200}",
+            "constraints": ["imageName, dimensions, animationPath"]
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": ["circle.png", "redCircle.png", "bg.png", "tick.png", "cross.png", "blackImage.png"]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": ["object_pulled_out_animation_sound.mp3"]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "Name": "Granny Celebrating",
+          "frameCount": 32,
+          "frameInitial": "Granny_Fix_celebrating/celebrating_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Granny Idle",
+          "frameCount": 16,
+          "frameInitial": "Granny_Fix_idle/idle_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Granny Run Left",
+          "frameCount": 11,
+          "frameInitial": "Granny_Fix_run_left/run_left_",
+          "extension": ".png"
+        },
+        {
+          "Name": "Granny Run Right",
+          "frameCount": 11,
+          "frameInitial": "Granny_Fix_run_right/run_right_",
+          "extension": ".png"
+        }
+      ]
+    },
+    "animationSprite": {
+      "scale": 0.75
+    }
+  }
+}

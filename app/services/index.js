@@ -5,11 +5,13 @@ const CONFIG = require('../../config');
  ********* independently ********
  ********************************/
 module.exports = {
-    userService: require(`./${CONFIG.PLATFORM}/userService`),
-    swaggerService: require(`./${CONFIG.PLATFORM}/swaggerService`),
-    authService: require(`./${CONFIG.PLATFORM}/authService`),
-    sessionService: require(`./${CONFIG.PLATFORM}/sessionService`),
-    socketService: require(`./${CONFIG.PLATFORM}/socketService`),
-    fileUploadService: require(`./${CONFIG.PLATFORM}/fileUploadService`),
-    roomService: require(`./${CONFIG.PLATFORM}/roomService`)
+    userService: require(`./helen/userService`),
+    swaggerService: require(`./helen/swaggerService`),
+    authService: require(`./helen/authService`),
+    activityService: require(`./helen/activityService`),
+    sessionService: require(`./helen/sessionService`),
+    socketService: require(`./helen/socketService`),
+    fileUploadService: require(`./helen/fileUploadService`),
+    roomService: require(`./helen/roomService`),
+    lessonService: require(`./helen/lessonService`)
 };
