@@ -83,7 +83,10 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                 ref.updateRoomData();
                 ref.isStudentInteractionEnable = true;
             }
-            config.teacherTips.data.moduleStart.enable && ref.triggerTip(config.teacherTips.data.moduleStart);
+            config.teacherTips.data.moduleStart.enable && ref.triggerTip(config.teacherTips.data.moduleStart.content.ops);
+          //   if(ACTIVITY_BAP_1.config.teacherTips.data.moduleStart.enable) {
+          //       ref.triggerTip(ACTIVITY_BAP_1.config.teacherTips.data.moduleStart);
+          //   }
         });
     },
 
@@ -115,6 +118,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
     triggerTip: function (message) {
         if (this.parent) {
+            console.log('message is ',message);
             this.parent.showTipMessage(message);
         }
     },

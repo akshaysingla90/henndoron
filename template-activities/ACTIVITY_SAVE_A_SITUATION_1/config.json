@@ -23,6 +23,7 @@
     "data": {
       "moduleStart": {
         "UIName": "Module Start",
+        "enable": "true",
         "description": "This will trigger when module starts.",
         "content": {
           "ops": [

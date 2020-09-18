@@ -170,7 +170,19 @@
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
-        "content": "You can count with their body by clapping five times, then counting with the hand by showing five fingers. Alternatively, tap your head and shoulders!\nIf the student is too young to write the numbers, the item can be circled while counting.\nRemember to erase the notations you make before the students turn to count, write or circle.\nPut emphasis on the “S” in cats so student understands that the word changes when there is more than one."
+        "content": {
+
+          "ops":
+          [
+            {
+              "insert": "You can count with their body by clapping five times, then counting with the hand by showing five fingers. Alternatively, tap your head and shoulders!"
+            }, {"insert": "\n"}, {"insert": "If the student is too young to write the numbers, the item can be circled while counting."},
+            {"insert":  "\n"},{"insert":"Remember to erase the notations you make before the students turn to count, write or circle."},
+            {"insert":"\n"},
+            {"insert":"Put emphasis on the “S” in cats so student understands that the word changes when there is more than one."}
+
+          ]
+        }
       }
     }
   },

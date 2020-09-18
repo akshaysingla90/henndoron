@@ -1206,8 +1206,13 @@ ACTIVITY_DONT_WAKE_THE_DRAGON_1.TeacherViewLayer = ACTIVITY_DONT_WAKE_THE_DRAGON
     onEnter: function () {
         this._super();
         this.setInteractionEnabled(true);
-        this.showScriptMessage(ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.teacherScripts.data.moduleStart);
-        this.showTipMessage(ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.teacherTips.data.moduleStart);
+       // this.showScriptMessage(ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.teacherScripts.data.moduleStart);
+        //this.showTipMessage(ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.teacherTips.data.moduleStart);
+        ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.teacherScripts.data.moduleStart.enable && this.showScriptMessage(ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.teacherScripts.data.moduleStart);
+        // console.log('log is ',ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
+        if(ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.teacherTips.data.moduleStart.enable) {
+            this.showTipMessage(ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.teacherTips.data.moduleStart.content.ops);
+        }
         if (this.state && this.state.treasureItems.length < ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.assets.sections.treasureItems.data.length) {
             this.getParent().getParent().setResetButtonActive(true);
         }
@@ -1221,7 +1226,7 @@ ACTIVITY_DONT_WAKE_THE_DRAGON_1.TeacherViewLayer = ACTIVITY_DONT_WAKE_THE_DRAGON
     },
 
     showTipMessage: function (msg) {
-        this.getParent().getParent().showTipMessage(msg.content.ops);
+        this.getParent().getParent().showTipMessage(msg);
     },
 
     buttonCallback: function (sender, type) {
