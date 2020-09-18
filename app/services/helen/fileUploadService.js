@@ -79,6 +79,7 @@ fileUploadService.uploadFile = async (payload, pathToUpload, pathOnServer) => {
  * function to upload file to local server.
  */
 fileUploadService.uploadMultipleFilesToLocal = async (payload, pathToUpload) => {
+    console.log('uploading multiple files ');
     let directoryPath = pathToUpload;
     // create user's directory if not present.
     fse.ensureDirSync(directoryPath);
@@ -104,6 +105,7 @@ fileUploadService.uploadMultipleFilesToLocal = async (payload, pathToUpload) => 
  */
 
 fileUploadService.deleteMultipleFilesFromLocal = async (payload, pathToDelete) => {
+    console.log('deleting multiple files ');
     let directoryPath = pathToDelete;
     let promises = [];
     for (let index = 0; index < payload.fileNames.length; index++) {
