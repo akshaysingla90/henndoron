@@ -107,25 +107,25 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         }
     },
     triggerScriptByCurrentSlideIdx: function () {
-        switch (this.curImageIdx) {
-            case 0: {
-                this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_1.content.ops);
-                break;
-            }
-            case 1: {
-                this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_2.content.ops);
-                break;
-            }
-            case 2: {
-                this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_3.content.ops);
-                break;
-            }
-            default: {
-                throw new Error(`Invalid slide index: ${this.curImageIdx}`);
-            }
-
-
-        }
+        //witch (this.curImageIdx) {
+            let  content = ACTIVITY_BAP_1.config.teacherScripts.data["slide_"+ (this.curImageIdx + 1 )].content.ops
+            this.triggerScript(content);
+        // case 0: {
+            //     this.triggerScript();
+            //     break;
+            // }
+            // case 1: {
+            //     this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_2.content.ops);
+            //     break;
+            // }
+            // case 2: {
+            //     this.triggerScript(ACTIVITY_BAP_1.config.teacherScripts.data.slide_3.content.ops);
+            //     break;
+            // }
+            // default: {
+            //     throw new Error(`Invalid slide index: ${this.curImageIdx}`);
+            // }
+        // }
     },
     triggerTip: function (message) {
         if (this.parent) {

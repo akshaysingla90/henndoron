@@ -207,14 +207,12 @@
       "btn_next":{
         "UIName": "Next Button",
         "enableState": "btn_next.png",
-        "position": { "x": 0, "y": 0 },
         "dimensions": { "width": 100, "height": 100 }
       },
 
       "btn_previous":{
         "UIName": "Previous Button",
         "enableState": "btn_previous.png",
-        "position": { "x": 0, "y": 0 },
         "dimensions": { "width": 100, "height": 100 }
       }
     }
@@ -227,8 +225,7 @@
         "component": "image",
         "UIName": "Color Palette Base",
         "imageName": "palette_sidebar.png",
-        "position": { "x": 0, "y": 0 },
-        "dimensions": { "width": 72, "height": 72 }
+        "dimensions": { "width": 69, "height": 410 }
       },
       "eraser": {
         "component": "button",
@@ -236,8 +233,7 @@
         "enableState": "eraser_icon.png",
         "pushedState": "eraser_icon.png",
         "disableState": "eraser_icon.png",
-        "position": { "x": 0, "y": 0 },
-        "dimensions": { "width": 72, "height": 72 }
+        "dimensions": { "width": 110, "height": 86 }
       },
       "color": {
         "component": "colorPalette",

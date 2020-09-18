@@ -23,6 +23,7 @@
     "data": {
       "moduleStart": {
         "UIName": "Module Start",
+        "enable": true,
         "description": "This will trigger when module starts.",
         "content": {
           "ops": [
@@ -130,6 +131,7 @@
       "onMouseEnable": {
         "UIName": "On Mouse Enable",
         "description": "This will trigger when teacher enables student mouse.",
+        "enable": true,
         "content": {
           "ops": [
             {
@@ -187,6 +189,7 @@
       "moduleStart": {
         "UIName": "Module Start",
         "description": "This will trigger when activity starts.",
+        "enable": true,
         "content": {
           "ops": [
             {
@@ -223,6 +226,7 @@
 
       "countingItems": {
         "component": "countingItems",
+        "dimensions": { "width": 512, "height": 512 },
         "data": [
           {
             "name": "Backpack",

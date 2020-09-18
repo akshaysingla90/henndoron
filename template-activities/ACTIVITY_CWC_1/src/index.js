@@ -195,7 +195,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
         selectButton.setLocalZOrder(20);
         this.handIconUI.push(selectButton);
         var tableView = new cc.TableView(this, cc.size(sprite.getContentSize().width * 0.9, sprite.getContentSize().height * 0.70));
-        tableView.setPosition(cc.p(position.x + sprite.getContentSize().width * 0.05, position.y + sprite.getContentSize().height * 0.04));
+        tableView.setPosition(cc.p(position.x + sprite.getContentSize().width * 0.05, position.y + sprite.getContentSize().height * 0.08));
         tableView.setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL);
         tableView.setBounceable(false);
         tableView.setVerticalFillOrder(cc.TABLEVIEW_FILL_TOPDOWN);

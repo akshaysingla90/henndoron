@@ -259,6 +259,7 @@
         "constraints": ["name", "size"]
       },
       "animals": {
+        "dimensions": { "width": 512, "height": 512 },
         "component": "animals",
         "data": [
           {
@@ -390,6 +391,10 @@
 
       "levels": {
         "component": "levels",
+        "dimensions": {
+        "width": 350,
+        "height": 350
+      },
         "data": [
           {
             "carouselAssets": [
