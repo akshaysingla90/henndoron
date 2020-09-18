@@ -105,15 +105,19 @@ fileUploadService.uploadMultipleFilesToLocal = async (payload, pathToUpload) => 
 
 fileUploadService.deleteMultipleFilesFromLocal = async (payload, pathToDelete) => {
     let directoryPath = pathToDelete;
-    const promises = payload.fileNames.map(fileName => {
+    let promises = [];
+    for (let index = 0; index < payload.fileNames.length; index++) {
+        let fileName = payload.fileNames[index];
         let fileDeletePath = `${directoryPath}/${fileName}`;
-        return new Promise((resolve, reject) => {
+        if (!fs.existsSync(fileDeletePath)) continue;
+        let promise = new Promise((resolve, reject) => {
             fs.unlink(fileDeletePath, err => {
                 if (err) reject(err)
                 else resolve('ok');
             });
         });
-    });
+        promises[index] = promise;
+    }
     return Promise.all(promises);
 }
 
