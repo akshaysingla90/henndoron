@@ -79,11 +79,12 @@ fileUploadService.uploadFile = async (payload, pathToUpload, pathOnServer) => {
  * function to upload file to local server.
  */
 fileUploadService.uploadMultipleFilesToLocal = async (payload, pathToUpload) => {
-    console.log('uploading multiple files ');
+    console.log('uploading multiple files ', payload.files.length);
     let directoryPath = pathToUpload;
     // create user's directory if not present.
     fse.ensureDirSync(directoryPath);
     const promises = payload.files.map(file => {
+        console.log(file.originalname);
         let fileSavePath = `${directoryPath}/${file.originalname}`;
         const writeStream = fs.createWriteStream(fileSavePath);
         return new Promise((resolve, reject) => {
