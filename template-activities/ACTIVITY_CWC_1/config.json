@@ -585,7 +585,7 @@
           "extension": ".png"
         },
         {
-          "Name": "Poul Restpose01",
+          "name": "Poul Restpose01",
           "frameCount": 25,
           "frameInitial": "Poul/RestPose01/Poul_restpose01_",
           "extension": ".png"
