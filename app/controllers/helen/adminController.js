@@ -111,7 +111,7 @@ adminController.publishActivity = async (payload) => {
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   activity.status = ACTIVITY_STATUS.PUBLISHED;
   await activity.save();
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_FETCHED_SUCCESSFULLY), { activity });
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_PUBLISHED_SUCCESSFULLY), { activity });
 }
 
 /**
