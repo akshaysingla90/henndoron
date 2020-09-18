@@ -7,6 +7,6 @@ const CONFIG = require('../../config');
  ********* independently ********
  ********************************/
 const Routes = [
-    ...require(`./${CONFIG.PLATFORM}/v1`)
+    ...require(`./helen/v1`)
 ]
 module.exports = Routes;

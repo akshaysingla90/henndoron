@@ -14,7 +14,7 @@ const app = EXPRESS();
  ***** Server Configuration *****
  ********************************/
 app.set('port', CONFIG.server.PORT);
-app.use(EXPRESS.static(__dirname + '/'));
+// app.use(EXPRESS.static(__dirname + '/'));
 // configuration to setup socket.io on express server.
 const server = require('http').Server(app);
 // const io = require('socket.io')(server);
@@ -26,9 +26,9 @@ global.io.use(p2p);
 /** Server is running here */
 let startNodeserver = async () => {
   // express startup.
-  await require(`./app/startup/${CONFIG.PLATFORM}/expressStartup`)(app);
+  await require(`./app/startup/helen/expressStartup`)(app);
   // start socket on server
-  await require(`./app/socket/${CONFIG.PLATFORM}/socket`).connect(global.io, p2p);
+  await require(`./app/socket/helen/socket`).connect(global.io, p2p);
 
   return new Promise((resolve, reject) => {
     server.listen(CONFIG.server.PORT, (err) => {

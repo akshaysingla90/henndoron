@@ -6,9 +6,30 @@ CONSTANTS.SERVER = {
   ONE: 1
 };
 
-CONSTANTS.AVAILABLE_AUTHS = {
-  USER: 'user',
-  ADMIN: 'admin'
+
+CONSTANTS.USER_ROLE = {
+  STUDENT: 'student',
+  TEACHER: 'teacher',
+  ADMIN: 'admin',
+
+};
+
+CONSTANTS.RESOURCE_TYPE = {
+  SPRITE: { VALUE: 1, BASE_PATH: '/res/Sprite' },
+  SOUND: { VALUE: 2, BASE_PATH: '/res/Sound' },
+  ANIMATION_FRAMES: { VALUE: 3, BASE_PATH: '/res/AnimationFrames' }
+};
+
+CONSTANTS.ACTIVITY_TYPE = {
+  SMALL: 1,
+  MEDIUM: 2,
+  GAME: 3
+};
+
+CONSTANTS.ACTIVITY_STATUS = {
+  DRAFT:2,
+  TEMPLATE: 1,
+  PUBLISHED:3
 };
 
 CONSTANTS.PASSWORD_PATTER_REGEX = /^(?=.{6,})(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;
@@ -100,13 +121,12 @@ CONSTANTS.PAGINATION = {
 
 CONSTANTS.LESSON_STATUS = {
   ON_GOING: 1,
-  COMPLETE: 2
+  COMPLETE: 2,
+  DRAFT: 3,
+  PUBLISHED: 4
 };
 
-CONSTANTS.USER_ROLE = {
-  STUDENT: 1,
-  TEACHER: 2
-};
+
 
 CONSTANTS.SOCKET_EVENTS_TYPES = {
   GAME_MESSAGE: 1000,

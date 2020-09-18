@@ -1,5 +1,5 @@
 const CONFIG = require('../../../config');
-const sessionModel = require(`../../models/${CONFIG.PLATFORM}/sessionModel`);
+const sessionModel = require(`../../models/helen/sessionModel`);
 
 let sessionService = {};
 

@@ -1,0 +1,457 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Spinning Wheel",
+    "activityPath": "ACTIVITY_SPINNINGWHEEL_1",
+    "description": "game desc. here",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": true
+    },
+    "externalRewards": true,
+    "studentPreview": false,
+    "url": "res/Activity/ACTIVITY_SPINNINGWHEEL_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_SPINNINGWHEEL_1",
+    "layerName": "SpinningWheelLayer"
+  },
+  "teacherScripts": {
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Circle/point to the images inside the wheel while the student reviews words."
+            },
+            {
+              "attributes": {
+                "underline": true,
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What do you see here?"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I see (a tub, a house, a tree, a book, sad Paul, glad Paul)."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Circle/point to the image to the right of the wheel."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "What do you see here? I see______. Let’s spin the wheel and find the match!"
+            },
+            {
+              "insert": "\n\n"
+            }
+          ]
+        }
+      },
+      "onGoButton": {
+        "UIName": "Go Button Clicked",
+        "enable": true,
+        "description": "This will trigger when GO button is clicked.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Click the Go! button to start the wheel. "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Stop! "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What’s this?"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I know!"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "This is a"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "______. Is it a match? Yes/No"
+            },
+            {
+              "insert": "\n\n"
+            }
+          ]
+        }
+      },
+      "onMouseEnable": {
+        "UIName": "On Mouse Enable",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Now it’s your turn! Can you spin the wheel? Yes, I can spin the wheel! "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Choose an image in the sidebar for the wheel to stop on."
+            },
+            {
+              "insert": " \n\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Student clicks the Go! Button. "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "What’s this? I know! This is a______. Is it a match? Yes/No. "
+            },
+            {
+              "insert": "\n\n\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "teacherTips": {
+    "component": "tipsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when activity starts.",
+        "content": {
+          "ops": [
+            {
+              "insert": "- Circle or point to the image on the right so student can see that they must match that image with the one in the wheel. \n- You choose when the student gets it right. Make the wheel land on the incorrect answer a few times to review more words.\n- Use gestures for spin and stop to help students understand the activity. \n- Don’t forget to praise their efforts!  \n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg.png",
+        "dimensions": { "width": 961, "height": 641 }
+      }
+    }
+  },
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "goButton": {
+        "UIName": "Go Button",
+        "enableState": "go_button_idle.png",
+        "pushedState": "go_button_pushed.png",
+        "disableState": "go_button_disabled.png",
+        "dimensions": { "width": 512, "height": 167 },
+        "position": { "x": 650, "y": 204.5 },
+        "scale": 0.5
+      },
+      "stopButton": {
+        "UIName": "Stop Button",
+        "enableState": "stop_button_idle.png",
+        "pushedState": "stop_button_pushed.png",
+        "disableState": "stop_button_disabled.png",
+        "dimensions": { "width": 512, "height": 167 },
+        "position": { "x": 650, "y": 104.5 },
+        "scale": 0.5
+      }
+    }
+  },
+
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "targetBackground": {
+        "component": "image",
+        "UIName": "Target Background",
+        "imageName": "targetBg.png",
+        "dimensions": { "width": 512, "height": 512 },
+        "position": { "x": 520, "y": 224.5 },
+        "scale": 0.5
+      },
+      "spinningWheelBase": {
+        "component": "image",
+        "UIName": "Spinning Wheel Base",
+        "imageName": "wheel_4.png",
+        "dimensions": { "width": 512, "height": 512 },
+        "position": { "x": 250, "y": 374.5 },
+        "scale": 0.8
+      },
+      "spinningCenter": {
+        "component": "image",
+        "UIName": "Spinning Center",
+        "imageName": "wheel_center.png",
+        "dimensions": { "width": 512, "height": 512 },
+        "position": { "x": 150, "y": 162.25 },
+        "scale": 0.15
+      },
+      "spinningWheelTop": {
+        "component": "image",
+        "UIName": "Spinning WheelTop",
+        "imageName": "wheel_arrow.png",
+        "dimensions": { "width": 512, "height": 512 },
+        "position": { "x": 250, "y": 324.5 },
+        "scale": 0.25
+      },
+      "carouselBackgroundImage": {
+        "component": "image",
+        "UIName": "Carousel Background Image",
+        "imageName": "carouselImage.png",
+        "position": { "x": 768, "y": 454.3 },
+        "dimensions": { "width": 681, "height": 121 }
+      },
+      "carouselBackgroundBorderImage": {
+        "component": "image",
+        "UIName": "Carousel Background Border Image",
+        "imageName": "carouselBorderImage.png",
+        "position": { "x": 768, "y": 454.3 },
+        "dimensions": { "width": 681, "height": 121 }
+      },
+      "carouselBackground": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": { "r": 60, "g": 92, "b": 113, "a": 0 },
+        "constraints": ["color"]
+      },
+      "carouselBoxBackground": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": { "r": 78, "g": 106, "b": 125, "a": 0 },
+        "constraints": ["color"]
+      },
+      "carouselBoxCardBackground": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "color": { "r": 44, "g": 59, "b": 69, "a": 0 },
+        "constraints": ["color"]
+      },
+      "carouselBoxCardText": {
+        "component": "text",
+        "UIName": "Carousel Box Card Text",
+        "color": { "r": 0, "g": 0, "b": 0, "a": 0 },
+        "font": "sassoon_sans_regular",
+        "fontSize": 16
+      },
+
+      "carouselBoxHighlight": {
+        "component": "colorPicker",
+        "UIName": "Carousel Box Highlight",
+        "color": { "r": 148, "g": 95, "b": 56, "a": 100 }
+      },
+
+      "animationWinLossSprite": {
+        "ignoreForAuthToolUI": true,
+        "configurable": true,
+        "title": "STOP!",
+        "position": { "x": 600, "y": 204.5 },
+        "scale": 1,
+        "constraints": ["name", "position"]
+      },
+      "tapHiddenObject": {
+        "component": "sound",
+        "UIName": "Tap Hidden Object Sound",
+        "sound": "tap.mp3"
+      },
+      "gameInfo": {
+        "ignoreForAuthToolUI": true,
+        "isCounting": true,
+        "countingObject": 3
+      },
+
+      "carouselAssets": {
+        "component": "carouselItems",
+        "allowDelete": false,
+        "allowAdd": false,
+        "dimensions": { "width": 72, "height": 72 },
+        "data": [
+          {
+            "imageName": "ant.png",
+            "scale": 1,
+            "label": "ant"
+          },
+          {
+            "imageName": "bat.png",
+            "scale": 1,
+            "label": "bat"
+          },
+          {
+            "imageName": "bee.png",
+            "scale": 1,
+            "label": "bee"
+          },
+          {
+            "imageName": "crow.png",
+            "scale": 1,
+            "label": "crow"
+          }
+        ]
+      },
+      "win": {
+        "component": "animation",
+        "UIName": "Win",
+        "name": "Win Object Pulled Out Animation",
+        "frameCount": 15,
+        "frameInitial": "Win/object_pulled_out_animation_",
+        "extension": ".png",
+        "dimensions": { "width": 1920, "height": 1280 },
+        "position": { "x": 256, "y": 512 },
+        "animationPath": "{100,100},{200,200}",
+        "constraints": ["imageName, dimensions, animationPath"]
+      },
+      "loss": {
+        "component": "animation",
+        "UIName": "Loss",
+        "name": "Loss Object Pulled Out Animation",
+        "frameCount": 15,
+        "frameInitial": "Loss/object_pulled_out_animation_",
+        "extension": ".png",
+        "dimensions": { "width": 1920, "height": 1280 },
+        "position": { "x": 256, "y": 512 },
+        "animationPath": "{100,100},{200,200}",
+        "constraints": ["imageName, dimensions, animationPath"]
+      }
+    }
+  },
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "bg.png",
+        "carouselBorderImage.png",
+        "carouselImage.png",
+        "ant.png",
+        "bat.png",
+        "bee.png",
+        "crow.png",
+        "go_button_disabled.png",
+        "go_button_idle.png",
+        "go_button_pushed.png",
+        "stop_button_disabled.png",
+        "stop_button_idle.png",
+        "stop_button_pushed.png",
+        "targetBg.png",
+        "wheel_4.png",
+        "wheel_5.png",
+        "wheel_6.png",
+        "wheel_arrow.png",
+        "wheel_center.png"
+      ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": ["tap.mp3"]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "name": "Win Object Pulled Out Animation",
+          "frameCount": 15,
+          "frameInitial": "Win/object_pulled_out_animation_",
+          "extension": ".png"
+        },
+        {
+          "name": "Loss Object Pulled Out Animation",
+          "frameCount": 15,
+          "frameInitial": "Loss/object_pulled_out_animation_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}

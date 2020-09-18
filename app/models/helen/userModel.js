@@ -1,5 +1,6 @@
 "use strict";
 /************* Modules ***********/
+const { USER_ROLE } = require('../../utils/constants')
 const MONGOOSE = require('mongoose');
 const Schema = MONGOOSE.Schema;
 /**************************************************
@@ -19,7 +20,8 @@ const userSchema = new Schema({
         activity: { type: String },
         rewards: { type: Number },
         teacherId: { type: Schema.Types.ObjectId, ref: 'user' }
-    }]
+    }],
+    role: { type: Number, enum: [USER_ROLE.ADMIN, USER_ROLE.STUDENT, USER_ROLE.TEACHER] }
 });
 
 userSchema.set('timestamps', true);

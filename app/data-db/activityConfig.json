@@ -1,0 +1,90 @@
+[
+  {
+    "name": "ACTIVITY_BAP_1",
+    "path": "/ACTIVITY_BAP_1",
+    "type": 1,
+    "description": "This is a multi-purpose module that can be used in hundreds of different ways.It is made up of simply a background, a pen, a color selector, and an eraser foreach student. The Teacher can click a button in the Teachers View to clear thedrawing, with a button at the bottom of the color palette. When clicked, the mouse cursoris replaced by an eraser, and clicking and dragging anywhere removes thepen marks that were ‘drawn’. There are small ‘Next’ and ‘Previous’ buttons on theTeacher’s View, for them to navigate to the next background in the activity.",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Counting.png",
+    "status":1
+  },
+  {
+    "name": "ACTIVITY_BUILD_SOMETHING_1",
+    "path": "/ACTIVITY_BUILD_SOMETHING_1",
+    "type": 1,
+    "description": "Students build something (human body, car, recipe, etc) by dragging in the item specified by the teacher.Wrong answers result in hilarious results, and the right answer produces a working product! This is agamified memory game. In the middle of the background is an area for construction - an operating table,or garage work table, a kitchen table-top, etc; This is the area where the final product will be assembled.All objects are draggable and students can choose the order to add them. As each object is dropped, it ‘sticks’to the object, it is dragged over/under. If it is dropped not over any other item, it flies back to the sidebar. Once stuck, it can no longer be moved.",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Build.png",
+    "status": 1
+  },
+  {
+    "name": "ACTIVITY_COUNTING_1",
+    "path": "/ACTIVITY_COUNTING_1",
+    "type": 1,
+    "description": "This game is used to practice counting.Students practice counting by findingsomething hiding behind different objects. Students click on the object to revealthe hidden object. In these instances, when the student clicks an object, a circleis overlaid with the number of items they have found so far.Teacher can enable/disablethe students mouse as usual.",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Counting.png",
+    "status": 1
+  },
+  {
+    "name": "ACTIVITY_CWC_1",
+    "path": "/ACTIVITY_CWC_1",
+    "type": 1,
+    "description": "Two characters stand on screen with an idle animation on repeat, and the teacher cantrigger each of them to say a sentence from a pre-defined list. When the teacher clicksthe down button on the select button, a drop-down menu appears. When the teacher selectsa sentence from the drop-down menu, The character starts their animated action,and plays the associated audio file.",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Conversations.png",
+    "status": 1
+  },
+  {
+    "name": "ACTIVITY_DONT_WAKE_THE_DRAGON_1",
+    "path": "/ACTIVITY_DONT_WAKE_THE_DRAGON_1",
+    "type": 1,
+    "description": "There is an animation of sleeping, snoring dragon. It’s chest rises and falls with it’s breathing.There are items under the dragon in a pile of treasure. The student should pick an object,say what it is, and then drag that object from under the sleeping monster. At some point,removing one of the objects will wake the monster and ‘scare’ the students. it is highly engagingbecause it works with emotions of excitement and nerves. ",
+    "iconUrl": "https://helen-doron-s3uploads.s3.amazonaws.com/icon_activity_Dragon.png",
+    "status": 1
+  },
+  {
+    "name": "ACTIVITY_FLASHCARDS_1",
+    "path": "/ACTIVITY_FLASH_CARDS_1",
+    "type": 1,
+    "description": "There are 6 images at the bottom of the screen in a bottom sidebar. The teacher canselect any item in the sidebar by clicking it, which triggers the display of a new flashcardcontaining that item. The currently displayed item is marked in the bottom-sidebar by the selecteditem having a highlighted background in the sidebar. Flashcard items are displayed in a bottom sidebarand the text associated with each flashcard item is displayed above each object. Any item can beselected multiple times, there are no limitations on this. The activity ends when the teacher clicksto enter the next module. In Student View, images are displayed inside billboards within a scene.",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Flashcards_01.png",
+    "status": 1
+  },
+  {
+    "name": "ACTIVITY_FLASHLIGHT_1",
+    "path": "/ACTIVITY_FLASHLIGHT_1",
+    "type": 1,
+    "description": "The screen is dark and the user controls a flashlight that reveals what is in the room as they move their mouse.There is a character in the scene, and the user has to help them find an object. When they shine the object onthe correct item and say its name, the character will run over and pick it up. For the teacher, a tick and crossbutton appears inside the circle. If the cross button is clicked, the flashlight is unfrozen.if the tick button is clicked, the animated character on screen runs over into the flashlight circle and celebrates.",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Flashlight.png",
+    "status": 1
+  },
+  {
+    "name": "ACTIVITY_MAGICHAT_1",
+    "path": "/ACTIVITY_MAGIC_HAT_1",
+    "type": 1,
+    "description": "This is a simple activity, for learning vocabulary. The student pulls large objectsout of a small bag or hat. Teachers have a carousel along the bottom of thescreen, displaying the items in the bag/hat. Clicking on an item makes it thenext item to be pulled out of the hat. The teacher can select any itemin the carousel by clicking it, which sets that item as the next item to be pulledfrom the hat/bag. Any item can be selected multiple times. When the studentclicks the bag the object jumps out of the bag/hat and lands on a table or on thefloor next to it.",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Magic_Hat.png",
+    "status": 1
+  },
+  {
+    "name": "ACTIVITY_PIANO_PLAYER_1",
+    "path": "/ACTIVITY_PIANO_PLAYER_1",
+    "type": 1,
+    "description": "Students enjoy playing the piano by clicking on keys to practice words, letters, or numbers.The teacher says certain words, and the student has to press the corresponding key based on the pictures.As the correct key is pressed, the key turns green. If the incorrect key is pressed, it turns red. When the miceare disabled, the students see whatever the teacher clicks on the teacher's keyboard. When the mice are enabledand all the students are playing their own keyboard, the teacher is shown live feedback when a student gets aword right or wrong",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Piano.png",
+    "status": 1
+  },
+  {
+    "name": "ACTIVITY_SAVE_A_SITUATION_1",
+    "path": "/ACTIVITY_SAVE_A_SITUATION_1",
+    "type": 1,
+    "description": "There is a tub in water, and the tub has holes shaped like objects.The tub has holes in it, each shaped like a different object. When they drag it toa position that overlaps with the hole in the tab that correlates to that item, itautomatically fits in the whole.When the student succeeds in plugging all the holesin the tub, the land finishes, and then the tub floats out to sea.This game can havemultiple levels, each with different shapes missing from the tub, and different objectsin the sidebar. There is no button to move to the next level, it happens automaticallywhen the previous level was completed successfully.",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Situation.png",
+    "status": 1
+  },
+  {
+    "name": "ACTIVITY_SPINNINGWHEEL_1",
+    "path": "/ACTIVITY_SPINNINGWHEEL_1",
+    "type": 1,
+    "description": "There is a wheel positioned in the center of the screen with 6 images in eachsection of the circle. An image is displayed to the right of the wheel as the mainimage to be matched to one from the wheel. An arrow marker points into the wheel,at the top point of it. There is a “GO!” button on the right of the spinning wheel, thatstarts the spin of the wheel. Along the bottom of the screen is a Selection Panelcontaining pictures of all items in the wheel. The teacher can select an item in thisSelection Panel as the ‘current’ item. They will select the item that the spinning wheelwill land on.",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Spinning_Wheel.png",
+    "status": 1
+  }
+]

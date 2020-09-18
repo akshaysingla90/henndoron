@@ -14,29 +14,27 @@ const uploadMiddleware = multer();
 
 let routeUtils = {};
 
+/** middleware for api's logging with deployment mode */
+let apiLooger = (req, res, next) => {
+  console.log(`\x1b[32m` + `api hitted ${(new Date()).toLocaleTimeString()} ${req.url} ${req.method} ${process.env.NODE_ENV}`);
+  next();
+};
+
 /**
  * function to create routes in the express.
  */
 routeUtils.route = async (app, routes = []) => {
   routes.forEach(route => {
-    if (route.joiSchemaForSwagger.params && Object.keys(route.joiSchemaForSwagger.params).length) {
-      route.joiSchemaForSwagger.params = Joi.object(route.joiSchemaForSwagger.params);
-    }
-    if (route.joiSchemaForSwagger.query && Object.keys(route.joiSchemaForSwagger.query).length) {
-      route.joiSchemaForSwagger.query = Joi.object(route.joiSchemaForSwagger.query);
-    }
-    if (route.joiSchemaForSwagger.body && Object.keys(route.joiSchemaForSwagger.body).length) {
-      route.joiSchemaForSwagger.body = Joi.object(route.joiSchemaForSwagger.body);
-    }
-    let middlewares = [getValidatorMiddleware(route)];
-    if (route.auth === AVAILABLE_AUTHS.USER) {
-     middlewares.push(SERVICES.authService.userValidate());
-    };
+    let middlewares = [];
     if (route.joiSchemaForSwagger.formData) {
-      const keys = Object.keys(route.joiSchemaForSwagger.formData);
-      keys.forEach((key) => {
-        middlewares.push(uploadMiddleware.single(key));
-      });
+      const multerMiddleware = getMulterMiddleware(route.joiSchemaForSwagger.formData);
+      middlewares = [multerMiddleware];
+    }
+    middlewares.push(apiLooger);
+    middlewares.push(getValidatorMiddleware(route));
+    if (route.auth) {
+      if (typeof route.auth === 'string') route.auth = [route.auth];
+      middlewares.push(SERVICES.authService.validateUser(route.auth));
     };
     app.route(route.path)[route.method.toLowerCase()](...middlewares, getHandlerMethod(route));
   });
@@ -49,19 +47,55 @@ routeUtils.route = async (app, routes = []) => {
  */
 let joiValidatorMethod = async (request, route) => {
   if (route.joiSchemaForSwagger.params && Object.keys(route.joiSchemaForSwagger.params).length) {
-    request.params = await route.joiSchemaForSwagger.params.validate(request.params);
+    request.params = await Joi.object(route.joiSchemaForSwagger.params).validate(request.params);
+    checkJoiValidationError(request.params);
   }
   if (route.joiSchemaForSwagger.body && Object.keys(route.joiSchemaForSwagger.body).length) {
-    request.body = await route.joiSchemaForSwagger.body.validate(request.body);
+    request.body = await Joi.object(route.joiSchemaForSwagger.body).validate(request.body);
+    checkJoiValidationError(request.body);
   }
   if (route.joiSchemaForSwagger.query && Object.keys(route.joiSchemaForSwagger.query).length) {
-    request.query = await route.joiSchemaForSwagger.query.validate(request.query);
+    request.query = await Joi.object(route.joiSchemaForSwagger.query).validate(request.query);
+    checkJoiValidationError(request.query);
   }
   if (route.joiSchemaForSwagger.headers && Object.keys(route.joiSchemaForSwagger.headers).length) {
-    let headersObject = await route.joiSchemaForSwagger.headers.validate(request.headers);
+    let headersObject = await Joi.object(route.joiSchemaForSwagger.headers).unknown().validate(request.headers);
+    checkJoiValidationError(headersObject);
     request.headers.authorization = ((headersObject || {}).value || {}).authorization;
   }
+  if (route.joiSchemaForSwagger.formData && route.joiSchemaForSwagger.formData.body && Object.keys(route.joiSchemaForSwagger.formData.body).length) {
+    multiPartObjectParse(route.joiSchemaForSwagger.formData.body, request);
+    request.body = await Joi.object(route.joiSchemaForSwagger.formData.body).validate(request.body);
+    checkJoiValidationError(request.body);
+  }
 };
+
+/**
+ *  Parse the objects recived in multipart data request
+ * @param {*} formBody
+ * @param {*} request
+ */
+let multiPartObjectParse = (formBody, request) => {
+  let invalidKey;
+  try {
+    Object.keys(formBody)
+      .filter(key => ['object', 'array'].includes(formBody[key].type))
+      .forEach(objKey => {
+        invalidKey = objKey;
+        if (typeof request.body[objKey] == 'string') request.body[objKey] = JSON.parse(request.body[objKey])
+      });
+  } catch (err) {
+    throw new Error(`${invalidKey} must be of type object`)
+  }
+
+}
+/**
+ * function to check the error of all joi validations
+ * @param {*} joiValidatedObject 
+ */
+let checkJoiValidationError = (joiValidatedObject) => {
+  if (joiValidatedObject.error) throw joiValidatedObject.error;
+}
 
 /**
  * middleware to validate request body/params/query/headers with JOI.
@@ -80,6 +114,37 @@ let getValidatorMiddleware = (route) => {
 }
 
 /**
+ *  middleware to  to handle the multipart/form-data
+ * @param {*} formData 
+ */
+let getMulterMiddleware = (formData) => {
+  let validKeys = Object.keys(formData).filter(key => ["file", 'files', "fileArray"].includes(key));
+  if (validKeys.length > 1) {
+    console.log(validKeys, "are used")
+    throw Error(`Only one parameter from ["file", 'files', "fileArray"] allowed in formData`)
+  }
+  // for multiple files
+  if (formData.files && Object.keys(formData.files).length) {
+    let fileFields = [];
+    const keys = Object.keys(formData.files);
+    keys.forEach((key) => {
+      fileFields.push({ name: key, maxCount: formData.files[key].maxCount });
+    });
+    return uploadMiddleware.fields(fileFields);
+  }
+  //for single file
+  if (formData.file && Object.keys(formData.file).length) {
+    const fileField = Object.keys(formData.file)[0];
+    return uploadMiddleware.single(fileField);
+  };
+  //for file array in single key
+  if (formData.fileArray && Object.keys(formData.fileArray).length) {
+    const fileField = Object.keys(formData.fileArray)[0];
+    return uploadMiddleware.array(fileField, formData.fileArray[fileField].maxCount);
+  };
+}
+
+/**
  * middleware
  * @param {*} handler 
  */
@@ -91,6 +156,7 @@ let getHandlerMethod = (route) => {
       ...((request.params || {}).value || {}),
       ...((request.query || {}).value || {}),
       file: (request.file || {}),
+      files: (request.files || {}),
       user: (request.user ? request.user : {}),
     };
     //request handler/controller

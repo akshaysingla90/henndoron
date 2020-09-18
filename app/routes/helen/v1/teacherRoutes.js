@@ -1,10 +1,9 @@
 'use strict';
 
 const { Joi } = require('../../../utils/joiUtils');
-const CONFIG = require('../../../../config');
-const { AVAILABLE_AUTHS } = require(`../../../utils/constants`);
+const { USER_ROLE } = require(`../../../utils/constants`);
 //load controllers
-const { saveRewardPoints } = require(`../../../controllers/${CONFIG.PLATFORM}/userController`);
+const { saveRewardPoints } = require(`../../../controllers/helen/userController`);
 
 let routes = [
     {
@@ -24,7 +23,7 @@ let routes = [
             description: 'Route to reward student.',
             model: 'Reward_Points'
         },
-        auth: AVAILABLE_AUTHS.USER,
+        // auth: [USER_ROLE.STUDENT, USER_ROLE.TEACHER],
         handler: saveRewardPoints
     }
 ];

@@ -2,7 +2,7 @@ const fs = require('fs');
 const swaggerJson = require('../../../config').swagger;
 const j2s = require('joi-to-swagger');
 let singleton = undefined;
-const { AVAILABLE_AUTHS } = require('../../utils/constants');
+const { USER_ROLE } = require('../../utils/constants');
 
 class Swagger {
     constructor() {
@@ -47,7 +47,7 @@ class Swagger {
         return fs.writeFileSync('swagger.json', JSON.stringify(swaggerData));
     }
 
-    addNewRoute(joiDefinitions, path, method, auth) {
+    addNewRoute(joiDefinitions, path, method, auths) {
 
         if (this.currentRoute.includes(path + method)) {
             return false;
@@ -136,6 +136,12 @@ class Swagger {
         }
 
         if (formData) {
+            toSwagger.properties.formData.properties = {
+                ...(toSwagger.properties.formData.properties.file && toSwagger.properties.formData.properties.file.properties),
+                ...(toSwagger.properties.formData.properties.fileArray && toSwagger.properties.formData.properties.fileArray.properties),
+                ...(toSwagger.properties.formData.properties.files && toSwagger.properties.formData.properties.files.properties),
+                ...(toSwagger.properties.formData.properties.body && toSwagger.properties.formData.properties.body.properties),
+            }
             const keys = Object.keys(toSwagger.properties.formData.properties).map((key) => key);
             let requiredFields = toSwagger.properties.formData.required;
             keys.forEach((key) => {
@@ -210,14 +216,15 @@ class Swagger {
 
        // add security for specific routes based on auth.
        this.paths[transformPath][method].security = [];
-       let availableAuths = Object.keys(AVAILABLE_AUTHS || {});
-       availableAuths.forEach((availableAuth) => {
-           if(AVAILABLE_AUTHS[availableAuth] === auth){
-               let securityObject = {};
-               securityObject[`${AVAILABLE_AUTHS[availableAuth]}TokenHeader`] = [];
-               this.paths[transformPath][method].security.push(securityObject);
-           }
-       });
+        if (auths) {
+            auths.forEach(auth => {
+                if (Object.values(USER_ROLE).includes(auth)) {
+                    let securityObject = {};
+                    securityObject[`${auth}TokenHeader`] = [];
+                    this.paths[transformPath][method].security.push(securityObject);
+                }
+            })
+        }
 
         const newData = {
             ...otherData,
