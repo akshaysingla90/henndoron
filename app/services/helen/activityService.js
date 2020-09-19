@@ -61,6 +61,13 @@ activityService.removeActivity = async (criteria) => {
 };
 
 /**
+ * function to remove multiple activities .
+ */
+activityService.removeActivities = async (criteria) => {
+  return await activityModel.deleteMany(criteria);
+};
+
+/**
  * function to fetch all Courses.
  */
 activityService.getCourses = async (criteria, projection) => {
@@ -79,9 +86,7 @@ activityService.copyTemplates = async (activities) => {
     let activity = activities[index];
     let templateCocoPath = path.join(`${cocoProjectPath}/HelenDoron/res/Activity${activity.path}`);
     let templateNodePath = path.join(__dirname, `../../../template-activities${activity.path}`);
-    console.log('copying start for file ',index);
     await fs.copy(templateCocoPath, templateNodePath);
-    console.log('copying end for file ', index);
   }
   await shell.cd(path.join(__dirname, `../../..`));
   await shell.exec(`sudo git add template-activities`);
