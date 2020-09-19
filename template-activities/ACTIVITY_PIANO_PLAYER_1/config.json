@@ -337,13 +337,13 @@
       },
       "keyPressedCorrectImage": {
         "component": "image",
-        "UIName": "KeyPressedCorrectImage",
+        "UIName": "Key Pressed Correct Image",
         "imageName": "key_pressed_correct.png",
         "dimensions": { "width": 120, "height": 170 }
       },
       "keyPressedIncorrectImage": {
         "component": "image",
-        "UIName": "KeyPressedIncorrectImage",
+        "UIName": "Key Pressed Incorrect Image",
         "imageName": "key_pressed_incorrect.png",
         "dimensions": { "width": 120, "height": 170 }
       },
