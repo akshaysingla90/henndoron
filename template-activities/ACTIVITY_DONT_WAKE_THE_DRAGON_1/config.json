@@ -175,7 +175,7 @@
           },
           "DragonAlertStage1": {
             "name": "Dragon Sleep02",
-            "UIName": "Dragon AlertStage 1",
+            "UIName": "Dragon Alert Stage 1",
             "frameCount": 24,
             "frameInitial": "dragon_sleep02/dragon_sleep02_",
             "extension": ".png"
