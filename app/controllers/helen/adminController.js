@@ -333,10 +333,10 @@ adminController.getCourses = async (payload) => {
  */
 adminController.updateActivityTemplate = async () => {
   await SERVICES.activityService.copyTemplates(ACTIVITIES);
-  let previewFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
-  fs.removeSync(previewFolderPath);
-  let activityFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
-  fs.removeSync(activityFolderPath);
+  // let previewFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
+  // fs.removeSync(previewFolderPath);
+  // let activityFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
+  // fs.removeSync(activityFolderPath);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY));
 }
 /* export adminController */
