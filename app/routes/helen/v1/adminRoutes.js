@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE } = require(`../../../utils/constants`);
 //load controllers
-const { deleteActivityPreview, deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
+const { updateActivityTemplate, deleteActivityPreview, deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
 
 let routes = [
   {
@@ -253,7 +253,24 @@ let routes = [
     },
     auth: USER_ROLE.ADMIN,
     handler: deleteActivityPreview
-  },
+  }
 ];
+
+if (process.env.UPDATE_TEMPLATES) {
+  routes.push({
+    method: 'POST',
+    path: '/v1/admin/update-activity-templates',
+    joiSchemaForSwagger: {
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
+      group: 'Activity-Template',
+      description: 'Route to update activity templates',
+      model: 'Delete_Acyivity_Preview'
+    },
+    auth: USER_ROLE.ADMIN,
+    handler: updateActivityTemplate
+  })
+}
 
 module.exports = routes;

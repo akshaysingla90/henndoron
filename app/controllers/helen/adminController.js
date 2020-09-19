@@ -3,6 +3,7 @@ const HELPERS = require("../../helpers");
 const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS } = require('../../utils/constants');
 const { ACTIVITY_SRC_PATH, ACTIVITY_PREVIEW_PATH, TEMPLATE_ACTIVITY_PREVIEW, TEMPLATE_ACTIVITY_PATH, ACTIVITY_DIRECTORY_PATH, ACTIVITY_RESOURCE_DIRECTORY_PATH, BASE_PATH, ACTIVITY_CONFIG_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const SERVICES = require('../../services');
+const ACTIVITIES = require('../../data-db/activityConfig.json');
 const fs = require('fs-extra');
 const replace = require('replace-in-file');
 const path = require('path');
@@ -327,6 +328,17 @@ adminController.getCourses = async (payload) => {
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.COURSES_FETCHED_SUCCESSFULLY), { courses });
 }
 
+/**
+ * fucntion to update the activity templates
+ */
+adminController.updateActivityTemplate = async () => {
+  await SERVICES.activityService.copyTemplates(ACTIVITIES);
+  let previewFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
+  fs.removeSync(previewFolderPath);
+  let activityFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
+  fs.removeSync(activityFolderPath);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY));
+}
 /* export adminController */
 module.exports = adminController;
 

@@ -89,6 +89,7 @@ module.exports = {
   ACTIVITY_PUBLISHED_SUCCESSFULLY:'Module published successfully',
   ACTIVITY_FETCHED_SUCCESSFULLY: "Module fetched successfully",
   ACTIVITY_UPDATED_SUCCESSFULLY: "Module updated successfully",
+  ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY: "Module templates updated successfully",
   ACTIVITY_DELETED_SUCCESSFULLY: "Module deleted successfully",
   ACTIVITY_PREVIEW_DELETED_SUCCESSFULLY: "Module preview deleted successfully",
   ACTIVITY_PREVIEW_CREATED_SUCCESSFULLY: "Module preview created successfully",
