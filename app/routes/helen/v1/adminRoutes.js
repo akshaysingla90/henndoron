@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE } = require(`../../../utils/constants`);
 //load controllers
-const { deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
+const { deleteActivityPreview, deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
 
 let routes = [
   {
@@ -236,6 +236,23 @@ let routes = [
     },
     auth: USER_ROLE.ADMIN,
     handler: deleteResourceFiles
+  },
+  {
+    method: 'DELETE',
+    path: '/v1/admin/activities/preview/:activityId',
+    joiSchemaForSwagger: {
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
+      params: {
+        activityId: Joi.string().required().description('Activity\'s Id.')
+      },
+      group: 'Admin',
+      description: 'Route to delete activity-preview',
+      model: 'Delete_Acyivity_Preview'
+    },
+    auth: USER_ROLE.ADMIN,
+    handler: deleteActivityPreview
   },
 ];
 

@@ -195,6 +195,18 @@ adminController.deleteActivity = async (payload) => {
 }
 
 /**
+ * function to delete the activity-preview folder by its id
+ * @param {*} payload 
+ */
+adminController.deleteActivityPreview = async (payload) => {
+  let activity = await SERVICES.activityService.getActivity({ _id: payload.activityId }, { path: 1 });
+  if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  let previewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}${activity.path}`);
+  fs.removeSync(previewPath);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_PREVIEW_DELETED_SUCCESSFULLY));
+}
+
+/**
  * function to duplicate a Activity from existing activity
  */
 
