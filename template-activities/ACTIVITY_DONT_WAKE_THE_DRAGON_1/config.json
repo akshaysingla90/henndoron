@@ -168,35 +168,35 @@
         "data": {
           "DragonSleep": {
             "name": "Dragon Sleep01",
-            "UIName": "DragonSleep",
+            "UIName": "Dragon Sleep",
             "frameCount": 35,
             "frameInitial": "dragon_sleep01/dragon_sleep01_",
             "extension": ".png"
           },
           "DragonAlertStage1": {
             "name": "Dragon Sleep02",
-            "UIName": "DragonAlertStage 1",
+            "UIName": "Dragon AlertStage 1",
             "frameCount": 24,
             "frameInitial": "dragon_sleep02/dragon_sleep02_",
             "extension": ".png"
           },
           "DragonAlertStage2": {
             "name": "Dragon Sleep03",
-            "UIName": "DragonAlertStage 2",
+            "UIName": "Dragon Alert Stage 2",
             "frameCount": 24,
             "frameInitial": "dragon_sleep03/dragon_sleep03_",
             "extension": ".png"
           },
           "DragonAwake": {
             "name": "Dragon Awake",
-            "UIName": "DragonAwake",
+            "UIName": "Dragon Awake",
             "frameCount": 48,
             "frameInitial": "dragon_awake/dragon_awake_",
             "extension": ".png"
           },
           "DragonBackToSleep": {
             "name": "Dragon Back To Sleep",
-            "UIName": "DragonBackToSleep",
+            "UIName": "Dragon Back To Sleep",
             "frameCount": 38,
             "frameInitial": "dragon_back_to_sleep/dragon_back_to_sleep_",
             "extension": ".png"
