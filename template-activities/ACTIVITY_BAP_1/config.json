@@ -10,8 +10,8 @@
       "turnBased": true
     },
     "externalRewards": true,
-    "studentPreview": true,
     "url": "res/Activity/ACTIVITY_BAP_1/",
+    "studentPreview": true,
     "number": 1,
     "renderMode": 1,
     "preLoaded": true,
