@@ -90,6 +90,7 @@ module.exports = {
   ACTIVITY_FETCHED_SUCCESSFULLY: "Module fetched successfully",
   ACTIVITY_UPDATED_SUCCESSFULLY: "Module updated successfully",
   ACTIVITY_DELETED_SUCCESSFULLY: "Module deleted successfully",
+  ACTIVITY_PREVIEW_DELETED_SUCCESSFULLY: "Module preview deleted successfully",
   ACTIVITY_PREVIEW_CREATED_SUCCESSFULLY: "Module preview created successfully",
   ACTIVITY_DOESNOT_EXISTS:"Module with this id doesn't exist",
   ACTIVITY_ALREADY_EXISTS_WITH_THIS_NAME:'Module already exists with this name',
