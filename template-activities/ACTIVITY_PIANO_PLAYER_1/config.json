@@ -237,6 +237,7 @@
         ]
       },
       "songs": {
+        "dimensions": { "width": 350, "height": 350 },
         "component": "pianoSongs",
         "data": [
           {

@@ -151,7 +151,6 @@
         "component": "carouselItems",
         "allowDelete": true,
         "allowAdd": true,
-        "allowAdd": true,
         "dimensions": { "width": 350, "height": 350 },
         "data": [
           {
