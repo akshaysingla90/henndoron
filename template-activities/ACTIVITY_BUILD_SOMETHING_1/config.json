@@ -90,7 +90,7 @@
       "TargetAssembledUnsuccessfully": {
         "UIName": "Target Assembled Unsuccessfully",
         "enable": true,
-        "description": "this will trigger when target is assembled unsuccessfully ",
+        "description": "This will trigger when target is assembled unsuccessfully ",
         "content": {
           "ops": [
             {
@@ -132,7 +132,7 @@
       "TargetAssembledSuccessfully": {
         "UIName": "Target Assembled Successfully",
         "enable": true,
-        "description": "this will trigger when target is assembled successfully",
+        "description": "This will trigger when target is assembled successfully",
         "content": {
           "ops": [
             {
@@ -307,8 +307,8 @@
       },
       "looseBG": {
         "component": "image",
-        "UIName": "Loose BG",
-        "imageName": "looseScreen",
+        "UIName": "Lose BG",
+        "imageName": "looseScreen.png",
         "dimensions": { "width": 960, "height": 640 }
       },
       "winBG": {
