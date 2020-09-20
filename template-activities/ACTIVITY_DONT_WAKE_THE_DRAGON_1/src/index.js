@@ -1139,13 +1139,13 @@ ACTIVITY_DONT_WAKE_THE_DRAGON_1.CommonLayer = HDBaseLayer.extend({
 
     _setClosedPincerFingersCursor: function () {
         this.isCustomCursorTexture = true;
-        this.customCursorTextureUrl = ( "AsyncActivity/" + ACTIVITY_DONT_WAKE_THE_DRAGON_1.resourcePath) + ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.cursors.data.closedFingers.imageName;
+        this.customCursorTextureUrl = ( ACTIVITY_DONT_WAKE_THE_DRAGON_1.resourcePath) + ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.cursors.data.closedFingers.imageName;
     },
 
     _setOpenPincerFingersCursor: function (flag) {
         if (flag) {
             this.isCustomCursorTexture = true;
-            this.customCursorTextureUrl = ( "AsyncActivity/" + ACTIVITY_DONT_WAKE_THE_DRAGON_1.resourcePath) + ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.cursors.data.openFingers.imageName;
+            this.customCursorTextureUrl = ( ACTIVITY_DONT_WAKE_THE_DRAGON_1.resourcePath) + ACTIVITY_DONT_WAKE_THE_DRAGON_1.MainLayerRef.config.cursors.data.openFingers.imageName;
         } else {
             this.isCustomCursorTexture = false;
             this.customCursorTextureUrl = "";

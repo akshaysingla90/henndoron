@@ -759,7 +759,7 @@ ACTIVITY_SAVE_A_SITUATION_1.SaveASituation = HDBaseLayer.extend({
 
     changeMouseCursorImage: function () {
         if (!HDAppManager.isTeacherView && this.isStudentInteractionEnable) {
-            var cursorPath = (ACTIVITY_SAVE_A_SITUATION_1.ref.config.properties.preLoaded ? ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath : "AsyncActivity/" + ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath);
+            var cursorPath = (ACTIVITY_SAVE_A_SITUATION_1.ref.config.properties.preLoaded ? ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath :  ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath);
             this.MouseTextureUrl = !this.selectedObject.isVisible() ? cursorPath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.cursors.data.openFingers.imageName : cursorPath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.cursors.data.closedFingers.imageName;
         } else {
             this.customTexture = false;

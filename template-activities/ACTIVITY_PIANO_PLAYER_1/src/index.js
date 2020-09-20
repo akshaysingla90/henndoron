@@ -238,9 +238,10 @@ ACTIVITY_PIANO_PLAYER_1.Piano = cc.Sprite.extend({
     let sheetWordsColorLayers = [];
     let innerContainerWidth = 0;
     for (let i = 0; i < sheetWords.length; ++i) {
-      let height = this.pianoKeyIconImages.find(
+      let item = this.pianoKeyIconImages.find(
           (item) => sheetWords[i] === item.word
-      ).height;
+      )
+      let height = (item && item.height) || 0;
       let label = new cc.LabelTTF(sheetWords[i], HDConstants.Sassoon_Regular, 35);
       label.setVerticalAlignment(cc.VERTICAL_TEXT_ALIGNMENT_BOTTOM);
       label.setColor(HDConstants.Black);
