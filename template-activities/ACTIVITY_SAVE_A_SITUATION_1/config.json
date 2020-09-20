@@ -519,7 +519,7 @@
         "data": {
           "tubWater": {
             "configurable": true,
-            "UIName": "TubWaterLine",
+            "UIName": "Tub WaterLine",
             "name": "tubWaterLine",
             "frameCount": 5,
             "dimensions": { "width": 512, "height": 512 },
@@ -532,7 +532,7 @@
 
           "animalWaterLine": {
             "configurable": true,
-            "UIName": "animals_waterline",
+            "UIName": "animals waterline",
             "name": "animals_waterline_loop_",
             "frameCount": 5,
             "dimensions": { "width": 512, "height": 512 },
@@ -544,7 +544,7 @@
           },
 
           "winAnimation": {
-            "UIName": "winAnimation",
+            "UIName": "win Animation",
             "configurable": true,
             "name": "magicHat_cardTakeOut_",
             "frameCount": 15,
@@ -556,7 +556,7 @@
           },
 
           "tubWaterCircle": {
-            "UIName": "TubWaterCircle",
+            "UIName": "Tub Water Circle",
             "configurable": true,
             "name": "tub_watecircle_loop_",
             "frameCount": 12,
@@ -569,7 +569,7 @@
           },
 
           "waterInTub": {
-            "UIName": "Tub_fillwaterline",
+            "UIName": "Tub fill waterline",
             "configurable": true,
             "name": "tub_fillwaterline_loop_",
             "frameCount": 24,
