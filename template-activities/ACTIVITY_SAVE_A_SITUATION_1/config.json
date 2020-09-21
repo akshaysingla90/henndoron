@@ -634,8 +634,7 @@
         "next_botton_pushed.png",
         "pop_up_bg.png",
         "replay_botton_idle.png",
-        "replay_botton_pushed.png",
-        "cursor_0001.png"
+        "replay_botton_pushed.png"
       ]
     },
     "animationFrames": {
