@@ -167,31 +167,36 @@
         "component": "animationGroup",
         "data": {
           "DragonSleep": {
-            "UIName": "DragonSleep",
+            "name": "Dragon Sleep01",
+            "UIName": "Dragon Sleep",
             "frameCount": 35,
             "frameInitial": "dragon_sleep01/dragon_sleep01_",
             "extension": ".png"
           },
           "DragonAlertStage1": {
-            "UIName": "DragonAlertStage 1",
+            "name": "Dragon Sleep02",
+            "UIName": "Dragon Alert Stage 1",
             "frameCount": 24,
             "frameInitial": "dragon_sleep02/dragon_sleep02_",
             "extension": ".png"
           },
           "DragonAlertStage2": {
-            "UIName": "DragonAlertStage 2",
+            "name": "Dragon Sleep03",
+            "UIName": "Dragon Alert Stage 2",
             "frameCount": 24,
             "frameInitial": "dragon_sleep03/dragon_sleep03_",
             "extension": ".png"
           },
           "DragonAwake": {
-            "UIName": "DragonAwake",
+            "name": "Dragon Awake",
+            "UIName": "Dragon Awake",
             "frameCount": 48,
             "frameInitial": "dragon_awake/dragon_awake_",
             "extension": ".png"
           },
           "DragonBackToSleep": {
-            "UIName": "DragonBackToSleep",
+            "name": "Dragon Back To Sleep",
+            "UIName": "Dragon Back To Sleep",
             "frameCount": 38,
             "frameInitial": "dragon_back_to_sleep/dragon_back_to_sleep_",
             "extension": ".png"
@@ -276,31 +281,31 @@
           "extension": ".png"
         },
         {
-          "Name": "Dragon Awake",
+          "name": "Dragon Awake",
           "frameCount": 48,
           "frameInitial": "dragon_awake/dragon_awake_",
           "extension": ".png"
         },
         {
-          "Name": "Dragon Sleep01",
+          "name": "Dragon Sleep01",
           "frameCount": 35,
           "frameInitial": "dragon_sleep01/dragon_sleep01_",
           "extension": ".png"
         },
         {
-          "Name": "Dragon Sleep02",
+          "name": "Dragon Sleep02",
           "frameCount": 24,
           "frameInitial": "dragon_sleep02/dragon_sleep02_",
           "extension": ".png"
         },
         {
-          "Name": "Dragon Sleep03",
+          "name": "Dragon Sleep03",
           "frameCount": 24,
           "frameInitial": "dragon_sleep03/dragon_sleep03_",
           "extension": ".png"
         },
         {
-          "Name": "Dragon Back To Sleep",
+          "name": "Dragon Back To Sleep",
           "frameCount": 38,
           "frameInitial": "dragon_back_to_sleep/dragon_back_to_sleep_",
           "extension": ".png"

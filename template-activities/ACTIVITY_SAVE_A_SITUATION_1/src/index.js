@@ -191,12 +191,13 @@ ACTIVITY_SAVE_A_SITUATION_1.SaveASituation = HDBaseLayer.extend({
     },
 
     setTub: function () {
-        this.tubBack = this.addSprite(ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.tubBack.imageName, ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.tubBack.position, this.cliper);
+        var tubPosition =    cc.p( 400, 300);
+        this.tubBack = this.addSprite(ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.tubBack.imageName, tubPosition, this.cliper);
         this.tubBack.setScale(ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.tubBack.scale);
         this.placeAnimals();
         this.setUpWater();
 
-        this.tubFront = this.addSprite(ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.levels.data[this.currentLevel].tubFront.imageName, ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.levels.data[this.currentLevel].tubFront.position, this.cliper);
+        this.tubFront = this.addSprite(ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.levels.data[this.currentLevel].tubFront.imageName, tubPosition, this.cliper);
         this.tubFront.setScale(ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.levels.data[this.currentLevel].tubFront.scale);
 
     },
@@ -217,7 +218,7 @@ ACTIVITY_SAVE_A_SITUATION_1.SaveASituation = HDBaseLayer.extend({
             var filledItem = new cc.Sprite(ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath + item.name);
             filledItem.setPosition(this.tubFront.convertToNodeSpace(cc.p(item.holeInfo.coordinates.x, item.holeInfo.coordinates.y)));
             filledItem.setName(item.holeInfo.filledImage);
-            filledItem.setScale(item.holeInfo.scale);
+            filledItem.setScale(0.3);
             filledItem.setTag(initalTag);
             filledItem.setVisible(this.lastSavedState ? this.lastSavedState.holesInfo[initalTag] : 0);
             this.holesArray.push(filledItem);
@@ -422,8 +423,14 @@ ACTIVITY_SAVE_A_SITUATION_1.SaveASituation = HDBaseLayer.extend({
         let position = cc.p(this.getPositionForTableView(), this.height * 0.01);
         let width = this.getWidthOfCarousel();
         var baseColorLayer = this.createColourLayer(cc.color(237, 231, 65), width, this.carouselHeight, cc.p(position.x, position.y + 6), this, 2);
-        baseColorLayer.setOpacity(255);
-        baseColorLayer.setVisible(true);
+        baseColorLayer.setOpacity(0);
+
+        let hPadding = 20;
+        var baseCarouselLayer = this.addSprite(ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.carouselBackgroundImage.imageName, cc.p(position.x -10, position.y), this);
+        baseCarouselLayer.setAnchorPoint(0,0);
+        baseCarouselLayer.setLocalZOrder(3);
+        baseCarouselLayer.setScale((width + hPadding)/ baseCarouselLayer.width, (baseColorLayer.height + 12) / baseCarouselLayer.height);
+        console.log(baseCarouselLayer.getScaleX(), baseCarouselLayer.getScaleY());
 
         this.tableView = new cc.TableView(this, cc.size(width, this.carouselHeight));
         this.tableView.setPosition(cc.p(position.x, position.y + 6));
@@ -445,7 +452,7 @@ ACTIVITY_SAVE_A_SITUATION_1.SaveASituation = HDBaseLayer.extend({
             });
         }
 
-        let hPadding = 20;
+
         var carouselBaseImage = this.addSprite(ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.assets.sections.carouselBackgroundBorderImage.imageName, cc.p(position.x - 10, position.y), this);
         carouselBaseImage.setAnchorPoint(0, 0);
         carouselBaseImage.setLocalZOrder(3);
@@ -759,7 +766,7 @@ ACTIVITY_SAVE_A_SITUATION_1.SaveASituation = HDBaseLayer.extend({
 
     changeMouseCursorImage: function () {
         if (!HDAppManager.isTeacherView && this.isStudentInteractionEnable) {
-            var cursorPath = (ACTIVITY_SAVE_A_SITUATION_1.ref.config.properties.preLoaded ? ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath : "AsyncActivity/" + ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath);
+            var cursorPath = (ACTIVITY_SAVE_A_SITUATION_1.ref.config.properties.preLoaded ? ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath :  ACTIVITY_SAVE_A_SITUATION_1.ref.spriteBasePath);
             this.MouseTextureUrl = !this.selectedObject.isVisible() ? cursorPath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.cursors.data.openFingers.imageName : cursorPath + ACTIVITY_SAVE_A_SITUATION_1.ref.config.cursors.data.closedFingers.imageName;
         } else {
             this.customTexture = false;

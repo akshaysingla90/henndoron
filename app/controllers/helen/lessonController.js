@@ -10,7 +10,10 @@ const Mongoose = require('mongoose');
 let lessonController = {};
 
 lessonController.createLesson = async (payload) => {
-  await SERVICES.lessonService.createLesson(payload);
+  //todo lesson folder 
+  let lesson = await SERVICES.lessonService.createLesson(payload);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSONS_FETCHED_SUCCESSFULLY), { lesson });
+
 }
 
 /**
@@ -18,11 +21,14 @@ lessonController.createLesson = async (payload) => {
  * @param {*} payload 
  */
 lessonController.getLessons = async (payload) => {
-  let criteria;
-  if (payload.status) criteria = { $match: { status: payload.status } };
+  let matchCriteria = { $match: {} };
+  if (payload.status) matchCriteria.$match.status = payload.status;
+  if (payload.coursId) matchCriteria.$match.coursId = Mongoose.Types.ObjectId(payload.coursId);
+  if (payload.search) matchCriteria.$match.name = new RegExp(payload.search, 'i');
+
   payload.skip = (payload.counter - 1) * payload.limit;
   let query = [
-    ...(criteria ? [criteria] : []),
+    matchCriteria,
     {
       $lookup: {
         from: 'activities',

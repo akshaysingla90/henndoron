@@ -3,6 +3,7 @@ const HELPERS = require("../../helpers");
 const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS } = require('../../utils/constants');
 const { ACTIVITY_SRC_PATH, ACTIVITY_PREVIEW_PATH, TEMPLATE_ACTIVITY_PREVIEW, TEMPLATE_ACTIVITY_PATH, ACTIVITY_DIRECTORY_PATH, ACTIVITY_RESOURCE_DIRECTORY_PATH, BASE_PATH, ACTIVITY_CONFIG_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const SERVICES = require('../../services');
+const ACTIVITIES = require('../../data-db/activityConfig.json');
 const fs = require('fs-extra');
 const replace = require('replace-in-file');
 const path = require('path');
@@ -20,6 +21,7 @@ adminController.cloneActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
+  payload.name = payload.name.replace(/ /g, '');
   const activityPath = `${payload.name}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activityPath}`);
   let newActivity = {
@@ -195,6 +197,18 @@ adminController.deleteActivity = async (payload) => {
 }
 
 /**
+ * function to delete the activity-preview folder by its id
+ * @param {*} payload 
+ */
+adminController.deleteActivityPreview = async (payload) => {
+  let activity = await SERVICES.activityService.getActivity({ _id: payload.activityId }, { path: 1 });
+  if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  let previewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}${activity.path}`);
+  fs.removeSync(previewPath);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_PREVIEW_DELETED_SUCCESSFULLY));
+}
+
+/**
  * function to duplicate a Activity from existing activity
  */
 
@@ -315,6 +329,19 @@ adminController.getCourses = async (payload) => {
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.COURSES_FETCHED_SUCCESSFULLY), { courses });
 }
 
+/**
+ * fucntion to update the activity templates
+ */
+adminController.updateActivityTemplate = async () => {
+  await SERVICES.activityService.copyTemplates(ACTIVITIES);
+  let previewFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
+  fs.removeSync(previewFolderPath);
+  let activityFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
+  fs.removeSync(activityFolderPath);
+  let criteria = {status:{$ne:ACTIVITY_STATUS.TEMPLATE}};
+  await SERVICES.activityService.removeActivities(criteria);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY));
+}
 /* export adminController */
 module.exports = adminController;
 

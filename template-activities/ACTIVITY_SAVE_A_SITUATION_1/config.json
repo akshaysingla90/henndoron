@@ -240,7 +240,6 @@
         "UIName": "TubBack",
         "imageName": "tub01.png",
         "dimensions": { "width": 512, "height": 512 },
-        "position": { "x": 400, "y": 300 },
         "scale": 0.7
       },
       "water": {
@@ -334,15 +333,13 @@
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND IMAGE",
         "imageName": "carouselImage.png",
-        "dimensions": { "width": 681, "height": 121 },
-        "position": { "x": 768, "y": 454.3 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND BORDER IMAGE",
         "imageName": "carouselBorderImage.png",
-        "dimensions": { "width": 681, "height": 121 },
-        "position": { "x": 768, "y": 454.3 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackground": {
         "ignoreForAuthToolUI": true,
@@ -393,9 +390,9 @@
       "levels": {
         "component": "levels",
         "dimensions": {
-        "width": 350,
-        "height": 350
-      },
+          "width": 350,
+          "height": 350
+        },
         "data": [
           {
             "carouselAssets": [
@@ -503,240 +500,9 @@
               }
             ],
             "tubFront": {
-              "UIName": "TubFront",
+              "UIName": "tubFront",
               "imageName": "tub02.png",
               "dimensions": { "width": 512, "height": 512 },
-              "position": { "x": 400, "y": 300 },
-              "scale": 0.7,
-              "constraints": ["name", "size"]
-            },
-            "rateOfWaterFilling": 2
-          },
-          {
-            "carouselAssets": [
-              {
-                "configurable": true,
-                "name": "item_tree.png",
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.25,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 300,
-                    "y": 265,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "tree",
-                  "scale": 0.28
-                },
-
-                "constraints": ["imageName, scale, size", "holeInfo"]
-              },
-              {
-                "configurable": true,
-                "name": "item_book.png",
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.25,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 358,
-                    "y": 194,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "book",
-                  "scale": 0.28
-                },
-                "constraints": ["imageName, sound, size"]
-              },
-              {
-                "configurable": true,
-                "name": "item_house.png",
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.25,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 397,
-                    "y": 275,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "house",
-                  "scale": 0.29
-                },
-                "constraints": ["imageName, sound, size"]
-              },
-              {
-                "configurable": true,
-                "name": "item_hat.png",
-
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.75,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 465,
-                    "y": 200,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "hat",
-                  "scale": 0.3
-                },
-                "constraints": ["imageName, sound, size"]
-              },
-              {
-                "configurable": true,
-                "name": "item_stickers.png",
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.75,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 497,
-                    "y": 285,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "stickers",
-                  "scale": 0.25
-                },
-                "constraints": ["imageName, sound, size"]
-              }
-            ],
-            "tubFront": {
-              "UIName": "TubFront",
-              "imageName": "tub02.png",
-              "dimensions": { "width": 512, "height": 512 },
-              "position": { "x": 400, "y": 300 },
-              "scale": 0.7,
-              "constraints": ["name", "size"]
-            },
-            "rateOfWaterFilling": 2
-          },
-          {
-            "carouselAssets": [
-              {
-                "configurable": true,
-                "name": "item_tree.png",
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.25,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 300,
-                    "y": 265,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "tree",
-                  "scale": 0.28
-                },
-
-                "constraints": ["imageName, scale, size", "holeInfo"]
-              },
-              {
-                "configurable": true,
-                "name": "item_book.png",
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.25,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 358,
-                    "y": 194,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "book",
-                  "scale": 0.28
-                },
-                "constraints": ["imageName, sound, size"]
-              },
-              {
-                "configurable": true,
-                "name": "item_house.png",
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.25,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 397,
-                    "y": 275,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "house",
-                  "scale": 0.29
-                },
-                "constraints": ["imageName, sound, size"]
-              },
-              {
-                "configurable": true,
-                "name": "item_hat.png",
-
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.75,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 465,
-                    "y": 200,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "hat",
-                  "scale": 0.3
-                },
-                "constraints": ["imageName, sound, size"]
-              },
-              {
-                "configurable": true,
-                "name": "item_stickers.png",
-                "dimensions": {
-                  "width": 350,
-                  "height": 350
-                },
-                "scale": 0.75,
-                "holeInfo": {
-                  "coordinates": {
-                    "x": 497,
-                    "y": 285,
-                    "width": 350,
-                    "height": 350
-                  },
-                  "filledImage": "stickers",
-                  "scale": 0.25
-                },
-                "constraints": ["imageName, sound, size"]
-              }
-            ],
-            "tubFront": {
-              "UIName": "TubFront",
-              "imageName": "tub02.png",
-              "dimensions": { "width": 512, "height": 512 },
-              "position": { "x": 400, "y": 300 },
               "scale": 0.7,
               "constraints": ["name", "size"]
             },
@@ -749,7 +515,7 @@
         "data": {
           "tubWater": {
             "configurable": true,
-            "UIName": "TubWaterLine",
+            "UIName": "Tub WaterLine",
             "name": "tubWaterLine",
             "frameCount": 5,
             "dimensions": { "width": 512, "height": 512 },
@@ -762,7 +528,7 @@
 
           "animalWaterLine": {
             "configurable": true,
-            "UIName": "animals_waterline",
+            "UIName": "animals waterline",
             "name": "animals_waterline_loop_",
             "frameCount": 5,
             "dimensions": { "width": 512, "height": 512 },
@@ -774,7 +540,7 @@
           },
 
           "winAnimation": {
-            "UIName": "winAnimation",
+            "UIName": "win Animation",
             "configurable": true,
             "name": "magicHat_cardTakeOut_",
             "frameCount": 15,
@@ -786,7 +552,7 @@
           },
 
           "tubWaterCircle": {
-            "UIName": "TubWaterCircle",
+            "UIName": "Tub Water Circle",
             "configurable": true,
             "name": "tub_watecircle_loop_",
             "frameCount": 12,
@@ -799,7 +565,7 @@
           },
 
           "waterInTub": {
-            "UIName": "Tub_fillwaterline",
+            "UIName": "Tub fill waterline",
             "configurable": true,
             "name": "tub_fillwaterline_loop_",
             "frameCount": 24,
@@ -854,6 +620,7 @@
         "rat_win.png",
         "sheep_win.png",
         "carouselBorderImage.png",
+        "carouselImage.png",
         "cellBGlow.png",
         "cellBg.png",
         "closed_pincer_fingers_pointer.png",

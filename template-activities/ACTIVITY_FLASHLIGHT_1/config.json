@@ -278,7 +278,7 @@
           "idle": {
             "configurable": true,
             "UIName": "Granny Idle",
-            "name": "idle",
+            "name": "Granny Idle",
             "frameCount": 16,
             "frameInitial": "Granny_Fix_idle/idle_",
             "extension": ".png",
@@ -294,7 +294,7 @@
           "celebrating": {
             "configurable": true,
             "UIName": "Granny Celebrating",
-            "name": "celebrating",
+            "name": "Granny Celebrating",
             "frameCount": 32,
             "frameInitial": "Granny_Fix_celebrating/celebrating_",
             "extension": ".png",
@@ -309,7 +309,7 @@
           },
           "run_left": {
             "configurable": true,
-            "name": "run_left",
+            "name": "Granny Run Left",
             "UIName": "Granny run left",
             "frameCount": 11,
             "frameInitial": "Granny_Fix_run_left/run_left_",
@@ -325,7 +325,7 @@
           },
           "run_right": {
             "configurable": true,
-            "name": "run_right",
+            "name": "Granny Run Right",
             "UIName": "granny run right",
             "frameCount": 11,
             "frameInitial": "Granny_Fix_run_right/run_right_",
@@ -357,25 +357,25 @@
       "basePath": "res/AnimationFrames/",
       "animation": [
         {
-          "Name": "Granny Celebrating",
+          "name": "Granny Celebrating",
           "frameCount": 32,
           "frameInitial": "Granny_Fix_celebrating/celebrating_",
           "extension": ".png"
         },
         {
-          "Name": "Granny Idle",
+          "name": "Granny Idle",
           "frameCount": 16,
           "frameInitial": "Granny_Fix_idle/idle_",
           "extension": ".png"
         },
         {
-          "Name": "Granny Run Left",
+          "name": "Granny Run Left",
           "frameCount": 11,
           "frameInitial": "Granny_Fix_run_left/run_left_",
           "extension": ".png"
         },
         {
-          "Name": "Granny Run Right",
+          "name": "Granny Run Right",
           "frameCount": 11,
           "frameInitial": "Granny_Fix_run_right/run_right_",
           "extension": ".png"
