@@ -2,6 +2,7 @@
 
 const express = require('express');
 const cors = require('cors');
+const replace = require('replace-in-file');
 
 const routes = require('../../routes');
 const routeUtils = require('../../utils/routeUtils');
@@ -14,6 +15,7 @@ const path = require('path');
 const activityPreviewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
 const activityPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
 const templatePath = path.join(__dirname, `../../../template-activities`);
+const previewTemplatePath = path.join(__dirname, `../../../template-activity-preview/main.js`);
 
 module.exports = async function (app) {
 
@@ -61,6 +63,19 @@ module.exports = async function (app) {
     await require('../db_mongo')();
     //Db Migrations.
     await dbUtils.migrateDatabase();
+
+    // Change server url in coco's main.js 
+    if (process.env.NODE_ENV != 'development') {
+        let fromReplace = new RegExp('AppMode.Development', 'g')
+        let textToWrite = process.env.NODE_ENV == 'production' ? 'AppMode.Production' : 'AppMode.Staging';
+        const options = {
+            files: previewTemplatePath,
+            from: fromReplace,
+            to: textToWrite
+        };
+        await replace(options);
+    }
+
     // initalize routes.
     await routeUtils.route(app, routes);
 };
