@@ -58,15 +58,13 @@
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND IMAGE",
         "imageName": "carouselImage.png",
-        "dimensions": { "width": 681, "height": 121 },
-        "position": { "x": 768, "y": 454.3 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND BORDER IMAGE",
         "imageName": "carouselBorderImage.png",
-        "dimensions": { "width": 681, "height": 121 },
-        "position": { "x": 768, "y": 454.3 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackground": {
         "ignoreForAuthToolUI": true,

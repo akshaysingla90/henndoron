@@ -240,7 +240,6 @@
         "UIName": "TubBack",
         "imageName": "tub01.png",
         "dimensions": { "width": 512, "height": 512 },
-        "position": { "x": 400, "y": 300 },
         "scale": 0.7
       },
       "water": {
@@ -334,15 +333,13 @@
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND IMAGE",
         "imageName": "carouselImage.png",
-        "dimensions": { "width": 681, "height": 121 },
-        "position": { "x": 768, "y": 454.3 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND BORDER IMAGE",
         "imageName": "carouselBorderImage.png",
-        "dimensions": { "width": 681, "height": 121 },
-        "position": { "x": 768, "y": 454.3 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackground": {
         "ignoreForAuthToolUI": true,
@@ -503,10 +500,9 @@
               }
             ],
             "tubFront": {
-              "UIName": "TubFront",
+              "UIName": "tubFront",
               "imageName": "tub02.png",
               "dimensions": { "width": 512, "height": 512 },
-              "position": { "x": 400, "y": 300 },
               "scale": 0.7,
               "constraints": ["name", "size"]
             },
@@ -624,6 +620,7 @@
         "rat_win.png",
         "sheep_win.png",
         "carouselBorderImage.png",
+        "carouselImage.png",
         "cellBGlow.png",
         "cellBg.png",
         "closed_pincer_fingers_pointer.png",
