@@ -291,14 +291,12 @@
         "component": "image",
         "UIName": "Carousel Background Image",
         "imageName": "carouselImage.png",
-        "position": { "x": 768, "y": 454.3 },
         "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "Carousel Background Border Image",
         "imageName": "carouselBorderImage.png",
-        "position": { "x": 768, "y": 454.3 },
         "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackground": {

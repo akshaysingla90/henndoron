@@ -213,7 +213,6 @@
         "pushedState": "start_pressed.png",
         "disableState": "start_idle.png",
         "scale": 1,
-        "position": { "x": 240, "y": 100 },
         "dimensions": { "width": 94, "height": 64 }
       },
       "stopButton": {
@@ -222,7 +221,6 @@
         "pushedState": "stop_pressed.png",
         "disableState": "stop_idle.png",
         "scale": 1,
-        "position": { "x": 480, "y": 100 },
         "dimensions": { "width": 94, "height": 64 }
       },
       "leftMoveButton": {
@@ -246,15 +244,13 @@
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND IMAGE",
         "imageName": "carouselImage.png",
-        "dimensions": { "width": 681, "height": 121 },
-        "position": { "x": 768, "y": 454.3 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "CAROUSEL BACKGROUND BORDER IMAGE",
         "imageName": "carouselBorderImage.png",
-        "dimensions": { "width": 681, "height": 121 },
-        "position": { "x": 768, "y": 454.3 }
+        "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackground": {
         "ignoreForAuthToolUI": true,
