@@ -18,9 +18,10 @@ let routes = [
       },
       body: {
         name: Joi.string().required().description('Lesson name.'),
-        decription: Joi.string().required().description('Lesson decription.'),
-        lessonNumber: Joi.number().description('Lesson number.'),
-        // activityIds: Joi.array().item().description('ActivityIds in order'),
+        // decription: Joi.string().required().description('Lesson decription.'),
+        lessonNumber: Joi.number().required().description('Lesson number.'),
+        episodeNumber: Joi.number().required().description('Episode number.'),
+        activityIds: Joi.array().items(Joi.string().required()).description('Activity Ids in order'),
         courseId: Joi.string().required().description('Course Id'),
         status: Joi.number().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
       },
@@ -40,7 +41,9 @@ let routes = [
       },
       query: {
         //TODO PAGINATION AND FILTERS AND SORTING ORDER
+        search: Joi.string().optional().description('search string'),
         status: Joi.number().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('1 => DRAFT,2 => PUBLISHED'),
+        courseId: Joi.string().optional().description('Course Id'),
         limit: Joi.number().optional().default(99999).description('Pagination limit.'),
         counter: Joi.number().optional().default(1).description('Pagination counter.'),
       },
