@@ -142,7 +142,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
 
     onEnterTransitionDidFinish: function(){
         this._super();
-        // HDAppManager.startResLoading();
+        HDAppManager.startResLoading();
     },
 
     onExit : function () {

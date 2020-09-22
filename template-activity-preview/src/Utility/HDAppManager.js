@@ -79,11 +79,12 @@ var HDAppManager = new function () {
         return url;
     };
     this.startResLoading = function(){
-        this.resourceCounter = 1;
-       this.tempResPath =  cc.loader.resPath ;
-       cc.loader.resPath =  cc.loader.resPath + "AsyncActivity/"
-        this.loadImageAsync( this.resourceCounter);
-
+        if (this.config.activityGame.length > 1) {
+            this.resourceCounter = 1;
+            this.tempResPath = cc.loader.resPath;
+            // cc.loader.resPath = cc.loader.resPath + "AsyncActivity/"
+            this.loadImageAsync(this.resourceCounter);
+        }
     };
     this.updateResLoading = function () {
         ++HDAppManager.resourceCounter;
