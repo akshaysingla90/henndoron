@@ -35,11 +35,11 @@
     "sections": {
       "theme": {
         "component": "select",
-        "UIName": "Theme",
+        "UIName": "Transition",
         "options": [
-          { "label": "classic", "value": 1 },
-          { "label": "billboards", "value": 2 },
-          { "label": "bookOfRhymes", "value": 3 }
+          { "label": "Classic", "value": 1 },
+          { "label": "Slide Left", "value": 2 },
+          { "label": "Page Turn", "value": 3 }
         ],
         "currentValue": 2,
         "theme": {
@@ -62,8 +62,7 @@
         "UIName": "Billboard DisplayImage position",
         "animationPath": [
           {
-            "position":
-            {
+            "position": {
               "x": 456,
               "y": 384
             }
@@ -165,7 +164,7 @@
         "component": "carouselItems",
         "allowDelete": true,
         "allowAdd": true,
-        "dimensions": { "width": 256, "height": 256 },
+        "dimensions": { "width": 350, "height": 350 },
         "data": [
           {
             "imageName": "flashcards_dog.png",
