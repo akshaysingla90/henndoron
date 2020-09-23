@@ -152,12 +152,12 @@
       },
       "pageFlip": {
         "component": "sound",
-        "UIName": "Page Flip",
+        "UIName": "Page Turn Flip",
         "sound": "flashcards_pageFlip.mp3"
       },
       "swipe": {
         "component": "sound",
-        "UIName": "Billboard Swipe",
+        "UIName": "Slide Left Swipe",
         "sound": "flashcards_swipe.mp3"
       },
       "carouselAssets": {
