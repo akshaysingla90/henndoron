@@ -51,7 +51,7 @@
 
       "billboard": {
         "component": "image",
-        "UIName": "BILLBOARD IMAGE",
+        "UIName": "Slide Left Image",
         "imageName": "flashcards_billboard.png",
         "position": { "y": 288 },
         "dimensions": { "width": 960, "height": 640 }
@@ -59,7 +59,7 @@
 
       "billboardDisplayImage": {
         "component": "cardTakeOutPath",
-        "UIName": "Billboard DisplayImage position",
+        "UIName": "Slide Left DisplayImage position",
         "animationPath": [
           {
             "position": {
@@ -106,7 +106,7 @@
 
       "BookOfRhymesWordLabelTeacher": {
         "component": "text",
-        "UIName": "BookOfRhymes WordLabel Teacher",
+        "UIName": "Page Turn WordLabel Teacher",
         "font": "sassoon_sans_regular",
         "fontSize": 50,
         "color": { "r": 124, "g": 99, "b": 81, "a": 255 },
@@ -114,7 +114,7 @@
       },
       "BookOfRhymesWordLabelStudent": {
         "component": "text",
-        "UIName": "BookOfRhymes WordLabel Student",
+        "UIName": "Page Turn WordLabel Student",
         "font": "sassoon_sans_regular",
         "fontSize": 50,
         "color": { "r": 124, "g": 99, "b": 81, "a": 255 },
