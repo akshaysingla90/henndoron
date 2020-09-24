@@ -105,6 +105,8 @@ cc.game.onStart = function(){
     cc.view.resizeWithBrowserSize(true);
     HDAppManager.appRunMode =  AppMode.Development;
     //
+    cc.loader.resPath = cc.loader.resPath + "AsyncActivity/"
+
     cc.loader.loadJson("res/lesson-config.json",function(error, data){
         cc.log(data);// data is the json object
         HDAppManager.config = data;

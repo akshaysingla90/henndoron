@@ -21,8 +21,7 @@ adminController.cloneActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-  payload.name = payload.name.replace(/ /g, '');
-  const activityPath = `${payload.name}${Date.now()}`;
+  const activityPath = `${payload.name.replace(/ /g, '')}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activityPath}`);
   let newActivity = {
     name: payload.name,
@@ -100,6 +99,11 @@ adminController.getActivities = async (payload) => {
   payload.criteria = {};
   payload.skip = (payload.counter - 1) * payload.limit;
   if (payload.type) payload.criteria.type = payload.type;
+  if (payload.courseId) {
+    payload.criteria.courseId = payload.courseId;
+    if (payload.episodeNumber) payload.criteria.episodeNumber = payload.episodeNumber;
+    if (payload.lessonNumber) payload.criteria.lessonNumber = payload.lessonNumber;
+  }
   let activities = await SERVICES.activityService.getActivities(payload);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_FETCHED_SUCCESSFULLY), activities);
 }
@@ -217,7 +221,7 @@ adminController.duplicateActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-  const activityPath = `${sourceActivity.name}${Date.now()}`;
+  const activityPath = `${sourceActivity.name.replace(/ /g, '')}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activityPath}`);
   //create new activity in database 
   let newActivity = {
@@ -272,20 +276,31 @@ adminController.duplicateActivity = async (payload) => {
 
 adminController.previewActivity = async (payload) => {
   const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.activityId });
+  if (!sourceActivity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  if (!sourceActivity.courseId || !sourceActivity.episodeNumber || !sourceActivity.lessonNumber) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_NOT_ASSOCIATED_TO_VALID_LESSONL, ERROR_TYPES.BAD_REQUEST);
   const sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
 
   const previewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}${sourceActivity.path}`);
   const templatePreviewPath = path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PREVIEW}`)
-  const destinationPath = `${previewPath}/res/Activity${sourceActivity.path}`;
+  const destinationSrcPath = `${previewPath}/res/Activity${sourceActivity.path}`;
+  const destinationResPath = `${previewPath}/AsyncActivity/res/Activity${sourceActivity.path}/res`;
 
   // Copying Preview template Directory
   await fs.emptyDir(previewPath);
-  await fs.copy(templatePreviewPath, previewPath,);
+  await fs.copy(templatePreviewPath, previewPath);
 
+  let re = new RegExp(sourcePath + ACTIVITY_RESOURCE_DIRECTORY_PATH);
+  const filterFunc = (filePath) => {
+    if ((filePath.search(re) !== -1) || filePath == sourcePath + ACTIVITY_RESOURCE_DIRECTORY_PATH) return false;
+    return true;
+  }
   //Copying the activity to the preview folder
-  await fs.copy(sourcePath, destinationPath);
+  await fs.copy(sourcePath, destinationSrcPath, { filter: filterFunc });
+  //Copy resources of each activity
+  await fs.copy(`${sourcePath}/res`, destinationResPath);
+
 
   //Update project.json
   let projectData = await (new Promise((resolve, reject) => {
@@ -338,7 +353,7 @@ adminController.updateActivityTemplate = async () => {
   fs.removeSync(previewFolderPath);
   let activityFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
   fs.removeSync(activityFolderPath);
-  let criteria = {status:{$ne:ACTIVITY_STATUS.TEMPLATE}};
+  let criteria = { status: { $ne: ACTIVITY_STATUS.TEMPLATE } };
   await SERVICES.activityService.removeActivities(criteria);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY));
 }

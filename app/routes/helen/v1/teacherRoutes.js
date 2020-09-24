@@ -10,9 +10,9 @@ let routes = [
         method: 'POST',
         path: '/v1/teacher/rewardPoints',
         joiSchemaForSwagger: {
-            headers: Joi.object({
+            headers: {
                 'authorization': Joi.string().required().description('User\'s JWT token.')
-            }).unknown(),
+            },
             body: {
                 studentUserName: Joi.string().required().description('Student user name.'),
                 rewards: Joi.number().optional().description('Reward Points.'),

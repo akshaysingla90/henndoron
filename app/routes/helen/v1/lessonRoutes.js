@@ -3,7 +3,7 @@
 const { Joi } = require('../../../utils/joiUtils');
 const { USER_ROLE, LESSON_STATUS } = require(`../../../utils/constants`);
 //load controllers
-const { createLesson, getLessons, getLessonById, deleteLesson } = require(`../../../controllers/helen/lessonController`);
+const { duplicateLesson, updateLesson, createLesson, getLessons, getLessonById, deleteLesson } = require(`../../../controllers/helen/lessonController`);
 
 let routes = [
   {
@@ -13,15 +13,17 @@ let routes = [
       headers: {
         'authorization': Joi.string().required().description('User\'s JWT token.')
       },
-      params: {
-        activityId: Joi.string().optional().description('Lesson Id to clone.')
-      },
       body: {
         name: Joi.string().required().description('Lesson name.'),
-        // decription: Joi.string().required().description('Lesson decription.'),
+        description: Joi.string().required().description('Lesson decription.'),
         lessonNumber: Joi.number().required().description('Lesson number.'),
         episodeNumber: Joi.number().required().description('Episode number.'),
-        activityIds: Joi.array().items(Joi.string().required()).description('Activity Ids in order'),
+        activities: Joi.array().required().items(
+          Joi.object({
+            activityId: Joi.string().required().description('actvityId.'),
+            activityName: Joi.string().required().description('Module name'),
+            allocatedTime: Joi.number().required().description('Module time'),
+          }).required()).description('Activity Ids in order'),
         courseId: Joi.string().required().description('Course Id'),
         status: Joi.number().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
       },
@@ -31,6 +33,37 @@ let routes = [
     },
     auth: USER_ROLE.ADMIN,
     handler: createLesson
+  },
+  {
+    method: 'PUT',
+    path: '/v1/admin/lesson/:id',
+    joiSchemaForSwagger: {
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
+      params: {
+        id: Joi.string().optional().description('Lesson Id to edit.')
+      },
+      body: {
+        name: Joi.string().optional().description('Lesson name.'),
+        description: Joi.string().optional().description('Lesson decription.'),
+        lessonNumber: Joi.number().optional().description('Lesson number.'),
+        episodeNumber: Joi.number().optional().description('Episode number.'),
+        activities: Joi.array().items(
+          Joi.object({
+            activityId: Joi.string().required().description('Module Id.'),
+            activityName: Joi.string().required().description('Module name'),
+            allocatedTime: Joi.number().required().description('Module time')
+          }).required()).description('Activity Ids in order'),
+        courseId: Joi.string().description('Course Id'),
+        status: Joi.number().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
+      },
+      group: 'Lesson',
+      description: 'Route to update a lesson',
+      model: 'Edit_Lesson'
+    },
+    auth: USER_ROLE.ADMIN,
+    handler: updateLesson
   },
   {
     method: 'GET',
@@ -75,9 +108,9 @@ let routes = [
     method: 'DELETE',
     path: '/v1/admin/lesson/:id',
     joiSchemaForSwagger: {
-      // headers: {
-      //   'authorization': Joi.string().required().description('User\'s JWT token.')
-      // },
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
       params: {
         id: Joi.string().required().description('Lesson\'s Id.')
       },
@@ -85,8 +118,25 @@ let routes = [
       description: 'Route to delete lesson by its id',
       model: 'Delete_Lesson'
     },
-    // auth: USER_ROLE.ADMIN,
+    auth: USER_ROLE.ADMIN,
     handler: deleteLesson
+  },
+  {
+    method: 'POST',
+    path: '/v1/admin/lesson/duplicate/:id',
+    joiSchemaForSwagger: {
+      headers: {
+        'authorization': Joi.string().required().description('User\'s JWT token.')
+      },
+      params: {
+        id: Joi.string().required().description('Lesson\'s Id.')
+      },
+      group: 'Lesson',
+      description: 'Route to duplicate lesson by its id',
+      model: 'Delete_Lesson'
+    },
+    auth: USER_ROLE.ADMIN,
+    handler: duplicateLesson
   }
 ];
 

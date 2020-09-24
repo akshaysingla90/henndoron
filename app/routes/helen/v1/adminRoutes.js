@@ -21,10 +21,8 @@ let routes = [
         name: Joi.string().regex(/^[a-z0-9_ ]+$/i).error(new Error('Activity name should contain only alphanumeric chracters')).description('Activity name.'),
         description: Joi.string().required().description('Activity description.'),
         courseId: Joi.string().required().description('courseId.'),
-        lessonNumber: Joi.number().required().description('Activity Cdescription.'),
-        episodeNumber: Joi.number().required().description('Activity episode.'),
-
-
+        episodeNumber: Joi.number().required().min(1).max(12).description('Valid between  1-12 '),
+        lessonNumber: Joi.number().required().min(1).max(7).description('Valid between 1-7 '),
         configData: Joi.object({}).unknown().description('Activity Config Data.'),
         exactResources: Joi.boolean().default(true).description(' true if want exact resources')
       },
@@ -49,8 +47,8 @@ let routes = [
         name: Joi.string().regex(/^[a-z0-9_ ]+$/i).error(new Error('Activity name should contain only alphanumeric chracters')).description('Activity name.'),
         description: Joi.string().optional().description('Activity description.'),
         courseId: Joi.string().optional().description('courseId.'),
-        lessonNumber: Joi.number().optional().description('Activity Lesson Number.'),
-        episodeNumber: Joi.number().optional().description('Activity episode Number.'),
+        episodeNumber: Joi.number().optional().min(1).max(12).description('Valid between  1-12 '),
+        lessonNumber: Joi.number().optional().min(1).max(7).description('Valid between 1-7 '),
         configData: Joi.object({}).unknown().description('Activity Config Data.'),
       },
       group: 'Admin',
@@ -102,11 +100,15 @@ let routes = [
         'authorization': Joi.string().required().description('User\'s JWT token.')
       },
       query: {
-        //pagination 
         counter: Joi.number().min(1).default(1).description('Page Counter'),
         limit: Joi.number().min(0).default(10).description('Page Limit'),
-        //TODO PAGINATION AND FILTERS AND SORTING ORDER
+        //TODO  FILTERS AND SORTING ORDER
         type: Joi.number().valid(ACTIVITY_TYPE.SMALL, ACTIVITY_TYPE.MEDIUM, ACTIVITY_TYPE.GAME).description('1 => SMALL,2 => MEDIUM,3 => GAME'),
+        courseId: Joi.string().description('courseId'),
+        episodeNumber: Joi.number().min(1).max(12).description('Valid between  1-12 ')
+          .when('courseId', { is: Joi.exist(), then: Joi.number(), otherwise: Joi.forbidden() }),
+        lessonNumber: Joi.number().min(1).max(7).description('Valid between 1-7 ')
+          .when('courseId', { is: Joi.exist(), then: Joi.number(), otherwise: Joi.forbidden() }),
       },
       group: 'Admin',
       description: 'Route to get activities',
