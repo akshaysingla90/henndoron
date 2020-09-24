@@ -17,8 +17,7 @@ let lessonController = {};
 lessonController.createLesson = async (payload) => {
   const alreadyExist = await SERVICES.lessonService.getLesson({ name: payload.name, coursId: payload.coursId, lessonNumber: payload.lessonNumber, episodeNumber: payload.episodeNumber });
   if (alreadyExist) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_ALREADY_EXISTS_WITH_THIS_NAME, ERROR_TYPES.BAD_REQUEST);
-  payload.name = payload.name.replace(/ /g, '');
-  const lessonPath = `${payload.name}${Date.now()}`;
+  const lessonPath = `${payload.name.replace(/ /g, '')}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lessonPath}`);
   const templatePreviewPath = path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PREVIEW}`)
   payload.path = "/" + lessonPath;
@@ -99,8 +98,7 @@ lessonController.duplicateLesson = async (payload) => {
   const sourceLesson = await SERVICES.lessonService.getLesson({ _id: payload.id });
   if (!sourceLesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSONS_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   const sourcePath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}`, sourceLesson.path);
-  sourceLesson.name = sourceLesson.name.replace(/ /g, '');
-  const lessonPath = `${sourceLesson.name}${Date.now()}`;
+  const lessonPath = `${sourceLesson.name.replace(/ /g, '')}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lessonPath}`);
   let newLesson = { ...sourceLesson, name: `${sourceLesson.name} (COPY)`, path: `/${lessonPath}` };
   delete newLesson._id;
@@ -135,7 +133,7 @@ lessonController.duplicateLesson = async (payload) => {
         "activityIcons": "$activityInfo.iconUrl",
         "name": 1,
         "path": 1,
-        "decription": 1,
+        "description": 1,
         "lessonNumber": 1,
         'status': 1,
         "courseIcon": "$course.iconUrl",
@@ -185,7 +183,7 @@ lessonController.getLessons = async (payload) => {
         "activityIcons": "$activityInfo.iconUrl",
         "name": 1,
         "path": 1,
-        "decription": 1,
+        "description": 1,
         "lessonNumber": 1,
         'status': 1,
         "courseIcon": "$course.iconUrl",
@@ -264,7 +262,7 @@ lessonController.getLessonById = async (payload) => {
         "activities": 1,
         "name": 1,
         "path": 1,
-        "decription": 1,
+        "description": 1,
         "lessonNumber": 1,
         'status': 1,
         "courseIcon": "$course.iconUrl",

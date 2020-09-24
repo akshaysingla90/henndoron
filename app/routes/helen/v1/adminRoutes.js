@@ -104,7 +104,7 @@ let routes = [
         limit: Joi.number().min(0).default(10).description('Page Limit'),
         //TODO  FILTERS AND SORTING ORDER
         type: Joi.number().valid(ACTIVITY_TYPE.SMALL, ACTIVITY_TYPE.MEDIUM, ACTIVITY_TYPE.GAME).description('1 => SMALL,2 => MEDIUM,3 => GAME'),
-        courseId: Joi.number().description('courseId'),
+        courseId: Joi.string().description('courseId'),
         episodeNumber: Joi.number().min(1).max(12).description('Valid between  1-12 ')
           .when('courseId', { is: Joi.exist(), then: Joi.number(), otherwise: Joi.forbidden() }),
         lessonNumber: Joi.number().min(1).max(7).description('Valid between 1-7 ')

@@ -21,8 +21,7 @@ adminController.cloneActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-  payload.name = payload.name.replace(/ /g, '');
-  const activityPath = `${payload.name}${Date.now()}`;
+  const activityPath = `${payload.name.replace(/ /g, '')}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activityPath}`);
   let newActivity = {
     name: payload.name,
@@ -222,8 +221,7 @@ adminController.duplicateActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-  sourceActivity.name = sourceActivity.name.replace(/ /g, '');
-  const activityPath = `${sourceActivity.name}${Date.now()}`;
+  const activityPath = `${sourceActivity.name.replace(/ /g, '')}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activityPath}`);
   //create new activity in database 
   let newActivity = {
