@@ -57,7 +57,7 @@ module.exports = async function (app) {
     app.use('/activity-resources', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
     app.use('/activity-resources', express.static(activityPath));
 
-    app.use('/lesson-preview', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
+    // app.use('/lesson-preview', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
     app.use('/lesson-preview', express.static(lessonPath));
 
     /** Used logger middleware for each api call **/
