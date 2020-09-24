@@ -32,6 +32,7 @@ var defaults = {
         TEMPLATE_ACTIVITY_PREVIEW:'/template-activity-preview',
         BASE_PATH: '/HelenDron-Cocos2d',
         ACTIVITY_DIRECTORY_PATH:'/cloned-activities',
+        LESSON_DIRECTORY_PATH:'/cloned-lessons',
         ACTIVITY_PREVIEW_PATH:'/activity-preview',
         ACTIVITY_RESOURCE_DIRECTORY_PATH:'/res',   
         ACTIVITY_CONFIG_PATH:'/config.json',

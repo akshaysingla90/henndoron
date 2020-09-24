@@ -13,11 +13,15 @@ const HELPERS = require("../../helpers");
 const lessonSchema = new Schema({
   name: { type: String, index: true, unique: true },
   path: { type: String },
-  decription: { type: String },
+  description: { type: String },
   lessonNumber: { type: Number },
-  episodeNumber: { type: Schema.Types.ObjectId },
-  activityIds: [{ type: Schema.Types.ObjectId }],
-  courseId: { type: Schema.Types.ObjectId },
+  episodeNumber: { type: Number },
+  activities: [{
+    activityId: { type: Schema.Types.ObjectId, ref: 'activities' },
+    activityName: { type: String },
+    allocatedTime: { type: Number }
+  }],
+  courseId: { type: Schema.Types.ObjectId, ref: 'courses' },
   status: { type: Number, enum: [LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED] }
 });
 
