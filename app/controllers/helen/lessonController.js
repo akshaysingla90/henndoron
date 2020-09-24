@@ -264,8 +264,10 @@ lessonController.getLessonById = async (payload) => {
         "path": 1,
         "description": 1,
         "lessonNumber": 1,
+        "episodeNumber": 1,
         'status': 1,
         "courseIcon": "$course.iconUrl",
+        "courseId":"$course._id",
         "createdAt": 1,
         "updatedAt": 1,
         "numberOfActivities": { $cond: { if: { $isArray: "$activities" }, then: { $size: "$activities" }, else: "NA" } }
