@@ -68,7 +68,7 @@ lessonController.createLesson = async (payload) => {
       if ((filePath.search(re) !== -1) || filePath == activityPath + ACTIVITY_RESOURCE_DIRECTORY_PATH) return false;
       return true;
     }
-    await fs.copy(activityPath, `${destinationPath}/res/Activity${activity.path}`, { filter: filterFunc }); //todo function option
+    await fs.copy(activityPath, `${destinationPath}/res/Activity${activity.path}`, { filter: filterFunc });
     //Copy resources of each activity
     await fs.copy(`${activityPath}/res`, `${destinationPath}/AsyncActivity/res/Activity${activity.path}/res`);
     //Update configData for each activity
@@ -298,9 +298,74 @@ lessonController.deleteLesson = async (payload) => {
 lessonController.updateLesson = async (payload) => {
   let lesson = await SERVICES.lessonService.getLesson({ _id: payload.id, status: LESSON_STATUS.DRAFT }, NORMAL_PROJECTION);
   if (!lesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
-  //todo lesson folder  same as createLesson
   await SERVICES.lessonService.updateLesson({ _id: payload.id }, payload);
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSONS_UPDATED_SUCCESSFULLY), { lesson });
+  lesson = (await SERVICES.lessonService.getLessonsAggregate([
+    { $match: { _id: Mongoose.Types.ObjectId(payload.id)} },
+    {
+      $lookup: {
+        from: 'activities',
+        localField: 'activities.activityId',
+        foreignField: '_id',
+        as: 'activityInfo'
+      }
+    },
+  ]))[0];
+  const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lesson.path}`);
+  const templatePreviewPath = path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PREVIEW}`)
+  // Copying Directory
+  await fs.copy(templatePreviewPath, destinationPath);
+
+  //Read lesson-config.json
+  let lessonConfigData = await (new Promise((resolve, reject) => {
+    fs.readFile(`${templatePreviewPath}/res/lesson-config.json`, 'utf-8', (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  }))
+  lessonConfigData = JSON.parse(lessonConfigData);
+  //Read Project.json
+  let projectData = await (new Promise((resolve, reject) => {
+    fs.readFile(`${templatePreviewPath}/project.json`, 'utf-8', (err, data) => {
+      if (err) reject(err);
+      resolve(data);
+    });
+  }))
+  projectData = JSON.parse(projectData);
+
+  for (let index = 0; index < lesson.activityInfo.length; index++) {
+    let activity = lesson.activityInfo[index];
+    //Updtae project.json
+    projectData.jsList.push(`res/Activity${activity.path}/src/index.js`);
+    //Update lesson-config
+    const activityPath = activity.status == ACTIVITY_STATUS.TEMPLATE
+      ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, activity.path)
+      : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, activity.path)
+    //Copying each activity to lesson
+    let re = new RegExp(activityPath + ACTIVITY_RESOURCE_DIRECTORY_PATH);
+    const filterFunc = (filePath) => {
+      if ((filePath.search(re) !== -1) || filePath == activityPath + ACTIVITY_RESOURCE_DIRECTORY_PATH) return false;
+      return true;
+    }
+    await fs.copy(activityPath, `${destinationPath}/res/Activity${activity.path}`, { filter: filterFunc });
+    //Copy resources of each activity
+    await fs.copy(`${activityPath}/res`, `${destinationPath}/AsyncActivity/res/Activity${activity.path}/res`);
+    //Update configData for each activity
+    let configData = await (new Promise((resolve, reject) => {
+      fs.readFile(`${activityPath}/${ACTIVITY_CONFIG_PATH}`, 'utf-8', (err, data) => {
+        if (err) reject(err);
+        resolve(data);
+      });
+    }))
+    configData = JSON.parse(configData);
+    configData.properties.activityName = lesson.activities[index].activityName;
+    configData.properties.allocatedTime = lesson.activities[index].allocatedTime;
+    await fs.writeFileSync(`${destinationPath}/res/Activity${activity.path}` + ACTIVITY_CONFIG_PATH, JSON.stringify(configData));
+    let lessonObj = { ...configData.properties, resources: configData.resources };
+    lessonConfigData.activityGame.push(lessonObj);
+  }
+  fs.writeFileSync(`${destinationPath}/project.json`, JSON.stringify(projectData));
+  fs.writeFileSync(`${destinationPath}/res/lesson-config.json`, JSON.stringify(lessonConfigData));
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSONS_UPDATED_SUCCESSFULLY));
 }
 
 /* export lessonController */
