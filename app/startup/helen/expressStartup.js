@@ -10,9 +10,10 @@ const dbUtils = require(`../../utils/dbUtils`);
 const COMMON_FUN = require('../../utils/utils');
 const SERVICES = require('../../services');
 const { USER_ROLE } = require('../../utils/constants');
-const { ACTIVITY_PREVIEW_PATH, BASE_PATH, ACTIVITY_DIRECTORY_PATH } = require('../../../config').COCOS_PROJECT_PATH;
+const { ACTIVITY_PREVIEW_PATH, BASE_PATH, ACTIVITY_DIRECTORY_PATH, LESSON_DIRECTORY_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const path = require('path');
 const activityPreviewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
+const lessonPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}`);
 const activityPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
 const templatePath = path.join(__dirname, `../../../template-activities`);
 const previewTemplatePath = path.join(__dirname, `../../../template-activity-preview/main.js`);
@@ -55,6 +56,9 @@ module.exports = async function (app) {
     
     app.use('/activity-resources', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
     app.use('/activity-resources', express.static(activityPath));
+
+    app.use('/lesson-preview', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
+    app.use('/lesson-preview', express.static(lessonPath));
 
     /** Used logger middleware for each api call **/
     // app.use(apiLooger);
