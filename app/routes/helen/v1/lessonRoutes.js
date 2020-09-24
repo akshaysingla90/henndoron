@@ -55,7 +55,7 @@ let routes = [
             activityName: Joi.string().required().description('Module name'),
             allocatedTime: Joi.number().required().description('Module time')
           }).required()).description('Activity Ids in order'),
-        courseId: Joi.string().required().description('Course Id'),
+        courseId: Joi.string().description('Course Id'),
         status: Joi.number().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
       },
       group: 'Lesson',
