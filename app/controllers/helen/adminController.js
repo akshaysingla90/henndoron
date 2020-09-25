@@ -8,6 +8,8 @@ const dbUtils = require('../../utils/dbUtils')
 const fs = require('fs-extra');
 const replace = require('replace-in-file');
 const path = require('path');
+const Mongoose = require('mongoose');
+
 /**************************************************
  ***** Auth controller for authentication logic ***
  **************************************************/
@@ -104,7 +106,8 @@ adminController.getActivities = async (payload) => {
   if (payload.type) payload.criteria.type = payload.type;
   if (payload.status) payload.criteria.status = payload.status;
   if (payload.courseId) {
-    payload.criteria.courseId = payload.courseId;
+    payload.criteria.courseId = Mongoose.Types.ObjectId(payload.courseId);
+    payload.status = ACTIVITY_STATUS.PUBLISHED;
     if (payload.episodeNumber) payload.criteria.episodeNumber = payload.episodeNumber;
     if (payload.lessonNumber) payload.criteria.lessonNumber = payload.lessonNumber;
   }
@@ -122,13 +125,13 @@ adminController.getActivities = async (payload) => {
       }
     },
     { $unwind: { path: "$courses", preserveNullAndEmptyArrays: true } },
-    ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit),
     { $addFields: { courseIcon: "$courses.iconUrl" } },
-    { $project: { courses: 0, courseId: 0 } },
+    { $project: { courses: 0, courseId: 0 } }
   ];
   if (payload.courseId && payload.lessonNumber && payload.episodeNumber) {
     query.push({ $project: { type: 1, name: 1, iconUrl: 1, time: 1 } })
   }
+  query = [...query, ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit)];
   let { items: activities, totalCount } = (await SERVICES.activityService.getActivitiesAggregate(query))[0] || { items: [], totalCount: 0 }
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_FETCHED_SUCCESSFULLY), { activities, totalCount });
 }
