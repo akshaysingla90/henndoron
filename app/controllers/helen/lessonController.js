@@ -209,14 +209,6 @@ lessonController.getLessonById = async (payload) => {
     matchCriteria,
     {
       $lookup: {
-        from: 'activities',
-        localField: 'activities.activityId',
-        foreignField: '_id',
-        as: 'activitiesInfo'
-      }
-    },
-    {
-      $lookup: {
         from: 'courses',
         localField: 'courseId',
         foreignField: '_id',
@@ -226,51 +218,51 @@ lessonController.getLessonById = async (payload) => {
     {
       $unwind: "$course"
     },
-    // { $unwind: "$activities" },
-    // {
-    //   $lookup: {
-    //     from: "activities",
-    //     let: { "id": "$activities.activityId" },
-    //     pipeline: [
-    //       { $match: { $expr: { $eq: ["$_id", "$$id"] } } },
-    //       { $project: { createdAt: 0, updatedAt: 0, _v: 0, } }
-    //     ],
-    //     as: "itemInfo"
-    //   }
-    // },
-    // { $unwind: "$itemInfo" },
-    // {
-    //   $group: {
-    //     _id: '$_id',
-    //     // name: { $first: '$name' },
-    //     activities: {
-    //       $push: {
-    //         activityName: '$activities.activityName',
-    //         _id: '$activities._id',
-    //         allocatedTime: '$activities.allocatedTime',
-    //         activityInfo: '$itemInfo.name'
-    //       }
-    //     },
-    //     lesson: { $first: '$$ROOT' }
-    //   }
-    // },
-    // { $replaceRoot: { newRoot: { $mergeObjects: ["$$ROOT", "$lesson"] } } },
-
+    {
+      $unwind: "$activities"
+    },
+    {
+      $lookup: {
+        from: 'activities',
+        localField: 'activities.activityId',
+        foreignField: '_id',
+        as: 'activitiesInfo'
+      }
+    },
+    {
+      $unwind: "$activitiesInfo"
+    },
+    {
+      $group: {
+        _id: '$_id',
+        activities: {
+          $push: {
+            $mergeObjects: [
+              {
+                activityName: '$activities.activityName',
+                _id: '$activities._id',
+                allocatedTime: '$activities.allocatedTime'
+              },
+              {
+                type: '$activitiesInfo.type',
+                iconUrl: '$activitiesInfo.iconUrl'
+              }
+            ]
+          }
+        },
+        lesson: { $first: '$$ROOT' }
+      }
+    },
+    { $replaceRoot: { newRoot: { $mergeObjects: ["$lesson", "$$ROOT"] } } },
+    {
+      $addFields: {
+        "numberOfActivities": { $cond: { if: { $isArray: "$activities" }, then: { $size: "$activities" }, else: "NA" } }
+      }
+    },
     {
       $project: {
-        "activityIcons": "$activitiesInfo.iconUrl",
-        "activities": 1,
-        "name": 1,
-        "path": 1,
-        "description": 1,
-        "lessonNumber": 1,
-        "episodeNumber": 1,
-        'status': 1,
-        "courseIcon": "$course.iconUrl",
-        "courseId":"$course._id",
-        "createdAt": 1,
-        "updatedAt": 1,
-        "numberOfActivities": { $cond: { if: { $isArray: "$activities" }, then: { $size: "$activities" }, else: "NA" } }
+        "activitiesInfo": 0,
+        "lesson": 0,
       }
     }
   ]
@@ -300,7 +292,7 @@ lessonController.updateLesson = async (payload) => {
   if (!lesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   await SERVICES.lessonService.updateLesson({ _id: payload.id }, payload);
   lesson = (await SERVICES.lessonService.getLessonsAggregate([
-    { $match: { _id: Mongoose.Types.ObjectId(payload.id)} },
+    { $match: { _id: Mongoose.Types.ObjectId(payload.id) } },
     {
       $lookup: {
         from: 'activities',
