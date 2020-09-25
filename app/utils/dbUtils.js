@@ -48,7 +48,7 @@ dbUtils.migrateDatabase = async () => {
     let dataToUpdate = {};
     for (let index = 0; index < rooms.length; index++) {
       if (rooms[index].currentTurnUserId && rooms[index].currentTurnUserId != "") {
-        dataToUpdate['currentTurnUserId'] = MONGOOSE.Types.ObjectId(rooms[index].currentTurnUserId);
+        dataToUpdate = { $set: { currentTurnUserId: MONGOOSE.Types.ObjectId(rooms[index].currentTurnUserId) } }
       } else {
         dataToUpdate = { $unset: { currentTurnUserId: 1 } }
       }
