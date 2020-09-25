@@ -129,7 +129,7 @@ adminController.getActivities = async (payload) => {
   if (payload.courseId && payload.lessonNumber && payload.episodeNumber) {
     query.push({ $project: { type: 1, name: 1, iconUrl: 1, time: 1 } })
   }
-  let { items: activities, totalCount } = (await getActivitiesAggregate(query))[0] || { items: [], totalCount: 0 }
+  let { items: activities, totalCount } = (await SERVICES.activityService.getActivitiesAggregate(query))[0] || { items: [], totalCount: 0 }
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_FETCHED_SUCCESSFULLY), { activities, totalCount });
 }
 
