@@ -33,7 +33,8 @@ adminController.cloneActivity = async (payload) => {
     iconUrl: sourceActivity.iconUrl,
     courseId: payload.courseId,
     lessonNumber: payload.lessonNumber,
-    episodeNumber: payload.episodeNumber
+    episodeNumber: payload.episodeNumber,
+    allocatedTime: payload.configData.properties.allocatedTime
   }
   //create new activity in database 
   const activity = (await SERVICES.activityService.createActivity(newActivity))._doc;
@@ -80,6 +81,7 @@ adminController.cloneActivity = async (payload) => {
 adminController.editActivity = async (payload) => {
   let activity = await SERVICES.activityService.getActivity({ _id: payload.activityId, status: ACTIVITY_STATUS.DRAFT }, NORMAL_PROJECTION, { instance: true });
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  payload.allocatedTime = payload.configData.properties.allocatedTime;
   await SERVICES.activityService.updateActivity({ _id: payload.activityId }, payload);
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activity.path}`);
   // console.log(payload.configData.properties);
@@ -105,9 +107,31 @@ adminController.getActivities = async (payload) => {
     if (payload.episodeNumber) payload.criteria.episodeNumber = payload.episodeNumber;
     if (payload.lessonNumber) payload.criteria.lessonNumber = payload.lessonNumber;
   }
-  let activities = await SERVICES.activityService.getActivities(payload);
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_FETCHED_SUCCESSFULLY), activities);
+  let query = [
+    { $match: payload.criteria },
+    {
+      $lookup: {
+        from: 'courses',
+        let: { id: "$courseId" },
+        pipeline: [
+          { $match: { $expr: { $eq: ["$_id", "$$id"] } } },
+          { $project: { "iconUrl": 1 } }
+        ],
+        as: 'courses',
+      }
+    },
+    { $unwind: { path: "$courses", preserveNullAndEmptyArrays: true } },
+    ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit),
+    { $addFields: { courseIcon: "$courses.iconUrl" } },
+    { $project: { courses: 0, courseId: 0 } },
+  ];
+  if (payload.courseId && payload.lessonNumber && payload.episodeNumber) {
+    query.push({ $project: { type: 1, name: 1, iconUrl: 1, time: 1 } })
+  }
+  let { items: activities, totalCount } = (await getActivitiesAggregate(query))[0] || { items: [], totalCount: 0 }
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_FETCHED_SUCCESSFULLY), { activities, totalCount });
 }
+
 
 /**
  * function to get publish activity by its id
