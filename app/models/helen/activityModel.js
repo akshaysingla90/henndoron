@@ -23,8 +23,8 @@ const activitySchema = new Schema({
     templateId: { type: String, ref: 'activity' },
     lessonId: { type: String, ref: 'lesson' },
     courseId: { type: String, ref: 'course' },
-    lessonNumber: { type: String },
-    episodeNumber: { type: String },
+    lessonNumber: { type: Number },
+    episodeNumber: { type: Number },
     // resFolders: [Resources],
     type: { type: Number, enum: [ACTIVITY_TYPE.GAME, ACTIVITY_TYPE.MEDIUM, ACTIVITY_TYPE.SMALL] },
     status: { type: Number, enum: [ACTIVITY_STATUS.PUBLISHED, ACTIVITY_STATUS.TEMPLATE, ACTIVITY_STATUS.DRAFT] }
