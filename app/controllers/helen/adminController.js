@@ -99,6 +99,7 @@ adminController.getActivities = async (payload) => {
   payload.criteria = {};
   payload.skip = (payload.counter - 1) * payload.limit;
   if (payload.type) payload.criteria.type = payload.type;
+  if (payload.status) payload.criteria.status = payload.status;
   if (payload.courseId) {
     payload.criteria.courseId = payload.courseId;
     if (payload.episodeNumber) payload.criteria.episodeNumber = payload.episodeNumber;
