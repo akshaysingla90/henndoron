@@ -2,7 +2,6 @@ const fs = require('fs-extra');
 const shell = require('shelljs')
 const path = require('path');
 const { activityModel, courseModel } = require(`../../models`);
-const dbUtils = require('../../utils/dbUtils')
 let activityService = {};
 
 /**
