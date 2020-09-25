@@ -176,7 +176,8 @@ lessonController.getLessons = async (payload) => {
       }
     },
     {
-      $unwind: "$course"
+      $unwind: { path: "$course", preserveNullAndEmptyArrays: true }
+
     },
     {
       $project: {
@@ -216,10 +217,10 @@ lessonController.getLessonById = async (payload) => {
       }
     },
     {
-      $unwind: "$course"
+      $unwind: { path: "$course", preserveNullAndEmptyArrays: true }
     },
     {
-      $unwind: "$activities"
+      $unwind: { path: "$activities", preserveNullAndEmptyArrays: true }
     },
     {
       $lookup: {
@@ -230,7 +231,7 @@ lessonController.getLessonById = async (payload) => {
       }
     },
     {
-      $unwind: "$activitiesInfo"
+      $unwind: { path: "$activitiesInfo", preserveNullAndEmptyArrays: true }
     },
     {
       $group: {
