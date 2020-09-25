@@ -161,13 +161,41 @@ lessonController.getLessons = async (payload) => {
   let query = [
     matchCriteria,
     {
+      $unwind: { path: "$activities", preserveNullAndEmptyArrays: true }
+    },
+    {
       $lookup: {
         from: 'activities',
         localField: 'activities.activityId',
         foreignField: '_id',
-        as: 'activityInfo'
+        as: 'activitiesInfo'
       }
     },
+    {
+      $unwind: { path: "$activitiesInfo", preserveNullAndEmptyArrays: true }
+    },
+    {
+      $group: {
+        _id: '$_id',
+        activities: {
+          $push: {
+            $mergeObjects: [
+              {
+                activityName: '$activities.activityName',
+                _id: '$activities._id',
+                allocatedTime: '$activities.allocatedTime'
+              },
+              {
+                type: '$activitiesInfo.type',
+                iconUrl: '$activitiesInfo.iconUrl'
+              }
+            ]
+          }
+        },
+        lesson: { $first: '$$ROOT' }
+      }
+    },
+    { $replaceRoot: { newRoot: { $mergeObjects: ["$lesson", "$$ROOT"] } } },
     {
       $lookup: {
         from: 'courses',
@@ -182,7 +210,7 @@ lessonController.getLessons = async (payload) => {
     },
     {
       $project: {
-        "activityIcons": "$activityInfo.iconUrl",
+        "activityIcons": "$activities.iconUrl",
         "name": 1,
         "path": 1,
         "description": 1,
