@@ -102,6 +102,7 @@ lessonController.duplicateLesson = async (payload) => {
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lessonPath}`);
   let newLesson = { ...sourceLesson, name: `${sourceLesson.name} (COPY)`, path: `/${lessonPath}` };
   delete newLesson._id;
+  newLesson.status = LESSON_STATUS.DRAFT;
   const alreadyExist = await SERVICES.lessonService.getLesson({ name: newLesson.name, coursId: newLesson.coursId, lessonNumber: newLesson.lessonNumber, episodeNumber: newLesson.episodeNumber });
   if (alreadyExist) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_ALREADY_EXISTS_WITH_THIS_NAME, ERROR_TYPES.BAD_REQUEST);
   let lesson = await SERVICES.lessonService.createLesson(newLesson);
