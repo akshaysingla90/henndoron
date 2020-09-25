@@ -4,6 +4,7 @@ const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, ACTIVITY_TYPE, RESOURCE_TYPE, 
 const { ACTIVITY_SRC_PATH, ACTIVITY_PREVIEW_PATH, TEMPLATE_ACTIVITY_PREVIEW, TEMPLATE_ACTIVITY_PATH, ACTIVITY_DIRECTORY_PATH, ACTIVITY_RESOURCE_DIRECTORY_PATH, BASE_PATH, ACTIVITY_CONFIG_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const SERVICES = require('../../services');
 const ACTIVITIES = require('../../data-db/activityConfig.json');
+const dbUtils = require('../../utils/dbUtils')
 const fs = require('fs-extra');
 const replace = require('replace-in-file');
 const path = require('path');
