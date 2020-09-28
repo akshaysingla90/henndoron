@@ -144,6 +144,7 @@ adminController.getActivities = async (payload) => {
 adminController.publishActivity = async (payload) => {
   let activity = await SERVICES.activityService.getActivity({ _id: payload.activityId, status: ACTIVITY_STATUS.DRAFT }, NORMAL_PROJECTION, { instance: true });
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  if (!activity.courseId || !activity.episodeNumber || !activity.lessonNumber) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_NOT_ASSOCIATED_TO_VALID_LESSONL, ERROR_TYPES.BAD_REQUEST);
   activity.status = ACTIVITY_STATUS.PUBLISHED;
   await activity.save();
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_PUBLISHED_SUCCESSFULLY), { activity });
@@ -306,7 +307,6 @@ adminController.duplicateActivity = async (payload) => {
 adminController.previewActivity = async (payload) => {
   const sourceActivity = await SERVICES.activityService.getActivity({ _id: payload.activityId });
   if (!sourceActivity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
-  if (!sourceActivity.courseId || !sourceActivity.episodeNumber || !sourceActivity.lessonNumber) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_NOT_ASSOCIATED_TO_VALID_LESSONL, ERROR_TYPES.BAD_REQUEST);
   const sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)

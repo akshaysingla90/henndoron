@@ -23,7 +23,8 @@ let routes = [
             activityId: Joi.string().required().description('actvityId.'),
             activityName: Joi.string().required().description('Module name'),
             allocatedTime: Joi.number().required().description('Module time'),
-          }).required()).description('Activity Ids in order'),
+          }).error(new Error('Module file cannot not be empty'))
+            .required()).description('Activity Ids in order'),
         courseId: Joi.string().required().description('Course Id'),
         status: Joi.number().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
       },
@@ -54,7 +55,9 @@ let routes = [
             activityId: Joi.string().required().description('Module Id.'),
             activityName: Joi.string().required().description('Module name'),
             allocatedTime: Joi.number().required().description('Module time')
-          }).required()).description('Activity Ids in order'),
+          })
+            .error(new Error('Module file cannot not be empty'))
+            .required()).description('Activity Ids in order'),
         courseId: Joi.string().description('Course Id'),
         status: Joi.number().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
       },
