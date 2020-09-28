@@ -221,10 +221,10 @@ adminController.deleteResourceFiles = async (payload) => {
  * @param {*} payload 
  */
 adminController.deleteActivity = async (payload) => {
-  let activity = await SERVICES.activityService.removeActivity({ _id: payload.id, status: { $ne: ACTIVITY_STATUS.TEMPLATE } });
-  if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   const assocaitedToLesson = await SERVICES.lessonService.getLesson({ "activities.activityId":activity._id},{_id:1});
   if (!!assocaitedToLesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_ASSOCIATED_TO__LESSON, ERROR_TYPES.BAD_REQUEST);
+  let activity = await SERVICES.activityService.removeActivity({ _id: payload.id, status: { $ne: ACTIVITY_STATUS.TEMPLATE } });
+  if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   let activityPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, activity.path);
   fs.removeSync(activityPath);
   let previewPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}${activity.path}`);
