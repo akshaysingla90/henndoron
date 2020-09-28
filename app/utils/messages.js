@@ -106,8 +106,8 @@ module.exports = {
   LESSON_DUPLICATED_SUCCESSFULLY: "Lesson duplicated successfully",
   LESSONS_FETCHED_SUCCESSFULLY: "Lessons fetched successfully",
   LESSON_FETCHED_SUCCESSFULLY: "Lesson fetched successfully",
-  LESSONS_DOESNOT_EXISTS: "Lessons doesn't exist",
-  LESSON_DELETED_SUCCESSFULLY: "Lessons deleted successfully",
+  LESSON_DOESNOT_EXISTS: "Lesson doesn't exist",
+  LESSON_DELETED_SUCCESSFULLY: "Lesson deleted successfully",
   COURSES_FETCHED_SUCCESSFULLY: "Courses fetched successfully",
   ACTIVITY_REQUIRED_TO_PUBLISH_LESSON:'Lesson should contain at least one module.'
 };

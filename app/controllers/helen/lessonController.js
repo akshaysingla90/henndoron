@@ -97,7 +97,7 @@ lessonController.createLesson = async (payload) => {
  */
 lessonController.duplicateLesson = async (payload) => {
   const sourceLesson = await SERVICES.lessonService.getLesson({ _id: payload.id });
-  if (!sourceLesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSONS_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  if (!sourceLesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   const sourcePath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}`, sourceLesson.path);
   const lessonPath = `${sourceLesson.name.replace(/ /g, '')}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lessonPath}`);
@@ -298,7 +298,7 @@ lessonController.getLessonById = async (payload) => {
     }
   ]
   let lesson = (await SERVICES.lessonService.getLessonsAggregate(query))[0];
-  if (!lesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSONS_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  if (!lesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_FETCHED_SUCCESSFULLY), { lesson });
 }
 
@@ -308,7 +308,7 @@ lessonController.getLessonById = async (payload) => {
  */
 lessonController.deleteLesson = async (payload) => {
   let lesson = await SERVICES.lessonService.deleteLesson({ _id: payload.id });
-  if (!lesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSONS_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  if (!lesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   let lessonPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}${lesson.path}`);
   fs.removeSync(lessonPath);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_DELETED_SUCCESSFULLY));
