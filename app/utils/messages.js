@@ -98,6 +98,7 @@ module.exports = {
   ACTIVITY_NOT_ASSOCIATED_TO_VALID_LESSONL:'Module is not associated to a valid lesson.',
   ACTIVITY_ASSOCIATED_TO__LESSON:'Module cannot be deleted as it is associated to a lesson.',
   LESSON_ALREADY_EXISTS_WITH_THIS_NAME: 'Lesson already exists with this name',
+  LESSON_ALREADY_EXISTS_WITH_THIS_LESSON_NUMBER: 'Lesson already exists with this lesson number',
   RESOURCES_UPLOAD_SUCCESSFULLY: "Resource uploaded successfully",
   RESOURCES_DELETED_SUCCESSFULLY: "Resource deleted successfully",
   LESSON_DOESNOT_EXISTS: 'Lesson doesn\'t exist',
