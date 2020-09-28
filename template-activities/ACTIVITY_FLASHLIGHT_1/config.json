@@ -150,7 +150,7 @@
       "onRedCircle": {
         "UIName": "On Red Circle",
         "enable": true,
-        "description": "This will trigger when module starts.",
+        "description": "This will trigger when clicking on any student's red circle.",
         "content": {
           "ops": [
             {
@@ -277,7 +277,7 @@
         "data": {
           "idle": {
             "configurable": true,
-            "UIName": "Granny Idle",
+            "UIName": "Character Idle",
             "name": "Granny Idle",
             "frameCount": 16,
             "frameInitial": "Granny_Fix_idle/idle_",
@@ -293,7 +293,7 @@
           },
           "celebrating": {
             "configurable": true,
-            "UIName": "Granny Celebrating",
+            "UIName": "Character Celebrating",
             "name": "Granny Celebrating",
             "frameCount": 32,
             "frameInitial": "Granny_Fix_celebrating/celebrating_",
@@ -310,7 +310,7 @@
           "run_left": {
             "configurable": true,
             "name": "Granny Run Left",
-            "UIName": "Granny run left",
+            "UIName": "Character run left",
             "frameCount": 11,
             "frameInitial": "Granny_Fix_run_left/run_left_",
             "extension": ".png",
@@ -326,7 +326,7 @@
           "run_right": {
             "configurable": true,
             "name": "Granny Run Right",
-            "UIName": "granny run right",
+            "UIName": "Character run right",
             "frameCount": 11,
             "frameInitial": "Granny_Fix_run_right/run_right_",
             "extension": ".png",

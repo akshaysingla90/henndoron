@@ -113,7 +113,7 @@
 
       "flashCardGlow": {
         "component": "animation",
-        "UIName": "Flash card glow animation",
+        "UIName": "Object Holder glow animation",
         "name": "cardTakeOut",
         "frameCount": 15,
         "extension": ".png",
@@ -125,7 +125,7 @@
       },
       "cardTakeOut": {
         "component": "cardTakeOutPath",
-        "UIName": "Card take out path",
+        "UIName": "Object reveal path",
         "animationPath": [
           {
             "position": {
@@ -147,6 +147,7 @@
 
       "carouselAssets": {
         "component": "carouselItems",
+        "UIname": "Objects",
         "allowDelete": true,
         "allowAdd": true,
         "dimensions": { "width": 350, "height": 350 },

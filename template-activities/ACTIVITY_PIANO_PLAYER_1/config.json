@@ -147,7 +147,7 @@
       "startButtonClicked": {
         "UIName": "Start Button Clicked",
         "enable": true,
-        "description": "this will trigger when activity starts ",
+        "description": "This will trigger on clicking start button ",
         "content": {
           "ops": [
             {
