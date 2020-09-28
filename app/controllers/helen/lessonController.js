@@ -182,7 +182,7 @@ lessonController.getLessons = async (payload) => {
             $mergeObjects: [
               {
                 activityName: '$activities.activityName',
-                _id: '$activities._id',
+                activityId: '$activities.activityId',
                 allocatedTime: '$activities.allocatedTime'
               },
               {
@@ -270,7 +270,7 @@ lessonController.getLessonById = async (payload) => {
             $mergeObjects: [
               {
                 activityName: '$activities.activityName',
-                _id: '$activities._id',
+                activityId: '$activities.activityId',
                 allocatedTime: '$activities.allocatedTime'
               },
               {
