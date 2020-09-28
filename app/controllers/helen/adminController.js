@@ -221,7 +221,7 @@ adminController.deleteResourceFiles = async (payload) => {
  * @param {*} payload 
  */
 adminController.deleteActivity = async (payload) => {
-  const assocaitedToLesson = await SERVICES.lessonService.getLesson({ "activities.activityId":activity._id},{_id:1});
+  const assocaitedToLesson = await SERVICES.lessonService.getLesson({ "activities.activityId": payload.id},{_id:1});
   if (!!assocaitedToLesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_ASSOCIATED_TO__LESSON, ERROR_TYPES.BAD_REQUEST);
   let activity = await SERVICES.activityService.removeActivity({ _id: payload.id, status: { $ne: ACTIVITY_STATUS.TEMPLATE } });
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
