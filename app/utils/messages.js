@@ -102,6 +102,7 @@ module.exports = {
   LESSON_DOESNOT_EXISTS: 'Lesson doesn\'t exist',
   LESSONS_UPDATED_SUCCESSFULLY: 'Lesson updated successfully',
   LESSON_CLONED_SUCCESSFULLY: "Draft saved successfully",
+  LESSON_DUPLICATED_SUCCESSFULLY: "Lesson duplicated successfully",
   LESSONS_FETCHED_SUCCESSFULLY: "Lessons fetched successfully",
   LESSON_FETCHED_SUCCESSFULLY: "Lesson fetched successfully",
   LESSONS_DOESNOT_EXISTS: "Lessons doesn't exist",
