@@ -156,7 +156,7 @@
       "onMouseEnable": {
         "UIName": "On Mouse Enable",
         "enable": true,
-        "description": "This will trigger when module starts.",
+        "description": "This will trigger on enabling any student's mouse.",
         "content": {
           "ops": [
             {
