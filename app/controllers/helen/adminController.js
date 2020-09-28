@@ -74,7 +74,7 @@ adminController.cloneActivity = async (payload) => {
   await fs.writeFileSync(destinationPath + ACTIVITY_CONFIG_PATH, JSON.stringify(payload.configData));
   activity.configData = { activityPath, url: `res/Activity/${activityPath}/`, namespace: activityPath };
   console.log('Copying complete!');
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_DUPLICATED_SUCCESSFULLY), { activity });
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITY_CLONED_SUCCESSFULLY), { activity });
 };
 
 /**

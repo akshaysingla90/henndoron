@@ -145,7 +145,7 @@ lessonController.duplicateLesson = async (payload) => {
       }
     }]
   lesson = (await SERVICES.lessonService.getLessonsAggregate(query))[0];
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_CLONED_SUCCESSFULLY), { lesson });
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_DUPLICATED_SUCCESSFULLY), { lesson });
 }
 
 /**
