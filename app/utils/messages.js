@@ -109,4 +109,5 @@ module.exports = {
   LESSONS_DOESNOT_EXISTS: "Lessons doesn't exist",
   LESSON_DELETED_SUCCESSFULLY: "Lessons deleted successfully",
   COURSES_FETCHED_SUCCESSFULLY: "Courses fetched successfully",
+  ACTIVITY_REQUIRED_TO_PUBLISH_LESSON:'Atleast one module is required to publish a lesson'
 };

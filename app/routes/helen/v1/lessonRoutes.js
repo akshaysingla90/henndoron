@@ -18,15 +18,16 @@ let routes = [
         description: Joi.string().required().description('Lesson decription.'),
         lessonNumber: Joi.number().required().description('Lesson number.'),
         episodeNumber: Joi.number().required().description('Episode number.'),
-        activities: Joi.array().required().items(
+        activities: Joi.array().items(
           Joi.object({
             activityId: Joi.string().required().description('actvityId.'),
             activityName: Joi.string().required().description('Module name'),
             allocatedTime: Joi.number().required().description('Module time'),
-          }).error(new Error('Module file cannot not be empty'))
-            .required()).description('Activity Ids in order'),
+          }))
+          .error(new Error('Module file is not enterd correctly!'))
+          .description('Activity Ids in order'),
         courseId: Joi.string().required().description('Course Id'),
-        status: Joi.number().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
+        status: Joi.number().required().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
       },
       group: 'Lesson',
       description: 'Route to create a new lesson either Draft/Publish',
@@ -56,10 +57,11 @@ let routes = [
             activityName: Joi.string().required().description('Module name'),
             allocatedTime: Joi.number().required().description('Module time')
           })
-            .error(new Error('Module file cannot not be empty'))
-            .required()).description('Activity Ids in order'),
+        )
+          .error(new Error('Module file is not enterd correctly!'))
+          .description('Activity Ids in order'),
         courseId: Joi.string().description('Course Id'),
-        status: Joi.number().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
+        status: Joi.number().required().valid(LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED).description('3 => DRAFT,4 => PUBLISHED'),
       },
       group: 'Lesson',
       description: 'Route to update a lesson',

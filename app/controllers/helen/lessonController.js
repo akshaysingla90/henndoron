@@ -21,6 +21,7 @@ lessonController.createLesson = async (payload) => {
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lessonPath}`);
   const templatePreviewPath = path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PREVIEW}`)
   payload.path = "/" + lessonPath;
+  if (payload.status == LESSON_STATUS.PUBLISHED && (!payload.activities || !payload.activities.length)) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_REQUIRED_TO_PUBLISH_LESSON, ERROR_TYPES.BAD_REQUEST)
   //Create new lesson in database
   await SERVICES.lessonService.createLesson(payload);
   // Copying Directory
@@ -320,6 +321,7 @@ lessonController.deleteLesson = async (payload) => {
 lessonController.updateLesson = async (payload) => {
   let lesson = await SERVICES.lessonService.getLesson({ _id: payload.id, status: LESSON_STATUS.DRAFT }, NORMAL_PROJECTION);
   if (!lesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
+  if (payload.status == LESSON_STATUS.PUBLISHED && (!payload.activities || !payload.activities.length)) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_REQUIRED_TO_PUBLISH_LESSON,ERROR_TYPES.BAD_REQUEST)
   await SERVICES.lessonService.updateLesson({ _id: payload.id }, payload);
   lesson = (await SERVICES.lessonService.getLessonsAggregate([
     { $match: { _id: Mongoose.Types.ObjectId(payload.id) } },
