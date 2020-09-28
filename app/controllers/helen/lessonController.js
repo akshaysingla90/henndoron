@@ -223,7 +223,7 @@ lessonController.getLessons = async (payload) => {
         "numberOfActivities": { $cond: { if: { $isArray: "$activities" }, then: { $size: "$activities" }, else: "NA" } }
       }
     },
-    ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit)
+    ...dbUtils.paginateWithTotalCount({ _id: 1 }, payload.skip, payload.limit)
   ]
   let { items: lessons, totalCount } = (await SERVICES.lessonService.getLessonsAggregate(query))[0] || { items: [], totalCount: 0 };
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSONS_FETCHED_SUCCESSFULLY), { lessons, totalCount });
