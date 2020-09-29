@@ -287,6 +287,17 @@ lessonController.getLessonById = async (payload) => {
     { $replaceRoot: { newRoot: { $mergeObjects: ["$lesson", "$$ROOT"] } } },
     {
       $addFields: {
+        "activities": {
+          $cond: {
+            if: { $eq: [[{}], "$activities"] },
+            then: [],
+            else: "$activities"
+          }
+        }
+      }
+    },
+    {
+      $addFields: {
         "numberOfActivities": { $cond: { if: { $isArray: "$activities" }, then: { $size: "$activities" }, else: "NA" } }
       }
     },
