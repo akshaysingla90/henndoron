@@ -1602,7 +1602,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         if (activityCursorFound) {
             cc.$("#gameCanvas").style.cursor = "pointer";
             if(lesson_1.ref.texture){
-                cc.$("#gameCanvas").style.cursor  =  "url" + "(\'" +  lesson_1.ref.texture + "\')"+ "," +  "auto";
+                cc.$("#gameCanvas").style.cursor  =  "url" + "(\'" + 'AsyncActivity/'+ lesson_1.ref.texture + "\')"+ "," +  "auto";
             }
         }
         if(cursorFound){
