@@ -88,6 +88,7 @@ lessonController.createLesson = async (payload) => {
   }
   fs.writeFileSync(`${destinationPath}/project.json`, JSON.stringify(projectData));
   fs.writeFileSync(`${destinationPath}/res/lesson-config.json`, JSON.stringify(lessonConfigData));
+  if (payload.status == LESSON_STATUS.PUBLISHED) return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_PUBLISHED_SUCCESSFULLY), { lesson });
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_CLONED_SUCCESSFULLY), { lesson });
 }
 
@@ -411,6 +412,7 @@ lessonController.updateLesson = async (payload) => {
   }
   fs.writeFileSync(`${destinationPath}/project.json`, JSON.stringify(projectData));
   fs.writeFileSync(`${destinationPath}/res/lesson-config.json`, JSON.stringify(lessonConfigData));
+  if (payload.status == LESSON_STATUS.PUBLISHED) return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_PUBLISHED_SUCCESSFULLY));
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSONS_UPDATED_SUCCESSFULLY));
 }
 
