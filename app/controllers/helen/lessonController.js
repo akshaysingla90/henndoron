@@ -15,7 +15,7 @@ const fs = require('fs-extra');
 let lessonController = {};
 
 lessonController.createLesson = async (payload) => {
-  const alreadyExist = await SERVICES.lessonService.getLesson({ coursId: payload.coursId, lessonNumber: payload.lessonNumber, episodeNumber: payload.episodeNumber });
+  const alreadyExist = await SERVICES.lessonService.getLesson({ courseId: payload.courseId, lessonNumber: payload.lessonNumber, episodeNumber: payload.episodeNumber });
   if (alreadyExist) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_ALREADY_EXISTS_WITH_THIS_LESSON_NUMBER, ERROR_TYPES.BAD_REQUEST);
   const lessonPath = `${payload.name.replace(/ /g, '')}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lessonPath}`);
