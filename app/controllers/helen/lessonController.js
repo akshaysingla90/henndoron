@@ -210,6 +210,17 @@ lessonController.getLessons = async (payload) => {
 
     },
     {
+      $addFields: {
+        "activities": {
+          $cond: {
+            if: { $eq: [[{}], "$activities"] },
+            then: [],
+            else: "$activities"
+          }
+        }
+      }
+    },
+    {
       $project: {
         "activityIcons": "$activities.iconUrl",
         "name": 1,
