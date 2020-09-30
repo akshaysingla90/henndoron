@@ -147,7 +147,7 @@
 
       "carouselAssets": {
         "component": "carouselItems",
-        "UIname": "Objects",
+        "UIName": "Objects",
         "allowDelete": true,
         "allowAdd": true,
         "dimensions": { "width": 350, "height": 350 },

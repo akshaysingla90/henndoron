@@ -263,6 +263,25 @@
         "position": { "x": 520, "y": 224.5 },
         "scale": 0.5
       },
+      "spinningWheelSpeed": {
+        "component": "select",
+        "UIName": "Spinning Wheel Speed",
+        "options": [
+          {
+            "label": 1,
+            "value": 1
+          },
+          {
+            "label": 2,
+            "value": 2
+          },
+          {
+            "label": 3,
+            "value": 3
+          }
+        ],
+        "currentValue": 2
+      },
       "spinningWheelBase": {
         "component": "image",
         "UIName": "Spinning Wheel Base",
