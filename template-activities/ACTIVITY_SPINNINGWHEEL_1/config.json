@@ -268,27 +268,27 @@
         "UIName": "Spinning Wheel Speed",
         "options": [
           {
-            "label": "50 rpm",
-            "value": 50
+            "label": "10 rpm",
+            "value": 10
           },
           {
-            "label": "55 rpm",
-            "value": 55
+            "label": "15 rpm",
+            "value": 15
           },
           {
-            "label": "60 rpm",
-            "value": 60
+            "label": "20 rpm",
+            "value": 20
           },
           {
-            "label": "65 rpm",
-            "value": 65
+            "label": "25 rpm",
+            "value": 25
           },
           {
-            "label": "70 rpm",
-            "value": 70
+            "label": "30 rpm",
+            "value": 30
           }
         ],
-        "currentValue": 60
+        "currentValue": 10
       },
 
       "spinningWheelBase": {

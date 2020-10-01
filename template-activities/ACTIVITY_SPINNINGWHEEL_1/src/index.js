@@ -74,7 +74,8 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
       ref.setupUI();
       ref.loadAudio();
       ref.loadSpriteFrames();
-      ref.rotationValue = ((ACTIVITY_SPINNINGWHEEL_1.ref.config.spinningWheelSpeed.currentValue / 60) * 360) / 60;
+      ref.rotationValue =
+        ((ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelSpeed.currentValue / 60) * 360) / 60;
       ref.speed = ref.rotationValue;
       if (ACTIVITY_SPINNINGWHEEL_1.ref.storedData) {
         ACTIVITY_SPINNINGWHEEL_1.ref.syncData(ACTIVITY_SPINNINGWHEEL_1.ref.storedData);

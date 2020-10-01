@@ -586,8 +586,9 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
         "_";
       folder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].name;
       name = folder; //.toLowerCase();
-      frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[index].frameCount;
-      loop = 1;
+     const idx= ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation.findIndex(item => ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation === item.UIName);
+     const frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[idx].frameCount;
+     loop = 1;
       actionFolder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation;
       speed = 0.05;
       let animation = HDUtility.runFrameAnimation(
