@@ -330,7 +330,7 @@ ACTIVITY_DONT_WAKE_THE_DRAGON_1.TreasureChests = HDBaseLayer.extend({
         treasureChestObj = {name: "", itemTag: ""}
     ) {
         let treasureItemSpriteRef = null;
-        console.log('treasue',treasureChestObj);
+     //   console.log('treasue',treasureChestObj);
         if (treasureChestObj.itemTag) {
             treasureItemSpriteRef = new cc.Sprite(
                 ACTIVITY_DONT_WAKE_THE_DRAGON_1.resourcePath +
