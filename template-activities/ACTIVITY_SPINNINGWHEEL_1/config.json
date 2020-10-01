@@ -273,18 +273,18 @@
           },
           {
             "label": "55 rpm",
-            "value": 50
+            "value": 55
           },
           {
-            "label": "60 rmp",
+            "label": "60 rpm",
             "value": 60
           },
           {
-            "label": "65 rmp",
-            "value": 66
+            "label": "65 rpm",
+            "value": 65
           },
           {
-            "label": "70 rmp",
+            "label": "70 rpm",
             "value": 70
           }
         ],
