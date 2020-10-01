@@ -417,7 +417,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
         let action = "_idle_";
         let folder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].name;
         let name = folder;//.toLowerCase();
-        let frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key]["animation"]["RestPose01"].frameCount;
+        let frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[0].frameCount;
         let loop = 1000;
         let actionFolder = "Idle";
         let speed = 0.05;
@@ -429,7 +429,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
         this.idelAnim = cc.callFunc(() => {
             let randNum = Math.ceil(Math.random() * 2 + 1);
             console.log('Random Number ',randNum);
-            sprite.runAction(new cc.Sequence(HDUtility.runFrameAnimation(ACTIVITY_CWC_1.animationBasePath + idleAnimFolder + "/" + "RestPose0" + randNum + "/" + idleAnimName + "_restpose0" + randNum + "_", ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key]["animation"]["RestPose0" + randNum].frameCount, idleAnimSpeed, ".png", false), cc.callFunc(this.repeatAnimation, this,
+            sprite.runAction(new cc.Sequence(HDUtility.runFrameAnimation(ACTIVITY_CWC_1.animationBasePath + idleAnimFolder + "/" + "RestPose0" + randNum + "/" + idleAnimName + "_restpose0" + randNum + "_", ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[randNum-1].frameCount, idleAnimSpeed, ".png", false), cc.callFunc(this.repeatAnimation, this,
                 {
                     "sprite": sprite,
                     "name": idleAnimName,
@@ -444,7 +444,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
             action = "_" + ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation.toLowerCase() + "_";
             folder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].name;
             name = folder;//.toLowerCase();
-            frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key]["animation"][ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation].frameCount;
+            frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[index].frameCount;
             loop = 1;
             actionFolder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation;
             speed = 0.05;
@@ -458,7 +458,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
     repeatAnimation: function (parent, animInfo) {
         let randNum = Math.ceil(Math.random() * 2 + 1);
         animInfo.sprite.restPose = true;
-        animInfo.sprite.runAction(new cc.Sequence(HDUtility.runFrameAnimation(ACTIVITY_CWC_1.animationBasePath + animInfo.folder + "/" + "RestPose0" + randNum + "/" + animInfo.name + "_restpose0" + randNum + "_", ACTIVITY_CWC_1.config.assets.sections.charactersData.data[animInfo.key]["animation"]["RestPose0" + randNum].frameCount, animInfo.speed, ".png", true), cc.callFunc(this.repeatAnimation, this, animInfo)));
+        animInfo.sprite.runAction(new cc.Sequence(HDUtility.runFrameAnimation(ACTIVITY_CWC_1.animationBasePath + animInfo.folder + "/" + "RestPose0" + randNum + "/" + animInfo.name + "_restpose0" + randNum + "_", ACTIVITY_CWC_1.config.assets.sections.charactersData.data[animInfo.key].animation[randNum-1].frameCount, animInfo.speed, ".png", true), cc.callFunc(this.repeatAnimation, this, animInfo)));
     },
 
     buttonCallback: function (sender, Type) {
