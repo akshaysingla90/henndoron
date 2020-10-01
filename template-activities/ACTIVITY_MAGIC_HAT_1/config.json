@@ -34,14 +34,14 @@
     "sections": {
       "flashCardFront": {
         "component": "image",
-        "UIName": "FLASH CARD FRONT",
+        "UIName": "OBJECT HOLDER FRONT",
         "imageName": "HatFront.png",
         "dimensions": { "width": 512, "height": 512 },
         "position": { "x": 240, "y": 324.5 }
       },
       "flashCardBack": {
         "component": "image",
-        "UIName": "FLASH CARD BACK",
+        "UIName": "OBJECT HOLDER BACK",
         "imageName": "HatBack.png",
         "dimensions": { "width": 512, "height": 512 },
         "position": { "x": 240, "y": 324.5 }
@@ -107,7 +107,7 @@
 
       "cardTakeOutSound": {
         "component": "sound",
-        "UIName": "Card take out sound",
+        "UIName": "OBJECT take out sound",
         "sound": "cardTakeOut.mp3"
       },
 
