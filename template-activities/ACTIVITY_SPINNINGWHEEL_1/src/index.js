@@ -38,7 +38,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
     cardQueue: [],
     animationCompleted: true,
     isRotating: false,
-    speed: 6,
+  //  speed: 6,
     intervalActionId: null,
     currentTargetIndex: 0,
     tableView: null,
@@ -600,7 +600,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         ACTIVITY_SPINNINGWHEEL_1.ref.isRotating = true;
         if (ACTIVITY_SPINNINGWHEEL_1.ref.parent)
             ACTIVITY_SPINNINGWHEEL_1.ref.parent.setStudentPanelActive(!ACTIVITY_SPINNINGWHEEL_1.ref.isRotating);
-        ACTIVITY_SPINNINGWHEEL_1.ref.speed = 6;
+    //    ACTIVITY_SPINNINGWHEEL_1.ref.speed = 6;
         ACTIVITY_SPINNINGWHEEL_1.ref.scheduleUpdate();
 
         if (ACTIVITY_SPINNINGWHEEL_1.ref.tableView)
@@ -630,15 +630,15 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         if (!ACTIVITY_SPINNINGWHEEL_1.ref) {
             return 0;
         }
-        var angle = ACTIVITY_SPINNINGWHEEL_1.ref.speed - 1;
+        var angle = ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelSpeed.currentValue- 1;
         if (angle == 0) {
             angle = 1;
-            ACTIVITY_SPINNINGWHEEL_1.ref.speed = 1;
+            ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelSpeed.currentValue = 1;
         }
         if (!ACTIVITY_SPINNINGWHEEL_1.ref.isRotating) {
             angle = 0;
         }
-        return ACTIVITY_SPINNINGWHEEL_1.ref.speed = angle;
+        return ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelSpeed.currentValue = angle;
     },
 
     /**
@@ -664,11 +664,11 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             var rotation = wheel.getRotation();
             var neoRotation = (rotation + speed) % 360;
             wheel.setRotation(neoRotation);
-            if (ACTIVITY_SPINNINGWHEEL_1.ref.speed < 3) {
+            if (ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelSpeed.currentValue < 3) {
                 var selectedItemAngle = ACTIVITY_SPINNINGWHEEL_1.ref.getAngle(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselAssets.data.length, ACTIVITY_SPINNINGWHEEL_1.ref.cardQueue[0]);
                 if (wheel.getRotationX() < selectedItemAngle + 5 && wheel.getRotationX() > selectedItemAngle - 5) {
                     ACTIVITY_SPINNINGWHEEL_1.ref.stopActionByTag(111);
-                    ACTIVITY_SPINNINGWHEEL_1.ref.speed = 4;
+                    ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelSpeed.currentValue = 4;
 
                     ACTIVITY_SPINNINGWHEEL_1.ref.unscheduleUpdate();
                     ACTIVITY_SPINNINGWHEEL_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
@@ -765,7 +765,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
      */
     calculateSpeed: function () {
         if (ACTIVITY_SPINNINGWHEEL_1.ref.isRotating) {
-            return ACTIVITY_SPINNINGWHEEL_1.ref.speed
+            return ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelSpeed.currentValue
         }
     },
     /**

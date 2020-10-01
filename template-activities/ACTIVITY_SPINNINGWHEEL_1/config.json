@@ -280,7 +280,7 @@
             "value": 3
           }
         ],
-        "currentValue": 2
+        "currentValue": 6
       },
       "spinningWheelBase": {
         "component": "image",
