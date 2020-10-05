@@ -584,7 +584,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
         (item) =>
           item.UIName === ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation
       );
-      action = "_" + requiredAnimationData.folderName + "_";
+      action = "_" + requiredAnimationData.folderName.toLowerCase() + "_";
       folder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].name;
       name = folder; //.toLowerCase();
       const idx = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation.findIndex(
