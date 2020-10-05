@@ -156,7 +156,7 @@
       "onMouseEnable": {
         "UIName": "On Mouse Enable",
         "enable": true,
-        "description": "This will trigger on enabling any student's mouse.",
+        "description": "This will trigger when module starts.",
         "content": {
           "ops": [
             {
@@ -263,34 +263,6 @@
         "position": { "x": 520, "y": 224.5 },
         "scale": 0.5
       },
-      "spinningWheelSpeed": {
-        "component": "select",
-        "UIName": "Spinning Wheel Speed",
-        "options": [
-          {
-            "label": "10 rpm",
-            "value": 10
-          },
-          {
-            "label": "15 rpm",
-            "value": 15
-          },
-          {
-            "label": "20 rpm",
-            "value": 20
-          },
-          {
-            "label": "25 rpm",
-            "value": 25
-          },
-          {
-            "label": "30 rpm",
-            "value": 30
-          }
-        ],
-        "currentValue": 10
-      },
-
       "spinningWheelBase": {
         "component": "image",
         "UIName": "Spinning Wheel Base",
@@ -319,12 +291,14 @@
         "component": "image",
         "UIName": "Carousel Background Image",
         "imageName": "carouselImage.png",
+        "position": { "x": 768, "y": 454.3 },
         "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "Carousel Background Border Image",
         "imageName": "carouselBorderImage.png",
+        "position": { "x": 768, "y": 454.3 },
         "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackground": {
@@ -432,7 +406,33 @@
       }
     }
   },
-
+  "spinningWheelSpeed": {
+    "component": "select",
+    "UIName": "Spinning Wheel Speed",
+    "options": [
+      {
+        "label": "50 rpm",
+        "value": 50
+      },
+      {
+        "label": "55 rpm",
+        "value": 50
+      },
+      {
+        "label": "60 rmp",
+        "value": 60
+      },
+      {
+        "label": "65 rmp",
+        "value": 66
+      },
+      {
+        "label": "70 rmp",
+        "value": 70
+      }
+    ],
+    "currentValue": 70
+  },
   "resources": {
     "ignoreForAuthToolUI": true,
     "sprites": {

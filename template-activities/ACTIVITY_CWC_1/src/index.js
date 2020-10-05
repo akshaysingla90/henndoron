@@ -580,16 +580,20 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
 
     let actionSeq = this.idelAnim;
     if (index != undefined && index.toString()) {
-      action =
-        "_" +
-        ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation.toLowerCase() +
-        "_";
+      const requiredAnimationData = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation.find(
+        (item) =>
+          item.UIName === ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation
+      );
+      action = "_" + requiredAnimationData.folderName + "_";
       folder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].name;
       name = folder; //.toLowerCase();
-     const idx= ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation.findIndex(item => ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation === item.UIName);
-     const frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[idx].frameCount;
-     loop = 1;
-      actionFolder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation;
+      const idx = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation.findIndex(
+        (item) =>
+          ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation === item.UIName
+      );
+      const frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[idx].frameCount;
+      loop = 1;
+      actionFolder = requiredAnimationData.folderName;
       speed = 0.05;
       let animation = HDUtility.runFrameAnimation(
         ACTIVITY_CWC_1.animationBasePath + folder + "/" + actionFolder + "/" + name + action,
