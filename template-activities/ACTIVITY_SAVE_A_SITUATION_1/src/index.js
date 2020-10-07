@@ -107,7 +107,7 @@ ACTIVITY_SAVE_A_SITUATION_1.SaveASituation = HDBaseLayer.extend({
                 console.log("error", error)
             }
           //  ACTIVITY_SAVE_A_SITUATION_1.ref.triggerScript(ACTIVITY_SAVE_A_SITUATION_1.ref.config.teacherScripts.data.moduleStart.content.ops);
-            ACTIVITY_SAVE_A_SITUATION_1.ref.config.teacherScripts.data.moduleStart.enable && ACTIVITY_SAVE_A_SITUATION_1.ref.triggerScript(ACTIVITY_SAVE_A_SITUATION_1.ref.config.teacherScripts.data.moduleStart.content.ops);
+            ACTIVITY_SAVE_A_SITUATION_1.ref.config.teacherScripts.data[0].enable && ACTIVITY_SAVE_A_SITUATION_1.ref.triggerScript(ACTIVITY_SAVE_A_SITUATION_1.ref.config.teacherScripts.data[0].content.ops);
 
         })
     },

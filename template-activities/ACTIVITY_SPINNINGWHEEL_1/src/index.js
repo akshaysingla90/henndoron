@@ -76,8 +76,8 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             if (ACTIVITY_SPINNINGWHEEL_1.ref.storedData) {
                 ACTIVITY_SPINNINGWHEEL_1.ref.syncData(ACTIVITY_SPINNINGWHEEL_1.ref.storedData)
             }
-            ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.moduleStart.enable && ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.moduleStart);
-            ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherTips.data.moduleStart.enable && ref.triggerTip(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherTips.data.moduleStart);
+            ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data[0].enable && ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data[0]);
+            ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherTips.data[0].enable && ref.triggerTip(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherTips.data[0]);
         });
     },
 
@@ -451,7 +451,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
                     "roomId": HDAppManager.roomId,
                     "users": [{userName: userName}]
                 });
-                ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.onMouseEnable.enable &&  ACTIVITY_SPINNINGWHEEL_1.ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.onMouseEnable);
+                ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data[2].enable &&  ACTIVITY_SPINNINGWHEEL_1.ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data[2]);
             }
         }
     },
@@ -599,7 +599,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         this.enableGoButton(false);
         this.enableStopButton(ACTIVITY_SPINNINGWHEEL_1.ref.isStopButtonEnabled());
 
-        ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.onGoButton.enable && ACTIVITY_SPINNINGWHEEL_1.ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data.onGoButton);
+        ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data[1].enable && ACTIVITY_SPINNINGWHEEL_1.ref.triggerScript(ACTIVITY_SPINNINGWHEEL_1.ref.config.teacherScripts.data[1]);
         ACTIVITY_SPINNINGWHEEL_1.ref.isRotating = true;
         if (ACTIVITY_SPINNINGWHEEL_1.ref.parent)
             ACTIVITY_SPINNINGWHEEL_1.ref.parent.setStudentPanelActive(!ACTIVITY_SPINNINGWHEEL_1.ref.isRotating);

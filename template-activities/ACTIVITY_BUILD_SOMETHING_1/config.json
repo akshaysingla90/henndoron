@@ -20,9 +20,10 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data": {
-      "moduleStart": {
+    "data":[
+     {
         "UIName": "moduleStart",
+        "enable": true,
         "description": "this will trigger when module starts",
         "content": {
           "ops": [
@@ -85,10 +86,11 @@
             }
           ]
         }
-      },
-      "TargetAssembledUnsuccessfully": {
+    },
+    {
         "UIName": "Target Assembled Unsuccessfully",
         "description": "this will trigger when target is assembled unsuccessfully ",
+        "enable": true,
         "content": {
           "ops": [
             {
@@ -126,9 +128,11 @@
             }
           ]
         }
-      },
-      "TargetAssembledSuccessfully": {
+  
+    },
+    {
         "UIName": "Target Assembled Successfully",
+        "enable": true,
         "description": "this will trigger when target is assembled successfully",
         "content": {
           "ops": [
@@ -165,7 +169,7 @@
           ]
         }
       }
-    }
+  ]
   },
   "gameInfo": {
     "ignoreForAuthToolUI": true,

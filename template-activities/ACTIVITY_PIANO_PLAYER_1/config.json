@@ -20,8 +20,8 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data": {
-      "moduleStart": {
+    "data":[ 
+    {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -54,8 +54,8 @@
             }
           ]
         }
-      },
-      "startButtonClicked": {
+    },
+    {
         "UIName": "Start Button Clicked",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -126,13 +126,13 @@
           ]
         }
       }
-    }
+  ]
   },
 
   "teacherTips": {
     "component": "tipsCard",
-    "data": {
-      "moduleStart": {
+    "data":[ 
+    {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
@@ -142,9 +142,9 @@
               "insert": "- As you demonstrate the keys, you may use movements from the songs to help the student remember the words. \n\n\n\n\n\n"
             }
           ]
-        }
-      },
-      "startButtonClicked": {
+      }
+    },
+    {
         "UIName": "Start Button Clicked",
         "enable": true,
         "description": "This will trigger on clicking start button ",
@@ -156,7 +156,7 @@
           ]
         }
       }
-    }
+  ]
   },
   "background": {
     "component": "backgroundCard",

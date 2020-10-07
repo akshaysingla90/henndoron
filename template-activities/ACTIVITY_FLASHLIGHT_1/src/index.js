@@ -74,12 +74,9 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
                 });
             }
             ACTIVITY_FLASHLIGHT_1.ref.loadSpriteFrames();
-        //    ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.moduleStart.content.ops);
-          //  ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data.moduleStart);
-            ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.moduleStart.enable && ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.moduleStart.content.ops);
-            // console.log('log is ',ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
-            if(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data.moduleStart.enable) {
-                ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data.moduleStart.content.ops);
+            ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[0].enable && ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[0].content.ops);
+            if(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data[0].enable) {
+                ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data[0].content.ops);
             }
         });
     },
@@ -698,8 +695,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
     },
 
     addOptionButton: function (sender) {
-       // this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.onRedCircle);
-        ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.onRedCircle.enable && this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data.onRedCircle.content.ops);
+        ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[1].enable && this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[1].content.ops);
 
         sender.setTouchEnabled(false);
         this.circle = sender;

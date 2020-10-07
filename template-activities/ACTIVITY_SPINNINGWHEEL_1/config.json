@@ -20,8 +20,8 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data": {
-      "moduleStart": {
+    "data":[
+     {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -86,8 +86,9 @@
             }
           ]
         }
-      },
-      "onGoButton": {
+      
+    },
+    {
         "UIName": "Go Button Clicked",
         "enable": true,
         "description": "This will trigger when GO button is clicked.",
@@ -152,8 +153,8 @@
             }
           ]
         }
-      },
-      "onMouseEnable": {
+    },
+    {
         "UIName": "On Mouse Enable",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -198,12 +199,12 @@
           ]
         }
       }
-    }
+  ]
   },
   "teacherTips": {
     "component": "tipsCard",
-    "data": {
-      "moduleStart": {
+    "data":[ 
+    {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
@@ -214,8 +215,8 @@
             }
           ]
         }
-      }
     }
+  ]
   },
   "background": {
     "component": "backgroundCard",

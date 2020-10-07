@@ -20,8 +20,8 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data": {
-      "moduleStart": {
+    "data":[ 
+    {
         "UIName": "Module Start",
         "enable": "true",
         "description": "This will trigger when module starts.",
@@ -152,7 +152,7 @@
           ]
         }
       }
-    }
+  ]
   },
   "background": {
     "component": "backgroundCard",

@@ -21,8 +21,8 @@
 
   "teacherScripts": {
     "component": "scriptsCard",
-    "data": {
-      "slide_1": {
+    "data":[ 
+    {
         "UIName": "Slide_1",
         "enable": true,
         "description": "This will trigger when slide 1 opens.",
@@ -52,8 +52,8 @@
             }
           ]
         }
-      },
-      "slide_2": {
+    },
+    {
         "UIName": "Slide_2",
         "enable": true,
         "description": "This will trigger when slide 2 opens.",
@@ -108,8 +108,8 @@
             }
           ]
         }
-      },
-      "slide_3": {
+    },
+    {
         "UIName": "Slide_3",
         "enable": true,
         "description": "This will trigger when slide 3 opens.",
@@ -161,12 +161,12 @@
           ]
         }
       }
-    }
+  ]
   },
   "teacherTips": {
     "component": "tipsCard",
-    "data": {
-      "moduleStart": {
+    "data":[ 
+    {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
@@ -184,7 +184,7 @@
           ]
         }
       }
-    }
+  ]
   },
 
   "background": {

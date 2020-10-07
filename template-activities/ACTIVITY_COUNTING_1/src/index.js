@@ -48,10 +48,10 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
             if (ACTIVITY_COUNTING_1.ref.storedData) {
                 ACTIVITY_COUNTING_1.ref.syncData(ACTIVITY_COUNTING_1.ref.storedData)
             }
-            ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.moduleStart.enable && ACTIVITY_COUNTING_1.ref.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.moduleStart.content.ops);
+            ACTIVITY_COUNTING_1.ref.config.teacherScripts.data[0].enable && ACTIVITY_COUNTING_1.ref.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data[0].content.ops);
          // console.log('log is ',ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
-            if(ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.enable) {
-                ACTIVITY_COUNTING_1.ref.triggerTip(ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
+            if(ACTIVITY_COUNTING_1.ref.config.teacherTips.data[0].enable) {
+                ACTIVITY_COUNTING_1.ref.triggerTip(ACTIVITY_COUNTING_1.ref.config.teacherTips.data[0].content.ops);
             }
         });
     },
@@ -186,7 +186,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
                     "users": []
                 });
             } else {
-                ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.onMouseEnable.enable && this.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.onMouseEnable.content.ops);
+                ACTIVITY_COUNTING_1.ref.config.teacherScripts.data[1].onMouseEnable.enable && this.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data[1].onMouseEnable.content.ops);
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
                     "users": [{userName: userName}]
