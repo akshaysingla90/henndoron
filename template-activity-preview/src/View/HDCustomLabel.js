@@ -38,7 +38,7 @@ var HDCustomLabel = cc.LabelTTF.extend({
 
             console.log("fontDefContent", fontDefContent);
             if (fontDefContent.color) {
-                this.setFontFillColor(fontDefContent.color);
+                this.setFontFillColor(this.convertHexToRGB(fontDefContent.color));
             }
 
         }
@@ -108,6 +108,14 @@ var HDCustomLabel = cc.LabelTTF.extend({
         this.setString(org);
         this.strings = [...textArr];
 
+    },
+    convertHexToRGB: function (color) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16),
+        } : null;
     }
 
 
