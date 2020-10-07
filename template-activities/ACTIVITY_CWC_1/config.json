@@ -21,8 +21,7 @@
   "teacherScripts": {
     "component": "scriptsCard",
     "data": [
-    {
-      "moduleStart": {
+      {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -97,10 +96,8 @@
             }
           ]
         }
-      }
-    },
-    {
-      "onSoundPlayed": {
+      },
+      {
         "UIName": "On Sound Played",
         "enable": true,
         "description": "This will trigger when slide 2 opens.",
@@ -161,22 +158,35 @@
           ]
         }
       }
-    }
-  ]
+    ]
   },
   "teacherTips": {
     "component": "tipsCard",
-    "data":[ 
-    {
-      "moduleStart": {
+    "data": [
+      {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
-        "content": {"ops":[
-          {"insert":"-Click the buttons below each character to have them respond to students or to move/bounce around. \n-Wave while saying "},{"attributes":{"italic":true},"insert":"Hi "},{"insert":"to the characters with the students.\n-You can place an open hand behind the ear to show that they want the child to say something.\n-Throw hands up in the air when saying "},{"attributes":{"italic":true},"insert":"Fun."},{"insert":"\n"},{"attributes":{"italic":true},"insert":"-Movement for Flupe: Place both hands touching the forehead with palms facing out and wiggle fingers. "},{"insert":"\n\n\n"}]}
+        "content": {
+          "ops": [
+            {
+              "insert": "-Click the buttons below each character to have them respond to students or to move/bounce around. \n-Wave while saying "
+            },
+            { "attributes": { "italic": true }, "insert": "Hi " },
+            {
+              "insert": "to the characters with the students.\n-You can place an open hand behind the ear to show that they want the child to say something.\n-Throw hands up in the air when saying "
+            },
+            { "attributes": { "italic": true }, "insert": "Fun." },
+            { "insert": "\n" },
+            {
+              "attributes": { "italic": true },
+              "insert": "-Movement for Flupe: Place both hands touching the forehead with palms facing out and wiggle fingers. "
+            },
+            { "insert": "\n\n\n" }
+          ]
+        }
       }
-    }
-  ]
+    ]
   },
   "background": {
     "component": "backgroundCard",

@@ -104,7 +104,10 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             if (ACTIVITY_BUILD_SOMETHING_1.ref.storedData) {
                 ACTIVITY_BUILD_SOMETHING_1.ref.syncData(ACTIVITY_BUILD_SOMETHING_1.ref.storedData)
             }
-            ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].moduleStart.content);
+            if (ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].enable) {
+                ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].content);
+              }
+            //ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].content);
 
         });
 
@@ -1041,7 +1044,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             if (this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer))
                 this.removeChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
             if (this.isTeacherView) {
-                ACTIVITY_BUILD_SOMETHING_1.ref.parent.updateScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].moduleStart.content.ops);
+                ACTIVITY_BUILD_SOMETHING_1.ref.parent.updateScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].content.ops);
             }
         }
 
@@ -1443,8 +1446,8 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             isAllCorrect = true;
         }
        // this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"].content);
-         this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[1].TargetAssembledUnsuccessfully.content);
-         this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[2].TargetAssembledSuccessfully.content);
+       ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[1].enable && this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[1].content);
+       ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[2].enable &&  this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[2].content);
  
        var bg = this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
         if (bg) {

@@ -72,9 +72,12 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
       ref.setupUI();
       if (ref.getChildByTag(ACTIVITY_CWC_1.Tag.character_1_tableView))
         ref.getChildByTag(ACTIVITY_CWC_1.Tag.character_1_tableView).reloadData();
-        ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data[0].moduleStart.content.ops);
-      if (ACTIVITY_CWC_1.config.teacherTips.data[0].moduleStart.enable) {
-        ACTIVITY_CWC_1.ref.triggerTip(ACTIVITY_CWC_1.config.teacherTips.data[0].moduleStart.content.ops);
+    //  ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data[0].content.ops);
+    if (ACTIVITY_CWC_1.config.teacherScripts.data[0].enable) {
+      ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data[0].content.ops);
+    }
+      if (ACTIVITY_CWC_1.config.teacherTips.data[0].enable) {
+        ACTIVITY_CWC_1.ref.triggerTip(ACTIVITY_CWC_1.config.teacherTips.data[0].content.ops);
       }
     });
 
@@ -358,8 +361,8 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
         }
 
         if (allSoundPlayed && !this.soundPlayTriggered) {
-          if (ACTIVITY_CWC_1.config.teacherScripts.data[1].onSoundPlayed.enable) {
-            ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data[1].onSoundPlayed.content.ops);
+          if (ACTIVITY_CWC_1.config.teacherScripts.data[1].enable) {
+            ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data[1].content.ops);
           }
 
           this.soundPlayTriggered = true;

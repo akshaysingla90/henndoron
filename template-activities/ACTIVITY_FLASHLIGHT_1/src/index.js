@@ -74,9 +74,9 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
                 });
             }
             ACTIVITY_FLASHLIGHT_1.ref.loadSpriteFrames();
-            ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[0].moduleStart.enable && ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[0].moduleStart.content.ops);
-            if(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data[0].moduleStart.enable) {
-                ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data[0].moduleStart.content.ops);
+            ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[0].enable && ACTIVITY_FLASHLIGHT_1.ref.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[0].content.ops);
+            if(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data[0].enable) {
+                ACTIVITY_FLASHLIGHT_1.ref.triggerTip(ACTIVITY_FLASHLIGHT_1.config.teacherTips.data[0].content.ops);
             }
         });
     },
@@ -695,7 +695,7 @@ ACTIVITY_FLASHLIGHT_1.Flashlight = HDBaseLayer.extend({
     },
 
     addOptionButton: function (sender) {
-        ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[1].onRedCircle.enable && this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[1].onRedCircle.content.ops);
+        ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[1].enable && this.triggerScript(ACTIVITY_FLASHLIGHT_1.config.teacherScripts.data[1].content.ops);
 
         sender.setTouchEnabled(false);
         this.circle = sender;

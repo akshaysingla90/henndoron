@@ -83,7 +83,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                 ref.updateRoomData();
                 ref.isStudentInteractionEnable = true;
             }
-            config.teacherTips.data[0].moduleStart.enable && ref.triggerTip(config.teacherTips.data[0].moduleStart.content.ops);
+            config.teacherTips.data[0].enable && ref.triggerTip(config.teacherTips.data[0].content.ops);
           //   if(ACTIVITY_BAP_1.config.teacherTips.data.moduleStart.enable) {
           //       ref.triggerTip(ACTIVITY_BAP_1.config.teacherTips.data.moduleStart);
           //   }
@@ -114,8 +114,8 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             //     let content = ACTIVITY_BAP_1.config.teacherScripts.data["slide_" + (this.curImageIdx + 1)].content.ops
             //     this.triggerScript(content);
             // }
-            if ( ACTIVITY_BAP_1.config.teacherScripts.data[this.curImageIdx]["slide_"+ (this.curImageIdx + 1 )].enable) {
-                let content = ACTIVITY_BAP_1.config.teacherScripts.data[this.curImageIdx]["slide_"+ (this.curImageIdx + 1 )].content.ops
+            if ( ACTIVITY_BAP_1.config.teacherScripts.data[this.curImageIdx].enable) {
+                let content = ACTIVITY_BAP_1.config.teacherScripts.data[this.curImageIdx].content.ops
                 this.triggerScript(content);
             }
 

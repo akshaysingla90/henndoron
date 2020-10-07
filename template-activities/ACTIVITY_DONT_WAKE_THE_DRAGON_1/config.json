@@ -22,7 +22,6 @@
     "component": "scriptsCard",
     "data": [
     {
-      "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -121,7 +120,6 @@
           ]
         }
       }
-    }
   ]
   },
 
@@ -129,7 +127,6 @@
     "component": "tipsCard",
     "data":[ 
     {
-      "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
@@ -150,7 +147,7 @@
           ]
         }
       }
-    }
+    
   ]
   },
   "background": {

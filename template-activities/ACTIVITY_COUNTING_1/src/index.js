@@ -48,10 +48,10 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
             if (ACTIVITY_COUNTING_1.ref.storedData) {
                 ACTIVITY_COUNTING_1.ref.syncData(ACTIVITY_COUNTING_1.ref.storedData)
             }
-            ACTIVITY_COUNTING_1.ref.config.teacherScripts.data[0].moduleStart.enable && ACTIVITY_COUNTING_1.ref.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data[0].moduleStart.content.ops);
+            ACTIVITY_COUNTING_1.ref.config.teacherScripts.data[0].enable && ACTIVITY_COUNTING_1.ref.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data[0].content.ops);
          // console.log('log is ',ACTIVITY_COUNTING_1.ref.config.teacherTips.data.moduleStart.content.ops);
-            if(ACTIVITY_COUNTING_1.ref.config.teacherTips.data[0].moduleStart.enable) {
-                ACTIVITY_COUNTING_1.ref.triggerTip(ACTIVITY_COUNTING_1.ref.config.teacherTips.data[0].moduleStart.content.ops);
+            if(ACTIVITY_COUNTING_1.ref.config.teacherTips.data[0].enable) {
+                ACTIVITY_COUNTING_1.ref.triggerTip(ACTIVITY_COUNTING_1.ref.config.teacherTips.data[0].content.ops);
             }
         });
     },
