@@ -29,7 +29,8 @@ CONSTANTS.ACTIVITY_TYPE = {
 CONSTANTS.ACTIVITY_STATUS = {
   DRAFT:2,
   TEMPLATE: 1,
-  PUBLISHED:3
+  PUBLISHED:3,
+  WEB_URL:4
 };
 
 CONSTANTS.PASSWORD_PATTER_REGEX = /^(?=.{6,})(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;

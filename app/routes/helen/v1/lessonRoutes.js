@@ -23,6 +23,7 @@ let routes = [
             activityId: Joi.string().required().description('actvityId.'),
             activityName: Joi.string().required().description('Module name'),
             allocatedTime: Joi.number().required().description('Module time'),
+            webUrl: Joi.string().optional().description('Module web Url'),
           }))
           .error(new Error('Module file is not enterd correctly!'))
           .description('Activity Ids in order'),
@@ -55,7 +56,8 @@ let routes = [
           Joi.object({
             activityId: Joi.string().required().description('Module Id.'),
             activityName: Joi.string().required().description('Module name'),
-            allocatedTime: Joi.number().required().description('Module time')
+            allocatedTime: Joi.number().required().description('Module time'),
+            webUrl: Joi.string().optional().description('Module web Url')
           })
         )
           .error(new Error('Module file is not enterd correctly!'))

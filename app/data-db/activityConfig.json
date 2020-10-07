@@ -86,5 +86,13 @@
     "description": "There is a wheel positioned in the center of the screen with 6 images in eachsection of the circle. An image is displayed to the right of the wheel as the mainimage to be matched to one from the wheel. An arrow marker points into the wheel,at the top point of it. There is a “GO!” button on the right of the spinning wheel, thatstarts the spin of the wheel. Along the bottom of the screen is a Selection Panelcontaining pictures of all items in the wheel. The teacher can select an item in thisSelection Panel as the ‘current’ item. They will select the item that the spinning wheelwill land on.",
     "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Spinning_Wheel.png",
     "status": 1
+  },
+  {
+    "name": "ACTIVITY_WEB_LINK_1",
+    "path": "/ACTIVITY_WEB_LINK_1",
+    "type": 1,
+    "description": "This is a template for weburl activities",
+    "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Spinning_Wheel.png",
+    "status": 4
   }
 ]

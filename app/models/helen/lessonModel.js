@@ -19,7 +19,8 @@ const lessonSchema = new Schema({
   activities: [{
     activityId: { type: Schema.Types.ObjectId, ref: 'activities' },
     activityName: { type: String },
-    allocatedTime: { type: Number }
+    allocatedTime: { type: Number },
+    webUrl: { type: String },
   }],
   courseId: { type: Schema.Types.ObjectId, ref: 'courses' },
   status: { type: Number, enum: [LESSON_STATUS.DRAFT, LESSON_STATUS.PUBLISHED] }
