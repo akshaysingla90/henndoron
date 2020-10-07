@@ -4,6 +4,7 @@
     "url": "res/Activity/ACTIVITY_WEB_LINK_1/",
     "number": "1",
     "renderMode": 1,
+    "activityPath": "ACTIVITY_WEB_LINK_1",
     "name": "Name",
     "namespace": "ACTIVITY_WEB_LINK_1",
     "layerName": "WebLinkLayer",
@@ -28,22 +29,18 @@
     "description": "",
     "allocatedTime": 10,
     "studentPreview": false,
-    "preLoaded" : false
+    "preLoaded": false
   },
   "jsList": [
     "res/Activity/ACTIVITY_WEB_LINK_1/src/index.js"
   ],
-  "teacherScripts": {
-  },
-  "teacherTips": {
-  },
-  "graphicalAssets": {
-  },
+  "teacherScripts": {},
+  "teacherTips": {},
+  "graphicalAssets": {},
   "resources": {
     "sprites": {
       "basePath": "res/Sprite/",
-      "images": [
-      ]
+      "images": []
     }
   }
 }
