@@ -104,7 +104,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             if (ACTIVITY_BUILD_SOMETHING_1.ref.storedData) {
                 ACTIVITY_BUILD_SOMETHING_1.ref.syncData(ACTIVITY_BUILD_SOMETHING_1.ref.storedData)
             }
-            ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.content);
+            ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].moduleStart.content);
 
         });
 
@@ -1041,7 +1041,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             if (this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer))
                 this.removeChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
             if (this.isTeacherView) {
-                ACTIVITY_BUILD_SOMETHING_1.ref.parent.updateScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.content.ops);
+                ACTIVITY_BUILD_SOMETHING_1.ref.parent.updateScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].moduleStart.content.ops);
             }
         }
 
@@ -1442,8 +1442,11 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         if (filteredArray.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.length && filteredArray.every(item => item.isCorrect && item.data.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.find(obj => obj.name === item.nodeName).partsCount)) {
             isAllCorrect = true;
         }
-        this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"].content);
-        var bg = this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
+       // this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"].content);
+         this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[1].TargetAssembledUnsuccessfully.content);
+         this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[2].TargetAssembledSuccessfully.content);
+ 
+       var bg = this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
         if (bg) {
             this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer).removeAllChildren();
             bg.setTexture(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + (isAllCorrect ? ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.winBG.imageName : ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.looseBG.imageName));

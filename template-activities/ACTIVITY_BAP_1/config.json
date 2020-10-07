@@ -21,7 +21,8 @@
 
   "teacherScripts": {
     "component": "scriptsCard",
-    "data": {
+    "data":[ 
+    {
       "slide_1": {
         "UIName": "Slide_1",
         "enable": true,
@@ -52,7 +53,9 @@
             }
           ]
         }
-      },
+      }
+    },
+    {
       "slide_2": {
         "UIName": "Slide_2",
         "enable": true,
@@ -108,7 +111,9 @@
             }
           ]
         }
-      },
+      }
+    },
+    {
       "slide_3": {
         "UIName": "Slide_3",
         "enable": true,
@@ -162,10 +167,12 @@
         }
       }
     }
+  ]
   },
   "teacherTips": {
     "component": "tipsCard",
-    "data": {
+    "data":[ 
+    {
       "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
@@ -185,6 +192,7 @@
         }
       }
     }
+  ]
   },
 
   "background": {

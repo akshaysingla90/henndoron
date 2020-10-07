@@ -913,8 +913,8 @@ ACTIVITY_PIANO_PLAYER_1.TeacherViewLayer = ACTIVITY_PIANO_PLAYER_1.CommonPianoPl
   onEnter: function () {
     this._super();
     this.getStudentsList();
-    ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data.moduleStart.enable && this.showScriptMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data.moduleStart);
-    ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data.moduleStart.enable &&  this.showTipMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data.moduleStart);
+    ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data[0].moduleStart.enable && this.showScriptMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data[0].moduleStart);
+    ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data[0].moduleStart.enable &&  this.showTipMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data[0].moduleStart);
     this.lightUpSheetWord(this.currentNoteIdx);
   },
 
@@ -1195,8 +1195,8 @@ ACTIVITY_PIANO_PLAYER_1.TeacherViewLayer = ACTIVITY_PIANO_PLAYER_1.CommonPianoPl
               wordIdx: this.currentNoteIdx,
               feedbackActivated: true,
             });
-            ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data.startButtonClicked.enable && this.showScriptMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data.startButtonClicked);
-            ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data.startButtonClicked.enable && this.showTipMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data.startButtonClicked);
+            ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data[1].startButtonClicked.enable && this.showScriptMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherScripts.data[1].startButtonClicked);
+            ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data[1].startButtonClicked.enable && this.showTipMessage(ACTIVITY_PIANO_PLAYER_1.MainPianoPlayerLayerRef.config.teacherTips.data[1].startButtonClicked);
             sender.setVisible(false);
             this.addPlayButton();
             break;

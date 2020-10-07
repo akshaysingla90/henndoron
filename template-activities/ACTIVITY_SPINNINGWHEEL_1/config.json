@@ -20,7 +20,8 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data": {
+    "data":[ 
+    {
       "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
@@ -86,7 +87,9 @@
             }
           ]
         }
-      },
+      }
+    },
+    {
       "onGoButton": {
         "UIName": "Go Button Clicked",
         "enable": true,
@@ -152,7 +155,9 @@
             }
           ]
         }
-      },
+      }
+    },
+    {
       "onMouseEnable": {
         "UIName": "On Mouse Enable",
         "enable": true,
@@ -199,10 +204,13 @@
         }
       }
     }
+
+  ]
   },
   "teacherTips": {
     "component": "tipsCard",
-    "data": {
+    "data": [
+    {
       "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
@@ -216,6 +224,7 @@
         }
       }
     }
+  ]
   },
   "background": {
     "component": "backgroundCard",

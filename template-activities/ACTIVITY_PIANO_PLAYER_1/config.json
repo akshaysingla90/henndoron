@@ -20,7 +20,8 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data": {
+    "data":[ 
+    {
       "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
@@ -54,7 +55,9 @@
             }
           ]
         }
-      },
+      }
+    },
+    {
       "startButtonClicked": {
         "UIName": "Start Button Clicked",
         "enable": true,
@@ -127,11 +130,13 @@
         }
       }
     }
+  ]
   },
 
   "teacherTips": {
     "component": "tipsCard",
-    "data": {
+    "data":[ 
+    {
       "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
@@ -157,6 +162,7 @@
         }
       }
     }
+  ]
   },
   "background": {
     "component": "backgroundCard",
