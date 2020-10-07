@@ -178,5 +178,16 @@ commonFunctions.generateAlphanumericString = (length) => {
   for (var i = length; i > 0; --i) randomString += chracters[Math.floor(Math.random() * chracters.length)];
   return randomString;
 };
+
+/**
+ * function to generate random alphabet string
+ */
+commonFunctions.generateCharacterString = (length) => {
+  let chracters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var randomString = '';
+  for (var i = length; i > 0; --i) randomString += chracters[Math.floor(Math.random() * chracters.length)];
+  return randomString;
+};
+
 module.exports = commonFunctions;
 

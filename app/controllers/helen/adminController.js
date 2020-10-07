@@ -1,6 +1,7 @@
 "use strict";
 const HELPERS = require("../../helpers");
 const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS } = require('../../utils/constants');
+const { generateCharacterString } = require('../../utils/utils');
 const { ACTIVITY_SRC_PATH, ACTIVITY_PREVIEW_PATH, TEMPLATE_ACTIVITY_PREVIEW, TEMPLATE_ACTIVITY_PATH, ACTIVITY_DIRECTORY_PATH, ACTIVITY_RESOURCE_DIRECTORY_PATH, BASE_PATH, ACTIVITY_CONFIG_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const SERVICES = require('../../services');
 const ACTIVITIES = require('../../data-db/activityConfig.json');
@@ -24,7 +25,7 @@ adminController.cloneActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-  const activityPath = `${payload.name.replace(/ /g, '')}${Date.now()}`;
+  const activityPath = `${generateCharacterString(15)}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activityPath}`);
   let newActivity = {
     name: payload.name,
@@ -248,7 +249,7 @@ adminController.duplicateActivity = async (payload) => {
   let sourcePath = sourceActivity.status == ACTIVITY_STATUS.TEMPLATE
     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, sourceActivity.path)
     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, sourceActivity.path)
-  const activityPath = `${sourceActivity.name.replace(/ /g, '')}${Date.now()}`;
+  const activityPath = `${generateCharacterString(15)}${Date.now()}`;
   const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}/${activityPath}`);
   //create new activity in database 
   let newActivity = {
