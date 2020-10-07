@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Build Something",
+    "activityPath": "ACTIVITY_BUILD_SOMETHING_1",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {
@@ -344,8 +345,7 @@
         "data": [
           {
             "UIName": "Object 01",
-            "parts":
-            [
+            "parts": [
               {
                 "name": "dwarf_head",
                 "configurable": true,
@@ -561,7 +561,7 @@
                 "constraints": ["name", "size"]
               }
             ],
-            "animation":{
+            "animation": {
               "name": "Dwarf Animation",
               "partsCount": 6,
               "animationFrameCount": 16,
@@ -573,8 +573,8 @@
             }
           },
           {
-            "UIName" : "OBJECT 02",
-            "parts" : [
+            "UIName": "OBJECT 02",
+            "parts": [
               {
                 "name": "king_head",
                 "configurable": true,
@@ -790,18 +790,18 @@
                 "constraints": ["name", "size"]
               }
             ],
-            "animation":{
+            "animation": {
               "name": "King Animation",
               "partsCount": 6,
               "animationPath": "king_animation/king_animation_",
               "frameCount": 16,
               "frameInitial": "king_animation/king_animation_",
               "extension": ".png"
-            } 
+            }
           },
           {
-            "UIName" :"OBJECT 03",
-            "parts" : [
+            "UIName": "OBJECT 03",
+            "parts": [
               {
                 "name": "knight_head",
                 "configurable": true,
@@ -1017,13 +1017,13 @@
                 "constraints": ["name", "size"]
               }
             ],
-            "animation":{
-            "name": "Knight Animation",
-            "partsCount": 6,
-            "animationPath": "knight_animation/knight_animation_",
-            "frameCount": 16,
-            "frameInitial": "knight_animation/knight_animation_",
-            "extension": ".png"
+            "animation": {
+              "name": "Knight Animation",
+              "partsCount": 6,
+              "animationPath": "knight_animation/knight_animation_",
+              "frameCount": 16,
+              "frameInitial": "knight_animation/knight_animation_",
+              "extension": ".png"
             }
           }
         ]
