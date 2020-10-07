@@ -559,6 +559,38 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         var snapIdxOfDraggedObj = -1;
         let attachedItemSnapPoint = cc.p(0, 0);
         if (connectionObject && connectionObjectData && clickedItemData) {
+
+            //connect with correct position if it is in 20 unit radius
+            // for(let points of clickedItemData.snappingPoints){
+            //     if(points && points.snapDetails){
+            //         let name = points.snapDetails.name;
+            //         let point = cc.p(points.snapDetails.point.x, points.snapDetails.point.y)
+            //         let connectionObj = ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj.filter(item=>item.name==name)[0];
+            //         let idxOfConnectionObj = ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj.indexOf(connectionObj);
+            //         if(idxOfConnectionObj != -1){
+            //             let connectionObj =  ACTIVITY_BUILD_SOMETHING_1.ref.assembledList[idxOfConnectionObj];
+            //             if(connectionObj){
+            //                 var connectionSnapPoint = cc.p(point.x * connectionObject.getScaleX(), point.y * connectionObject.getScaleY());
+            //                 var pointInWorldSpace = cc.p(connectionObject.getPositionX() - connectionObject.getContentSize().width * connectionObject.getScaleX() * 0.5 + connectionSnapPoint.x, connectionObject.getPositionY() - connectionObject.getContentSize().height * connectionObject.getScaleY() * 0.5 + connectionSnapPoint.y);
+            //
+            //                 var currentSnapPoint = cc.p(clickedItemData.snappingPoints[currIndex].x * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX(),
+            //                     clickedItemData.snappingPoints[currIndex].y * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY());
+            //                 var currentPointInWorldSpace = cc.p(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionX() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 + currentSnapPoint.x,
+            //                     ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionY() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 + currentSnapPoint.y);
+            //                 var distance = cc.pDistance(pointInWorldSpace, currentPointInWorldSpace);
+            //
+            //             }
+            //         }
+            //     }
+            // }
+            // var currentSnapPoint = cc.p(clickedItemData.snappingPoints[currIndex].x * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX(), clickedItemData.snappingPoints[currIndex].y * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY());
+            // var currentPointInWorldSpace = cc.p(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionX() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 + currentSnapPoint.x, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionY() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 + currentSnapPoint.y);
+
+            ///------------------------------------------------------
+
+
+
+
             for (let index = 0; index < connectionObjectData.snappingPoints.length; index++) {
                 var connectionSnapPoint = cc.p(connectionObjectData.snappingPoints[index].x * connectionObject.getScaleX(), connectionObjectData.snappingPoints[index].y * connectionObject.getScaleY());
                 var pointInWorldSpace = cc.p(connectionObject.getPositionX() - connectionObject.getContentSize().width * connectionObject.getScaleX() * 0.5 + connectionSnapPoint.x, connectionObject.getPositionY() - connectionObject.getContentSize().height * connectionObject.getScaleY() * 0.5 + connectionSnapPoint.y);
