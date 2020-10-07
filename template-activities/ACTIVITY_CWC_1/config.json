@@ -51,7 +51,7 @@
               "attributes": {
                 "italic": true
               },
-              "insert": " (teacher's name). "
+              "insert": " (teacher's name). "
             },
             {
               "insert": "\n"
@@ -83,7 +83,16 @@
               "insert": "). Say Hi to (Fix/Paul/Flupe). Say hi to me!"
             },
             {
-              "insert": " \nMake characters say “Hi” using their menus. \n\n"
+              "insert": " \n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Make characters say “Hi” using their menus. "
+            },
+            {
+              "insert": "\n\n"
             }
           ]
         }
@@ -136,9 +145,7 @@
               },
               "insert": "."
             },
-            {
-              "insert": "\n\n"
-            },
+
             {
               "attributes": {
                 "underline": true
@@ -160,40 +167,8 @@
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
-        "content": {
-          "ops": [
-            {
-              "insert": "- Click the buttons below each character to have them respond to students or to move/bounce around. \n - Wave while saying "
-            },
-            {
-              "attributes": {
-                "italic": true
-              },
-              "insert": "Hi "
-            },
-            {
-              "insert": "to the characters with the students.\n- You can place an open hand behind the ear to show that they want the child to say something.\n- Throw hands up in the air when saying "
-            },
-            {
-              "attributes": {
-                "italic": true
-              },
-              "insert": "Fun."
-            },
-            {
-              "insert": "\n"
-            },
-            {
-              "attributes": {
-                "italic": true
-              },
-              "insert": "- Movement for Flupe: Place both hands touching the forehead with palms facing out and wiggle fingers. "
-            },
-            {
-              "insert": "\n\n"
-            }
-          ]
-        }
+        "content": {"ops":[
+          {"insert":"-Click the buttons below each character to have them respond to students or to move/bounce around. \n-Wave while saying "},{"attributes":{"italic":true},"insert":"Hi "},{"insert":"to the characters with the students.\n-You can place an open hand behind the ear to show that they want the child to say something.\n-Throw hands up in the air when saying "},{"attributes":{"italic":true},"insert":"Fun."},{"insert":"\n"},{"attributes":{"italic":true},"insert":"-Movement for Flupe: Place both hands touching the forehead with palms facing out and wiggle fingers. "},{"insert":"\n\n\n"}]}
       }
     }
   },
@@ -245,43 +220,53 @@
                 "frameCount": 60
               }
             ],
-            "animation": {
-              "RestPose01": {
-                "frameCount": 25,
+            "animation": [
+              {
                 "UIName": "RestPose01",
+                "folderName": "RestPose01",
+                "frameCount": 25,
                 "name": "Poul Restpose01",
                 "frameInitial": "Poul/RestPose01/Poul_restpose01_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": false
               },
-              "RestPose02": {
-                "frameCount": 21,
+              {
                 "UIName": "RestPose02",
+                "folderName": "RestPose02",
+                "frameCount": 21,
                 "name": "Poul Restpose02",
                 "frameInitial": "Poul/RestPose02/Poul_restpose02_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": false
               },
-              "RestPose03": {
-                "name": "Poul Restpose03",
+              {
                 "UIName": "RestPose03",
+                "folderName": "RestPose03",
+                "name": "Poul Restpose03",
                 "frameCount": 25,
                 "frameInitial": "Poul/RestPose03/Poul_restpose03_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": false
               },
-              "Hi": {
+              {
+                "UIName": "Hi",
+                "folderName": "Hi",
                 "frameCount": 24,
                 "name": "Poul Hi",
-                "UIName": "Hi",
                 "frameInitial": "Poul/Hi/Poul_hi_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": true
               },
-              "Excited": {
-                "name": "Poul Excited",
+              {
                 "UIName": "Excited",
+                "folderName": "Excited",
+                "name": "Poul Excited",
                 "frameCount": 23,
                 "frameInitial": "Poul/Excited/Poul_excited_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": true
               }
-            }
+            ]
           },
           {
             "name": "Flupe",
@@ -314,43 +299,53 @@
               }
             ],
 
-            "animation": {
-              "RestPose01": {
-                "name": "Flupe Restpose01",
+            "animation": [
+              {
                 "UIName": "RestPose01",
+                "folderName": "RestPose01",
+                "name": "Flupe Restpose01",
                 "frameCount": 26,
                 "frameInitial": "Flupe/RestPose01/Flupe_restpose01_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": false
               },
-              "RestPose02": {
-                "name": "Flupe Restpose02",
+              {
                 "UIName": "RestPose02",
+                "folderName": "RestPose02",
+                "name": "Flupe Restpose02",
                 "frameCount": 20,
                 "frameInitial": "Flupe/RestPose02/Flupe_restpose02_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": false
               },
-              "RestPose03": {
-                "name": "Flupe Restpose03",
+              {
                 "UIName": "RestPose03",
+                "folderName": "RestPose03",
+                "name": "Flupe Restpose03",
                 "frameCount": 23,
                 "frameInitial": "Flupe/RestPose03/Flupe_restpose03_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": false
               },
-              "Hi": {
-                "name": "Flupe Hi",
+              {
                 "UIName": "Hi",
+                "name": "Flupe Hi",
+                "folderName": "Hi",
                 "frameCount": 23,
                 "frameInitial": "Flupe/Hi/Flupe_hi_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": true
               },
-              "Excited": {
-                "name": "Flupe Excited",
+              {
                 "UIName": "Excited",
+                "folderName": "Excited",
+                "name": "Flupe Excited",
                 "frameCount": 29,
                 "frameInitial": "Flupe/Excited/Flupe_excited_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": true
               }
-            }
+            ]
           },
           {
             "name": "Grnanny_fix",
@@ -383,43 +378,53 @@
               }
             ],
 
-            "animation": {
-              "RestPose01": {
+            "animation": [
+              {
+                "folderName": "RestPose01",
                 "name": "Grnanny_fix Restpose01",
                 "UIName": "RestPose01",
                 "frameCount": 32,
                 "frameInitial": "Grnanny_fix/RestPose01/Grnanny_fix_restpose01_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": false
               },
-              "RestPose02": {
+              {
                 "name": "Grnanny_fix Restpose02",
-                "UIName": "RestPose01",
+                "folderName": "RestPose02",
+                "UIName": "RestPose02",
                 "frameCount": 31,
                 "frameInitial": "Grnanny_fix/RestPose02/Grnanny_fix_restpose02_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": false
               },
-              "RestPose03": {
-                "name": "Grnanny_fix Restpose03",
+              {
                 "UIName": "RestPose03",
+                "folderName": "RestPose03",
+                "name": "Grnanny_fix Restpose03",
                 "frameCount": 31,
                 "frameInitial": "Grnanny_fix/RestPose03/Grnanny_fix_restpose03_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": false
               },
-              "Hi": {
+              {
                 "name": "Grnanny Hi",
+                "folderName": "Hi",
                 "UIName": "Hi",
                 "frameCount": 27,
                 "frameInitial": "Grnanny_fix/Hi/Grnanny_fix_hi_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": true
               },
-              "Excited": {
+              {
                 "name": "Grnanny Excited",
+                "folderName": "Excited",
                 "UIName": "Excited",
                 "frameCount": 24,
                 "frameInitial": "Grnanny_fix/Excited/Grnanny_fix_excited_",
-                "extension": ".png"
+                "extension": ".png",
+                "UINameEditable": true
               }
-            }
+            ]
           }
         ]
       }

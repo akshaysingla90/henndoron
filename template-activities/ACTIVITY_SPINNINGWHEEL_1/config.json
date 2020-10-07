@@ -156,7 +156,7 @@
       "onMouseEnable": {
         "UIName": "On Mouse Enable",
         "enable": true,
-        "description": "This will trigger on enabling any student's mouse.",
+        "description": "This will trigger when module starts.",
         "content": {
           "ops": [
             {
@@ -268,19 +268,27 @@
         "UIName": "Spinning Wheel Speed",
         "options": [
           {
-            "label": 1,
-            "value": 1
+            "label": "50 rpm",
+            "value": 50
           },
           {
-            "label": 2,
-            "value": 2
+            "label": "55 rpm",
+            "value": 50
           },
           {
-            "label": 3,
-            "value": 3
+            "label": "60 rmp",
+            "value": 60
+          },
+          {
+            "label": "65 rmp",
+            "value": 66
+          },
+          {
+            "label": "70 rmp",
+            "value": 70
           }
         ],
-        "currentValue": 2
+        "currentValue": 80
       },
       "spinningWheelBase": {
         "component": "image",
@@ -310,12 +318,14 @@
         "component": "image",
         "UIName": "Carousel Background Image",
         "imageName": "carouselImage.png",
+        "position": { "x": 768, "y": 454.3 },
         "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackgroundBorderImage": {
         "component": "image",
         "UIName": "Carousel Background Border Image",
         "imageName": "carouselBorderImage.png",
+        "position": { "x": 768, "y": 454.3 },
         "dimensions": { "width": 681, "height": 121 }
       },
       "carouselBackground": {
@@ -423,6 +433,7 @@
       }
     }
   },
+
   "resources": {
     "ignoreForAuthToolUI": true,
     "sprites": {

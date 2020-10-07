@@ -46,6 +46,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
     stopWheelUsers: [],
     joinedStudentList: [],
     tempInteraction: null,
+    rotationValue : 6,
 
     ctor: function () {
         this._super();
@@ -70,6 +71,8 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             ref.setupUI();
             ref.loadAudio();
             ref.loadSpriteFrames();
+            ref.rotationValue = ((( ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.spinningWheelSpeed.currentValue)/60)*360)/60;
+            ref.speed = ref.rotationValue;
             if (ACTIVITY_SPINNINGWHEEL_1.ref.storedData) {
                 ACTIVITY_SPINNINGWHEEL_1.ref.syncData(ACTIVITY_SPINNINGWHEEL_1.ref.storedData)
             }
@@ -600,7 +603,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         ACTIVITY_SPINNINGWHEEL_1.ref.isRotating = true;
         if (ACTIVITY_SPINNINGWHEEL_1.ref.parent)
             ACTIVITY_SPINNINGWHEEL_1.ref.parent.setStudentPanelActive(!ACTIVITY_SPINNINGWHEEL_1.ref.isRotating);
-        ACTIVITY_SPINNINGWHEEL_1.ref.speed = 6;
+        ACTIVITY_SPINNINGWHEEL_1.ref.speed =    ACTIVITY_SPINNINGWHEEL_1.ref.rotationValue;
         ACTIVITY_SPINNINGWHEEL_1.ref.scheduleUpdate();
 
         if (ACTIVITY_SPINNINGWHEEL_1.ref.tableView)

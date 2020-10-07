@@ -72,6 +72,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     resultScreenDataForSync: [],
     configData: null,
     config: null,
+    originalDismantalObj : [],
 
     ctor: function () {
         this._super();
@@ -90,17 +91,25 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             ACTIVITY_BUILD_SOMETHING_1.spriteBasePath = ACTIVITY_BUILD_SOMETHING_1.resourcePath + "Sprite/";
             ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView = HDAppManager.isTeacherView;
             ACTIVITY_BUILD_SOMETHING_1.ref.isStudentInteractionEnable = ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView;
-            ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data];
+
+            for(let character of ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data){
+                ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject.push( ...character.parts);
+            }
+            ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj = [...ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject];
+
+            // ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data];
+            // ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data];
             ACTIVITY_BUILD_SOMETHING_1.ref.setupUI();
 
             if (ACTIVITY_BUILD_SOMETHING_1.ref.storedData) {
                 ACTIVITY_BUILD_SOMETHING_1.ref.syncData(ACTIVITY_BUILD_SOMETHING_1.ref.storedData)
             }
-         //   ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.content.ops);
-            ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.enable && ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.content.ops);
-
+            ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.content);
 
         });
+
+
+
 
 
     },
@@ -123,12 +132,12 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
      */
     triggerScript: function (message) {
         if (this.parent) {
-            this.parent.showScriptMessage(message);
+            this.parent.showScriptMessage(message.ops);
         }
     },
     triggerTip: function (message) {
         if (this.parent) {
-            this.parent.showTipMessage(message);
+            this.parent.showTipMessage(message.ops);
         }
     },
     /**
@@ -193,7 +202,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             let startButtonObject = ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.startButton;
             let startButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.enableState, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.pushedState, "", 32, ACTIVITY_BUILD_SOMETHING_1.Tag.startButton, cc.p(this.getContentSize().width * 0.09,
                 this.getContentSize().height * 0.2), this, this, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.disableState);
-           //console.log('butto position ',startButton.getPosition());
+           console.log('butto position ',startButton.getPosition());
             startButton.setScale(startButtonObject.scale);
             startButton.setEnabled(true);
             startButton.setLocalZOrder(10);
@@ -406,8 +415,8 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                 var clickedItem = ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject[ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject];
                 if (connectionObject && clickedItem && connectionObject.userData && clickedItem && attachResult.snapIdxOfPlacedObj != -1 && attachResult.snapIdxOfDraggedObj != -1) {
                     // Placed Obj
-                    connectionObject.userData.snappingPoints.splice(attachResult.snapIdxOfPlacedObj, 1);
-                    clickedItem.snappingPoints.splice(attachResult.snapIdxOfDraggedObj, 1);
+                    // connectionObject.userData.snappingPoints.splice(attachResult.snapIdxOfPlacedObj, 1);
+                    // clickedItem.snappingPoints.splice(attachResult.snapIdxOfDraggedObj, 1);
                 }
                 let completeMovement = cc.callFunc(function () {
                     if (ACTIVITY_BUILD_SOMETHING_1.ref.tableView) {
@@ -515,7 +524,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     },
 
     isTurnSwitchingBlocked: function () {
-        console.log(!(this.gameState == ACTIVITY_BUILD_SOMETHING_1.gameState.START));
+      //  console.log(!(this.gameState == ACTIVITY_BUILD_SOMETHING_1.gameState.START));
         return !(this.gameState == ACTIVITY_BUILD_SOMETHING_1.gameState.START);
     },
 
@@ -538,7 +547,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
 
     attachPoint: function (loc, index) {
         var connectionObject = ACTIVITY_BUILD_SOMETHING_1.ref.assembledList[index];
-        var connectionObjectData = ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data[connectionObject.getUserData().tag];
+        var connectionObjectData = ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj[connectionObject.getUserData().tag];
         var clickedItemData = ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject[ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject];
         var attachToLocation = null; //Point from already placed objects
         var attachFromLocation = null; // Point from current clicked object.
@@ -580,15 +589,17 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             }
         }
         isAttachedToCorrectPoints = this.checkIfAttachedToCorrectPoints(clickedItemData, originalPoint, attachedItemSnapPoint);
-        var newAttachToLocation = cc.p(attachToLocation.x + ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 - originalSnappingPoint.x,
-            attachToLocation.y + ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 - originalSnappingPoint.y);
-        return {
-            "attachTo": newAttachToLocation,
-            "attachFrom": attachFromLocation,
-            "isAttachedToCorrectPoints": isAttachedToCorrectPoints,
-            "snapIdxOfPlacedObj": snapIdxOfPlacedObj,
-            "snapIdxOfDraggedObj": snapIdxOfDraggedObj,
-        };
+        if(attachToLocation && originalSnappingPoint) {
+            var newAttachToLocation = cc.p(attachToLocation.x + ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 - originalSnappingPoint.x,
+                attachToLocation.y + ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 - originalSnappingPoint.y);
+            return {
+                "attachTo": newAttachToLocation,
+                "attachFrom": attachFromLocation,
+                "isAttachedToCorrectPoints": isAttachedToCorrectPoints,
+                "snapIdxOfPlacedObj": snapIdxOfPlacedObj,
+                "snapIdxOfDraggedObj": snapIdxOfDraggedObj,
+            };
+        }
     },
 
     checkIfAttachedToCorrectPoints: function (clickedItemData, originalPoint, attachedItemSnapPoint) {
@@ -969,7 +980,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
      * resetScreen: This will reset UI for everyone.
      */
     resetScreen: function () {
-        console.log("reset screen");
+        //console.log("reset screen");
         ACTIVITY_BUILD_SOMETHING_1.config = JSON.parse(JSON.stringify(ACTIVITY_BUILD_SOMETHING_1.configData));
         ACTIVITY_BUILD_SOMETHING_1.ref.finalOrderList.length = 0;
         ACTIVITY_BUILD_SOMETHING_1.ref.animatingCharacters.forEach(element => element.removeFromParent(true));
@@ -987,7 +998,8 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         ACTIVITY_BUILD_SOMETHING_1.ref.initialPosition = null;
         if (ACTIVITY_BUILD_SOMETHING_1.ref.tableView) {
             ACTIVITY_BUILD_SOMETHING_1.ref.draggableObject.length = 0;
-            ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data];
+            ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj];
+            // ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data];
             ACTIVITY_BUILD_SOMETHING_1.ref.tableView.reloadData();
         }
 
@@ -1041,7 +1053,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     },
 
     getDismantledObjectIndex: function (name) {
-        let dismantledData = ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data;
+        let dismantledData = ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject;
         for (let index = 0; index < dismantledData.length; index++) {
             var curObject = dismantledData[index];
             if (curObject.name == name) {
@@ -1398,9 +1410,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         if (filteredArray.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.length && filteredArray.every(item => item.isCorrect && item.data.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.find(obj => obj.name === item.nodeName).partsCount)) {
             isAllCorrect = true;
         }
-      //  this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"].content.ops);
-        ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"].enable && this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"].content.ops)
-
+        this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"].content);
         var bg = this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
         if (bg) {
             this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer).removeAllChildren();
