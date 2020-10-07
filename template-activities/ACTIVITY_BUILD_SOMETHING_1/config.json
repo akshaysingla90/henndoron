@@ -298,12 +298,12 @@
       },
       "looseBG": {
         "component": "image",
-        "UIName": "Loose BG",
-        "imageName": "looseScreen"
+        "UIName": "Loose Background",
+        "imageName": "looseScreen.png"
       },
       "winBG": {
         "component": "image",
-        "UIName": "Win BG",
+        "UIName": "Win Background",
         "imageName": "winScreen.png"
       },
       "gameInfo": {
