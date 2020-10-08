@@ -25,7 +25,7 @@
       "background": {
         "component": "background",
         "UIName": "BACKGROUND",
-        "imageName": "flashcards_billboardBackground.png",
+        "imageName": "flashcards_bookPage.png",
         "dimensions": { "width": 960, "height": 640 }
       }
     }
@@ -41,7 +41,7 @@
           { "label": "Slide Left", "value": 2 },
           { "label": "Page Turn", "value": 3 }
         ],
-        "currentValue": 2,
+        "currentValue": 3,
         "theme": {
           "classic": 1,
           "billboards": 2,
@@ -191,6 +191,30 @@
             "label": "hen"
           }
         ]
+      },
+      "bookOfRhymesItems": {
+        "ignoreForAuthToolUI": true,
+        "dimensions": { "width": 350, "height": 350 },
+        "data": [
+          {
+            "imageName": "Item_book.png"
+          },
+          {
+            "imageName": "Item_cat.png"
+          },
+          {
+            "imageName": "Item_dog.png"
+          },
+          {
+            "imageName": "Item_rat.png"
+          },
+          {
+            "imageName": "Item_sheep.png"
+          },
+          {
+            "imageName": "Item_sign.png"
+          }
+        ]
       }
     }
   },
@@ -211,12 +235,59 @@
         "flashcards_panelBackground.png",
         "flashcards_panelForeground.png",
         "flashcards_billboardBackground.png",
-        "flashcards_billboard.png"
+        "flashcards_billboard.png",
+        "Item_book.png",
+        "Item_cat.png",
+        "Item_dog.png",
+        "Item_rat.png",
+        "Item_sheep.png",
+        "Item_sigh.png"
       ]
     },
     "sounds": {
       "basePath": "res/Sound/",
       "audio": ["flashcards_pageFlip.mp3", "flashcards_swipe.mp3"]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "name": "pageTurnBook",
+          "frameCount": 8,
+          "frameInitial": "page_turn_book/page_turn_book_",
+          "extension": ".png"
+        },
+        {
+          "name": "pageTurnCat",
+          "frameCount": 8,
+          "frameInitial": "page_turn_cat/page_turn_cat_",
+          "extension": ".png"
+        },
+        {
+          "name": "pageTurnDog",
+          "frameCount": 8,
+          "frameInitial": "page_turn_dog/page_turn_dog_",
+          "extension": ".png"
+        },
+        {
+          "name": "pageTurnRat",
+          "frameCount": 8,
+          "frameInitial": "page_turn_rat/page_turn_rat_",
+          "extension": ".png"
+        },
+        {
+          "name": "pageTurnSheep",
+          "frameCount": 8,
+          "frameInitial": "page_turn_sheep/page_turn_sheep_",
+          "extension": ".png"
+        },
+        {
+          "name": "pageTurnSign",
+          "frameCount": 8,
+          "frameInitial": "page_turn_sign/page_turn_sign_",
+          "extension": ".png"
+        }
+      ]
     }
   }
 }

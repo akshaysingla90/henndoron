@@ -20,8 +20,9 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data":[
+    "data":
      {
+      "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -86,9 +87,8 @@
             }
           ]
         }
-      
     },
-    {
+      "onGoButton": {
         "UIName": "Go Button Clicked",
         "enable": true,
         "description": "This will trigger when GO button is clicked.",
@@ -154,7 +154,7 @@
           ]
         }
     },
-    {
+      "onMouseEnable": {
         "UIName": "On Mouse Enable",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -199,12 +199,13 @@
           ]
         }
       }
-  ]
+    }
   },
   "teacherTips": {
     "component": "tipsCard",
-    "data":[ 
+    "data":
     {
+      "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
@@ -216,7 +217,7 @@
           ]
         }
     }
-  ]
+  }
   },
   "background": {
     "component": "backgroundCard",
@@ -434,7 +435,33 @@
       }
     }
   },
-
+  "spinningWheelSpeed": {
+    "component": "select",
+    "UIName": "Spinning Wheel Speed",
+    "options": [
+      {
+        "label": "50 rpm",
+        "value": 50
+      },
+      {
+        "label": "55 rpm",
+        "value": 50
+      },
+      {
+        "label": "60 rmp",
+        "value": 60
+      },
+      {
+        "label": "65 rmp",
+        "value": 66
+      },
+      {
+        "label": "70 rmp",
+        "value": 70
+      }
+    ],
+    "currentValue": 60
+  },
   "resources": {
     "ignoreForAuthToolUI": true,
     "sprites": {

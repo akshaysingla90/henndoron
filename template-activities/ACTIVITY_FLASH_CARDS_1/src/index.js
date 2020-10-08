@@ -1,5 +1,5 @@
 // NameSpace for this activity
-var ACTIVITY_FLASH_CARDS_1= {};
+var ACTIVITY_FLASH_CARDS_1 = {};
 
 // socket events
 /*
@@ -27,20 +27,15 @@ ACTIVITY_FLASH_CARDS_1.BookPage = cc.Sprite.extend({
   displayWord: "",
   displayImageTag: 1,
   displayWordTag: 2,
-  ctor: function (
-      backgroundImage,
-      displayImage,
-      displayWord,
-      displayWordPosition,
-      font,
-      fontSize,
-      color
-  ) {
+  ctor: function (backgroundImage, displayImage, displayWord, displayWordPosition, font, fontSize, color) {
     this._super(backgroundImage);
     this.displayImage = displayImage;
-    this.displayWord = displayWord;
+
     this.addDisplayImage();
-    this.addWordLabel(displayWordPosition, font, fontSize, color);
+    if (displayWord) {
+      this.displayWord = displayWord;
+      this.addWordLabel(displayWordPosition, font, fontSize, color);
+    }
   },
   onEnter: function () {
     this._super();
@@ -92,30 +87,14 @@ ACTIVITY_FLASH_CARDS_1.Book = cc.Node.extend({
   animationQueue: [],
   isAnimationRunning: false,
   sound: undefined,
-  ctor: function (
-      backgroundImage,
-      displayImage,
-      text,
-      textPos,
-      font,
-      fontSize,
-      color,
-      sound
-  ) {
+  ctor: function (backgroundImage, displayImage, text, textPos, font, fontSize, color, sound) {
     this._super();
     this.setContentSize(cc.size(cc.winSize.width, cc.winSize.height));
     this.sound = sound;
-    this._addPages(
-        backgroundImage,
-        displayImage,
-        text,
-        textPos,
-        font,
-        fontSize,
-        color
-    );
+    this._addPages(backgroundImage, displayImage, text, textPos, font, fontSize, color);
   },
-  _addPages: function (
+  _addPages: function (backgroundImage, displayImage, text, textPos, font, fontSize, color) {
+    var currentPage = new ACTIVITY_FLASH_CARDS_1.BookPage(
       backgroundImage,
       displayImage,
       text,
@@ -123,26 +102,17 @@ ACTIVITY_FLASH_CARDS_1.Book = cc.Node.extend({
       font,
       fontSize,
       color
-  ) {
-    var currentPage = new ACTIVITY_FLASH_CARDS_1.BookPage(
-        backgroundImage,
-        displayImage,
-        text,
-        textPos,
-        font,
-        fontSize,
-        color
     );
     currentPage.setPosition(cc.p(this.width * 0.5, this.height * 0.5));
     currentPage.setTag(this.currentPageTag);
     var nextPage = new ACTIVITY_FLASH_CARDS_1.BookPage(
-        backgroundImage,
-        displayImage,
-        text,
-        textPos,
-        font,
-        fontSize,
-        color
+      backgroundImage,
+      displayImage,
+      text,
+      textPos,
+      font,
+      fontSize,
+      color
     );
     nextPage.setTag(this.nextPageTag);
     nextPage.setPosition(cc.p(this.width * 0.5, this.height * 0.5));
@@ -168,16 +138,16 @@ ACTIVITY_FLASH_CARDS_1.Book = cc.Node.extend({
       nextPage.setDisplayImage(this.animationQueue[0].image);
       nextPage.setDisplayWord(this.animationQueue[0].word);
       this.getChildByTag(this.nodeGridTag).runAction(
-          cc.sequence(
-              cc.pageTurn3D(1, cc.size(16, 12)),
-              cc.callFunc(() => {
-                this.isAnimationRunning = false;
-                this.animationQueue.shift();
-                if (this.animationQueue.length > 0) {
-                  this._runPageTurnAction();
-                }
-              })
-          )
+        cc.sequence(
+          cc.pageTurn3D(1, cc.size(16, 12)),
+          cc.callFunc(() => {
+            this.isAnimationRunning = false;
+            this.animationQueue.shift();
+            if (this.animationQueue.length > 0) {
+              this._runPageTurnAction();
+            }
+          })
+        )
       );
     }
   },
@@ -194,22 +164,17 @@ ACTIVITY_FLASH_CARDS_1.BillboardSprite = cc.Sprite.extend({
   yPosition: 0,
   onEnterActionOver: () => {},
   ctor: function (
-      parent,
-      billboardImage,
-      displayImage,
-      billboardYPosition,
-      duration,
-      onEnterActionOver,
-      sound,
-      displayImagePosition
+    parent,
+    billboardImage,
+    displayImage,
+    billboardYPosition,
+    duration,
+    onEnterActionOver,
+    sound,
+    displayImagePosition
   ) {
     this._super(billboardImage);
-    this.setPosition(
-        cc.p(
-            this.getContentSize().width * 0.5 + parent.getContentSize().width,
-            billboardYPosition
-        )
-    );
+    this.setPosition(cc.p(this.getContentSize().width * 0.5 + parent.getContentSize().width, billboardYPosition));
     parent.addChild(this);
     this.parentRef = parent;
     this.duration = duration;
@@ -222,33 +187,18 @@ ACTIVITY_FLASH_CARDS_1.BillboardSprite = cc.Sprite.extend({
   },
   _placeDisplayImageInMiddle: function (displayImage, pos) {
     var displayImageSprite = new cc.Sprite(displayImage);
-    displayImageSprite.setScaleY(
-        (this.height * 0.43) / displayImageSprite.height
-    );
+    displayImageSprite.setScaleY((this.height * 0.43) / displayImageSprite.height);
     displayImageSprite.setPosition(pos);
     this.addChild(displayImageSprite, 1);
   },
   triggerEnterAction: function () {
-    var enterAction = cc.moveTo(
-        this.duration,
-        cc.p(this.parentRef.getContentSize().width * 0.5, this.yPosition)
-    );
-    this.runAction(
-        cc.sequence(
-            enterAction,
-            cc.callFunc(this.onEnterActionOver, this.parentRef)
-        )
-    );
+    var enterAction = cc.moveTo(this.duration, cc.p(this.parentRef.getContentSize().width * 0.5, this.yPosition));
+    this.runAction(cc.sequence(enterAction, cc.callFunc(this.onEnterActionOver, this.parentRef)));
     cc.audioEngine.playEffect(this.sound);
   },
   triggerExitAction: function () {
-    var exitAction = cc.moveTo(
-        this.duration,
-        cc.p(-this.getContentSize().width * 0.5, this.yPosition)
-    );
-    this.runAction(
-        cc.sequence(exitAction, cc.callFunc(this._exitCleanup, this))
-    );
+    var exitAction = cc.moveTo(this.duration, cc.p(-this.getContentSize().width * 0.5, this.yPosition));
+    this.runAction(cc.sequence(exitAction, cc.callFunc(this._exitCleanup, this)));
   },
   _exitCleanup: function () {
     this.parentRef.removeChild(this);
@@ -274,96 +224,89 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
     this.state = state;
     this.setUpCommonUI();
     if (
-        state >= 0 &&
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+      state >= 0 &&
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
         ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.billboards
     ) {
       this.driveToNextBillboard(
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
-              state
-              ].imageName,
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
-              state
-              ].label
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[state].imageName,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[state].label
       );
     } else if (
-        state >= 0 &&
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+      state >= 0 &&
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
         ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
     ) {
       this.turnBookPage(
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
-              state
-              ].imageName,
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
-              state
-              ].label
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[state].imageName,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[state].label
       );
     }
   },
   setUpCommonUI: function () {
     this.addBackground();
     if (
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue !==
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue !==
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
     ) {
       this.setWordHolder(
-          this.state >= 0
-              ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[this.state].label
-              : ""
+        this.state >= 0
+          ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[this.state].label
+          : ""
       );
     } else {
       // for book of rhymes show only label for now ,
     }
     if (
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.classic
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.classic
     ) {
       this.renderInitialSelectedFlashcardItem();
     }
   },
   addBackground: function () {
     if (
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
     ) {
       var book = new ACTIVITY_FLASH_CARDS_1.Book(
-          ACTIVITY_FLASH_CARDS_1.resourcePath +
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.background.sections.background
-              .imageName,
-          undefined,
-          "",
-          cc.p(
-              HDAppManager.isTeacherView
-                  ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                      .BookOfRhymesWordLabelTeacher.position.x
-                  : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                      .BookOfRhymesWordLabelStudent.position.x,
-              HDAppManager.isTeacherView
-                  ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                      .BookOfRhymesWordLabelTeacher.position.y
-                  : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                      .BookOfRhymesWordLabelStudent.position.y
-          ),
-          HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.font:
-              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.font,
-          HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.fontSize:
-              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.fontSize,
-          cc.color(
-              HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                      .BookOfRhymesWordLabelTeacher.color.r:ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabelStudent.color.r,
-              HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabelTeacher.color.g:ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabelStudent.color.g,
-              HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabelTeacher.color.b:ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabelStudent.color.b,
-              HDAppManager.isTeacherView?ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabelTeacher.color.a:ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                  .BookOfRhymesWordLabelStudent.color.a,
-          ),
-          ACTIVITY_FLASH_CARDS_1.soundPath +
+        ACTIVITY_FLASH_CARDS_1.resourcePath +
+          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.background.sections.background.imageName,
+        undefined,
+        "",
+        cc.p(
+          HDAppManager.isTeacherView
+            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.position
+                .x
+            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.position
+                .x,
+          HDAppManager.isTeacherView
+            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.position
+                .y
+            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.position
+                .y
+        ),
+        HDAppManager.isTeacherView
+          ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.font
+          : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.font,
+        HDAppManager.isTeacherView
+          ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.fontSize
+          : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.fontSize,
+        cc.color(
+          HDAppManager.isTeacherView
+            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.r
+            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.r,
+          HDAppManager.isTeacherView
+            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.g
+            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.g,
+          HDAppManager.isTeacherView
+            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.b
+            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.b,
+          HDAppManager.isTeacherView
+            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.a
+            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.a
+        ),
+        ACTIVITY_FLASH_CARDS_1.soundPath +
           ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.swipe.sound
       );
       book.setTag(this.bookTag);
@@ -371,25 +314,20 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
       book.setLocalZOrder(-1);
     } else {
       var bgSpriteRef = this.setBackground(
-          ACTIVITY_FLASH_CARDS_1.resourcePath +
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.background.sections.background
-              .imageName
+        ACTIVITY_FLASH_CARDS_1.resourcePath +
+          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.background.sections.background.imageName
       );
       bgSpriteRef.setLocalZOrder(-1);
     }
   },
   renderInitialSelectedFlashcardItem: function () {
-
     var selectedFlashCardItemSprite = this.addSprite(
-        ACTIVITY_FLASH_CARDS_1.resourcePath +
+      ACTIVITY_FLASH_CARDS_1.resourcePath +
         ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
-            this.state >= 0 ? this.state : 0
-            ].imageName,
-        cc.p(
-            this.getContentSize().width * 0.5,
-            this.getContentSize().height * 0.5
-        ),
-        this
+          this.state >= 0 ? this.state : 0
+        ].imageName,
+      cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5),
+      this
     );
     selectedFlashCardItemSprite.setVisible(this.state >= 0);
     selectedFlashCardItemSprite.setTag(this.selectedFlashCardItemSpriteTag);
@@ -403,18 +341,13 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
 
   updateWordHolderText: function (text) {
     var wordHolderSprite = this.getChildByTag(this.wordHolderTag);
-    var label = wordHolderSprite.getChildByTag(
-        this.selectedFlashCardItemLabelTag
-    );
+    var label = wordHolderSprite.getChildByTag(this.selectedFlashCardItemLabelTag);
     label.setString(text);
     wordHolderSprite.setVisible(true);
   },
 
   turnBookPage: function (image, word) {
-    this.getChildByTag(this.bookTag).turnPage(
-        ACTIVITY_FLASH_CARDS_1.resourcePath + image,
-        word
-    );
+    this.getChildByTag(this.bookTag).turnPage(ACTIVITY_FLASH_CARDS_1.resourcePath + image, word);
   },
   driveToNextBillboard: function (imageName, word) {
     this.canSelectNextItem = false;
@@ -427,22 +360,21 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
   },
   enterNewBillboard: function (imageName, word) {
     var billBoard = new ACTIVITY_FLASH_CARDS_1.BillboardSprite(
-        this,
-        ACTIVITY_FLASH_CARDS_1.resourcePath +
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.billboard
-            .imageName,
-        ACTIVITY_FLASH_CARDS_1.resourcePath + imageName,
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.billboard.position.y,
-        0.5,
-        () => this.onBillboardEnterd(word),
-        ACTIVITY_FLASH_CARDS_1.soundPath +
+      this,
+      ACTIVITY_FLASH_CARDS_1.resourcePath +
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.billboard.imageName,
+      ACTIVITY_FLASH_CARDS_1.resourcePath + imageName,
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.billboard.position.y,
+      0.5,
+      () => this.onBillboardEnterd(word),
+      ACTIVITY_FLASH_CARDS_1.soundPath +
         ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.swipe.sound,
-        cc.p(
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                .billboardDisplayImage.animationPath[0].position.x,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                .billboardDisplayImage.animationPath[0].position.y
-        )
+      cc.p(
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.billboardDisplayImage.animationPath[0]
+          .position.x,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.billboardDisplayImage.animationPath[0]
+          .position.y
+      )
     );
     this.billboardQueue.push(billBoard);
     billBoard.triggerEnterAction();
@@ -469,46 +401,43 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
         break;
       }
       default: {
-        throw new Error(
-            "current theme is not a valid theme. Please check value of 'currentTheme' key in config file"
-        );
+        throw new Error("current theme is not a valid theme. Please check value of 'currentTheme' key in config file");
       }
     }
   },
   setWordHolder: function (initialLabelString) {
     var wordHolderSprite = this.addSprite(
-        ACTIVITY_FLASH_CARDS_1.resourcePath +
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderTeacher
-            .imageName,
-        cc.p(
-            HDAppManager.isTeacherView
-                ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderTeacher.position.x
-                : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderStudent.position.x,
-            HDAppManager.isTeacherView
-                ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderTeacher.position.y
-                : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderStudent.position.y
-        ),
-        this
+      ACTIVITY_FLASH_CARDS_1.resourcePath +
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderTeacher.imageName,
+      cc.p(
+        HDAppManager.isTeacherView
+          ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderTeacher.position.x
+          : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderStudent.position.x,
+        HDAppManager.isTeacherView
+          ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderTeacher.position.y
+          : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordHolderStudent.position.y
+      ),
+      this
     );
     wordHolderSprite.setTag(this.wordHolderTag);
     wordHolderSprite.setLocalZOrder(1);
     wordHolderSprite.setVisible(this.state >= 0);
 
     var label = this.createTTFLabel(
-        initialLabelString,
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.font,
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.fontSize,
-        cc.color(
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.r,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.g,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.b,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.a
-        ),
-        cc.p(
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelStudent.position.x,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelStudent.position.y
-        ),
-        wordHolderSprite
+      initialLabelString,
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.font,
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.fontSize,
+      cc.color(
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.r,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.g,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.b,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelteacher.color.a
+      ),
+      cc.p(
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelStudent.position.x,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.wordLabelStudent.position.y
+      ),
+      wordHolderSprite
     );
     label.setTag(this.selectedFlashCardItemLabelTag);
   },
@@ -542,9 +471,7 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
   },
   onNotificationReceived: function () {},
   mouseControlEnable: function (location) {
-    let tableView = this.getChildByTag(
-        this.tableViewContainerTag
-    ).getChildByTag(this.tableViewTag);
+    let tableView = this.getChildByTag(this.tableViewContainerTag).getChildByTag(this.tableViewTag);
     let loc = tableView.convertToNodeSpace(location);
     if (tableView && cc.rectContainsPoint(tableView.getBoundingBox(), loc)) {
       return true;
@@ -556,45 +483,33 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
     var x_position = this.sideBottomBar_X_position;
     var width = this.maxSideBottomBarWidth;
     if (
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data
-            .length < this.visibleFlashCardItemsCount
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length <
+      this.visibleFlashCardItemsCount
     ) {
       width =
-          (this.maxSideBottomBarWidth *
-              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length) /
-          this.visibleFlashCardItemsCount;
-      x_position =
-          (this.maxSideBottomBarWidth - width) / 2 +
-          this.sideBottomBar_X_position;
+        (this.maxSideBottomBarWidth *
+          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length) /
+        this.visibleFlashCardItemsCount;
+      x_position = (this.maxSideBottomBarWidth - width) / 2 + this.sideBottomBar_X_position;
     }
-    var tableViewBackgroundColorLayer = new cc.LayerColor(
-        cc.color(0, 0, 0, 0),
-        width,
-        cc.winSize.height * 0.15
-    );
-    tableViewBackgroundColorLayer.setPosition(
-        cc.p(x_position, cc.winSize.height * 0)
-    );
+    var tableViewBackgroundColorLayer = new cc.LayerColor(cc.color(0, 0, 0, 0), width, cc.winSize.height * 0.15);
+    tableViewBackgroundColorLayer.setPosition(cc.p(x_position, cc.winSize.height * 0));
     tableViewBackgroundColorLayer.setTag(this.tableViewContainerTag);
 
     var tableViewBgSprite = this.addSprite(
-        ACTIVITY_FLASH_CARDS_1.resourcePath +
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-            .carouselBackground.imageName,
-        cc.p(0, 0),
-        tableViewBackgroundColorLayer
+      ACTIVITY_FLASH_CARDS_1.resourcePath +
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselBackground.imageName,
+      cc.p(0, 0),
+      tableViewBackgroundColorLayer
     );
     tableViewBgSprite.setLocalZOrder(-1);
     tableViewBgSprite.setScale(
-        width / tableViewBgSprite.getContentSize().width,
-        (cc.winSize.height * 0.15) / tableViewBgSprite.getContentSize().height
+      width / tableViewBgSprite.getContentSize().width,
+      (cc.winSize.height * 0.15) / tableViewBgSprite.getContentSize().height
     );
     tableViewBgSprite.setAnchorPoint(0, 0);
 
-    var tableView = new cc.TableView(
-        this,
-        cc.size(width, cc.winSize.height * 0.15)
-    );
+    var tableView = new cc.TableView(this, cc.size(width, cc.winSize.height * 0.15));
     this.tableViewRef = tableView;
     tableView.setDirection(cc.SCROLLVIEW_DIRECTION_HORIZONTAL);
     tableView.setAnchorPoint(cc.p(0, 0));
@@ -607,12 +522,12 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
   },
   tableCellSizeForIndex: function (table, idx) {
     return cc.size(
-        table.width /
-        (ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data
-            .length < this.visibleFlashCardItemsCount
-            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length
-            : this.visibleFlashCardItemsCount),
-        table.height
+      table.width /
+        (ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length <
+        this.visibleFlashCardItemsCount
+          ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length
+          : this.visibleFlashCardItemsCount),
+      table.height
     );
   },
   tableCellAtIndex: function (table, idx) {
@@ -624,11 +539,9 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
       cell = new ACTIVITY_FLASH_CARDS_1.FlashCardItem();
     }
     cell.createItem(
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
-            idx
-            ],
-        cellSize,
-        this.selectedFlashCardItemIdx === idx
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[idx],
+      cellSize,
+      this.selectedFlashCardItemIdx === idx
     );
     return cell;
   },
@@ -637,68 +550,54 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
   },
   tableCellTouched: function (table, cell) {
     var previouslySelectedFlashCardItemIdx = this.selectedFlashCardItemIdx;
-    if (
-        previouslySelectedFlashCardItemIdx !== cell.getIdx() &&
-        this.canSelectNextItem
-    ) {
+    if (previouslySelectedFlashCardItemIdx !== cell.getIdx() && this.canSelectNextItem) {
       this.selectedFlashCardItemIdx = cell.getIdx();
       this.showSyncData(
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
-              cell.getIdx()
-              ].imageName,
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[
-              cell.getIdx()
-              ].label
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[cell.getIdx()]
+          .imageName,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[cell.getIdx()].label
       );
       // highlight touched cell
-      this.getChildByTag(this.tableViewContainerTag)
-          .getChildByTag(this.tableViewTag)
-          .updateCellAtIndex(cell.getIdx());
+      this.getChildByTag(this.tableViewContainerTag).getChildByTag(this.tableViewTag).updateCellAtIndex(cell.getIdx());
       // unhighlight previously selected cell
       if (previouslySelectedFlashCardItemIdx >= 0) {
         this.getChildByTag(this.tableViewContainerTag)
-            .getChildByTag(this.tableViewTag)
-            .updateCellAtIndex(previouslySelectedFlashCardItemIdx);
+          .getChildByTag(this.tableViewTag)
+          .updateCellAtIndex(previouslySelectedFlashCardItemIdx);
       }
 
       // emit socket event
       SocketManager.emitCutomEvent(
-          ACTIVITY_FLASH_CARDS_1.socketEventKey.singleEvent,
-          {
-            eventType: ACTIVITY_FLASH_CARDS_1.teacherEvents.FLASH_CARDS_NEXT_ITEM,
-            roomId: HDAppManager.roomId,
-            data:
-                ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[cell.getIdx()],
-          },
+        ACTIVITY_FLASH_CARDS_1.socketEventKey.singleEvent,
+        {
+          eventType: ACTIVITY_FLASH_CARDS_1.teacherEvents.FLASH_CARDS_NEXT_ITEM,
+          roomId: HDAppManager.roomId,
+          data: ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[cell.getIdx()],
+        },
 
-          () => undefined
-
+        () => undefined
       );
 
       // updated update room data
       SocketManager.emitCutomEvent(
-          ACTIVITY_FLASH_CARDS_1.socketEventKey.singleEvent,
-          {
-            eventType: HDSocketEventType.UPDATE_ROOM_DATA,
+        ACTIVITY_FLASH_CARDS_1.socketEventKey.singleEvent,
+        {
+          eventType: HDSocketEventType.UPDATE_ROOM_DATA,
+          roomId: HDAppManager.roomId,
+          data: {
             roomId: HDAppManager.roomId,
-            data: {
-              roomId: HDAppManager.roomId,
-              roomData: {
-                activity:
-                ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.properties.namespace,
-                data: this.selectedFlashCardItemIdx,
-              },
+            roomData: {
+              activity: ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.properties.namespace,
+              data: this.selectedFlashCardItemIdx,
             },
-
           },
-          null
+        },
+        null
       );
     }
   },
   reloadTable: function () {
-    var tableView = this.getChildByTag(
-        this.tableViewContainerTag
-    ).getChildByTag(this.tableViewTag);
+    var tableView = this.getChildByTag(this.tableViewContainerTag).getChildByTag(this.tableViewTag);
     if (tableView) {
       tableView.reloadData();
     }
@@ -708,21 +607,20 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
     this._super();
     // updated update room data
     SocketManager.emitCutomEvent(
-        ACTIVITY_FLASH_CARDS_1.socketEventKey.singleEvent,
-        {
-          eventType: HDSocketEventType.UPDATE_ROOM_DATA,
+      ACTIVITY_FLASH_CARDS_1.socketEventKey.singleEvent,
+      {
+        eventType: HDSocketEventType.UPDATE_ROOM_DATA,
+        roomId: HDAppManager.roomId,
+        data: {
           roomId: HDAppManager.roomId,
-          data: {
-            roomId: HDAppManager.roomId,
-            roomData: {
-              activity:
-              ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.properties.namespace,
-              data: this.selectedFlashCardItemIdx,
-              activityStartTime : HDAppManager.getActivityStartTime()
-            },
+          roomData: {
+            activity: ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.properties.namespace,
+            data: this.selectedFlashCardItemIdx,
+            activityStartTime: HDAppManager.getActivityStartTime(),
           },
         },
-        null
+      },
+      null
     );
   },
   onExit: function () {},
@@ -736,18 +634,10 @@ ACTIVITY_FLASH_CARDS_1.FlashCardItem = cc.TableViewCell.extend({
   createItem: function (item, cellSize, isSelected) {
     var r, g, b, a;
     if (isSelected) {
-      r =
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-              .carouselItemHighlighted.color.r;
-      g =
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-              .carouselItemHighlighted.color.g;
-      b =
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-              .carouselItemHighlighted.color.b;
-      a =
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-              .carouselItemHighlighted.color.a;
+      r = ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemHighlighted.color.r;
+      g = ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemHighlighted.color.g;
+      b = ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemHighlighted.color.b;
+      a = ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemHighlighted.color.a;
     } else {
       r = 0;
       g = 0;
@@ -755,79 +645,55 @@ ACTIVITY_FLASH_CARDS_1.FlashCardItem = cc.TableViewCell.extend({
       a = 0;
     }
 
-    var itemBgColorLayer = new cc.LayerColor(
-        new cc.Color(r, g, b, a),
-        cellSize.width * 0.9,
-        cellSize.height * 0.9
-    );
+    var itemBgColorLayer = new cc.LayerColor(new cc.Color(r, g, b, a), cellSize.width * 0.9, cellSize.height * 0.9);
     var itemBgSprite = new cc.Sprite(
-        ACTIVITY_FLASH_CARDS_1.resourcePath +
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-            .carouselForeground.imageName
+      ACTIVITY_FLASH_CARDS_1.resourcePath +
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselForeground.imageName
     );
     itemBgSprite.setScale(
-        (cellSize.width * 0.9) / itemBgSprite.getContentSize().width,
-        (cellSize.height * 0.9) / itemBgSprite.getContentSize().height
+      (cellSize.width * 0.9) / itemBgSprite.getContentSize().width,
+      (cellSize.height * 0.9) / itemBgSprite.getContentSize().height
     );
-    itemBgSprite.setPosition(
-        cc.p(itemBgColorLayer.width * 0.5, itemBgColorLayer.height * 0.5)
-    );
+    itemBgSprite.setPosition(cc.p(itemBgColorLayer.width * 0.5, itemBgColorLayer.height * 0.5));
     itemBgSprite.setLocalZOrder(-1);
     itemBgColorLayer.setPosition(
-        cc.p(
-            (cellSize.width - itemBgColorLayer.width) / 2,
-            (cellSize.height - itemBgColorLayer.height) / 2
-        )
+      cc.p((cellSize.width - itemBgColorLayer.width) / 2, (cellSize.height - itemBgColorLayer.height) / 2)
     );
     itemBgColorLayer.addChild(itemBgSprite);
     var itemSpriteRef = ACTIVITY_FLASH_CARDS_1.teacherViewLayerRef.addSprite(
-        ACTIVITY_FLASH_CARDS_1.resourcePath + item.imageName,
-        cc.p(
-            itemBgColorLayer.getContentSize().width * 0.5,
-            itemBgColorLayer.getContentSize().height * 0.5
-        ),
-        itemBgColorLayer
+      ACTIVITY_FLASH_CARDS_1.resourcePath + item.imageName,
+      cc.p(itemBgColorLayer.getContentSize().width * 0.5, itemBgColorLayer.getContentSize().height * 0.5),
+      itemBgColorLayer
     );
     itemSpriteRef.setScale(
-        (itemBgColorLayer.getContentSize().width * 0.85) /
-        itemSpriteRef.getContentSize().width,
-        (itemBgColorLayer.getContentSize().height * 0.85) /
-        itemSpriteRef.getContentSize().height
+      (itemBgColorLayer.getContentSize().width * 0.85) / itemSpriteRef.getContentSize().width,
+      (itemBgColorLayer.getContentSize().height * 0.85) / itemSpriteRef.getContentSize().height
     );
     var itemNameColorLayer = ACTIVITY_FLASH_CARDS_1.teacherViewLayerRef.createColourLayer(
-        new cc.Color(
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.r,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.g,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.b,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.a
-        ),
-        itemBgColorLayer.getContentSize().width,
-        itemBgColorLayer.getContentSize().height * 0.25,
-        cc.p(0, itemBgColorLayer.getContentSize().height * 0.8),
-        itemBgColorLayer,
-        2
+      new cc.Color(
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.r,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.g,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.b,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabelBackground.color.a
+      ),
+      itemBgColorLayer.getContentSize().width,
+      itemBgColorLayer.getContentSize().height * 0.25,
+      cc.p(0, itemBgColorLayer.getContentSize().height * 0.8),
+      itemBgColorLayer,
+      2
     );
     ACTIVITY_FLASH_CARDS_1.teacherViewLayerRef.createTTFLabel(
-        item.label,
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel
-            .font,
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel
-            .fontSize,
-        cc.color(
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                .carouselItemLabel.color.r,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                .carouselItemLabel.color.g,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                .carouselItemLabel.color.b,
-            ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections
-                .carouselItemLabel.color.a
-        ),
-        cc.p(
-            itemNameColorLayer.getContentSize().width * 0.5,
-            itemNameColorLayer.getContentSize().height * 0.5
-        ),
-        itemNameColorLayer
+      item.label,
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel.font,
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel.fontSize,
+      cc.color(
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel.color.r,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel.color.g,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel.color.b,
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselItemLabel.color.a
+      ),
+      cc.p(itemNameColorLayer.getContentSize().width * 0.5, itemNameColorLayer.getContentSize().height * 0.5),
+      itemNameColorLayer
     );
     this.addChild(itemBgColorLayer);
   },
@@ -868,29 +734,25 @@ ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayer = cc.Layer.extend({
   ctor: function () {
     this._super();
     var self = this;
-    let activityName = 'ACTIVITY_FLASH_CARDS_1';
+    let activityName = "ACTIVITY_FLASH_CARDS_1";
     ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef = this;
-    cc.loader.loadJson(
-        "res/Activity/" + activityName + "/config.json",
-        function (error, data) {
-          self.config = data;
-          ACTIVITY_FLASH_CARDS_1.resourcePath =
-              "res/Activity/" + ""+ activityName +  "/res/Sprite/";
-          ACTIVITY_FLASH_CARDS_1.soundPath = "res/Activity/" + ""+ activityName +  "/res/Sound/";
-          self.isTeacher = HDAppManager.isTeacherView; //get user token to determine whether user is teacher or student
-          if (self.isTeacher) {
-            var teacherViewLayer = new ACTIVITY_FLASH_CARDS_1.TeacherViewLayer(self.state);
-            self.notificationDelegate = teacherViewLayer;
-            self.teacherViewRef = teacherViewLayer;
-            self.addChild(teacherViewLayer);
-          } else {
-            var studentViewLayer = new ACTIVITY_FLASH_CARDS_1.StudentViewLayer(self.state);
-            self.notificationDelegate = studentViewLayer;
-            self.addChild(studentViewLayer);
-          }
-          self.connectSocket();
-        }
-    );
+    cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, data) {
+      self.config = data;
+      ACTIVITY_FLASH_CARDS_1.resourcePath = "res/Activity/" + "" + activityName + "/res/Sprite/";
+      ACTIVITY_FLASH_CARDS_1.soundPath = "res/Activity/" + "" + activityName + "/res/Sound/";
+      self.isTeacher = HDAppManager.isTeacherView; //get user token to determine whether user is teacher or student
+      if (self.isTeacher) {
+        var teacherViewLayer = new ACTIVITY_FLASH_CARDS_1.TeacherViewLayer(self.state);
+        self.notificationDelegate = teacherViewLayer;
+        self.teacherViewRef = teacherViewLayer;
+        self.addChild(teacherViewLayer);
+      } else {
+        var studentViewLayer = new ACTIVITY_FLASH_CARDS_1.StudentViewLayer(self.state);
+        self.notificationDelegate = studentViewLayer;
+        self.addChild(studentViewLayer);
+      }
+      self.connectSocket();
+    });
   },
   connectSocket: function () {
     if (SocketManager.socket === null || !SocketManager.isSocketConnected()) {
@@ -899,13 +761,11 @@ ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayer = cc.Layer.extend({
   },
 
   socketListener: function (event) {
-    if (this.notificationDelegate)
-      this.notificationDelegate.onNotificationReceived(event);
+    if (this.notificationDelegate) this.notificationDelegate.onNotificationReceived(event);
   },
 
   mouseControlEnable: function (location) {
-    if (this.teacherViewRef)
-      return this.teacherViewRef.mouseControlEnable(location);
+    if (this.teacherViewRef) return this.teacherViewRef.mouseControlEnable(location);
   },
 
   syncData: function (data) {

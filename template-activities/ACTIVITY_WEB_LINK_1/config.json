@@ -4,11 +4,11 @@
     "url": "res/Activity/ACTIVITY_WEB_LINK_1/",
     "number": "1",
     "renderMode": 1,
-    "activityPath": "ACTIVITY_WEB_LINK_1",
     "name": "Name",
     "namespace": "ACTIVITY_WEB_LINK_1",
     "layerName": "WebLinkLayer",
     "activityName": "Web Game",
+    "activityPath": "ACTIVITY_WEB_LINK_1",
     "urlInfo": {
       "url" : "http://hddev.s3-website-eu-west-1.amazonaws.com/kangi_game_libs/#/game/e_learning_fwf/ep01_l05_m07-connect_lines"
     },
@@ -29,18 +29,22 @@
     "description": "",
     "allocatedTime": 10,
     "studentPreview": false,
-    "preLoaded": false
+    "preLoaded" : false
   },
   "jsList": [
     "res/Activity/ACTIVITY_WEB_LINK_1/src/index.js"
   ],
-  "teacherScripts": {},
-  "teacherTips": {},
-  "graphicalAssets": {},
+  "teacherScripts": {
+  },
+  "teacherTips": {
+  },
+  "graphicalAssets": {
+  },
   "resources": {
     "sprites": {
       "basePath": "res/Sprite/",
-      "images": []
+      "images": [
+      ]
     }
   }
 }

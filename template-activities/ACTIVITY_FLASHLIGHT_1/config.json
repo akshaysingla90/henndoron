@@ -20,8 +20,9 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data":[ 
+    "data":
     {
+      "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -147,7 +148,7 @@
           ]
         }
     },
-    {
+      "onRedCircle": {
         "UIName": "On Red Circle",
         "enable": true,
         "description": "This will trigger when clicking on any student's red circle.",
@@ -174,13 +175,14 @@
           ]
         }
       }
-  ]
+    }
   },
 
   "teacherTips": {
     "component": "tipsCard",
-    "data":[
+    "data":
      {
+      "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
@@ -242,7 +244,7 @@
           ]
         }
       }
-  ]
+    }
   },
   "background": {
     "component": "backgroundCard",
