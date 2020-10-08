@@ -93,6 +93,8 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
 
         window.addEventListener('resize', this.browserResized);
         iFrame.addEventListener('mousemove', function (event) {
+            if(!ACTIVITY_WEB_LINK_1.ref.iFrame)
+                return;
             ACTIVITY_WEB_LINK_1.ref.getParent().setActiveActivityInfo(false);
             ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
             ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo( ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
@@ -178,7 +180,8 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
     },
 
     mouseEventListener: function (event) {
-        console.log("on Mouse move called ");
+        if(!ACTIVITY_WEB_LINK_1.ref.iFrame)
+            return;
         switch (event._eventType) {
             case cc.EventMouse.DOWN:
                 this.onMouseDown(event);
@@ -228,6 +231,8 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         if (!ACTIVITY_WEB_LINK_1.ref.isStudentInteractionEnable)
             return;
     },
+
+
     socketListener: function (res) {
         if (!ACTIVITY_WEB_LINK_1.ref)
             return;
