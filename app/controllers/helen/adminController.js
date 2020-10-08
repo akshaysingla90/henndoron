@@ -1,6 +1,6 @@
 "use strict";
 const HELPERS = require("../../helpers");
-const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS } = require('../../utils/constants');
+const { MESSAGES, ERROR_TYPES, NORMAL_PROJECTION, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS, ACTIVITY_SEARCH_TYPE } = require('../../utils/constants');
 const { generateCharacterString } = require('../../utils/utils');
 const { ACTIVITY_SRC_PATH, ACTIVITY_PREVIEW_PATH, TEMPLATE_ACTIVITY_PREVIEW, TEMPLATE_ACTIVITY_PATH, ACTIVITY_DIRECTORY_PATH, ACTIVITY_RESOURCE_DIRECTORY_PATH, BASE_PATH, ACTIVITY_CONFIG_PATH } = require('../../../config').COCOS_PROJECT_PATH;
 const SERVICES = require('../../services');
@@ -107,6 +107,22 @@ adminController.getActivities = async (payload) => {
     if (payload.episodeNumber) payload.criteria.episodeNumber = payload.episodeNumber;
     if (payload.lessonNumber) payload.criteria.lessonNumber = payload.lessonNumber;
   }
+  if (payload.search_type == ACTIVITY_SEARCH_TYPE.DROPDOWN) {
+    payload.criteria.status = ACTIVITY_STATUS.PUBLISHED;
+    payload.criteria = {
+      $or: [
+        payload.criteria,
+        { status: { $in: [ACTIVITY_STATUS.PUBLISHED, ACTIVITY_STATUS.WEB_URL] } }
+      ]
+    }
+  } else {
+    payload.criteria = {
+      $and: [
+        payload.criteria,
+        { status: { $ne: ACTIVITY_STATUS.WEB_URL } }
+      ]
+    }
+  }
   let query = [
     { $match: payload.criteria },
     {
@@ -125,7 +141,7 @@ adminController.getActivities = async (payload) => {
     { $project: { courses: 0, courseId: 0 } }
   ];
   if (payload.courseId && payload.lessonNumber && payload.episodeNumber) {
-    query.push({ $project: { type: 1, name: 1, iconUrl: 1, allocatedTime: 1 } })
+    query.push({ $project: { type: 1, name: 1, iconUrl: 1, allocatedTime: 1, webUrl: 1 } })
   }
   query = [...query, ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit)];
   let { items: activities, totalCount } = (await SERVICES.activityService.getActivitiesAggregate(query))[0] || { items: [], totalCount: 0 }
@@ -217,7 +233,7 @@ adminController.deleteResourceFiles = async (payload) => {
  * @param {*} payload 
  */
 adminController.deleteActivity = async (payload) => {
-  const assocaitedToLesson = await SERVICES.lessonService.getLesson({ "activities.activityId": payload.id},{_id:1});
+  const assocaitedToLesson = await SERVICES.lessonService.getLesson({ "activities.activityId": payload.id }, { _id: 1 });
   if (!!assocaitedToLesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_ASSOCIATED_TO__LESSON, ERROR_TYPES.BAD_REQUEST);
   let activity = await SERVICES.activityService.removeActivity({ _id: payload.id, status: { $ne: ACTIVITY_STATUS.TEMPLATE } });
   if (!activity) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
@@ -386,4 +402,3 @@ adminController.updateActivityTemplate = async () => {
 }
 /* export adminController */
 module.exports = adminController;
- 

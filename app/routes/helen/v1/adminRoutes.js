@@ -2,7 +2,7 @@
 
 const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
-const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS } = require(`../../../utils/constants`);
+const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS, ACTIVITY_SEARCH_TYPE } = require(`../../../utils/constants`);
 //load controllers
 const { updateActivityTemplate, deleteActivityPreview, deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
 
@@ -104,7 +104,13 @@ let routes = [
         limit: Joi.number().min(0).default(10).description('Page Limit'),
         //TODO  FILTERS AND SORTING ORDER
         type: Joi.number().valid(ACTIVITY_TYPE.SMALL, ACTIVITY_TYPE.MEDIUM, ACTIVITY_TYPE.GAME).description('1 => SMALL,2 => MEDIUM,3 => GAME'),
-        status: Joi.number().valid(ACTIVITY_STATUS.PUBLISHED, ACTIVITY_STATUS.DRAFT, ACTIVITY_STATUS.TEMPLATE, ACTIVITY_STATUS.WEB_URL).description('1 => TEMPLATE,2 => DRAFT,3 => PUBLISHED, 4 => WEB_URL'),
+        search_type: Joi.number().valid(ACTIVITY_SEARCH_TYPE.LISTING, ACTIVITY_SEARCH_TYPE.DROPDOWN).description('1 => LISTING,2 => DROPDOWN'),
+        status: Joi.number().description('1 => TEMPLATE,2 => DRAFT,3 => PUBLISHED, 4 => WEB_URL')
+          .when('search_type', {
+            is: ACTIVITY_SEARCH_TYPE.LISTING,
+            then: Joi.number().valid(ACTIVITY_STATUS.PUBLISHED, ACTIVITY_STATUS.DRAFT, ACTIVITY_STATUS.TEMPLATE, ACTIVITY_STATUS.WEB_URL),
+            otherwise: Joi.forbidden()
+          }),
         courseId: Joi.string().description('courseId'),
         episodeNumber: Joi.number().min(1).max(12).description('Valid between  1-12 ')
           .when('courseId', { is: Joi.exist(), then: Joi.number(), otherwise: Joi.forbidden() }),

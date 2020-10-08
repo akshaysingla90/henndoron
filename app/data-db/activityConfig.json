@@ -90,6 +90,7 @@
   {
     "name": "ACTIVITY_WEB_LINK_1",
     "path": "/ACTIVITY_WEB_LINK_1",
+    "allocatedTime": 10,
     "type": 1,
     "description": "This is a template for weburl activities",
     "iconUrl": "https://helen-doron-s3uploads.s3.us-east-2.amazonaws.com/icon_activity_Spinning_Wheel.png",
