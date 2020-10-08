@@ -141,7 +141,7 @@ adminController.getActivities = async (payload) => {
     { $project: { courses: 0, courseId: 0 } }
   ];
   if (payload.courseId && payload.lessonNumber && payload.episodeNumber) {
-    query.push({ $project: { type: 1, name: 1, iconUrl: 1, allocatedTime: 1, webUrl: 1 } })
+    query.push({ $project: { type: 1, name: 1, iconUrl: 1, allocatedTime: 1, webUrl: 1, status:1 } })
   }
   query = [...query, ...dbUtils.paginateWithTotalCount(undefined, payload.skip, payload.limit)];
   let { items: activities, totalCount } = (await SERVICES.activityService.getActivitiesAggregate(query))[0] || { items: [], totalCount: 0 }
