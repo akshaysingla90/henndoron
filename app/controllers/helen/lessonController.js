@@ -422,7 +422,8 @@ lessonController.getLessonById = async (payload) => {
               {
                 activityName: '$activities.activityName',
                 activityId: '$activities.activityId',
-                allocatedTime: '$activities.allocatedTime'
+                allocatedTime: '$activities.allocatedTime',
+                webUrl: '$activities.webUrl',
               },
               {
                 type: '$activitiesInfo.type',
