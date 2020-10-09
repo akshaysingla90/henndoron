@@ -68,7 +68,7 @@ var lessonResources = [
     lessonResourceBasePath + "lesson_1_reset_idle_icon.png",
     lessonResourceBasePath + "starDummy.png",
     lessonResourceBasePath + "lesson_1_play.png",
-    lessonResourceBasePath +  "lesson_1_student_panel_bg.png",
+    lessonResourceBasePath + "lesson_1_student_panel_bg.png",
     lessonResourceBasePath + "lesson_1_time_pie_chart.png",
     lessonResourceBasePath + "lesson_1_time_pie_chart_25.png",
     lessonResourceBasePath + "lesson_1_time_pie_chart_50.png",
@@ -77,18 +77,18 @@ var lessonResources = [
 
 ]
 
-for(let i = 1; i <= 22; ++i) {
-    counter = (i < 10 ? "000" + i : "00"+i);
+for (let i = 1; i <= 22; ++i) {
+    counter = (i < 10 ? "000" + i : "00" + i);
     lessonResources.push(magicHatAnimationFrames + "reward_star_appear/reward_star_appear_" + counter + ".png");
 }
 
-for(let i = 1; i <= 14; ++i) {
-    counter = (i < 10 ? "000" + i : "00"+i);
+for (let i = 1; i <= 14; ++i) {
+    counter = (i < 10 ? "000" + i : "00" + i);
     lessonResources.push(magicHatAnimationFrames + "reward_star_track/reward_star_track_" + counter + ".png");
 }
 
 
-for(var j in lessonResources){
+for (var j in lessonResources) {
     resources.push(lessonResources[j]);
 }
 //Font file
@@ -98,7 +98,7 @@ var fontFile = [
     fontBasePath + "Sassoon_Sans_US_W01_Medium.ttf",
     fontBasePath + "LondrinaSolid-Regular.ttf",
 ]
-for(var ff in fontFile){
+for (var ff in fontFile) {
     resources.push(fontFile[ff]);
 }
 
@@ -482,64 +482,64 @@ for(var ff in fontFile){
 // }
 
 
-
-//--------------------- SOT
-let SOTSpriteBasePath = "res/Activity/ACTIVITY_SANDS_OF_TIME_1/res/Sprite/";
-let SOTAnimationBasePath = "res/Activity/ACTIVITY_SANDS_OF_TIME_1/res/AnimationFrames/"
-let SOTRes = [
-    SOTSpriteBasePath + "game_bg.png",
-    SOTSpriteBasePath + "Item_cat.png",
-    SOTSpriteBasePath + "Item_dog.png",
-    SOTSpriteBasePath + "Item_donkey.png",
-    SOTSpriteBasePath + "Item_duck.png",
-    SOTSpriteBasePath + "Item_hare.png",
-    SOTSpriteBasePath + "Item_horse.png",
-    SOTSpriteBasePath + "Item_rabbit.png",
-    SOTSpriteBasePath + "Item_rooster.png",
-    SOTSpriteBasePath + "Item_sheep.png",
-    SOTSpriteBasePath + "Item_tortoise.png",
-    SOTSpriteBasePath +  "leaf_0001.png",
-    SOTSpriteBasePath + "leaf_0002.png",
-    SOTSpriteBasePath + "leaf_0003.png",
-    SOTSpriteBasePath + "leaf_0004.png",
-    SOTSpriteBasePath + "score_window.png",
-    SOTSpriteBasePath + "student1_bag_back.png",
-    SOTSpriteBasePath + "student1_bag_front.png",
-    SOTSpriteBasePath + "student2_bag_back.png",
-    SOTSpriteBasePath + "student2_bag_front.png",
-    SOTSpriteBasePath + "student3_bag_back.png",
-    SOTSpriteBasePath + "student3_bag_front.png",
-    SOTSpriteBasePath + "student4_bag_back.png",
-    SOTSpriteBasePath + "student4_bag_front.png",
-    SOTSpriteBasePath + "student5_bag_back.png",
-    SOTSpriteBasePath + "student5_bag_front.png",
-    SOTSpriteBasePath + "student6_bag_back.png",
-    SOTSpriteBasePath + "student6_bag_front.png",
-    SOTSpriteBasePath + "student7_bag_back.png",
-    SOTSpriteBasePath +  "student7_bag_front.png",
-    SOTSpriteBasePath + "student8_bag_back.png",
-    SOTSpriteBasePath + "student8_bag_front.png"
-    // SOTSpriteBasePath + "bg.png",
-    // SOTSpriteBasePath + "cursor_watercan_idle.png",
-    // SOTSpriteBasePath + "ant.png",
-    // SOTSpriteBasePath + "bat.png",
-    // SOTSpriteBasePath + "bee.png",
-    // SOTSpriteBasePath + "crow.png",
-    // SOTSpriteBasePath + "bat.png",
-]
-
-for(let i = 1; i <= 6; ++i) {
-    // SOTRes.push(SOTSpriteBasePath + "pot0" + i + "_back.png");
-    // SOTRes.push(SOTSpriteBasePath + "pot0" + i + "_front.png");
-}
-for(let i = 1; i <= 9; ++i) {
-    SOTRes.push(SOTAnimationBasePath + "student1_rake/student1_rake_" + ('0000' + i).slice(-4) + ".png");
-    // SOTRes.push(SOTAnimationBasePath + "watering_effect_animation/watering_" + ('0000' + i).slice(-4) + ".png");
-}
-for (var i of SOTRes) {
-    resources.push(i);
-}
-
+//
+// //--------------------- SOT
+// let SOTSpriteBasePath = "res/Activity/ACTIVITY_SANDS_OF_TIME_1/res/Sprite/";
+// let SOTAnimationBasePath = "res/Activity/ACTIVITY_SANDS_OF_TIME_1/res/AnimationFrames/"
+// let SOTRes = [
+//     SOTSpriteBasePath + "game_bg.png",
+//     SOTSpriteBasePath + "Item_cat.png",
+//     SOTSpriteBasePath + "Item_dog.png",
+//     SOTSpriteBasePath + "Item_donkey.png",
+//     SOTSpriteBasePath + "Item_duck.png",
+//     SOTSpriteBasePath + "Item_hare.png",
+//     SOTSpriteBasePath + "Item_horse.png",
+//     SOTSpriteBasePath + "Item_rabbit.png",
+//     SOTSpriteBasePath + "Item_rooster.png",
+//     SOTSpriteBasePath + "Item_sheep.png",
+//     SOTSpriteBasePath + "Item_tortoise.png",
+//     SOTSpriteBasePath +  "leaf_0001.png",
+//     SOTSpriteBasePath + "leaf_0002.png",
+//     SOTSpriteBasePath + "leaf_0003.png",
+//     SOTSpriteBasePath + "leaf_0004.png",
+//     SOTSpriteBasePath + "score_window.png",
+//     SOTSpriteBasePath + "student1_bag_back.png",
+//     SOTSpriteBasePath + "student1_bag_front.png",
+//     SOTSpriteBasePath + "student2_bag_back.png",
+//     SOTSpriteBasePath + "student2_bag_front.png",
+//     SOTSpriteBasePath + "student3_bag_back.png",
+//     SOTSpriteBasePath + "student3_bag_front.png",
+//     SOTSpriteBasePath + "student4_bag_back.png",
+//     SOTSpriteBasePath + "student4_bag_front.png",
+//     SOTSpriteBasePath + "student5_bag_back.png",
+//     SOTSpriteBasePath + "student5_bag_front.png",
+//     SOTSpriteBasePath + "student6_bag_back.png",
+//     SOTSpriteBasePath + "student6_bag_front.png",
+//     SOTSpriteBasePath + "student7_bag_back.png",
+//     SOTSpriteBasePath +  "student7_bag_front.png",
+//     SOTSpriteBasePath + "student8_bag_back.png",
+//     SOTSpriteBasePath + "student8_bag_front.png"
+//     // SOTSpriteBasePath + "bg.png",
+//     // SOTSpriteBasePath + "cursor_watercan_idle.png",
+//     // SOTSpriteBasePath + "ant.png",
+//     // SOTSpriteBasePath + "bat.png",
+//     // SOTSpriteBasePath + "bee.png",
+//     // SOTSpriteBasePath + "crow.png",
+//     // SOTSpriteBasePath + "bat.png",
+// ]
+//
+// for(let i = 1; i <= 6; ++i) {
+//     // SOTRes.push(SOTSpriteBasePath + "pot0" + i + "_back.png");
+//     // SOTRes.push(SOTSpriteBasePath + "pot0" + i + "_front.png");
+// }
+// for(let i = 1; i <= 9; ++i) {
+//     SOTRes.push(SOTAnimationBasePath + "student1_rake/student1_rake_" + ('0000' + i).slice(-4) + ".png");
+//     // SOTRes.push(SOTAnimationBasePath + "watering_effect_animation/watering_" + ('0000' + i).slice(-4) + ".png");
+// }
+// for (var i of SOTRes) {
+//     resources.push(i);
+// }
+//
 
 
 
