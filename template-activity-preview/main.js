@@ -77,14 +77,10 @@
  */
 
 cc.game.onStart = function(){
-    cc.director.setDisplayStats(false);
+    // cc.director.setDisplayStats(false);
     var sys = cc.sys;
     if(!sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
         document.body.removeChild(document.getElementById("cocosLoading"));
-
-    // Pass true to enable retina display, on Android disabled by default to improve performance
-    cc.view.enableRetina(sys.os === sys.OS_IOS ? true : false);
-
     // Disable auto full screen on baidu and wechat, you might also want to eliminate sys.BROWSER_TYPE_MOBILE_QQ
     if (sys.isMobile &&
         sys.browserType !== sys.BROWSER_TYPE_BAIDU &&
@@ -92,27 +88,26 @@ cc.game.onStart = function(){
         cc.view.enableAutoFullScreen(true);
     }
     cc._loaderImage = HDConstants.HD_Logo;
+    cc.view.enableRetina(true);
     // Adjust viewport meta
     cc.view.adjustViewPort(true);
-
     // Uncomment the following line to set a fixed orientation for your game
-    // cc.view.setOrientation(cc.ORIENTATION_PORTRAIT);
-
+    cc.view.setOrientation(cc.ORIENTATION_AUTO);
     // Setup the resolution policy and design resolution size
     cc.view.setDesignResolutionSize(960, 640, cc.ResolutionPolicy.SHOW_ALL);
-
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
-    HDAppManager.appRunMode =  AppMode.Development;
+    HDAppManager.appRunMode = AppMode.Development;
+    cc.loader.resPath =  cc.loader.resPath + "AsyncActivity/";
+    window.addEventListener("orientationchange", ()=>{
+             // window.location.reload();
+    }, false);
     //
-    cc.loader.resPath = cc.loader.resPath + "AsyncActivity/"
-
     cc.loader.loadJson("res/lesson-config.json",function(error, data){
-        cc.log(data);// data is the json object
         HDAppManager.config = data;
         let activityInfo = data.activityGame[0];
         let url = activityInfo.url;
-        let activityResources = activityInfo.resources;
+        let actRes = activityInfo.resources;
         var spritesPath = null;
         var images = null;
         var soundPath = null;
@@ -122,24 +117,24 @@ cc.game.onStart = function(){
         let soundArr = [];
         let spritesArr = [];
         let animationFramesArr = [];
-        if (activityResources) {
-            if (activityResources.sprites) {
-                spritesPath = activityResources.sprites.basePath;
-                images = activityResources.sprites ? activityResources.sprites.images : null;
+        if(actRes) {
+            if(actRes.sprites) {
+                spritesPath = actRes.sprites.basePath;
+                images = actRes.sprites ? actRes.sprites.images : null;
                 for (let img of images) {
                     spritesArr.push(url + spritesPath + img);
                 }
             }
-            if (activityResources.sounds) {
-                soundPath = activityResources.sounds ? activityResources.sounds.basePath : null;
-                sounds = activityResources.sounds ? activityResources.sounds.audio : null;
-                for (let sound of sounds) {
-                    soundArr.push(url + soundPath + sound)
+            if(actRes.sounds) {
+                soundPath = actRes.sounds ? actRes.sounds.basePath : null;
+                sounds = actRes.sounds ? actRes.sounds.audio : null;
+                for(let sound of sounds){
+                    soundArr.push(url + soundPath + sound )
                 }
             }
-            if (activityResources.animationFrames) {
-                animationPath = activityResources.animationFrames.basePath;
-                framesInfo = activityResources.animationFrames.animation;
+            if(actRes.animationFrames) {
+                animationPath = actRes.animationFrames.basePath;
+                framesInfo = actRes.animationFrames.animation;
                 for (let obj of framesInfo) {
                     for (let i = 1; i <= obj.frameCount; ++i) {
                         let frameName = obj.frameInitial + ('0000' + i).slice(-4) + obj.extension;
@@ -148,14 +143,12 @@ cc.game.onStart = function(){
                 }
             }
         }
-        let temp = [...animationFramesArr, ...soundArr, ...spritesArr, ...resources]
+        var resArr = [ ...resources, ...spritesArr, ...animationFramesArr, ...soundArr];
         //load resources
-        // cc.sys.localStorage.setItem("isTeacherView", false);
         HDAppManager.isTeacherView = JSON.parse(cc.sys.localStorage.getItem("isTeacherView"));
-        cc.LoaderScene.preload(temp, function (data) {
-            cc.director.runScene(new lesson_1.HDLessonScene());
+        cc.LoaderScene.preload(resArr, function (data) {
+            cc.director.runScene(new   lesson_1.HDLessonScene ());
         }, this);
-
     });
 };
 cc.game.run();

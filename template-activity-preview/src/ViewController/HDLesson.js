@@ -53,12 +53,12 @@ lesson_1.Tag = {
     blackDot                    :   179,
     lessonTimer                 :   180,
 
-},
+};
 
 lesson_1.TimerType = {
    lessonTimer   : 1,
    activityTimer : 2
-},
+};
 
 lesson_1.socketEventKey = {
     launchActivity      : "launchActivity",
@@ -116,6 +116,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
     pendingLessonTimerProgress: 0,
     pendingActivityTimerProgress:0,
     enableLogs: false,
+    loadingResourceLabel: null,
 
 
 //---------------------------------------- Life cycle -------------------------------------
@@ -125,28 +126,38 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         lesson_1.config = HDAppManager.config;
         lesson_1.ref = this;
         lesson_1.resourcePath = "res/LessonResources/"+lesson_1.config.properties.name+"_";
-        this.studentPanelScrollViewDefaultPos = cc.p(this.width * 0.16, this.height * 0);
+        this.studentPanelScrollViewDefaultPos = cc.p(this.width * 0.16, 0);
         return true;
     },
 
     onEnter : function () {
         this._super();
-        this.enableLogs = HDAppManager.appRunMode == AppMode.Development? true: false;
+
+        this.enableLogs = HDAppManager.appRunMode === AppMode.Development;
         this.isTeacherView = HDAppManager.isTeacherView;
         this.isPendingRoomJoinReq = false;
         lesson_1.ref.isRewardAnimationCompleted = true;
         this.addSocketConnectionStatusLabel();
-        this.createRoomLayer();
-
+        // this.setBackground("res/LessonResources/backyardtop.png");
+      this.createRoomLayer();
+        if (HDAppManager.isEventAddedForBackground() == null || !HDAppManager.isEventAddedForBackground()) {
+            HDAppManager.setEventAddedForBackground(true);
+            this.addBackgroundAndForegroundAppListeners();
+        }
     },
 
     onEnterTransitionDidFinish: function(){
         this._super();
-        HDAppManager.startResLoading();
+        if(HDAppManager.config.activityGame.length > 1) {
+            HDAppManager.startResLoading();
+        }
     },
 
     onExit : function () {
         this._super();
+        HDAppManager.setEventAddedForBackground(false);
+        cc.eventManager.removeListener(this.gameShowListener);
+        cc.eventManager.removeListener(this.gameHideListener);
     },
 
     //-------------------------------------------------------------------------------------------------
@@ -164,6 +175,32 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         }
         this.logLabel = this.createTTFLabel("",HDConstants.Lato_Regular,24,cc.color(0,0,0,255),cc.p(200,250),this);
         this.logLabel.setLocalZOrder(this.lessonZOrder);
+        this.createLabelLoadingRes();
+        this.loadingResLabelSetActive(false);
+    },
+    createLabelLoadingRes: function (){
+      this.loadingResourceLabel = this.createTTFLabel(HDString.loadingResources, HDConstants.Sassoon_Medium,
+          30, cc.color(0, 255, 0, 255), cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.7), this);
+      this.loadingResourceLabel.setLocalZOrder(this.lessonZOrder);
+      let bg = this.createButton("res/LessonResources/emptyImage.png", "res/LessonResources/emptyImage.png", "", 0, 8888,
+          cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5 ),
+          this, null, null);
+      bg.setLocalZOrder(this.lessonZOrder + 100);
+      bg.setScale( this.getContentSize().width/bg.getContentSize().width,
+          this.getContentSize().height/bg.getContentSize().height);
+      bg.addTouchEventListener(()=>{}, this);
+      this.loadingResourceLabel.bg = bg;
+      this.loadingResourceLabel.enableStroke(cc.color(0, 0, 255, 255), 2);
+    },
+
+    loadingResLabelSetActive : function (status){
+        this.loadingResourceLabel.setVisible(status);
+        if(status){
+            this.loadingResourceLabel.runAction( cc.sequence( cc.fadeOut(0.5),cc.fadeIn(0.5)).repeatForever());
+        }else{
+            this.loadingResourceLabel.stopAllActions();
+        }
+        this.loadingResourceLabel.bg.setVisible(status);
     },
 
     showLogMessageForTablet : function(message) {
@@ -212,7 +249,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
                 lesson_1.ref.mousePosDiff = null;
                 lesson_1.ref.passTouchToChildActivity(touch, event);
             },
-            onTouchCancelled: function (touch, event){
+            onTouchCancelled: function (touch){
                 lesson_1.ref.passTouchToChildActivity(touch.event);
             }
         }), this);
@@ -279,7 +316,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         star.setTag(lesson_1.Tag.rewardStar);
         var rewardLabel = this.createTTFLabel("", HDConstants.LondrinaSolid_Regular, 15, cc.color(101, 64, 39, 255), cc.p(rewardBg.width * 0.5, rewardBg.height * 0.45), rewardBg );
         rewardLabel.setTag(lesson_1.Tag.rewardLabel);
-        var isTouch = HDAppManager.isTeacherView ? true : false;
+        var isTouch = HDAppManager.isTeacherView ;
         rewardBg.setEnabled(isTouch );
         lesson_1.ref.rewardAnimation = this.addSprite("res/LessonResources/emptyImage.png", cc.p(lesson_1.ref.getContentSize().width * 0.5, lesson_1.ref.getContentSize().height * 0.5), this);
         lesson_1.ref.rewardAnimation.setLocalZOrder(this.lessonZOrder);
@@ -303,11 +340,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         stencil.setAnchorPoint(0,1);
         stencil.setPosition(0,position.y);
         clipper.setStencil(stencil);
-
         this.addChild(clipper);
-
-        ;
-
         this.rewardDropDown =  this.createColourLayer(HDConstants.Black, tempWidth, this.getContentSize().height, cc.p(0,0), clipper, this.lessonZOrder - 1 );
         this.rewardDropDown.setOpacity(0);
         var maxVisibleRewards = 8;
@@ -338,7 +371,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         //console.log("initialPos", initialPos);
         for(let student in  lesson_1.ref.studentRewardList){
             var cell = this.createStudentRewardCell(parseInt(student),  this.rewardDropDown.width,cellHeight);
-            cell.setPosition(container.width * 0.0, initialPos  - Math.floor(student * ( cellHeight + vPadding)) );
+            cell.setPosition(0, initialPos  - Math.floor(student * ( cellHeight + vPadding)) );
           //  console.log("pos", cell.getPosition());
             container.addChild(cell);
         }
@@ -362,7 +395,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         this.handIconUI.push(button);
         var scoreTitle = this.createTTFLabel(lesson_1.ref.studentRewardList[index].rewards ==0 ? "0" : lesson_1.ref.studentRewardList[index].rewards.toString(), HDConstants.LondrinaSolid_Regular, 10,cc.color(101, 64, 39, 255), cc.p(button.getContentSize().width * 0.5, button.getContentSize().height * 0.45), button);
         scoreTitle.setTag(lesson_1.Tag.rewardLabel);
-        var nameTitle = this.createTTFLabel(lesson_1.ref.studentRewardList[index].name, HDConstants.LondrinaSolid_Regular, 10,cc.color(101, 64, 39, 255), cc.p(cell.getContentSize().width * 0.5, cell.getContentSize().height * 0.15), cell);
+        this.createTTFLabel(lesson_1.ref.studentRewardList[index].name, HDConstants.LondrinaSolid_Regular, 10,cc.color(101, 64, 39, 255), cc.p(cell.getContentSize().width * 0.5, cell.getContentSize().height * 0.15), cell);
         return cell;
 
     },
@@ -371,7 +404,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         if(type == ccui.Widget.TOUCH_ENDED){
 
             console.log(lesson_1.ref.isRewardAnimationCompleted ,lesson_1.ref.rewardDropDown.getNumberOfRunningActions() )
-            if( lesson_1.ref.isRewardAnimationCompleted && lesson_1.ref.rewardDropDown.getNumberOfRunningActions() == 0){
+            if( lesson_1.ref.isRewardAnimationCompleted && lesson_1.ref.rewardDropDown.getNumberOfRunningActions() === 0){
                 var name = this.studentList[pSender.getTag()];
                 pSender.setTouchEnabled(false);
                 this.sendRewardInfoToServer({"studentUserName": name, "roomId": HDAppManager.roomId}, pSender, pSender.getTag());
@@ -562,6 +595,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         scrollView.setLocalZOrder(this.lessonZOrder);
         scrollView.setBounceable(false);
         scrollView.setTouchEnabled(false);
+        this.handIconUI.push(scrollView);
         this.addChild(scrollView);
         if(activityCount > maxItemsCountWithoutScroll) {
             var leftNavigation = this.createButton(lesson_1.resourcePath + "leftArrow.png", lesson_1.resourcePath + "leftArrow.png",
@@ -669,25 +703,21 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
     createActivityDialog : function(){
         if(!this.isTeacherView)
             return;
-        // let layer = this.createColourLayer(cc.color(255, 255, 255, 255),
-        //     this.getContentSize().width * 0.2, 100, cc.p(200, 200), this, this.lessonZOrder);
-        //
         let layer  = this.addSprite("res/LessonResources/lesson_1_activity_box_top.png", cc.p(0, 0), this );
         layer.setTag(lesson_1.Tag.activityBox);
         layer.setAnchorPoint(cc.p(0,0));
         layer.setLocalZOrder(this.lessonZOrder);
         layer.setScale(0.59);
+        this.handIconUI.push(layer);
         let activityName = this.createTTFLabel("Magic Hat", HDConstants.LondrinaSolid_Regular, 32,cc.color(101, 64, 39, 255),
             cc.p(layer.getContentSize().width * 0.5, layer.getContentSize().height * 0.6), layer);
         activityName.setTag(lesson_1.Tag.activityName);
-        // activityName.setAnchorPoint(0.5,1);
         activityName.setDimensions(cc.size(layer.getContentSize().width * 0.9, 0));
         let activityTime = this.createTTFLabel("Time: 1 Min", HDConstants.Sassoon_Regular, 24, HDConstants.Black,
             cc.p(layer.getContentSize().width * 0.5, layer.getContentSize().height * 0.40), layer);
         activityTime.setTag(lesson_1.Tag.activityTime);
         let playButton = this.createButton(lesson_1.resourcePath +"play.png", lesson_1.resourcePath+"play.png",
             "", 0, lesson_1.Tag.playButton, cc.p(layer.getContentSize().width * 0.5, layer.getContentSize().height * 0.25), layer, this)
-
         this.handIconUI.push(playButton);
         layer.setVisible(false);
 
@@ -835,9 +865,6 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         let x_pos = this.studentPanelScrollViewDefaultPos.x;
         let next_x_coord = h_padding + cellSize * 0.5;
         let innerContainerWidth = count * (cellSize + h_padding) + h_padding;
-        // if(innerContainerWidth < scrollView.getViewSize().width){
-        //     innerContainerWidth = scrollView.getViewSize().width;
-        // }
         if(count < maxCapacity){
             x_pos = (maxScrollViewWidth - innerContainerWidth) / 2 + this.studentPanelScrollViewDefaultPos.x - cellSize * 0.5;
         }
@@ -859,14 +886,12 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
            scrollView.addChild(student);
            next_x_coord = student.x + cellSize + h_padding;
         }));
-        // remove teacher from list
-        lesson_1.ref.studentList.shift();
+         lesson_1.ref.studentList.shift();
     },
 
     setStudentsPreviewPanelActive: function (status) {
        let studentPanelScrollView = this.getChildByTag(lesson_1.Tag.studentPreviewScrollView);
        studentPanelScrollView.setVisible(status);
-       //studentPanelScrollView.setPosition(this.studentPanelScrollViewDefaultPos);
     },
 
     /**
@@ -1025,6 +1050,8 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
      * @param index
      */
     launchActivity : function(index){
+        console.log(" launch activity idx ", index);
+        CMProcessIndicator.removeLoadingIndicator(lesson_1.ref);
         cc.$("#gameCanvas").style.cursor = "default";
         this.activityIdx = (index || this.activityIdx);
         if(this.getChildByTag(lesson_1.Tag.activeActivityTag))
@@ -1125,6 +1152,33 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         this.connectSocket();
         this.subscribeToEvents();
     },
+
+    addBackgroundAndForegroundAppListeners: function () {
+        this.gameShowListener = cc.EventListener.create({
+            event: cc.EventListener.CUSTOM,
+            eventName: cc.game.EVENT_SHOW,
+            callback: this.onApplicationForeground
+        });
+        this.gameHideListener = cc.EventListener.create({
+            event: cc.EventListener.CUSTOM,
+            eventName: cc.game.EVENT_HIDE,
+            callback: this.onApplicationBackground
+        });
+        cc.eventManager.addListener(this.gameShowListener, this);
+        cc.eventManager.addListener(this.gameHideListener, this);
+    },
+
+    onApplicationForeground: function (event) {
+        console.log(" Foreground called");
+        if(SocketManager.socket){
+            lesson_1.ref.setupSocket();
+        }
+        // if (HDAppManager.socket)
+        //    HDAppManager.socket.emit(SocketEventKey.GetServerTimeKey);
+    },
+    onApplicationBackground : function (event){
+        console.log(" on backgroud");
+    },
     /**
      * Subscribe socket event
      */
@@ -1141,9 +1195,6 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
      * @param res
      */
     socketListener : function(res){
-        if(lesson_1.ref && lesson_1.ref.currentActivity && lesson_1.ref.currentActivity.socketListener){
-            lesson_1.ref.currentActivity.socketListener(res);
-        }
         switch (res.eventType) {
             case HDSocketEventType.CREATE_ROOM:
                 lesson_1.ref.onRoomCreated(res.data);
@@ -1173,6 +1224,9 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
                  if(!HDAppManager.isTeacherView)
                 lesson_1.ref.onRewardReceive(res.data);
                 break;
+        }
+        if(lesson_1.ref && lesson_1.ref.currentActivity && lesson_1.ref.currentActivity.socketListener){
+            lesson_1.ref.currentActivity.socketListener(res);
         }
     },
     /**
@@ -1220,7 +1274,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
      * @param res: Room info
      */
     onRoomCreated: function(res) {
-        this.roomLayer.setVisible(false);
+        this.roomLayer.removeFromParent(true);
         lesson_1.ref.roomId = res.roomId;
         HDAppManager.roomId = lesson_1.ref.roomId;
         //Temp remove it-----------------------------
@@ -1458,7 +1512,28 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
             HDAppManager.setActivityStartTime(new Date().getTime());
             this.startActivityTimer(lesson_1.config.activityGame[this.activityIdx].allocatedTime * 60);  // when we switch to new activity
         }
-        this.launchActivity(this.activityIdx);
+        //
+        //check If Resource Loaded
+        //
+        if(!HDAppManager.loadedResIndex.includes(this.activityIdx)){
+            console.log(" not loaded loading");
+            lesson_1.ref.loadingResLabelSetActive(true);
+            HDAppManager.nextActivityIdx = lesson_1.ref.activityIdx;
+            CMProcessIndicator.addLoadingIndicator(lesson_1.ref);
+            cc.eventManager.addCustomListener("loadedActivity", (data)=>{
+                console.log(" loaded activity ", data.getUserData());
+                if(data.getUserData() == lesson_1.ref.activityIdx) {
+                    lesson_1.ref.launchActivity(lesson_1.ref.activityIdx);
+                    lesson_1.ref.loadingResLabelSetActive(false);
+                    cc.eventManager.removeCustomListeners("loadedActivity");
+                }
+            });
+
+        }else{
+            this.launchActivity(this.activityIdx);
+        }
+
+
     },
     /**
      *
@@ -1602,7 +1677,12 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         if (activityCursorFound) {
             cc.$("#gameCanvas").style.cursor = "pointer";
             if(lesson_1.ref.texture){
-                cc.$("#gameCanvas").style.cursor  =  "url" + "(\'" + 'AsyncActivity/'+ lesson_1.ref.texture + "\')"+ "," +  "auto";
+                if(lesson_1.ref.texture == 'none'){
+                    cc.$("#gameCanvas").style.cursor = 'none';
+                }else {
+                    // lesson_1.ref.texture = "AsyncActivity/"+lesson_1.ref.texture;
+                    cc.$("#gameCanvas").style.cursor = "url" + "(\'"  +'AsyncActivity/' + lesson_1.ref.texture + "\')" + "," + "auto";
+                }
             }
         }
         if(cursorFound){
@@ -1665,6 +1745,10 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
             return found;
         }
         return false;
+    },
+
+    setActiveActivityInfo : function (status){
+        lesson_1.ref.getChildByTag(lesson_1.Tag.activityBox).setVisible(status);
     },
 
     /**
@@ -2394,15 +2478,21 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
                         if(currentActivity && currentActivity.config && currentActivity.config.properties && currentActivity.config.properties.namespace == roomData.activity) {
                             currentActivity.syncData(roomData.data);
                         } else {
-                            this.roomLayer.setVisible(false);
+                            this.roomLayer.removeFromParent(true);
                             this.updateActivityTimerAfterReload(data)
                           let status = HDAppManager.loadedResIndex.indexOf(index) == -1;
                           if(status) {
-                              HDAppManager.loadImageAsync(index, (activityIndex) => {
-                                  if (activityIndex == index) {
+                              HDAppManager.nextActivityIdx = index;
+                              lesson_1.ref.activityIdx = index;
+                              lesson_1.ref.loadingResLabelSetActive(true);
+                              CMProcessIndicator.addLoadingIndicator(lesson_1.ref);
+                              cc.eventManager.addCustomListener("loadedActivity", (data)=>{
+                                  if(data.getUserData() == lesson_1.ref.activityIdx) {
                                       lesson_1.ref.launchActivity(index);
                                       let newActivity = lesson_1.ref.getChildByTag(lesson_1.Tag.activeActivityTag);
                                       newActivity.syncData(roomData.data);
+                                      lesson_1.ref.loadingResLabelSetActive(false);
+                                      cc.eventManager.removeCustomListeners("loadedActivity");
                                   }
                               });
                           }else{
@@ -2415,8 +2505,6 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
                         break;
                     }
                 }
-
-
             }
         }
     },
@@ -2521,6 +2609,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
                 break;
         }
     },
+
     //Tableview setup
     setRoomsContent: function () {
         let width = 200;
@@ -2559,16 +2648,13 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
     tableCellTouched: function (table, cell) {
         var selectedRoom = this.listAvailableRooms[cell.tag];
         //Join This room.
-        this.roomLayer.setVisible(false);
+        this.roomLayer.removeFromParent(true);
     },
 
     calculateElapsedTime : function (startAt) {
         var currentTime = new Date().getTime();
         var  seconds = Math.floor((currentTime - startAt)/1000) % 60;
         var  minutes = Math.floor((currentTime - startAt)/1000) / 60;
-
-        console.log("seconds and minutes", seconds, minutes, currentTime);
-
         return parseInt(minutes.toString()) * 60 + seconds;
     }
 
@@ -2622,7 +2708,6 @@ var HDTimer =  cc.Class.extend({
     isRunning : false,
 
     ctor : function () {
-
     },
 
     startTimer : function (time, delegate, timerType) {
@@ -2665,7 +2750,6 @@ var HDTimer =  cc.Class.extend({
             clearInterval(this.interval);
         }
         this.isRunning = false;
-
         this.progress = 0;
     },
 
@@ -2676,10 +2760,7 @@ var HDTimer =  cc.Class.extend({
     updateProgress : function (time) {
         this.progress = time;
     }
-
 });
-
-
  lesson_1.HDLessonScene = cc.Scene.extend({
     ctor: function(){
         this._super();
@@ -2687,7 +2768,7 @@ var HDTimer =  cc.Class.extend({
     onEnter:function () {
         this._super();
         var layer = new lesson_1.HDLessonLayer();
-        this.addChild(layer);
+        this.addChild(layer, 10)   ;
     }
 });
 

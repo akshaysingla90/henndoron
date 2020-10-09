@@ -5,15 +5,6 @@ var HDBaseLayer = cc.Layer.extend({
         this._super();
         this._size = size;
         this.setContentSize(size);
-        //==== Preventive Touch button
-        // if (preventTouch) {
-        //     var button = new ccui.Button();
-        //     button.loadTextures(res.DemoBG, res.DemoBG);
-        //     button.setPosition(cc.p(this._size.width * 0.5, this._size.height * 0.5));
-        //     button.setScale(this._size.width / button.getContentSize().width, this._size.height / button.getContentSize().height);
-        //     button.setOpacity(0);
-        //     this.addChild(button, -1);
-        // }
     },
     onEnter: function () {
         this._super();
@@ -22,25 +13,38 @@ var HDBaseLayer = cc.Layer.extend({
         //     this.addBackgroundAndForegroundAppListeners();
         // }
     },
-
-    addBackgroundAndForegroundAppListeners: function () {
-        // this.gameShowListener = cc.EventListener.create({
-        //     event: cc.EventListener.CUSTOM,
-        //     eventName: cc.game.EVENT_SHOW,
-        //     callback: this.onApplicationForeground
-        // });
-        // cc.eventManager.addListener(this.gameShowListener, this);
-    },
-
-    onApplicationForeground: function (event) {
-        // if (HDAppManager.socket)
-        //     HDAppManager.socket.emit(SocketEventKey.GetServerTimeKey);
-    },
-
-    removeBackgroundAndForegroundAppListeners: function () {
-        // HDAppManager.setEventAddedForBackground(false);
-        // cc.eventManager.removeListener(this.gameShowListener);
-    },
+    //
+    // addBackgroundAndForegroundAppListeners: function () {
+    //     this.gameShowListener = cc.EventListener.create({
+    //         event: cc.EventListener.CUSTOM,
+    //         eventName: cc.game.EVENT_SHOW,
+    //         callback: this.onApplicationForeground
+    //     });
+    //     this.gameHideListener = cc.EventListener.create({
+    //         event: cc.EventListener.CUSTOM,
+    //         eventName: cc.game.EVENT_HIDE,
+    //         callback: this.onApplicationBackground
+    //     });
+    //     cc.eventManager.addListener(this.gameShowListener, this);
+    //     cc.eventManager.addListener(this.gameHideListener, this);
+    // },
+    //
+    // onApplicationForeground: function (event) {
+    //     console.log(" Foreground called");
+    //     if(SocketManager.socket){
+    //
+    //     }
+    //     // if (HDAppManager.socket)
+    //     //    HDAppManager.socket.emit(SocketEventKey.GetServerTimeKey);
+    // },
+    // onApplicationBackground : function (event){
+    //   console.log(" on backgroud");
+    // },
+    //
+    // removeBackgroundAndForegroundAppListeners: function () {
+    //     // HDAppManager.setEventAddedForBackground(false);
+    //     // cc.eventManager.removeListener(this.gameShowListener);
+    // },
 
     onExit: function () {
         this._super();

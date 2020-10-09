@@ -7,11 +7,12 @@
     "id"            :   "gameCanvas",
     "renderMode"    :   1,
     "engineDir"     :   "frameworks/cocos2d-html5",
-    "modules"       :   ["cocos2d", "ccui", "extensions"],
+    "modules"       :   ["cocos2d", "extensions"],
     "jsList"        :   [
         "src/services/peerjs.min.js",
         "src/services/axios.min.js",
         "src/resource.js",
+        "src/asyncResources.js",
         "src/Base/HDBaseLayer.js",
         "src/Base/HDBaseScene.js",
         "src/Base/app.js",
@@ -25,6 +26,7 @@
         "src/Utility/HDSoundManager.js",
         "src/Utility/HDUtility.js",
         "src/Utility/HDNetworkHandler.js",
-        "src/Utility/HDSocketManager.js"
+        "src/Utility/HDSocketManager.js",
+        "src/Utility/HDString.js"
     ]
 }

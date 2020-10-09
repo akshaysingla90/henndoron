@@ -5,304 +5,383 @@
     "name": "lesson_1",
     "timer": 11
   },
-
-  "graphicalAssets" : {
-    "logo" : {
+  "graphicalAssets": {
+    "logo": {
       "configurable": true,
       "name": "logo.png",
       "imageName": "lesson_1_logo.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "starBgTeacher" : {
+    "starBgTeacher": {
       "configurable": true,
       "name": "btn_star_reward.png",
       "imageName": "lesson_1_btn_star_reward.png",
       "size": "{85, 85}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "rewardStar" : {
+    "rewardStar": {
       "configurable": true,
       "name": "icon_star_reward.png",
       "imageName": "lesson_1_icon_star_reward.png",
       "size": "{40, 38}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-    "studentRewards" : [
-
+    "studentRewards": [
       {
         "configurable": true,
         "name": "icon_student_star_blue.png",
         "imageName": "lesson_1_icon_student_star_blue.png",
         "size": "{85, 85}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
-
       {
         "configurable": true,
         "name": "icon_student_star_green.png",
         "imageName": "lesson_1_icon_student_star_green.png",
         "size": "{85, 85}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
         "configurable": true,
         "name": "icon_student_star_orange.png",
         "imageName": " lesson_1_icon_student_star_orange",
         "size": "{85, 85}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
         "configurable": true,
         "name": "icon_student_star_pink.png",
         "imageName": "lesson_1_icon_student_star_pink.png",
         "size": "{85, 85}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
         "configurable": true,
         "name": "icon_student_star_purple.png",
         "imageName": "lesson_1_icon_student_star_purple.png",
         "size": "{85, 85}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
         "configurable": true,
         "name": "icon_student_star_red.png",
         "imageName": "lesson_1_icon_student_star_red.png",
         "size": "{85, 85}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
         "configurable": true,
         "name": "icon_student_star_teal.png",
         "imageName": "lesson_1_icon_student_star_teal.png",
         "size": "{85, 85}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
-
       {
         "configurable": true,
         "name": "icon_student_star_yellow.png",
         "imageName": "lesson_1_icon_student_star_yellow.png",
         "size": "{85, 85}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       }
-
     ],
-
-    "bottomRewardDropDown" : {
+    "bottomRewardDropDown": {
       "configurable": true,
       "name": "slice_bottom_dropdown.png",
       "imageName": "lesson_1_slice_bottom_dropdown.png",
       "size": "{65, 39}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "rewardDropDown" : {
+    "rewardDropDown": {
       "configurable": true,
       "name": "slice_dropdown.png",
       "imageName": "lesson_1_slice_dropdown.png",
       "size": "{65, 2}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "questionNormal" : {
+    "questionNormal": {
       "configurable": true,
       "name": "questionNormal.png",
       "imageName": "lesson_1_questionNormal.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "questionHighlighted" : {
+    "questionHighlighted": {
       "configurable": true,
       "name": "questionHighlighted.png",
       "imageName": "lesson_1_questionHighlighted.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "questionSelected" : {
+    "questionSelected": {
       "configurable": true,
       "name": "questionSelected.png",
       "imageName": "lesson_1_questionSelected.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "arrowNormal" : {
+    "arrowNormal": {
       "configurable": true,
       "name": "arrowNormal.png",
       "imageName": "lesson_1_arrowNormal.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "arrowHighlighted" : {
+    "arrowHighlighted": {
       "configurable": true,
       "name": "arrowHighlighted.png",
       "imageName": "lesson_1_arrowHighlighted.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "arrowSelected" : {
+    "arrowSelected": {
       "configurable": true,
       "name": "arrowSelected.png",
       "imageName": "lesson_1_arrowSelected.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "reloadMessageNormal" : {
+    "reloadMessageNormal": {
       "configurable": true,
       "name": "reloadMessageNormal.png",
       "imageName": "lesson_1_reloadMessageNormal.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "reloadMessageHighlighted" : {
+    "reloadMessageHighlighted": {
       "configurable": true,
       "name": "reloadMessageHighlighted.png",
       "imageName": "lesson_1_reloadMessageHighlighted.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "reloadMessageSelected" : {
+    "reloadMessageSelected": {
       "configurable": true,
       "name": "reloadMessageSelected.png",
       "imageName": "lesson_1_reloadMessageSelected.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "messageButtonNormal" : {
+    "messageButtonNormal": {
       "configurable": true,
       "name": "messageButtonNormal.png",
       "imageName": "lesson_1_messageButtonNormal.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "messageButtonHighlighted" : {
+    "messageButtonHighlighted": {
       "configurable": true,
       "name": "messageButtonHighlighted.png",
       "imageName": "lesson_1_messageButtonHighlighted.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "messageButtonSelected" : {
+    "messageButtonSelected": {
       "configurable": true,
       "name": "messageButtonSelected.png",
       "imageName": "lesson_1_messageButtonSelected.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "navigationArrowNormal" : {
+    "navigationArrowNormal": {
       "configurable": true,
       "name": "navigationArrowNormal.png",
       "imageName": "lesson_1_navigationArrowNormal.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "navigationArrowDisable" : {
+    "navigationArrowDisable": {
       "configurable": true,
       "name": "navigationArrowDisable.png",
       "imageName": "lesson_1_navigationArrowDisable.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "activityDotNormal" : {
+    "activityDotNormal": {
       "configurable": true,
       "name": "activityDotNormal.png",
       "imageName": "lesson_1_activityDotNormal.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "activityDotProgress" : {
+    "activityDotProgress": {
       "configurable": true,
       "name": "activityDotProgress.png",
       "imageName": "lesson_1_activityDotProgress.png",
       "size": "{300, 300}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
-    "activityDotComplete" : {
+    "activityDotComplete": {
       "configurable": true,
       "name": "activityDotComplete.png",
       "imageName": "lesson_1_activityDotComplete.png",
       "size": "{30, 30}",
-      "constraints" : ["name", "size"]
+      "constraints": [
+        "name",
+        "size"
+      ]
     },
-
     "lessonTimer": [
       {
         "configurable": true,
         "name": "time_pie_chart.png",
         "imageName": "lesson_1_time_pie_chart.png",
         "size": "{82, 82}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
         "configurable": true,
         "name": "time_pie_chart_25.png",
         "imageName": "lesson_1_time_pie_chart_25.png",
         "size": "{82, 82}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
         "configurable": true,
         "name": "time_pie_chart_50.png",
         "imageName": "lesson_1_time_pie_chart_50.png",
         "size": "{82, 82}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
         "configurable": true,
         "name": "time_pie_chart_75.png",
         "imageName": "lesson_1_time_pie_chart_75.png",
         "size": "{82, 82}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
         "configurable": true,
         "name": "time_pie_chart_90.png",
         "imageName": "lesson_1_time_pie_chart_90.png",
         "size": "{82, 82}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       },
       {
-
         "configurable": true,
         "name": "time_pie_chart_90.png",
         "imageName": "lesson_1_time_pie_chart_90.png",
         "size": "{82, 82}",
-        "constraints" : ["name", "size"]
+        "constraints": [
+          "name",
+          "size"
+        ]
       }
-
     ]
-
   },
-
-
-  "animations" : {
+  "animations": {
     "rewardStarAppear": {
       "configurable": true,
       "name": "reward_star_appear_",
       "frameCount": 5,
       "size": "{960,640}",
-      "position" : {"x": 450,"y": 320},
-      "scale" : 1,
+      "position": {
+        "x": 450,
+        "y": 320
+      },
+      "scale": 1,
       "constraints": [
         "imageName, size"
       ]
@@ -312,12 +391,15 @@
       "name": "reward_star_track_",
       "frameCount": 5,
       "size": "{960,640}",
-      "position" : {"x": 450,"y": 320},
-      "scale" : 1,
+      "position": {
+        "x": 450,
+        "y": 320
+      },
+      "scale": 1,
       "constraints": [
         "imageName, size"
       ]
     }
   },
-  "activityGame" : []
+  "activityGame": []
 }

@@ -170,7 +170,6 @@ var HDUtility =  {
         animation._loops = loop;
         for(let i = 1; i <= maxFrames; ++i) {
             counter = (i < 10 ? "000" + i : "00"+i);
-          //  console.log(imageName + counter + extension);
             animation.addSpriteFrameWithFile(imageName + counter + extension);
         }
         animation.setRestoreOriginalFrame(true);

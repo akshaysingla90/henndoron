@@ -134,7 +134,7 @@ for(var ff in fontFile){
 //     magicHatSpriteBasePath + "sing.png",
 //     magicHatSpriteBasePath + "tub.png",
 //     magicHatSpriteBasePath + "tree.png",
-
+//
 //     magicHatSoundPath + "cardTakeOut.mp3",
 // ]
 // for(let i = 1; i <= 15; ++i) {
@@ -472,6 +472,106 @@ for(var ff in fontFile){
 //     resources.push(cwcRes[rs]);
 // }
 
+//--------------------- Sudoku
+// let SudokuSpriteBasePath = "res/Activity/ACTIVITY_SUDOKU_1/res/Sprite/";
+// let SudokuRes = [
+//     SudokuSpriteBasePath + "cursor_eraser.png",
+// ]
+// for (var i of SudokuRes) {
+//     resources.push(i);
+// }
+
+
+
+//--------------------- SOT
+let SOTSpriteBasePath = "res/Activity/ACTIVITY_SANDS_OF_TIME_1/res/Sprite/";
+let SOTAnimationBasePath = "res/Activity/ACTIVITY_SANDS_OF_TIME_1/res/AnimationFrames/"
+let SOTRes = [
+    SOTSpriteBasePath + "game_bg.png",
+    SOTSpriteBasePath + "Item_cat.png",
+    SOTSpriteBasePath + "Item_dog.png",
+    SOTSpriteBasePath + "Item_donkey.png",
+    SOTSpriteBasePath + "Item_duck.png",
+    SOTSpriteBasePath + "Item_hare.png",
+    SOTSpriteBasePath + "Item_horse.png",
+    SOTSpriteBasePath + "Item_rabbit.png",
+    SOTSpriteBasePath + "Item_rooster.png",
+    SOTSpriteBasePath + "Item_sheep.png",
+    SOTSpriteBasePath + "Item_tortoise.png",
+    SOTSpriteBasePath +  "leaf_0001.png",
+    SOTSpriteBasePath + "leaf_0002.png",
+    SOTSpriteBasePath + "leaf_0003.png",
+    SOTSpriteBasePath + "leaf_0004.png",
+    SOTSpriteBasePath + "score_window.png",
+    SOTSpriteBasePath + "student1_bag_back.png",
+    SOTSpriteBasePath + "student1_bag_front.png",
+    SOTSpriteBasePath + "student2_bag_back.png",
+    SOTSpriteBasePath + "student2_bag_front.png",
+    SOTSpriteBasePath + "student3_bag_back.png",
+    SOTSpriteBasePath + "student3_bag_front.png",
+    SOTSpriteBasePath + "student4_bag_back.png",
+    SOTSpriteBasePath + "student4_bag_front.png",
+    SOTSpriteBasePath + "student5_bag_back.png",
+    SOTSpriteBasePath + "student5_bag_front.png",
+    SOTSpriteBasePath + "student6_bag_back.png",
+    SOTSpriteBasePath + "student6_bag_front.png",
+    SOTSpriteBasePath + "student7_bag_back.png",
+    SOTSpriteBasePath +  "student7_bag_front.png",
+    SOTSpriteBasePath + "student8_bag_back.png",
+    SOTSpriteBasePath + "student8_bag_front.png"
+    // SOTSpriteBasePath + "bg.png",
+    // SOTSpriteBasePath + "cursor_watercan_idle.png",
+    // SOTSpriteBasePath + "ant.png",
+    // SOTSpriteBasePath + "bat.png",
+    // SOTSpriteBasePath + "bee.png",
+    // SOTSpriteBasePath + "crow.png",
+    // SOTSpriteBasePath + "bat.png",
+]
+
+for(let i = 1; i <= 6; ++i) {
+    // SOTRes.push(SOTSpriteBasePath + "pot0" + i + "_back.png");
+    // SOTRes.push(SOTSpriteBasePath + "pot0" + i + "_front.png");
+}
+for(let i = 1; i <= 9; ++i) {
+    SOTRes.push(SOTAnimationBasePath + "student1_rake/student1_rake_" + ('0000' + i).slice(-4) + ".png");
+    // SOTRes.push(SOTAnimationBasePath + "watering_effect_animation/watering_" + ('0000' + i).slice(-4) + ".png");
+}
+for (var i of SOTRes) {
+    resources.push(i);
+}
+
+
+
+
+//--------------------- Chug
+// let GftgSpriteBasePath = "res/Activity/ACTIVITY_GFTG_1/res/Sprite/";
+// let GftgAnimationBasePath = "res/Activity/ACTIVITY_GFTG_1/res/AnimationFrames/"
+// let ChugRes = [
+//     GftgSpriteBasePath + "bg.png",
+//     GftgSpriteBasePath + "cursor_watercan_idle.png",
+//     GftgSpriteBasePath + "ant.png",
+//     GftgSpriteBasePath + "bat.png",
+//     GftgSpriteBasePath + "bee.png",
+//     GftgSpriteBasePath + "crow.png",
+//     GftgSpriteBasePath + "bat.png",
+// ]
+//
+// for(let i = 1; i <= 6; ++i) {
+//     ChugRes.push(GftgSpriteBasePath + "pot0" + i + "_back.png");
+//     ChugRes.push(GftgSpriteBasePath + "pot0" + i + "_front.png");
+// }
+// for(let i = 1; i <= 3; ++i) {
+//     ChugRes.push(GftgAnimationBasePath + "cursor_watercan_animation/cursor_watercan_" + ('0000' + i).slice(-4) + ".png");
+//     ChugRes.push(GftgAnimationBasePath + "watering_effect_animation/watering_" + ('0000' + i).slice(-4) + ".png");
+// }
+// for (var i of ChugRes) {
+//     resources.push(i);
+// }
+//
+
+
+
+
 //--------------------- BAP
 // let BAPSpriteBasePath = "res/Activity/ACTIVITY_BAP_1/res/Sprite/";
 // let BAPRes = [
@@ -598,4 +698,69 @@ for(var ff in fontFile){
 //     resources.push(BuildSomethingRes[i]);
 // }
 
+
+// let BuildSomethingSpriteBasePath = "res/Activity/ACTIVITY_CHUG_1/res/Sprite/";
+// let BuildSomethingRes = [
+//     BuildSomethingSpriteBasePath + "bg.png",
+//     BuildSomethingSpriteBasePath + "botle_mask.png",
+//     BuildSomethingSpriteBasePath + "chug_btn_idle.png",
+//     BuildSomethingSpriteBasePath + "chug_btn_pressed.png",
+//     BuildSomethingSpriteBasePath + "Item_bg.png",
+//     BuildSomethingSpriteBasePath + "coffee_mug_mask.png",
+//     BuildSomethingSpriteBasePath + "Item_big_ball.png",
+//     BuildSomethingSpriteBasePath + "Item_big_boy.png",
+//     BuildSomethingSpriteBasePath + "Item_big_braclet.png",
+//     BuildSomethingSpriteBasePath + "Item_big_girl.png",
+//     BuildSomethingSpriteBasePath + "Item_little_ball.png",
+//     BuildSomethingSpriteBasePath + "Item_little_boy.png",
+//     BuildSomethingSpriteBasePath + "Item_little_braclet.png",
+//     BuildSomethingSpriteBasePath + "Item_little_girl.png",
+//     BuildSomethingSpriteBasePath + "jar_mask.png",
+//     BuildSomethingSpriteBasePath + "milkshake_glass_mask.png",
+//     BuildSomethingSpriteBasePath + "plastic_cup_mask.png",
+//     BuildSomethingSpriteBasePath + "preview.png",
+//     BuildSomethingSpriteBasePath + "regular_glass_mask.png",
+//     BuildSomethingSpriteBasePath + "tea_cup_mask.png",
+//     BuildSomethingSpriteBasePath + "umbrella_glass_mask.png",
+// ]
+//
+// for (var i in BuildSomethingRes) {
+//     resources.push(BuildSomethingRes[i]);
+// }
+//
+// let BuildSomethingAnimationBasePath = "res/Activity/ACTIVITY_CHUG_1/res/AnimationFrames/";
+// for(let i = 1; i <= 11; ++i) {
+//     counter = (i < 10 ? "000" + i : "00"+i);
+//     BuildSomethingRes.push(BuildSomethingAnimationBasePath + "bottle_animation/bottle_" + counter + ".png");
+// }
+// for(let i = 1; i <= 11; ++i) {
+//     counter = (i < 10 ? "000" + i : "00"+i);
+//     BuildSomethingRes.push(BuildSomethingAnimationBasePath + "coffee_mug_animation/coffee_mug_" + counter + ".png");
+// }
+// for(let i = 1; i <= 11; ++i) {
+//     counter = (i < 10 ? "000" + i : "00"+i);
+//     BuildSomethingRes.push(BuildSomethingAnimationBasePath + "jar_animation/jar_" + counter + ".png");
+// }
+// for(let i = 1; i <= 11; ++i) {
+//     counter = (i < 10 ? "000" + i : "00"+i);
+//     BuildSomethingRes.push(BuildSomethingAnimationBasePath + "milkshake_glass_animation/milkshake_glass_" + counter + ".png");
+// }
+// for(let i = 1; i <= 11; ++i) {
+//     counter = (i < 10 ? "000" + i : "00"+i);
+//     BuildSomethingRes.push(BuildSomethingAnimationBasePath + "plastic_cup_animation/plastic_cup_" + counter + ".png");
+// }
+// for(let i = 1; i <= 11; ++i) {
+//     counter = (i < 10 ? "000" + i : "00"+i);
+//     BuildSomethingRes.push(BuildSomethingAnimationBasePath + "regular_glass_animation/regular_glass_" + counter + ".png");
+// }
+// for(let i = 1; i <= 11; ++i) {
+//     counter = (i < 10 ? "000" + i : "00"+i);
+//     BuildSomethingRes.push(BuildSomethingAnimationBasePath + "tea_cup_animation/tea_cup_" + counter + ".png");
+// }
+// for(let i = 1; i <= 11; ++i) {
+//     counter = (i < 10 ? "000" + i : "00"+i);
+//     BuildSomethingRes.push(BuildSomethingAnimationBasePath + "umbrella_glass_animation/umbrella_glass_" + counter + ".png");
+// }
+//
+//
 
