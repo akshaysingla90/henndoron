@@ -74,4 +74,14 @@ activityService.copyTemplates = async (activities) => {
   await shell.exec(`sudo git push`);
   console.log('Template activities are updated and pushed to the remote')
 }
+
+/**
+ * function to minify a cocos project folder 
+ * @param {*} lessonPath 
+ */
+activityService.minifyPublishLesoon = async (lessonPath, lessonFolderName) => {
+  //todo  steps:  Run  minify command -> Rename published folder to lessonFolder -> Move it outside to cloned-lesson folder 
+  console.log('We need to minify the lesson');
+}
+
 module.exports = activityService;
