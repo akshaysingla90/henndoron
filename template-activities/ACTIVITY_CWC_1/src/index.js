@@ -545,7 +545,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
     let idleAnimSpeed = speed;
     let idleAnimFolder = folder;
     this.idelAnim = cc.callFunc(() => {
-      let randNum = Math.floor(Math.random() * 2 + 1);
+      let randNum = Math.floor(Math.random() * 3 + 1);
       console.log("Random Number ", randNum);
       sprite.runAction(
         new cc.Sequence(
@@ -612,7 +612,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
     sprite.runAction(actionSeq);
   },
   repeatAnimation: function (parent, animInfo) {
-    let randNum = Math.floor(Math.random() * 2 + 1);
+    let randNum = Math.floor(Math.random() * 3 + 1);
     animInfo.sprite.restPose = true;
     animInfo.sprite.runAction(
       new cc.Sequence(
