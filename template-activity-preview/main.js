@@ -76,10 +76,10 @@
  *
  */
 
-cc.game.onStart = function(){
+cc.game.onStart = function () {
     // cc.director.setDisplayStats(false);
     var sys = cc.sys;
-    if(!sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
+    if (!sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
         document.body.removeChild(document.getElementById("cocosLoading"));
     // Disable auto full screen on baidu and wechat, you might also want to eliminate sys.BROWSER_TYPE_MOBILE_QQ
     if (sys.isMobile &&
@@ -98,12 +98,12 @@ cc.game.onStart = function(){
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
     HDAppManager.appRunMode = AppMode.Development;
-    cc.loader.resPath =  cc.loader.resPath + "AsyncActivity/";
-    window.addEventListener("orientationchange", ()=>{
-             // window.location.reload();
+    cc.loader.resPath = cc.loader.resPath + "AsyncActivity/";
+    window.addEventListener("orientationchange", () => {
+        // window.location.reload();
     }, false);
     //
-    cc.loader.loadJson("res/lesson-config.json",function(error, data){
+    cc.loader.loadJson("res/lesson-config.json", function (error, data) {
         HDAppManager.config = data;
         let activityInfo = data.activityGame[0];
         let url = activityInfo.url;
@@ -117,22 +117,22 @@ cc.game.onStart = function(){
         let soundArr = [];
         let spritesArr = [];
         let animationFramesArr = [];
-        if(actRes) {
-            if(actRes.sprites) {
+        if (actRes) {
+            if (actRes.sprites) {
                 spritesPath = actRes.sprites.basePath;
                 images = actRes.sprites ? actRes.sprites.images : null;
                 for (let img of images) {
                     spritesArr.push(url + spritesPath + img);
                 }
             }
-            if(actRes.sounds) {
+            if (actRes.sounds) {
                 soundPath = actRes.sounds ? actRes.sounds.basePath : null;
                 sounds = actRes.sounds ? actRes.sounds.audio : null;
-                for(let sound of sounds){
-                    soundArr.push(url + soundPath + sound )
+                for (let sound of sounds) {
+                    soundArr.push(url + soundPath + sound)
                 }
             }
-            if(actRes.animationFrames) {
+            if (actRes.animationFrames) {
                 animationPath = actRes.animationFrames.basePath;
                 framesInfo = actRes.animationFrames.animation;
                 for (let obj of framesInfo) {
@@ -143,11 +143,11 @@ cc.game.onStart = function(){
                 }
             }
         }
-        var resArr = [ ...resources, ...spritesArr, ...animationFramesArr, ...soundArr];
+        var resArr = [...resources, ...spritesArr, ...animationFramesArr, ...soundArr];
         //load resources
         HDAppManager.isTeacherView = JSON.parse(cc.sys.localStorage.getItem("isTeacherView"));
         cc.LoaderScene.preload(resArr, function (data) {
-            cc.director.runScene(new   lesson_1.HDLessonScene ());
+            cc.director.runScene(new lesson_1.HDLessonScene());
         }, this);
     });
 };
