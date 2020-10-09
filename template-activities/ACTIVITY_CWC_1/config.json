@@ -20,8 +20,9 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data": [
+    "data": 
       {
+        "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when module starts.",
@@ -97,7 +98,7 @@
           ]
         }
       },
-      {
+        "onSoundPlayed": {
         "UIName": "On Sound Played",
         "enable": true,
         "description": "This will trigger when slide 2 opens.",
@@ -158,12 +159,12 @@
           ]
         }
       }
-    ]
+    }
   },
   "teacherTips": {
     "component": "tipsCard",
-    "data": [
-      {
+    "data": {
+        "moduleStart": {
         "UIName": "Module Start",
         "enable": true,
         "description": "This will trigger when activity starts.",
@@ -186,7 +187,7 @@
           ]
         }
       }
-    ]
+    }
   },
   "background": {
     "component": "backgroundCard",

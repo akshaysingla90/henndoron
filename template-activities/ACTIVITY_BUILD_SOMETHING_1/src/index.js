@@ -104,8 +104,8 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             if (ACTIVITY_BUILD_SOMETHING_1.ref.storedData) {
                 ACTIVITY_BUILD_SOMETHING_1.ref.syncData(ACTIVITY_BUILD_SOMETHING_1.ref.storedData)
             }
-            if (ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].enable) {
-                ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].content);
+            if (ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.enable) {
+                ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.content);
               }
             //ACTIVITY_BUILD_SOMETHING_1.ref.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].content);
 
@@ -415,6 +415,10 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             } else if (!result.isIsolatedNode && result.nodeContainsPoint) {
                 var attachResult = ACTIVITY_BUILD_SOMETHING_1.ref.attachPoint(location, result.index);
                 var connectionObject = ACTIVITY_BUILD_SOMETHING_1.ref.assembledList[result.index];
+                if(attachResult.connectionObject){
+                    connectionObject = attachResult.connectionObject;
+                }
+
                 var clickedItem = ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject[ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject];
                 if (connectionObject && clickedItem && connectionObject.userData && clickedItem && attachResult.snapIdxOfPlacedObj != -1 && attachResult.snapIdxOfDraggedObj != -1) {
                     // Placed Obj
@@ -562,37 +566,66 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         var snapIdxOfDraggedObj = -1;
         let attachedItemSnapPoint = cc.p(0, 0);
         if (connectionObject && connectionObjectData && clickedItemData) {
+            //connect with correct position if it is in allowed unit radius
+            if (clickedItemData.snappingPoints.filter(x => x.snapDetails).length == 1) {
+                let points = null;
+                for (let obj of clickedItemData.snappingPoints) {
+                    if(obj.snapDetails) {
+                        points = obj;
+                        break;
+                    }
+                }
+                    //point with correct point details
+                    if (points && points.snapDetails) {
+                       // console.log("1 points ", points)
+                        //name of object
+                        let name = points.snapDetails.name;
+                        //snap point of correct object in object
+                        let correctPoint = cc.p(points.snapDetails.point.x, points.snapDetails.point.y);
 
-            //connect with correct position if it is in 20 unit radius
-            // for(let points of clickedItemData.snappingPoints){
-            //     if(points && points.snapDetails){
-            //         let name = points.snapDetails.name;
-            //         let point = cc.p(points.snapDetails.point.x, points.snapDetails.point.y)
-            //         let connectionObj = ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj.filter(item=>item.name==name)[0];
-            //         let idxOfConnectionObj = ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj.indexOf(connectionObj);
-            //         if(idxOfConnectionObj != -1){
-            //             let connectionObj =  ACTIVITY_BUILD_SOMETHING_1.ref.assembledList[idxOfConnectionObj];
-            //             if(connectionObj){
-            //                 var connectionSnapPoint = cc.p(point.x * connectionObject.getScaleX(), point.y * connectionObject.getScaleY());
-            //                 var pointInWorldSpace = cc.p(connectionObject.getPositionX() - connectionObject.getContentSize().width * connectionObject.getScaleX() * 0.5 + connectionSnapPoint.x, connectionObject.getPositionY() - connectionObject.getContentSize().height * connectionObject.getScaleY() * 0.5 + connectionSnapPoint.y);
-            //
-            //                 var currentSnapPoint = cc.p(clickedItemData.snappingPoints[currIndex].x * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX(),
-            //                     clickedItemData.snappingPoints[currIndex].y * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY());
-            //                 var currentPointInWorldSpace = cc.p(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionX() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 + currentSnapPoint.x,
-            //                     ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionY() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 + currentSnapPoint.y);
-            //                 var distance = cc.pDistance(pointInWorldSpace, currentPointInWorldSpace);
-            //
-            //             }
-            //         }
-            //     }
-            // }
-            // var currentSnapPoint = cc.p(clickedItemData.snappingPoints[currIndex].x * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX(), clickedItemData.snappingPoints[currIndex].y * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY());
-            // var currentPointInWorldSpace = cc.p(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionX() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 + currentSnapPoint.x, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionY() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 + currentSnapPoint.y);
-
-            ///------------------------------------------------------
-
-
-
+                        //connection object
+                        let connectionObjDetails = ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj.filter(item => item.name == name)[0];
+                        //indexOfSanpingPoint
+                        let cpObject = connectionObjDetails.snappingPoints.filter(p => p.x == correctPoint.x && p.y == correctPoint.y)[0];
+                        let cpIndex = connectionObjDetails.snappingPoints.indexOf(cpObject);
+                        if (cpIndex != -1) {
+                            let actualConnectionObj = ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.filter(x => x.getName() == name);
+                            if (actualConnectionObj && actualConnectionObj.length > 0) {
+                                actualConnectionObj = actualConnectionObj[0];
+                                var connectionSnapPoint = cc.p(correctPoint.x * actualConnectionObj.getScaleX(), correctPoint.y * actualConnectionObj.getScaleY());
+                                var pointInWorldSpace = cc.p(actualConnectionObj.getPositionX() - actualConnectionObj.getContentSize().width * actualConnectionObj.getScaleX() * 0.5 + connectionSnapPoint.x, actualConnectionObj.getPositionY() - actualConnectionObj.getContentSize().height * actualConnectionObj.getScaleY() * 0.5 + connectionSnapPoint.y);
+                                var currentSnapPoint = cc.p(points.x * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX(), points.y * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY());
+                                var currentPointInWorldSpace = cc.p(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionX() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 + currentSnapPoint.x, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionY() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 + currentSnapPoint.y);
+                                var distance = cc.pDistance(pointInWorldSpace, currentPointInWorldSpace);
+                                if (distance < ACTIVITY_BUILD_SOMETHING_1.config.allowedRadius.currentValue) {
+                                    snapIdxOfPlacedObj = cpIndex;
+                                    connectionObjectData = connectionObjDetails;
+                                    snapIdxOfDraggedObj = clickedItemData.snappingPoints.indexOf(points);
+                                    previousDistance = distance;
+                                    attachFromLocation = currentPointInWorldSpace;
+                                    attachToLocation = pointInWorldSpace;
+                                    originalSnappingPoint = currentSnapPoint;
+                                    originalPoint = clickedItemData.snappingPoints[snapIdxOfDraggedObj];
+                                    attachedItemSnapPoint = connectionObjectData.snappingPoints[cpIndex];
+                                    isAttachedToCorrectPoints = this.checkIfAttachedToCorrectPoints(clickedItemData, originalPoint, attachedItemSnapPoint);
+                                    if (attachToLocation && originalSnappingPoint) {
+                                        var newAttachToLocation = cc.p(attachToLocation.x + ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 - originalSnappingPoint.x,
+                                            attachToLocation.y + ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 - originalSnappingPoint.y);
+                                        return {
+                                            "attachTo": newAttachToLocation,
+                                            "attachFrom": attachFromLocation,
+                                            "isAttachedToCorrectPoints": isAttachedToCorrectPoints,
+                                            "snapIdxOfPlacedObj": snapIdxOfPlacedObj,
+                                            "snapIdxOfDraggedObj": snapIdxOfDraggedObj,
+                                            "connectionObject": actualConnectionObj
+                                        };
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             for (let index = 0; index < connectionObjectData.snappingPoints.length; index++) {
                 var connectionSnapPoint = cc.p(connectionObjectData.snappingPoints[index].x * connectionObject.getScaleX(), connectionObjectData.snappingPoints[index].y * connectionObject.getScaleY());
@@ -622,7 +655,6 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                     }
                 }
             }
-        }
         isAttachedToCorrectPoints = this.checkIfAttachedToCorrectPoints(clickedItemData, originalPoint, attachedItemSnapPoint);
         if(attachToLocation && originalSnappingPoint) {
             var newAttachToLocation = cc.p(attachToLocation.x + ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 - originalSnappingPoint.x,
@@ -1022,6 +1054,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         ACTIVITY_BUILD_SOMETHING_1.ref.animatingCharacters.length = 0;
         ACTIVITY_BUILD_SOMETHING_1.ref.cardQueue.length = 0;
         ACTIVITY_BUILD_SOMETHING_1.ref.currentIsolatedNode = 0;
+        ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject.length = 0;
         for (let index = 0; index < ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.length; index++) {
             ACTIVITY_BUILD_SOMETHING_1.ref.assembledList[index].removeFromParent();
         }
@@ -1044,7 +1077,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             if (this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer))
                 this.removeChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
             if (this.isTeacherView) {
-                ACTIVITY_BUILD_SOMETHING_1.ref.parent.updateScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[0].content.ops);
+                ACTIVITY_BUILD_SOMETHING_1.ref.parent.updateScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.moduleStart.content.ops);
             }
         }
 
@@ -1446,9 +1479,8 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             isAllCorrect = true;
         }
        // this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"].content);
-       ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[1].enable && this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[1].content);
-       ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[2].enable &&  this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[2].content);
- 
+       ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.TargetAssembledUnsuccessfully.enable && this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.TargetAssembledUnsuccessfully.content);
+       ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.TargetAssembledSuccessfully.enable &&  this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.TargetAssembledSuccessfully.content);
        var bg = this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
         if (bg) {
             this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer).removeAllChildren();

@@ -20,8 +20,9 @@
   },
   "teacherScripts": {
     "component": "scriptsCard",
-    "data":[
+    "data":
      {
+      "moduleStart":{
         "UIName": "moduleStart",
         "enable": true,
         "description": "this will trigger when module starts",
@@ -87,7 +88,7 @@
           ]
         }
     },
-    {
+      "TargetAssembledUnSuccessfully":{
         "UIName": "Target Assembled Unsuccessfully",
         "description": "this will trigger when target is assembled unsuccessfully ",
         "enable": true,
@@ -128,9 +129,8 @@
             }
           ]
         }
-  
     },
-    {
+      "TargetAssembledSuccessfully":{
         "UIName": "Target Assembled Successfully",
         "enable": true,
         "description": "this will trigger when target is assembled successfully",
@@ -169,7 +169,7 @@
           ]
         }
       }
-  ]
+    }
   },
   "gameInfo": {
     "ignoreForAuthToolUI": true,
@@ -428,7 +428,7 @@
                     "snapDetails": {
                       "name": "dwarf_torso",
                       "point": {
-                        "x": 30,
+                        "x": 125,
                         "y": 25
                       }
                     }
@@ -482,7 +482,7 @@
                     "snapDetails": {
                       "name": "dwarf_torso",
                       "point": {
-                        "x": 125,
+                        "x": 30,
                         "y": 25
                       }
                     }
@@ -1033,6 +1033,33 @@
         ]
       }
     }
+  },
+  "allowedRadius": {
+    "component": "select",
+    "UIName": "Allowed radius",
+    "options": [
+      {
+        "label": "30 px",
+        "value": 30
+      },
+      {
+        "label": "40 px",
+        "value": 40
+      },
+      {
+        "label": "50 px",
+        "value": 50
+      },
+      {
+        "label": "60 px",
+        "value": 60
+      },
+      {
+        "label": "70 px",
+        "value": 70
+      }
+    ],
+    "currentValue": 60
   },
   "resources": {
     "ignoreForAuthToolUI": true,

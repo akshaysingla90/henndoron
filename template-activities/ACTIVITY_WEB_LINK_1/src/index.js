@@ -41,6 +41,8 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
 
     onExit: function () {
         this._super();
+        window.removeEventListener('resize', this.browserResized);
+        ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.removeEventListener('mousemove', this.focusIframe);
         ACTIVITY_WEB_LINK_1.ref.removeAllChildrenWithCleanup(true);
         ACTIVITY_WEB_LINK_1.ref.customTexture = false;
         ACTIVITY_WEB_LINK_1.ref.interactableObject = false;
@@ -71,9 +73,6 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         // console.log('iFrame', iFrame, "  ui  ", ui, document.getElementById('Cocos2dGameContainer').getElementsByTagName('iFrame')[0]);
         // iFrame.width  = iFrame.contentWindow.document.body.scrollWidth;
         // iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
-        document.getElementById('Cocos2dGameContainer').onresize = () => {
-            console.log('iFrame called ');
-        };
 
         //$(win/*dow).resize(function() {
         //     $('#frameContainer').css({width: $(window).width() * widthRatio});
@@ -92,15 +91,7 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         // }, iFrame );
 
         window.addEventListener('resize', this.browserResized);
-        iFrame.addEventListener('mousemove', function (event) {
-            if(!ACTIVITY_WEB_LINK_1.ref.iFrame)
-                return;
-            ACTIVITY_WEB_LINK_1.ref.getParent().setActiveActivityInfo(false);
-            ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo( ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
-                ACTIVITY_WEB_LINK_1.ref.iFrame.getPositionX(),
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
-        }.bind(this));
+        iFrame.addEventListener('mousemove', this.focusIframe);
         this.createColourLayer(cc.color(0,255, 0), 960, 640, cc.p(0, 0), this, 200);
 
         // let canvas = document.getElementById('gameCanvas');
@@ -131,10 +122,21 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         // containerNoe.appendChild(canvasNode);
     },
     browserResized :function (){
-     console.log('resize called');
-        ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.width =  window.width;
-        ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.height =  window.height;
+        if( ACTIVITY_WEB_LINK_1.ref.iFrame ) {
+            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.width = window.width;
+            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.height = window.height;
+        }
     },
+    focusIframe : function (){
+        if(!ACTIVITY_WEB_LINK_1.ref.iFrame)
+            return;
+        ACTIVITY_WEB_LINK_1.ref.getParent().setActiveActivityInfo(false);
+        ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
+        ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo( ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
+            ACTIVITY_WEB_LINK_1.ref.iFrame.getPositionX(),
+            ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
+    },
+
     touchEventListener: function (touch, event) {
         switch (event._eventCode) {
             case cc.EventTouch.EventCode.BEGAN:
@@ -219,7 +221,7 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
             ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
             ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
                 ACTIVITY_WEB_LINK_1.ref.iFrame.getPositionX(),
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.25)) );
+                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.2)) );
         }else{
             // ACTIVITY_WEB_LINK_1.ref.iFrame.setPosition(cc.p(
             //     ACTIVITY_WEB_LINK_1.ref.iFrame.getPositionX(),
