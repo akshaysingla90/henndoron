@@ -1031,35 +1031,35 @@
             }
           }
         ]
+      },
+      "allowedRadius": {
+        "component": "select",
+        "UIName": "Allowed radius",
+        "options": [
+          {
+            "label": "30 px",
+            "value": 30
+          },
+          {
+            "label": "40 px",
+            "value": 40
+          },
+          {
+            "label": "50 px",
+            "value": 50
+          },
+          {
+            "label": "60 px",
+            "value": 60
+          },
+          {
+            "label": "70 px",
+            "value": 70
+          }
+        ],
+        "currentValue": 60
       }
     }
-  },
-  "allowedRadius": {
-    "component": "select",
-    "UIName": "Allowed radius",
-    "options": [
-      {
-        "label": "30 px",
-        "value": 30
-      },
-      {
-        "label": "40 px",
-        "value": 40
-      },
-      {
-        "label": "50 px",
-        "value": 50
-      },
-      {
-        "label": "60 px",
-        "value": 60
-      },
-      {
-        "label": "70 px",
-        "value": 70
-      }
-    ],
-    "currentValue": 60
   },
   "resources": {
     "ignoreForAuthToolUI": true,

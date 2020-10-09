@@ -597,7 +597,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                                 var currentSnapPoint = cc.p(points.x * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX(), points.y * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY());
                                 var currentPointInWorldSpace = cc.p(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionX() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 + currentSnapPoint.x, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionY() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 + currentSnapPoint.y);
                                 var distance = cc.pDistance(pointInWorldSpace, currentPointInWorldSpace);
-                                if (distance < ACTIVITY_BUILD_SOMETHING_1.config.allowedRadius.currentValue) {
+                                if (distance < ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.allowedRadius.currentValue) {
                                     snapIdxOfPlacedObj = cpIndex;
                                     connectionObjectData = connectionObjDetails;
                                     snapIdxOfDraggedObj = clickedItemData.snappingPoints.indexOf(points);

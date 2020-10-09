@@ -33,6 +33,24 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
             }
         });
     },
+    onEnterTransitionDidFinish : function (){
+      this._super();
+      this.checkIfWindowCreated();
+    },
+
+    checkIfWindowCreated : function (){
+      if(ACTIVITY_WEB_LINK_1.ref.iFrame && ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd)  {
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.height = '100%';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.top = '0';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.left = '0';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.bottom = '0';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.right = '0';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.width = '100%';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.contentWindow.window.addEventListener('mousemove', this.focusIframe);
+      }else{
+          setTimeout(ACTIVITY_WEB_LINK_1.ref.checkIfWindowCreated, 1000);
+      }
+    },
 
     fetchGameData: function () {
         HDNetworkHandler.get(HDAPIKey.GameData, {"roomId": HDAppManager.roomId}, true, (err, res) => {
@@ -42,6 +60,9 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
     onExit: function () {
         this._super();
         window.removeEventListener('resize', this.browserResized);
+        if(ACTIVITY_WEB_LINK_1.ref.iFrame && ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd)  {
+           // ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.contentWindow.window.removeEventListener('mousemove', this.focusIframe);
+        }
         ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.removeEventListener('mousemove', this.focusIframe);
         ACTIVITY_WEB_LINK_1.ref.removeAllChildrenWithCleanup(true);
         ACTIVITY_WEB_LINK_1.ref.customTexture = false;
@@ -74,11 +95,6 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         // iFrame.width  = iFrame.contentWindow.document.body.scrollWidth;
         // iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
 
-        //$(win/*dow).resize(function() {
-        //     $('#frameContainer').css({width: $(window).width() * widthRatio});
-        // });*/
-
-
         // window.addEventListener('DOMContentLoaded', function(e,iFrame) {
         //     console.log('e ', e, 'frame ', iFrame);
         //     resizeIFrameToFitContent( iFrame );
@@ -91,7 +107,6 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         // }, iFrame );
 
         window.addEventListener('resize', this.browserResized);
-        iFrame.addEventListener('mousemove', this.focusIframe);
         this.createColourLayer(cc.color(0,255, 0), 960, 640, cc.p(0, 0), this, 200);
 
         // let canvas = document.getElementById('gameCanvas');
@@ -122,9 +137,12 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         // containerNoe.appendChild(canvasNode);
     },
     browserResized :function (){
+        console.log('resize called', ACTIVITY_WEB_LINK_1.ref.iFrame);
         if( ACTIVITY_WEB_LINK_1.ref.iFrame ) {
-            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.width = window.width;
-            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.height = window.height;
+            // ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
+            ACTIVITY_WEB_LINK_1.ref.iFrame.setPosition( cc.p(
+                ACTIVITY_WEB_LINK_1.ref.iFrame.getPositionX(),
+                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4));
         }
     },
     focusIframe : function (){
@@ -210,9 +228,6 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
 
     onMouseMove: function (event) {
         ACTIVITY_WEB_LINK_1.ref.updateMouseIcon(event.getLocation());
-
-        console.log(ACTIVITY_WEB_LINK_1.ref.convertToNodeSpace(event.getLocation()).y / ACTIVITY_WEB_LINK_1.ref.getContentSize().height)
-        // return;
         ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
         if(ACTIVITY_WEB_LINK_1.ref.convertToNodeSpace(event.getLocation()).y > ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.8){
             // ACTIVITY_WEB_LINK_1.ref.iFrame.setPosition(cc.p(
