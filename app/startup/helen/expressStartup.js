@@ -58,9 +58,9 @@ module.exports = async function (app) {
     app.use('/activity-resources', express.static(activityPath));
 
     //rewrite path
-    app.get('/lesson-preview/:lessonPath', function (req, res) {
-        res.sendFile(path.join(lessonDirectoryPath +"/"+ lessonPath + '/index.html'));
-    });
+    // app.get('/lesson-preview/:lessonPath', function (req, res) {
+    //     res.sendFile(path.join(lessonDirectoryPath +"/"+ lessonPath + '/index.html'));
+    // });
 
     // app.use('/lesson-preview', SERVICES.authService.validateUser([USER_ROLE.ADMIN]));
     app.use('/lesson-preview', express.static(lessonDirectoryPath));
