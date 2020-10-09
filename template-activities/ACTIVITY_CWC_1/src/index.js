@@ -72,10 +72,10 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
       ref.setupUI();
       if (ref.getChildByTag(ACTIVITY_CWC_1.Tag.character_1_tableView))
         ref.getChildByTag(ACTIVITY_CWC_1.Tag.character_1_tableView).reloadData();
-    //  ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data[0].content.ops);
-    if (ACTIVITY_CWC_1.config.teacherScripts.data.moduleStart.enable) {
-      ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data.moduleStart.content.ops);
-    }
+      //  ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data[0].content.ops);
+      if (ACTIVITY_CWC_1.config.teacherScripts.data.moduleStart.enable) {
+        ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data.moduleStart.content.ops);
+      }
       if (ACTIVITY_CWC_1.config.teacherTips.data.moduleStart.enable) {
         ACTIVITY_CWC_1.ref.triggerTip(ACTIVITY_CWC_1.config.teacherTips.data.moduleStart.content.ops);
       }
@@ -583,7 +583,12 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
           item.UIName === ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation
       );
       action = "_" + requiredAnimationData.folderName.toLowerCase() + "_";
-      folder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].name;
+      folder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation
+        .find(
+          (item) =>
+            item.UIName === ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].animation
+        )
+        .frameInitial.split("/")[0];
       name = folder; //.toLowerCase();
       const idx = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation.findIndex(
         (item) =>
