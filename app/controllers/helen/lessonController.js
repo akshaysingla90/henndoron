@@ -140,6 +140,7 @@ async function makeLesson(lessonId) {
   }
   fs.writeFileSync(`${destinationLessonPath}/project.json`, JSON.stringify(projectData));
   fs.writeFileSync(`${destinationLessonPath}/res/lesson-config.json`, JSON.stringify(lessonConfigData));
+  return destinationLessonPath;
 }
 
 /**
@@ -149,108 +150,16 @@ async function makeLesson(lessonId) {
 lessonController.createLesson = async (payload) => {
   const alreadyExist = await SERVICES.lessonService.getLesson({ courseId: payload.courseId, lessonNumber: payload.lessonNumber, episodeNumber: payload.episodeNumber });
   if (alreadyExist) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_ALREADY_EXISTS_WITH_THIS_LESSON_NUMBER, ERROR_TYPES.BAD_REQUEST);
-  const lessonPath = `${generateCharacterString(15)}${Date.now()}`;
+  let lessonPath = `${generateCharacterString(15)}${Date.now()}`;
   payload.path = "/" + lessonPath;
   if (payload.status == LESSON_STATUS.PUBLISHED && (!payload.activities || !payload.activities.length)) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_REQUIRED_TO_PUBLISH_LESSON, ERROR_TYPES.BAD_REQUEST)
   //Create new lesson in database
   let lesson = await SERVICES.lessonService.createLesson(payload);
-  await makeLesson(lesson._id);
-  // lesson = (await SERVICES.lessonService.getLessonsAggregate([
-  //   { $match: { _id: lesson._id } },
-  //   {
-  //     $lookup: {
-  //       from: 'activities',
-  //       localField: 'activities.activityId',
-  //       foreignField: '_id',
-  //       as: 'activityInfo'
-  //     }
-  //   },
-  // ]))[0];
-
-  // const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lesson.path}`);
-  // const templatePreviewPath = path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PREVIEW}`)
-  // // Copying Directory
-  // await fs.copy(templatePreviewPath, destinationPath);
-
-  // //Read lesson-config.json
-  // let lessonConfigData = await (new Promise((resolve, reject) => {
-  //   fs.readFile(`${templatePreviewPath}/res/lesson-config.json`, 'utf-8', (err, data) => {
-  //     if (err) reject(err);
-  //     resolve(data);
-  //   });
-  // }))
-  // lessonConfigData = JSON.parse(lessonConfigData);
-  // //Read Project.json
-  // let projectData = await (new Promise((resolve, reject) => {
-  //   fs.readFile(`${templatePreviewPath}/project.json`, 'utf-8', (err, data) => {
-  //     if (err) reject(err);
-  //     resolve(data);
-  //   });
-  // }))
-  // projectData = JSON.parse(projectData);
-
-  // for (let index = 0; index < lesson.activityInfo.length; index++) {
-  //   let activity = lesson.activityInfo[index];
-  //   //activity path to copy the activity folder
-  //   const activityPath = [ACTIVITY_STATUS.WEB_URL, ACTIVITY_STATUS.TEMPLATE].includes(activity.status)
-  //     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, activity.path)
-  //     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, activity.path)
-  //   //Regex to prevent resourcesfrom copying
-  //   let re = new RegExp(activityPath + ACTIVITY_RESOURCE_DIRECTORY_PATH);
-  //   const filterFunc = (filePath) => {
-  //     if ((filePath.search(re) !== -1) || filePath == activityPath + ACTIVITY_RESOURCE_DIRECTORY_PATH) return false;
-  //     return true;
-  //   }
-  //   if (activity.status == ACTIVITY_STATUS.WEB_URL) {
-  //     var webUrlNameSpace = `${generateCharacterString(15)}${Date.now()}`
-  //     activity.path = `/${webUrlNameSpace}`;
-  //   }
-  //   //Updtae project.json
-  //   projectData.jsList.push(`res/Activity${activity.path}/src/index.js`);
-  //   //Copying each activity to lesson
-  //   await fs.copy(activityPath, `${destinationPath}/res/Activity${activity.path}`, { filter: filterFunc });
-  //   //Copy resources of each activity
-  //   if (activity.status != ACTIVITY_STATUS.WEB_URL) {
-  //     await fs.copy(`${activityPath}/res`, `${destinationPath}/AsyncActivity/res/Activity${activity.path}/res`);
-  //   }
-  //   //Update configData for each activity
-  //   let configData = await (new Promise((resolve, reject) => {
-  //     fs.readFile(`${activityPath}/${ACTIVITY_CONFIG_PATH}`, 'utf-8', (err, data) => {
-  //       if (err) reject(err);
-  //       resolve(data);
-  //     });
-  //   }))
-  //   configData = JSON.parse(configData);
-  //   //Changes in case of weburl 
-  //   if (activity.status == ACTIVITY_STATUS.WEB_URL) {
-  //     // Change index.js 
-  //     let pathToReplace = configData.properties.activityPath;
-  //     let namespaceToReplace = configData.properties.namespace;
-  //     let textToWrite = webUrlNameSpace;
-  //     let fromReplace = pathToReplace == namespaceToReplace ? new RegExp(pathToReplace, 'g') : [new RegExp(pathToReplace, 'g'), new RegExp(namespaceToReplace, 'g')];
-  //     const options = {
-  //       files: `${destinationPath}/res/Activity${activity.path}` + ACTIVITY_SRC_PATH,
-  //       from: fromReplace,
-  //       to: textToWrite
-  //     };
-  //     await replace(options);
-  //     //Creating config.json for web url activity 
-  //     configData.properties.activityPath = webUrlNameSpace;
-  //     configData.properties.url = `res/Activity/${webUrlNameSpace}/`;
-  //     configData.properties.namespace = `${webUrlNameSpace}`;
-  //     if (lesson.activities[index].webUrl) configData.properties.urlInfo.url = lesson.activities[index].webUrl;
-  //   }
-  //   configData.properties.activityName = lesson.activities[index].activityName;
-  //   configData.properties.allocatedTime = lesson.activities[index].allocatedTime;
-  //   //update activity-config 
-  //   await fs.writeFileSync(`${destinationPath}/res/Activity${activity.path}` + ACTIVITY_CONFIG_PATH, JSON.stringify(configData));
-  //   //Update lesson-config
-  //   let lessonObj = { ...configData.properties, resources: configData.resources };
-  //   lessonConfigData.activityGame.push(lessonObj);
-  // }
-  // fs.writeFileSync(`${destinationPath}/project.json`, JSON.stringify(projectData));
-  // fs.writeFileSync(`${destinationPath}/res/lesson-config.json`, JSON.stringify(lessonConfigData));
-  if (payload.status == LESSON_STATUS.PUBLISHED) return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_PUBLISHED_SUCCESSFULLY));
+  lessonPath = await makeLesson(lesson._id);
+  if (payload.status == LESSON_STATUS.PUBLISHED) {
+    await SERVICES.activityService.minifyPublishLesoon(lessonPath, payload.path);
+    return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_PUBLISHED_SUCCESSFULLY));
+  }
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_CLONED_SUCCESSFULLY));
 }
 
@@ -508,105 +417,13 @@ lessonController.updateLesson = async (payload) => {
   let lesson = await SERVICES.lessonService.getLesson({ _id: payload.id, status: LESSON_STATUS.DRAFT }, NORMAL_PROJECTION);
   if (!lesson) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.LESSON_DOESNOT_EXISTS, ERROR_TYPES.BAD_REQUEST);
   if (payload.status == LESSON_STATUS.PUBLISHED && (!payload.activities || !payload.activities.length)) throw HELPERS.responseHelper.createErrorResponse(MESSAGES.ACTIVITY_REQUIRED_TO_PUBLISH_LESSON, ERROR_TYPES.BAD_REQUEST)
+  //Update lesson in database
   await SERVICES.lessonService.updateLesson({ _id: payload.id }, payload);
-  await makeLesson(Mongoose.Types.ObjectId(payload.id));
-
-  // lesson = (await SERVICES.lessonService.getLessonsAggregate([
-  //   { $match: { _id: Mongoose.Types.ObjectId(payload.id) } },
-  //   {
-  //     $lookup: {
-  //       from: 'activities',
-  //       localField: 'activities.activityId',
-  //       foreignField: '_id',
-  //       as: 'activityInfo'
-  //     }
-  //   },
-  // ]))[0];
-
-  // const destinationPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lesson.path}`);
-  // const templatePreviewPath = path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PREVIEW}`)
-  // // Copying Directory
-  // await fs.copy(templatePreviewPath, destinationPath);
-
-  // //Read lesson-config.json
-  // let lessonConfigData = await (new Promise((resolve, reject) => {
-  //   fs.readFile(`${templatePreviewPath}/res/lesson-config.json`, 'utf-8', (err, data) => {
-  //     if (err) reject(err);
-  //     resolve(data);
-  //   });
-  // }))
-  // lessonConfigData = JSON.parse(lessonConfigData);
-  // //Read Project.json
-  // let projectData = await (new Promise((resolve, reject) => {
-  //   fs.readFile(`${templatePreviewPath}/project.json`, 'utf-8', (err, data) => {
-  //     if (err) reject(err);
-  //     resolve(data);
-  //   });
-  // }))
-  // projectData = JSON.parse(projectData);
-
-  // for (let index = 0; index < lesson.activityInfo.length; index++) {
-  //   let activity = lesson.activityInfo[index];
-  //   //activity path to copy the activity folder
-  //   const activityPath = [ACTIVITY_STATUS.WEB_URL, ACTIVITY_STATUS.TEMPLATE].includes(activity.status)
-  //     ? path.join(__dirname, `../../..${TEMPLATE_ACTIVITY_PATH}`, activity.path)
-  //     : path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`, activity.path)
-  //   //Regex to prevent resourcesfrom copying
-  //   let re = new RegExp(activityPath + ACTIVITY_RESOURCE_DIRECTORY_PATH);
-  //   const filterFunc = (filePath) => {
-  //     if ((filePath.search(re) !== -1) || filePath == activityPath + ACTIVITY_RESOURCE_DIRECTORY_PATH) return false;
-  //     return true;
-  //   }
-  //   if (activity.status == ACTIVITY_STATUS.WEB_URL) {
-  //     var webUrlNameSpace = `${generateCharacterString(15)}${Date.now()}`
-  //     activity.path = `/${webUrlNameSpace}`;
-  //   }
-  //   //Updtae project.json
-  //   projectData.jsList.push(`res/Activity${activity.path}/src/index.js`);
-  //   //Copying each activity to lesson
-  //   await fs.copy(activityPath, `${destinationPath}/res/Activity${activity.path}`, { filter: filterFunc });
-  //   //Copy resources of each activity
-  //   if (activity.status != ACTIVITY_STATUS.WEB_URL) {
-  //     await fs.copy(`${activityPath}/res`, `${destinationPath}/AsyncActivity/res/Activity${activity.path}/res`);
-  //   }
-  //   //Update configData for each activity
-  //   let configData = await (new Promise((resolve, reject) => {
-  //     fs.readFile(`${activityPath}/${ACTIVITY_CONFIG_PATH}`, 'utf-8', (err, data) => {
-  //       if (err) reject(err);
-  //       resolve(data);
-  //     });
-  //   }))
-  //   configData = JSON.parse(configData);
-  //   //Changes in case of weburl 
-  //   if (activity.status == ACTIVITY_STATUS.WEB_URL) {
-  //     // Change index.js 
-  //     let pathToReplace = configData.properties.activityPath;
-  //     let namespaceToReplace = configData.properties.namespace;
-  //     let textToWrite = webUrlNameSpace;
-  //     let fromReplace = pathToReplace == namespaceToReplace ? new RegExp(pathToReplace, 'g') : [new RegExp(pathToReplace, 'g'), new RegExp(namespaceToReplace, 'g')];
-  //     const options = {
-  //       files: `${destinationPath}/res/Activity${activity.path}` + ACTIVITY_SRC_PATH,
-  //       from: fromReplace,
-  //       to: textToWrite
-  //     };
-  //     await replace(options);
-  //     //Creating config.json for web url activity 
-  //     configData.properties.activityPath = webUrlNameSpace;
-  //     configData.properties.url = `res/Activity/${webUrlNameSpace}/`;
-  //     configData.properties.namespace = `${webUrlNameSpace}`;
-  //     if (lesson.activities[index].webUrl) configData.properties.urlInfo.url = lesson.activities[index].webUrl;
-  //   }
-  //   configData.properties.activityName = lesson.activities[index].activityName;
-  //   configData.properties.allocatedTime = lesson.activities[index].allocatedTime;
-  //   //update activity-config 
-  //   await fs.writeFileSync(`${destinationPath}/res/Activity${activity.path}` + ACTIVITY_CONFIG_PATH, JSON.stringify(configData));
-  //   //Update lesson-config
-  //   let lessonObj = { ...configData.properties, resources: configData.resources };
-  //   lessonConfigData.activityGame.push(lessonObj);
-  // }
-  // fs.writeFileSync(`${destinationPath}/project.json`, JSON.stringify(projectData));
-  // fs.writeFileSync(`${destinationPath}/res/lesson-config.json`, JSON.stringify(lessonConfigData));
-  if (payload.status == LESSON_STATUS.PUBLISHED) return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_PUBLISHED_SUCCESSFULLY));
+  let lessonPath = await makeLesson(Mongoose.Types.ObjectId(payload.id));
+  if (payload.status == LESSON_STATUS.PUBLISHED) {
+    await SERVICES.activityService.minifyPublishLesoon(lessonPath,lesson.path);
+    return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSON_PUBLISHED_SUCCESSFULLY));
+  }
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.LESSONS_UPDATED_SUCCESSFULLY));
 }
 
