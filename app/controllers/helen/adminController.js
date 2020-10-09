@@ -396,7 +396,7 @@ adminController.updateActivityTemplate = async () => {
   fs.removeSync(previewFolderPath);
   let activityFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
   fs.removeSync(activityFolderPath);
-  let criteria = { status: { $ne: ACTIVITY_STATUS.TEMPLATE } };
+  let criteria = { status: { $nin: [ACTIVITY_STATUS.TEMPLATE, ACTIVITY_STATUS.WEB_URL] } };
   await SERVICES.activityService.removeActivities(criteria);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY));
 }
