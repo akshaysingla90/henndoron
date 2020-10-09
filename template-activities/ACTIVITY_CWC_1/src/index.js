@@ -477,7 +477,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
       }
     }
     if (char_1) {
-      if (cc.rectContainsPoint(char_1.getBoundingBox(), char_2.parent.convertToNodeSpace(location))) {
+      if (cc.rectContainsPoint(char_1.getBoundingBox(), char_1.parent.convertToNodeSpace(location))) {
         notOverLappedWithAnyone = false;
       }
     }
@@ -545,7 +545,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
     let idleAnimSpeed = speed;
     let idleAnimFolder = folder;
     this.idelAnim = cc.callFunc(() => {
-      let randNum = Math.ceil(Math.random() * 2 + 1);
+      let randNum = Math.floor(Math.random() * 2 + 1);
       console.log("Random Number ", randNum);
       sprite.runAction(
         new cc.Sequence(
@@ -612,7 +612,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
     sprite.runAction(actionSeq);
   },
   repeatAnimation: function (parent, animInfo) {
-    let randNum = Math.ceil(Math.random() * 2 + 1);
+    let randNum = Math.floor(Math.random() * 2 + 1);
     animInfo.sprite.restPose = true;
     animInfo.sprite.runAction(
       new cc.Sequence(
