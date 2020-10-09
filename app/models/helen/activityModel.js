@@ -28,7 +28,7 @@ const activitySchema = new Schema({
     allocatedTime: { type: Number },
     // resFolders: [Resources],
     type: { type: Number, enum: [ACTIVITY_TYPE.GAME, ACTIVITY_TYPE.MEDIUM, ACTIVITY_TYPE.SMALL] },
-    status: { type: Number, enum: [ACTIVITY_STATUS.PUBLISHED, ACTIVITY_STATUS.TEMPLATE, ACTIVITY_STATUS.DRAFT] }
+    status: { type: Number, enum: [ACTIVITY_STATUS.PUBLISHED, ACTIVITY_STATUS.TEMPLATE, ACTIVITY_STATUS.DRAFT, ACTIVITY_STATUS.WEB_URL] }
 });
 
 activitySchema.set('timestamps', true);
