@@ -200,7 +200,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "background.png",
-        "dimensions": { "width": 960, "height": 649 }
+        "dimensions": { "width": 960, "height": 640 }
       }
     }
   },
@@ -212,6 +212,7 @@
         "enableState": "start_idle.png",
         "pushedState": "start_pressed.png",
         "disableState": "start_idle.png",
+        "dimensions": { "width": 96, "height": 64 },
         "scale": 1,
         "position": { "x": 240, "y": 100 }
       },
@@ -220,17 +221,20 @@
         "enableState": "stop_idle.png",
         "pushedState": "stop_pressed.png",
         "disableState": "stop_idle.png",
+        "dimensions": { "width": 96, "height": 64 },
         "scale": 1,
         "position": { "x": 480, "y": 100 }
       },
       "leftMoveButton": {
         "UIName": "Left Move Button",
         "enableState": "left_arrow_idle.png",
+        "dimensions": { "width": 65, "height": 130 },
         "pushedState": "left_arrow_pushed.png"
       },
       "rightMoveButton": {
         "UIName": "Right Move Button",
         "enableState": "right_arrow_idle.png",
+        "dimensions": { "width": 65, "height": 130 },
         "pushedState": "right_arrow_pushed.png"
       }
     }
@@ -293,6 +297,7 @@
       "frame": {
         "component": "image",
         "UIName": "Frame",
+        "dimensions": { "width": 174, "height": 178 },
         "imageName": "reward_screen_frame.png"
       },
       "usernamePosition": {
@@ -303,10 +308,12 @@
       "looseBG": {
         "component": "image",
         "UIName": "Loose Background",
+        "dimensions": { "width": 960, "height": 640 },
         "imageName": "looseScreen.png"
       },
       "winBG": {
         "component": "image",
+        "dimensions": { "width": 960, "height": 640 },
         "UIName": "Win Background",
         "imageName": "winScreen.png"
       },
@@ -371,7 +378,7 @@
       },
       "dismantledObject": {
         "component": "dismantledObjects",
-        "UIName": "dismantledObjects",
+        "UIName": "Dismantled Objects",
         "data": [
           {
             "UIName": "Object 01",
