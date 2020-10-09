@@ -533,7 +533,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
   playAnimation: function (tag, key, index) {
     var sprite = this.getChildByTag(tag);
     let action = "_idle_";
-    let folder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].name;
+    let folder = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[0].frameInitial.split("/")[0];
     let name = folder; //.toLowerCase();
     let frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[0].frameCount;
     let loop = 1000;

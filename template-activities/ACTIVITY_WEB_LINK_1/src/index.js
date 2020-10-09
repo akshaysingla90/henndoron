@@ -6,10 +6,10 @@ ACTIVITY_WEB_LINK_1.socketEventKey = {
 ACTIVITY_WEB_LINK_1.ref = null;
 ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
     isTeacherView: false,
-    interactableObject: null,
-    customTexture: null,
-    iFrame: null,
-    iFrameSpeed: 0.25,
+    interactableObject:null,
+    customTexture:null,
+    iFrame : null,
+    iFrameSpeed :  0.25,
 
     ctor: function () {
         this._super();
@@ -34,49 +34,49 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
             }
         });
     },
-    onEnterTransitionDidFinish: function () {
-        this._super();
-        this.checkIfWindowCreated();
+    onEnterTransitionDidFinish : function (){
+      this._super();
+      this.checkIfWindowCreated();
     },
 
-    checkIfWindowCreated: function () {
+    checkIfWindowCreated : function (){
 
         ACTIVITY_WEB_LINK_1.ref.autoFocus();
-        if (ACTIVITY_WEB_LINK_1.ref.iFrame && ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd) {
-            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.height = '100%';
-            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.top = '0';
-            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.left = '0';
-            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.bottom = '0';
-            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.right = '0';
-            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.width = '100%';
+      if(  ACTIVITY_WEB_LINK_1.ref.iFrame && ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd)  {
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.height = '100%';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.top = '0';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.left = '0';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.bottom = '0';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.right = '0';
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.width = '100%';
 
-            ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.contentWindow.window.addEventListener('mousemove', this.focusIframe);
-        } else {
+          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.contentWindow.window.addEventListener('mousemove', this.focusIframe);
+      }else{
 
-        }
+      }
     },
 
-    autoFocus: function () {
+    autoFocus : function (){
         let container = document.getElementById('Cocos2dGameContainer');
-        if (container) {
+        if(container){
             container.focus();
 
         }
-        if (ACTIVITY_WEB_LINK_1.ref) {
+        if(ACTIVITY_WEB_LINK_1.ref){
             setTimeout(ACTIVITY_WEB_LINK_1.ref.autoFocus, 500);
         }
     },
 
     fetchGameData: function () {
-        HDNetworkHandler.get(HDAPIKey.GameData, { "roomId": HDAppManager.roomId }, true, (err, res) => {
+        HDNetworkHandler.get(HDAPIKey.GameData, {"roomId": HDAppManager.roomId}, true, (err, res) => {
         });
     },
 
     onExit: function () {
         this._super();
         window.removeEventListener('resize', this.browserResized);
-        if (ACTIVITY_WEB_LINK_1.ref.iFrame && ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd) {
-            // ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.contentWindow.window.removeEventListener('mousemove', this.focusIframe);
+        if(ACTIVITY_WEB_LINK_1.ref.iFrame && ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd)  {
+           // ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.contentWindow.window.removeEventListener('mousemove', this.focusIframe);
         }
         ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.removeEventListener('mousemove', this.focusIframe);
         ACTIVITY_WEB_LINK_1.ref.removeAllChildrenWithCleanup(true);
@@ -106,24 +106,24 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         this.addChild(ui);
         this.iFrame = ui;
         window.addEventListener('resize', this.browserResized);
-        this.createColourLayer(cc.color(0, 255, 0), 960, 640, cc.p(0, 0), this, 200);
+        this.createColourLayer(cc.color(0,255, 0), 960, 640, cc.p(0, 0), this, 200);
     },
-    browserResized: function () {
-        if (ACTIVITY_WEB_LINK_1.ref.iFrame) {
+    browserResized :function (){
+        if( ACTIVITY_WEB_LINK_1.ref.iFrame ) {
             ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction(cc.moveTo(0, cc.p(
+            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(0, cc.p(
                 ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5 + Math.random() * 1 + 1,
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4 + Math.random() * 1 + 1)));
+                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4 +  Math.random() * 1 + 1)) );
         }
     },
-    focusIframe: function () {
-        if (!ACTIVITY_WEB_LINK_1.ref.iFrame)
+    focusIframe : function (){
+        if(!ACTIVITY_WEB_LINK_1.ref.iFrame)
             return;
         ACTIVITY_WEB_LINK_1.ref.getParent().setActiveActivityInfo(false);
         ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-        ACTIVITY_WEB_LINK_1.ref.iFrame.runAction(cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
+        ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo( ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
             ACTIVITY_WEB_LINK_1.ref.iFrame.getPositionX(),
-            ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)));
+            ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
     },
 
     touchEventListener: function (touch, event) {
@@ -148,7 +148,7 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
                 "roomId": HDAppManager.roomId,
                 "roomData": {
                     "activity": ACTIVITY_WEB_LINK_1.config.properties.namespace,
-                    "data": { 'dataArray': this.lineSyncData, 'slideIndex': this.curImageIdx },
+                    "data": {'dataArray': this.lineSyncData, 'slideIndex': this.curImageIdx},
                     "activityStartTime": HDAppManager.getActivityStartTime()
                 }
             }
@@ -159,7 +159,7 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         if (this.isTeacherView) {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 "eventType": ACTIVITY_WEB_LINK_1.socketEventKey.STUDENT_INTERACTION,
-                "data": { "userName": username, "status": status }
+                "data": {"userName": username, "status": status}
             });
         }
     },
@@ -171,7 +171,7 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
     },
 
     mouseEventListener: function (event) {
-        if (!ACTIVITY_WEB_LINK_1.ref.iFrame)
+        if(!ACTIVITY_WEB_LINK_1.ref.iFrame)
             return;
         switch (event._eventType) {
             case cc.EventMouse.DOWN:
@@ -200,15 +200,15 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
     onMouseMove: function (event) {
         ACTIVITY_WEB_LINK_1.ref.updateMouseIcon(event.getLocation());
         ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-        if (ACTIVITY_WEB_LINK_1.ref.convertToNodeSpace(event.getLocation()).y > ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.8) {
+        if(ACTIVITY_WEB_LINK_1.ref.convertToNodeSpace(event.getLocation()).y > ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.8){
             ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction(cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
+            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
                 ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5,
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.2)));
-        } else {
-            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction(cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
+                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.2)) );
+        }else{
+            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
                 ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5,
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)));
+                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
         }
         if (!ACTIVITY_WEB_LINK_1.ref.isStudentInteractionEnable)
             return;
@@ -275,7 +275,7 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
             } else {
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
-                    "users": [{ userName: userName }]
+                    "users": [{userName: userName}]
                 });
             }
         }
@@ -340,7 +340,7 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
      * @returns {{textureUrl: (null|string), hasCustomTexture: boolean}}
      */
     mouseTexture: function () {
-        return { 'hasCustomTexture': this.customTexture, 'textureUrl': this.MouseTextureUrl };
+        return {'hasCustomTexture': this.customTexture, 'textureUrl': this.MouseTextureUrl};
     },
 
     /**
