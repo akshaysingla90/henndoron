@@ -24,6 +24,9 @@ async function makeLesson(lessonId) {
   let lesson = (await SERVICES.lessonService.getLessonsAggregate([
     { $match: { _id: lessonId } },
     {
+      $unwind: { path: "$activities", preserveNullAndEmptyArrays: true }
+    },
+    {
       $lookup: {
         from: 'activities',
         localField: 'activities.activityId',
@@ -31,6 +34,27 @@ async function makeLesson(lessonId) {
         as: 'activityInfo'
       }
     },
+    {
+      $unwind: { path: "$activityInfo", preserveNullAndEmptyArrays: true }
+    },
+    {
+      $group: {
+        _id: '$_id',
+        activities: {
+          $push: "$activities"
+        },
+        activityInfo: {
+          $push: "$activityInfo"
+        },
+        lesson: { $first: '$$ROOT' }
+      }
+    },
+    { $replaceRoot: { newRoot: { $mergeObjects: ["$lesson", "$$ROOT"] } } },
+    {
+      $project: {
+        "lesson": 0
+      }
+    }
   ]))[0];
 
   const destinationLessonPath = path.join(__dirname, `../../../..${BASE_PATH}${LESSON_DIRECTORY_PATH}/${lesson.path}`);
