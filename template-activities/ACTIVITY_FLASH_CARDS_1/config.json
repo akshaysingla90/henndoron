@@ -48,6 +48,15 @@
           "bookOfRhymes": 3
         }
       },
+      "pageTurnAnimation": {
+        "component": "animation",
+        "UIName": "Page turn Animation",
+        "name": "onePageTurn",
+        "frameCount": 8,
+        "extension": ".png",
+        "frameInitial": "one_page_turn/one_page_tern_",
+        "dimensions": { "width": 960, "height": 640 }
+      },
 
       "billboard": {
         "component": "image",
@@ -193,26 +202,57 @@
         ]
       },
       "bookOfRhymesItems": {
-        "ignoreForAuthToolUI": true,
-        "dimensions": { "width": 350, "height": 350 },
+        "component": "bookOfRhymesItems",
+        "dimensions": { "width": 960, "height": 640 },
+        "UIName": "Objects Page Turn Animations",
         "data": [
           {
-            "imageName": "Item_book.png"
+            "name": "pageTurnBook",
+            "imageName": "Item_book.png",
+            "label": "book",
+            "frameCount": 8,
+            "frameInitial": "page_turn_book/page_turn_book_",
+            "extension": ".png"
           },
           {
-            "imageName": "Item_cat.png"
+            "name": "pageTurnCat",
+            "imageName": "Item_cat.png",
+            "label": "cat",
+            "frameCount": 8,
+            "frameInitial": "page_turn_cat/page_turn_cat_",
+            "extension": ".png"
           },
           {
-            "imageName": "Item_dog.png"
+            "name": "pageTurnDog",
+            "imageName": "Item_dog.png",
+            "label": "dog",
+            "frameCount": 8,
+            "frameInitial": "page_turn_dog/page_turn_dog_",
+            "extension": ".png"
           },
           {
-            "imageName": "Item_rat.png"
+            "name": "pageTurnRat",
+            "imageName": "Item_rat.png",
+            "label": "rat",
+            "frameCount": 8,
+            "frameInitial": "page_turn_rat/page_turn_rat_",
+            "extension": ".png"
           },
           {
-            "imageName": "Item_sheep.png"
+            "name": "pageTurnSheep",
+            "imageName": "Item_sheep.png",
+            "label": "sheep",
+            "frameCount": 8,
+            "frameInitial": "page_turn_sheep/page_turn_sheep_",
+            "extension": ".png"
           },
           {
-            "imageName": "Item_sign.png"
+            "name": "pageTurnSign",
+            "imageName": "Item_sign.png",
+            "label": "sign",
+            "frameCount": 8,
+            "frameInitial": "page_turn_sign/page_turn_sign_",
+            "extension": ".png"
           }
         ]
       }
@@ -241,7 +281,7 @@
         "Item_dog.png",
         "Item_rat.png",
         "Item_sheep.png",
-        "Item_sigh.png"
+        "Item_sign.png"
       ]
     },
     "sounds": {
@@ -251,6 +291,12 @@
     "animationFrames": {
       "basePath": "res/AnimationFrames/",
       "animation": [
+        {
+          "name": "onePageTurn",
+          "frameCount": 8,
+          "extension": ".png",
+          "frameInitial": "one_page_turn/one_page_tern_"
+        },
         {
           "name": "pageTurnBook",
           "frameCount": 8,
