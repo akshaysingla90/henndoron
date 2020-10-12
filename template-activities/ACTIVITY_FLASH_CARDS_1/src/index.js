@@ -27,11 +27,26 @@ ACTIVITY_FLASH_CARDS_1.BookPage = cc.Sprite.extend({
   displayWord: "",
   displayImageTag: 1,
   displayWordTag: 2,
-  ctor: function (backgroundImage, displayImage, displayWord, displayWordPosition, font, fontSize, color) {
+  animationData: null,
+  animationSpeed: 0.065,
+  backgroundImage: undefined,
+  ctor: function (
+    backgroundImage,
+    animationData,
+    displayImage,
+    displayWord,
+    displayWordPosition,
+    font,
+    fontSize,
+    color
+  ) {
     this._super(backgroundImage);
-    this.displayImage = displayImage;
-
-    this.addDisplayImage();
+    this.backgroundImage = backgroundImage;
+    this.animationData = animationData;
+    if (displayImage) {
+      this.displayImage = displayImage;
+      this.addDisplayImage();
+    }
     if (displayWord) {
       this.displayWord = displayWord;
       this.addWordLabel(displayWordPosition, font, fontSize, color);
@@ -76,6 +91,33 @@ ACTIVITY_FLASH_CARDS_1.BookPage = cc.Sprite.extend({
     return this.displayWord;
   },
 
+  setBackgroundImage: function (image) {
+    this.backgroundImage = image;
+    this.setTexture(image);
+  },
+
+  setAnimationData: function (data) {
+    this.animationData = data;
+  },
+
+  getAnimationData: function () {
+    return this.animationData;
+  },
+
+  getBackgroundImage: function () {
+    return this.backgroundImage;
+  },
+
+  getTurnAction: function () {
+    return HDUtility.runFrameAnimation(
+      ACTIVITY_FLASH_CARDS_1.animationPath + this.animationData.frameInitial,
+      this.animationData.frameCount,
+      this.animationSpeed,
+      this.animationData.extension,
+      1
+    );
+  },
+
   onExit: function () {},
 });
 
@@ -87,15 +129,16 @@ ACTIVITY_FLASH_CARDS_1.Book = cc.Node.extend({
   animationQueue: [],
   isAnimationRunning: false,
   sound: undefined,
-  ctor: function (backgroundImage, displayImage, text, textPos, font, fontSize, color, sound) {
+  ctor: function (backgroundImage, animationData, sound, displayImage, text, textPos, font, fontSize, color) {
     this._super();
     this.setContentSize(cc.size(cc.winSize.width, cc.winSize.height));
     this.sound = sound;
-    this._addPages(backgroundImage, displayImage, text, textPos, font, fontSize, color);
+    this._addPages(backgroundImage, animationData, displayImage, text, textPos, font, fontSize, color);
   },
-  _addPages: function (backgroundImage, displayImage, text, textPos, font, fontSize, color) {
+  _addPages: function (backgroundImage, animationData, displayImage, text, textPos, font, fontSize, color) {
     var currentPage = new ACTIVITY_FLASH_CARDS_1.BookPage(
       backgroundImage,
+      animationData,
       displayImage,
       text,
       textPos,
@@ -107,6 +150,7 @@ ACTIVITY_FLASH_CARDS_1.Book = cc.Node.extend({
     currentPage.setTag(this.currentPageTag);
     var nextPage = new ACTIVITY_FLASH_CARDS_1.BookPage(
       backgroundImage,
+      animationData,
       displayImage,
       text,
       textPos,
@@ -116,15 +160,15 @@ ACTIVITY_FLASH_CARDS_1.Book = cc.Node.extend({
     );
     nextPage.setTag(this.nextPageTag);
     nextPage.setPosition(cc.p(this.width * 0.5, this.height * 0.5));
-    var nodeGrid = new cc.NodeGrid();
-    nodeGrid.setTag(this.nodeGridTag);
-    nodeGrid.setTarget(currentPage);
-    this.addChild(nodeGrid, 1);
+    // var nodeGrid = new cc.NodeGrid();
+    // nodeGrid.setTag(this.nodeGridTag);
+    // nodeGrid.setTarget(currentPage);
+    // this.addChild(nodeGrid, 1);
     this.addChild(currentPage, 2);
     this.addChild(nextPage, 0);
   },
-  turnPage: function (image, word) {
-    this.animationQueue.push({ image: image, word: word });
+  turnPage: function (animationData) {
+    this.animationQueue.push({ animationData: animationData });
     this._runPageTurnAction();
   },
   _runPageTurnAction: function () {
@@ -133,16 +177,25 @@ ACTIVITY_FLASH_CARDS_1.Book = cc.Node.extend({
       cc.audioEngine.playEffect(this.sound);
       let currentPage = this.getChildByTag(this.currentPageTag);
       let nextPage = this.getChildByTag(this.nextPageTag);
-      currentPage.setDisplayImage(nextPage.getDisplayImage());
-      currentPage.setDisplayWord(nextPage.getDisplayWord());
-      nextPage.setDisplayImage(this.animationQueue[0].image);
-      nextPage.setDisplayWord(this.animationQueue[0].word);
-      this.getChildByTag(this.nodeGridTag).runAction(
+      nextPage.setAnimationData(this.animationQueue[0].animationData);
+      nextPage.setBackgroundImage(
+        ACTIVITY_FLASH_CARDS_1.animationPath +
+          this.animationQueue[0].animationData.frameInitial +
+          "0001" +
+          this.animationQueue[0].animationData.extension
+      );
+      // currentPage.setDisplayImage(nextPage.getDisplayImage());
+      // currentPage.setDisplayWord(nextPage.getDisplayWord());
+      // nextPage.setDisplayImage(this.animationQueue[0].image);
+      // nextPage.setDisplayWord(this.animationQueue[0].word);
+      currentPage.runAction(
         cc.sequence(
-          cc.pageTurn3D(1, cc.size(16, 12)),
+          currentPage.getTurnAction(),
           cc.callFunc(() => {
             this.isAnimationRunning = false;
             this.animationQueue.shift();
+            currentPage.setBackgroundImage(nextPage.getBackgroundImage());
+            currentPage.setAnimationData(nextPage.getAnimationData());
             if (this.animationQueue.length > 0) {
               this._runPageTurnAction();
             }
@@ -238,8 +291,7 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
         ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
     ) {
       this.turnBookPage(
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[state].imageName,
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[state].label
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.bookOfRhymesItems.data[state]
       );
     }
   },
@@ -272,42 +324,43 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
       var book = new ACTIVITY_FLASH_CARDS_1.Book(
         ACTIVITY_FLASH_CARDS_1.resourcePath +
           ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.background.sections.background.imageName,
-        undefined,
-        "",
-        cc.p(
-          HDAppManager.isTeacherView
-            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.position
-                .x
-            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.position
-                .x,
-          HDAppManager.isTeacherView
-            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.position
-                .y
-            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.position
-                .y
-        ),
-        HDAppManager.isTeacherView
-          ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.font
-          : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.font,
-        HDAppManager.isTeacherView
-          ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.fontSize
-          : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.fontSize,
-        cc.color(
-          HDAppManager.isTeacherView
-            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.r
-            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.r,
-          HDAppManager.isTeacherView
-            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.g
-            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.g,
-          HDAppManager.isTeacherView
-            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.b
-            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.b,
-          HDAppManager.isTeacherView
-            ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.a
-            : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.a
-        ),
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.pageTurnAnimation,
         ACTIVITY_FLASH_CARDS_1.soundPath +
           ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.swipe.sound
+        // undefined,
+        // "",
+        // cc.p(
+        //   HDAppManager.isTeacherView
+        //     ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.position
+        //         .x
+        //     : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.position
+        //         .x,
+        //   HDAppManager.isTeacherView
+        //     ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.position
+        //         .y
+        //     : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.position
+        //         .y
+        // ),
+        // HDAppManager.isTeacherView
+        //   ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.font
+        //   : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.font,
+        // HDAppManager.isTeacherView
+        //   ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.fontSize
+        //   : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.fontSize,
+        // cc.color(
+        //   HDAppManager.isTeacherView
+        //     ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.r
+        //     : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.r,
+        //   HDAppManager.isTeacherView
+        //     ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.g
+        //     : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.g,
+        //   HDAppManager.isTeacherView
+        //     ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.b
+        //     : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.b,
+        //   HDAppManager.isTeacherView
+        //     ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelTeacher.color.a
+        //     : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.BookOfRhymesWordLabelStudent.color.a
+        // ),
       );
       book.setTag(this.bookTag);
       this.addChild(book);
@@ -346,8 +399,8 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
     wordHolderSprite.setVisible(true);
   },
 
-  turnBookPage: function (image, word) {
-    this.getChildByTag(this.bookTag).turnPage(ACTIVITY_FLASH_CARDS_1.resourcePath + image, word);
+  turnBookPage: function (animationData) {
+    this.getChildByTag(this.bookTag).turnPage(animationData);
   },
   driveToNextBillboard: function (imageName, word) {
     this.canSelectNextItem = false;
@@ -386,6 +439,7 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
     }
   },
   showSyncData: function (texture, textData) {
+    cc.log("texture", texture);
     switch (ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue) {
       case ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.classic: {
         this.updateFlashcardItemImage(texture);
@@ -397,7 +451,7 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
         break;
       }
       case ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes: {
-        this.turnBookPage(texture, textData);
+        this.turnBookPage(texture);
         break;
       }
       default: {
@@ -405,6 +459,7 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
       }
     }
   },
+
   setWordHolder: function (initialLabelString) {
     var wordHolderSprite = this.addSprite(
       ACTIVITY_FLASH_CARDS_1.resourcePath +
@@ -458,12 +513,18 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
   selectedFlashCardItemLabelContainerTag: 102,
   tableViewTag: 102,
   tableViewContainerTag: 103,
+  sideBarItems: [],
   ctor: function (state) {
     this._super(state);
     this.sideBottomBar_X_position = cc.winSize.width * 0.18;
     this.maxSideBottomBarWidth = cc.winSize.width * 0.65;
     ACTIVITY_FLASH_CARDS_1.teacherViewLayerRef = this;
     this.selectedFlashCardItemIdx = state;
+    this.sideBarItems =
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
+        ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.bookOfRhymesItems.data
+        : ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data;
     this.createUI();
   },
   createUI: function () {
@@ -482,14 +543,8 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
   addBottomSideBar: function () {
     var x_position = this.sideBottomBar_X_position;
     var width = this.maxSideBottomBarWidth;
-    if (
-      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length <
-      this.visibleFlashCardItemsCount
-    ) {
-      width =
-        (this.maxSideBottomBarWidth *
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length) /
-        this.visibleFlashCardItemsCount;
+    if (this.sideBarItems.length < this.visibleFlashCardItemsCount) {
+      width = (this.maxSideBottomBarWidth * this.sideBarItems.length) / this.visibleFlashCardItemsCount;
       x_position = (this.maxSideBottomBarWidth - width) / 2 + this.sideBottomBar_X_position;
     }
     var tableViewBackgroundColorLayer = new cc.LayerColor(cc.color(0, 0, 0, 0), width, cc.winSize.height * 0.15);
@@ -523,9 +578,8 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
   tableCellSizeForIndex: function (table, idx) {
     return cc.size(
       table.width /
-        (ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length <
-        this.visibleFlashCardItemsCount
-          ? ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length
+        (this.sideBarItems.length < this.visibleFlashCardItemsCount
+          ? this.sideBarItems.length
           : this.visibleFlashCardItemsCount),
       table.height
     );
@@ -538,25 +592,25 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
     } else {
       cell = new ACTIVITY_FLASH_CARDS_1.FlashCardItem();
     }
-    cell.createItem(
-      ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[idx],
-      cellSize,
-      this.selectedFlashCardItemIdx === idx
-    );
+    cell.createItem(this.sideBarItems[idx], cellSize, this.selectedFlashCardItemIdx === idx);
     return cell;
   },
   numberOfCellsInTableView: function (table) {
-    return ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data.length;
+    return this.sideBarItems.length;
   },
   tableCellTouched: function (table, cell) {
     var previouslySelectedFlashCardItemIdx = this.selectedFlashCardItemIdx;
     if (previouslySelectedFlashCardItemIdx !== cell.getIdx() && this.canSelectNextItem) {
       this.selectedFlashCardItemIdx = cell.getIdx();
-      this.showSyncData(
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[cell.getIdx()]
-          .imageName,
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[cell.getIdx()].label
-      );
+      if (
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.currentValue ===
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
+      ) {
+        this.showSyncData(this.sideBarItems[cell.getIdx()]);
+      } else {
+        this.showSyncData(this.sideBarItems[cell.getIdx()].imageName, this.sideBarItems[cell.getIdx()].label);
+      }
+
       // highlight touched cell
       this.getChildByTag(this.tableViewContainerTag).getChildByTag(this.tableViewTag).updateCellAtIndex(cell.getIdx());
       // unhighlight previously selected cell
@@ -572,7 +626,7 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
         {
           eventType: ACTIVITY_FLASH_CARDS_1.teacherEvents.FLASH_CARDS_NEXT_ITEM,
           roomId: HDAppManager.roomId,
-          data: ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.carouselAssets.data[cell.getIdx()],
+          data: this.sideBarItems[cell.getIdx()],
         },
 
         () => undefined
@@ -740,6 +794,7 @@ ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayer = cc.Layer.extend({
       self.config = data;
       ACTIVITY_FLASH_CARDS_1.resourcePath = "res/Activity/" + "" + activityName + "/res/Sprite/";
       ACTIVITY_FLASH_CARDS_1.soundPath = "res/Activity/" + "" + activityName + "/res/Sound/";
+      ACTIVITY_FLASH_CARDS_1.animationPath = "res/Activity/" + activityName + "/res/AnimationFrames/";
       self.isTeacher = HDAppManager.isTeacherView; //get user token to determine whether user is teacher or student
       if (self.isTeacher) {
         var teacherViewLayer = new ACTIVITY_FLASH_CARDS_1.TeacherViewLayer(self.state);
