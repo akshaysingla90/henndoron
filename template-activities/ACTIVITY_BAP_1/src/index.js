@@ -492,7 +492,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
 
     backgroundWithControl: function () {
         this.playGround = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[0], cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5), this);
-        let slidIndexHeight = this.getContentSize().height * 0.07;
+        let slidIndexHeight = this.getContentSize().height * 0.88;
         if (this.isTeacherView) {
             if(ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length > 1){
             let nextButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.btn_next.enableState,
