@@ -203,7 +203,8 @@
       },
       "bookOfRhymesItems": {
         "component": "bookOfRhymesItems",
-        "dimensions": { "width": 960, "height": 640 },
+        "animationDimensions": { "width": 960, "height": 640 },
+        "imageDimensions": { "width": 350, "height": 350 },
         "UIName": "Objects Page Turn Animations",
         "data": [
           {
