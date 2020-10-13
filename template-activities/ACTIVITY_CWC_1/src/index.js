@@ -538,7 +538,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
     let frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[0].frameCount;
     let loop = 1000;
     let actionFolder = "Idle";
-    let speed = 0.05;
+    let speed = 0.08;
 
     // let animation
     let idleAnimName = name;
@@ -597,7 +597,7 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
       const frameCount = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].animation[idx].frameCount;
       loop = 1;
       actionFolder = requiredAnimationData.folderName;
-      speed = 0.05;
+      speed = 0.08;
       let animation = HDUtility.runFrameAnimation(
         ACTIVITY_CWC_1.animationBasePath + folder + "/" + actionFolder + "/" + name + action,
         frameCount,
