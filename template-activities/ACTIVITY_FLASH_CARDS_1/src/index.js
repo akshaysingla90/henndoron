@@ -322,9 +322,11 @@ ACTIVITY_FLASH_CARDS_1.CommonFlashCardsLayer = HDBaseLayer.extend({
       ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.theme.theme.bookOfRhymes
     ) {
       var book = new ACTIVITY_FLASH_CARDS_1.Book(
-        ACTIVITY_FLASH_CARDS_1.resourcePath +
-          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.background.sections.background.imageName,
-        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.pageTurnAnimation,
+        ACTIVITY_FLASH_CARDS_1.animationPath +
+          ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.background.sections.background.bookOfRhymes
+            .frameInitial +
+          "0001.png",
+        ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.background.sections.background.bookOfRhymes,
         ACTIVITY_FLASH_CARDS_1.soundPath +
           ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.assets.sections.swipe.sound
         // undefined,

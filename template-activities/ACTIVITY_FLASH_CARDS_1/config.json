@@ -23,9 +23,18 @@
     "component": "backgroundCard",
     "sections": {
       "background": {
-        "component": "background",
+        "component": "flashcardBackground",
         "UIName": "BACKGROUND",
         "imageName": "flashcards_bookPage.png",
+        "bookOfRhymes": {
+          "component": "animation",
+          "UIName": "Page turn Animation",
+          "name": "onePageTurn",
+          "frameCount": 8,
+          "extension": ".png",
+          "frameInitial": "one_page_turn/one_page_tern_",
+          "dimensions": { "width": 960, "height": 640 }
+        },
         "dimensions": { "width": 960, "height": 640 }
       }
     }
@@ -48,16 +57,6 @@
           "bookOfRhymes": 3
         }
       },
-      "pageTurnAnimation": {
-        "component": "animation",
-        "UIName": "Page turn Animation",
-        "name": "onePageTurn",
-        "frameCount": 8,
-        "extension": ".png",
-        "frameInitial": "one_page_turn/one_page_tern_",
-        "dimensions": { "width": 960, "height": 640 }
-      },
-
       "billboard": {
         "component": "image",
         "UIName": "Slide Left Image",
