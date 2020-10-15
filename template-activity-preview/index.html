@@ -84,6 +84,36 @@ body {
 canvas {
   background-color: rgba(0, 0, 0, 0);
 }
+.video_wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+}
+.video_wrapper iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border:0;
+}
+.call_back {
+    position: absolute;
+    top: 15px;
+    left:calc(50% - 60px);
+    width: 120px;
+    background: #fff;
+    color: #000000;
+    border-radius: 10px;
+    height: 44px;
+    line-height: 30px;
+    padding: 7px 12px;
+    z-index: 111;
+    visibility: hidden;
+}
+.call_back:focus {
+    outline:0;
+    border:0;
+}
 @font-face {
     font-family: 'sassoon_sans_regular';
     src: url('res/Fonts/Sassoon_Sans_US_W01_Regular.ttf') format('truetype');
@@ -107,6 +137,7 @@ canvas {
 <body>
 <script src="res/loading.js"></script>
 <canvas id="gameCanvas" width="960" height="640"></canvas>
+<button class="call_back" onclick="switchVisible();">Close</button>
 <script src="frameworks/cocos2d-html5/CCBoot.js"></script>
 <script cocos src="main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>

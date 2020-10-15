@@ -152,3 +152,12 @@ cc.game.onStart = function () {
     });
 };
 cc.game.run();
+function switchVisible() {
+    if (document.getElementsByClassName('call_back')) {
+        if (document.getElementsByClassName("call_back")[0].style.display != 'none') {
+            document.getElementsByClassName('video_wrapper')[0].style.display = 'none';
+            document.getElementsByClassName('video_wrapper')[0].remove();
+            document.getElementsByClassName("call_back")[0].style.visibility = 'hidden';
+        }
+    }
+}
