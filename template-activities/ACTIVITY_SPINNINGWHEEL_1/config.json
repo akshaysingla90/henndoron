@@ -226,7 +226,7 @@
         "component": "background",
         "UIName": "BACKGROUND",
         "imageName": "bg.png",
-        "dimensions": { "width": 961, "height": 641 }
+        "dimensions": { "width": 960, "height": 640 }
       }
     }
   },

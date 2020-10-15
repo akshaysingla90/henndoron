@@ -170,29 +170,6 @@
       }
     }
   },
-  "gameInfo": {
-    "ignoreForAuthToolUI": true,
-    "isolatedNodes": 3,
-    "assembleObjectInfo": [
-      {
-        "name": "dwarf",
-        "partsCount": 6,
-        "animationFrameCount": 16,
-        "fps": 12,
-        "animationPath": "dwarf_animation/dwarf_animation_"
-      },
-      {
-        "name": "king",
-        "partsCount": 6,
-        "animationPath": "king_animation/king_animation_"
-      },
-      {
-        "name": "knight",
-        "partsCount": 6,
-        "animationPath": "knight_animation/knight_animation_"
-      }
-    ]
-  },
   "background": {
     "component": "backgroundCard",
     "sections": {
@@ -317,38 +294,7 @@
         "UIName": "Win Background",
         "imageName": "winScreen.png"
       },
-      "gameInfo": {
-        "ignoreForAuthToolUI": true,
-        "data": {
-          "dwarf": {
-            "name": "dwarf",
-            "partsCount": 6,
-            "animationFrameCount": 16,
-            "fps": 12,
-            "animationPath": "dwarf_animation/dwarf_animation_",
-            "frameCount": 16,
-            "frameInitial": "dwarf_animation/dwarf_animation_",
-            "extension": ".png"
-          },
-          "king": {
-            "name": "king",
-            "partsCount": 6,
-            "animationPath": "king_animation/king_animation_",
-            "frameCount": 16,
-            "frameInitial": "king_animation/king_animation_",
-            "extension": ".png"
-          },
-          "knight": {
-            "name": "knight",
-            "partsCount": 6,
-            "animationPath": "knight_animation/knight_animation_",
-            "frameCount": 16,
-            "frameInitial": "knight_animation/knight_animation_",
-            "extension": ".png"
-          }
-        },
-        "isolatedNodes": 3
-      },
+
       "allowedRadius": {
         "component": "select",
         "UIName": "Allowed radius",
@@ -385,6 +331,7 @@
             "parts": [
               {
                 "name": "dwarf_head",
+                "animationName": "Dwarf Animation",
                 "configurable": true,
                 "imageName": "dwarf_head.png",
                 "initialPosition": {
@@ -414,6 +361,7 @@
               },
               {
                 "name": "dwarf_lefthand",
+                "animationName": "Dwarf Animation",
                 "configurable": true,
                 "imageName": "dwarf_lefthand.png",
                 "initialPosition": {
@@ -443,6 +391,7 @@
               },
               {
                 "name": "dwarf_leftleg",
+                "animationName": "Dwarf Animation",
                 "configurable": true,
                 "imageName": "dwarf_leftleg.png",
                 "initialPosition": {
@@ -472,6 +421,7 @@
               },
               {
                 "name": "dwarf_righthand",
+                "animationName": "Dwarf Animation",
                 "configurable": true,
                 "imageName": "dwarf_righthand.png",
                 "initialPosition": {
@@ -501,6 +451,7 @@
               },
               {
                 "name": "dwarf_rightleg",
+                "animationName": "Dwarf Animation",
                 "configurable": true,
                 "imageName": "dwarf_rightleg.png",
                 "initialPosition": {
@@ -530,6 +481,7 @@
               },
               {
                 "name": "dwarf_torso",
+                "animationName": "Dwarf Animation",
                 "configurable": true,
                 "imageName": "dwarf_torso.png",
                 "initialPosition": {
@@ -614,6 +566,7 @@
             "parts": [
               {
                 "name": "king_head",
+                "animationName": "King Animation",
                 "configurable": true,
                 "imageName": "king_head.png",
                 "initialPosition": {
@@ -643,6 +596,7 @@
               },
               {
                 "name": "king_lefthand",
+                "animationName": "King Animation",
                 "configurable": true,
                 "imageName": "king_lefthand.png",
                 "initialPosition": {
@@ -672,6 +626,7 @@
               },
               {
                 "name": "king_leftleg",
+                "animationName": "King Animation",
                 "configurable": true,
                 "imageName": "king_leftleg.png",
                 "initialPosition": {
@@ -701,6 +656,7 @@
               },
               {
                 "name": "king_righthand",
+                "animationName": "King Animation",
                 "configurable": true,
                 "imageName": "king_righthand.png",
                 "initialPosition": {
@@ -730,6 +686,7 @@
               },
               {
                 "name": "king_rightleg",
+                "animationName": "King Animation",
                 "configurable": true,
                 "imageName": "king_rightleg.png",
                 "initialPosition": {
@@ -759,6 +716,7 @@
               },
               {
                 "name": "king_torso",
+                "animationName": "King Animation",
                 "configurable": true,
                 "imageName": "king_torso.png",
                 "initialPosition": {
@@ -841,6 +799,7 @@
             "parts": [
               {
                 "name": "knight_head",
+                "animationName": "Knight Animation",
                 "configurable": true,
                 "imageName": "knight_head.png",
                 "initialPosition": {
@@ -870,6 +829,7 @@
               },
               {
                 "name": "knight_lefthand",
+                "animationName": "Knight Animation",
                 "configurable": true,
                 "imageName": "knight_lefthand.png",
                 "initialPosition": {
@@ -899,6 +859,7 @@
               },
               {
                 "name": "knight_leftleg",
+                "animationName": "Knight Animation",
                 "configurable": true,
                 "imageName": "knight_leftleg.png",
                 "initialPosition": {
@@ -928,6 +889,7 @@
               },
               {
                 "name": "knight_righthand",
+                "animationName": "Knight Animation",
                 "configurable": true,
                 "imageName": "knight_righthand.png",
                 "initialPosition": {
@@ -957,6 +919,7 @@
               },
               {
                 "name": "knight_rightleg",
+                "animationName": "Knight Animation",
                 "configurable": true,
                 "imageName": "knight_rightleg.png",
                 "initialPosition": {
@@ -986,6 +949,7 @@
               },
               {
                 "name": "knight_torso",
+                "animationName": "Knight Animation",
                 "configurable": true,
                 "imageName": "knight_torso.png",
                 "initialPosition": {

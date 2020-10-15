@@ -40,10 +40,22 @@
   },
   "graphicalAssets": {
   },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "background.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
   "resources": {
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [
+        "background.png"
       ]
     }
   }

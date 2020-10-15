@@ -494,6 +494,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         this.playGround = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[0], cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5), this);
         let slidIndexHeight = this.getContentSize().height * 0.88;
         if (this.isTeacherView) {
+            if(ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length > 1){
             let nextButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.btn_next.enableState,
                 ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.btn_next.enableState, "", 0, ACTIVITY_BAP_1.Tag.NextImage,
                 cc.p(this.getContentSize().width * 0.57, slidIndexHeight), this);
@@ -507,6 +508,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             prevButton.setScale(0.4);
             this.handIconUI.push(prevButton);
             prevButton.setLocalZOrder(1000);
+            }
             // let clearButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.clear_disable.name,
             //     ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.clear_disable.name, "Clear",
             //     16, ACTIVITY_BAP_1.Tag.Clear, cc.p(this.getContentSize().width * 0.085,
@@ -528,12 +530,21 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
 
 
             //countLabel
-            let countLabel = this.createTTFLabel("Slide 1 of " + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length,
-                HDConstants.Sassoon_Regular, 16, HDConstants.Black,
-                cc.p(this.getContentSize().width * 0.5, slidIndexHeight), this);
-            countLabel.setAnchorPoint(cc.p(0.5, 0.65));
-            countLabel.setLocalZOrder(1000);
-            countLabel.setTag(ACTIVITY_BAP_1.Tag.CountLabel);
+            //let countLabel = this.createTTFLabel("Slide 1 of " + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length,
+           // console.log('length of slides ',ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length);
+            if(ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length > 1)
+            {
+                console.log('length of  ',ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length);
+                let countLabel = this.createTTFLabel("Slide 1 of " + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length,
+    
+                    HDConstants.Sassoon_Regular, 16, HDConstants.Black,
+                    cc.p(this.getContentSize().width * 0.5, slidIndexHeight), this);
+                countLabel.setAnchorPoint(cc.p(0.5, 0.65));
+                countLabel.setLocalZOrder(1000);
+                countLabel.setTag(ACTIVITY_BAP_1.Tag.CountLabel);
+
+            }
+         
         }
 
         let drawNode = new cc.DrawNode();
@@ -856,7 +867,12 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             this.getChildByTag(ACTIVITY_BAP_1.Tag.PrevImage).setTouchEnabled(this.curImageIdx !== 0);
             this.getChildByTag(ACTIVITY_BAP_1.Tag.NextImage).setOpacity(this.curImageIdx === ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length - 1 ? 100 : 255);
             this.getChildByTag(ACTIVITY_BAP_1.Tag.NextImage).setTouchEnabled(this.curImageIdx !== ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length - 1);
-            this.getChildByTag(ACTIVITY_BAP_1.Tag.CountLabel).setString("Slide " + (this.curImageIdx + 1) + " of " + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length);
+            if(ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length>1)
+            {
+                this.getChildByTag(ACTIVITY_BAP_1.Tag.CountLabel).setString("Slide " + (this.curImageIdx + 1) + " of " + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length);
+
+            }
+           
         }
         if (this.playGround && ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[ACTIVITY_BAP_1.ref.curImageIdx]) {
             this.playGround.runAction(new cc.Sequence(new cc.FadeOut(0.2), new cc.callFunc(() => {

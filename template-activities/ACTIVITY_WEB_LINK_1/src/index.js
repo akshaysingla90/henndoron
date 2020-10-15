@@ -36,36 +36,37 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
     },
     onEnterTransitionDidFinish : function (){
       this._super();
-      this.checkIfWindowCreated();
+        document.getElementsByClassName("call_back")[0].style.visibility = 'visible';
+     // this.checkIfWindowCreated();
     },
 
     checkIfWindowCreated : function (){
+      //
+      //   ACTIVITY_WEB_LINK_1.ref.autoFocus();
+      // if(  ACTIVITY_WEB_LINK_1.ref.iFrame && ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd)  {
+      //     ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.height = '100%';
+      //     ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.top = '0';
+      //     ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.left = '0';
+      //     ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.bottom = '0';
+      //     ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.right = '0';
+      //     ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.width = '100%';
+      //
+      //     ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.contentWindow.window.addEventListener('mousemove', this.focusIframe);
+      // }else{
 
-        ACTIVITY_WEB_LINK_1.ref.autoFocus();
-      if(  ACTIVITY_WEB_LINK_1.ref.iFrame && ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd)  {
-          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.height = '100%';
-          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.top = '0';
-          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.left = '0';
-          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.bottom = '0';
-          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.right = '0';
-          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.width = '100%';
-
-          ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.contentWindow.window.addEventListener('mousemove', this.focusIframe);
-      }else{
-
-      }
+      // }
     },
 
-    autoFocus : function (){
-        let container = document.getElementById('Cocos2dGameContainer');
-        if(container){
-            container.focus();
-
-        }
-        if(ACTIVITY_WEB_LINK_1.ref){
-            setTimeout(ACTIVITY_WEB_LINK_1.ref.autoFocus, 500);
-        }
-    },
+    // autoFocus : function (){
+    //     let container = document.getElementById('Cocos2dGameContainer');
+    //     if(container){
+    //         container.focus();
+    //
+    //     }
+    //     if(ACTIVITY_WEB_LINK_1.ref){
+    //         setTimeout(ACTIVITY_WEB_LINK_1.ref.autoFocus, 500);
+    //     }
+    // },
 
     fetchGameData: function () {
         HDNetworkHandler.get(HDAPIKey.GameData, {"roomId": HDAppManager.roomId}, true, (err, res) => {
@@ -78,11 +79,12 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         if(ACTIVITY_WEB_LINK_1.ref.iFrame && ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd)  {
            // ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._iframe.contentWindow.window.removeEventListener('mousemove', this.focusIframe);
         }
-        ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.removeEventListener('mousemove', this.focusIframe);
+       // ACTIVITY_WEB_LINK_1.ref.iFrame._renderCmd._div.removeEventListener('mousemove', this.focusIframe);
         ACTIVITY_WEB_LINK_1.ref.removeAllChildrenWithCleanup(true);
         ACTIVITY_WEB_LINK_1.ref.customTexture = false;
         ACTIVITY_WEB_LINK_1.ref.interactableObject = false;
         ACTIVITY_WEB_LINK_1.ref = null;
+        document.getElementsByClassName("call_back")[0].style.visibility = 'hidden';
     },
 
     triggerScript: function (message) {
@@ -99,32 +101,37 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
 
 
     setupUI: function () {
-        let ui = new ccui.WebView(ACTIVITY_WEB_LINK_1.config.properties.urlInfo.url);
-        ui.setPosition(cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.4));
-        ui.setContentSize(cc.size(this.getContentSize().width * 1, this.getContentSize().height * 0.9));
-        ui.setLocalZOrder(100);
-        this.addChild(ui);
-        this.iFrame = ui;
-        window.addEventListener('resize', this.browserResized);
-        this.createColourLayer(cc.color(0,255, 0), 960, 640, cc.p(0, 0), this, 200);
+        this.setBackground( ACTIVITY_WEB_LINK_1.spriteBasePath + ACTIVITY_WEB_LINK_1.config.background.sections.background.imageName);
+        let div   =  document.createElement('div');
+        let iFrameDiv   =  document.createElement('div');
+        iFrameDiv.setAttribute('class', 'video_wrapper');
+       let iFrame =   document.createElement('iFrame');
+       iFrame.width = "600";
+       iFrame.height = "300";
+       iFrame.src = ACTIVITY_WEB_LINK_1.config.properties.urlInfo.url;
+       document.body.appendChild(div);
+       let container = document.getElementById('Cocos2dGameContainer');
+       div.appendChild(container);
+       div.appendChild(iFrameDiv);
+       iFrameDiv.appendChild(iFrame);
     },
-    browserResized :function (){
-        if( ACTIVITY_WEB_LINK_1.ref.iFrame ) {
-            ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(0, cc.p(
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5 + Math.random() * 1 + 1,
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4 +  Math.random() * 1 + 1)) );
-        }
-    },
-    focusIframe : function (){
-        if(!ACTIVITY_WEB_LINK_1.ref.iFrame)
-            return;
-        ACTIVITY_WEB_LINK_1.ref.getParent().setActiveActivityInfo(false);
-        ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-        ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo( ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
-            ACTIVITY_WEB_LINK_1.ref.iFrame.getPositionX(),
-            ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
-    },
+    // browserResized :function (){
+    //     // if( ACTIVITY_WEB_LINK_1.ref.iFrame ) {
+    //     //     ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
+    //     //     ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(0, cc.p(
+    //     //         ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5 + Math.random() * 1 + 1,
+    //     //         ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4 +  Math.random() * 1 + 1)) );
+    //     // }
+    // },
+    // focusIframe : function (){
+    //     // if(!ACTIVITY_WEB_LINK_1.ref.iFrame)
+    //     //     return;
+    //     // ACTIVITY_WEB_LINK_1.ref.getParent().setActiveActivityInfo(false);
+    //     // ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
+    //     // ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo( ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
+    //     //     ACTIVITY_WEB_LINK_1.ref.iFrame.getPositionX(),
+    //     //     ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
+    // },
 
     touchEventListener: function (touch, event) {
         switch (event._eventCode) {
@@ -199,17 +206,17 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
 
     onMouseMove: function (event) {
         ACTIVITY_WEB_LINK_1.ref.updateMouseIcon(event.getLocation());
-        ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-        if(ACTIVITY_WEB_LINK_1.ref.convertToNodeSpace(event.getLocation()).y > ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.8){
-            ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5,
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.2)) );
-        }else{
-            ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5,
-                ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
-        }
+        // ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
+        // if(ACTIVITY_WEB_LINK_1.ref.convertToNodeSpace(event.getLocation()).y > ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.8){
+        //     ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
+        //     ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
+        //         ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5,
+        //         ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.2)) );
+        // }else{
+        //     ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
+        //         ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5,
+        //         ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
+        // }
         if (!ACTIVITY_WEB_LINK_1.ref.isStudentInteractionEnable)
             return;
     },
