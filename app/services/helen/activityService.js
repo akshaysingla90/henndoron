@@ -64,9 +64,14 @@ activityService.copyTemplates = async (activities) => {
   await shell.exec(`sudo git pull`);
   for (let index = 0; index < activities.length; index++) {
     let activity = activities[index];
-    let templateCocoPath = path.join(`${cocoProjectPath}/HelenDoron/res/Activity${activity.path}`);
+    //Copy Source to the template
+    let templateCocoSrcPath = path.join(`${cocoProjectPath}/HelenDoron/res/Activity${activity.path}`);
     let templateNodePath = path.join(__dirname, `../../../template-activities${activity.path}`);
-    await fs.copy(templateCocoPath, templateNodePath);
+    await fs.copy(templateCocoSrcPath, templateNodePath);
+    // Copy Resources to the template 
+    let templateNodeResPath = path.join(`${templateNodePath}/res`);
+    let templateCocoResPath = path.join(`${cocoProjectPath}/HelenDoron/AsyncActivity/res/Activity${activity.path}/res`);
+    await fs.copy(templateCocoResPath, templateNodeResPath);
   }
   await shell.cd(path.join(__dirname, `../../..`));
   await shell.exec(`sudo git add template-activities`);

@@ -92,10 +92,11 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView = HDAppManager.isTeacherView;
             ACTIVITY_BUILD_SOMETHING_1.ref.isStudentInteractionEnable = ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView;
 
-            for(let character of ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data){
-                ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject.push( ...character.parts);
-            }
-            ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj = [...ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject];
+            ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [];
+            ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj = [];
+
+            ACTIVITY_BUILD_SOMETHING_1.ref.assignTagsToCarouselItems();
+            //ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj = [...ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject];
 
             // ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data];
             // ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject = [...ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data];
@@ -127,6 +128,21 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             ACTIVITY_BUILD_SOMETHING_1.ref.interval = null;
         }
         ACTIVITY_BUILD_SOMETHING_1.ref = null;
+    },
+
+    assignTagsToCarouselItems: function () {
+        let initialTag = 0;
+        for(let idx = 0; idx < ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data.length; ++idx){
+            let characterParts = ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data[idx].parts;
+            for (let i = 0; i < characterParts.length; ++i){
+                let part = characterParts[i];
+                part.tag = initialTag;
+                ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject.push(part);
+                ACTIVITY_BUILD_SOMETHING_1.ref.originalDismantalObj.push(part);
+                ++initialTag;
+            }
+
+        }
     },
 
     /**
@@ -205,7 +221,6 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             let startButtonObject = ACTIVITY_BUILD_SOMETHING_1.config.buttons.data.startButton;
             let startButton = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.enableState, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.pushedState, "", 32, ACTIVITY_BUILD_SOMETHING_1.Tag.startButton, cc.p(this.getContentSize().width * 0.09,
                 this.getContentSize().height * 0.2), this, this, ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + startButtonObject.disableState);
-           console.log('butto position ',startButton.getPosition());
             startButton.setScale(startButtonObject.scale);
             startButton.setEnabled(true);
             startButton.setLocalZOrder(10);
@@ -457,8 +472,9 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     validateData: function (index, position, size, isNew, connectionNode, isAttachedToCorrectPoints) {
         var dataObject = ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject[index];
         ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject.splice(index, 1);
-        var splitData = dataObject.name.split("_");
-        var nodeName = splitData[0];
+        //var splitData = dataObject.name.split("_");
+        //var nodeName = splitData[0];
+        var nodeName = dataObject.animationName;
         if (!isNew) {
             let index = this.getNodeIndex(connectionNode);
             var isCorrectName = isAttachedToCorrectPoints;//this.checkIfAllAttachedImagesSameType(index,nodeName);
@@ -509,11 +525,11 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             })
         }
         this.sendUserData();
-        for (let object of ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo) {
+        for (let object of ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data) {
             for (let assembledObj of this.userDataForSync) {
-                if (assembledObj.isCorrect && object.name == assembledObj.nodeName &&
-                    object.partsCount == assembledObj.data.length && !assembledObj.isAnimationCompled) {
-                    this.allPartsConnectedSuccessfully(assembledObj, object);
+                if (assembledObj.isCorrect && object.animation.name == assembledObj.nodeName &&
+                    object.parts.length == assembledObj.data.length && !assembledObj.isAnimationCompled) {
+                    this.allPartsConnectedSuccessfully(assembledObj, object.animation);
                     assembledObj.isAnimationCompled = true;
                     if (ACTIVITY_BUILD_SOMETHING_1.ref.isTeacherView && ACTIVITY_BUILD_SOMETHING_1.ref.gameState == ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO) {
                         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
@@ -521,7 +537,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                             'data': {
                                 'userName': HDAppManager.userName,
                                 "assembledObj": assembledObj,
-                                "animationInfo": object
+                                "animationInfo": object.animation
                             }
                         });
                     }
@@ -723,7 +739,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                 };
             }
         }
-        if (this.currentIsolatedNode < ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.isolatedNodes) {
+        if (this.currentIsolatedNode < ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data.length) {
             this.currentIsolatedNode++;
             return {"isIsolatedNode": true};
         }
@@ -1475,13 +1491,12 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
         // touch prevention button
         let filteredArray = res.data.filter((item, idx) => res.data.findIndex((obj, pos) => obj.nodeName === item.nodeName) === idx);
         // console.log("filterArray", filteredArray,filteredArray.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.length, filteredArray.every(item => item.isCorrect && item.data.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.find(obj => obj.name === item.nodeName).partsCount));
-        if (filteredArray.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.length && filteredArray.every(item => item.isCorrect && item.data.length === ACTIVITY_BUILD_SOMETHING_1.config.gameInfo.assembleObjectInfo.find(obj => obj.name === item.nodeName).partsCount)) {
+        if (filteredArray.length === ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data.length && filteredArray.every(item => item.isCorrect && item.data.length === ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data.find(obj => obj.animation.name === item.nodeName).parts.length)) {
             isAllCorrect = true;
         }
-       // this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnsuccessfully"].content);
-       ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.TargetAssembledUnsuccessfully.enable && this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.TargetAssembledUnsuccessfully.content);
-       ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.TargetAssembledSuccessfully.enable &&  this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data.TargetAssembledSuccessfully.content);
-       var bg = this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
+       let scriptKey = isAllCorrect ? "TargetAssembledSuccessfully" : "TargetAssembledUnSuccessfully";
+        ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[scriptKey].enable && this.triggerScript(ACTIVITY_BUILD_SOMETHING_1.config.teacherScripts.data[scriptKey].content);
+        var bg = this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
         if (bg) {
             this.getChildByTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer).removeAllChildren();
             bg.setTexture(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + (isAllCorrect ? ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.winBG.imageName : ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.looseBG.imageName));
