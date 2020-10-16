@@ -709,7 +709,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
         layer.setLocalZOrder(this.lessonZOrder);
         layer.setScale(0.59);
         this.handIconUI.push(layer);
-        let activityName = this.createTTFLabel("Magic Hat", HDConstants.LondrinaSolid_Regular, 32,cc.color(101, 64, 39, 255),
+        let activityName = this.createTTFLabel("Magic Hat", HDConstants.LondrinaSolid_Regular, 28,cc.color(101, 64, 39, 255),
             cc.p(layer.getContentSize().width * 0.5, layer.getContentSize().height * 0.6), layer);
         activityName.setTag(lesson_1.Tag.activityName);
         activityName.setDimensions(cc.size(layer.getContentSize().width * 0.9, 0));
