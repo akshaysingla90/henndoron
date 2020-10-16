@@ -24,7 +24,7 @@ let routes = [
             activityName: Joi.string().required().description('Module name'),
             allocatedTime: Joi.number().required().description('Module time'),
             webUrl: Joi.string().optional().description('Module web Url'),
-            sharedScreen: Joi.string().optional().description('Web Url share screen'), //todo 
+            // sharedScreen: Joi.string().optional().description('Web Url share screen'), //todo 
           }))
           .error(new Error('Module file is not enterd correctly!'))
           .description('Activity Ids in order'),

@@ -128,8 +128,9 @@ async function makeLesson(lessonId) {
       configData.properties.activityPath = webUrlNameSpace;
       configData.properties.url = `res/Activity/${webUrlNameSpace}/`;
       configData.properties.namespace = `${webUrlNameSpace}`;
-      configData.properties.sharedScreen = lesson.activities[index].sharedScreen; //todo
-      if (lesson.activities[index].webUrl) configData.properties.urlInfo.url = lesson.activities[index].webUrl; //todo similar
+      if (lesson.activities[index].webUrl) configData.properties.urlInfo.url = lesson.activities[index].webUrl;
+      // configData.properties.sharedScreen = lesson.activities[index].sharedScreen; //todo
+      // if (lesson.activities[index].webUrl) configData.properties.urlInfo.url = lesson.activities[index].webUrl; //todo similar
     }
     configData.properties.activityName = lesson.activities[index].activityName;
     configData.properties.allocatedTime = lesson.activities[index].allocatedTime;
