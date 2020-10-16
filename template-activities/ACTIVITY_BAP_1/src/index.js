@@ -75,9 +75,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             ACTIVITY_BAP_1.soundPath = ACTIVITY_BAP_1.resourcePath + "Sound/";
             ACTIVITY_BAP_1.animationBasePath = ACTIVITY_BAP_1.resourcePath + "AnimationFrames/";
             ACTIVITY_BAP_1.spriteBasePath = ACTIVITY_BAP_1.resourcePath + "Sprite/";
-
             ref.isTeacherView = HDAppManager.isTeacherView;
-
             ref.setupUI();
             if (ref.isTeacherView) {
                 ref.updateRoomData();
@@ -118,7 +116,6 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
     triggerTip: function (message) {
         if (this.parent) {
-            console.log('message is ',message);
             this.parent.showTipMessage(message);
         }
     },
@@ -153,7 +150,6 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         if (this.syncDataInfo && this.syncDataInfo.dataArray) {
             let userNames = Object.keys(this.syncDataInfo.dataArray);
             for (var i = 0; i < userNames.length; ++i) {
-                console.log(Object.keys(this.syncDataInfo.dataArray[eval("\"" + userNames[i] + "\"")]).length);
                 for (var j = 0; j < Object.keys(this.syncDataInfo.dataArray[eval("\"" + userNames[i] + "\"")]).length; ++j) {
                     if ((this.syncDataInfo.dataArray[eval("\"" + userNames[i] + "\"")][eval("\"" + j + "\"")])) {
                         for (var k = 0; k < (this.syncDataInfo.dataArray[eval("\"" + userNames[i] + "\"")][eval("\"" + j + "\"")]).length; ++k) {
@@ -528,17 +524,11 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             drawMode.setAnchorPoint(cc.p(0.5, 0.5));
             this.handIconUI.push(drawMode);
 
-
-            //countLabel
-            //let countLabel = this.createTTFLabel("Slide 1 of " + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length,
-           // console.log('length of slides ',ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length);
             if(ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length > 1)
             {
-                console.log('length of  ',ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length);
                 let countLabel = this.createTTFLabel("Slide 1 of " + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length,
-    
-                    HDConstants.Sassoon_Regular, 16, HDConstants.Black,
-                    cc.p(this.getContentSize().width * 0.5, slidIndexHeight), this);
+                HDConstants.Sassoon_Regular, 16, HDConstants.Black,
+                cc.p(this.getContentSize().width * 0.5, slidIndexHeight), this);
                 countLabel.setAnchorPoint(cc.p(0.5, 0.65));
                 countLabel.setLocalZOrder(1000);
                 countLabel.setTag(ACTIVITY_BAP_1.Tag.CountLabel);
@@ -594,7 +584,6 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     performPaint: function (last, cur, color, userName, tag, imageIndex) {
-        // console.log('tag', tag, 'image index', imageIndex);
         let centreX = Math.abs(cur.x - last.x) * 0.5;
         let centreY = Math.abs(cur.y - last.y) * 0.5;
         let midPointX = last.x < cur.x ? last.x + centreX : (cur.x + centreX);
@@ -862,7 +851,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
      */
     updateImage: function (index) {
         this.curImageIdx = index;
-        if (this.isTeacherView) {
+        if (this.isTeacherView && this.getChildByTag(ACTIVITY_BAP_1.Tag.PrevImage)) {
             this.getChildByTag(ACTIVITY_BAP_1.Tag.PrevImage).setOpacity(this.curImageIdx === 0 ? 100 : 255);
             this.getChildByTag(ACTIVITY_BAP_1.Tag.PrevImage).setTouchEnabled(this.curImageIdx !== 0);
             this.getChildByTag(ACTIVITY_BAP_1.Tag.NextImage).setOpacity(this.curImageIdx === ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images.length - 1 ? 100 : 255);
