@@ -240,7 +240,7 @@ ACTIVITY_FLASH_CARDS_1.BillboardSprite = cc.Sprite.extend({
   },
   _placeDisplayImageInMiddle: function (displayImage, pos) {
     var displayImageSprite = new cc.Sprite(displayImage);
-    displayImageSprite.setScaleY((this.height * 0.43) / displayImageSprite.height);
+    //displayImageSprite.setScaleY((this.height * 0.43) / displayImageSprite.height);
     displayImageSprite.setPosition(pos);
     this.addChild(displayImageSprite, 1);
   },
