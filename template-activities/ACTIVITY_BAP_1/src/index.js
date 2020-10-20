@@ -26,7 +26,7 @@ ACTIVITY_BAP_1.intervals = [];
 ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     self: null,
     curColor: cc.color(0, 0, 0, 0),
-    penThickness: 10,
+    penThickness: 5,
     eraserThickness: 20,
     playGround: null,
     isTeacherView: false,
@@ -431,7 +431,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     colorPanel: function () {
-        let colorPanel = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + "palette_sidebar.png", cc.p(0, this.getContentSize().height * 0.5), this);
+        let colorPanel = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.colorPaletteBase.imageName, cc.p(0, this.getContentSize().height * 0.5), this);
         colorPanel.setLocalZOrder(1000);
         colorPanel.setAnchorPoint(0, 0.5);
         this.handIconUI.push(colorPanel);
@@ -449,7 +449,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         }
 
         //Eraser
-        let eraser = this.createButton(ACTIVITY_BAP_1.spriteBasePath + "eraser_icon.png", ACTIVITY_BAP_1.spriteBasePath + "eraser_icon.png", "", 0, colorInfo.length, cc.p(colorPanel.getContentSize().width * 0.472, colorPanel.getContentSize().height * 0.072), colorPanel, this);
+        let eraser = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.eraser.enableState, ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.eraser.pushedState, "", 0, colorInfo.length, cc.p(colorPanel.getContentSize().width * 0.472, colorPanel.getContentSize().height * 0.072), colorPanel, this);
         eraser.addTouchEventListener(this.selectedColorCallback, this);
         eraser.setScale(0.46);
         eraser.initialScale = 0.46;
@@ -595,7 +595,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         } else if (this.isTeacherView && !this.sharedMode) {
             node.setVisible(userName == HDAppManager.username);
         }
-        node.drawQuadBezier(last, cc.p(midPointX, midPointY), cur, 2, 10, color);
+        node.drawQuadBezier(last, cc.p(midPointX, midPointY), cur, 2, this.penThickness, color);
         let imgIdx = imageIndex;
         if (!this.allLineInfo[userName]) {
             this.allLineInfo[userName] = [];
