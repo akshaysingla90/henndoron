@@ -610,13 +610,13 @@
                     "y": 160
                   },
                   {
-                    "x": 125,
-                    "y": 35,
+                    "x": 40,
+                    "y": 140,
                     "snapDetails": {
                       "name": "king_torso",
                       "point": {
-                        "x": 30,
-                        "y": 125
+                        "x": 180,
+                        "y": 205
                       }
                     }
                   }
@@ -670,13 +670,13 @@
                     "y": 155
                   },
                   {
-                    "x": 30,
-                    "y": 40,
+                    "x": 115,
+                    "y": 140,
                     "snapDetails": {
                       "name": "king_torso",
                       "point": {
-                        "x": 60,
-                        "y": 200
+                        "x": 55,
+                        "y": 205
                       }
                     }
                   }
@@ -737,24 +737,24 @@
                     }
                   },
                   {
-                    "x": 60,
-                    "y": 200,
+                    "x": 55,
+                    "y": 205,
                     "snapDetails": {
                       "name": "king_righthand",
                       "point": {
-                        "x": 125,
-                        "y": 155
+                        "x": 115,
+                        "y": 140
                       }
                     }
                   },
                   {
                     "x": 180,
-                    "y": 200,
+                    "y": 205,
                     "snapDetails": {
                       "name": "king_lefthand",
                       "point": {
-                        "x": 20,
-                        "y": 160
+                        "x": 40,
+                        "y": 140
                       }
                     }
                   },
@@ -843,13 +843,13 @@
                     "y": 145
                   },
                   {
-                    "x": 95,
-                    "y": 30,
+                    "x": 30,
+                    "y": 160,
                     "snapDetails": {
                       "name": "knight_torso",
                       "point": {
-                        "x": 170,
-                        "y": 150
+                        "x": 200,
+                        "y": 180
                       }
                     }
                   }
@@ -899,13 +899,13 @@
                 "localZOrder": 8,
                 "snappingPoints": [
                   {
-                    "x": 110,
+                    "x": 100,
                     "y": 160,
                     "snapDetails": {
                       "name": "knight_torso",
                       "point": {
-                        "x": 45,
-                        "y": 150
+                        "x": 30,
+                        "y": 180
                       }
                     }
                   },
@@ -970,24 +970,24 @@
                     }
                   },
                   {
-                    "x": 45,
-                    "y": 150,
+                    "x": 30,
+                    "y": 180,
                     "snapDetails": {
                       "name": "knight_righthand",
                       "point": {
-                        "x": 110,
+                        "x": 100,
                         "y": 160
                       }
                     }
                   },
                   {
-                    "x": 170,
-                    "y": 150,
+                    "x": 200,
+                    "y": 180,
                     "snapDetails": {
                       "name": "knight_lefthand",
                       "point": {
-                        "x": 10,
-                        "y": 145
+                        "x": 30,
+                        "y": 160
                       }
                     }
                   },

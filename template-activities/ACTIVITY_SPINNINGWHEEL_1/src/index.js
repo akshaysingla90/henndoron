@@ -620,7 +620,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
             return;
 
         this.enableStopButton(false);
-        var action = cc.repeatForever(cc.sequence(cc.delayTime(0.5), cc.callFunc(this.updateWheelRotation, this)));
+        var action = cc.repeatForever(cc.sequence(cc.delayTime(0.3), cc.callFunc(this.updateWheelRotation, this)));
         action.setTag(111);
         ACTIVITY_SPINNINGWHEEL_1.ref.runAction(action);
     },
@@ -733,7 +733,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
         });
 
         var animationSprite = ACTIVITY_SPINNINGWHEEL_1.ref.baseLayer.getChildByTag(ACTIVITY_SPINNINGWHEEL_1.Tag.animationSprite);
-        animationSprite.runAction(cc.sequence([completionAnimation, cc.delayTime(10), updateTarget]));
+        animationSprite.runAction(cc.sequence([completionAnimation, cc.delayTime(4), updateTarget]));
 
         if (ACTIVITY_SPINNINGWHEEL_1.ref.tableView)
             ACTIVITY_SPINNINGWHEEL_1.ref.tableView.setTouchEnabled(true);
@@ -746,7 +746,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
                 ACTIVITY_SPINNINGWHEEL_1.ref.parent.setStudentPanelActive(!ACTIVITY_SPINNINGWHEEL_1.ref.isRotating);
             ACTIVITY_SPINNINGWHEEL_1.ref.enableGoButton(ACTIVITY_SPINNINGWHEEL_1.ref.isGoButtonEnabled());
         });
-        ACTIVITY_SPINNINGWHEEL_1.ref.runAction(cc.sequence([cc.delayTime(12), enableButton]));
+        ACTIVITY_SPINNINGWHEEL_1.ref.runAction(cc.sequence([cc.delayTime(5), enableButton]));
     },
 
     /**
@@ -1051,7 +1051,7 @@ ACTIVITY_SPINNINGWHEEL_1.SpinningWheelLayer = HDBaseLayer.extend({
 ACTIVITY_SPINNINGWHEEL_1.HDCardCell = cc.TableViewCell.extend({
     cellData: null,
     cellHorizontalPadding: 10,
-    cellVerticalPadding: 10,
+    cellVerticalPadding: 20,
     cardTextHeight: 25,
     highlightLayer: null,
 
@@ -1076,7 +1076,7 @@ ACTIVITY_SPINNINGWHEEL_1.HDCardCell = cc.TableViewCell.extend({
 
         let cardElementImage = new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + data.imageName);
         cardElementImage.setContentSize(cc.size(colourLayer._contentSize.width, colourLayer._contentSize.height));
-        cardElementImage.setPosition(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.5);
+        cardElementImage.setPosition(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.7);
         cardElementImage.setAnchorPoint(0, 0);
         parent.addChild(cardElementImage, 3);
 

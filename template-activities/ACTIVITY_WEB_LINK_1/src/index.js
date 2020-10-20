@@ -106,8 +106,8 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         let iFrameDiv   =  document.createElement('div');
         iFrameDiv.setAttribute('class', 'video_wrapper');
        let iFrame =   document.createElement('iFrame');
-       iFrame.width = "600";
-       iFrame.height = "300";
+       iFrame.width = "960";
+       iFrame.height = "640";
        iFrame.src = ACTIVITY_WEB_LINK_1.config.properties.urlInfo.url;
        document.body.appendChild(div);
        let container = document.getElementById('Cocos2dGameContainer');
