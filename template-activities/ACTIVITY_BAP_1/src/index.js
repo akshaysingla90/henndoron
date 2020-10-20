@@ -431,17 +431,17 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     colorPanel: function () {
-        let colorPanel = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.colorPaletteBase.imageName, cc.p(0, this.getContentSize().height * 0.5), this);
+        let colorPanel = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.colorPaletteBase.imageName, cc.p(0, this.getContentSize().height * 0.48), this);
         colorPanel.setLocalZOrder(1000);
         colorPanel.setAnchorPoint(0, 0.5);
         this.handIconUI.push(colorPanel);
         let colorInfo = ACTIVITY_BAP_1.config.assets.sections.color.data;
-        let positionInY = [0.93, 0.82, 0.72, 0.615, 0.51, 0.407, 0.305, 0.202, 0.102]
+        let positionInY = [0.79, 0.70, 0.61, 0.52, 0.43, 0.34, 0.25, 0.16, 0.2]
         for (let i = 0; i < colorInfo.length; ++i) {
             let button = this.createButton(ACTIVITY_BAP_1.spriteBasePath + colorInfo[i].imageName, ACTIVITY_BAP_1.spriteBasePath + colorInfo[i].imageName, "", 0, i, cc.p(colorPanel.getContentSize().width * 0.475, colorPanel.getContentSize().height * positionInY[i]), colorPanel, this);
             button.addTouchEventListener(this.selectedColorCallback, this);
-            button.setScale(0.42);
-            button.initialScale = 0.42;
+            button.setScale(0.38);
+            button.initialScale = 0.38;
             button.rgb = colorInfo[i].rgb;
             if (i == 0) {
                 this.selectedColorCallback(button, ccui.Widget.TOUCH_ENDED)
@@ -449,19 +449,30 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         }
 
         //Eraser
-        let eraser = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.eraser.enableState, ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.eraser.pushedState, "", 0, colorInfo.length, cc.p(colorPanel.getContentSize().width * 0.472, colorPanel.getContentSize().height * 0.072), colorPanel, this);
+        let eraser = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.eraser.enableState, ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.eraser.pushedState, "", 0, colorInfo.length, cc.p(colorPanel.getContentSize().width * 0.470, colorPanel.getContentSize().height * 0.064), colorPanel, this);
         eraser.addTouchEventListener(this.selectedColorCallback, this);
-        eraser.setScale(0.46);
-        eraser.initialScale = 0.46;
+        eraser.setScaleX(0.52);
+        eraser.setScaleY(0.46);
+        eraser.initialScaleX = 0.52;
+        eraser.initialScaleY = 0.46;
         eraser.rgb = null;
     },
 
     selectedColorCallback: function (sender, type) {
         sender.stopAllActions();
-        sender.runAction(new cc.Sequence(new cc.ScaleTo(0.2, sender.initialScale - 0.05), new cc.ScaleTo(0.2, sender.initialScale + 0.01)));
-        sender.runAction(new cc.Sequence(new cc.ScaleTo(0.2, sender.initialScale - 0.05), new cc.ScaleTo(0.2, sender.initialScale + 0.01)));
+        if(sender.rgb) {
+            sender.runAction(new cc.Sequence(new cc.ScaleTo(0.2, sender.initialScale - 0.05), new cc.ScaleTo(0.2, sender.initialScale + 0.05)));
+        }else{
+            sender.runAction(new cc.Sequence(new cc.ScaleTo(0.2, sender.initialScaleX - 0.05, sender.initialScaleY - 0.05), new cc.ScaleTo(0.2, sender.initialScaleX + 0.05, sender.initialScaleY + 0.05)));
+        }
+        // sender.runAction(new cc.Sequence(new cc.ScaleTo(0.2, sender.initialScale - 0.05), new cc.ScaleTo(0.2, sender.initialScale + 0.01)));
+
         if (this.selectedColorObject) {
-            this.selectedColorObject.setScale(this.selectedColorObject.initialScale);
+            if(this.selectedColorObject.rgb) {
+                this.selectedColorObject.setScale(this.selectedColorObject.initialScale);
+            }else{
+                this.selectedColorObject.setScale(this.selectedColorObject.initialScaleX, this.selectedColorObject.initialScaleY);
+            }
         }
         this.selectedColorObject = sender;
         switch (type) {
@@ -470,7 +481,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                     this.selectedColor = cc.color(sender.rgb.r, sender.rgb.g, sender.rgb.b, 255);
                     this.erasing = false;
                     this.MouseTextureUrl = ( ACTIVITY_BAP_1.spriteBasePath) + "cursor_pencil.png";
-                } else {
+                } else{
                     this.erasing = true;
                     this.MouseTextureUrl = (  ACTIVITY_BAP_1.spriteBasePath) + "cursor_eraser.png";
                 }
@@ -505,15 +516,6 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             this.handIconUI.push(prevButton);
             prevButton.setLocalZOrder(1000);
             }
-            // let clearButton = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.clear_disable.name,
-            //     ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.graphicalAssets.clear_disable.name, "Clear",
-            //     16, ACTIVITY_BAP_1.Tag.Clear, cc.p(this.getContentSize().width * 0.085,
-            //         this.getContentSize().height * 0.15), this);
-            // clearButton.setTitleColor(cc.color(0, 0, 0, 255));
-            // // clearButton.setScale(0.7, 0.7);
-            // clearButton.setLocalZOrder(1000);
-            // this.handIconUI.push(clearButton);
-
             let drawMode = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState,
                 ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState, "Individual Mode",
                 16, ACTIVITY_BAP_1.Tag.DrawMode, cc.p(this.getContentSize().width * 0.915,

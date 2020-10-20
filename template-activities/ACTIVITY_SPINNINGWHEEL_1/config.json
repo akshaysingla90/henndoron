@@ -385,7 +385,7 @@
         "component": "carouselItems",
         "allowDelete": false,
         "allowAdd": false,
-        "dimensions": { "width": 72, "height": 72 },
+        "dimensions": { "width": 100, "height": 100 },
         "data": [
           {
             "imageName": "ant.png",

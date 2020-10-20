@@ -1076,9 +1076,9 @@ ACTIVITY_SPINNINGWHEEL_1.HDCardCell = cc.TableViewCell.extend({
 
         let cardElementImage = new cc.Sprite(ACTIVITY_SPINNINGWHEEL_1.ref.spriteBasePath + data.imageName);
         cardElementImage.setContentSize(cc.size(colourLayer._contentSize.width, colourLayer._contentSize.height));
-        cardElementImage.setPosition(this.cellHorizontalPadding * 0.5, this.cellVerticalPadding * 0.7);
-        cardElementImage.setAnchorPoint(0, 0);
-        parent.addChild(cardElementImage, 3);
+        cardElementImage.setPosition(cc.p(this._contentSize.width * 0.5, this._contentSize.height * 0.6));
+        cardElementImage.setAnchorPoint(0.5, 0.5);
+        this.addChild(cardElementImage, 3);
 
         let textBaseLayer = new cc.LayerColor(cc.color(ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.r, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.g, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.b, ACTIVITY_SPINNINGWHEEL_1.ref.config.assets.sections.carouselBoxCardBackground.color.a), this._contentSize.width - this.cellHorizontalPadding, this.cardTextHeight);
         textBaseLayer.setPosition(cc.p(this.cellHorizontalPadding * 0.5, this._contentSize.height - this.cellVerticalPadding - this.cardTextHeight));
