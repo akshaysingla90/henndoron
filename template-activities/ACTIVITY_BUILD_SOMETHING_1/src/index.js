@@ -883,7 +883,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             case ACTIVITY_BUILD_SOMETHING_1.socketEventKey.SHOW_STUDENT_BUILD:
                 ACTIVITY_BUILD_SOMETHING_1.ref.showPreviewToAll(res.data);
                 break;
-            case ACTIVITY_BAP_1.socketEventKey.STUDENT_INTERACTION:
+            case ACTIVITY_BUILD_SOMETHING_1.socketEventKey.STUDENT_INTERACTION:
                 this.onUpdateStudentInteraction(res.data);
                 break;
             case ACTIVITY_BUILD_SOMETHING_1.socketEventKey.PLAY_ANIMATION:
