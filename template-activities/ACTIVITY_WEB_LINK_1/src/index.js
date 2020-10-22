@@ -2,6 +2,7 @@ var ACTIVITY_WEB_LINK_1 = {};
 ACTIVITY_WEB_LINK_1.Tag = {
 }
 ACTIVITY_WEB_LINK_1.socketEventKey = {
+    REMOVE_IFRAME : 0,
 }
 ACTIVITY_WEB_LINK_1.ref = null;
 ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
@@ -26,7 +27,9 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
             ACTIVITY_WEB_LINK_1.animationBasePath = ACTIVITY_WEB_LINK_1.resourcePath + "AnimationFrames/";
             ACTIVITY_WEB_LINK_1.spriteBasePath = ACTIVITY_WEB_LINK_1.resourcePath + "Sprite/";
             ACTIVITY_WEB_LINK_1.ref.isTeacherView = HDAppManager.isTeacherView;
-
+            if( ACTIVITY_WEB_LINK_1.ref.isTeacherView) {
+                document.getElementsByClassName("call_back")[0].style.visibility = 'visible';
+            }
             ACTIVITY_WEB_LINK_1.ref.setupUI();
             if (ACTIVITY_WEB_LINK_1.ref.isTeacherView) {
                 ACTIVITY_WEB_LINK_1.ref.updateRoomData();
@@ -36,8 +39,14 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
     },
     onEnterTransitionDidFinish : function (){
       this._super();
-        document.getElementsByClassName("call_back")[0].style.visibility = 'visible';
+        // document.getElementsByClassName("call_back")[0].style.visibility = 'visible';
+        window.addEventListener('iFrameRemoved', ACTIVITY_WEB_LINK_1.ref.removeIframe);
+
      // this.checkIfWindowCreated();
+    },
+    removeIframe: function() {
+        console.log("iFRame removed");
+        ACTIVITY_WEB_LINK_1.ref.emitSocketEvent( HDSocketEventType.GAME_MESSAGE, {'eventType': ACTIVITY_WEB_LINK_1.socketEventKey.REMOVE_IFRAME} );
     },
 
     checkIfWindowCreated : function (){
@@ -115,23 +124,6 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
        div.appendChild(iFrameDiv);
        iFrameDiv.appendChild(iFrame);
     },
-    // browserResized :function (){
-    //     // if( ACTIVITY_WEB_LINK_1.ref.iFrame ) {
-    //     //     ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-    //     //     ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(0, cc.p(
-    //     //         ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5 + Math.random() * 1 + 1,
-    //     //         ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4 +  Math.random() * 1 + 1)) );
-    //     // }
-    // },
-    // focusIframe : function (){
-    //     // if(!ACTIVITY_WEB_LINK_1.ref.iFrame)
-    //     //     return;
-    //     // ACTIVITY_WEB_LINK_1.ref.getParent().setActiveActivityInfo(false);
-    //     // ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-    //     // ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo( ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
-    //     //     ACTIVITY_WEB_LINK_1.ref.iFrame.getPositionX(),
-    //     //     ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
-    // },
 
     touchEventListener: function (touch, event) {
         switch (event._eventCode) {
@@ -206,17 +198,6 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
 
     onMouseMove: function (event) {
         ACTIVITY_WEB_LINK_1.ref.updateMouseIcon(event.getLocation());
-        // ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-        // if(ACTIVITY_WEB_LINK_1.ref.convertToNodeSpace(event.getLocation()).y > ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.8){
-        //     ACTIVITY_WEB_LINK_1.ref.iFrame.stopAllActions();
-        //     ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
-        //         ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5,
-        //         ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.2)) );
-        // }else{
-        //     ACTIVITY_WEB_LINK_1.ref.iFrame.runAction( cc.moveTo(ACTIVITY_WEB_LINK_1.ref.iFrameSpeed, cc.p(
-        //         ACTIVITY_WEB_LINK_1.ref.getContentSize().width * 0.5,
-        //         ACTIVITY_WEB_LINK_1.ref.getContentSize().height * 0.4)) );
-        // }
         if (!ACTIVITY_WEB_LINK_1.ref.isStudentInteractionEnable)
             return;
     },
@@ -302,6 +283,15 @@ ACTIVITY_WEB_LINK_1.WebLinkLayer = HDBaseLayer.extend({
         switch (res.eventType) {
             case ACTIVITY_WEB_LINK_1.socketEventKey.STUDENT_INTERACTION:
                 this.onUpdateStudentInteraction(res.data);
+                break;
+            case ACTIVITY_WEB_LINK_1.socketEventKey.REMOVE_IFRAME:
+                if (document.getElementsByClassName('call_back')) {
+                    if (document.getElementsByClassName("call_back")[0].style.display != 'none'){
+                        document.getElementsByClassName('video_wrapper')[0].style.display = 'none';
+                        document.getElementsByClassName('video_wrapper')[0].remove();
+                        document.getElementsByClassName("call_back")[0].style.visibility = 'hidden';
+                    }
+                }
                 break;
         }
     },
