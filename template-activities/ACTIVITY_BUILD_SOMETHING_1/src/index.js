@@ -614,9 +614,9 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                                 var currentSnapPoint = cc.p(points.x * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX(), points.y * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY());
                                 var currentPointInWorldSpace = cc.p(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionX() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().width * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleX() * 0.5 + currentSnapPoint.x, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionY() - ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize().height * ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getScaleY() * 0.5 + currentSnapPoint.y);
                                 var distance = cc.pDistance(pointInWorldSpace, currentPointInWorldSpace);
-                                var label = ACTIVITY_BUILD_SOMETHING_1.ref.createTTFLabel(Math.floor(distance) + ' px', HDConstants.Sassoon_Regular, 40,  distance <= allowedLimit ? cc.color(0, 255, 0, 255):  cc.color(255, 0, 0, 255), cc.p(ACTIVITY_BUILD_SOMETHING_1.ref.getContentSize().width * 0.5, ACTIVITY_BUILD_SOMETHING_1.ref.getContentSize().height * 0.5), ACTIVITY_BUILD_SOMETHING_1.ref);
-                                label.setLocalZOrder(100);
-                                label.runAction( cc.sequence(cc.fadeOut(2), cc.removeSelf()));
+                                // var label = ACTIVITY_BUILD_SOMETHING_1.ref.createTTFLabel(Math.floor(distance) + ' px', HDConstants.Sassoon_Regular, 40,  distance <= allowedLimit ? cc.color(0, 255, 0, 255):  cc.color(255, 0, 0, 255), cc.p(ACTIVITY_BUILD_SOMETHING_1.ref.getContentSize().width * 0.5, ACTIVITY_BUILD_SOMETHING_1.ref.getContentSize().height * 0.5), ACTIVITY_BUILD_SOMETHING_1.ref);
+                                // label.setLocalZOrder(100);
+                                // label.runAction( cc.sequence(cc.fadeOut(2), cc.removeSelf()));
                                 if (distance <= allowedLimit) {
                                     snapIdxOfPlacedObj = cpIndex;
                                     connectionObjectData = connectionObjDetails;
@@ -1186,7 +1186,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                         });
 
                         this.showResultInfo([...ACTIVITY_BUILD_SOMETHING_1.ref.allUserData]);
-                        this.resetScreen();
+                        //this.resetScreen();
                         this.isResultViewOn = true;
                         break;
 
@@ -1462,7 +1462,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     },
 
     showResultInfo: function (data) {
-        if (data.length > 0) {
+        //if (data.length > 0) {
             this.parent.setResetButtonActive(true);
             this.gameState = ACTIVITY_BUILD_SOMETHING_1.gameState.RESULT;
             var scrollLayer = new ACTIVITY_BUILD_SOMETHING_1.ResultLayer(data);
@@ -1476,16 +1476,17 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                     "gameState": ACTIVITY_BUILD_SOMETHING_1.gameState.RESULT
                 }
             });
-        } else {
-            this.gameState = ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO;
-            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-                'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.GAME_STATE,
-                'data': {
-                    'userName': HDAppManager.userName,
-                    "gameState": ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO
-                }
-            });
-        }
+        //}
+        // else {
+        //     this.gameState = ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO;
+        //     this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+        //         'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.GAME_STATE,
+        //         'data': {
+        //             'userName': HDAppManager.userName,
+        //             "gameState": ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO
+        //         }
+        //     });
+        // }
         this.updateRoomData();
     },
 
