@@ -153,6 +153,7 @@ cc.game.onStart = function () {
 };
 cc.game.run();
 function switchVisible() {
+    window.dispatchEvent(new CustomEvent('iFrameRemoved'));
     if (document.getElementsByClassName('call_back')) {
         if (document.getElementsByClassName("call_back")[0].style.display != 'none') {
             document.getElementsByClassName('video_wrapper')[0].style.display = 'none';
