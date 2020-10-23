@@ -1161,6 +1161,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             case ccui.Widget.TOUCH_ENDED:
                 switch (sender.getTag()) {
                     case ACTIVITY_BUILD_SOMETHING_1.Tag.startButton:
+                        this.resetScreen();
                         this.parent.setResetButtonActive(true);
                         this.updateButtonVisibility(ACTIVITY_BUILD_SOMETHING_1.Tag.startButton, false);
                         this.updateButtonVisibility(ACTIVITY_BUILD_SOMETHING_1.Tag.stopButton, true);

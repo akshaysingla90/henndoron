@@ -186,7 +186,7 @@ ACTIVITY_COUNTING_1.CountingLayer = HDBaseLayer.extend({
                     "users": []
                 });
             } else {
-                ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.onMouseEnable.onMouseEnable.enable && this.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.onMouseEnable.onMouseEnable.content.ops);
+                ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.onMouseEnable.enable && this.triggerScript(ACTIVITY_COUNTING_1.ref.config.teacherScripts.data.onMouseEnable.content.ops);
                 this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_TEACHER, {
                     "roomId": HDAppManager.roomId,
                     "users": [{userName: userName}]
