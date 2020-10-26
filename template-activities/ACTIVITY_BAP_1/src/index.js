@@ -127,7 +127,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     setupUI: function () {
-        this.colorPanel();
+        ACTIVITY_BAP_1.config.assets.sections.showColorPalette.value && this.colorPanel();
         this.backgroundWithControl();
         this.createEraser();
         this.updateGameWithSyncData();
@@ -263,7 +263,9 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         if (ACTIVITY_BAP_1.ref.erasing) {
             ACTIVITY_BAP_1.ref.isErasing = true;
         } else {
-            ACTIVITY_BAP_1.ref.drawingStart = true;
+            if(ACTIVITY_BAP_1.config.assets.sections.showColorPalette.value){
+                ACTIVITY_BAP_1.ref.drawingStart = true;
+            }
         }
     },
 

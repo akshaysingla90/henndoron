@@ -240,6 +240,11 @@
   "assets": {
     "component": "assetsCard",
     "sections": {
+      "showColorPalette": {
+        "component": "checkbox",
+        "value": true,
+        "UIName": "Show Color Palette"
+      },
       "colorPaletteBase": {
         "component": "image",
         "UIName": "Color Palette Base",
