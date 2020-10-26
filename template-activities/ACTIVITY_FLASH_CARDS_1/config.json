@@ -18,6 +18,110 @@
     "namespace": "ACTIVITY_FLASH_CARDS_1",
     "layerName": "MainFlashCardsLayer"
   },
+  "teacherScripts": {
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "A dragon! Be careful! SHHH - Don’t wake the dragon. "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I want the hat!"
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Take first item from under the dragon. "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "What do you want?"
+            },
+            {
+              "insert": "  "
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "I want the (tree, book, house)"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "!"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": " "
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "SHH – Don’t wake the dragon! "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Student drags the item from under the dragon."
+            },
+            {
+              "insert": " \n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "What have you got? I’ve got a ____! "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "Continue like this until the dragon wakes up."
+            },
+            {
+              "insert": "\n\n\n\n"
+            }
+          ]
+        }
+      }
+    }
+  },
 
   "background": {
     "component": "backgroundCard",

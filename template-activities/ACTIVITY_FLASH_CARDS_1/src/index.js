@@ -659,8 +659,16 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
     }
   },
 
+  showScriptMessage: function (msg) {
+    this.getParent().getParent().showScriptMessage(msg);
+  },
+
   onEnter: function () {
     this._super();
+
+    const moduleStartTriggerData = ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.teacherScripts.data.moduleStart;
+    moduleStartTriggerData.enable && this.showScriptMessage(moduleStartTriggerData.content.ops);
+
     // updated update room data
     SocketManager.emitCutomEvent(
       ACTIVITY_FLASH_CARDS_1.socketEventKey.singleEvent,
