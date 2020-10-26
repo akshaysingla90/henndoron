@@ -243,7 +243,8 @@
       "showColorPalette": {
         "component": "checkbox",
         "value": true,
-        "UIName": "Show Color Palette"
+        "UIName": "Show Color Palette",
+        "toolTipText": "Show/hide color palette."
       },
       "colorPaletteBase": {
         "component": "image",
