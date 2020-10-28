@@ -176,7 +176,7 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
             this.currentCard = this.addSprite(ACTIVITY_MAGIC_HAT_1.resourcePath + imageName, this.flashCardBaseFront.getPosition(), this);
             this.currentCard.tag = ACTIVITY_MAGIC_HAT_1.Tag.currentCard;
             this.currentCard.setScale(0.0);
-            this.currentCard.setLocalZOrder(100); //2
+            this.currentCard.setLocalZOrder(2); //2
         }
 
         let movementActions = actionOffFromScreen != null ? [addAnswerCard, actionOffFromScreen, customFunc] : [addAnswerCard, customFunc];
