@@ -866,6 +866,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                 ACTIVITY_BUILD_SOMETHING_1.ref.updateGameState();
                 break;
             case ACTIVITY_BUILD_SOMETHING_1.socketEventKey.RESET_UI:
+                this.gameState = ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO;
                 ACTIVITY_BUILD_SOMETHING_1.ref.resetScreen();
                 break;
             case ACTIVITY_BUILD_SOMETHING_1.socketEventKey.SCROLL_OFFSET:
