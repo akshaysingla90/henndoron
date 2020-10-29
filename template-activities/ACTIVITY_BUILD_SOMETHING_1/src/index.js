@@ -81,6 +81,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     onEnter: function () {
         this._super();
         ACTIVITY_BUILD_SOMETHING_1.ref = this;
+        this.getStudentsList();
         let activityName = 'ACTIVITY_BUILD_SOMETHING_1';
         cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, config) {
             ACTIVITY_BUILD_SOMETHING_1.configData = config
@@ -128,6 +129,12 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             ACTIVITY_BUILD_SOMETHING_1.ref.interval = null;
         }
         ACTIVITY_BUILD_SOMETHING_1.ref = null;
+    },
+
+    getStudentsList: function () {
+        this.emitSocketEvent(HDSocketEventType.STUDENT_STATUS, {
+            roomId: HDAppManager.roomId,
+        });
     },
 
     assignTagsToCarouselItems: function () {
@@ -846,8 +853,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
      */
     studentStatus: function (data) {
         if (this.isTeacherView) {
-            this.joinedStudentList = [];
-            this.joinedStudentList = data;
+            this.joinedStudentList = data.users;
         }
     },
     /**
@@ -1464,13 +1470,27 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     },
 
     showResultInfo: function (data) {
+        const resultData = [];
+        data.map(item => {
+            resultData.push(item);
+        });
+        // excluding teacher
+        const onlyStudents = this.joinedStudentList.filter(joined => joined.userName !== HDAppManager.username);
+        // list contains those students who did not moved a single part (empty result)
+        const list = HDUtility.getDifferenceBetweenArrays(onlyStudents, data, "userName");
+        list.map(item => {
+            resultData.push({
+                data: [],
+                userName: item.userName
+            });
+        });
         //if (data.length > 0) {
             this.parent.setResetButtonActive(true);
             this.gameState = ACTIVITY_BUILD_SOMETHING_1.gameState.RESULT;
-            var scrollLayer = new ACTIVITY_BUILD_SOMETHING_1.ResultLayer(data);
+            var scrollLayer = new ACTIVITY_BUILD_SOMETHING_1.ResultLayer(resultData);
             scrollLayer.setTag(ACTIVITY_BUILD_SOMETHING_1.Tag.resultLayer);
             this.addChild(scrollLayer, 20);
-            this.resultScreenDataForSync = [...data];
+            this.resultScreenDataForSync = resultData;
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 'eventType': ACTIVITY_BUILD_SOMETHING_1.socketEventKey.GAME_STATE,
                 'data': {
@@ -1663,14 +1683,14 @@ ACTIVITY_BUILD_SOMETHING_1.ResultLayer = HDBaseLayer.extend({
 
             var frame = this.createFrame();
             var cell = this.createBanner();
-            ACTIVITY_BUILD_SOMETHING_1.ref.createUIForData(ACTIVITY_BUILD_SOMETHING_1.ref.allUserData[index].userName, ACTIVITY_BUILD_SOMETHING_1.ref.allUserData[index].data, cell);
+            ACTIVITY_BUILD_SOMETHING_1.ref.createUIForData(this.data[index].userName, this.data[index].data, cell);
             cell.setScale(frame.width * 0.75 / cell.width);
             frame.setScale(this.getScaleFactor());
             cell.setPosition(frame.width * 0.1, frame.height * 0.1);
             frame.addChild(cell);
             frame.setTag(index);
             frame.setPosition((index % columnNo) * (horizontalSpacing + this.getFramesWidth()), this.container.height - Math.floor((index + columnNo) / columnNo) * ((frame.width * frame.getScale()) + verticalSpacing));
-            this.addStudentName(ACTIVITY_BUILD_SOMETHING_1.ref.allUserData[index].userName, frame);
+            this.addStudentName(this.data[index].userName, frame);
             this.container.addChild(frame);
 
         }
