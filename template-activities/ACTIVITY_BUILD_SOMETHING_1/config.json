@@ -274,7 +274,7 @@
       "frame": {
         "component": "image",
         "UIName": "Frame",
-        "dimensions": { "width": 174, "height": 178 },
+        "dimensions": { "width": 256, "height": 256 },
         "imageName": "reward_screen_frame.png"
       },
       "usernamePosition": {
