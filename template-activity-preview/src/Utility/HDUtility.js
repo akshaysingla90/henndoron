@@ -10,10 +10,10 @@ var HDUtility = {
     },
 
     /**
-     * Read any static file
-     * @param fileUrl
-     * @param callback
-     */
+    * Read any static file
+    * @param fileUrl
+    * @param callback
+    */
     readJSONFile: function (fileUrl, callback) {
         cc.loader.loadJson(fileUrl, function (error, data) {
             callback(error, data);
@@ -22,30 +22,30 @@ var HDUtility = {
 
 
     /**
-     * will create alert box with option of single or Dual button
-     * @param message
-     * @param title
-     * @param parent
-     * @param isDualButton
-     * @param cancelTexture
-     * @param oktexture
-     */
+    * will create alert box with option of single or Dual button
+    * @param message
+    * @param title
+    * @param parent
+    * @param isDualButton
+    * @param cancelTexture
+    * @param oktexture
+    */
     // createAlertBox : function (message, title, parent,isDualButton, okTag = OK_TAG, okTexture = common.OKButton, okTitle = "", cancelTag = CANCEL_TAG, cancelTexture = common.CancelButton, cancelTitle = "") {
-    //   try {
-    //       var alertBox = new CMAlertBox(cc.color(169, 169, 169, 200), parent.getContentSize().width, parent.getContentSize().height);
-    //       alertBox.addAlertBG(common.AlertBG);
-    //       alertBox.createAlertBox(message, title, isDualButton, okTag, okTexture, okTitle, cancelTag, cancelTexture, cancelTitle);
-    //       alertBox._delegate = parent;
-    //       parent.addChild(alertBox, 1000);
-    //   }catch (e) {
+    // try {
+    // var alertBox = new CMAlertBox(cc.color(169, 169, 169, 200), parent.getContentSize().width, parent.getContentSize().height);
+    // alertBox.addAlertBG(common.AlertBG);
+    // alertBox.createAlertBox(message, title, isDualButton, okTag, okTexture, okTitle, cancelTag, cancelTexture, cancelTitle);
+    // alertBox._delegate = parent;
+    // parent.addChild(alertBox, 1000);
+    // }catch (e) {
     //
-    //   }
+    // }
     // },
 
     /**
-     * will remove all white spaces from given string/text
-     * @param string
-     */
+    * will remove all white spaces from given string/text
+    * @param string
+    */
     removeAllWhiteSpaces: function (string) {
         return string.replace(/\s/g, '');
     },
@@ -53,12 +53,12 @@ var HDUtility = {
 
 
     /**
-     * will clamp a number b/w a range.
-     * @param num
-     * @param min
-     * @param max
-     * @returns {*}
-     */
+    * will clamp a number b/w a range.
+    * @param num
+    * @param min
+    * @param max
+    @returns {}
+    */
     clampANumber: function (num, min, max) {
         return num <= min ? min : num >= max ? max : num;
     },
@@ -127,12 +127,12 @@ var HDUtility = {
     },
 
     // addSpriteSheets : function(plistName, pngName){
-    //     cc.spriteFrameCache.addSpriteFrames(plistName, pngName);
+    // cc.spriteFrameCache.addSpriteFrames(plistName, pngName);
     // },
 
     convertSecondsIntoTimeFormat: function (ms) {
-        var days = this.convertNumberIntoTwoDigit(Math.floor(ms / (24 * 60 * 60)));
-        var daysms = ms % (24 * 60 * 60);
+        var days = this.convertNumberIntoTwoDigit(Math.floor(ms / (24 60 60)));
+        var daysms = ms % (24 60 60);
         var hours = this.convertNumberIntoTwoDigit(Math.floor((daysms) / (60 * 60)));
         var hoursms = ms % (60 * 60);
         var minutes = this.convertNumberIntoTwoDigit(Math.floor((hoursms) / (60)));
@@ -183,6 +183,11 @@ var HDUtility = {
             counter = (i < 10 ? "000" + i : "00" + i);
             cc.spriteFrameCache.addSpriteFrame(initial + counter + extension, name + counter + extension);
         }
+    },
+
+    //Find values that are in arr1 but not in arr2 (both arrays should have compareField ) arrays of objects
+    getDifferenceBetweenArrays: function (arr1, arr2, compareField) {
+        return arr1.filter((updated) => !arr2.some((current) => current[compareField] === updated[compareField]));
     },
 
 }
