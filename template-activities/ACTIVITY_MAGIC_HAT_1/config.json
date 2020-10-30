@@ -124,7 +124,7 @@
         "constraints": ["imageName, dimensions, animationPath"]
       },
       "cardTakeOut": {
-        "component": "cardTakeOutPath",
+        "component": "beizerPath",
         "UIName": "Object reveal path",
         "animationPath": [
           {
