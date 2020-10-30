@@ -114,8 +114,11 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
   characterSetup: function () {
     //character setup
     for (let index in ACTIVITY_CWC_1.config.assets.sections.charactersData.data) {
+      const animation = ACTIVITY_CWC_1.config.assets.sections.charactersData.data[index].animation;
+      const restpos_01 = animation.find(item => item.UIName === "RestPose01");
+      const sprite = restpos_01.frameInitial + '0001' + restpos_01.extension;
       let character = this.addSprite(
-        ACTIVITY_CWC_1.spriteBasePath + ACTIVITY_CWC_1.config.assets.sections.charactersData.data[index].imageName,
+        ACTIVITY_CWC_1.animationBasePath + sprite,
         cc.p(
           ACTIVITY_CWC_1.config.assets.sections.charactersData.data[index].position.x,
           ACTIVITY_CWC_1.config.assets.sections.charactersData.data[index].position.y
