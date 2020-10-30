@@ -429,7 +429,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             if (result.isIsolatedNode) {
                 //Place node at that position
                 ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.push(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem);
-                ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), "", ACTIVITY_BUILD_SOMETHING_1.events.STOP);
+                //ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), "", ACTIVITY_BUILD_SOMETHING_1.events.STOP);
                 ACTIVITY_BUILD_SOMETHING_1.ref.validateData(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize(), true, null);
                 ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem = null;
                 ACTIVITY_BUILD_SOMETHING_1.ref.updateTableView();
@@ -450,7 +450,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                 let completeMovement = cc.callFunc(function () {
                     if (ACTIVITY_BUILD_SOMETHING_1.ref.tableView) {
                         ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.push(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem);
-                        ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), "", ACTIVITY_BUILD_SOMETHING_1.events.STOP);
+                        //ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), "", ACTIVITY_BUILD_SOMETHING_1.events.STOP);
                         ACTIVITY_BUILD_SOMETHING_1.ref.validateData(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize(), false, result.connectionNodeName, attachResult.isAttachedToCorrectPoints);
                         ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem = null;
                         ACTIVITY_BUILD_SOMETHING_1.ref.updateTableView();
@@ -461,7 +461,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                 }
                 return attachResult.attachTo;
             } else {
-                ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.initialPosition, "", ACTIVITY_BUILD_SOMETHING_1.events.MOVE_BACK);
+                //ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.initialPosition, "", ACTIVITY_BUILD_SOMETHING_1.events.MOVE_BACK);
                 ACTIVITY_BUILD_SOMETHING_1.ref.moveBackChanges();
             }
             if (ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.length > 0 && HDAppManager.isTeacherView) {
