@@ -128,6 +128,9 @@
         "UIName": "Object reveal path",
         "animationPath": [
           {
+            "position": {"x": 240, "y": 324.5}
+          },
+          {
             "position": {
               "x": 200,
               "y": 224.5

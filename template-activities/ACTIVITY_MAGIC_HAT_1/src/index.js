@@ -173,7 +173,11 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
             }
         });
         if (this.currentCard == null) {
-            this.currentCard = this.addSprite(ACTIVITY_MAGIC_HAT_1.resourcePath + imageName, this.flashCardBaseFront.getPosition(), this);
+            this.currentCard = this.addSprite(
+              ACTIVITY_MAGIC_HAT_1.resourcePath + imageName,
+              cc.p(animationObj.animationPath[0].position.x, animationObj.animationPath[0].position.y),
+              this
+            );
             this.currentCard.tag = ACTIVITY_MAGIC_HAT_1.Tag.currentCard;
             this.currentCard.setScale(0.0);
             this.currentCard.setLocalZOrder(2); //2
@@ -183,10 +187,11 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
 
         let actionScale = cc.scaleTo(2.0, 0.3, 0.3);
         //let actionMove1 = cc.bezierTo(2.0, animationObj.animationPath).easing(cc.easeBounceIn());
-        let actionMove1 = cc.bezierTo(2.0, animationObj.animationPath.map(item => {return {
-            x: item.position.x,
-            y:item.position.y
-        }}));
+        let actionMove1 = cc.bezierTo(2.0, [
+            cc.p(animationObj.animationPath[1].position.x, animationObj.animationPath[1].position.y),
+            cc.p(animationObj.animationPath[2].position.x, animationObj.animationPath[2].position.y),
+            cc.p(animationObj.animationPath[3].position.x, animationObj.animationPath[3].position.y)
+        ]);
 
         let actionMove = cc.spawn([actionMove1, actionScale]);
         console.log('action ',actionMove1);

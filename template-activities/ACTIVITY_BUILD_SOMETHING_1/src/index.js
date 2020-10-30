@@ -1437,6 +1437,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
     },
 
     moveCellObject: function (cell, position) {
+        if(cell){
         ACTIVITY_BUILD_SOMETHING_1.ref.tableView._dragging = false;
         cell.stopAllActions();
         let completedAnimation = cc.callFunc(function () {
@@ -1467,7 +1468,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             }
         });
         this.runAction(cc.sequence(completedAnimation, cc.scaleTo(0.1, 1, 1), cc.scaleTo(0.2, 1, 1)));
-    },
+    }},
 
     showResultInfo: function (data) {
         const resultData = [];
