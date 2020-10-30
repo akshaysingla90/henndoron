@@ -168,7 +168,7 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
             if (ACTIVITY_MAGIC_HAT_1.ref.currentCard != null) {
                 let mSprite = new cc.Sprite(ACTIVITY_MAGIC_HAT_1.resourcePath + imageName);
                 ACTIVITY_MAGIC_HAT_1.ref.currentCard.setTexture(mSprite.getTexture());
-                ACTIVITY_MAGIC_HAT_1.ref.currentCard.setPosition(ACTIVITY_MAGIC_HAT_1.ref.flashCardBaseFront.getPosition());
+                ACTIVITY_MAGIC_HAT_1.ref.currentCard.setPosition(cc.p(animationObj.animationPath[0].position.x, animationObj.animationPath[0].position.y));
                 ACTIVITY_MAGIC_HAT_1.ref.currentCard.setScale(0.0);
             }
         });
