@@ -964,7 +964,9 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                                 if (ACTIVITY_BUILD_SOMETHING_1.ref.gameState == ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO) {
                                     ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.push(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem);
                                     ACTIVITY_BUILD_SOMETHING_1.ref.dismantledObject.splice(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject, 1);
+                                    const offset = ACTIVITY_BUILD_SOMETHING_1.ref.tableView.getContentOffset();
                                     ACTIVITY_BUILD_SOMETHING_1.ref.tableView.reloadData();
+                                    ACTIVITY_BUILD_SOMETHING_1.ref.tableView.setContentOffset(offset);
                                 }
                                 ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.setPosition(data.position);
                             }
