@@ -663,11 +663,20 @@ ACTIVITY_FLASH_CARDS_1.TeacherViewLayer = ACTIVITY_FLASH_CARDS_1.CommonFlashCard
     this.getParent().getParent().showScriptMessage(msg);
   },
 
+  showTipMessage: function (msg) {
+    this.getParent().getParent().showTipMessage(msg);
+  },
+
   onEnter: function () {
     this._super();
 
+    // script
     const moduleStartTriggerData = ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.teacherScripts.data.moduleStart;
     moduleStartTriggerData.enable && this.showScriptMessage(moduleStartTriggerData.content.ops);
+
+    // tip
+    const moduleStartTipData = ACTIVITY_FLASH_CARDS_1.MainFlashCardsLayerRef.config.teacherTips.data.moduleStart;
+    moduleStartTipData.enable && this.showTipMessage(moduleStartTipData.content.ops);
 
     // updated update room data
     SocketManager.emitCutomEvent(
