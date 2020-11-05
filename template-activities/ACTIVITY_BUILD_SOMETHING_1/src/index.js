@@ -343,19 +343,35 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             return;
         }
         ACTIVITY_BUILD_SOMETHING_1.ref.mousePos = ACTIVITY_BUILD_SOMETHING_1.ref.convertToNodeSpace(event.getLocation());
+        let clickedItemPos_Y = 0;
+        if(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem) {
+            clickedItemPos_Y = ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPositionY();
+        }
         ACTIVITY_BUILD_SOMETHING_1.ref.mousePressedDown = false;
         if (ACTIVITY_BUILD_SOMETHING_1.ref.tableView) {
             ACTIVITY_BUILD_SOMETHING_1.ref.tableView._dragging = this.isStudentInteractionEnable;
             var loc = ACTIVITY_BUILD_SOMETHING_1.ref.convertToNodeSpace(event.getLocation());
-            if (ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem && cc.rectIntersectsRect(ACTIVITY_BUILD_SOMETHING_1.ref.tableView.getBoundingBox(), ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getBoundingBox())) {
-                ACTIVITY_BUILD_SOMETHING_1.ref.moveBackChanges();
+            var finalPosition = ACTIVITY_BUILD_SOMETHING_1.ref.matchPosition(loc);
+                if(finalPosition === "isolated"){
+                    if(clickedItemPos_Y <= (ACTIVITY_BUILD_SOMETHING_1.ref.tableView.getViewSize().height + cc.winSize.height * 0.2)){
+                        ACTIVITY_BUILD_SOMETHING_1.ref.moveBackChanges();
+                        ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.initialPosition, "", ACTIVITY_BUILD_SOMETHING_1.events.MOVE_BACK);
+                    }
+                    else {
+                        ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.push(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem);
+                        ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), "", ACTIVITY_BUILD_SOMETHING_1.events.STOP);
+                        ACTIVITY_BUILD_SOMETHING_1.ref.validateData(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize(), true, null);
+                        ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem = null;
+                        ACTIVITY_BUILD_SOMETHING_1.ref.updateTableView();
+                    }
 
-                ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.initialPosition, "", ACTIVITY_BUILD_SOMETHING_1.events.MOVE_BACK);
-                return;
-            } else {
-                var finalPosition = ACTIVITY_BUILD_SOMETHING_1.ref.matchPosition(loc);
-                ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(finalPosition ? finalPosition : loc, "", ACTIVITY_BUILD_SOMETHING_1.events.STOP);
-            }
+                }
+                else if(finalPosition !== false){
+                    ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(finalPosition ? finalPosition : loc, "", ACTIVITY_BUILD_SOMETHING_1.events.STOP);
+                }
+        }
+        if (ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.length > 0 && HDAppManager.isTeacherView) {
+            this.parent.setResetButtonActive(true);
         }
         ACTIVITY_BUILD_SOMETHING_1.ref.updateRoomData();
     },
@@ -428,11 +444,12 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
 
             if (result.isIsolatedNode) {
                 //Place node at that position
-                ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.push(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem);
-                //ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), "", ACTIVITY_BUILD_SOMETHING_1.events.STOP);
-                ACTIVITY_BUILD_SOMETHING_1.ref.validateData(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize(), true, null);
-                ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem = null;
-                ACTIVITY_BUILD_SOMETHING_1.ref.updateTableView();
+                // ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.push(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem);
+                // //ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), "", ACTIVITY_BUILD_SOMETHING_1.events.STOP);
+                // ACTIVITY_BUILD_SOMETHING_1.ref.validateData(ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.tag - ACTIVITY_BUILD_SOMETHING_1.Tag.movedObject, ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getPosition(), ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem.getContentSize(), true, null);
+                // ACTIVITY_BUILD_SOMETHING_1.ref.clickedItem = null;
+                // ACTIVITY_BUILD_SOMETHING_1.ref.updateTableView();
+                return "isolated";
 
             } else if (!result.isIsolatedNode && result.nodeContainsPoint) {
                 var attachResult = ACTIVITY_BUILD_SOMETHING_1.ref.attachPoint(location, result.index);
@@ -461,12 +478,13 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
                 }
                 return attachResult.attachTo;
             } else {
-                //ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.initialPosition, "", ACTIVITY_BUILD_SOMETHING_1.events.MOVE_BACK);
+                ACTIVITY_BUILD_SOMETHING_1.ref.moveObject(ACTIVITY_BUILD_SOMETHING_1.ref.initialPosition, "", ACTIVITY_BUILD_SOMETHING_1.events.MOVE_BACK);
                 ACTIVITY_BUILD_SOMETHING_1.ref.moveBackChanges();
+                return false;
             }
-            if (ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.length > 0 && HDAppManager.isTeacherView) {
-                this.parent.setResetButtonActive(true);
-            }
+            // if (ACTIVITY_BUILD_SOMETHING_1.ref.assembledList.length > 0 && HDAppManager.isTeacherView) {
+            //     this.parent.setResetButtonActive(true);
+            // }
         }
     },
 
@@ -751,7 +769,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             }
         }
         if (this.currentIsolatedNode < ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.dismantledObject.data.length) {
-            this.currentIsolatedNode++;
+            //this.currentIsolatedNode++;
             return {"isIsolatedNode": true};
         }
         return {"isIsolatedNode": false, "nodeContainsPoint": false}
@@ -1012,6 +1030,7 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             return;
         }
         if (data) {
+            data.usersData.length > 0 && this.parent.setResetButtonActive(true);
             ACTIVITY_BUILD_SOMETHING_1.ref.gameState = data.gameState;
             switch (data.gameState) {
                 case ACTIVITY_BUILD_SOMETHING_1.gameState.TEACHER_DEMO:
