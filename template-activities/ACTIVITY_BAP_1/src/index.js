@@ -433,7 +433,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     colorPanel: function () {
-        let colorPanel = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.colorPaletteBase.imageName, cc.p(0, this.getContentSize().height * 0.48), this);
+        let colorPanel = this.addSprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.assets.sections.colorPaletteBase.imageName, cc.p(-this.getContentSize().width * 0.005, this.getContentSize().height * 0.48), this);
         colorPanel.setLocalZOrder(1000);
         colorPanel.setAnchorPoint(0, 0.5);
         this.handIconUI.push(colorPanel);
@@ -869,7 +869,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         }
         if (this.playGround && ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[ACTIVITY_BAP_1.ref.curImageIdx]) {
             this.playGround.runAction(new cc.Sequence(new cc.FadeOut(0.2), new cc.callFunc(() => {
-                ACTIVITY_BAP_1.ref.playGround.setTexture(new cc.Sprite(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[ACTIVITY_BAP_1.ref.curImageIdx]).getTexture());
+                ACTIVITY_BAP_1.ref.playGround.setTexture(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[ACTIVITY_BAP_1.ref.curImageIdx]);
                 ACTIVITY_BAP_1.ref.playGround.runAction(new cc.FadeIn(0.1));
                 if (ACTIVITY_BAP_1.ref.getChildByTag(ACTIVITY_BAP_1.Tag.boardInitialTag + ACTIVITY_BAP_1.ref.curImageIdx)) {
                     ACTIVITY_BAP_1.ref.getChildByTag(ACTIVITY_BAP_1.Tag.boardInitialTag + ACTIVITY_BAP_1.ref.curImageIdx).setVisible(true);
