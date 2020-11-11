@@ -523,7 +523,7 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
         ACTIVITY_MAGIC_HAT_1.ref.cardQueue.length = 0;
         ACTIVITY_MAGIC_HAT_1.ref.cardQueue = data;
         if (ACTIVITY_MAGIC_HAT_1.ref.isTeacher) {
-            ACTIVITY_MAGIC_HAT_1.ref.tableView.reloadData();
+            ACTIVITY_MAGIC_HAT_1.ref.tableView && ACTIVITY_MAGIC_HAT_1.ref.tableView.reloadData();
         }
     },
 

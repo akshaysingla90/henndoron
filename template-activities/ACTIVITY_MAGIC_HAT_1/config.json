@@ -128,7 +128,7 @@
         "UIName": "Object reveal path",
         "options": [
           {
-            "label": "arc (up -> down)",
+            "label": "arc (up to down)",
             "value": 1
           },
           {
@@ -136,12 +136,12 @@
             "value": 2
           },
           {
-            "label": "arc (down -> up)",
+            "label": "arc (down to up)",
             "value": 3
           }
         ],
         "currentOption": 1,
-        "curveHeight": 500,
+        "curveHeight": 250,
         "animationPath": [
           {
             "position": { "x": 240, "y": 324.5 }
