@@ -101,7 +101,7 @@
         "onSoundPlayed": {
         "UIName": "On Sound Played",
         "enable": true,
-        "description": "This will trigger when slide 2 opens.",
+        "description": "This will trigger after the first animated sentence is played.",
         "content": {
           "ops": [
             {

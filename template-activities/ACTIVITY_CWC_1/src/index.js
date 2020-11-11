@@ -352,24 +352,10 @@ ACTIVITY_CWC_1.CharacterConversationLayer = HDBaseLayer.extend({
         ACTIVITY_CWC_1.soundPath + ACTIVITY_CWC_1.config.assets.sections.charactersData.data[key].audioData[index].audio
       );
       if (!this.soundPlayTriggered) {
-        let allSoundPlayed = true;
-        if (this.getChildByTag(ACTIVITY_CWC_1.Tag.character_1)) {
-          allSoundPlayed = allSoundPlayed && this.getChildByTag(ACTIVITY_CWC_1.Tag.character_1).soundPlayed;
-        }
-        if (this.getChildByTag(ACTIVITY_CWC_1.Tag.character_2)) {
-          allSoundPlayed = allSoundPlayed && this.getChildByTag(ACTIVITY_CWC_1.Tag.character_2).soundPlayed;
-        }
-        if (this.getChildByTag(ACTIVITY_CWC_1.Tag.character_3)) {
-          allSoundPlayed = allSoundPlayed && this.getChildByTag(ACTIVITY_CWC_1.Tag.character_3).soundPlayed;
-        }
-
-        if (allSoundPlayed && !this.soundPlayTriggered) {
-          if (ACTIVITY_CWC_1.config.teacherScripts.data.onSoundPlayedenable) {
+        if (ACTIVITY_CWC_1.config.teacherScripts.data.onSoundPlayed.enable) {
             ACTIVITY_CWC_1.ref.triggerScript(ACTIVITY_CWC_1.config.teacherScripts.data.onSoundPlayed.content.ops);
           }
-
-          this.soundPlayTriggered = true;
-        }
+        this.soundPlayTriggered = true;
       }
       this.updateRoomData();
     }
