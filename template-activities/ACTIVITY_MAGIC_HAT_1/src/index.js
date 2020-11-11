@@ -185,9 +185,9 @@ ACTIVITY_MAGIC_HAT_1.HDMagicHatLayer = HDBaseLayer.extend({
 
         let movementActions = actionOffFromScreen != null ? [addAnswerCard, actionOffFromScreen, customFunc] : [addAnswerCard, customFunc];
 
-        let actionScale = cc.scaleTo(2.0, 0.3, 0.3);
+        let actionScale = cc.scaleTo(1.2, 0.3, 0.3);
         //let actionMove1 = cc.bezierTo(2.0, animationObj.animationPath).easing(cc.easeBounceIn());
-        let actionMove1 = cc.bezierTo(2.0, [
+        let actionMove1 = cc.bezierTo(1.2, [
             cc.p(animationObj.animationPath[1].position.x, animationObj.animationPath[1].position.y),
             cc.p(animationObj.animationPath[2].position.x, animationObj.animationPath[2].position.y),
             cc.p(animationObj.animationPath[3].position.x, animationObj.animationPath[3].position.y)
