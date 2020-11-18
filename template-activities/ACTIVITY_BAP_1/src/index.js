@@ -519,7 +519,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             prevButton.setLocalZOrder(1000);
             }
             let drawMode = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState,
-                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState, "Individual Mode",
+                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState, "Shared Mode",
                 16, ACTIVITY_BAP_1.Tag.DrawMode, cc.p(this.getContentSize().width * 0.915,
                     this.getContentSize().height * 0.15), this);
             drawMode.setTitleColor(cc.color(0, 0, 0, 255));
@@ -929,7 +929,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
      */
     toggleDrawMode() {
         this.sharedMode = !this.sharedMode;
-        this.getChildByTag(ACTIVITY_BAP_1.Tag.DrawMode).setTitleText(this.sharedMode ? "Individual Mode" : "Shared Mode");
+        this.getChildByTag(ACTIVITY_BAP_1.Tag.DrawMode).setTitleText(this.sharedMode ? "Shared Mode" : "Individual Mode");
         this.emitDrawModeEvent();
     },
 
