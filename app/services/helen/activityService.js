@@ -18,6 +18,12 @@ activityService.getActivity = async (criteria, projection, options) => {
   if (options && options.instance) return await activityModel.findOne(criteria, projection);
   return await activityModel.findOne(criteria, projection).lean();
 };
+/**
+ * function to fetch Activities
+ */
+activityService.getActivities = async (criteria, projection, ) => {
+  return await activityModel.find(criteria, projection).lean();
+};
 
 /**
  * function to fetch all activites.

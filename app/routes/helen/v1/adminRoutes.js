@@ -1,6 +1,7 @@
 'use strict';
 
 const { Joi } = require('../../../utils/joiUtils');
+const { getEnumArray } = require('../../../utils/utils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS, ACTIVITY_SEARCH_TYPE } = require(`../../../utils/constants`);
 //load controllers
@@ -295,7 +296,7 @@ if (process.env.UPDATE_TEMPLATES) {
           type: Joi.number().valid(...getEnumArray(ACTIVITY_TYPE)).required().description('Activity type -> SMALL/MEDIUM/GAME.'),
           iconUrl: Joi.string().required().description('Activity iconUrl.'),
         },
-        group: 'Admin',
+        group: 'Activity-Template',
         description: 'Route to create a new template',
         model: 'Add_Template'
       },
