@@ -391,7 +391,8 @@ adminController.getCourses = async (payload) => {
  * fucntion to update the activity templates
  */
 adminController.updateActivityTemplate = async () => {
-  await SERVICES.activityService.copyTemplates(ACTIVITIES);
+  let activities = await SERVICES.activityService.getActivity({status:ACTIVITY_STATUS.TEMPLATE});
+  await SERVICES.activityService.copyTemplates(activities);
   let previewFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
   fs.removeSync(previewFolderPath);
   let activityFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_DIRECTORY_PATH}`);
@@ -400,5 +401,18 @@ adminController.updateActivityTemplate = async () => {
   await SERVICES.activityService.removeActivities(criteria);
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY));
 }
+
+/**
+ * Function to add template to the database
+ * @param {*} payload 
+ */
+adminController.addTemplate = async (payload) => {
+  let template = payload;
+  template.status = ACTIVITY_STATUS.TEMPLATE;
+  //TODO check for name 
+  await SERVICES.activityService.createActivity(tempalte);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY));
+}
+
 /* export adminController */
 module.exports = adminController;

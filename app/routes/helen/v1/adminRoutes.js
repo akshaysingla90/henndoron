@@ -4,7 +4,7 @@ const { Joi } = require('../../../utils/joiUtils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS, ACTIVITY_SEARCH_TYPE } = require(`../../../utils/constants`);
 //load controllers
-const { updateActivityTemplate, deleteActivityPreview, deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
+const { addTemplate, updateActivityTemplate, deleteActivityPreview, deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
 
 let routes = [
   {
@@ -280,6 +280,29 @@ if (process.env.UPDATE_TEMPLATES) {
     auth: USER_ROLE.ADMIN,
     handler: updateActivityTemplate
   })
+  routes.push(
+    {
+      method: 'POST',
+      path: '/v1/admin/template',
+      joiSchemaForSwagger: {
+        headers: {
+          'authorization': Joi.string().required().description('User\'s JWT token.')
+        },
+        body: {
+          name: Joi.string().regex(/^[a-z0-9_ ]+$/i).error(new Error('Activity name should contain only alphanumeric chracters')).description('Activity name.'),
+          description: Joi.string().required().description('Activity description.'),
+          path: Joi.string().required().description('Activity path in Coco\'s Folder.'),
+          type: Joi.number().valid(...getEnumArray(ACTIVITY_TYPE)).required().description('Activity type -> SMALL/MEDIUM/GAME.'),
+          iconUrl: Joi.string().required().description('Activity iconUrl.'),
+        },
+        group: 'Admin',
+        description: 'Route to create a new template',
+        model: 'Add_Template'
+      },
+      auth: USER_ROLE.ADMIN,
+      handler: addTemplate
+    }
+  )
 }
 
 module.exports = routes;
