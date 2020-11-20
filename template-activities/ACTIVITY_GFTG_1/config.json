@@ -1,0 +1,201 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Growing from the ground",
+    "description": "game desc. here",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": true
+    },
+    "externalRewards": true,
+    "studentPreview": false,
+    "url": "res/Activity/ACTIVITY_GFTG_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_GFTG_1",
+    "layerName": "GftgLayer"
+  },
+  "teacherScripts": {
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "moduleStart",
+        "enable": true,
+        "description": "this will trigger when module starts",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": false
+              },
+              "insert": "What a beautiful garden. Let’s see what we can grow! Do you want to try?"
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": false,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": false,
+                "underline": true
+              },
+              "insert": "S responds"
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": false,
+                "underline": true
+              },
+              "insert": "Plants need water! Give it a go!"
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": false,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": true,
+                "underline": true
+              },
+              "insert": "S clicks and grows"
+            },
+            {
+              "attributes": {
+                "italic": false,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": true,
+                "underline": true
+              },
+              "insert": " INSERT TARGET VOCAB \n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": false,
+                "underline": false
+              },
+              "insert": " You did it! AMAZING. What is it?"
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": false,
+                "underline": false
+              },
+              "insert": "It’s a"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "transparent",
+                "color": "#000000",
+                "bold": true,
+                "underline": false
+              },
+              "insert": "INSERT TARGET VOCAB"
+            },
+            {
+              "insert": "\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "arrayOfAssets": {
+        "component": "imagesGroup",
+        "dimensions": [
+          { "width": 256, "height": 256 },
+          { "width": 256, "height": 256 },
+          { "width": 72, "height": 72 }
+        ],
+        "UIName": "Pots",
+        "columnLabels": ["Pot Front", "Pot Back", "Revealed Object"],
+        "data": [
+          {
+            "image_1": "pot01_front.png",
+            "image_2": "pot01_back.png",
+            "image_3": "ant.png"
+          },
+          {
+            "image_1": "pot02_front.png",
+            "image_2": "pot02_back.png",
+            "image_3": "bat.png"
+          },
+          {
+            "image_1": "pot03_front.png",
+            "image_2": "pot03_back.png",
+            "image_3": "bee.png"
+          },
+          {
+            "image_1": "pot04_front.png",
+            "image_2": "pot04_back.png",
+            "image_3": "crow.png"
+          },
+          {
+            "image_1": "pot05_front.png",
+            "image_2": "pot05_back.png",
+            "image_3": "frog.png"
+          },
+          {
+            "image_1": "pot06_front.png",
+            "image_2": "pot06_back.png",
+            "image_3": "crow.png"
+          }
+        ]
+      }
+    }
+  },
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": ["bg.png", "ant.png", "bat.png", "bee.png", "cat.png"]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": ["cardTakeOut.mp3"]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": []
+    }
+  }
+}
