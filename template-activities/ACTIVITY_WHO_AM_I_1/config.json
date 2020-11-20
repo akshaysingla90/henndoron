@@ -1,0 +1,327 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Who Am I",
+    "activityPath": "ACTIVITY_WHO_AM_I_1",
+    "description": "game desc. here",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": true
+    },
+    "externalRewards": true,
+    "studentPreview": true,
+    "url": "res/Activity/ACTIVITY_WHO_AM_I_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_WHO_AM_I_1",
+    "layerName": "WhoAmI"
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "help": {
+        "UIName": "Help Button",
+        "enableState": "btn_help_idle.png",
+        "pushedState": "btn_help_clicked.png",
+        "dimensions": { "width": 100, "height": 100 },
+        "position": { "x": 105, "y": 145 }
+      },
+      "reveal": {
+        "UIName": "Reveal Button",
+        "enableState": "btn_door_idle.png",
+        "pushedState": "btn_door_clicked.png",
+        "disableState": "btn_door_disabled.png",
+        "dimensions": { "width": 100, "height": 100 },
+        "position": { "x": 857, "y": 145 }
+      },
+
+      "studentSelection": {
+        "UIName": "Student Selection Button",
+        "enableState": "btn_student_idle.png",
+        "pushedState": "btn_student_selected.png",
+        "disableState": "btn_student_again.png",
+        "dimensions": { "width": 100, "height": 100 },
+        "position": { "x": 857, "y": 145 }
+      }
+    }
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "itemCard": {
+        "component": "image",
+        "UIName": "Item Card",
+        "imageName": "item_card_on_shelf.png",
+        "dimensions": {
+          "width": 350,
+          "height": 350
+        }
+      },
+      "shelvesBG": {
+        "component": "image",
+        "UIName": "Shelves Bg",
+        "imageName": "bg_shelves.png",
+        "dimensions": {
+          "width": 960,
+          "height": 640
+        }
+      },
+      "leftButtonContainer": {
+        "component": "image",
+        "UIName": "Left Button Container",
+        "imageName": "l_btn_container.png",
+        "position": {
+          "x": 90,
+          "y": 100
+        }
+      },
+
+      "rightButtonContainer": {
+        "component": "image",
+        "UIName": "Right Button Container",
+        "imageName": "r_btn_container.png",
+        "position": {
+          "x": 874,
+          "y": 100
+        }
+      },
+      "teacherCarouselStart": {
+        "component": "image",
+        "UIName": "Teacher Carousel Start",
+        "imageName": "teacher_carousel_start.png",
+        "dimensions": {
+          "width": 960,
+          "height": 640
+        }
+      },
+      "teacherCarouselMid": {
+        "component": "image",
+        "UIName": "Teacher Carousel Mid",
+        "imageName": "teacher_carousel_mid.png",
+        "dimensions": {
+          "width": 960,
+          "height": 640
+        }
+      },
+
+      "teacherCarouselEnd": {
+        "component": "image",
+        "UIName": "Teacher Carousel End",
+        "imageName": "teacher_carousel_end.png",
+        "dimensions": {
+          "width": 960,
+          "height": 640
+        }
+      },
+
+      "doors": {
+        "component": "imagesGroup",
+        "dimensions": [
+          { "width": 0, "height": 0 },
+          { "width": 0, "height": 0 },
+          { "width": 0, "height": 0 }
+        ],
+        "UIName": "Student Doors",
+        "columnLabels": ["Left Door", "Right Door"],
+        "data": [
+          {
+            "image_1": "student1_l_door.png",
+            "image_2": "student1_r_door.png"
+          },
+          {
+            "image_1": "student2_l_door.png",
+            "image_2": "student2_r_door.png"
+          },
+          {
+            "image_1": "student3_l_door.png",
+            "image_2": "student3_r_door.png"
+          },
+          {
+            "image_1": "student4_l_door.png",
+            "image_2": "student4_r_door.png"
+          },
+          {
+            "image_1": "student5_l_door.png",
+            "image_2": "student5_r_door.png"
+          },
+          {
+            "image_1": "student6_l_door.png",
+            "image_2": "student6_r_door.png"
+          },
+          {
+            "image_1": "student7_l_door.png",
+            "image_2": "student7_r_door.png"
+          },
+          {
+            "image_1": "student8_l_door.png",
+            "image_2": "student8_r_door.png"
+          }
+        ],
+        "position": {
+          "left": { "x": 385, "y": 320 },
+          "right": { "x": 600, "y": 320 }
+        }
+      },
+      "items": {
+        "component": "treasureItems",
+        "dimensions": { "width": 350, "height": 350 },
+        "UIName": "Shelves Items",
+        "withLabel": true,
+        "data": [
+          {
+            "imageName": "item_desk.png",
+            "label": "desk",
+            "position": { "x": 319, "y": 475 }
+          },
+          {
+            "imageName": "item_door.png",
+            "label": "door",
+            "position": { "x": 482.5, "y": 475 }
+          },
+          {
+            "imageName": "item_sign.png",
+            "label": "sign",
+            "position": { "x": 650, "y": 475 }
+          },
+          {
+            "imageName": "item_marker.png",
+            "label": "marker",
+            "position": { "x": 319, "y": 330 }
+          },
+          {
+            "imageName": "item_classroom.png",
+            "label": "classroom",
+            "position": { "x": 482.5, "y": 330 }
+          },
+          {
+            "imageName": "item_window.png",
+            "label": "window",
+            "position": { "x": 650, "y": 330 }
+          },
+          {
+            "imageName": "item_chair.png",
+            "label": "chair",
+            "position": { "x": 395, "y": 182 }
+          },
+          {
+            "imageName": "item_whiteboard.png",
+            "label": "whiteboard",
+            "position": { "x": 570, "y": 182 }
+          }
+        ]
+      },
+
+      "animation": {
+        "component": "animationGroup",
+        "data": {
+          "labelAnimation": {
+            "UIName": "Label Animation",
+            "name": "label_anim",
+            "frameCount": 57,
+            "frameInitial": "label_anim/label_",
+            "extension": ".png"
+          },
+          "foregroundAnimation": {
+            "UIName": "Foreground Animation",
+            "name": "foreground_anim",
+            "frameCount": 24,
+            "frameInitial": "foreground_anim/foreground_",
+            "extension": ".png"
+          }
+        }
+      }
+    }
+  },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "cursorPointer": {
+        "UIName": "Cursor Pointer",
+        "imageName": "cursor_0001.png",
+        "dimensions": { "width": 32, "height": 32 }
+      }
+    }
+  },
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "bg_shelves.png",
+        "bg.png",
+        "btn_door_clicked.png",
+        "btn_door_idle.png",
+        "btn_help_clicked.png",
+        "btn_help_idle.png",
+        "btn_student_again.png",
+        "btn_student_idle.png",
+        "btn_student_selected.png",
+        "closed_doors.png",
+        "foreground.png",
+        "item_card_on_shelf.png",
+        "item_chair.png",
+        "item_classroom.png",
+        "item_desk.png",
+        "item_door.png",
+        "item_marker.png",
+        "item_sign.png",
+        "item_whiteboard.png",
+        "item_window.png",
+        "cursor_0001.png",
+        "cursor_0002.png",
+        "student1_l_door.png",
+        "student1_r_door.png",
+        "student2_l_door.png",
+        "student2_r_door.png",
+        "student3_l_door.png",
+        "student3_r_door.png",
+        "student4_l_door.png",
+        "student4_r_door.png",
+        "student5_l_door.png",
+        "student5_r_door.png",
+        "student6_l_door.png",
+        "student6_r_door.png",
+        "student7_l_door.png",
+        "student7_r_door.png",
+        "student8_l_door.png",
+        "student8_r_door.png",
+        "teacher_carousel_start.png",
+        "teacher_carousel_mid.png",
+        "teacher_carousel_end.png",
+        "r_btn_container.png",
+        "l_btn_container.png",
+        "btn_door_disabled.png"
+      ]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "name": "foreground_anim",
+          "frameCount": 24,
+          "frameInitial": "foreground_anim/foreground_",
+          "extension": ".png"
+        },
+        {
+          "name": "label_anim",
+          "frameCount": 57,
+          "frameInitial": "label_anim/label_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}
