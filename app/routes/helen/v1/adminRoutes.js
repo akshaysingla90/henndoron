@@ -323,8 +323,8 @@ if (process.env.UPDATE_TEMPLATES) {
           iconUrl: Joi.string().description('Activity iconUrl.'),
         },
         group: 'Activity-Template',
-        description: 'Route to create a new template',
-        model: 'Add_Template'
+        description: 'Route to update a  template',
+        model: 'Update_Template'
       },
       auth: USER_ROLE.ADMIN,
       handler: updateTemplate
