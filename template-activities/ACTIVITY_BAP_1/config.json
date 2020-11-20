@@ -216,7 +216,7 @@
       },
       "drawMode": {
         "UIName": "Draw Mode Button",
-        "title": ["Shared Mode", "Individual Mode"],
+        "title": ["Individual Mode"],
         "enableState": "btn_enable.png",
         "pushedState": "btn_enable.png",
         "disableState": "btn_disable.png",
