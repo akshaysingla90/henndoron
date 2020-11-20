@@ -1,0 +1,113 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Electronic water grid",
+    "description": "",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": false,
+      "turnBased": false
+    },
+    "externalRewards": true,
+    "studentPreview": true,
+    "url": "res/Activity/ACTIVITY_EWG_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "layerName": "EwgLayer",
+    "namespace": "ACTIVITY_EWG_1"
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "arrayOfAssets": {
+        "component": "carouselItems",
+        "UIName": "Grid Objects",
+        "allowDelete": false,
+        "allowAdd": false,
+        "dimensions": { "width": 350, "height": 350 },
+        "data": [
+          {
+            "imageName": "Item_build.png",
+            "label": "build"
+          },
+          {
+            "imageName": "Item_clap.png",
+            "label": "clap"
+          },
+          {
+            "imageName": "Item_run.png",
+            "label": "run"
+          },
+          {
+            "imageName": "Item_sing.png",
+            "label": "sing"
+          }
+        ]
+      }
+    }
+  },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "cursor": {
+        "UIName": "CURSOR",
+        "imageName": "cursor_0001.png",
+        "dimensions": { "width": 32, "height": 32 }
+      }
+    }
+  },
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "bg.png",
+        "frame_bottom.png",
+        "frame_top_lights_off.png",
+        "frame_top_lights_on.png",
+        "Item_build.png",
+        "Item_clap.png",
+        "Item_run.png",
+        "Item_sing.png",
+        "win_screen_01.png",
+        "win_screen_02.png"
+      ]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "name": "Item Box",
+          "frameCount": 22,
+          "frameInitial": "item_box/item_box_",
+          "extension": ".png"
+        },
+        {
+          "name": "Sidebar Item Box",
+          "frameCount": 22,
+          "frameInitial": "sidebar_item_box/sidebar_item_box_",
+          "extension": ".png"
+        },
+        {
+          "name": "Win",
+          "frameCount": 3,
+          "frameInitial": "win/win_animation_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}
