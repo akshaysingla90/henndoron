@@ -1,42 +1,30 @@
 {
   "properties": {
-    "configurable": true,
-    "url": "res/Activity/ACTIVITY_CHUG_1/",
-    "number": "1",
-    "renderMode": 1,
-    "name": "Chug",
-    "namespace": "ACTIVITY_CHUG_1",
-    "layerName": "Chug",
+    "component": "infoCard",
     "activityName": "Chug",
-    "teacherScriptsNotes": {
-      "notes": "Ask to identify notes",
-      "timestamp": "",
-      "triggers": ""
-    },
-    "controls" : {
-      "mouse" : true,
+    "activityPath": "ACTIVITY_CHUG_1",
+    "description": "",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
       "turnBased": false
     },
-    "teacherTipsNotes": {
-      "tips": "Don't ask about bag",
-      "timestamp": "",
-      "triggers": ""
-    },
-    "description" : "",
-    "allocatedTime": 10,
+    "externalRewards": true,
     "studentPreview": false,
-    "preLoaded" : true
+    "url": "res/Activity/ACTIVITY_CHUG_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_CHUG_1",
+    "layerName": "Chug"
   },
-  "jsList": [
-    "res/Activity/ACTIVITY_CHUG_1/src/Chug.js"
-  ],
-
 
   "teacherScripts": {
     "component": "scriptsCard",
     "data": {
       "moduleStart": {
         "UIName": "moduleStart",
+        "enable": true,
         "description": "this will trigger when module starts",
         "content": {
           "ops": [
@@ -79,46 +67,48 @@
           ]
         }
       },
-      "AllCupsAreEmptied" : {
-          "UIName": "allCupEmptied",
-          "description": "this will trigger when all cups are emptied",
-          "content": {
-            "ops": [
-              {
-                "attributes": {
-                  "italic": true
-                },
-                "insert": "_____(S Name) What do you have? "
+      "AllCupsAreEmptied": {
+        "UIName": "allCupEmptied",
+        "enable": true,
+        "description": "this will trigger when all cups are emptied",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true
               },
-              {
-                "insert": "\n"
+              "insert": "_____(S Name) What do you have? "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true
               },
-              {
-                "attributes": {
-                  "italic": true
-                },
-                "insert": "Great job! Let’s put it all together "
+              "insert": "Great job! Let’s put it all together "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
               },
-              {
-                "insert": "\n"
-              },
-              {
-                "attributes": {
-                  "underline": true
-                },
-                "insert": "Create sentence "
-              },
-              {
-                "insert": "\n"
-              }
-            ]
-       }
+              "insert": "Create sentence "
+            },
+            {
+              "insert": "\n"
+            }
+          ]
+        }
       }
     }
   },
   "gameInfo": {
-    "numberOfCups" : 8,
-    "drinkReductionLevel" : 0.1
+    "ignoreForAuthToolUI": true,
+    "numberOfCups": 8,
+    "drinkReductionLevel": 0.1
   },
   "background": {
     "component": "backgroundCard",
@@ -132,369 +122,255 @@
     }
   },
   "buttons": {
-      "component": "buttonsCard",
-      "data": {
-        "start": {
-          "UIName": "startButton",
-          "enableState": "start_idle.png",
-          "pushedState": "start_pressed.png",
-          "disableState":"startDisable.png",
-          "dimensions": { "width": 94, "height": 64 },
-          "position" : {"x": 85, "y": 120}
-
-        },
-        "drink": {
-          "UIName": "drinkButton",
-          "enableState": "chug_btn_idle.png",
-          "pushedState": "chug_btn_pressed.png",
-          "dimensions": { "width": 256, "height": 256 },
-          "position" : {"x": 480, "y": 85}
-
-        }
+    "component": "buttonsCard",
+    "data": {
+      "start": {
+        "UIName": "Start Button",
+        "enableState": "start_idle.png",
+        "pushedState": "start_pressed.png",
+        "disableState": "startDisable.png",
+        "dimensions": { "width": 94, "height": 64 },
+        "position": { "x": 85, "y": 120 }
+      },
+      "drink": {
+        "UIName": "Drink Button",
+        "enableState": "chug_btn_idle.png",
+        "pushedState": "chug_btn_pressed.png",
+        "dimensions": { "width": 256, "height": 256 },
+        "position": { "x": 480, "y": 85 }
       }
-    },
-  "cursors": {
-      "component": "cursorsCard",
-      "data": {
-        "cursorPointer": {
-          "UIName": "cursor pointer",
-          "imageName": "cursor_0001.png",
-          "dimensions": { "width": 32, "height": 32 }
-        }
-      }
-    },
-  "Assets": {
+    }
+  },
+
+  "assets": {
     "component": "assetsCard",
-    "sections" :{
-      "ItemBg" : {
+    "sections": {
+      "ItemBg": {
         "component": "image",
-        "UIName": "ItemNg",
+        "UIName": "Item Container",
         "imageName": "Item_bg.png",
         "dimensions": { "width": 350, "height": 350 }
       },
       "glow": {
         "component": "image",
-        "UIName": "ItemNg",
+        "UIName": "Glass Base",
         "imageName": "yellow_glow_shadow.png",
         "dimensions": { "width": 350, "height": 350 }
       },
       "cups": {
-        "component": "cups",
-        "data" : [
-          {
-            "configurable": true,
-            "initialFrame": "regular_glass_animation/regular_glass_",
-            "dimensions": { "width": 202, "height": 428 },
-            "position": {"x":171 , "y":151 },
-            "frameCount": 11,
-            "extension": ".png",
-            "glowScale" : 0.5,
-            "glowPosition": {"x":187.012 , "y":165 },
-            "constraints": [
-              "initialFrame",
-              "dimensions"
-            ]
-          },
-          {
-            "configurable": true,
-            "initialFrame": "milkshake_glass_animation/milkshake_glass_",
-            "dimensions": { "width": 182, "height": 473 },
-            "position": {"x":292 , "y":340 },
-            "frameCount": 11,
-            "glowScale" : 0.45,
-            "glowPosition": {"x":283.088 , "y":351 },
-            "constraints": [
-              "initialFrame",
-              "dimensions"
-            ]
-          },
-          {
-            "configurable": true,
-            "initialFrame": "coffee_mug_animation/coffee_mug_",
-            "dimensions": { "width": 240, "height": 250 },
-            "position": {"x":359 , "y":151 },
-            "frameCount": 11,
-            "glowScale" : 0.5,
-            "glowPosition": {"x":338 , "y":165 },
-            "constraints": [
-              "initialFrame",
-              "dimensions"
-            ]
-          },
-          {
-            "configurable": true,
-            "initialFrame": "bottle_animation/bottle_",
-            "dimensions": { "width": 152, "height": 403 },
-            "position": {"x":451 , "y":340 },
-            "frameCount": 11,
-            "glowScale" : 0.5,
-            "glowPosition": {"x":450 , "y":351 },
-            "constraints": [
-              "initialFrame",
-              "dimensions"
-            ]
-          },
-          {
-            "configurable": true,
-            "initialFrame": "jar_animation/jar_",
-            "dimensions": { "width": 161, "height": 509 },
-            "position": {"x":547 , "y":151 },
-            "frameCount": 11,
-            "glowScale" : 0.5,
-            "glowPosition": {"x":545 , "y":165 },
-            "constraints": [
-              "initialFrame",
-              "dimensions"
-            ]
-          },
-          {
-            "configurable": true,
-            "initialFrame": "plastic_cup_animation/plastic_cup_",
-            "dimensions": { "width": 179, "height": 464 },
-            "position": {"x":615 , "y":340 },
-            "frameCount": 11,
-            "glowScale" : 0.4,
-            "glowPosition": {"x":615 , "y":355 },
-            "constraints": [
-              "initialFrame",
-              "dimensions"
-            ]
-          },
-          {
-            "configurable": true,
-            "initialFrame": "tea_cup_animation/tea_cup_",
-            "dimensions": { "width": 226, "height": 225 },
-            "maskImage": "tea_cup_mask.png",
-            "position": {"x":710 , "y":151},
-            "frameCount": 11,
-            "glowScale" : 0.4,
-            "glowPosition": {"x":700 , "y":160 },
-            "constraints": [
-              "initialFrame",
-              "dimensions"
-            ]
-          },
-          {
-            "configurable": true,
-            "initialFrame": "umbrella_glass_animation/umbrella_glass_",
-            "dimensions": { "width": 246, "height": 409 },
-            "position": {"x":750 , "y":340 },
-            "frameCount": 11,
-            "glowScale" : 0.33,
-            "glowPosition": {"x":775 , "y":350 },
-            "constraints": [
-              "initialFrame",
-              "dimensions"
-            ]
-          }
-        ]
-      },
-      "mask": {
-        "component": "mask",
-         "data" : [
-           {
-             "configurable": true,
-             "maskImage": "regular_glass_mask.png",
-             "dimensions": { "width": 147, "height": 172 },
-             "maskPosition": {"x":220.896 , "y":155},
-             "initialFrame" : "regular_glass_liquid_animation/regular_glass_liquid_",
-             "frameCount": 22,
-             "scale" : {"x": 1.2, "y":1},
-             "extension": ".png",
-             "constraints": [
-               "maskImage",
-               "dimensions",
-               "initialFrame"
-             ]
-           },
-           {
-             "configurable": true,
-             "maskImage": "milkshake_glass_mask.png",
-             "dimensions": { "width": 140, "height": 222 },
-             "maskPosition": {"x":308 , "y":365.231},
-             "initialFrame" : "milkshake_glass_liquid_animation/milkshake_glass_liquid_",
-             "frameCount": 22,
-             "scale" : {"x": 1.2, "y":1},
-             "extension": ".png",
-             "constraints": [
-               "imageName",
-               "dimensions"
-             ]
-           },
-           {
-             "configurable": true,
-             "maskImage": "coffee_mug_mask.png",
-             "dimensions": { "width": 167, "height": 155 },
-             "maskPosition": {"x":375, "y":158},
-             "initialFrame" :"coffee_mug_liquid_animation/coffee_mug_liquid_",
-             "frameCount": 22,
-             "scale" : {"x": 1.2, "y":1},
-             "extension": ".png",
-             "constraints": [
-               "imageName",
-               "dimensions"
-             ]
-           },
-           {
-             "configurable": true,
-             "maskImage": "botle_mask.png",
-             "dimensions": { "width": 133, "height": 271 },
-             "maskPosition": {"x":465, "y":345.768},
-             "initialFrame" : "bottle_liquid_animation/bottle_liquid_",
-             "frameCount": 22,
-             "scale" : {"x": 1.2, "y":1.1},
-             "extension": ".png",
-             "constraints": [
-               "imageName",
-               "dimensions"
-             ]
-           },
-           {
-             "configurable": true,
-             "maskImage": "jar_mask.png",
-             "dimensions": { "width": 139, "height": 182 },
-             "maskPosition": {"x":560.857, "y":159.334},
-             "initialFrame" : "jar_liquid_animation/jar_liquid_",
-             "frameCount": 22,
-             "scale" : {"x": 1.2, "y":1},
-             "extension": ".png",
-             "constraints": [
-               "imageName",
-               "dimensions"
-             ]
-           },
-           {
-             "configurable": true,
-             "maskImage": "plastic_cup_mask.png",
-             "dimensions": { "width": 159, "height": 202 },
-             "maskPosition": {"x":630.857 , "y":340.334},
-             "initialFrame" : "plastic_cup_liquid_animation/plastic_cup_liquid_",
-             "frameCount": 22,
-             "scale" : {"x": 1.2, "y":1},
-             "extension": ".png",
-             "constraints": [
-               "imageName",
-               "dimensions"
-             ]
-           },
-           {
-             "configurable": true,
-             "maskImage": "tea_cup_mask.png",
-             "dimensions": { "width": 178, "height": 131 },
-             "maskPosition": {"x":721.182 , "y":170.880},
-             "initialFrame" : "tea_cup_liquid_animation/tea_cup_liquid_",
-             "frameCount": 22,
-             "scale" : {"x": 1.2, "y":1},
-             "extension": ".png",
-             "constraints": [
-               "imageName",
-               "dimensions"
-             ]
-           },
-           {
-             "configurable": true,
-             "maskImage": "umbrella_glass_mask.png",
-             "dimensions": { "width": 136, "height": 171 },
-             "maskPosition": {"x":825.206 , "y":386.694},
-             "initialFrame" : "umbrella_glass_liquid_animation/umbrella_glass_liquid_",
-             "frameCount": 22,
-             "scale" : {"x": 1.2, "y":1},
-             "extension": ".png",
-             "constraints": [
-               "imageName",
-               "dimensions"
-             ]
-           }
-         ]
-      },
-      "items": {"component" :  "hiddenItems",
+        "component": "chugCups",
+        "UIName": "Cups",
+        "dimensions": { "width": 350, "height": 350 },
         "data": [
           {
-            "configurable": true,
-            "name": "Item_little_ball.png",
+            "position": { "x": 171, "y": 151 },
+            "glowScale": 0.5,
+            "glowPosition": { "x": 187.012, "y": 165 },
+            "scale": { "x": 1.2, "y": 1 },
+            "maskImage": "regular_glass_mask.png",
+            "maskPosition": { "x": 220.896, "y": 155 },
             "dimensions": { "width": 350, "height": 350 },
-            "BgPosition": {"x":189.263 , "y":218.90},
-            "constraints": [
-              "imageName",
-              "dimensions"
-            ]
+            "emptyCupAnimation": {
+              "name": "Regular cup Animation",
+              "frameInitial": "regular_glass_animation/regular_glass_",
+              "frameCount": 11,
+              "extension": ".png"
+            },
+            "filledCupAnimation": {
+              "name": "Regular cup Liquid Animation",
+              "frameInitial": "regular_glass_liquid_animation/regular_glass_liquid_",
+              "frameCount": 22,
+              "extension": ".png"
+            },
+            "imageInside": {
+              "name": "Item_little_ball.png",
+              "BgPosition": { "x": 189.263, "y": 218.9 }
+            }
           },
           {
-            "configurable": true,
-            "name": "Item_big_braclet.png",
-            "dimensions": { "width": 350, "height": 350 },
-            "BgPosition": {"x":282.334 , "y":449.216},
-            "constraints": [
-              "imageName",
-              "dimensions"
-            ]
+            "position": { "x": 292, "y": 340 },
+            "glowScale": 0.45,
+            "glowPosition": { "x": 283.088, "y": 351 },
+            "maskImage": "milkshake_glass_mask.png",
+            "maskPosition": { "x": 308, "y": 365.231 },
+            "scale": { "x": 1.2, "y": 1 },
+            "emptyCupAnimation": {
+              "name": "Milkshake  Animation",
+              "frameInitial": "milkshake_glass_animation/milkshake_glass_",
+              "frameCount": 11,
+              "extension": ".png"
+            },
+            "filledCupAnimation": {
+              "name": "Milkshake Liquid Animation",
+              "frameInitial": "milkshake_glass_liquid_animation/milkshake_glass_liquid_",
+              "frameCount": 22,
+              "extension": ".png"
+            },
+            "imageInside": {
+              "name": "Item_big_braclet.png",
+              "BgPosition": { "x": 282.334, "y": 449.216 }
+            }
           },
           {
-            "configurable": true,
-            "name": "Item_little_boy.png",
-            "dimensions": { "width": 350, "height": 350 },
-            "BgPosition": {"x":335.361 , "y":210.7},
-            "constraints": [
-              "imageName",
-              "dimensions"
-            ]
+            "position": { "x": 359, "y": 151 },
+            "glowScale": 0.5,
+            "glowPosition": { "x": 338, "y": 165 },
+            "maskImage": "coffee_mug_mask.png",
+            "maskPosition": { "x": 375, "y": 158 },
+            "scale": { "x": 1.2, "y": 1 },
+            "emptyCupAnimation": {
+              "name": "Coffee Mag Animation",
+              "frameInitial": "coffee_mug_animation/coffee_mug_",
+              "frameCount": 11,
+              "extension": ".png"
+            },
+            "filledCupAnimation": {
+              "name": "Coffee Liquid Animation",
+              "frameInitial": "coffee_mug_liquid_animation/coffee_mug_liquid_",
+              "frameCount": 22,
+              "extension": ".png"
+            },
+            "imageInside": {
+              "name": "Item_little_boy.png",
+              "BgPosition": { "x": 335.361, "y": 210.7 }
+            }
           },
           {
-            "configurable": true,
-            "name": "Item_big_girl.png",
-            "dimensions": { "width": 350, "height": 350 },
-            "maskImage": "Item_little_girl.png",
-            "BgPosition": {"x":449.174, "y":402.201},
-            "constraints": [
-              "imageName",
-              "dimensions"
-            ]
+            "position": { "x": 451, "y": 340 },
+            "glowScale": 0.5,
+            "glowPosition": { "x": 450, "y": 351 },
+            "maskImage": "botle_mask.png",
+            "maskPosition": { "x": 465, "y": 345.768 },
+            "scale": { "x": 1.2, "y": 1.1 },
+            "emptyCupAnimation": {
+              "name": "bottle animation",
+              "frameInitial": "bottle_animation/bottle_",
+              "frameCount": 11,
+              "extension": ".png"
+            },
+            "filledCupAnimation": {
+              "name": "Bottle Liquid Animation",
+              "frameInitial": "bottle_liquid_animation/bottle_liquid_",
+              "frameCount": 22,
+              "extension": ".png"
+            },
+            "imageInside": {
+              "name": "Item_big_girl.png",
+              "BgPosition": { "x": 449.174, "y": 402.201 }
+            }
           },
           {
-            "configurable": true,
-            "name": "Item_little_braclet.png",
-            "dimensions": { "width": 350, "height": 350 },
-            "BgPosition": {"x":545.779, "y":215.990},
-            "constraints": [
-              "imageName",
-              "dimensions"
-            ]
+            "position": { "x": 547, "y": 151 },
+            "glowScale": 0.5,
+            "glowPosition": { "x": 545, "y": 165 },
+            "maskImage": "jar_mask.png",
+            "maskPosition": { "x": 560.857, "y": 159.334 },
+            "scale": { "x": 1.2, "y": 1 },
+            "emptyCupAnimation": {
+              "name": "Jar Animation",
+              "frameInitial": "jar_animation/jar_",
+              "frameCount": 11,
+              "extension": ".png"
+            },
+            "filledCupAnimation": {
+              "name": "Jar Liquid Animation",
+              "frameInitial": "jar_liquid_animation/jar_liquid_",
+              "frameCount": 22,
+              "extension": ".png"
+            },
+            "imageInside": {
+              "name": "Item_little_braclet.png",
+              "BgPosition": { "x": 545.779, "y": 215.99 }
+            }
           },
           {
-            "configurable": true,
-            "name": "Item_big_boy.png",
-            "dimensions": { "width": 350, "height": 350 },
-            "BgPosition": {"x":615.238, "y":421.284},
-            "constraints": [
-              "imageName",
-              "dimensions"
-            ]
+            "position": { "x": 615, "y": 340 },
+            "glowScale": 0.4,
+            "glowPosition": { "x": 615, "y": 355 },
+            "maskImage": "plastic_cup_mask.png",
+            "maskPosition": { "x": 630.857, "y": 340.334 },
+            "scale": { "x": 1.2, "y": 1 },
+            "emptyCupAnimation": {
+              "name": "Plastic cup Animation",
+              "frameInitial": "plastic_cup_animation/plastic_cup_",
+              "frameCount": 11,
+              "extension": ".png"
+            },
+            "filledCupAnimation": {
+              "name": "Plastic cup Liquid Animation",
+              "frameInitial": "plastic_cup_liquid_animation/plastic_cup_liquid_",
+              "frameCount": 22,
+              "extension": ".png"
+            },
+            "imageInside": {
+              "name": "Item_big_boy.png",
+              "BgPosition": { "x": 615.238, "y": 421.284 }
+            }
           },
           {
-            "configurable": true,
-            "name": "Item_little_girl.png",
-            "dimensions": { "width": 350, "height": 350 },
-            "BgPosition": {"x":695, "y":215},
-            "constraints": [
-              "imageName",
-              "dimensions"
-            ]
+            "position": { "x": 710, "y": 151 },
+            "glowScale": 0.4,
+            "glowPosition": { "x": 700, "y": 160 },
+            "maskImage": "tea_cup_mask.png",
+            "maskPosition": { "x": 721.182, "y": 170.88 },
+            "scale": { "x": 1.2, "y": 1 },
+            "emptyCupAnimation": {
+              "name": "Tea cup Animation",
+              "frameInitial": "tea_cup_animation/tea_cup_",
+              "frameCount": 11,
+              "extension": ".png"
+            },
+            "filledCupAnimation": {
+              "name": "Tea cup Liquid Animation",
+              "frameInitial": "tea_cup_liquid_animation/tea_cup_liquid_",
+              "frameCount": 22,
+              "extension": ".png"
+            },
+            "imageInside": {
+              "name": "Item_little_girl.png",
+              "BgPosition": { "x": 695, "y": 215 }
+            }
           },
           {
-            "configurable": true,
-            "name": "Item_big_ball.png",
-            "dimensions": { "width": 350, "height": 350 },
-            "BgPosition": {"x":778, "y":440},
-            "constraints": [
-              "imageName",
-              "dimensions"
-            ]
+            "position": { "x": 750, "y": 340 },
+            "glowScale": 0.33,
+            "glowPosition": { "x": 775, "y": 350 },
+            "maskImage": "umbrella_glass_mask.png",
+            "maskPosition": { "x": 825.206, "y": 386.694 },
+            "scale": { "x": 1.2, "y": 1 },
+            "emptyCupAnimation": {
+              "name": "umbrella glass Animation",
+              "frameInitial": "umbrella_glass_animation/umbrella_glass_",
+              "frameCount": 11,
+              "extension": ".png"
+            },
+            "filledCupAnimation": {
+              "name": "umbrella glass liquid Animation",
+              "frameInitial": "umbrella_glass_liquid_animation/umbrella_glass_liquid_",
+              "frameCount": 22,
+              "extension": ".png"
+            },
+            "imageInside": {
+              "name": "Item_big_ball.png",
+              "BgPosition": { "x": 778, "y": 440 }
+            }
           }
         ]
       }
     }
-   },
+  },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "cursorPointer": {
+        "UIName": "Cursor Pointer",
+        "imageName": "cursor_0001.png",
+        "dimensions": { "width": 32, "height": 32 }
+      }
+    }
+  },
   "resources": {
+    "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [
@@ -505,7 +381,7 @@
         "Item_little_ball.png",
         "bg.png",
         "botle_mask.png",
-       "startDisable.png",
+        "startDisable.png",
         "Item_little_boy.png",
         "chug_btn_pressed.png",
         "coffee_mug_mask.png",
@@ -528,91 +404,97 @@
       "basePath": "res/AnimationFrames/",
       "animation": [
         {
-          "Name": "bottle animation",
+          "name": "bottle animation",
           "frameCount": 11,
           "frameInitial": "bottle_animation/bottle_",
           "extension": ".png"
         },
         {
-          "Name": "Bottle Liquid Animation",
-          "frameCount": 16,
+          "name": "Bottle Liquid Animation",
+          "frameCount": 22,
           "frameInitial": "bottle_liquid_animation/bottle_liquid_",
           "extension": ".png"
         },
         {
-          "Name": "Coffee Mag Animation",
-          "frameCount": 16,
+          "name": "Coffee Mag Animation",
+          "frameCount": 11,
           "frameInitial": "coffee_mug_animation/coffee_mug_",
           "extension": ".png"
         },
         {
-          "Name": "Coffee Liquid Animation",
+          "name": "Coffee Liquid Animation",
           "frameCount": 22,
           "frameInitial": "coffee_mug_liquid_animation/coffee_mug_liquid_",
           "extension": ".png"
         },
         {
-          "Name": "Jar Animation",
+          "name": "Jar Animation",
           "frameCount": 11,
           "frameInitial": "jar_animation/jar_",
           "extension": ".png"
         },
         {
-          "Name": "Jar Liquid Animation",
+          "name": "Jar Liquid Animation",
           "frameCount": 22,
           "frameInitial": "jar_liquid_animation/jar_liquid_",
           "extension": ".png"
         },
         {
-          "Name": "Milkshake  Animation",
+          "name": "Milkshake  Animation",
           "frameCount": 11,
           "frameInitial": "milkshake_glass_animation/milkshake_glass_",
           "extension": ".png"
         },
         {
-          "Name": "Milkshake Liquid Animation",
+          "name": "Milkshake Liquid Animation",
           "frameCount": 22,
           "frameInitial": "milkshake_glass_liquid_animation/milkshake_glass_liquid_",
           "extension": ".png"
         },
         {
-          "Name": "Plastic cup Animation",
-          "frameCount": 22,
+          "name": "Plastic cup Animation",
+          "frameCount": 11,
           "frameInitial": "plastic_cup_animation/plastic_cup_",
           "extension": ".png"
         },
         {
-          "Name": "Plastic cup Animation",
+          "name": "Plastic cup Liquid Animation",
           "frameCount": 22,
-          "frameInitial": "plastic_cup_liquid_animation",
+          "frameInitial": "plastic_cup_liquid_animation/plastic_cup_liquid_",
           "extension": ".png"
         },
         {
-          "Name": "Plastic cup Animation",
-          "frameCount": 22,
+          "name": "Regular cup Animation",
+          "frameCount": 11,
           "frameInitial": "regular_glass_animation/regular_glass_",
           "extension": ".png"
         },
         {
-          "Name": "Plastic cup Animation",
+          "name": "Regular cup Liquid Animation",
           "frameCount": 22,
-          "frameInitial": "regular_glass_animation/regular_glass_",
+          "frameInitial": "regular_glass_liquid_animation/regular_glass_liquid_",
           "extension": ".png"
         },
         {
-          "Name": "Plastic cup Animation",
-          "frameCount": 22,
+          "name": "Tea cup Animation",
+          "frameCount": 11,
           "frameInitial": "tea_cup_animation/tea_cup_",
           "extension": ".png"
         },
         {
-          "Name": "umbrella glass Animation",
+          "name": "Tea cup Liquid Animation",
+          "frameInitial": "tea_cup_liquid_animation/tea_cup_liquid_",
           "frameCount": 22,
+          "extension": ".png"
+        },
+        {
+          "name": "umbrella glass Animation",
+          "frameCount": 11,
           "frameInitial": "umbrella_glass_animation/umbrella_glass_",
           "extension": ".png"
         },
         {
-          "Name": "umbrella glass  liquid Animation",
+          "name": "umbrella glass liquid Animation",
           "frameCount": 22,
           "frameInitial": "umbrella_glass_liquid_animation/umbrella_glass_liquid_",
           "extension": ".png"

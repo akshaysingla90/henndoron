@@ -119,16 +119,15 @@ ACTIVITY_CHUG_1.ChugLayer = HDBaseLayer.extend({
     },
 
     setCups : function (){
-        let cupsArray =  ACTIVITY_CHUG_1.config.Assets.sections.cups.data;
-        let maskArray = ACTIVITY_CHUG_1.config.Assets.sections.mask.data;
+        let cupsArray =  ACTIVITY_CHUG_1.config.assets.sections.cups.data;
         let counter   = 0;
         for(var item of cupsArray){
-            var cupSprite = this.addSprite(ACTIVITY_CHUG_1.animationBasePath + item.initialFrame + "0001.png", cc.p(item.position), this);
+            var cupSprite = this.addSprite(ACTIVITY_CHUG_1.animationBasePath + item.emptyCupAnimation.frameInitial + "0001.png", cc.p(item.position), this);
             cupSprite.setScale(0.8);
             cupSprite.setAnchorPoint(0.5,0);
             cupSprite.setTag(ACTIVITY_CHUG_1.Tag.cupsStart +  counter);
             var glowPos = cupSprite.convertToNodeSpace(item.glowPosition);
-            var glow =this.addSprite(ACTIVITY_CHUG_1.spriteBasePath + ACTIVITY_CHUG_1.config.Assets.sections.glow.imageName, cc.p(glowPos), cupSprite);
+            var glow =this.addSprite(ACTIVITY_CHUG_1.spriteBasePath + ACTIVITY_CHUG_1.config.assets.sections.glow.imageName, cc.p(glowPos), cupSprite);
             glow.setScale(item.glowScale);
             glow.setLocalZOrder(-3);
             glow.setTag(ACTIVITY_CHUG_1.Tag.glowTag);
@@ -136,15 +135,15 @@ ACTIVITY_CHUG_1.ChugLayer = HDBaseLayer.extend({
             this.setItem(counter, cupSprite);
             var cliper = new cc.ClippingNode();
             cliper.setContentSize(cupSprite.getContentSize());
-            var maskPos = cupSprite.convertToNodeSpaceAR(maskArray[counter].maskPosition);
-            var mask = new cc.Sprite(ACTIVITY_CHUG_1.spriteBasePath + maskArray[counter].maskImage);
+            var maskPos = cupSprite.convertToNodeSpaceAR(item.maskPosition);
+            var mask = new cc.Sprite(ACTIVITY_CHUG_1.spriteBasePath + item.maskImage);
             mask.setPosition(maskPos.x + mask.width * 0.5, maskPos.y);
             mask.setAnchorPoint(0.5,0);
-            mask.setScale(maskArray[counter].scale.x,maskArray[counter].scale.y );
+            mask.setScale(item.scale.x,item.scale.y );
             cliper.setStencil(mask);
             cliper.setTag(ACTIVITY_CHUG_1.Tag.maskStartTag);
             cupSprite.addChild(cliper, -1);
-            let liquid =this.addSprite(ACTIVITY_CHUG_1.animationBasePath + maskArray[counter].initialFrame + "0001.png", cc.p(maskPos.x + mask.width *0.5, maskPos.y), cliper);
+            let liquid =this.addSprite(ACTIVITY_CHUG_1.animationBasePath + item.filledCupAnimation.frameInitial + "0001.png", cc.p(maskPos.x + mask.width *0.5, maskPos.y), cliper);
             liquid.setAnchorPoint(0.5,0);
             liquid.setTag(ACTIVITY_CHUG_1.Tag.liquid);
 
@@ -163,14 +162,14 @@ ACTIVITY_CHUG_1.ChugLayer = HDBaseLayer.extend({
 
     setItem : function(index, parent){
         // console.log(parent.getContentSize());
-        var item = ACTIVITY_CHUG_1.config.Assets.sections.items.data[index];
+        var item = ACTIVITY_CHUG_1.config.assets.sections.cups.data[index].imageInside;
         var position = parent.convertToNodeSpace(item.BgPosition);
-        var baseBg = this.addSprite(ACTIVITY_CHUG_1.spriteBasePath  + ACTIVITY_CHUG_1.config.Assets.sections.ItemBg.imageName, position, parent);
+        var baseBg = this.addSprite(ACTIVITY_CHUG_1.spriteBasePath  + ACTIVITY_CHUG_1.config.assets.sections.ItemBg.imageName, position, parent);
         baseBg.setTag(ACTIVITY_CHUG_1.Tag.itemBGStart);
         baseBg.setScale(0.4);
         baseBg.setOpacity(0);
         baseBg.setLocalZOrder(-2);
-        var baseAnimation = this.addSprite(ACTIVITY_CHUG_1.spriteBasePath  + ACTIVITY_CHUG_1.config.Assets.sections.ItemBg.imageName, position, parent);
+        var baseAnimation = this.addSprite(ACTIVITY_CHUG_1.spriteBasePath  + ACTIVITY_CHUG_1.config.assets.sections.ItemBg.imageName, position, parent);
         baseAnimation.setTag(ACTIVITY_CHUG_1.Tag.baseAnimationTag);
         baseAnimation.setScale(0);
         baseAnimation.setLocalZOrder(-3);
@@ -544,13 +543,13 @@ ACTIVITY_CHUG_1.ChugLayer = HDBaseLayer.extend({
         console.log("index",index);
         var cup = this.cupItems[index];
         var mask = cup.getChildByTag(ACTIVITY_CHUG_1.Tag.maskStartTag).getChildByTag(ACTIVITY_CHUG_1.Tag.liquid);
-        var cupInfo = ACTIVITY_CHUG_1.config.Assets.sections.cups.data;
-        var maskInfo = ACTIVITY_CHUG_1.config.Assets.sections.mask.data[index];
+        var cupInfo = ACTIVITY_CHUG_1.config.assets.sections.cups.data;
 
-        var animation = HDUtility.runFrameAnimation(ACTIVITY_CHUG_1.animationBasePath + cupInfo[index].initialFrame, cupInfo[index].frameCount, 0.1, ".png", 1);
-        var maskAnimation = HDUtility.runFrameAnimation(ACTIVITY_CHUG_1.animationBasePath + maskInfo.initialFrame, maskInfo.frameCount, 0.1, ".png", 1);
+
+        var animation = HDUtility.runFrameAnimation(ACTIVITY_CHUG_1.animationBasePath + cupInfo[index].emptyCupAnimation.frameInitial, cupInfo[index].emptyCupAnimation.frameCount, 0.1, ".png", 1);
+        var maskAnimation = HDUtility.runFrameAnimation(ACTIVITY_CHUG_1.animationBasePath + cupInfo[index].filledCupAnimation.frameInitial, cupInfo[index].filledCupAnimation.frameCount, 0.1, ".png", 1);
         var changeToOriginalframe = cc.callFunc(function () {
-           cup.setTexture(ACTIVITY_CHUG_1.animationBasePath + cupInfo[index].initialFrame + "0001.png");
+           cup.setTexture(ACTIVITY_CHUG_1.animationBasePath + cupInfo[index].emptyCupAnimation.frameInitial + "0001.png");
         });
         mask.runAction(cc.sequence(cc.spawn(cc.scaleTo(0.2, 1.2, scale),maskAnimation)));
         cup.runAction(cc.sequence(animation, changeToOriginalframe));
