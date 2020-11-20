@@ -82,7 +82,7 @@ ACTIVITY_GFTG_1.GftgLayer = HDBaseLayer.extend({
      this.setWaterCan();
      this.setPotAnimation();
      this.updateWithSyncData();
-     this.triggerScript(ACTIVITY_GFTG_1.config.teacherScripts.data.moduleStart.content.ops);
+     ACTIVITY_GFTG_1.config.teacherScripts.data.moduleStart.enable && this.triggerScript(ACTIVITY_GFTG_1.config.teacherScripts.data.moduleStart.content.ops);
     },
     setPot : function (){
         let initialX = this.getContentSize().width * 0.12;

@@ -68,7 +68,7 @@ ACTIVITY_CHUG_1.ChugLayer = HDBaseLayer.extend({
                     ACTIVITY_CHUG_1.ref.updateRoomData();
                     ACTIVITY_CHUG_1.ref.isStudentInteractionEnabled = true;
                     ACTIVITY_CHUG_1.ref.joinedStudentList = [...lesson_1.ref.studentList];
-                    ACTIVITY_CHUG_1.ref.triggerScript(ACTIVITY_CHUG_1.config.teacherScripts.data.moduleStart.content);
+                    ACTIVITY_CHUG_1.config.teacherScripts.data.moduleStart.enable && ACTIVITY_CHUG_1.ref.triggerScript(ACTIVITY_CHUG_1.config.teacherScripts.data.moduleStart.content);
 
                 }
             } else {
@@ -768,7 +768,7 @@ ACTIVITY_CHUG_1.ChugLayer = HDBaseLayer.extend({
 
         console.log("count", count);
         if(allCupEmpty){
-            this.triggerScript(ACTIVITY_CHUG_1.config.teacherScripts.data.AllCupsAreEmptied.content);
+            ACTIVITY_CHUG_1.config.teacherScripts.data.AllCupsAreEmptied.enable && this.triggerScript(ACTIVITY_CHUG_1.config.teacherScripts.data.AllCupsAreEmptied.content);
         }
     }
 });
