@@ -412,6 +412,7 @@ adminController.addTemplate = async (payload) => {
   //TODO check for name 
   //Todo add template in activity Config for database seeding while project setup
   template = await SERVICES.activityService.createActivity(template);
+  await adminController.updateActivityTemplate();
   return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY), { template });
 }
 
