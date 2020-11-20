@@ -5,7 +5,7 @@ const { getEnumArray } = require('../../../utils/utils');
 const CONFIG = require('../../../../config');
 const { USER_ROLE, ACTIVITY_TYPE, RESOURCE_TYPE, ACTIVITY_STATUS, ACTIVITY_SEARCH_TYPE } = require(`../../../utils/constants`);
 //load controllers
-const { addTemplate, updateActivityTemplate, deleteActivityPreview, deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
+const { updateTemplate, addTemplate, updateActivityTemplate, deleteActivityPreview, deleteResourceFiles, getCourses, editActivity, cloneActivity, getActivities, getActivity, addResourceFiles, deleteActivity, duplicateActivity, previewActivity, publishActivity } = require(`../../../controllers/helen/adminController`);
 
 let routes = [
   {
@@ -302,6 +302,32 @@ if (process.env.UPDATE_TEMPLATES) {
       },
       auth: USER_ROLE.ADMIN,
       handler: addTemplate
+    }
+  )
+
+  routes.push(
+    {
+      method: 'PUT',
+      path: '/v1/admin/template/:activityId',
+      joiSchemaForSwagger: {
+        headers: {
+          'authorization': Joi.string().required().description('User\'s JWT token.')
+        },
+        params: {
+          activityId: Joi.string().optional().description('Template Id.')
+        },
+        body: {
+          name: Joi.string().regex(/^[a-z0-9_ ]+$/i).error(new Error('Activity name should contain only alphanumeric chracters')).description('Activity name.'),
+          description: Joi.string().description('Activity description.'),
+          type: Joi.number().valid(...getEnumArray(ACTIVITY_TYPE)).description('Activity type -> SMALL/MEDIUM/GAME.'),
+          iconUrl: Joi.string().description('Activity iconUrl.'),
+        },
+        group: 'Activity-Template',
+        description: 'Route to create a new template',
+        model: 'Add_Template'
+      },
+      auth: USER_ROLE.ADMIN,
+      handler: updateTemplate
     }
   )
 }

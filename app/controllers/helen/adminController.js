@@ -391,7 +391,7 @@ adminController.getCourses = async (payload) => {
  * fucntion to update the activity templates
  */
 adminController.updateActivityTemplate = async () => {
-  let activities = await SERVICES.activityService.getActivities({status:ACTIVITY_STATUS.TEMPLATE});
+  let activities = await SERVICES.activityService.getActivities({ status: ACTIVITY_STATUS.TEMPLATE });
   await SERVICES.activityService.copyTemplates(activities);
   let previewFolderPath = path.join(__dirname, `../../../..${BASE_PATH}${ACTIVITY_PREVIEW_PATH}`);
   fs.removeSync(previewFolderPath);
@@ -410,8 +410,20 @@ adminController.addTemplate = async (payload) => {
   let template = payload;
   template.status = ACTIVITY_STATUS.TEMPLATE;
   //TODO check for name 
-  await SERVICES.activityService.createActivity(template);
-  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY));
+  //Todo add template in activity Config for database seeding while project setup
+  template = await SERVICES.activityService.createActivity(template);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY), { template });
+}
+
+
+/**
+ * Function to update template to the database
+ * @param {*} payload 
+ */
+adminController.updateTemplate = async (payload) => {
+  let criteria = { _id: payload.activityId , status: ACTIVITY_STATUS.TEMPLATE };
+  let template = await SERVICES.activityService.updateActivity(criteria, payload);
+  return Object.assign(HELPERS.responseHelper.createSuccessResponse(MESSAGES.ACTIVITIES_TEMPLATE_UPDATED_SUCCESSFULLY),{template});
 }
 
 /* export adminController */
