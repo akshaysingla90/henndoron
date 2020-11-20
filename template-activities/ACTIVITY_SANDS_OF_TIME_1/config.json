@@ -1,0 +1,318 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Sands Of Time",
+    "activityPath": "ACTIVITY_SANDS_OF_TIME_1",
+    "description": "game desc. here",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": false
+    },
+    "externalRewards": true,
+    "studentPreview": false,
+    "url": "res/Activity/ACTIVITY_SANDS_OF_TIME_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_SANDS_OF_TIME_1",
+    "layerName": "SOTLayer"
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "game_bg.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "start": {
+        "UIName": "Start Button",
+        "enableState": "start_idle.png",
+        "pushedState": "start_pressed.png",
+        "dimensions": { "width": 100, "height": 100 },
+        "position": { "x": 85, "y": 120 }
+      },
+      "stop": {
+        "UIName": "Stop Button",
+        "enableState": "stop_idle.png",
+        "pushedState": "stop_pressed.png",
+        "dimensions": { "width": 100, "height": 100 },
+        "position": { "x": 85, "y": 120 }
+      }
+    }
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "bagText": {
+        "component": "text",
+        "UIName": "bag Text",
+        "color": { "r": 0, "g": 0, "b": 0, "a": 255 },
+        "font": "sassoon_sans_regular",
+        "fontSize": 12
+      },
+      "winnerScreenBackground": {
+        "component": "image",
+        "UIName": "Winner Screen Background",
+        "imageName": "score_window.png",
+        "dimensions": { "width": 632, "height": 421 },
+        "position": { "x": 520, "y": 224.5 },
+        "scale": 0.5
+      },
+      "winnerScreenWhiteBg": {
+        "component": "image",
+        "UIName": "Winner Screen White Background",
+        "imageName": "whiteBG.png",
+        "dimensions": { "width": 960, "height": 640 },
+        "position": { "x": 0, "y": 0 },
+        "scale": 1
+      },
+      "arrayOfAssets": {
+        "component": "treasureItems",
+        "dimensions": { "width": 350, "height": 350 },
+        "UIName": "Objects",
+        "data": [
+          {
+            "imageName": "Item_cat.png",
+            "position": {
+              "x": 100,
+              "y": 100
+            }
+          },
+          {
+            "imageName": "Item_dog.png",
+            "position": {
+              "x": 300,
+              "y": 100
+            }
+          },
+          {
+            "imageName": "Item_donkey.png",
+            "position": {
+              "x": 500,
+              "y": 150
+            }
+          },
+          {
+            "imageName": "Item_duck.png",
+            "position": {
+              "x": 700,
+              "y": 200
+            }
+          },
+          {
+            "imageName": "Item_hare.png",
+            "position": {
+              "x": 150,
+              "y": 400
+            }
+          },
+          {
+            "imageName": "Item_horse.png",
+            "position": {
+              "x": 350,
+              "y": 240
+            }
+          },
+          {
+            "imageName": "Item_rabbit.png",
+            "position": {
+              "x": 350,
+              "y": 400
+            }
+          },
+          {
+            "imageName": "Item_rooster.png",
+            "position": {
+              "x": 750,
+              "y": 450
+            }
+          },
+          {
+            "imageName": "Item_sheep.png",
+            "position": {
+              "x": 550,
+              "y": 400
+            }
+          },
+          {
+            "imageName": "Item_tortoise.png",
+            "position": {
+              "x": 650,
+              "y": 100
+            }
+          }
+        ]
+      },
+      "arrayOfStudentsBag": {
+        "component": "imagesGroup",
+        "dimensions": [
+          { "width": 76, "height": 84 },
+          { "width": 76, "height": 84 },
+          { "width": 76, "height": 84 }
+        ],
+        "UIName": "Student Bags",
+        "columnLabels": ["Bag Front", "Bag Back"],
+        "data": [
+          {
+            "image_1": "student1_bag_front.png",
+            "image_2": "student1_bag_back.png"
+          },
+          {
+            "image_1": "student2_bag_front.png",
+            "image_2": "student2_bag_back.png"
+          },
+          {
+            "image_1": "student3_bag_front.png",
+            "image_2": "student3_bag_back.png"
+          },
+          {
+            "image_1": "student4_bag_front.png",
+            "image_2": "student4_bag_back.png"
+          },
+          {
+            "image_1": "student5_bag_front.png",
+            "image_2": "student5_bag_back.png"
+          },
+          {
+            "image_1": "student6_bag_front.png",
+            "image_2": "student6_bag_back.png"
+          },
+          {
+            "image_1": "student7_bag_front.png",
+            "image_2": "student7_bag_back.png"
+          },
+          {
+            "image_1": "student8_bag_front.png",
+            "image_2": "student8_bag_back.png"
+          }
+        ]
+      }
+    }
+  },
+
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "game_bg.png",
+        "Item_cat.png",
+        "Item_dog.png",
+        "Item_donkey.png",
+        "Item_duck.png",
+        "Item_hare.png",
+        "Item_horse.png",
+        "Item_rabbit.png",
+        "Item_rooster.png",
+        "Item_sheep.png",
+        "Item_tortoise.png",
+        "leaf_0001.png",
+        "leaf_0002.png",
+        "leaf_0003.png",
+        "leaf_0004.png",
+        "score_window.png",
+        "student1_bag_back.png",
+        "student1_bag_front.png",
+        "student2_bag_back.png",
+        "student2_bag_front.png",
+        "student3_bag_back.png",
+        "student3_bag_front.png",
+        "student4_bag_back.png",
+        "student4_bag_front.png",
+        "student5_bag_back.png",
+        "student5_bag_front.png",
+        "student6_bag_back.png",
+        "student6_bag_front.png",
+        "student7_bag_back.png",
+        "student7_bag_front.png",
+        "student8_bag_back.png",
+        "student8_bag_front.png",
+        "whiteBG.png",
+        "stop_idle.png",
+        "start_pressed.png",
+        "start_idle.png",
+        "stop_pressed.png"
+      ]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "name": "bag_stars",
+          "frameCount": 11,
+          "frameInitial": "bag_stars/bag_stars_",
+          "extension": ".png"
+        },
+        {
+          "name": "item_stars",
+          "frameCount": 11,
+          "frameInitial": "item_stars/item_stars_",
+          "extension": ".png"
+        },
+        {
+          "name": "student1_rake",
+          "frameCount": 9,
+          "frameInitial": "student1_rake/student1_rake_",
+          "extension": ".png"
+        },
+        {
+          "name": "student2_rake",
+          "frameCount": 9,
+          "frameInitial": "student2_rake/student2_rake_",
+          "extension": ".png"
+        },
+        {
+          "name": "student3_rake",
+          "frameCount": 9,
+          "frameInitial": "student3_rake/student3_rake_",
+          "extension": ".png"
+        },
+        {
+          "name": "student4_rake",
+          "frameCount": 9,
+          "frameInitial": "student4_rake/student4_rake_",
+          "extension": ".png"
+        },
+        {
+          "name": "student5_rake",
+          "frameCount": 9,
+          "frameInitial": "student5_rake/student5_rake_",
+          "extension": ".png"
+        },
+        {
+          "name": "student6_rake",
+          "frameCount": 9,
+          "frameInitial": "student6_rake/student6_rake_",
+          "extension": ".png"
+        },
+        {
+          "name": "student7_rake",
+          "frameCount": 9,
+          "frameInitial": "student7_rake/student7_rake_",
+          "extension": ".png"
+        },
+        {
+          "name": "student8_rake",
+          "frameCount": 9,
+          "frameInitial": "student8_rake/student8_rake_",
+          "extension": ".png"
+        },
+        {
+          "name": "wind_anim",
+          "frameCount": 12,
+          "frameInitial": "wind_anim/wind_anim_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}
