@@ -1,0 +1,1060 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Kevin's Crane",
+    "activityPath": "ACTIVITY_KEVINS_CRANE_1",
+    "description": "game desc. here",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": true,
+      "turnBasedEditable": true
+    },
+    "externalRewards": true,
+    "studentPreview":  true,
+    "url": "res/Activity/ACTIVITY_KEVINS_CRANE_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_KEVINS_CRANE_1",
+    "layerName": "KevinsCrane"
+  },
+  "teacherScripts": {
+  },
+  "teacherTips": {
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "help": {
+        "UIName": "HelpButton",
+        "enableState": "Help.png",
+        "pushedState": "Help.png",
+        "dimensions": { "width": 64, "height": 64 },
+        "position" : {"x": 750 , "y":40}
+      },
+
+     "multiplayerMode" :{
+       "UIName": "MultiPlayerButton",
+       "title": ["Shared Mode", "Individual Mode"],
+       "enableState": "btn_enable.png",
+       "pushedState": "btn_enable.png",
+       "disableState": "btn_disable.png",
+       "position": { "x": 0, "y": 0 },
+       "dimensions": { "width": 139, "height": 32 }
+     }
+    }
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "theme": {
+        "component": "select",
+        "UIName": "Transition",
+        "options": [
+          { "label": "demolishing", "value": 1 },
+          { "label": "construction", "value": 2 }
+        ],
+        "currentValue": 2,
+        "theme": {
+          "demolishing": 1,
+          "construction": 2
+        }
+      },
+      "construction" : {
+        "component" : "construction",
+        "hintShowTime" :5,
+        "images_items_data" : {
+          "component"       :   "image",
+          "UIName"          :   "DisplayImages",
+          "data"      :   [
+            {
+              "imageName"   :   "item_bad.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "bad"
+            },
+            {
+              "imageName"   :   "item_band.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "band"
+            },
+            {
+              "imageName"   :   "item_bed.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "bed"
+            },
+            {
+              "imageName"   :   "item_big.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "big"
+            },
+            {
+              "imageName"   :   "item_dad.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "dad"
+            },
+            {
+              "imageName"   :   "item_dig.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "dig"
+            },
+            {
+              "imageName"   :   "item_dog.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "dog"
+            },
+            {
+              "imageName"   :   "item_egg.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "egg"
+            },
+            {
+              "imageName"   :   "item_fat.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "fat"
+            },
+            {
+              "imageName"   :   "item_food.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "food"
+            },
+            {
+              "imageName"   :   "item_gate.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "gate"
+            },
+            {
+              "imageName"   :   "item_ghost.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "ghost"
+            },
+            {
+              "imageName"   :   "item_grape.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "grape"
+            },
+            {
+              "imageName"   :   "item_happy.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "happy"
+            },
+            {
+              "imageName"   :   "item_panda.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "panda"
+            },
+            {
+              "imageName"   :   "item_pig.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "pig"
+            },
+            {
+              "imageName"   :   "item_sand.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "sand"
+            },
+            {
+              "imageName"   :   "item_sing.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "sing"
+            }
+          ]
+        },
+        "numberOfRows"        :   3,
+        "maxCharacterInRow"   :   9,
+        "levels": {
+          "component": "levels",
+          "data" : [
+            {
+              "words" : [
+                {
+                  "correct_word"  : "dog",
+                  "display_word"  : "d  "
+                },
+                {
+                  "correct_word"  : "pig",
+                  "display_word"  : "p g"
+                },
+                {
+                  "correct_word"  : "panda",
+                  "display_word"  : "pa da"
+                }
+              ]
+
+            }
+          ]
+        }
+      },
+      "demolishing" : {
+        "component" : "demolishing",
+        "hintShowTime" : 5,
+        "images_items_data" : {
+          "component"       :   "image",
+          "UIName"          :   "DisplayImages",
+          "data"      :   [
+            {
+              "imageName"   :   "item_bad.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "bad"
+            },
+            {
+              "imageName"   :   "item_band.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "band"
+            },
+            {
+              "imageName"   :   "item_bed.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "item_bed"
+            },
+            {
+              "imageName"   :   "item_big.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "big"
+            },
+            {
+              "imageName"   :   "item_dad.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "dad"
+            },
+            {
+              "imageName"   :   "item_dig.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "dig"
+            },
+            {
+              "imageName"   :   "item_dog.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "dog"
+            },
+            {
+              "imageName"   :   "item_egg.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "egg"
+            },
+            {
+              "imageName"   :   "item_fat.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "fat"
+            },
+            {
+              "imageName"   :   "item_food.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "food"
+            },
+            {
+              "imageName"   :   "item_gate.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "gate"
+            },
+            {
+              "imageName"   :   "item_ghost.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "ghost"
+            },
+            {
+              "imageName"   :   "item_grape.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "grape"
+            },
+            {
+              "imageName"   :   "item_happy.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "happy"
+            },
+            {
+              "imageName"   :   "item_panda.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "panda"
+            },
+            {
+              "imageName"   :   "item_pig.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "pig"
+            },
+            {
+              "imageName"   :   "item_sand.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "sand"
+            },
+            {
+              "imageName"   :   "item_sing.png",
+              "dimension"   :   {
+                "width": 350,
+                "height": 350
+              },
+              "name"        :   "sing"
+            }
+          ]
+        },
+        "numberOfRows"        :   3,
+        "maxCharacterInRow"   :   9,
+        "levels": {
+          "component": "levels",
+          "data" : [
+            {
+              "words" : [
+                {
+                  "correct_word"  : "dog",
+                  "display_word"  : "dogdfresd"
+                },
+                {
+                  "correct_word"  : "pig",
+                  "display_word"  : "tpigt"
+                },
+                {
+                  "correct_word"  : "panda",
+                  "display_word"  : "pannda"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "hint_images_base": {
+        "component": "image",
+        "UIName": "hint_images_base",
+        "imageName": "hint_images_base.png",
+        "dimensions": {
+          "width": 304,
+          "height": 117
+        }
+      },
+
+      "help_window": {
+        "component": "image",
+        "UIName": "help_window",
+        "imageName": "help_window.png",
+        "dimensions": {
+          "width": 559,
+          "height": 283
+        }
+      },
+
+      "dustImage": {
+        "component": "image",
+        "UIName": "dustEffect",
+        "imageName": "dustEffect.png",
+        "dimensions": {
+          "width": 450,
+          "height": 535
+        }
+      },
+
+      "reset_cover_up": {
+        "component": "image",
+        "UIName": "reset_cover_up",
+        "imageName": "reset_cover_up.png",
+        "dimensions": {
+          "width": 625,
+          "height": 592
+        }
+      },
+
+      "character_highlight": {
+        "component"     :   "image",
+        "UIName"        :   "character_highlight",
+        "imageName"     :   "character_highlight.png",
+        "name"          :   "character_highlight",
+        "dimensions": {
+          "width": 53,
+          "height": 103
+        }
+      },
+      "homeBase": {
+        "component"     :   "image",
+        "UIName"        :   "HomeBase",
+        "imageName"     :   "building_base.png",
+        "name"          :   "HomeBase",
+        "dimensions": {
+          "width": 492,
+          "height": 89
+        }
+      },
+
+      "homeRoof": {
+        "component"     :   "image",
+        "UIName"        :   "HomeBase",
+        "imageName"     :   "building_roof.png",
+        "name"          :   "HomeRoof",
+        "dimensions": {
+          "width": 518,
+          "height": 142
+        }
+      },
+
+      "floorBalancer"     : {
+        "component"       :   "image",
+        "UIName"          :   "floorBalancer",
+        "imageName"       :   "floor_balancer.png",
+        "dimension"       :   {
+          "width": 470,
+          "height": 12
+        },
+        "name"            :   "balancer"
+      },
+
+      "crane" : {
+        "component"       :   "image",
+        "UIName"          :   "crane",
+
+        "component"       :   {
+
+          "cockpit"       :   {
+            "imageName"   :   "craneCockpit.png",
+            "dimension"   :   {
+              "width": 360,
+              "height": 329
+            },
+            "name"        :   "craneCockpit"
+          },
+
+          "craneCylinder"       :   {
+            "imageName"   :   "crane_cylinder.png",
+            "dimension"   :   {
+              "width"     :   40,
+              "height"    :   32
+            },
+            "name"        :   "craneCylinder"
+          },
+
+          "craneChassis"       :   {
+            "imageName"   :   "craneChassis.png",
+            "dimension"   :   {
+              "width"     :   218,
+              "height"    :   67
+            },
+            "name"        :   "craneChassis"
+          },
+
+          "craneClaw"     :   {
+            "imageName"   :   "craneClaw.png",
+            "dimension"   :   {
+              "width"     :   360,
+              "height"    :   329
+            },
+            "name"        :   "craneClaw"
+          }
+        }
+      },
+      "characters" : {
+        "component"       :   "image",
+        "UIName"          :   "Characters",
+        "charactersData"  :   {
+          "a" : {
+            "imageName"   :   "a_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "a_lowercase"
+          },
+          "b" : {
+            "imageName"   :   "b_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "b_lowercase"
+          },
+          "c" : {
+            "imageName"   :   "c_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "c_lowercase"
+          },
+          "d" : {
+            "imageName"   :   "d_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "d_lowercase"
+          },
+          "e" : {
+            "imageName"   :   "e_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "e_lowercase"
+          },
+          "f" : {
+            "imageName"   :   "f_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "f_lowercase"
+          },
+          "g" : {
+            "imageName"   :   "g_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "g_lowercase"
+          },
+          "h" : {
+            "imageName"   :   "h_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "h_lowercase"
+          },
+          "i" : {
+            "imageName"   :   "i_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "i_lowercase"
+          },
+          "j" : {
+            "imageName"   :   "j_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "j_lowercase"
+          },
+          "k" : {
+            "imageName"   :   "k_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "k_lowercase"
+          },
+          "l" : {
+            "imageName"   :   "l_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "l_lowercase"
+          },
+          "m" : {
+            "imageName"   :   "m_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "m_lowercase"
+          },
+          "n" : {
+            "imageName"   :   "n_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "n_lowercase"
+          },
+          "o" : {
+            "imageName"   :   "o_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "o_lowercase"
+          },
+          "p" : {
+            "imageName"   :   "p_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "p_lowercase"
+          },
+          "q" : {
+            "imageName"   :   "q_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "q_lowercase"
+          },
+          "r" : {
+            "imageName"   :   "r_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "r_lowercase"
+          },
+          "s" : {
+            "imageName"   :   "s_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "s_lowercase"
+          },
+          "t" : {
+            "imageName"   :   "t_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "t_lowercase"
+          },
+          "u" : {
+            "imageName"   :   "u_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "u_lowercase"
+          },
+          "v" : {
+            "imageName"   :   "v_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "v_lowercase"
+          },
+          "w" : {
+            "imageName"   :   "w_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "w_lowercase"
+          },
+          "x" : {
+            "imageName"   :   "x_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "x_lowercase"
+          },
+          "y" : {
+            "imageName"   :   "y_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "y_lowercase"
+          },
+          "z" : {
+            "imageName"   :   "z_lowercase.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "z_lowercase"
+          },
+          "empty" : {
+            "imageName"   :   "empty.png",
+            "dimension"   :   {
+              "width": 52,
+              "height": 102
+            },
+            "name"        :   "empty"
+          }
+        }
+      },
+      "animation": {
+        "component": "animationGroup",
+        "data": {
+          "correctWordAnimation": {
+            "configurable": true,
+            "UIName": "CorrectCharacterBrokenAnimation",
+            "name": "CorrectCharacterBrokenAnimation",
+            "frameCount": 10,
+            "frameInitial": "CorrectWordAnimation/correct_effect_",
+            "extension": ".png"
+          },
+
+          "inCorrectWordAnimation": {
+            "configurable": true,
+            "UIName": "InCorrectCharacterBrokenAnimation",
+            "name": "InCorrectCharacterBrokenAnimation",
+            "frameCount": 9,
+            "frameInitial": "InCorrectWordAnimation/incorrect_effect_",
+            "extension": ".png"
+          },
+          "craneBallIdle": {
+            "configurable": true,
+            "UIName": "crane_ball_loop_anim",
+            "name": "crane_ball_loop_anim",
+            "frameCount": 8,
+            "frameInitial": "crane_ball_loop_anim/crane_ball_idle_",
+            "extension": ".png"
+          },
+          "craneMoveLeft": {
+            "configurable": true,
+            "UIName": "crane_chassis_goleft_loop_anim",
+            "name": "crane_chassis_goleft_loop_anim",
+            "frameCount": 4,
+            "frameInitial": "crane_chassis_goleft_loop_anim/crane_chassis_goleft_",
+            "extension": ".png"
+          },
+          "craneMoveRight": {
+            "configurable": true,
+            "UIName": "crane_chassis_goright_loop_anim",
+            "name": "crane_chassis_goright_loop_anim",
+            "frameCount": 4,
+            "frameInitial": "crane_chassis_goright_loop_anim/crane_chassis_goright_",
+            "extension": ".png"
+          },
+          "breakWordWithSmasherAnimation": {
+            "configurable": true,
+            "UIName": "crane_smash_anim",
+            "name": "breakWordWithSmasherAnimation",
+            "frameCount": 27,
+            "frameInitial": "crane_smash_anim/crane_smash_",
+            "extension": ".png"
+          },
+          "tileBreakAndSmokeAnimation": {
+            "configurable": true,
+            "UIName": "tileBreakAndSmokeAnimation",
+            "name": "tileBreakAndSmokeAnimation",
+            "frameCount": 11,
+            "frameInitial": "TileBreakAndSmokeAnimation/smoke_effect_",
+            "extension": ".png"
+          },
+
+          "craneClawCloseAnimation": {
+            "configurable": true,
+            "UIName": "CraneClawCloseAnimation",
+            "name": "craneClawCloseAnimation",
+            "frameCount": 8,
+            "frameInitial": "crane_clawclosed_loop_anim/crane_clawclosed_",
+            "extension": ".png"
+          },
+
+          "craneClawOpenAnimation": {
+            "configurable": true,
+            "UIName": "CraneClawOpenAnimation",
+            "name": "craneClawOpenAnimation",
+            "frameCount": 8,
+            "frameInitial": "crane_clawopen_loop_anim/crane_clawopen_",
+            "extension": ".png"
+          },
+
+          "craneAddElement": {
+            "configurable": true,
+            "UIName": "CraneAddElement",
+            "name": "craneAddElement",
+            "frameCount": 14,
+            "frameInitial": "crane_add_element_anim/crane_insert_",
+            "extension": ".png"
+          },
+
+          "cranePickFalse": {
+            "configurable": true,
+            "UIName": "CranePickFalse",
+            "name": "cranePickFalse",
+            "frameCount": 17,
+            "frameInitial": "crane_pickup_false_anim/crane_pickup_false_",
+            "extension": ".png"
+          },
+
+          "cranePickTrue": {
+            "configurable": true,
+            "UIName": "CranePickTrue",
+            "name": "cranePickTrue",
+            "frameCount": 10,
+            "frameInitial": "crane_pickup_true_anim/crane_pickup_true_",
+            "extension": ".png"
+          },
+
+          "fallDustEffectAnimation": {
+            "configurable": true,
+            "UIName": "FallDustEffectAnimation",
+            "name": "fallDustEffectAnimation",
+            "frameCount": 16,
+            "frameInitial": "fall_dust_effect_animation/fall_dust_effect_",
+            "extension": ".png"
+          }
+        }
+      }
+    }
+  },
+
+  "resources": {
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "bg.png",
+        "joystick_idle.png",
+        "joystick_down.png",
+        "joystick_left.png",
+        "joystick_right.png",
+        "joystick_up.png",
+        "nob.png",
+        "shaft.png",
+        "button_idle.png",
+        "button_pressed.png",
+        "crane_cilinder.png",
+        "building_base.png",
+        "a_lowercase.png",
+        "b_lowercase.png",
+        "c_lowercase.png",
+        "d_lowercase.png",
+        "e_lowercase.png",
+        "f_lowercase.png",
+        "g_lowercase.png",
+        "h_lowercase.png",
+        "i_lowercase.png",
+        "j_lowercase.png",
+        "k_lowercase.png",
+        "l_lowercase.png",
+        "m_lowercase.png",
+        "n_lowercase.png",
+        "o_lowercase.png",
+        "p_lowercase.png",
+        "q_lowercase.png",
+        "r_lowercase.png",
+        "s_lowercase.png",
+        "t_lowercase.png",
+        "u_lowercase.png",
+        "v_lowercase.png",
+        "w_lowercase.png",
+        "x_lowercase.png",
+        "y_lowercase.png",
+        "z_lowercase.png",
+        "floor_balancer.png",
+        "building_roof.png",
+        "empty.png",
+        "character_highlight.png",
+        "hint_images_base.png",
+        "item_bad.png",
+        "item_band.png",
+        "item_bed.png",
+        "item_big.png",
+        "item_dad.png",
+        "item_dig.png",
+        "item_dog.png",
+        "item_egg.png",
+        "item_fat.png",
+        "item_food.png",
+        "item_gate.png",
+        "item_ghost.png",
+        "item_grape.png",
+        "item_happy.png",
+        "item_panda.png",
+        "item_pig.png",
+        "item_sand.png",
+        "item_sing.png",
+        "help_window.png",
+        "reset_cover_up.png",
+        "craneCockpit.png",
+        "crane_cylinder.png",
+        "craneChassis.png",
+        "Help.png",
+        "crane_clawclosed.png",
+        "dustEffect.png"
+      ]
+    },
+
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "Name": "CorrectCharacterBrokenAnimation",
+          "frameCount": 10,
+          "frameInitial": "CorrectWordAnimation/correct_effect_",
+          "extension": ".png"
+        },
+        {
+          "Name": "InCorrectCharacterBrokenAnimation",
+          "frameCount": 9,
+          "frameInitial": "InCorrectWordAnimation/incorrect_effect_",
+          "extension": ".png"
+        },
+        {
+          "Name": "crane_ball_loop_anim",
+          "frameCount": 8,
+          "frameInitial": "crane_ball_loop_anim/crane_ball_idle_",
+          "extension": ".png"
+        },
+        {
+          "Name": "crane_chassis_goleft_loop_anim",
+          "frameCount": 4,
+          "frameInitial": "crane_chassis_goleft_loop_anim/crane_chassis_goleft_",
+          "extension": ".png"
+        },
+        {
+          "Name": "crane_chassis_goright_loop_anim",
+          "frameCount": 4,
+          "frameInitial": "crane_chassis_goright_loop_anim/crane_chassis_goright_",
+          "extension": ".png"
+        },
+        {
+          "Name": "breakWordWithSmasherAnimation",
+          "frameCount": 27,
+          "frameInitial": "crane_smash_anim/crane_smash_",
+          "extension": ".png"
+        },
+        {
+          "Name": "tileBreakAndSmokeAnimation",
+          "frameCount": 11,
+          "frameInitial": "TileBreakAndSmokeAnimation/smoke_effect_",
+          "extension": ".png"
+        },
+        {
+          "Name": "craneClawCloseAnimation",
+          "frameCount": 8,
+          "frameInitial": "crane_clawclosed_loop_anim/crane_clawclosed_",
+          "extension": ".png"
+        },
+        {
+          "Name": "craneClawOpenAnimation",
+          "frameCount": 8,
+          "frameInitial": "crane_clawopen_loop_anim/crane_clawopen_",
+          "extension": ".png"
+        },
+
+        {
+          "Name": "craneAddElement",
+          "frameCount": 14,
+          "frameInitial": "crane_add_element_anim/crane_insert_",
+          "extension": ".png"
+        },
+
+        {
+          "Name": "cranePickFalse",
+          "frameCount": 17,
+          "frameInitial": "crane_pickup_false_anim/crane_pickup_false_",
+          "extension": ".png"
+        },
+
+        {
+          "Name": "cranePickTrue",
+          "frameCount": 10,
+          "frameInitial": "crane_pickup_true_anim/crane_pickup_true_",
+          "extension": ".png"
+        },
+        {
+          "Name": "fall_dust_effect_animation",
+          "frameCount": 16,
+          "frameInitial": "fall_dust_effect_animation/fall_dust_effect_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}
