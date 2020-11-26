@@ -42,14 +42,13 @@
         "enableState": "Help.png",
         "pushedState": "Help.png",
         "dimensions": { "width": 64, "height": 64 },
-        "position" : {"x": 750 , "y":40}
+        "position" : {"x": 900 , "y":300}
       },
 
      "multiplayerMode" :{
        "UIName": "MultiPlayerButton",
        "title": ["Shared Mode", "Individual Mode"],
        "enableState": "btn_enable.png",
-       "pushedState": "btn_enable.png",
        "disableState": "btn_disable.png",
        "position": { "x": 0, "y": 0 },
        "dimensions": { "width": 139, "height": 32 }
@@ -66,7 +65,7 @@
           { "label": "demolishing", "value": 1 },
           { "label": "construction", "value": 2 }
         ],
-        "currentValue": 2,
+        "currentValue": 1,
         "theme": {
           "demolishing": 1,
           "construction": 2
@@ -82,144 +81,144 @@
             {
               "imageName"   :   "item_bad.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "bad"
             },
             {
               "imageName"   :   "item_band.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "band"
             },
             {
               "imageName"   :   "item_bed.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "bed"
             },
             {
               "imageName"   :   "item_big.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "big"
             },
             {
               "imageName"   :   "item_dad.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "dad"
             },
             {
               "imageName"   :   "item_dig.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "dig"
             },
             {
               "imageName"   :   "item_dog.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "dog"
             },
             {
               "imageName"   :   "item_egg.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "egg"
             },
             {
               "imageName"   :   "item_fat.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "fat"
             },
             {
               "imageName"   :   "item_food.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "food"
             },
             {
               "imageName"   :   "item_gate.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "gate"
             },
             {
               "imageName"   :   "item_ghost.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "ghost"
             },
             {
               "imageName"   :   "item_grape.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "grape"
             },
             {
               "imageName"   :   "item_happy.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "happy"
             },
             {
               "imageName"   :   "item_panda.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "panda"
             },
             {
               "imageName"   :   "item_pig.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "pig"
             },
             {
               "imageName"   :   "item_sand.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "sand"
             },
             {
               "imageName"   :   "item_sing.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "sing"
             }
@@ -244,8 +243,8 @@
                   "correct_word"  : "panda",
                   "display_word"  : "pa da"
                 }
-              ]
-
+              ],
+              "ground_word" : "oingts"
             }
           ]
         }
@@ -256,148 +255,148 @@
         "images_items_data" : {
           "component"       :   "image",
           "UIName"          :   "DisplayImages",
-          "data"      :   [
+          "data"            :   [
             {
               "imageName"   :   "item_bad.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "bad"
             },
             {
               "imageName"   :   "item_band.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "band"
             },
             {
               "imageName"   :   "item_bed.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
-              "name"        :   "item_bed"
+              "name"        :   "bed"
             },
             {
               "imageName"   :   "item_big.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "big"
             },
             {
               "imageName"   :   "item_dad.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "dad"
             },
             {
               "imageName"   :   "item_dig.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "dig"
             },
             {
               "imageName"   :   "item_dog.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "dog"
             },
             {
               "imageName"   :   "item_egg.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "egg"
             },
             {
               "imageName"   :   "item_fat.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "fat"
             },
             {
               "imageName"   :   "item_food.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "food"
             },
             {
               "imageName"   :   "item_gate.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "gate"
             },
             {
               "imageName"   :   "item_ghost.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "ghost"
             },
             {
               "imageName"   :   "item_grape.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "grape"
             },
             {
               "imageName"   :   "item_happy.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "happy"
             },
             {
               "imageName"   :   "item_panda.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "panda"
             },
             {
               "imageName"   :   "item_pig.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "pig"
             },
             {
               "imageName"   :   "item_sand.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "sand"
             },
             {
               "imageName"   :   "item_sing.png",
               "dimension"   :   {
-                "width": 350,
-                "height": 350
+                "width"     :   350,
+                "height"    :   350
               },
               "name"        :   "sing"
             }
@@ -423,6 +422,23 @@
                   "display_word"  : "pannda"
                 }
               ]
+            },
+            {
+              "words" : [
+                  {
+                    "correct_word"  : "happy",
+                    "display_word"  : "haprpy"
+                  },
+                  {
+                    "correct_word"  : "grape",
+                    "display_word"  : "grparpe"
+                  },
+                  {
+                    "correct_word"  : "fat",
+                    "display_word"  : "ftat"
+                  }
+                ]
+
             }
           ]
         }
@@ -966,7 +982,9 @@
         "craneChassis.png",
         "Help.png",
         "crane_clawclosed.png",
-        "dustEffect.png"
+        "dustEffect.png",
+        "btn_disable.png",
+        "btn_enable.png"
       ]
     },
 

@@ -59,6 +59,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     sharedMode: true,
     isPreviewMode: false,
     previewingStudentName: "",
+    isSyncDataUpdated : false,
 
     ctor: function () {
         this._super();
@@ -77,8 +78,8 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             ACTIVITY_BAP_1.spriteBasePath = ACTIVITY_BAP_1.resourcePath + "Sprite/";
             ref.isTeacherView = HDAppManager.isTeacherView;
             ref.setupUI();
+            ref.fetchConnectedStudents();
             if (ref.isTeacherView) {
-                ref.updateRoomData();
                 ref.isStudentInteractionEnable = true;
             }
             config.teacherTips.data.moduleStart.enable && ref.triggerTip(config.teacherTips.data.moduleStart.content.ops);
@@ -90,6 +91,14 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
 
     fetchGameData: function () {
         HDNetworkHandler.get(HDAPIKey.GameData, {"roomId": HDAppManager.roomId}, true, (err, res) => {
+        });
+    },
+    fetchConnectedStudents: function (){
+        SocketManager.emitCutomEvent(ACTIVITY_SANDS_OF_TIME_1.socketEventKey.SingleEvent, {
+            eventType: HDSocketEventType.STUDENT_STATUS,
+            data: {
+                roomId: HDAppManager.roomId,
+            },
         });
     },
 
@@ -147,8 +156,20 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     updateGameWithSyncData() {
+        this.isSyncDataUpdated = true;
+        this.erasedDataForsync.length = 0;
+        this.lineDataForsync.length = 0;
+        let userNames = Object.keys(this.allLineInfo);
+        for (let i = 0; i < userNames.length; ++i) {
+            while (this.allLineInfo[userNames[i]] && this.allLineInfo[userNames[i]][this.curImageIdx] && this.allLineInfo[userNames[i]][this.curImageIdx].length != 0) {
+                this.allLineInfo[userNames[i]][this.curImageIdx].pop().obj.removeFromParent(true);
+            }
+        }
+
+
         if (this.syncDataInfo && this.syncDataInfo.dataArray) {
             let userNames = Object.keys(this.syncDataInfo.dataArray);
+            this.lineSyncData = this.syncDataInfo.dataArray;
             for (var i = 0; i < userNames.length; ++i) {
                 for (var j = 0; j < Object.keys(this.syncDataInfo.dataArray[eval("\"" + userNames[i] + "\"")]).length; ++j) {
                     if ((this.syncDataInfo.dataArray[eval("\"" + userNames[i] + "\"")][eval("\"" + j + "\"")])) {
@@ -164,6 +185,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             }
         }
         if (this.syncDataInfo && this.syncDataInfo.slideIndex) {
+
             this.updateImage(this.syncDataInfo.slideIndex)
         } else {
             this.updateImage(this.curImageIdx);
@@ -179,11 +201,12 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         }, 3000)
         ACTIVITY_BAP_1.intervals.push(eraseInterval);
         let lineInterval = setInterval(() => {
-            //if(ACTIVITY_BAP_1.ref && ACTIVITY_BAP_1.ref.sharedMode) {
             ACTIVITY_BAP_1.ref.updateLineData();
-            // }
         }, 1000);
         ACTIVITY_BAP_1.intervals.push(lineInterval);
+        if(this.isTeacherView){
+            this.updateRoomData();
+        }
     },
 
     updateRoomData: function () {
@@ -202,8 +225,10 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     updateSyncData: function () {
-        this.updateLineDataForSync();
-        this.updateEraseDataForSync();
+        if(HDAppManager.username == this.joinedStudentList.users[0].userName) {
+            this.updateLineDataForSync();
+            this.updateEraseDataForSync();
+        }
     },
 
     updateStudentInteraction: function (username, status) {
@@ -375,11 +400,8 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                     if (ACTIVITY_BAP_1.ref.isPreviewMode && ACTIVITY_BAP_1.ref.isTeacherView) {
                         pixels.obj.setVisible(user == this.previewingStudentName);
                     } else if (!ACTIVITY_BAP_1.ref.isPreviewMode && ACTIVITY_BAP_1.ref.isTeacherView) {
-                        if (this.sharedMode) {
-                            pixels.obj.setVisible(true)
-                        } else {
-                            pixels.obj.setVisible(user == HDAppManager.username);
-                        }
+                        if (this.sharedMode) {pixels.obj.setVisible(true)} else {
+                            pixels.obj.setVisible(user == HDAppManager.username);}
                     }
                 });
             }
@@ -387,9 +409,9 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     studentStatus: function (data) {
+        this.joinedStudentList = [];
+        this.joinedStudentList = data;
         if (this.isTeacherView) {
-            this.joinedStudentList = [];
-            this.joinedStudentList = data;
             this.emitDrawModeEvent();
         }
 
@@ -615,31 +637,34 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             if (this.allLineInfo[userName][imageIndex].length == 1) {
                 this.parent.setResetButtonActive(true);
             }
-            let index = -1;
-            for (let i = 0; i < this.lineDataForsync.length; ++i) {
-                if (this.lineDataForsync[i] && this.lineDataForsync[i].userName == userName) {
-                    index = i;
-                }
-            }
-            if (index === -1) {
-                this.lineDataForsync.push({
-                    "userName": "",
-                    "slideIndex": 0,
-                    "data": [],
-                })
-                index = this.lineDataForsync.length - 1;
-            }
-            this.lineDataForsync[index].userName = userName;
-            this.lineDataForsync[index].slideIndex = imageIndex;
-            this.lineDataForsync[index].data.push({
-                "tag": node.getTag(),
-                "source": JSON.stringify(last),
-                "dest": JSON.stringify(cur),
-                "color": {"r": color.r, "g": color.g, "b": color.b, "a": color.a},
-                "slideIndex": imageIndex,
-                "userName": userName
-            });
+
         }
+
+        let index = -1;
+        for (let i = 0; i < this.lineDataForsync.length; ++i) {
+            if (this.lineDataForsync[i] && this.lineDataForsync[i].userName == userName) {
+                index = i;
+            }
+        }
+        if (index === -1) {
+            this.lineDataForsync.push({
+                "userName": "",
+                "slideIndex": 0,
+                "data": [],
+            })
+            index = this.lineDataForsync.length - 1;
+        }
+        this.lineDataForsync[index].userName = userName;
+        this.lineDataForsync[index].slideIndex = imageIndex;
+        this.lineDataForsync[index].data.push({
+            "tag": node.getTag(),
+            "source": JSON.stringify(last),
+            "dest": JSON.stringify(cur),
+            "color": {"r": color.r, "g": color.g, "b": color.b, "a": color.a},
+            "slideIndex": imageIndex,
+            "userName": userName
+        });
+
         let drawingBoardNode = this.getChildByTag(ACTIVITY_BAP_1.Tag.boardInitialTag + imgIdx);
         if (!drawingBoardNode) {
             drawingBoardNode = new cc.DrawNode();
@@ -655,7 +680,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     updateLineDataForSync: function () {
-        if (this.isTeacherView && this.lineDataForsync.length > 0) {
+        if (this.lineDataForsync.length > 0) {
             this.emitSocketEvent(HDSocketEventType.EDIT_ROOM_DATA, {
                 "roomId": HDAppManager.roomId,
                 "operation": 1,
@@ -707,9 +732,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                     let lastElement = element._buffer[0].verts[element._buffer[0].verts.length - 1];
                     if (cc.rectContainsPoint(this.eraser.getBoundingBox(), firstElement) ||
                         cc.rectContainsPoint(this.eraser.getBoundingBox(), lastElement)) {
-                        if (this.isTeacherView) {
-                            this.insertEraseData(HDAppManager.username, element.getTag(), this.curImageIdx);
-                        }
+                        this.insertEraseData(HDAppManager.username, element.getTag(), this.curImageIdx);
                         element.removeFromParent(true);
                         this.allLineInfo[userNames[i]][this.curImageIdx].splice(j, 1);
                         this.erasedPointArr.push({
@@ -742,7 +765,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     insertEraseData: function (userName, tag, slideIndex) {
-        if (this.isTeacherView) {
+        // if (this.isTeacherView) {
             let index = -1;
             for (let i = 0; i < this.erasedDataForsync.length; ++i) {
 
@@ -761,16 +784,16 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             this.erasedDataForsync[index].userName = userName;
             this.erasedDataForsync[index].slideIndex = slideIndex;
             this.erasedDataForsync[index].data.push(tag);
-        }
+
     },
 
     updateEraseDataForSync: function () {
-        if (this.isTeacherView && this.erasedDataForsync.length > 0) {
+        if (this.erasedDataForsync.length > 0) {
             this.emitSocketEvent(HDSocketEventType.EDIT_ROOM_DATA, {
                 "roomId": HDAppManager.roomId,
                 "operation": 2,
                 "slideIndex": this.curImageIdx,
-                "arrayToPush": this.erasedDataForsync,
+                "arrayToPush": [...this.erasedDataForsync],
             });
             this.erasedDataForsync.length = 0;
         }
@@ -783,6 +806,8 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                 this.allLineInfo[userNames[i]][this.curImageIdx].pop().obj.removeFromParent(true);
             }
         }
+        this.erasedDataForsync.length = 0;
+        this.lineDataForsync.length = 0;
         if (this.isTeacherView) {
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {"eventType": ACTIVITY_BAP_1.socketEventKey.CLEAR});
             let keys = Object.keys(this.allLineInfo);
@@ -871,9 +896,14 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             this.playGround.runAction(new cc.Sequence(new cc.FadeOut(0.2), new cc.callFunc(() => {
                 ACTIVITY_BAP_1.ref.playGround.setTexture(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.background.sections.backgroundSlides.images[ACTIVITY_BAP_1.ref.curImageIdx]);
                 ACTIVITY_BAP_1.ref.playGround.runAction(new cc.FadeIn(0.1));
-                if (ACTIVITY_BAP_1.ref.getChildByTag(ACTIVITY_BAP_1.Tag.boardInitialTag + ACTIVITY_BAP_1.ref.curImageIdx)) {
-                    ACTIVITY_BAP_1.ref.getChildByTag(ACTIVITY_BAP_1.Tag.boardInitialTag + ACTIVITY_BAP_1.ref.curImageIdx).setVisible(true);
-                } else {
+                let node = ACTIVITY_BAP_1.ref.getChildByTag(ACTIVITY_BAP_1.Tag.boardInitialTag + ACTIVITY_BAP_1.ref.curImageIdx);
+                if (node) {
+                    node.setVisible(true);
+                    if(node.getChildren().length > 0 && this.isTeacherView)
+                    {
+                        this.parent.setResetButtonActive(true);
+                    }
+                }else {
                     let drawNode = new cc.DrawNode();
                     drawNode.setContentSize(ACTIVITY_BAP_1.ref.playGround.getContentSize().width, ACTIVITY_BAP_1.ref.playGround.getContentSize().height);
                     drawNode.setTag(ACTIVITY_BAP_1.Tag.boardInitialTag + ACTIVITY_BAP_1.ref.curImageIdx);
@@ -887,7 +917,6 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             this.getChildByTag(ACTIVITY_BAP_1.Tag.boardInitialTag + this.lastImageIndex).setVisible(false);
         }
         this.lastImageIndex = this.curImageIdx;
-
     },
 
     /**
@@ -896,6 +925,9 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
      */
     syncData: function (data) {
         ACTIVITY_BAP_1.ref.syncDataInfo = data;
+        if(  this.isSyncDataUpdated ){
+            this.updateGameWithSyncData();
+        }
     },
 
     /**
@@ -913,9 +945,6 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
                     case ACTIVITY_BAP_1.Tag.PrevImage:
                         this.updateSlide(false);
                         break;
-                    // case  ACTIVITY_BAP_1.Tag.Clear:
-                    //     this.clear();
-                    //     break;
                     case ACTIVITY_BAP_1.Tag.DrawMode:
                         this.toggleDrawMode();
                         break;
