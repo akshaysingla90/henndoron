@@ -16,7 +16,7 @@
     "renderMode": 1,
     "preLoaded": true,
     "namespace": "ACTIVITY_CHUG_1",
-    "layerName": "Chug"
+    "layerName": "ChugLayer"
   },
 
   "teacherScripts": {
