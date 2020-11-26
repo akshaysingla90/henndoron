@@ -27,26 +27,6 @@
     "src/Utility/HDUtility.js",
     "src/Utility/HDNetworkHandler.js",
     "src/Utility/HDSocketManager.js",
-    "src/Utility/HDString.js",
-    "res/Activity/ACTIVITY_BAP_1/src/index.js",
-    "res/Activity/ACTIVITY_COUNTING_1/src/index.js",
-    "res/Activity/ACTIVITY_CWC_1/src/index.js",
-    "res/Activity/ACTIVITY_MAGIC_HAT_1/src/index.js",
-    "res/Activity/ACTIVITY_FLASH_CARDS_1/src/index.js",
-    "res/Activity/ACTIVITY_SPINNINGWHEEL_1/src/index.js",
-    "res/Activity/ACTIVITY_PIANO_PLAYER_1/src/index.js",
-    "res/Activity/ACTIVITY_FLASHLIGHT_1/src/index.js",
-    "res/Activity/ACTIVITY_BUILD_SOMETHING_1/src/index.js",
-    "res/Activity/ACTIVITY_DONT_WAKE_THE_DRAGON_1/src/index.js",
-    "res/Activity/ACTIVITY_SAVE_A_SITUATION_1/src/index.js",
-    "res/Activity/ACTIVITY_SUDOKU_1/src/index.js",
-    "res/Activity/ACTIVITY_GFTG_1/src/index.js",
-    "res/Activity/ACTIVITY_CHUG_1/src/index.js",
-    "res/Activity/ACTIVITY_EWG_1/src/index.js",
-    "res/Activity/ACTIVITY_SANDS_OF_TIME_1/src/index.js",
-    "res/Activity/ACTIVITY_WHO_AM_I_1/src/index.js",
-    "res/Activity/ACTIVITY_WEB_LINK_1/src/index.js",
-    "res/Activity/ACTIVITY_KEVINS_CRANE_1/src/index.js",
-    "res/Activity/ACTIVITY_HUNGRY_FLUPE_1/src/index.js"
+    "src/Utility/HDString.js"
   ]
 }
