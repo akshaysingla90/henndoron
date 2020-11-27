@@ -12,6 +12,7 @@ ACTIVITY_BAP_1.Tag = {
 }
 
 ACTIVITY_BAP_1.socketEventKey = {
+    SingleEvent : "SingleEvent",
     SHARED_MOUSE_STATUS: 1,
     PAINT_INFO: 2,
     ERASE_INFO: 3,
@@ -94,7 +95,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
         });
     },
     fetchConnectedStudents: function (){
-        SocketManager.emitCutomEvent(ACTIVITY_SANDS_OF_TIME_1.socketEventKey.SingleEvent, {
+        SocketManager.emitCutomEvent(ACTIVITY_BAP_1.socketEventKey.SingleEvent, {
             eventType: HDSocketEventType.STUDENT_STATUS,
             data: {
                 roomId: HDAppManager.roomId,
@@ -225,9 +226,13 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
     },
 
     updateSyncData: function () {
-        if(HDAppManager.username == this.joinedStudentList.users[0].userName) {
-            this.updateLineDataForSync();
-            this.updateEraseDataForSync();
+        if(ACTIVITY_BAP_1 && ACTIVITY_BAP_1.ref.joinedStudentList
+            && ACTIVITY_BAP_1.ref.joinedStudentList.users &&
+            ACTIVITY_BAP_1.ref.joinedStudentList.users[0]) {
+            if (HDAppManager.username == ACTIVITY_BAP_1.ref.joinedStudentList.users[0].userName) {
+                this.updateLineDataForSync();
+                this.updateEraseDataForSync();
+            }
         }
     },
 
@@ -541,8 +546,8 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
             prevButton.setLocalZOrder(1000);
             }
             let drawMode = this.createButton(ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState,
-                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState, "Shared Mode",
-                16, ACTIVITY_BAP_1.Tag.DrawMode, cc.p(this.getContentSize().width * 0.915,
+                ACTIVITY_BAP_1.spriteBasePath + ACTIVITY_BAP_1.config.buttons.data.drawMode.enableState, "Go to Individual Mode",
+                13, ACTIVITY_BAP_1.Tag.DrawMode, cc.p(this.getContentSize().width * 0.915,
                     this.getContentSize().height * 0.15), this);
             drawMode.setTitleColor(cc.color(0, 0, 0, 255));
             // drawMode.setScale(0.7, 0.7);
@@ -958,7 +963,7 @@ ACTIVITY_BAP_1.BackgroundAndPenLayer = HDBaseLayer.extend({
      */
     toggleDrawMode() {
         this.sharedMode = !this.sharedMode;
-        this.getChildByTag(ACTIVITY_BAP_1.Tag.DrawMode).setTitleText(this.sharedMode ? "Shared Mode" : "Individual Mode");
+        this.getChildByTag(ACTIVITY_BAP_1.Tag.DrawMode).setTitleText(this.sharedMode ? "Go to Individual Mode" : "Go to Shared Mode");
         this.emitDrawModeEvent();
     },
 
