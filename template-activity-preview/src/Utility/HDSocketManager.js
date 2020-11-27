@@ -56,4 +56,8 @@ const SocketManager = {
   removeSubscribedEvent: function (eventName, fn) {
     //   this.socket.removeListener(eventName,fn);
   },
+
+  closeSocket: function () {
+    if (this.socket) this.socket.close();
+  },
 };

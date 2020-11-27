@@ -138,6 +138,10 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
       HDAppManager.setEventAddedForBackground(true);
       this.addBackgroundAndForegroundAppListeners();
     }
+
+    window.addEventListener("beforeunload", function () {
+      SocketManager.closeSocket();
+    });
   },
 
   onEnterTransitionDidFinish: function () {
@@ -149,6 +153,8 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
 
   onExit: function () {
     this._super();
+    console.log("lesson on exit called");
+    SocketManager.closeSocket();
     HDAppManager.setEventAddedForBackground(false);
     cc.eventManager.removeListener(this.gameShowListener);
     cc.eventManager.removeListener(this.gameHideListener);
@@ -2900,7 +2906,6 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
    * @param data
    */
   onSyncData: function (data) {
-    console.log("inside on sycn data");
     var roomDetail = data;
     if (HDAppManager.roomId && HDAppManager.roomId == roomDetail.roomId) {
       if (roomDetail && roomDetail.roomData) {
@@ -2939,7 +2944,7 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
                 let newActivity = lesson_1.ref.getChildByTag(lesson_1.Tag.activeActivityTag);
                 newActivity.syncData(roomData.data);
               }
-              this.updateActivityTimerAfterReload(data);
+              this.updateActivityTimerAfterReload(data, index);
             }
             break;
           }
@@ -2948,14 +2953,14 @@ lesson_1.HDLessonLayer = HDBaseLayer.extend({
     }
   },
 
-  updateActivityTimerAfterReload: function (data) {
+  updateActivityTimerAfterReload: function (data, index) {
     if (lesson_1.ref.isTeacherView) {
       if (data.roomData) {
         var delay = lesson_1.ref.calculateElapsedTime(data.roomData.activityStartTime);
         var time =
-          delay > lesson_1.config.activityGame[this.activityIdx].allocatedTime * 60
+          delay > lesson_1.config.activityGame[index].allocatedTime * 60
             ? 0
-            : time - lesson_1.config.activityGame[this.activityIdx].allocatedTime;
+            : time - lesson_1.config.activityGame[index].allocatedTime;
         this.startActivityTimer(time);
         HDAppManager.setActivityStartTime(new Date().getTime());
       }
