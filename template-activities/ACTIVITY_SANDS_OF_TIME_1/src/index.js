@@ -552,16 +552,7 @@ ACTIVITY_SANDS_OF_TIME_1.SOTLayer = HDBaseLayer.extend({
             ACTIVITY_SANDS_OF_TIME_1.ref.generateSequenceToEmitLeaf();
         }
     },
-    toggleMouse : function (){
-        console.log("toggle mouse called");
-        var scrollView = lesson_1.ref.getChildByTag(lesson_1.Tag.studentScrollView);
-        let container = scrollView._container;
-        console.log(container);
-        for (let child of container.getChildren()) {
-            console.log("child here", child);
-            lesson_1.ref.selectedStudentCallback(child, ccui.Widget.TOUCH_ENDED);
-        }
-    },
+
 
     generateSequenceToEmitLeaf : function (){
      this.leafEmitDetails = [];
@@ -803,7 +794,7 @@ ACTIVITY_SANDS_OF_TIME_1.SOTLayer = HDBaseLayer.extend({
             this.changeButtonStates();
             this.updateTimerString();
             this.generateSequenceToEmitLeaf();
-            this.toggleMouse();
+            this.getParent().setAllStudentsMouseActive(false);
         }
     },
 
@@ -1220,7 +1211,7 @@ ACTIVITY_SANDS_OF_TIME_1.SOTLayer = HDBaseLayer.extend({
                             "eventType": ACTIVITY_SANDS_OF_TIME_1.socketEventKey.GameState,
                             "data": ACTIVITY_SANDS_OF_TIME_1.ref.gameState
                         });
-                        this.toggleMouse();
+                        this.getParent().setAllStudentsMouseActive(true);
                         this.startTimer();
                         this.changeButtonStates();
                         this.generateSequenceToEmitLeaf();
@@ -1229,7 +1220,7 @@ ACTIVITY_SANDS_OF_TIME_1.SOTLayer = HDBaseLayer.extend({
                         break;
 
                     case ACTIVITY_SANDS_OF_TIME_1.Tag.stopButton:
-                        this.toggleMouse();
+                        this.getParent().setAllStudentsMouseActive(false);
                         this.onGameComplete();
                         this.stopTimer();
                         this.changeButtonStates();
