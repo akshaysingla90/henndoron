@@ -5,6 +5,7 @@
     "activityPath": "ACTIVITY_KEVINS_CRANE_1",
     "description": "game desc. here",
     "allocatedTime": 10,
+    "timeDelays": 5,
     "controls": {
       "mouse": true,
       "turnBased": true,
@@ -19,7 +20,6 @@
     "namespace": "ACTIVITY_KEVINS_CRANE_1",
     "layerName": "KevinsCrane"
   },
-
   "format": {
     "component": "formatsCard",
     "sections": {
@@ -29,10 +29,11 @@
           { "label": "CONSTRUCTION", "value": 1 },
           { "label": "DEMOLITION", "value": 2 }
         ],
-        "currentValue": 2
+        "currentValue": 1
       }
     }
   },
+
   "background": {
     "component": "backgroundCard",
     "sections": {
@@ -45,7 +46,7 @@
     }
   },
   "buttons": {
-    "component": "buttonsCard",
+    "ignoreForAuthToolUI": true,
     "data": {
       "help": {
         "UIName": "HelpButton",
@@ -68,19 +69,6 @@
   "assets": {
     "component": "assetsCard",
     "sections": {
-      "theme": {
-        "component": "select",
-        "UIName": "Transition",
-        "options": [
-          { "label": "demolishing", "value": 1 },
-          { "label": "construction", "value": 2 }
-        ],
-        "currentValue": 2,
-        "theme": {
-          "demolishing": 1,
-          "construction": 2
-        }
-      },
       "building": {
         "component": "buildingStructure",
         "UIName": "BUILDING",
@@ -129,7 +117,7 @@
         "position": { "x": 0, "y": 0 }
       },
       "hint_images_base": {
-        "component": "image",
+        "ignoreForAuthToolUI": true,
         "UIName": "hint_images_base",
         "imageName": "hint_images_base.png",
         "dimensions": {
@@ -337,7 +325,7 @@
             "animation": {
               "craneMoveLeft": {
                 "configurable": true,
-                "UIName": "crane_chassis_goleft_loop_anim",
+                "UIName": "MOVEMENT TO THE LEFT",
                 "name": "crane_chassis_goleft_loop_anim",
                 "frameCount": 4,
                 "frameInitial": "crane_chassis_goleft_loop_anim/crane_chassis_goleft_",
@@ -345,7 +333,7 @@
               },
               "craneMoveRight": {
                 "configurable": true,
-                "UIName": "crane_chassis_goright_loop_anim",
+                "UIName": "MOVEMENT TO THE RIGHT",
                 "name": "crane_chassis_goright_loop_anim",
                 "frameCount": 4,
                 "frameInitial": "crane_chassis_goright_loop_anim/crane_chassis_goright_",
@@ -363,7 +351,7 @@
             "animation": {
               "craneClawOpenAnimation": {
                 "configurable": true,
-                "UIName": "CraneClawOpenAnimation",
+                "UIName": "CLAW OPEN",
                 "name": "craneClawOpenAnimation",
                 "frameCount": 8,
                 "frameInitial": "crane_clawopen_loop_anim/crane_clawopen_",
@@ -371,7 +359,7 @@
               },
               "craneClawCloseAnimation": {
                 "configurable": true,
-                "UIName": "CraneClawCloseAnimation",
+                "UIName": "CLAW CLOSE",
                 "name": "craneClawCloseAnimation",
                 "frameCount": 8,
                 "frameInitial": "crane_clawclosed_loop_anim/crane_clawclosed_",
@@ -379,7 +367,7 @@
               },
               "craneAddElement": {
                 "configurable": true,
-                "UIName": "CraneAddElement",
+                "UIName": "CRANE INSERT",
                 "name": "craneAddElement",
                 "frameCount": 14,
                 "frameInitial": "crane_add_element_anim/crane_insert_",
@@ -387,7 +375,7 @@
               },
               "cranePickTrue": {
                 "configurable": true,
-                "UIName": "CranePickTrue",
+                "UIName": "CRANE PICKUP (RIGHT LETTER)",
                 "name": "cranePickTrue",
                 "frameCount": 10,
                 "frameInitial": "crane_pickup_true_anim/crane_pickup_true_",
@@ -395,7 +383,7 @@
               },
               "cranePickFalse": {
                 "configurable": true,
-                "UIName": "CranePickFalse",
+                "UIName": "CRANE PICKUP (WRONG LETTER)",
                 "name": "cranePickFalse",
                 "frameCount": 17,
                 "frameInitial": "crane_pickup_false_anim/crane_pickup_false_",
@@ -413,7 +401,7 @@
             "animation": {
               "craneBallIdle": {
                 "configurable": true,
-                "UIName": "crane_ball_loop_anim",
+                "UIName": "BALL IDLE",
                 "name": "crane_ball_loop_anim",
                 "frameCount": 8,
                 "frameInitial": "crane_ball_loop_anim/crane_ball_idle_",
@@ -421,28 +409,19 @@
               },
               "breakWordWithSmasherAnimation": {
                 "configurable": true,
-                "UIName": "crane_smash_anim",
+                "UIName": "BALL SMASH",
                 "name": "breakWordWithSmasherAnimation",
                 "frameCount": 27,
                 "frameInitial": "crane_smash_anim/crane_smash_",
                 "extension": ".png"
               }
             }
-          },
-          "craneCylinder" : {
-            "imageName": "crane_cylinder.png",
-            "dimension": {
-              "width": 360,
-              "height": 329
-            },
-            "name": "craneCockpit"
           }
-
         }
       }
     }
-
   },
+
   "wordsAndHints": {
     "component": "hintsCard",
     "sections": {
@@ -468,7 +447,8 @@
                   "display_word": "pa da"
                 }
               ],
-              "ground_word" : "oingts",
+              "additionalRandomLetters": 1,
+              "groundLetters":"",
               "hintsSections": {
                 "UIName": "HINTS",
                 "images": ["item_dog.png", "item_pig.png", "item_panda.png"],
@@ -478,7 +458,7 @@
                 "UIName": "HELP SECTION",
                 "imageName": "help_window_pictures.png",
                 "dimensions": { "width": 559, "height": 283 },
-                "hintTime"   : 3
+                "helpShowTime": 5
               }
             }
           ],
@@ -507,35 +487,7 @@
                 "UIName": "HELP SECTION",
                 "imageName": "help_window_pictures.png",
                 "dimensions": { "width": 559, "height": 283 },
-                "hintTime"   : 3
-              }
-            },
-
-            {
-              "words": [
-                {
-                  "correct_word": "dog",
-                  "display_word": "dogd"
-                },
-                {
-                  "correct_word": "sing",
-                  "display_word": "stpingt"
-                },
-                {
-                  "correct_word": "food",
-                  "display_word": "fponod"
-                }
-              ],
-              "hintsSections": {
-                "UIName": "HINTS SECTION",
-                "images": ["item_dog.png", "item_sing.png", "item_food.png"],
-                "dimensions": { "width": 350, "height": 350 }
-              },
-              "helpSection": {
-                "UIName": "HELP SECTION",
-                "imageName": "help_window_pictures.png",
-                "dimensions": { "width": 559, "height": 283 },
-                "hintTime"   : 3
+                "helpShowTime": 5
               }
             }
           ]
@@ -553,6 +505,7 @@
       }
     }
   },
+
   "resources": {
     "ignoreForAuthToolUI": true,
     "sprites": {
@@ -565,7 +518,6 @@
         "joystick_right.png",
         "joystick_up.png",
         "nob.png",
-
         "shaft.png",
         "button_idle.png",
         "button_pressed.png",
@@ -626,12 +578,9 @@
         "crane_cylinder.png",
         "craneChassis.png",
         "Help.png",
+        "help_window_pictures.png",
         "crane_clawclosed.png",
-        "dustEffect.png",
-        "btn_disable.png",
-        "btn_enable.png",
-        "cursor_0001.png",
-        "help_window_pictures"
+        "dustEffect.png"
       ]
     },
 
@@ -639,82 +588,82 @@
       "basePath": "res/AnimationFrames/",
       "animation": [
         {
-          "Name": "CorrectCharacterBrokenAnimation",
+          "name": "CorrectCharacterBrokenAnimation",
           "frameCount": 10,
           "frameInitial": "CorrectWordAnimation/correct_effect_",
           "extension": ".png"
         },
         {
-          "Name": "InCorrectCharacterBrokenAnimation",
+          "name": "InCorrectCharacterBrokenAnimation",
           "frameCount": 9,
           "frameInitial": "InCorrectWordAnimation/incorrect_effect_",
           "extension": ".png"
         },
         {
-          "Name": "crane_ball_loop_anim",
+          "name": "crane_ball_loop_anim",
           "frameCount": 8,
           "frameInitial": "crane_ball_loop_anim/crane_ball_idle_",
           "extension": ".png"
         },
         {
-          "Name": "crane_chassis_goleft_loop_anim",
+          "name": "crane_chassis_goleft_loop_anim",
           "frameCount": 4,
           "frameInitial": "crane_chassis_goleft_loop_anim/crane_chassis_goleft_",
           "extension": ".png"
         },
         {
-          "Name": "crane_chassis_goright_loop_anim",
+          "name": "crane_chassis_goright_loop_anim",
           "frameCount": 4,
           "frameInitial": "crane_chassis_goright_loop_anim/crane_chassis_goright_",
           "extension": ".png"
         },
         {
-          "Name": "breakWordWithSmasherAnimation",
+          "name": "breakWordWithSmasherAnimation",
           "frameCount": 27,
           "frameInitial": "crane_smash_anim/crane_smash_",
           "extension": ".png"
         },
         {
-          "Name": "tileBreakAndSmokeAnimation",
+          "name": "tileBreakAndSmokeAnimation",
           "frameCount": 11,
           "frameInitial": "TileBreakAndSmokeAnimation/smoke_effect_",
           "extension": ".png"
         },
         {
-          "Name": "craneClawCloseAnimation",
+          "name": "craneClawCloseAnimation",
           "frameCount": 8,
           "frameInitial": "crane_clawclosed_loop_anim/crane_clawclosed_",
           "extension": ".png"
         },
         {
-          "Name": "craneClawOpenAnimation",
+          "name": "craneClawOpenAnimation",
           "frameCount": 8,
           "frameInitial": "crane_clawopen_loop_anim/crane_clawopen_",
           "extension": ".png"
         },
 
         {
-          "Name": "craneAddElement",
+          "name": "craneAddElement",
           "frameCount": 14,
           "frameInitial": "crane_add_element_anim/crane_insert_",
           "extension": ".png"
         },
 
         {
-          "Name": "cranePickFalse",
+          "name": "cranePickFalse",
           "frameCount": 17,
           "frameInitial": "crane_pickup_false_anim/crane_pickup_false_",
           "extension": ".png"
         },
 
         {
-          "Name": "cranePickTrue",
+          "name": "cranePickTrue",
           "frameCount": 10,
           "frameInitial": "crane_pickup_true_anim/crane_pickup_true_",
           "extension": ".png"
         },
         {
-          "Name": "fall_dust_effect_animation",
+          "name": "fall_dust_effect_animation",
           "frameCount": 16,
           "frameInitial": "fall_dust_effect_animation/fall_dust_effect_",
           "extension": ".png"
