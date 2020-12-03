@@ -142,7 +142,7 @@ ACTIVITY_KEVINS_CRANE_1.CraneNode = cc.Node.extend({
         var componentPath       =   ACTIVITY_KEVINS_CRANE_1.config.assets.sections.crane.data;
         console.log("coponent path",componentPath );
         this.craneChanins       =   this.gameRef.addSprite(ACTIVITY_KEVINS_CRANE_1.spriteBasePath + componentPath.craneChassis.imageName, cc.p(this.gameRef._size.width * 0.5,this.gameRef._size.height * 0.1), this);
-        this.craneCylinder      =   this.gameRef.addSprite(ACTIVITY_KEVINS_CRANE_1.spriteBasePath + componentPath.craneCylinder.imageName, cc.p(this.gameRef._size.width * 0.52,this.gameRef._size.height * 0.13), this);
+        this.craneCylinder      =   this.gameRef.addSprite(ACTIVITY_KEVINS_CRANE_1.spriteBasePath + "crane_cylinder.png", cc.p(this.gameRef._size.width * 0.52,this.gameRef._size.height * 0.13), this);
         this.craneCylinder.setAnchorPoint(cc.p(0.5,0));
         this.initialCockpitPos   = cc.p(this.gameRef._size.width * 0.425,this.gameRef._size.height * 0.405);
 
@@ -626,7 +626,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
             multiPlayerMode.setAnchorPoint(cc.p(0.5, 0.5));
             this.handIconUI.push(multiPlayerMode);
         }
-        var themeData   =  ACTIVITY_KEVINS_CRANE_1.config.assets.sections.theme;
+        var themeData   =  ACTIVITY_KEVINS_CRANE_1.config.format.sections.theme;
         var optionData  =   themeData.options;
         for (var counter = 0; counter < optionData.length; counter++) {
             var option = optionData[counter];
