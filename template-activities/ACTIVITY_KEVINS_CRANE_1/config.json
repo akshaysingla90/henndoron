@@ -33,10 +33,6 @@
       }
     }
   },
-  "teacherScripts": {
-  },
-  "teacherTips": {
-  },
   "background": {
     "component": "backgroundCard",
     "sections": {
@@ -86,7 +82,6 @@
         }
       },
       "building": {
-        "ignoreForAuthToolUI": false,
         "component": "buildingStructure",
         "UIName": "BUILDING",
         "data": [
@@ -144,7 +139,6 @@
       },
       "dustImage": {
         "ignoreForAuthToolUI": true,
-        "component": "image",
         "UIName": "dustEffect",
         "imageName": "dustEffect.png",
         "dimensions": {
@@ -154,7 +148,6 @@
       },
       "reset_cover_up": {
         "ignoreForAuthToolUI": true,
-        "component": "image",
         "UIName": "reset_cover_up",
         "imageName": "reset_cover_up.png",
         "dimensions": {
@@ -164,7 +157,6 @@
       },
       "character_highlight": {
         "ignoreForAuthToolUI": true,
-        "component"     :   "image",
         "UIName"        :   "character_highlight",
         "imageName"     :   "character_highlight.png",
         "name"          :   "character_highlight",
@@ -174,7 +166,6 @@
         }
       },
       "alphabetBricks": {
-        "ignoreForAuthToolUI": false,
         "UIName": "ALPHABET BRICKS",
         "component": "alphabetBricks",
         "dimensions": {
@@ -294,7 +285,6 @@
       },
       "animation": {
         "ignoreForAuthToolUI": true,
-        "component": "animationGroup",
         "data": {
           "correctWordAnimation": {
             "configurable": true,
@@ -564,6 +554,7 @@
     }
   },
   "resources": {
+    "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [
