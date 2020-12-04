@@ -448,7 +448,7 @@
                 }
               ],
               "additionalRandomLetters": 1,
-              "groundLetters":"",
+              "groundLetters":"iognrta",
               "hintsSections": {
                 "UIName": "HINTS",
                 "images": ["item_dog.png", "item_pig.png", "item_panda.png"],

@@ -21,8 +21,9 @@ ACTIVITY_KEVINS_CRANE_1.LEVEL_STATE ={
 }
 
 ACTIVITY_KEVINS_CRANE_1.GAME_TYPE = {
-    DEMOLISHING         :   1,
-    CONSTRUCTION        :   2
+    CONSTRUCTION        :   1,
+    DEMOLISHING         :   2
+
 };
 
 ACTIVITY_KEVINS_CRANE_1.MULTIPLAYER_TYPE = {
@@ -304,10 +305,9 @@ ACTIVITY_KEVINS_CRANE_1.CraneControl = cc.Node.extend({
 
         this.shaftButton = this.gameRef.createButton(ACTIVITY_KEVINS_CRANE_1.spriteBasePath + "button_idle.png", ACTIVITY_KEVINS_CRANE_1.spriteBasePath+"button_pressed.png",
             "", 0, 100, cc.p( this.controlBase.getContentSize().width * 0.51, this.controlBase.getContentSize().height *0.255),  this.controlBase,this);
-        this.shaftButton.setSwallowTouches(true);
-        if(!ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable){
-            this.shaftButton .setTouchEnabled(false);
-        }
+        // this.shaftButton.setSwallowTouches(true);
+        console.log("touch", ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable);
+
 
 
     },
@@ -728,6 +728,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         this.addAllImagesInBoard(rowInfo[this.currentLevel]);
         this.addResetHoverImage();
         if(this.gameType == ACTIVITY_KEVINS_CRANE_1.GAME_TYPE.CONSTRUCTION) {
+
             this.addCharacterInGrounds();
         }
     },
@@ -755,6 +756,10 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
     addCraneInGame : function(){
         let craneNode = new ACTIVITY_KEVINS_CRANE_1.CraneNode();
         this.craneControlNode = new ACTIVITY_KEVINS_CRANE_1.CraneControl(craneNode);
+        if(!this.isTeacherView){
+            console.log("touch changed");
+            this.craneControlNode.shaftButton.setTouchEnabled(false);
+        }
         console.log("getContentSize",this.craneControlNode.getContentSize());
         this.addChild(this.craneControlNode,60);
         this.addChild(craneNode,1500);
@@ -801,14 +806,9 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
     },
 
     addCharacterInGrounds : function() {
-        var data = null;
-        if(this.gameType == ACTIVITY_KEVINS_CRANE_1.GAME_TYPE.CONSTRUCTION){
-            data = ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels.data.construction[this.currentLevel];
-        }else{
-            data =  ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels.data.demolishing[this.currentLevel];
-        }
-        var rotation = [10,15,20,25,30,35];
-        this.groundLetters      =   data.ground_word;
+        this.groundLetters      =  ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels.data.construction[this.currentLevel].groundLetters;
+        var rotation = [10,15,20,25,30,35,40,45];
+
         console.log("length", this.groundLetters.length);
         var initialPositionX    =   this.getContentSize().width * 0.2;
         for (var counter = 0; counter < this.groundLetters.length; counter++) {
@@ -932,20 +932,23 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
             }
         }
 
-        if(this.selectedCharacterFromGround){
-           if((this.isStudentInteractionEnable && !this.isTeacherView) || (this.isTurnBased() && this.isTeacherView && !this.isStudentSelected)){
-               var dataToSend = this.createDataToSend();
-               ACTIVITY_KEVINS_CRANE_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-                    "eventType"     :   ACTIVITY_KEVINS_CRANE_1.socketEventKey.CHARACTER_PICKED,
-                    "data"          :   {
-                        "tag"       :   ACTIVITY_KEVINS_CRANE_1.ref.selectedCharacterFromGround.getTag(),
-                        "userInfo"  :   JSON.stringify(dataToSend)
-                   },
-               });
-           }
-        }else  {
-            this.craneControlNode.craneNode.runCranePickAnimation();
+        if((this.isStudentInteractionEnable && !this.isTeacherView) || (this.isTurnBased() && this.isTeacherView && !this.isStudentSelected)){
+            var dataToSend = this.createDataToSend();
+            ACTIVITY_KEVINS_CRANE_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+                "eventType"     :   ACTIVITY_KEVINS_CRANE_1.socketEventKey.CHARACTER_PICKED,
+                "data"          :   {
+                    "tag"       :   ACTIVITY_KEVINS_CRANE_1.ref.selectedCharacterFromGround ? ACTIVITY_KEVINS_CRANE_1.ref.selectedCharacterFromGround.getTag() :0,
+                    "userInfo"  :   JSON.stringify(dataToSend)
+                },
+            });
         }
+
+        if(!ACTIVITY_KEVINS_CRANE_1.ref.selectedCharacterFromGround){
+            this.craneControlNode.craneNode.runCranePickAnimation();
+
+        }
+
+
     },
 
     playCharacterPickingAnimation(tag){
@@ -958,7 +961,6 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
     },
 
     checkCharcterFixingProcess : function() {
-        console.log("charater fixing process");
         var colliderLocation = cc.p(this.craneControlNode.craneNode.craneCockpitCollider.getPosition().x + this.craneControlNode.craneNode.getPositionX(), this.craneControlNode.craneNode.craneCockpitCollider.getPosition().y +  this.craneControlNode.craneNode.craneCockpitCollider.getContentSize().height * 0.5);
         ACTIVITY_KEVINS_CRANE_1.ref.checkConstructionCollision(colliderLocation, this.craneControlNode.craneNode.craneCockpitCollider.text);
     },
@@ -1563,6 +1565,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
     },
 
     onUpdateStudentInteraction: function (params) {
+        console.log("inside this");
         if (params.userName == HDAppManager.username) {
             ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable = params.status;
             ACTIVITY_KEVINS_CRANE_1.ref.craneControlNode.shaftButton.setTouchEnabled(true);
@@ -1732,7 +1735,13 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
 
             case ACTIVITY_KEVINS_CRANE_1.socketEventKey.CHARACTER_PICKED:
                 if(this.isTurnBased() || (this.isPreviewMode &&   res.userName == this.previewingStudentName)) {
-                    this.playCharacterPickingAnimation(res.data.tag);
+                    if(res.data.tag){
+                        this.playCharacterPickingAnimation(res.data.tag);
+                    }else{
+                        this.craneControlNode.craneNode.runCranePickAnimation();
+
+                    }
+
                 }
                 this.updateUserInfo(JSON.parse(res.data.userInfo));
                 break;
