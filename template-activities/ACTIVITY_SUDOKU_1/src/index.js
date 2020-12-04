@@ -104,7 +104,7 @@ ACTIVITY_SUDOKU_1.SudokuLayer = HDBaseLayer.extend({
         }
         let initialX = cc.winSize.width * 0.07;
         let initialY = cc.winSize.height * 0.21;
-        let sidebarBgSprite = this.addSprite(ACTIVITY_SUDOKU_1.spriteBasePath + ACTIVITY_SUDOKU_1.config.assets.sections.arrayOfAssets.data[7].imageName,cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5),this);
+        let sidebarBgSprite = this.addSprite(ACTIVITY_SUDOKU_1.spriteBasePath + ACTIVITY_SUDOKU_1.config.assets.sections.bar.imageName,cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5),this);
         for(var i = 0; i < 6; ++i){
             let sidebarButton = this.createButton(sidebarData[i].normalImage,null,null,null,i,cc.p(initialX, initialY ),this,null,sidebarData[i].normalImage);
             sidebarButton.setName(sidebarData[i].name);
@@ -122,7 +122,7 @@ ACTIVITY_SUDOKU_1.SudokuLayer = HDBaseLayer.extend({
     },
     board : function () {
         //boardBG
-        this.boardBg = this.addSprite(ACTIVITY_SUDOKU_1.spriteBasePath + ACTIVITY_SUDOKU_1.config.assets.sections.arrayOfAssets.data[6].imageName,cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5),this);
+        this.boardBg = this.addSprite(ACTIVITY_SUDOKU_1.spriteBasePath + ACTIVITY_SUDOKU_1.config.assets.sections.Blackboard.imageName,cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5),this);
         //Conflicted Layers
         this.conflictLayerOne = this.createConflictedLayer();
         this.conflictLayerTwo = this.createConflictedLayer();

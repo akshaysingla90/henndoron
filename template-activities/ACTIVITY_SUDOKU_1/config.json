@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Sudoku",
+    "activityPath": "ACTIVITY_SUDOKU_1",
     "description": "game desc. here",
     "allocatedTime": 10,
     "controls": {
@@ -24,43 +25,43 @@
         "UIName": "moduleStart",
         "description": "this will trigger when module starts",
         "content": {
-          "ops":[
+          "ops": [
             {
-              "attributes":{
-                "underline":true
+              "attributes": {
+                "underline": true
               },
-              "insert":"Review images at the top of the screen."
+              "insert": "Review images at the top of the screen."
             },
             {
-              "insert":"\n"
+              "insert": "\n"
             },
             {
-              "attributes":{
-                "underline":true
+              "attributes": {
+                "underline": true
               },
-              "insert":"Click to have the first column/row/box light up. Do the 1st example."
+              "insert": "Click to have the first column/row/box light up. Do the 1st example."
             },
             {
-              "insert":"\n"
+              "insert": "\n"
             },
             {
-              "attributes":{
-                "italic":true,
-                "bold":true
+              "attributes": {
+                "italic": true,
+                "bold": true
               },
-              "insert":"What do you see here? INSERT TARGET VOCAB. What is missing? The INSERT TARGET VOCAB is missing!"
+              "insert": "What do you see here? INSERT TARGET VOCAB. What is missing? The INSERT TARGET VOCAB is missing!"
             },
             {
-              "insert":"\n"
+              "insert": "\n"
             },
             {
-              "attributes":{
-                "underline":true
+              "attributes": {
+                "underline": true
               },
-              "insert":"Click on the square to add the missing image."
+              "insert": "Click on the square to add the missing image."
             },
             {
-              "insert":"\n"
+              "insert": "\n"
             }
           ]
         }
@@ -69,25 +70,25 @@
         "UIName": "studentMouseEnable",
         "description": "this will trigger when student's mouse enable",
         "content": {
-          "ops":[
+          "ops": [
             {
-              "attributes":{
-                "underline":true
+              "attributes": {
+                "underline": true
               },
-              "insert":"Enable student’s mouse. Click to have the columns/rows/boxes light up as you work on each section."
+              "insert": "Enable student’s mouse. Click to have the columns/rows/boxes light up as you work on each section."
             },
             {
-              "insert":"\n"
+              "insert": "\n"
             },
             {
-              "attributes":{
-                "italic":true,
-                "bold":true
+              "attributes": {
+                "italic": true,
+                "bold": true
               },
-              "insert":"Now it’s your turn. What’s missing? The ___ is missing."
+              "insert": "Now it’s your turn. What’s missing? The ___ is missing."
             },
             {
-              "insert":"\n"
+              "insert": "\n"
             }
           ]
         }
@@ -105,6 +106,236 @@
       }
     }
   },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "Blackboard": {
+        "ignoreForAuthToolUI": true,
+        "UIName": "Blackboard",
+        "imageName": "Blackboard.png",
+        "dimensions": { "width": 960, "height": 640 }
+      },
+      "bar": {
+        "ignoreForAuthToolUI": true,
+        "UIName": "Bar",
+        "imageName": "bar.png",
+        "dimensions": { "width": 960, "height": 640 }
+      },
+      "line": {
+        "ignoreForAuthToolUI": true,
+        "UIName": "Line",
+        "imageName": "line.png",
+        "dimensions": { "width": 960, "height": 640 }
+      },
+      "arrayOfAssets": {
+        "component": "carouselItems",
+        "UIName": "ITEMS",
+        "allowDelete": false,
+        "allowAdd": false,
+        "dimensions": { "width": 350, "height": 350 },
+        "data": [
+          {
+            "imageName": "Item_pen.png",
+            "label": "Pen"
+          },
+          {
+            "imageName": "Item_glue.png",
+            "label": "Glue"
+          },
+          {
+            "imageName": "Item_eraser.png",
+            "label": "Eraser"
+          },
+          {
+            "imageName": "Item_pencil_case.png",
+            "label": "Pencil_case"
+          },
+          {
+            "imageName": "Item_ruler.png",
+            "label": "Ruler"
+          },
+          {
+            "imageName": "Item_notebook.png",
+            "label": "Notebook"
+          }
+        ]
+      },
+      "arrayOfBoardData": {
+        "ignoreForAuthToolUI": true,
+        "data": [
+          {
+            "rowData": [
+              {
+                "label": "Pen",
+                "imageId": 0
+              },
+              {
+                "label": "Eraser",
+                "imageId": 2
+              },
+              {
+                "label": "Notebook",
+                "imageId": 5
+              },
+              {
+                "label": "Pencil_case",
+                "imageId": 3
+              },
+              {
+                "label": "Glue",
+                "imageId": 1
+              },
+              {
+                "label": "Ruler",
+                "imageId": 4
+              }
+            ]
+          },
+          {
+            "rowData": [
+              {
+                "label": "Ruler",
+                "imageId": 4
+              },
+              {
+                "label": "Pencil_case",
+                "imageId": 3
+              },
+              {
+                "label": "Glue",
+                "imageId": 1
+              },
+              {
+                "label": "Pen",
+                "imageId": 0
+              },
+              {
+                "label": "Notebook",
+                "imageId": 5
+              },
+              {
+                "label": "Eraser",
+                "imageId": 2
+              }
+            ]
+          },
+          {
+            "rowData": [
+              {
+                "label": "Eraser",
+                "imageId": 2
+              },
+              {
+                "label": "Pen",
+                "imageId": 0
+              },
+              {
+                "label": "Pencil_case",
+                "imageId": 3
+              },
+              {
+                "label": "Glue",
+                "imageId": 1
+              },
+              {
+                "label": "Ruler",
+                "imageId": 4
+              },
+              {
+                "label": "Notebook",
+                "imageId": 5
+              }
+            ]
+          },
+          {
+            "rowData": [
+              {
+                "label": "Glue",
+                "imageId": 1
+              },
+              {
+                "label": "Notebook",
+                "imageId": 5
+              },
+              {
+                "label": "Ruler",
+                "imageId": 4
+              },
+              {
+                "label": "Eraser",
+                "imageId": 2
+              },
+              {
+                "label": "Pen",
+                "imageId": 0
+              },
+              {
+                "label": "Pencil_case",
+                "imageId": 3
+              }
+            ]
+          },
+          {
+            "rowData": [
+              {
+                "label": "Pencil_case",
+                "imageId": 3
+              },
+              {
+                "label": "Ruler",
+                "imageId": 4
+              },
+              {
+                "label": "Pen",
+                "imageId": 0
+              },
+              {
+                "label": "Notebook",
+                "imageId": 5
+              },
+              {
+                "label": "Eraser",
+                "imageId": 2
+              },
+              {
+                "label": "Glue",
+                "imageId": 1
+              }
+            ]
+          },
+          {
+            "rowData": [
+              {
+                "label": "Notebook",
+                "imageId": 5
+              },
+              {
+                "label": "Glue",
+                "imageId": 1
+              },
+              {
+                "label": "Eraser",
+                "imageId": 2
+              },
+              {
+                "label": "Ruler",
+                "imageId": 4
+              },
+              {
+                "label": "Pencil_case",
+                "imageId": 3
+              },
+              {
+                "label": "Pen",
+                "imageId": 0
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+
   "cursors": {
     "component": "cursorsCard",
     "data": {
@@ -115,260 +346,15 @@
       }
     }
   },
-  "assets": {
-    "component": "assetsCard",
-    "sections": {
-      "flashCardFront": {
-        "component": "image",
-        "UIName": "FLASH CARD FRONT",
-        "imageName": "HatFront.png",
-        "dimensions": { "width": 512, "height": 512 },
-        "position": {
-          "x": 240,
-          "y": 324.5
-        }
-      },
-
-      "arrayOfAssets": {
-        "component": "arrayOfAsset",
-        "data": [
-          {
-            "imageName": "Item_pen.png",
-            "label" : "Pen",
-            "dimensions": { "width": 350, "height": 350 }
-          },
-          {
-            "imageName": "Item_glue.png",
-            "label" : "Glue",
-            "dimensions": { "width": 350, "height": 350 }
-          },
-          {
-            "imageName": "Item_eraser.png",
-            "label" : "Eraser",
-            "dimensions": { "width": 350, "height": 350 }
-          },
-          {
-            "imageName": "Item_pencil_case.png",
-            "label" : "Pencil_case",
-            "dimensions": { "width": 350, "height": 350 }
-          },
-          {
-            "imageName": "Item_ruler.png",
-            "label" : "Ruler",
-            "dimensions": { "width": 350, "height": 350 }
-          },
-          {
-            "imageName": "Item_notebook.png",
-            "label" : "Notebook",
-            "dimensions": { "width": 350, "height": 350 }
-          },
-          {
-            "imageName": "Blackboard.png",
-            "label" : "Blackboard",
-            "dimensions": { "width": 960, "height": 640 }
-          },
-          {
-            "imageName": "bar.png",
-            "label" : "Bar",
-            "dimensions": { "width": 960, "height": 640 }
-          },
-          {
-            "imageName": "line.png",
-            "label" : "Line",
-            "dimensions": { "width": 960, "height": 640 }
-          }
-        ]
-
-      },
-      "arrayOfBoardData": {
-        "data" : [
-          {
-            "rowData" : [
-              {
-                "label" : "Pen",
-                "imageId" : 0
-              },
-              {
-                "label" : "Eraser",
-                "imageId" : 2
-              },
-              {
-                "label" : "Notebook",
-                "imageId" : 5
-              },
-              {
-                "label" : "Pencil_case",
-                "imageId" : 3
-              },
-              {
-                "label" : "Glue",
-                "imageId" : 1
-              },
-              {
-                "label" : "Ruler",
-                "imageId" : 4
-              }
-            ]
-          },
-          {
-            "rowData" : [
-              {
-                "label" : "Ruler",
-                "imageId" : 4
-              },
-              {
-                "label" : "Pencil_case",
-                "imageId" : 3
-              },
-              {
-                "label" : "Glue",
-                "imageId" : 1
-              },
-              {
-                "label" : "Pen",
-                "imageId" : 0
-              },
-              {
-                "label" : "Notebook",
-                "imageId" : 5
-              },
-              {
-                "label" : "Eraser",
-                "imageId" : 2
-              }
-            ]
-          },
-          {
-            "rowData" : [
-              {
-                "label" : "Eraser",
-                "imageId" : 2
-              },
-              {
-                "label" : "Pen",
-                "imageId" : 0
-              },
-              {
-                "label" : "Pencil_case",
-                "imageId" : 3
-              },
-              {
-                "label" : "Glue",
-                "imageId" : 1
-              },
-              {
-                "label" : "Ruler",
-                "imageId" : 4
-              },
-              {
-                "label" : "Notebook",
-                "imageId" : 5
-              }
-            ]
-          },
-          {
-            "rowData" : [
-              {
-                "label" : "Glue",
-                "imageId" : 1
-              },
-              {
-                "label" : "Notebook",
-                "imageId" : 5
-              },
-              {
-                "label" : "Ruler",
-                "imageId" : 4
-              },
-              {
-                "label" : "Eraser",
-                "imageId" : 2
-              },
-              {
-                "label" : "Pen",
-                "imageId" : 0
-              },
-              {
-                "label" : "Pencil_case",
-                "imageId" : 3
-              }
-            ]
-          },
-          {
-            "rowData" : [
-              {
-                "label" : "Pencil_case",
-                "imageId" : 3
-              },
-              {
-                "label" : "Ruler",
-                "imageId" : 4
-              },
-              {
-                "label" : "Pen",
-                "imageId" : 0
-              },
-              {
-                "label" : "Notebook",
-                "imageId" : 5
-              },
-              {
-                "label" : "Eraser",
-                "imageId" : 2
-              },
-              {
-                "label" : "Glue",
-                "imageId" : 1
-              }
-            ]
-          },
-          {
-            "rowData" : [
-              {
-                "label" : "Notebook",
-                "imageId" : 5
-              },
-              {
-                "label" : "Glue",
-                "imageId" : 1
-              },
-              {
-                "label" : "Eraser",
-                "imageId" : 2
-              },
-              {
-                "label" : "Ruler",
-                "imageId" : 4
-              },
-              {
-                "label" : "Pencil_case",
-                "imageId" : 3
-              },
-              {
-                "label" : "Pen",
-                "imageId" : 0
-              }
-            ]
-          }
-        ]
-      }
-    }
-  },
   "resources": {
     "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
-      "images": [
-        "bg.png",
-        "ant.png",
-        "bat.png",
-        "bee.png",
-        "cat.png"
-      ]
+      "images": ["bg.png", "ant.png", "bat.png", "bee.png", "cat.png"]
     },
     "sounds": {
       "basePath": "res/Sound/",
-      "audio":[]
+      "audio": []
     },
     "animationFrames": {
       "basePath": "res/AnimationFrames/",
