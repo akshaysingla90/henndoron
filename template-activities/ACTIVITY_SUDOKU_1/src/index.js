@@ -162,7 +162,7 @@ ACTIVITY_SUDOKU_1.SudokuLayer = HDBaseLayer.extend({
                     layer.status = ACTIVITY_SUDOKU_1.TileStatus.Finalised;
                     layer.imageId = configGridData.imageId;
                     layer.img = sprite;
-                    layer.img.name = configGridData.label;
+                    layer.img.name = ACTIVITY_SUDOKU_1.config.assets.sections.arrayOfAssets.data[configGridData.imageId].label;
                     if(i == 0){
                         layer.isColumnCompleted = true;
                     }
@@ -308,7 +308,7 @@ ACTIVITY_SUDOKU_1.SudokuLayer = HDBaseLayer.extend({
                                 columnCountArr[col]--;
                             }
                             replaceObjOfRow1.status = ACTIVITY_SUDOKU_1.TileStatus.Finalised;
-                            replaceObjOfRow1.img.name = configGridData.label;
+                            replaceObjOfRow1.img.name = ACTIVITY_SUDOKU_1.config.assets.sections.arrayOfAssets.data[configGridData.imageId].label;
                             replaceObjOfRow1.img.setVisible(true);
 
                             configGridData = this.boardData[tempRow+1].rowData[col];
@@ -317,7 +317,7 @@ ACTIVITY_SUDOKU_1.SudokuLayer = HDBaseLayer.extend({
                                 columnCountArr[col]--;
                             }
                             replaceObjOfRow2.status = ACTIVITY_SUDOKU_1.TileStatus.Finalised;
-                            replaceObjOfRow2.img.name = configGridData.label;
+                            replaceObjOfRow2.img.name = ACTIVITY_SUDOKU_1.config.assets.sections.arrayOfAssets.data[configGridData.imageId].label;
                             replaceObjOfRow2.img.setVisible(true);
                         }
                         i = 0;
@@ -390,7 +390,7 @@ ACTIVITY_SUDOKU_1.SudokuLayer = HDBaseLayer.extend({
         this.parent.setResetButtonActive(true);
         if(!this.isSwapEnable || !isBlockCompleted || !isRowCompleted || !isColumnCompleted ){
             let configGridData = this.boardData[row].rowData[column];
-            if(this.gridData[row][column].img.name == configGridData.label) {
+            if(this.gridData[row][column].img.name == ACTIVITY_SUDOKU_1.config.assets.sections.arrayOfAssets.data[configGridData.imageId].label) {
                 this.runSingleObjectPlacedAnimation(row, column);
                 grid.status = ACTIVITY_SUDOKU_1.TileStatus.Finalised;
             }
@@ -732,7 +732,7 @@ ACTIVITY_SUDOKU_1.SudokuLayer = HDBaseLayer.extend({
                 obj.img.setVisible(this.isTeacherView);
                 obj.status = ACTIVITY_SUDOKU_1.TileStatus.Finalised;
                 obj.imageId = configGridData.imageId;
-                obj.img.name = configGridData.label;
+                obj.img.name = ACTIVITY_SUDOKU_1.config.assets.sections.arrayOfAssets.data[configGridData.imageId].label;
                 if (i == 0) {
                     obj.isColumnCompleted = true;
                 }
