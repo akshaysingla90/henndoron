@@ -1,0 +1,569 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Drag & Drop Parking",
+    "description": "game desc. here",
+    "activityPath": "ACTIVITY_DRAG_DROP_PARKING_1",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": false,
+      "turnBasedEditable": true
+    },
+    "externalRewards": true,
+    "studentPreview": true,
+    "url": "res/Activity/ACTIVITY_DRAG_DROP_PARKING_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_DRAG_DROP_PARKING_1",
+    "layerName": "MainDragDropParkingLayer"
+  },
+  "teacherScripts": {
+    "component": "scriptsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What do you see here? "
+            },
+            {
+              "insert": "\n\nCircle/point to the image in the first dropzone.\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "color": "#0000ff",
+                "bold": true
+              },
+              "insert": "I see ["
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "color": "#0000ff",
+                "background": "#ffff00",
+                "bold": true
+              },
+              "insert": "INSERT TARGET VOCAB]"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "color": "#0000ff",
+                "bold": true
+              },
+              "insert": " here. "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Where is the car with the ["
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "background": "#ffff00",
+                "bold": true
+              },
+              "insert": "INSERT TARGET VOCAB]"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "? "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "color": "#0000ff",
+                "bold": true
+              },
+              "insert": "Here!"
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What is this? "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "color": "#0000ff",
+                "bold": true
+              },
+              "insert": "This is a ____. "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Let’s park the car!"
+            },
+            {
+              "insert": "\n\nDrag the car into the correct dropzone. Enable the student's mouse. \n\n"
+            }
+          ]
+        }
+      },
+      "StudentMouseEnabled": {
+        "UIName": "Student Mouse Enabled",
+        "enable": true,
+        "description": "This will trigger on enabling student's mouse.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Now it’s your turn! "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What do you see here? "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "color": "#0000ff",
+                "bold": true
+              },
+              "insert": "I see ___here. "
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Circle/point to the image in the second dropzone."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What is this? "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "color": "#0000ff",
+                "bold": true
+              },
+              "insert": "This is a ____. "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Let’s park the car!"
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Students drag the car into the correct dropzone."
+            },
+            {
+              "insert": "\n \n\n"
+            }
+          ]
+        }
+      },
+      "StudentFirstCorrectDrop": {
+        "UIName": "Student First Correct Drop",
+        "enable": true,
+        "description": "This will trigger upon student’s first correct drop.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "Great! What is this? "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "color": "#0000ff",
+                "bold": true
+              },
+              "insert": "This is a ____."
+            },
+            {
+              "insert": "\n\n"
+            },
+            {
+              "attributes": {
+                "italic": true
+              },
+              "insert": "Continue this way until all images have been matched. "
+            },
+            {
+              "insert": "\n\n \n\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "nextButton": {
+        "UIName": "Next Button",
+        "enableState": "next_idle.png",
+        "pushedState": "next_pressed.png",
+        "dimensions": { "width": 139, "height": 32 }
+      },
+      "switchButton": {
+        "UIName": "Switch Button",
+        "enableState": "btn_enable.png",
+        "pushedState": "btn_enable.png",
+        "disableState": "btn_disable.png",
+        "dimensions": { "width": 96, "height": 64 }
+      }
+    }
+  },
+
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "snapBack": {
+        "component": "checkbox",
+        "value": true,
+        "UIName": "Snapback",
+        "toolTipText": "When turned on, draggables snap back into their original position if dropped outside of their correct dropzone"
+      },
+      "levels": {
+        "ignoreForAuthToolUI": true,
+        "backgroundDimensions": { "width": 960, "height": 640 },
+        "UIName": "Levels",
+        "isSoloDraggableUIName": "Solo Draggable",
+        "isSoloDraggableToolTipText": "This information is needed for hovering and incorrect match effects.",
+        "data": [
+          {
+            "isDraggableSolo": false,
+            "background": "bg_parking.png",
+            "dropZones": [
+              {
+                "imageName": "parking_star.png",
+                "position": {
+                  "x": 259,
+                  "y": 425
+                }
+              },
+              {
+                "imageName": "parking_photos.png",
+                "position": {
+                  "x": 367,
+                  "y": 425
+                }
+              },
+              {
+                "imageName": "parking_cat.png",
+                "position": {
+                  "x": 475,
+                  "y": 425
+                }
+              },
+              {
+                "imageName": "parking_shore.png",
+                "position": {
+                  "x": 583,
+                  "y": 425
+                }
+              },
+              {
+                "imageName": "parking_dog.png",
+                "position": {
+                  "x": 690,
+                  "y": 425
+                }
+              }
+            ],
+            "draggables": [
+              {
+                "imageName": "car_cat.png",
+                "position": {
+                  "x": 105,
+                  "y": 350
+                },
+                "audioName": "",
+                "dropZoneIdx": 2
+              },
+              {
+                "imageName": "car_dog.png",
+                "position": {
+                  "x": 240,
+                  "y": 155
+                },
+                "audioName": "",
+                "dropZoneIdx": 4
+              },
+              {
+                "imageName": "car_shore.png",
+                "position": {
+                  "x": 480,
+                  "y": 175
+                },
+                "audioName": "",
+                "dropZoneIdx": 3
+              },
+              {
+                "imageName": "car_star.png",
+                "position": {
+                  "x": 720,
+                  "y": 155
+                },
+                "audioName": "",
+                "dropZoneIdx": 0
+              },
+              {
+                "imageName": "car_photos.png",
+                "position": {
+                  "x": 885,
+                  "y": 328
+                },
+                "audioName": "",
+                "dropZoneIdx": 1
+              }
+            ]
+          },
+          {
+            "isDraggableSolo": true,
+            "background": "bg_beach.png",
+            "dropZones": [
+              {
+                "imageName": "target_cat.png",
+                "position": {
+                  "x": 259,
+                  "y": 425
+                }
+              },
+              {
+                "imageName": "target_photos.png",
+                "position": {
+                  "x": 367,
+                  "y": 425
+                }
+              },
+              {
+                "imageName": "target_shore.png",
+                "position": {
+                  "x": 475,
+                  "y": 425
+                }
+              },
+              {
+                "imageName": "target_star.png",
+                "position": {
+                  "x": 583,
+                  "y": 425
+                }
+              },
+              {
+                "imageName": "target_dog.png",
+                "position": {
+                  "x": 690,
+                  "y": 425
+                }
+              }
+            ],
+            "draggables": [
+              {
+                "imageName": "Item_star.png",
+                "position": {
+                  "x": 105,
+                  "y": 350
+                },
+                "audioName": "",
+                "dropZoneIdx": 3
+              },
+              {
+                "imageName": "Item_dog.png",
+                "position": {
+                  "x": 240,
+                  "y": 155
+                },
+                "audioName": "",
+                "dropZoneIdx": 4
+              },
+              {
+                "imageName": "Item_cat.png",
+                "position": {
+                  "x": 480,
+                  "y": 175
+                },
+                "audioName": "",
+                "dropZoneIdx": 0
+              },
+              {
+                "imageName": "Item_shore.png",
+                "position": {
+                  "x": 720,
+                  "y": 155
+                },
+                "audioName": "",
+                "dropZoneIdx": 2
+              },
+              {
+                "imageName": "Item_photos.png",
+                "position": {
+                  "x": 885,
+                  "y": 328
+                },
+                "audioName": "",
+                "dropZoneIdx": 1
+              }
+            ]
+          }
+        ]
+      },
+      "animation": {
+        "component": "animationGroup",
+        "data": {
+          "starAnimation": {
+            "UIName": "Stars Animation",
+            "name": "Stars",
+            "frameCount": 9,
+            "frameInitial": "stars_anim/stars_anim_",
+            "extension": ".png"
+          },
+          "winAnimation": {
+            "UIName": "Win Animation",
+            "name": "Win Game",
+            "frameCount": 11,
+            "frameInitial": "win_game_anim/win_game_anim_",
+            "extension": ".png"
+          }
+        }
+      }
+    }
+  },
+
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "cursorPointer": {
+        "UIName": "Cursor Pointer",
+        "imageName": "cursor_0001.png",
+        "dimensions": { "width": 32, "height": 32 }
+      }
+    }
+  },
+
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "bg_beach.png",
+        "bg_parking.png",
+        "car_cat.png",
+        "car_dog.png",
+        "car_photos.png",
+        "car_shore.png",
+        "car_star.png",
+        "Item_cat.png",
+        "Item_dog.png",
+        "Item_photos.png",
+        "Item_shore.png",
+        "Item_star.png",
+        "parking_cat.png",
+        "parking_dog.png",
+        "parking_photos.png",
+        "parking_shore.png",
+        "parking_star.png",
+        "btn_disable.png",
+        "btn_enable.png",
+        "next_idle.png",
+        "next_pressed.png",
+        "cursor_0001.png",
+        "target_cat.png",
+        "target_dog.png",
+        "target_photos.png",
+        "target_shore.png",
+        "target_star.png"
+      ]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "name": "Stars",
+          "frameCount": 9,
+          "frameInitial": "stars_anim/stars_anim_",
+          "extension": ".png"
+        },
+        {
+          "name": "Win Game",
+          "frameCount": 11,
+          "frameInitial": "win_game_anim/win_game_anim_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}
