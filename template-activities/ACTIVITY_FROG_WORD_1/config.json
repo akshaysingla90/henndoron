@@ -1,0 +1,282 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Frog Word Hop",
+    "activityPath": "ACTIVITY_FROG_WORD_1",
+    "description": "game desc. here",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": true,
+      "turnBasedEditable": true
+    },
+    "externalRewards": true,
+    "studentPreview":  true,
+    "url": "res/Activity/ACTIVITY_FROG_WORD_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_FROG_WORD_1",
+    "layerName": "FrogWordHop"
+  },
+  "teacherScripts": {
+  },
+  "teacherTips": {
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "bg.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+
+  "buttons": {
+    "component": "buttonsCard",
+    "data": {
+      "help": {
+        "UIName": "HelpButton",
+        "enableState": "Help.png",
+        "pushedState": "Help.png",
+        "dimensions": { "width": 64, "height": 64 },
+        "position" : {"x": 900 , "y":300}
+      },
+
+     "multiplayerMode" :{
+       "UIName": "MultiPlayerButton",
+       "title": ["Shared Mode", "Individual Mode"],
+       "enableState": "btn_enable.png",
+       "disableState": "btn_disable.png",
+       "position": { "x": 0, "y": 0 },
+       "dimensions": { "width": 139, "height": 32 }
+     }
+    }
+  },
+
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "lilyLight": {
+        "component": "image",
+        "UIName": "lily_pad_light",
+        "imageName": "lily_pad_light.png",
+        "dimensions": {
+          "width": 450,
+          "height": 535
+        }
+      },
+      "letters" : {
+        "component": "letters",
+        "imageNames" : [
+          "letter_a.png",
+          "letter_b.png",
+          "letter_c.png",
+          "letter_d.png",
+          "letter_e.png",
+          "letter_f.png",
+          "letter_g.png",
+          "letter_h.png",
+          "letter_i.png",
+          "letter_j.png",
+          "letter_k.png",
+          "letter_l.png",
+          "letter_m.png",
+          "letter_n.png",
+          "letter_o.png",
+          "letter_p.png",
+          "letter_q.png",
+          "letter_r.png",
+          "letter_s.png",
+          "letter_t.png",
+          "letter_u.png",
+          "letter_v.png",
+          "letter_w.png",
+          "letter_x.png",
+          "letter_y.png",
+          "letter_z.png"]
+      },
+      "items" : {
+        "component": "items",
+        "imageNames" : [
+          "item_friends.png",
+          "item_pencil_case.png",
+          "item_rooster.png",
+          "item_runner.png",
+          "item_school_bag.png",
+          "item_hen.png",
+          "item_horse.png",
+          "item_house.png",
+          "item_fly1.png",
+          "item_fly2.png",
+          "item_fun.png",
+          "item_glue.png",
+          "item_hare.png",
+          "item_sheep.png",
+          "item_sing.png",
+          "item_sleep.png",
+          "item_sweep.png",
+          "item_ball.png",
+          "item_blackboard.png",
+          "item_bracelet.png",
+          "item_clap.png",
+          "item_dance.png",
+          "item_dancer.png",
+          "item_doctor.png",
+          "item_dog.png",
+          "item_duck.png",
+          "item_eraser.png",
+          "item_fall_down1.png",
+          "item_fall_down2.png",
+          "item_finish_line.png",
+          "item_five.png"]
+      },
+      "animation": {
+        "component": "animationGroup",
+        "data": {
+          "froggy_jump_splash": {
+            "configurable": true,
+            "UIName": "froggy_jump_splash",
+            "name": "froggy_jump_splash",
+            "frameCount": 38,
+            "frameInitial": "froggy_jump_splash/froggy_jump_splash_",
+            "extension": ".png"
+          },
+          "froggy_climb_back": {
+            "configurable": true,
+            "UIName": "froggy_climb_back",
+            "name": "froggy_climb_back",
+            "frameCount": 11,
+            "frameInitial": "froggy_climb_back/froggy_climb_",
+            "extension": ".png"
+          },
+          "froggy_jump_land": {
+            "configurable": true,
+            "UIName": "froggy_jump_land",
+            "name": "froggy_jump_land",
+            "frameCount": 15,
+            "frameInitial": "froggy_jump_land/froggy_jump_land_",
+            "extension": ".png"
+          },
+          "correct_answer": {
+            "configurable": true,
+            "UIName": "correct_answer",
+            "name": "correct_answer",
+            "frameCount": 15,
+            "frameInitial": "correct_answer/correct_ans_",
+            "extension": ".png"
+          }
+        }
+      }
+    }
+  },
+
+  "resources": {
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "bg.png",
+        "lily_pad_dark.png",
+        "lily_pad_light.png",
+        "box_collected-item.png",
+        "tongue_arow_slice_01.png",
+        "tongue_arow_slice_02.png",
+        "tongue_arow_slice_03.png",
+        "item_friends.png",
+        "froggy_idle.png",
+        "item_pencil_case.png",
+        "item_rooster.png",
+        "item_runner.png",
+        "item_school_bag.png",
+        "item_hen.png",
+        "item_horse.png",
+        "item_house.png",
+        "item_fly1.png",
+        "item_fly2.png",
+        "item_fun.png",
+        "item_glue.png",
+        "item_hare.png",
+        "item_sheep.png",
+        "item_sing.png",
+        "item_sleep.png",
+        "item_sweep.png",
+        "item_ball.png",
+        "item_blackboard.png",
+        "item_bracelet.png",
+        "item_clap.png",
+        "item_dance.png",
+        "item_dancer.png",
+        "item_doctor.png",
+        "item_dog.png",
+        "item_duck.png",
+        "item_eraser.png",
+        "item_fall_down1.png",
+        "item_fall_down2.png",
+        "item_finish_line.png",
+        "item_five.png",
+        "letter_base.png",
+        "letter_a.png",
+        "letter_b.png",
+        "letter_c.png",
+        "letter_d.png",
+        "letter_e.png",
+        "letter_f.png",
+        "letter_g.png",
+        "letter_h.png",
+        "letter_i.png",
+        "letter_j.png",
+        "letter_k.png",
+        "letter_l.png",
+        "letter_m.png",
+        "letter_n.png",
+        "letter_o.png",
+        "letter_p.png",
+        "letter_q.png",
+        "letter_r.png",
+        "letter_s.png",
+        "letter_t.png",
+        "letter_u.png",
+        "letter_v.png",
+        "letter_w.png",
+        "letter_x.png",
+        "letter_y.png",
+        "letter_z.png"
+
+      ]
+    },
+
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+        {
+          "Name": "froggy_jump_splash",
+          "frameCount": 38,
+          "frameInitial": "froggy_jump_splash/froggy_jump_splash_",
+          "extension": ".png"
+        },
+        {
+          "Name": "froggy_climb_back",
+          "frameCount": 11,
+          "frameInitial": "froggy_climb_back/froggy_climb_",
+          "extension": ".png"
+        },
+        {
+          "Name": "froggy_jump_land",
+          "frameCount": 15,
+          "frameInitial": "froggy_jump_land/froggy_jump_land_",
+          "extension": ".png"
+        },
+        {
+          "Name": "correct_answer",
+          "frameCount": 15,
+          "frameInitial": "correct_answer/correct_ans_",
+          "extension": ".png"
+        }
+
+      ]
+    }
+  }
+}
