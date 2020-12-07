@@ -305,14 +305,13 @@ ACTIVITY_KEVINS_CRANE_1.CraneControl = cc.Node.extend({
 
         this.shaftButton = this.gameRef.createButton(ACTIVITY_KEVINS_CRANE_1.spriteBasePath + "button_idle.png", ACTIVITY_KEVINS_CRANE_1.spriteBasePath+"button_pressed.png",
             "", 0, 100, cc.p( this.controlBase.getContentSize().width * 0.51, this.controlBase.getContentSize().height *0.255),  this.controlBase,this);
-        // this.shaftButton.setSwallowTouches(true);
+        this.shaftButton.setSwallowTouches(true);
         console.log("touch", ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable);
-
-
 
     },
 
     buttonCallback : function (sender, type){
+        console.log("button callback");
         console.log(!ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable , ACTIVITY_KEVINS_CRANE_1.ref.isPreviewMode, type);
         if(!ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable || ACTIVITY_KEVINS_CRANE_1.ref.isPreviewMode || ( ACTIVITY_KEVINS_CRANE_1.ref.isTeacherView && ACTIVITY_KEVINS_CRANE_1.ref.isStudentSelected && ACTIVITY_KEVINS_CRANE_1.ref.multiPlayerType == ACTIVITY_KEVINS_CRANE_1.MULTIPLAYER_TYPE.TURN_BASED)) return;
         var button      = sender;
@@ -452,7 +451,8 @@ ACTIVITY_KEVINS_CRANE_1.CraneControl = cc.Node.extend({
     },
 
     onTouchEnded:function(touch, event) {
-        if(!ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable || ACTIVITY_KEVINS_CRANE_1.ref.isPreviewMode || (ACTIVITY_KEVINS_CRANE_1.ref.isStudentSelected && ACTIVITY_KEVINS_CRANE_1.ref.multiPlayerType == ACTIVITY_KEVINS_CRANE_1.MULTIPLAYER_TYPE.TURN_BASED)) return;
+        console.log("touch ended called");
+        if(!ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable || ACTIVITY_KEVINS_CRANE_1.ref.isPreviewMode || (ACTIVITY_KEVINS_CRANE_1.ref.isStudentSelected && ACTIVITY_KEVINS_CRANE_1.ref.multiPlayerType == ACTIVITY_KEVINS_CRANE_1.MULTIPLAYER_TYPE.TURN_BASED) || !this.shaftButton.isTouchEnabled()) return;
         var pos = touch.getLocation();
         if (this.shaftTouch(pos)){
             // cc.log("onTouchCancelled at: " + pos.x + " " + pos.y + " Id:" + id );
@@ -1112,7 +1112,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         }
         var movement = this.hintImagesBase.getContentSize().width * (openImageBoard ? -1.2 : 1.2);
         var action   = new cc.MoveBy(0.5, movement, 0);
-        var delay  = this.gameType == ACTIVITY_KEVINS_CRANE_1.GAME_TYPE.DEMOLISHING ?  ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels.data.demolishing[this.currentLevel].helpSection.hintTime : ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels.data.construction[this.currentLevel].helpSection.hintTime;
+        var delay  = this.gameType == ACTIVITY_KEVINS_CRANE_1.GAME_TYPE.DEMOLISHING ?  ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels.data.demolishing[this.currentLevel].helpSection.helpShowTime : ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels.data.construction[this.currentLevel].helpSection.helpShowTime;
         this.isHintOpen = true;
         this.hintImagesBase.runAction(cc.sequence(action, cc.delayTime(delay), action.reverse(), cc.callFunc(()=>{
             ACTIVITY_KEVINS_CRANE_1.ref.isHintOpen = false;
@@ -1486,7 +1486,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
                 this.onMouseMove(event);
                 break;
             case cc.EventMouse.UP:
-                console.log("mouse up called");
+                console.log("callback mouse up called");
                 this.isMousePressed = false;
                 this.onMouseUp(event);
                 break;
@@ -1497,7 +1497,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
     },
 
     onMouseDown: function (event) {
-        console.log("mouse down");
+        // console.log("mouse down");
         if(this.craneControlNode && cc.rectContainsPoint(this.craneControlNode.shaftButton.getBoundingBoxToWorld(), event.getLocation())) return;
         if (!ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable)
             return;
@@ -1509,7 +1509,6 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
     },
 
     onMouseUp: function (event) {
-        if(this.craneControlNode && cc.rectContainsPoint(this.craneControlNode.shaftButton.getBoundingBoxToWorld(), event.getLocation())) return;
         if (!ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable)
             return;
        ACTIVITY_KEVINS_CRANE_1.ref.craneControlNode.onTouchEnded(event);
@@ -1610,6 +1609,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         if (this.isTeacherView) {
             this.isStudentSelected = users.length > 0 ? true : false;
             if(this.isStudentSelected){
+                console.log("student has been selected ");
                 this.craneControlNode.shaftButton.setTouchEnabled(false);
             }else{
                 this.craneControlNode.shaftButton.setTouchEnabled(true);
