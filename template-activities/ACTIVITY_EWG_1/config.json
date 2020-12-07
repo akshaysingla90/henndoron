@@ -2,6 +2,7 @@
   "properties": {
     "component": "infoCard",
     "activityName": "Electronic water grid",
+    "activityPath": "ACTIVITY_EWG_1",
     "description": "",
     "allocatedTime": 10,
     "controls": {
