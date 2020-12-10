@@ -24,6 +24,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.TAGS = {
   SWITCH_BUTTON: 6,
   CLIPPER_NODE: 7,
   COLOR_LAYER: 8,
+  BACK_BUTTON: 9,
   DRAGGABLE_START: 20,
   DROPZONE_START: 50,
 };
@@ -38,14 +39,16 @@ ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS = {
   UPDATE_USER_DATA: "ACTIVITY_DRAG_DROP_PARKING_1_UPDATE_USER_DATA",
   STUDENT_INTERACTION: "ACTIVITY_DRAG_DROP_PARKING_1_STUDENT_INTERACTION",
   NEXT_LEVEL: "ACTIVITY_DRAG_DROP_PARKING_1_NEXT_LEVEL",
+  PREV_LEVEL: "ACTIVITY_DRAG_DROP_PARKING_1_PREV_LEVEL",
   RESET: "ACTIVITY_DRAG_DROP_PARKING_1_RESET",
-  SHOW_HOVER_EFFECT: "SHOW_HOVER_EFFECT",
-  HIDE_HOVER_EFFECT: "HIDE_HOVER_EFFECT",
-  LEVEL_COMPLETE_ANIMATION: "LEVEL_COMPLETE_ANIMATION",
+  SHOW_HOVER_EFFECT: "ACTIVITY_DRAG_DROP_PARKING_1_SHOW_HOVER_EFFECT",
+  HIDE_HOVER_EFFECT: "ACTIVITY_DRAG_DROP_PARKING_1_HIDE_HOVER_EFFECT",
+  LEVEL_COMPLETE_ANIMATION: "ACTIVITY_DRAG_DROP_PARKING_1_LEVEL_COMPLETE_ANIMATION",
 };
 
 ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
   let syncedState;
+  let maxLevels = 2;
   const setState = (state) => {
     syncedState = state;
   };
@@ -54,23 +57,30 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     return syncedState;
   };
 
+  const setMaxLevels = (levels = 2) => {
+    maxLevels = levels;
+  };
+
   const getDefaultUserData = () => {
+    const levelsArr = [];
+    for (let i = 0; i < maxLevels; ++i) {
+      levelsArr[i] = {
+        currentLevelInfo: [], // indices of draggables which are matched correctly,
+        correctCount: 0,
+      };
+    }
     return {
-      currentLevel: 1,
-      currentLevelInfo: [], // indices of draggables which are matched correctly,
-      correctCount: 0,
+      currentLevel: 0,
+      levels: levelsArr,
     };
   };
   const setDefaultState = () => {
-    const userName = HDAppManager.username;
     syncedState = {
       gameMode: ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED,
-      shared: {
-        currentLevel: 1,
-        currentLevelInfo: [], // indices of draggables which are matched correctly
-        correctCount: 0,
+      shared: getDefaultUserData(),
+      individual: {
+        [HDAppManager.username]: getDefaultUserData(),
       },
-      individual: {},
     };
   };
 
@@ -78,11 +88,14 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
       return syncedState.shared.currentLevel;
     } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
-      return syncedState.individual[HDAppManager.username].currentLevel;
+      const data = syncedState.individual[HDAppManager.username]
+        ? syncedState.individual[HDAppManager.username]
+        : getDefaultUserData();
+      return data.currentLevel;
     }
   };
 
-  const setCurrentLevel = (level = 1) => {
+  const setCurrentLevel = (level = 0) => {
     if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
       syncedState.shared.currentLevel = level;
     } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
@@ -92,33 +105,43 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
   // returns copy
   const getLevelInfo = () => {
     if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
-      return [...syncedState.shared.currentLevelInfo];
+      return [...syncedState.shared.levels[syncedState.shared.currentLevel].currentLevelInfo];
     } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
-      return [...syncedState.individual[HDAppManager.username].currentLevelInfo];
+      const data = syncedState.individual[HDAppManager.username]
+        ? syncedState.individual[HDAppManager.username]
+        : getDefaultUserData();
+      return [...data.levels[data.currentLevel].currentLevelInfo];
     }
   };
 
   const setLevelInfo = (draggableIdx) => {
     if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
-      syncedState.shared.currentLevelInfo.push(draggableIdx);
+      syncedState.shared.levels[syncedState.shared.currentLevel].currentLevelInfo.push(draggableIdx);
     } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
-      syncedState.individual[HDAppManager.username].currentLevelInfo.push(draggableIdx);
+      syncedState.individual[HDAppManager.username].levels[
+        syncedState.individual[HDAppManager.username].currentLevel
+      ].currentLevelInfo.push(draggableIdx);
     }
   };
 
   const getCorrectCount = () => {
     if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
-      return syncedState.shared.correctCount;
+      return syncedState.shared.levels[syncedState.shared.currentLevel].correctCount;
     } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
-      return syncedState.individual[HDAppManager.username].correctCount;
+      const data = syncedState.individual[HDAppManager.username]
+        ? syncedState.individual[HDAppManager.username]
+        : getDefaultUserData();
+      return data.levels[data.currentLevel].correctCount;
     }
   };
 
   const setCorrectCount = (count) => {
     if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
-      syncedState.shared.correctCount = count;
+      syncedState.shared.levels[syncedState.shared.currentLevel].correctCount = count;
     } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
-      syncedState.individual[HDAppManager.username].correctCount = count;
+      syncedState.individual[HDAppManager.username].levels[
+        syncedState.individual[HDAppManager.username].currentLevel
+      ].correctCount = count;
     }
   };
 
@@ -130,22 +153,35 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
   // individual mode only
   // returns copy
   const getLevelInfoOfUser = (userName) => {
-    const data = syncedState.individual[userName];
+    const data = syncedState.individual[userName] ? syncedState.individual[userName] : getDefaultUserData();
+    let levelsCopy = [];
+    for(let i = 0; i < data.levels.length; ++i){
+      levelsCopy[i] = {
+        currentLevelInfo: [...data.levels[i].currentLevelInfo] ,
+        correctCount: data.levels[i].correctCount
+      }
+    }
     const clonedData = {
       ...data,
-      currentLevelInfo: [...data.currentLevelInfo],
+      levels: levelsCopy ,
     };
     return clonedData;
   };
 
   const resetState = () => {
     setDefaultState();
-    setLevelInfoOfUser(HDAppManager.username, getDefaultUserData());
   };
   const setGameMode = (mode = ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) => {
     syncedState.gameMode = mode;
   };
-  setDefaultState();
+
+  const resetCurrentLevel = () => {
+    if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
+      syncedState.shared.levels[syncedState.shared.currentLevel].correctCount = 0;
+      syncedState.shared.levels[syncedState.shared.currentLevel].currentLevelInfo = [];
+    }
+  };
+
   return {
     getState: getState,
     setState: setState,
@@ -157,9 +193,11 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     setGameMode: setGameMode,
     getLevelInfoOfUser: getLevelInfoOfUser,
     setLevelInfoOfUser: setLevelInfoOfUser,
-    getDefaultUserData: getDefaultUserData,
     getCorrectCount,
     setCorrectCount,
+    resetCurrentLevel,
+    setMaxLevels,
+    setDefaultState,
   };
 })();
 
@@ -404,17 +442,17 @@ ACTIVITY_DRAG_DROP_PARKING_1.Dropzone = HDBaseLayer.extend({
 
 // common layer for teacher and student
 ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
-  _currentLevel: 1,
+  _currentLevel: 0,
   _levelInfo: [],
   _draggableSprites: [],
   _dropzoneSprites: [],
   _draggedSpriteRef: null,
   _correctCount: 0,
   _interactionEnabled: true,
-  _gameMode: ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED,
   _lastIntersectedDropzoneSprite: null,
   _isDragging: false,
   _isIncorrectMatchAnimationPlaying: false,
+  _levelChangeDelegate: null,
   ctor: function () {
     // initializations here
     this._super();
@@ -459,28 +497,26 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
     this._levelInfo.length = 0;
     this._correctCount = 0;
     this._isIncorrectMatchAnimationPlaying = false;
-    this._setResetButtonActive(false);
   },
 
-  _setCurrentLevel: function (level = 1) {
-    this._currentLevel = cc.clampf(level, 1, ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data.length);
+  _setCurrentLevel: function (level = 0) {
+    this._currentLevel = cc.clampf(level, 0, ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data.length - 1);
   },
 
   _syncState: function () {
     this._setCurrentLevel(ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCurrentLevel());
     this._levelInfo = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfo();
     this._correctCount = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCorrectCount();
-  },
-
-  _setResetButtonActive: function (flag) {
-    this.getParent().getParent().setResetButtonActive(flag);
+    lesson_1.ref.turnBased = !(this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE);
   },
 
   _renderBackground: function () {
     const bgSprite = this.getChildByTag(ACTIVITY_DRAG_DROP_PARKING_1.TAGS.BACKGROUND_SPRITE);
     const texture =
       ACTIVITY_DRAG_DROP_PARKING_1.spritePath +
-      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel - 1].background;
+      ACTIVITY_DRAG_DROP_PARKING_1.config.background.sections.backgroundSlides.images[
+        ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].background
+      ];
     if (bgSprite) {
       bgSprite.setTexture(texture);
     } else {
@@ -491,7 +527,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
 
   _renderDraggables: function () {
     const draggablesData =
-      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel - 1].draggables;
+      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].draggables;
     for (let i = 0; i < draggablesData.length; ++i) {
       const draggableObj = draggablesData[i];
       const draggableSprite = new ACTIVITY_DRAG_DROP_PARKING_1.Draggable(
@@ -515,9 +551,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
 
   _renderDropzones: function () {
     const isSoloDraggable =
-      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel - 1].isDraggableSolo;
+      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].isDraggableSolo;
     const dropzonesData =
-      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel - 1].dropZones;
+      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].dropZones;
     for (let i = 0; i < dropzonesData.length; ++i) {
       const dropzoneObj = dropzonesData[i];
       const dropzoneSprite = new ACTIVITY_DRAG_DROP_PARKING_1.Dropzone(
@@ -527,7 +563,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
         isSoloDraggable,
         new cc.Sprite(
           ACTIVITY_DRAG_DROP_PARKING_1.spritePath +
-            ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel - 1].draggables[0]
+            ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].draggables[0]
               .imageName
         ).getContentSize().height
       );
@@ -580,7 +616,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   _isCurrentLevelCompleted: function () {
     return (
       this._correctCount ===
-      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel - 1].draggables.length
+      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].draggables.length
     );
   },
 
@@ -604,10 +640,6 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   handleSocketEvents: function (event) {
     const { eventType, data } = event;
     switch (eventType) {
-      case HDSocketEventType.GAME_MESSAGE: {
-        this.handleGameSocketEvents(data);
-        break;
-      }
     }
   },
 
@@ -660,6 +692,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
           userName: HDAppManager.username,
           dropzoneTag: this._lastIntersectedDropzoneSprite.getTag(),
         });
+        this._lastIntersectedDropzoneSprite = null;
       }
 
       return true;
@@ -668,7 +701,15 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   },
 
   onMouseUp: function (event) {
-    this._lastIntersectedDropzoneSprite && this._lastIntersectedDropzoneSprite.hideHoverEffect();
+    if (this._lastIntersectedDropzoneSprite) {
+      this._lastIntersectedDropzoneSprite.hideHoverEffect();
+      this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+        roomId: HDAppManager.roomId,
+        type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.HIDE_HOVER_EFFECT,
+        userName: HDAppManager.username,
+        dropzoneTag: this._lastIntersectedDropzoneSprite.getTag(),
+      });
+    }
     let isMatchedCorrectly = false;
     if (this._isDragging) {
       this._draggedSpriteRef.setDraggable(false);
@@ -679,7 +720,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
           ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setCorrectCount(this._correctCount);
           this._lastIntersectedDropzoneSprite.dropDraggable(this._draggedSpriteRef);
           this._draggedSpriteRef.playCorrectAnimation();
-          this._setResetButtonActive(true);
+          this.setResetButtonActive(true);
           if (this._isCurrentLevelCompleted()) {
             this.playLevelCompleteAnimation();
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
@@ -690,18 +731,21 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
           }
           ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setLevelInfo(this._draggedSpriteRef.getIdx());
           this.updateRoomData();
-          this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-            roomId: HDAppManager.roomId,
-            type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.UPDATE_USER_DATA,
-            userName: HDAppManager.username,
-            data: ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(HDAppManager.username),
-          });
+          if (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
+            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+              roomId: HDAppManager.roomId,
+              type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.UPDATE_USER_DATA,
+              userName: HDAppManager.username,
+              data: ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(HDAppManager.username),
+            });
+          }
           this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             roomId: HDAppManager.roomId,
             type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_DROPPED_CORRECTLY,
             userName: HDAppManager.username,
             itemTag: this._draggedSpriteRef.getTag(),
             dropzoneTag: this._lastIntersectedDropzoneSprite.getTag(),
+            correctCount: this._correctCount,
           });
           isMatchedCorrectly = true;
         } else {
@@ -737,15 +781,43 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
     }
   },
 
-  // socket events
-
   // public exposed functions below
 
+  setResetButtonActive: function (flag) {
+    this.getParent().getParent().setResetButtonActive(flag);
+  },
+
+  isThereNextLevel: function () {
+    return this.getCurrentLevel() < ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data.length;
+  },
+
+  setCorrectCount: function (count) {
+    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setCorrectCount(count);
+    this._correctCount = count;
+  },
+
   playLevelCompleteAnimation: function () {
-    for (let i = 0; i < this._dropzoneSprites.length; ++i) {
-      const dropzoneSprite = this._dropzoneSprites[i];
-      dropzoneSprite.playWinAnimation();
+    const self = this;
+    let interval = null;
+    let i = 0;
+
+    function playDropZoneAnimation() {
+      if (i === self._dropzoneSprites.length) {
+        clearInterval(interval);
+        if (self.isThereNextLevel()) {
+          self.renderNextLevelWithDelay(3);
+        }
+      } else {
+        self._dropzoneSprites[i].playWinAnimation();
+      }
+      ++i;
     }
+
+    interval = setInterval(playDropZoneAnimation, 200);
+  },
+
+  renderPreviousLevel: function () {
+    this.renderLevel(ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCurrentLevel() - 1);
   },
 
   renderNextLevel: function () {
@@ -758,24 +830,27 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
 
   renderGameMode: function (mode = ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
     ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setGameMode(mode);
-    this._currentLevel = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCurrentLevel();
-    this._levelInfo = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfo();
-    this._renderCurrentLevel();
+    lesson_1.ref.turnBased = !(mode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE);
+    this.renderLevel(ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCurrentLevel());
   },
 
   renderLevel: function (level = 1) {
     this._cleanup();
     ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setCurrentLevel(level);
-    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setCorrectCount(0);
+    this._correctCount = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCorrectCount();
+    this._levelInfo = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfo();
     this._setCurrentLevel(level);
     this._renderCurrentLevel();
+    this.updateRoomData();
+    this._levelChangeDelegate && this._levelChangeDelegate.onLevelChange();
   },
 
   // individual mode
   renderWithLevelData: function (userName) {
+    this._cleanup();
     const data = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(userName);
     this._setCurrentLevel(data.currentLevel);
-    this._levelInfo = data.currentLevelInfo;
+    this._levelInfo = data.levels[data.currentLevel].currentLevelInfo;
     this._renderCurrentLevel();
   },
 
@@ -794,15 +869,20 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   putDraggableInDropzone: function (draggableTag, dropzoneTag) {
     const draggableSprite = this.getChildByTag(draggableTag);
     const dropzoneSprite = this.getChildByTag(dropzoneTag);
-    dropzoneSprite.dropDraggable(draggableSprite);
-    draggableSprite.playCorrectAnimation();
+    if (draggableSprite && dropzoneSprite) {
+      dropzoneSprite.dropDraggable(draggableSprite);
+      draggableSprite.playCorrectAnimation();
+    }
+    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setLevelInfo(draggableSprite.getIdx());
   },
 
   incorrectMatch: function (draggableTag, dropzoneTag) {
     const draggableSprite = this.getChildByTag(draggableTag);
     const dropzoneSprite = this.getChildByTag(dropzoneTag);
     draggableSprite.setPosition(dropzoneSprite.getPosition());
-    draggableSprite.snapBack();
+    dropzoneSprite.playIncorrectMatchEffect(() => {
+      draggableSprite.snapBack();
+    }, this);
   },
 
   emitSocketEvent: function (type, data) {
@@ -814,7 +894,6 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   },
 
   updateRoomData: function () {
-    console.log("update room data sync data =>>>>>>>", ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getState());
     this.emitSocketEvent(HDSocketEventType.UPDATE_ROOM_DATA, {
       roomId: HDAppManager.roomId,
       roomData: {
@@ -825,10 +904,10 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
     });
   },
 
+  // reset current level
   reset: function () {
-    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.resetState();
+    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.resetCurrentLevel();
     this._cleanup();
-    this._setCurrentLevel(1);
     this._renderCurrentLevel();
     this.updateRoomData();
   },
@@ -874,18 +953,26 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   hideHoverEffect: function (dropzoneTag) {
     this.getChildByTag(dropzoneTag).hideHoverEffect();
   },
+
+  subscribeToLevelChange: function (target) {
+    this._levelChangeDelegate = target;
+  },
 });
 
 // teacher layer
 ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer.extend({
   isCustomMouseTexture: true,
+  previewRequestUserName: "",
   ctor: function () {
     this._super();
+    this.subscribeToLevelChange(this);
     this.sync();
   },
 
   onEnter: function () {
     this._super();
+    this.setResetButtonActive(true);
+    this.renderBackButton();
     this.renderNextButton();
     this.renderSwitchButton();
     const moduleStartScriptObj = ACTIVITY_DRAG_DROP_PARKING_1.config.teacherScripts.data.moduleStart;
@@ -894,6 +981,11 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
 
   onExit: function () {
     this._super();
+  },
+
+  onLevelChange: function () {
+    this.nextButtonActive();
+    this.backButtonActive();
   },
 
   // sync teacher specific data
@@ -922,6 +1014,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
   },
 
   onStudentPreviewCellClicked: function (userName, isSelected, scrollViewContainer) {
+    this.previewRequestUserName = userName;
     this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
       roomId: HDAppManager.roomId,
       type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.PREVIEW_REQUEST,
@@ -933,55 +1026,92 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
   },
 
   handleGameSocketEvents: function (data) {
+    this._super(data);
     const { type, userName } = data;
     switch (type) {
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_DRAGGED: {
         const { itemTag, location } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED &&
+            userName !== HDAppManager.username) ||
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+            userName === this.previewRequestUserName)
+        ) {
           this.dragDraggableByTag(itemTag, location);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_SNAPPED_BACK: {
         const { itemTag } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED &&
+            userName !== HDAppManager.username) ||
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+            userName === this.previewRequestUserName)
+        ) {
           this.snapBackDraggableByTag(itemTag);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_DROPPED_CORRECTLY: {
-        const { itemTag, dropzoneTag } = data;
-        if (userName !== HDAppManager.username) {
+        const { itemTag, dropzoneTag, correctCount } = data;
+        if (
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED &&
+            userName !== HDAppManager.username) ||
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+            userName === this.previewRequestUserName)
+        ) {
           this.putDraggableInDropzone(itemTag, dropzoneTag);
           this.showScriptMessage(
             ACTIVITY_DRAG_DROP_PARKING_1.config.teacherScripts.data.StudentFirstCorrectDrop.content.ops
           );
+          this.setCorrectCount(correctCount);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_DROPPED_INCORRECTLY: {
         const { itemTag, dropzoneTag } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED &&
+            userName !== HDAppManager.username) ||
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+            userName === this.previewRequestUserName)
+        ) {
           this.incorrectMatch(itemTag, dropzoneTag);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.SHOW_HOVER_EFFECT: {
         const { dropzoneTag } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED &&
+            userName !== HDAppManager.username) ||
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+            userName === this.previewRequestUserName)
+        ) {
           this.showHoverEffect(dropzoneTag);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.HIDE_HOVER_EFFECT: {
         const { dropzoneTag } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED &&
+            userName !== HDAppManager.username) ||
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+            userName === this.previewRequestUserName)
+        ) {
           this.hideHoverEffect(dropzoneTag);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.LEVEL_COMPLETE_ANIMATION: {
-        if (userName !== HDAppManager.username) {
+        if (
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED &&
+            userName !== HDAppManager.username) ||
+          (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+            userName === this.previewRequestUserName)
+        ) {
           this.playLevelCompleteAnimation();
         }
         break;
@@ -992,6 +1122,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
   },
 
   handleSocketEvents: function (event) {
+    this._super(event);
     const { eventType, data } = event;
     switch (eventType) {
       case HDSocketEventType.GAME_MESSAGE: {
@@ -1015,9 +1146,11 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
     const nodeSpace = this.convertToNodeSpace(location);
     const switchButton = this.getChildByTag(ACTIVITY_DRAG_DROP_PARKING_1.TAGS.SWITCH_BUTTON);
     const nextButton = this.getChildByTag(ACTIVITY_DRAG_DROP_PARKING_1.TAGS.NEXT_BUTTON);
+    const backButton = this.getChildByTag(ACTIVITY_DRAG_DROP_PARKING_1.TAGS.BACK_BUTTON);
     this.isCustomMouseTexture = !(
       cc.rectContainsPoint(switchButton.getBoundingBox(), nodeSpace) ||
-      (nextButton && cc.rectContainsPoint(nextButton.getBoundingBox(), nodeSpace))
+      (nextButton && cc.rectContainsPoint(nextButton.getBoundingBox(), nodeSpace)) ||
+      (backButton && cc.rectContainsPoint(backButton.getBoundingBox(), nodeSpace))
     );
     return true;
   },
@@ -1051,7 +1184,23 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
     lesson_1.ref.setStudentsPreviewPanelActive(flag);
   },
 
+  renderBackButton: function () {
+    const backButtonObj = ACTIVITY_DRAG_DROP_PARKING_1.config.buttons.data.backButton;
+    const backButton = this.createButton(
+      ACTIVITY_DRAG_DROP_PARKING_1.spritePath + backButtonObj.enableState,
+      ACTIVITY_DRAG_DROP_PARKING_1.spritePath + backButtonObj.pushedState,
+      "",
+      0,
+      ACTIVITY_DRAG_DROP_PARKING_1.TAGS.BACK_BUTTON,
+      cc.p(this.getContentSize().width * 0.023, this.getContentSize().height * 0.14),
+      this
+    );
+    backButton.setAnchorPoint(cc.p(0, 0));
+    this.backButtonActive();
+  },
+
   renderNextButton: function () {
+    const backButton = this.getChildByTag(ACTIVITY_DRAG_DROP_PARKING_1.TAGS.BACK_BUTTON);
     const nextButtonObj = ACTIVITY_DRAG_DROP_PARKING_1.config.buttons.data.nextButton;
     const nextButton = this.createButton(
       ACTIVITY_DRAG_DROP_PARKING_1.spritePath + nextButtonObj.enableState,
@@ -1059,10 +1208,24 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
       "",
       0,
       ACTIVITY_DRAG_DROP_PARKING_1.TAGS.NEXT_BUTTON,
-      cc.p(this.getContentSize().width * 0.023, this.getContentSize().height * 0.14),
+      cc.p(
+        backButton.getPositionX(),
+        backButton.getPositionY() + backButton.getContentSize().height + this.getContentSize().height * 0.02
+      ),
       this
     );
     nextButton.setAnchorPoint(cc.p(0, 0));
+    this.nextButtonActive();
+  },
+
+  nextButtonActive: function () {
+    const nextButton = this.getChildByTag(ACTIVITY_DRAG_DROP_PARKING_1.TAGS.NEXT_BUTTON);
+    nextButton.setEnabled(this.isThereNextLevel());
+  },
+
+  backButtonActive: function () {
+    const backButton = this.getChildByTag(ACTIVITY_DRAG_DROP_PARKING_1.TAGS.BACK_BUTTON);
+    backButton.setEnabled(this.getCurrentLevel() !== 0);
   },
 
   renderSwitchButton: function () {
@@ -1070,7 +1233,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
     const switchButton = this.createButton(
       ACTIVITY_DRAG_DROP_PARKING_1.spritePath + switchButtonObj.enableState,
       ACTIVITY_DRAG_DROP_PARKING_1.spritePath + switchButtonObj.pushedState,
-      ACTIVITY_DRAG_DROP_PARKING_1.SWITCH_BUTTON_TITLE.SHARED,
+      this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
+        ? ACTIVITY_DRAG_DROP_PARKING_1.SWITCH_BUTTON_TITLE.SHARED
+        : ACTIVITY_DRAG_DROP_PARKING_1.SWITCH_BUTTON_TITLE.INDIVIDUAL_MODE,
       16,
       ACTIVITY_DRAG_DROP_PARKING_1.TAGS.SWITCH_BUTTON,
       cc.p(this.getContentSize().width * 0.977, this.getContentSize().height * 0.14),
@@ -1092,7 +1257,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
     );
     this.setStudentPreviewPanelActive(!gameMode);
     const newGameMode = gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED ? 1 : 0;
-    this.setGameMode(newGameMode);
+    this.renderGameMode(newGameMode);
     this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
       roomId: HDAppManager.roomId,
       type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.CHANGE_GAME_MODE,
@@ -1110,6 +1275,15 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
               roomId: HDAppManager.roomId,
               type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.NEXT_LEVEL,
+              userName: HDAppManager.username,
+            });
+            break;
+          }
+          case ACTIVITY_DRAG_DROP_PARKING_1.TAGS.BACK_BUTTON: {
+            this.renderPreviousLevel();
+            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+              roomId: HDAppManager.roomId,
+              type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.PREV_LEVEL,
               userName: HDAppManager.username,
             });
             break;
@@ -1189,32 +1363,46 @@ ACTIVITY_DRAG_DROP_PARKING_1.StudentViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
   },
 
   handleGameSocketEvents: function (data) {
+    this._super(data);
     const { type, userName } = data;
     switch (type) {
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_DRAGGED: {
         const { itemTag, location } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          userName !== HDAppManager.username &&
+          this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
+        ) {
           this.dragDraggableByTag(itemTag, location);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_SNAPPED_BACK: {
         const { itemTag } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          userName !== HDAppManager.username &&
+          this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
+        ) {
           this.snapBackDraggableByTag(itemTag);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_DROPPED_CORRECTLY: {
-        const { itemTag, dropzoneTag } = data;
-        if (userName !== HDAppManager.username) {
+        const { itemTag, dropzoneTag, correctCount } = data;
+        if (
+          userName !== HDAppManager.username &&
+          this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
+        ) {
           this.putDraggableInDropzone(itemTag, dropzoneTag);
+          this.setCorrectCount(correctCount);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_DROPPED_INCORRECTLY: {
         const { itemTag, dropzoneTag } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          userName !== HDAppManager.username &&
+          this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
+        ) {
           this.incorrectMatch(itemTag, dropzoneTag);
         }
         break;
@@ -1228,7 +1416,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.StudentViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.CHANGE_GAME_MODE: {
         const { gameMode } = data;
-        this.setGameMode(gameMode);
+        this.renderGameMode(gameMode);
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.STUDENT_INTERACTION: {
@@ -1244,22 +1432,35 @@ ACTIVITY_DRAG_DROP_PARKING_1.StudentViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
         this.renderNextLevel();
         break;
       }
+      case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.PREV_LEVEL: {
+        this.renderPreviousLevel();
+        break;
+      }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.SHOW_HOVER_EFFECT: {
         const { dropzoneTag } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          userName !== HDAppManager.username &&
+          this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
+        ) {
           this.showHoverEffect(dropzoneTag);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.HIDE_HOVER_EFFECT: {
         const { dropzoneTag } = data;
-        if (userName !== HDAppManager.username) {
+        if (
+          userName !== HDAppManager.username &&
+          this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
+        ) {
           this.hideHoverEffect(dropzoneTag);
         }
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.LEVEL_COMPLETE_ANIMATION: {
-        if (userName !== HDAppManager.username) {
+        if (
+          userName !== HDAppManager.username &&
+          this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
+        ) {
           this.playLevelCompleteAnimation();
         }
         break;
@@ -1270,6 +1471,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.StudentViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
   },
 
   handleSocketEvents: function (event) {
+    this._super(event);
     const { eventType, data } = event;
     switch (eventType) {
       case HDSocketEventType.STUDENT_TURN: {
@@ -1293,7 +1495,6 @@ ACTIVITY_DRAG_DROP_PARKING_1.StudentViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
 // main layer
 ACTIVITY_DRAG_DROP_PARKING_1.MainDragDropParkingLayer = cc.Layer.extend({
   delegate: null,
-
   ctor: function () {
     this._super();
     const self = this;
@@ -1302,15 +1503,10 @@ ACTIVITY_DRAG_DROP_PARKING_1.MainDragDropParkingLayer = cc.Layer.extend({
     ACTIVITY_DRAG_DROP_PARKING_1.spritePath = "res/Activity/" + "" + activityName + "/res/Sprite/";
     ACTIVITY_DRAG_DROP_PARKING_1.soundPath = "res/Activity/" + "" + activityName + "/res/Sound/";
     ACTIVITY_DRAG_DROP_PARKING_1.animationPath = "res/Activity/" + activityName + "/res/AnimationFrames/";
-
-    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setLevelInfoOfUser(
-      HDAppManager.username,
-      ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getDefaultUserData()
-    );
-
     cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, data) {
       ACTIVITY_DRAG_DROP_PARKING_1.config = data;
-
+      ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setMaxLevels(data.assets.sections.levels.data.length);
+      ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setDefaultState();
       if (HDAppManager.isTeacherView) {
         const teacherViewLayer = new ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer();
         self.delegate = teacherViewLayer;
@@ -1362,7 +1558,6 @@ ACTIVITY_DRAG_DROP_PARKING_1.MainDragDropParkingLayer = cc.Layer.extend({
   },
 
   syncData: function (data) {
-    console.log("sync data =>>>>>>>>>>>", data);
     ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setState(data);
   },
 

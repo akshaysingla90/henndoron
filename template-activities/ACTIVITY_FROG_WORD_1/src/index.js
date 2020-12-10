@@ -1,3 +1,23 @@
+/**
+ * return the distance between two points.
+ *
+ * @param {number} x1		x position of first point
+ * @param {number} y1		y position of first point
+ * @param {number} x2		x position of second point
+ * @param {number} y2		y position of second point
+ * @return {number} 		distance between given points
+ */
+Math.getDistance = function( x1, y1, x2, y2 ) {
+
+    var 	xs = x2 - x1,
+        ys = y2 - y1;
+
+    xs *= xs;
+    ys *= ys;
+
+    return Math.sqrt( xs + ys );
+};
+
 var ACTIVITY_FROG_WORD_1 = {};
 ACTIVITY_FROG_WORD_1.Tag = {
     HOME_BASE           :   100,
@@ -13,6 +33,12 @@ ACTIVITY_FROG_WORD_1.MULTIPLAYER_TYPE = {
 
 ACTIVITY_FROG_WORD_1.socketEventKey = {
     HELP                        : 101,
+    USER_DATA                   : 102,
+    START_NEXT_LEVEL            : 103,
+    STUDENT_INTERACTION         : 104,
+    CHANGE_MULTIPLAYER_MODE     : 105,
+    REPLAY                      : 106
+
 
 };
 
@@ -281,9 +307,13 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
         tounge.setVisible(shouldShow);
     },
 
-    enlrageFrogTounge :  function(scalefactor){
+    enlrageFrogTounge :  function(toPoint){
         let tounge = this.frog.getChildByTag(ACTIVITY_FROG_WORD_1.Tag.FrogTounge);
-        tounge.setScaleX(scalefactor);
+        let touchDistance = Math.getDistance(this.frog.getPosition().x,this.frog.getPosition().y,toPoint.x,toPoint.y);
+        // cc.log("distance = "+touchDistance);
+        if(touchDistance/25 < 5.0)
+            tounge.setScaleX(touchDistance/25);
+
     },
 
     nodeMoveToLocation : function(location,leaf){
@@ -538,7 +568,7 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
         let leaf = this.getTouchedLeaf(touch);
         this.rotateNodeToPoint(this.frog,pos);
         this.showFrogTounge(true);
-        this.enlrageFrogTounge(5.0);
+        this.enlrageFrogTounge(pos);
         //
         if(leaf) this.tempPath.push(leaf.getPosition());
         this.tempPathDisplay();
@@ -553,6 +583,7 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
         var id = touch.getID();
         let leaf = this.getTouchedLeaf(touch);
         this.rotateNodeToPoint(this.frog,pos);
+        this.enlrageFrogTounge(pos);
     },
 
     onTouchEnded:function(touch, event) {
@@ -560,9 +591,9 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
         var pos = touch.getLocation();
         var id = touch.getID();
         this.showFrogTounge(false);
-        this.enlrageFrogTounge(1.0);
+        this.enlrageFrogTounge(pos);
         let leaf = this.getTouchedLeaf(touch);
-        if (leaf && this.isApproachable(leaf.getPosition()) && !this.isFrogInAction) {
+        if (leaf && leaf.getChildByTag(ACTIVITY_FROG_WORD_1.Tag.LeafItem) && this.isApproachable(leaf.getPosition()) && !this.isFrogInAction) {
             this.nodeMoveToLocation(leaf.getPosition(),leaf);
         }
 
@@ -699,35 +730,17 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
                 ACTIVITY_FROG_WORD_1.ref.onUpdateStudentInteraction(res.data);
                 break;
 
-            case ACTIVITY_FROG_WORD_1.socketEventKey.CRANE_MOVEMENT:
-                if(this.multiPlayerType == ACTIVITY_FROG_WORD_1.MULTIPLAYER_TYPE.TURN_BASED || this.isPreviewMode){
-                    ACTIVITY_FROG_WORD_1.ref.updateCranePosition(res.data);
-                }
-                this.updateUserInfo(JSON.parse(res.data.userInfo));
-
-                break;
-
 
             case ACTIVITY_FROG_WORD_1.socketEventKey.HELP:
                 if(this.multiPlayerType == ACTIVITY_FROG_WORD_1.MULTIPLAYER_TYPE.TURN_BASED || this.isPreviewMode)
                 ACTIVITY_FROG_WORD_1.ref.showOrHideBoard(res.data.show);
                 break;
 
-            case ACTIVITY_FROG_WORD_1.socketEventKey.MOVE_WREACKING_BALL:
-                if(this.multiPlayerType == ACTIVITY_FROG_WORD_1.MULTIPLAYER_TYPE.TURN_BASED || this.isPreviewMode)
-                ACTIVITY_FROG_WORD_1.ref.checkCollision();
-                break;
 
             case ACTIVITY_FROG_WORD_1.socketEventKey.CHANGE_MULTIPLAYER_MODE:
                 ACTIVITY_FROG_WORD_1.ref.multiPlayerType = res.data.mode;
                 break;
 
-
-            case ACTIVITY_FROG_WORD_1.socketEventKey.CRANE_STOP:
-                if(this.multiPlayerType == ACTIVITY_FROG_WORD_1.MULTIPLAYER_TYPE.TURN_BASED || this.isPreviewMode)
-                ACTIVITY_FROG_WORD_1.ref.stopCrane(res.data);
-                this.updateUserInfo(JSON.parse(res.data.userInfo));
-                break;
 
             case ACTIVITY_FROG_WORD_1.socketEventKey.REPLAY:
                 ACTIVITY_FROG_WORD_1.ref.restart(res.data.levelNo);

@@ -460,6 +460,35 @@
                 "dimensions": { "width": 559, "height": 283 },
                 "helpShowTime": 5
               }
+            },
+            {
+              "words": [
+                {
+                  "correct_word": "sing",
+                  "display_word": "sin "
+                },
+                {
+                  "correct_word": "fat",
+                  "display_word": "f t"
+                },
+                {
+                  "correct_word": "panda",
+                  "display_word": "pa da"
+                }
+              ],
+              "additionalRandomLetters": 1,
+              "groundLetters":"iognrta",
+              "hintsSections": {
+                "UIName": "HINTS",
+                "images": ["item_sing.png", "item_fat.png", "item_panda.png"],
+                "dimensions": { "width": 350, "height": 350 }
+              },
+              "helpSection": {
+                "UIName": "HELP SECTION",
+                "imageName": "help_window_pictures.png",
+                "dimensions": { "width": 559, "height": 283 },
+                "helpShowTime": 5
+              }
             }
           ],
           "demolishing": [

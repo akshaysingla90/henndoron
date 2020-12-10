@@ -5,7 +5,6 @@
     "activityPath": "ACTIVITY_HUNGRY_FLUPE_1",
     "description": "game desc. here",
     "allocatedTime": 10,
-    "gamePlayTime" : 40,
     "controls": {
       "mouse": true,
       "turnBased": false,
@@ -105,19 +104,10 @@
               "attributes": {
                 "underline": true
               },
-              "insert": "Click the start button to enable the"
+              "insert": "Click the start button to enable the student’s mouse"
             },
             {
-              "insert": "\n"
-            },
-            {
-              "attributes": {
-                "underline": true
-              },
-              "insert": "student’s mouse."
-            },
-            {
-              "insert": "\n"
+              "insert": ". \n"
             }
           ]
         }
@@ -554,6 +544,12 @@
           }
         }
       }
+  },
+  "gamePlayTime" : 40,
+  "maxBubbleInScreen": 10,
+  "bubbleSpeed" : {
+    "x" : 50,
+    "y" : 100
   },
   "resources": {
     "sprites": {

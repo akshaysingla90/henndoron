@@ -268,6 +268,18 @@
     }
   },
 
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "backgroundSlides": {
+        "component": "backgroundSlides",
+        "UIName": "BACKGROUND SLIDES",
+        "images": ["bg_beach.png", "bg_parking.png"],
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+
   "buttons": {
     "component": "buttonsCard",
     "data": {
@@ -275,6 +287,12 @@
         "UIName": "Next Button",
         "enableState": "next_idle.png",
         "pushedState": "next_pressed.png",
+        "dimensions": { "width": 139, "height": 32 }
+      },
+      "backButton": {
+        "UIName": "Back Button",
+        "enableState": "back_idle.png",
+        "pushedState": "back_pressed.png",
         "dimensions": { "width": 139, "height": 32 }
       },
       "switchButton": {
@@ -297,38 +315,45 @@
         "toolTipText": "When turned on, draggables snap back into their original position if dropped outside of their correct dropzone"
       },
       "levels": {
-        "ignoreForAuthToolUI": true,
+        "UIName": "LEVELS",
+        "component": "dragAndDropLevels",
         "backgroundDimensions": { "width": 960, "height": 640 },
-        "UIName": "Levels",
-        "isSoloDraggableUIName": "Solo Draggable",
-        "isSoloDraggableToolTipText": "This information is needed for hovering and incorrect match effects.",
+        "draggableDimensions": { "width": 350, "height": 350 },
+        "dropzoneDimensions": { "width": 350, "height": 350 },
         "data": [
           {
             "isDraggableSolo": false,
-            "background": "bg_parking.png",
+            "background": 1,
             "dropZones": [
               {
+                "name": "parking star",
                 "imageName": "parking_star.png",
+                "visible": true,
                 "position": {
                   "x": 259,
                   "y": 425
                 }
               },
               {
+                "name": "parking photos",
                 "imageName": "parking_photos.png",
+                "visible": true,
                 "position": {
                   "x": 367,
                   "y": 425
                 }
               },
               {
+                "name": "parking cat",
                 "imageName": "parking_cat.png",
+                "visible": true,
                 "position": {
                   "x": 475,
                   "y": 425
                 }
               },
               {
+                "name": "parking shore",
                 "imageName": "parking_shore.png",
                 "position": {
                   "x": 583,
@@ -336,7 +361,9 @@
                 }
               },
               {
+                "name": "parking dog",
                 "imageName": "parking_dog.png",
+                "visible": true,
                 "position": {
                   "x": 690,
                   "y": 425
@@ -345,6 +372,7 @@
             ],
             "draggables": [
               {
+                "name": "1",
                 "imageName": "car_cat.png",
                 "position": {
                   "x": 105,
@@ -354,6 +382,7 @@
                 "dropZoneIdx": 2
               },
               {
+                "name": "2",
                 "imageName": "car_dog.png",
                 "position": {
                   "x": 240,
@@ -363,6 +392,7 @@
                 "dropZoneIdx": 4
               },
               {
+                "name": "3",
                 "imageName": "car_shore.png",
                 "position": {
                   "x": 480,
@@ -372,6 +402,7 @@
                 "dropZoneIdx": 3
               },
               {
+                "name": "4",
                 "imageName": "car_star.png",
                 "position": {
                   "x": 720,
@@ -381,6 +412,7 @@
                 "dropZoneIdx": 0
               },
               {
+                "name": "5",
                 "imageName": "car_photos.png",
                 "position": {
                   "x": 885,
@@ -393,38 +425,48 @@
           },
           {
             "isDraggableSolo": true,
-            "background": "bg_beach.png",
+            "background": 0,
             "dropZones": [
               {
+                "name": "Cat",
                 "imageName": "target_cat.png",
+                "visible": true,
                 "position": {
                   "x": 259,
                   "y": 425
                 }
               },
               {
+                "name": "Photos",
                 "imageName": "target_photos.png",
+                "visible": true,
                 "position": {
                   "x": 367,
                   "y": 425
                 }
               },
               {
+                "name": "shore",
                 "imageName": "target_shore.png",
+                "visible": true,
                 "position": {
                   "x": 475,
                   "y": 425
                 }
               },
               {
+                "name": "star",
                 "imageName": "target_star.png",
+                "visible": true,
                 "position": {
                   "x": 583,
                   "y": 425
                 }
               },
               {
+                "name": "dog",
                 "imageName": "target_dog.png",
+                "visible": true,
                 "position": {
                   "x": 690,
                   "y": 425
@@ -433,6 +475,7 @@
             ],
             "draggables": [
               {
+                "name": "",
                 "imageName": "Item_star.png",
                 "position": {
                   "x": 105,
@@ -442,6 +485,7 @@
                 "dropZoneIdx": 3
               },
               {
+                "name": "",
                 "imageName": "Item_dog.png",
                 "position": {
                   "x": 240,
@@ -451,6 +495,7 @@
                 "dropZoneIdx": 4
               },
               {
+                "name": "",
                 "imageName": "Item_cat.png",
                 "position": {
                   "x": 480,
@@ -460,6 +505,7 @@
                 "dropZoneIdx": 0
               },
               {
+                "name": "",
                 "imageName": "Item_shore.png",
                 "position": {
                   "x": 720,
@@ -469,6 +515,7 @@
                 "dropZoneIdx": 2
               },
               {
+                "name": "",
                 "imageName": "Item_photos.png",
                 "position": {
                   "x": 885,
@@ -482,7 +529,7 @@
         ]
       },
       "animation": {
-        "component": "animationGroup",
+        "ignoreForAuthToolUI": true,
         "data": {
           "starAnimation": {
             "UIName": "Stars Animation",
@@ -545,7 +592,9 @@
         "target_dog.png",
         "target_photos.png",
         "target_shore.png",
-        "target_star.png"
+        "target_star.png",
+        "back_idle.png",
+        "back_pressed.png"
       ]
     },
     "animationFrames": {
