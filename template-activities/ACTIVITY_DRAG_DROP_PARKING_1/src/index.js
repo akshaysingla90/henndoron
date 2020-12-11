@@ -305,13 +305,11 @@ ACTIVITY_DRAG_DROP_PARKING_1.Draggable = cc.Sprite.extend({
 ACTIVITY_DRAG_DROP_PARKING_1.Dropzone = HDBaseLayer.extend({
   Z_ORDER_DRAGGABLE: 3,
   Z_ORDER_ANIMATION: 4,
-  Z_ORDER_DROPZONE: 2,
-  Z_ORDER_CLIPPER_NODE: 1,
+  Z_ORDER_DROPZONE: 1,
+  Z_ORDER_CLIPPER_NODE: 2,
   winAnimationSpeed: 0.1,
   imgFile: "",
-  isSoloDraggable: false,
-  draggableHeight: null,
-  ctor: function (imgFile, position, idx, isSoloDraggable, draggableHeight) {
+  ctor: function (imgFile, position, idx, isVisible) {
     this._super();
     this.setUserData({
       idx: idx,
@@ -320,13 +318,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.Dropzone = HDBaseLayer.extend({
     this.setAnchorPoint(cc.p(0.5, 0.5));
     this.setPosition(position);
     this.imgFile = imgFile;
-    this.isSoloDraggable = isSoloDraggable;
-    if (this.isSoloDraggable) {
-      this.Z_ORDER_DROPZONE = 1;
-      this.Z_ORDER_CLIPPER_NODE = 2;
-    }
-    this.draggableHeight = draggableHeight;
-    this.renderDropzoneSprite();
+    this.renderDropzoneSprite(isVisible);
   },
 
   onEnter: function () {
@@ -339,10 +331,11 @@ ACTIVITY_DRAG_DROP_PARKING_1.Dropzone = HDBaseLayer.extend({
     this._super();
   },
 
-  renderDropzoneSprite: function () {
+  renderDropzoneSprite: function (isVisible) {
     const dropzoneSprite = this.addSprite(this.imgFile, cc.p(0, 0), this);
     dropzoneSprite.setLocalZOrder(this.Z_ORDER_DROPZONE);
     dropzoneSprite.setAnchorPoint(cc.p(0, 0));
+    dropzoneSprite.setVisible(isVisible);
     this.setContentSize(dropzoneSprite.getContentSize());
   },
 
@@ -351,12 +344,8 @@ ACTIVITY_DRAG_DROP_PARKING_1.Dropzone = HDBaseLayer.extend({
     clipperNode.setLocalZOrder(this.Z_ORDER_CLIPPER_NODE);
     clipperNode.setContentSize(this.getContentSize());
     let stencil;
-    if (this.isSoloDraggable) {
-      stencil = new cc.Sprite(this.imgFile);
-      stencil.setPosition(cc.p(clipperNode.getContentSize().width * 0.5, this.getContentSize().height * 0.5));
-    } else {
-      stencil = new cc.LayerColor(HDConstants.White, this.getContentSize().width, this.draggableHeight);
-    }
+    stencil = new cc.Sprite(this.imgFile);
+    stencil.setPosition(cc.p(clipperNode.getContentSize().width * 0.5, this.getContentSize().height * 0.5));
 
     clipperNode.setStencil(stencil);
 
@@ -434,13 +423,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.Dropzone = HDBaseLayer.extend({
 
   dropDraggable: function (draggableSprite) {
     draggableSprite.removeFromParent();
-    if (this.isSoloDraggable) {
-      draggableSprite.setAnchorPoint(cc.p(0.5, 0.5));
-      draggableSprite.setPosition(cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5));
-    } else {
-      draggableSprite.setAnchorPoint(cc.p(0.5, 0));
-      draggableSprite.setPosition(cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.0));
-    }
+
+    draggableSprite.setAnchorPoint(cc.p(0.5, 0.5));
+    draggableSprite.setPosition(cc.p(this.getContentSize().width * 0.5, this.getContentSize().height * 0.5));
 
     draggableSprite.setLocalZOrder(this.Z_ORDER_DRAGGABLE);
     this.addChild(draggableSprite);
@@ -569,8 +554,6 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   },
 
   _renderDropzones: function () {
-    const isSoloDraggable =
-      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].isDraggableSolo;
     const dropzonesData = ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].dropZones;
     for (let i = 0; i < dropzonesData.length; ++i) {
       const dropzoneObj = dropzonesData[i];
@@ -578,11 +561,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
         ACTIVITY_DRAG_DROP_PARKING_1.spritePath + dropzoneObj.imageName,
         dropzoneObj.position,
         i,
-        isSoloDraggable,
-        new cc.Sprite(
-          ACTIVITY_DRAG_DROP_PARKING_1.spritePath +
-            ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].draggables[0].imageName
-        ).getContentSize().height
+        dropzoneObj.visible
       );
       dropzoneSprite.setTag(ACTIVITY_DRAG_DROP_PARKING_1.TAGS.DROPZONE_START + i);
       this.scaleSpriteInRatio(dropzoneSprite, 1);

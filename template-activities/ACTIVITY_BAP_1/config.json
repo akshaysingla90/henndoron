@@ -197,7 +197,9 @@
         "component": "backgroundSlides",
         "UIName": "BACKGROUND SLIDES",
         "images": ["background_1.png", "background_2.png", "background_3.png"],
-        "dimensions": { "width": 960, "height": 640 }
+        "dimensions": { "width": 960, "height": 640 },
+        "allowDelete": true,
+        "allowAdd": true
       }
     }
   },

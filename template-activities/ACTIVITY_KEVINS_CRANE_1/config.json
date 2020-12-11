@@ -86,7 +86,7 @@
           {
             "component": "image",
             "UIName": "Section-B FIRST FLOOR",
-            "imageName": "floor_balancer.png",
+            "imageName": "floor_balancer_first_floor.png",
             "dimensions": {
               "width": 470,
               "height": 12
@@ -96,7 +96,7 @@
           {
             "component": "image",
             "UIName": "Section-B SECOND FLOOR",
-            "imageName": "floor_balancer.png",
+            "imageName": "floor_balancer_second_floor.png",
             "dimensions": {
               "width": 470,
               "height": 12
@@ -317,7 +317,7 @@
         "data": {
           "craneChassis": {
             "imageName": "craneChassis.png",
-            "dimension": {
+            "dimensions": {
               "width": 218,
               "height": 67
             },
@@ -343,7 +343,7 @@
           },
           "craneClaw": {
             "imageName": "craneClaw.png",
-            "dimension": {
+            "dimensions": {
               "width": 360,
               "height": 329
             },
@@ -393,7 +393,7 @@
           },
           "craneCockpit": {
             "imageName": "craneCockpit.png",
-            "dimension": {
+            "dimensions": {
               "width": 360,
               "height": 329
             },

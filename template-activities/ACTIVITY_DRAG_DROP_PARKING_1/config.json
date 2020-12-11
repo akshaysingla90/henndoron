@@ -267,7 +267,6 @@
       }
     }
   },
-
   "background": {
     "component": "backgroundCard",
     "sections": {
@@ -275,11 +274,15 @@
         "component": "backgroundSlides",
         "UIName": "BACKGROUND SLIDES",
         "images": ["bg_beach.png", "bg_parking.png"],
-        "dimensions": { "width": 960, "height": 640 }
+        "dimensions": {
+          "width": 960,
+          "height": 640
+        },
+        "allowDelete": true,
+        "allowAdd": true
       }
     }
   },
-
   "buttons": {
     "component": "buttonsCard",
     "data": {
@@ -287,24 +290,32 @@
         "UIName": "Next Button",
         "enableState": "next_idle.png",
         "pushedState": "next_pressed.png",
-        "dimensions": { "width": 139, "height": 32 }
+        "dimensions": {
+          "width": 139,
+          "height": 32
+        }
       },
       "backButton": {
         "UIName": "Back Button",
         "enableState": "back_idle.png",
         "pushedState": "back_pressed.png",
-        "dimensions": { "width": 139, "height": 32 }
+        "dimensions": {
+          "width": 139,
+          "height": 32
+        }
       },
       "switchButton": {
         "UIName": "Switch Button",
         "enableState": "btn_enable.png",
         "pushedState": "btn_enable.png",
         "disableState": "btn_disable.png",
-        "dimensions": { "width": 96, "height": 64 }
+        "dimensions": {
+          "width": 96,
+          "height": 64
+        }
       }
     }
   },
-
   "assets": {
     "component": "assetsCard",
     "sections": {
@@ -317,56 +328,53 @@
       "levels": {
         "UIName": "LEVELS",
         "component": "dragAndDropLevels",
-        "backgroundDimensions": { "width": 960, "height": 640 },
-        "draggableDimensions": { "width": 350, "height": 350 },
-        "dropzoneDimensions": { "width": 350, "height": 350 },
         "data": [
           {
-            "isDraggableSolo": true,
             "background": 1,
             "dropZones": [
               {
                 "name": "parking star",
                 "imageName": "green_target_shape.png",
-                "visible": true,
+                "visible": false,
                 "position": {
-                  "x": 259,
-                  "y": 425
+                  "x": 263.0341033935547,
+                  "y": 373.92044830322266
                 }
               },
               {
                 "name": "parking photos",
                 "imageName": "red_target_shape.png",
-                "visible": true,
+                "visible": false,
                 "position": {
-                  "x": 367,
-                  "y": 425
+                  "x": 370.0341033935547,
+                  "y": 373.92044830322266
                 }
               },
               {
                 "name": "parking cat",
                 "imageName": "blue_target_shape.png",
-                "visible": true,
+                "visible": false,
                 "position": {
-                  "x": 475,
-                  "y": 425
+                  "x": 482.0341033935547,
+                  "y": 372.92044830322266
                 }
               },
               {
                 "name": "parking shore",
                 "imageName": "yellow_target_shape.png",
+                "visible": false,
                 "position": {
-                  "x": 583,
-                  "y": 425
+                  "x": 591.0341033935547,
+                  "y": 373.92044830322266
                 }
               },
               {
                 "name": "parking dog",
                 "imageName": "violet_target_shape.png",
-                "visible": true,
+                "visible": false,
                 "position": {
-                  "x": 690,
-                  "y": 425
+                  "x": 701.0341033935547,
+                  "y": 373.92044830322266
                 }
               }
             ],
@@ -424,7 +432,6 @@
             ]
           },
           {
-            "isDraggableSolo": true,
             "background": 0,
             "dropZones": [
               {
@@ -432,8 +439,8 @@
                 "imageName": "target_cat.png",
                 "visible": true,
                 "position": {
-                  "x": 259,
-                  "y": 425
+                  "x": 248.39773559570312,
+                  "y": 349.69034004211426
                 }
               },
               {
@@ -441,8 +448,8 @@
                 "imageName": "target_photos.png",
                 "visible": true,
                 "position": {
-                  "x": 367,
-                  "y": 425
+                  "x": 466.3977355957031,
+                  "y": 338.69034004211426
                 }
               },
               {
@@ -450,8 +457,8 @@
                 "imageName": "target_shore.png",
                 "visible": true,
                 "position": {
-                  "x": 475,
-                  "y": 425
+                  "x": 677.6704559326172,
+                  "y": 347.69034004211426
                 }
               },
               {
@@ -459,8 +466,8 @@
                 "imageName": "target_star.png",
                 "visible": true,
                 "position": {
-                  "x": 583,
-                  "y": 425
+                  "x": 309.3977355957031,
+                  "y": 207.69034004211426
                 }
               },
               {
@@ -468,8 +475,8 @@
                 "imageName": "target_dog.png",
                 "visible": true,
                 "position": {
-                  "x": 690,
-                  "y": 425
+                  "x": 543.6704559326172,
+                  "y": 203.69034004211426
                 }
               }
             ],
@@ -478,8 +485,8 @@
                 "name": "",
                 "imageName": "Item_star.png",
                 "position": {
-                  "x": 105,
-                  "y": 350
+                  "x": 177.39773559570312,
+                  "y": 456.69034004211426
                 },
                 "audioName": "",
                 "dropZoneIdx": 3
@@ -488,8 +495,8 @@
                 "name": "",
                 "imageName": "Item_dog.png",
                 "position": {
-                  "x": 240,
-                  "y": 155
+                  "x": 460.2159118652344,
+                  "y": 471.69034004211426
                 },
                 "audioName": "",
                 "dropZoneIdx": 4
@@ -498,8 +505,8 @@
                 "name": "",
                 "imageName": "Item_cat.png",
                 "position": {
-                  "x": 480,
-                  "y": 175
+                  "x": 778.6704559326172,
+                  "y": 460.69034004211426
                 },
                 "audioName": "",
                 "dropZoneIdx": 0
@@ -508,8 +515,8 @@
                 "name": "",
                 "imageName": "Item_shore.png",
                 "position": {
-                  "x": 720,
-                  "y": 155
+                  "x": 781.6704559326172,
+                  "y": 196.69034004211426
                 },
                 "audioName": "",
                 "dropZoneIdx": 2
@@ -518,8 +525,8 @@
                 "name": "",
                 "imageName": "Item_photos.png",
                 "position": {
-                  "x": 885,
-                  "y": 328
+                  "x": 131.39773559570312,
+                  "y": 174.69034004211426
                 },
                 "audioName": "",
                 "dropZoneIdx": 1
@@ -549,18 +556,19 @@
       }
     }
   },
-
   "cursors": {
     "component": "cursorsCard",
     "data": {
       "cursorPointer": {
         "UIName": "Cursor Pointer",
         "imageName": "cursor_0001.png",
-        "dimensions": { "width": 32, "height": 32 }
+        "dimensions": {
+          "width": 32,
+          "height": 32
+        }
       }
     }
   },
-
   "resources": {
     "ignoreForAuthToolUI": true,
     "sprites": {
