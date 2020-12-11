@@ -1025,6 +1025,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
 
   onStudentPreviewCellClicked: function (userName, isSelected, scrollViewContainer) {
     this.previewRequestUserName = userName;
+    this.setInteractionEnabled(userName === HDAppManager.username);
     this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
       roomId: HDAppManager.roomId,
       type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.PREVIEW_REQUEST,
