@@ -4,6 +4,8 @@ const ACTIVITY_DRAG_DROP_PARKING_1 = {
   spritePath: "",
   soundPath: "",
   animationPath: "",
+  isSyncedState: false,
+  maxLevels: 2,
 };
 
 ACTIVITY_DRAG_DROP_PARKING_1.SWITCH_BUTTON_TITLE = {
@@ -90,7 +92,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
       const data = syncedState.individual[HDAppManager.username]
         ? syncedState.individual[HDAppManager.username]
-        : getDefaultUserData();
+        : syncedState.shared;
       return data.currentLevel;
     }
   };
@@ -109,7 +111,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
       const data = syncedState.individual[HDAppManager.username]
         ? syncedState.individual[HDAppManager.username]
-        : getDefaultUserData();
+        : syncedState.shared;
       return [...data.levels[data.currentLevel].currentLevelInfo];
     }
   };
@@ -130,7 +132,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
       const data = syncedState.individual[HDAppManager.username]
         ? syncedState.individual[HDAppManager.username]
-        : getDefaultUserData();
+        : syncedState.shared;
       return data.levels[data.currentLevel].correctCount;
     }
   };
@@ -145,6 +147,20 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     }
   };
 
+  const makeCopy = (data = getDefaultUserData()) => {
+    let levelsCopy = [];
+    for (let i = 0; i < data.levels.length; ++i) {
+      levelsCopy[i] = {
+        currentLevelInfo: [...data.levels[i].currentLevelInfo],
+        correctCount: data.levels[i].correctCount,
+      };
+    }
+    return {
+      ...data,
+      levels: levelsCopy,
+    };
+  };
+
   // individual mode only
   const setLevelInfoOfUser = (userName, data = getDefaultUserData()) => {
     syncedState.individual[userName] = data;
@@ -153,19 +169,8 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
   // individual mode only
   // returns copy
   const getLevelInfoOfUser = (userName) => {
-    const data = syncedState.individual[userName] ? syncedState.individual[userName] : getDefaultUserData();
-    let levelsCopy = [];
-    for(let i = 0; i < data.levels.length; ++i){
-      levelsCopy[i] = {
-        currentLevelInfo: [...data.levels[i].currentLevelInfo] ,
-        correctCount: data.levels[i].correctCount
-      }
-    }
-    const clonedData = {
-      ...data,
-      levels: levelsCopy ,
-    };
-    return clonedData;
+    const data = syncedState.individual[userName] ? syncedState.individual[userName] : syncedState.shared;
+    return makeCopy(data);
   };
 
   const resetState = () => {
@@ -180,6 +185,11 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
       syncedState.shared.levels[syncedState.shared.currentLevel].correctCount = 0;
       syncedState.shared.levels[syncedState.shared.currentLevel].currentLevelInfo = [];
     }
+  };
+
+  // set my individual state to shared state (copy of shared state is set to individual state)
+  const setMyStateToShared = () => {
+    syncedState.individual[HDAppManager.username] = makeCopy(syncedState.shared);
   };
 
   return {
@@ -198,6 +208,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     resetCurrentLevel,
     setMaxLevels,
     setDefaultState,
+    setMyStateToShared,
   };
 })();
 
@@ -456,6 +467,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   ctor: function () {
     // initializations here
     this._super();
+    if (!ACTIVITY_DRAG_DROP_PARKING_1.isSyncedState) {
+      this.setDefaultState();
+    }
     this._syncState();
   },
 
@@ -471,6 +485,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
     this._super();
     ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.resetState();
     this._cleanup();
+    lesson_1.ref.turnBased = true;
   },
 
   // private functions below
@@ -500,7 +515,11 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   },
 
   _setCurrentLevel: function (level = 0) {
-    this._currentLevel = cc.clampf(level, 0, ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data.length - 1);
+    this._currentLevel = cc.clampf(
+      level,
+      0,
+      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data.length - 1
+    );
   },
 
   _syncState: function () {
@@ -552,8 +571,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   _renderDropzones: function () {
     const isSoloDraggable =
       ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].isDraggableSolo;
-    const dropzonesData =
-      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].dropZones;
+    const dropzonesData = ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].dropZones;
     for (let i = 0; i < dropzonesData.length; ++i) {
       const dropzoneObj = dropzonesData[i];
       const dropzoneSprite = new ACTIVITY_DRAG_DROP_PARKING_1.Dropzone(
@@ -563,8 +581,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
         isSoloDraggable,
         new cc.Sprite(
           ACTIVITY_DRAG_DROP_PARKING_1.spritePath +
-            ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].draggables[0]
-              .imageName
+            ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].draggables[0].imageName
         ).getContentSize().height
       );
       dropzoneSprite.setTag(ACTIVITY_DRAG_DROP_PARKING_1.TAGS.DROPZONE_START + i);
@@ -783,12 +800,22 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
 
   // public exposed functions below
 
+  // set my individual state to shared on individual mode
+  setMyStateToShared: function () {
+    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setMyStateToShared();
+  },
+
+  setDefaultState: function () {
+    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setMaxLevels(ACTIVITY_DRAG_DROP_PARKING_1.maxLevels);
+    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setDefaultState();
+  },
+
   setResetButtonActive: function (flag) {
     this.getParent().getParent().setResetButtonActive(flag);
   },
 
   isThereNextLevel: function () {
-    return this.getCurrentLevel() < ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data.length;
+    return this.getCurrentLevel() < ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data.length - 1;
   },
 
   setCorrectCount: function (count) {
@@ -873,7 +900,6 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
       dropzoneSprite.dropDraggable(draggableSprite);
       draggableSprite.playCorrectAnimation();
     }
-    ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setLevelInfo(draggableSprite.getIdx());
   },
 
   incorrectMatch: function (draggableTag, dropzoneTag) {
@@ -956,6 +982,11 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
 
   subscribeToLevelChange: function (target) {
     this._levelChangeDelegate = target;
+  },
+
+  getDraggableIdxByTag: function (tag) {
+    const draggableSprite = this.getChildByTag(tag);
+    return draggableSprite.getIdx();
   },
 });
 
@@ -1061,11 +1092,14 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
           (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
             userName === this.previewRequestUserName)
         ) {
+          if (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
+            ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setLevelInfo(this.getDraggableIdxByTag(itemTag));
+            this.setCorrectCount(correctCount);
+          }
           this.putDraggableInDropzone(itemTag, dropzoneTag);
           this.showScriptMessage(
             ACTIVITY_DRAG_DROP_PARKING_1.config.teacherScripts.data.StudentFirstCorrectDrop.content.ops
           );
-          this.setCorrectCount(correctCount);
         }
         break;
       }
@@ -1257,6 +1291,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
     );
     this.setStudentPreviewPanelActive(!gameMode);
     const newGameMode = gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED ? 1 : 0;
+    if (newGameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
+      this.setMyStateToShared();
+    }
     this.renderGameMode(newGameMode);
     this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
       roomId: HDAppManager.roomId,
@@ -1392,8 +1429,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.StudentViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
           userName !== HDAppManager.username &&
           this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
         ) {
-          this.putDraggableInDropzone(itemTag, dropzoneTag);
           this.setCorrectCount(correctCount);
+          ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setLevelInfo(this.getDraggableIdxByTag(itemTag));
+          this.putDraggableInDropzone(itemTag, dropzoneTag);
         }
         break;
       }
@@ -1416,6 +1454,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.StudentViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.CHANGE_GAME_MODE: {
         const { gameMode } = data;
+        if (gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
+          this.setMyStateToShared();
+        }
         this.renderGameMode(gameMode);
         break;
       }
@@ -1505,8 +1546,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.MainDragDropParkingLayer = cc.Layer.extend({
     ACTIVITY_DRAG_DROP_PARKING_1.animationPath = "res/Activity/" + activityName + "/res/AnimationFrames/";
     cc.loader.loadJson("res/Activity/" + activityName + "/config.json", function (error, data) {
       ACTIVITY_DRAG_DROP_PARKING_1.config = data;
-      ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setMaxLevels(data.assets.sections.levels.data.length);
-      ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setDefaultState();
+      ACTIVITY_DRAG_DROP_PARKING_1.maxLevels = data.assets.sections.levels.data.length;
       if (HDAppManager.isTeacherView) {
         const teacherViewLayer = new ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer();
         self.delegate = teacherViewLayer;
@@ -1525,6 +1565,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.MainDragDropParkingLayer = cc.Layer.extend({
 
   onExit: function () {
     this._super();
+    ACTIVITY_DRAG_DROP_PARKING_1.isSyncedState = false;
   },
 
   // delegate methods from lesson container below
@@ -1559,6 +1600,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.MainDragDropParkingLayer = cc.Layer.extend({
 
   syncData: function (data) {
     ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setState(data);
+    ACTIVITY_DRAG_DROP_PARKING_1.isSyncedState = true;
   },
 
   reset: function () {

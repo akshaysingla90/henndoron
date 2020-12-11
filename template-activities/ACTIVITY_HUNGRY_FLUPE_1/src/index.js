@@ -252,17 +252,18 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         this.stopTimer();
         this.setScoreScreenActive(true);
         while (this.bubbleList.length > 0){
-            //console.log("this.bubbleList.length ", this.bubbleList.length);
             this.removeBubbles(this.bubbleList[0]);
         }
         this.isTeacherView && this.getParent().setAllStudentsMouseActive(false);
-        this.setPushButtonActive()
+        this.setPushButtonActive();
         if(ACTIVITY_HUNGRY_FLUPE_1.ref.joinedStudentList
             && ACTIVITY_HUNGRY_FLUPE_1.ref.joinedStudentList.users &&
             ACTIVITY_HUNGRY_FLUPE_1.ref.joinedStudentList.users[0] &&
             HDAppManager.username === ACTIVITY_HUNGRY_FLUPE_1.ref.joinedStudentList.users[0].userName) {
             ACTIVITY_HUNGRY_FLUPE_1.ref.updateRoomData();
         }
+        this.isStudentInteractionEnable = false;
+        this.setPushButtonActive();
     },
     setupControlButton: function (){
         let props =  ACTIVITY_HUNGRY_FLUPE_1.config.buttons.data.push;
@@ -1000,6 +1001,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             case ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.START:
                 this.gameState = ACTIVITY_HUNGRY_FLUPE_1.gameState.STARTED;
                 this.startTimer(this.gamePlayTime);
+                this.setScoreScreenActive(false);
                 break;
             case ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.STOP:
                 ACTIVITY_HUNGRY_FLUPE_1.ref.gameState = ACTIVITY_HUNGRY_FLUPE_1.gameState.STOP;

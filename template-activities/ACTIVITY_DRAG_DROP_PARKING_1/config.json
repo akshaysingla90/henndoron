@@ -322,12 +322,12 @@
         "dropzoneDimensions": { "width": 350, "height": 350 },
         "data": [
           {
-            "isDraggableSolo": false,
+            "isDraggableSolo": true,
             "background": 1,
             "dropZones": [
               {
                 "name": "parking star",
-                "imageName": "parking_star.png",
+                "imageName": "green_target_shape.png",
                 "visible": true,
                 "position": {
                   "x": 259,
@@ -336,7 +336,7 @@
               },
               {
                 "name": "parking photos",
-                "imageName": "parking_photos.png",
+                "imageName": "red_target_shape.png",
                 "visible": true,
                 "position": {
                   "x": 367,
@@ -345,7 +345,7 @@
               },
               {
                 "name": "parking cat",
-                "imageName": "parking_cat.png",
+                "imageName": "blue_target_shape.png",
                 "visible": true,
                 "position": {
                   "x": 475,
@@ -354,7 +354,7 @@
               },
               {
                 "name": "parking shore",
-                "imageName": "parking_shore.png",
+                "imageName": "yellow_target_shape.png",
                 "position": {
                   "x": 583,
                   "y": 425
@@ -362,7 +362,7 @@
               },
               {
                 "name": "parking dog",
-                "imageName": "parking_dog.png",
+                "imageName": "violet_target_shape.png",
                 "visible": true,
                 "position": {
                   "x": 690,
@@ -578,11 +578,6 @@
         "Item_photos.png",
         "Item_shore.png",
         "Item_star.png",
-        "parking_cat.png",
-        "parking_dog.png",
-        "parking_photos.png",
-        "parking_shore.png",
-        "parking_star.png",
         "btn_disable.png",
         "btn_enable.png",
         "next_idle.png",
@@ -594,7 +589,12 @@
         "target_shore.png",
         "target_star.png",
         "back_idle.png",
-        "back_pressed.png"
+        "back_pressed.png",
+        "blue_target_shape.png",
+        "green_target_shape.png",
+        "red_target_shape.png",
+        "violet_target_shape.png",
+        "yellow_target_shape.png"
       ]
     },
     "animationFrames": {

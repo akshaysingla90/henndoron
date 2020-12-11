@@ -37,9 +37,10 @@ ACTIVITY_FROG_WORD_1.socketEventKey = {
     START_NEXT_LEVEL            : 103,
     STUDENT_INTERACTION         : 104,
     CHANGE_MULTIPLAYER_MODE     : 105,
-    REPLAY                      : 106
-
-
+    REPLAY                      : 106,
+    JUMPFROG                    : 107,
+    TARGET_LETTER               : 108,
+    PATHSELECTION               : 109
 };
 
 ACTIVITY_FROG_WORD_1.paths_1 = [
@@ -198,13 +199,19 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
         // this.setEmptyBoxes(6);
         this.setFrogToInitialPos();
         this.targetLetterBase = this.addSprite(ACTIVITY_FROG_WORD_1.spriteBasePath + "letter_base.png",cc.p(this._size.width*0.93,this._size.height*0.63),this);
-        this.setTargetLetter();
-        this.distributeItems();
+
+        this.isTeacherView && this.brodcastTargetLetter();
+        // this.setTargetLetter();
+        // this.distributeItems();
+        this.isTeacherView && this.brodcastPathSelection();
+
     },
 
-    distributeItems :  function(){
-        let path = ACTIVITY_FROG_WORD_1.paths_1[Math.floor(Math.random() * ACTIVITY_FROG_WORD_1.paths_1.length)];
+    distributeItems :  function(path){
+        //todo paramatiesd common features so that there would be same path and items distribution on each student page
+        // let path = ACTIVITY_FROG_WORD_1.paths_1[Math.floor(Math.random() * ACTIVITY_FROG_WORD_1.paths_1.length)];
         // cc.log("Path is ="+JSON.stringify(path));
+        let itemsToBroadcast = [];
         this.setEmptyBoxes(path.length);
         let correctItems = this.getCorrectItems(true);
         let inCorrectItems = this.getCorrectItems(false);
@@ -228,8 +235,42 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
                 let item = this.addSprite(ACTIVITY_FROG_WORD_1.spriteBasePath + itemName,cc.p(leaf.getContentSize().width*0.5,leaf.getContentSize().height*0.5),leaf);
                 item.setName(itemName);
                 item.setTag(ACTIVITY_FROG_WORD_1.Tag.LeafItem);
+                itemsToBroadcast.push({"leafTag":leaf.getTag(),"itemName":itemName})
             }
         }
+        return itemsToBroadcast;
+    },
+
+    distributeItemsStudent : function({path,itemsToBroadcast}){
+        for (let i = 0;i<this.lillyLeafs.length;i++){
+            let leaf = this.lillyLeafs[i];
+            if (leaf !== ACTIVITY_FROG_WORD_1.ref.lillyLeafs[5]) {
+                let itemName = itemsToBroadcast[i].itemName;
+                let item = this.addSprite(ACTIVITY_FROG_WORD_1.spriteBasePath + itemName,cc.p(leaf.getContentSize().width*0.5,leaf.getContentSize().height*0.5),leaf);
+                item.setName(itemName);
+                item.setTag(ACTIVITY_FROG_WORD_1.Tag.LeafItem);
+            }
+        }
+        // for (let leaf of this.lillyLeafs){
+        //     if (leaf !== ACTIVITY_FROG_WORD_1.ref.lillyLeafs[5]) {
+        //         let itemName = "";
+        //
+        //         let item = this.addSprite(ACTIVITY_FROG_WORD_1.spriteBasePath + itemName,cc.p(leaf.getContentSize().width*0.5,leaf.getContentSize().height*0.5),leaf);
+        //         item.setName(itemName);
+        //         item.setTag(ACTIVITY_FROG_WORD_1.Tag.LeafItem);
+        //     }
+        // }
+
+    },
+
+    brodcastPathSelection : function(){
+        let path = ACTIVITY_FROG_WORD_1.paths_1[Math.floor(Math.random() * ACTIVITY_FROG_WORD_1.paths_1.length)];
+        let itemsToBroadcast = this.distributeItems(path);
+        let param = {"path":path,"itemsToBroadcast":itemsToBroadcast};
+        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE,{
+            "eventType":ACTIVITY_FROG_WORD_1.socketEventKey.PATHSELECTION,
+            "data" : param
+        });
     },
 
     isLeafOnCorrectPath : function(path,leaf){
@@ -243,11 +284,21 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
         return status;
     },
 
-    setTargetLetter : function(){
-        let letterImages =  ACTIVITY_FROG_WORD_1.config.assets.sections.letters.imageNames;
-        this.targetLetter = "letter_f.png";//letterImages[Math.floor(Math.random() * letterImages.length)];
+    setTargetLetter : function({letter}){
+        this.targetLetter = letter;
         this.addSprite(ACTIVITY_FROG_WORD_1.spriteBasePath+this.targetLetter,cc.p(this.targetLetterBase.getContentSize().width*0.5,this.targetLetterBase.getContentSize().height*0.5),this.targetLetterBase);
 
+    },
+
+    brodcastTargetLetter : function(){
+        let letterImages =  ACTIVITY_FROG_WORD_1.config.assets.sections.letters.imageNames;
+        this.targetLetter = "letter_f.png";//letterImages[Math.floor(Math.random() * letterImages.length)];
+        let param = {"letter":this.targetLetter};
+        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE,{
+            "eventType":ACTIVITY_FROG_WORD_1.socketEventKey.TARGET_LETTER,
+            "data" : param
+        });
+        this.setTargetLetter(param);
     },
 
     getCorrectItems : function(areCorrect){
@@ -269,9 +320,12 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
     },
 
     setPondLeafs : function() {
+        var leafTag = 500;
         for(let pos of this.itemPositions){
             let sprite = this.addSprite(ACTIVITY_FROG_WORD_1.spriteBasePath + "lily_pad_dark.png",cc.p(pos.x,pos.y),this);
             sprite.setScale(pos.s);
+            sprite.setTag(leafTag);
+            leafTag = leafTag+1;
             ACTIVITY_FROG_WORD_1.ref.lillyLeafs.push(sprite);
         }
     },
@@ -316,7 +370,8 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
 
     },
 
-    nodeMoveToLocation : function(location,leaf){
+    nodeMoveToLocation : function({location,leafTag}){
+        let leaf = this.getChildByTag(leafTag);
         this.isFrogInAction = true;
         if(this.checkAnswer(leaf)){
             // answer is correct
@@ -345,6 +400,16 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
 
         }
 
+    },
+
+    jumpFrogBrodcasting : function(location, leaf){
+        //ge identify tag
+        let param = {location:location,leafTag:leaf.getTag()};
+        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE,{
+            "eventType":ACTIVITY_FROG_WORD_1.socketEventKey.JUMPFROG,
+            "data" : param
+        });
+        this.nodeMoveToLocation(param);
     },
 
     itemShakeAnimation : function(leaf){
@@ -378,6 +443,11 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
                 },this)));
             }
             this.isFrogInAction = false;
+        }
+
+        // changing student turn
+        if (!this.isTeacherView && this.isStudentInteractionEnable) {
+            this.emitSocketEvent(HDSocketEventType.SWITCH_TURN_BY_STUDENT, {"roomId": HDAppManager.roomId});
         }
 
     },
@@ -594,7 +664,8 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
         this.enlrageFrogTounge(pos);
         let leaf = this.getTouchedLeaf(touch);
         if (leaf && leaf.getChildByTag(ACTIVITY_FROG_WORD_1.Tag.LeafItem) && this.isApproachable(leaf.getPosition()) && !this.isFrogInAction) {
-            this.nodeMoveToLocation(leaf.getPosition(),leaf);
+            // this.nodeMoveToLocation(leaf.getPosition(),leaf);
+            this.jumpFrogBrodcasting(leaf.getPosition(),leaf);
         }
 
     },
@@ -754,6 +825,15 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
             case ACTIVITY_FROG_WORD_1.socketEventKey.START_NEXT_LEVEL:
                 this.currentLevel = res.data.level;
                 this.startNewLevel();
+                break;
+            case ACTIVITY_FROG_WORD_1.socketEventKey.JUMPFROG:
+                this.nodeMoveToLocation(res.data);
+                break;
+            case ACTIVITY_FROG_WORD_1.socketEventKey.TARGET_LETTER:
+                this.setTargetLetter(res.data);
+                break;
+            case ACTIVITY_FROG_WORD_1.socketEventKey.PATHSELECTION:
+                this.distributeItemsStudent(res.data);
                 break;
 
 
