@@ -29,7 +29,7 @@
           { "label": "CONSTRUCTION", "value": 1 },
           { "label": "DEMOLITION", "value": 2 }
         ],
-        "currentValue": 1
+        "currentValue": 2
       }
     }
   },
@@ -496,20 +496,47 @@
               "words": [
                 {
                   "correct_word": "dig",
-                  "display_word": "digdfresd"
+                  "display_word": "digdfre"
                 },
                 {
                   "correct_word": "sing",
-                  "display_word": "stpingt"
+                  "display_word": "stingt"
                 },
                 {
                   "correct_word": "food",
-                  "display_word": "fponod"
+                  "display_word": "fonod"
                 }
               ],
               "hintsSections": {
                 "UIName": "HINTS SECTION",
                 "images": ["item_dig.png", "item_sing.png", "item_food.png"],
+                "dimensions": { "width": 350, "height": 350 }
+              },
+              "helpSection": {
+                "UIName": "HELP SECTION",
+                "imageName": "help_window_pictures.png",
+                "dimensions": { "width": 559, "height": 283 },
+                "helpShowTime": 5
+              }
+            },
+            {
+              "words": [
+                {
+                  "correct_word": "dog",
+                  "display_word": "dogdfd"
+                },
+                {
+                  "correct_word": "panda",
+                  "display_word": "pannda"
+                },
+                {
+                  "correct_word": "egg",
+                  "display_word": "eagag"
+                }
+              ],
+              "hintsSections": {
+                "UIName": "HINTS SECTION",
+                "images": ["item_dog.png", "item_panda.png", "item_egg.png"],
                 "dimensions": { "width": 350, "height": 350 }
               },
               "helpSection": {

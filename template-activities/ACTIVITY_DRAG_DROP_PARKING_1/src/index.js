@@ -274,7 +274,11 @@ ACTIVITY_DRAG_DROP_PARKING_1.Draggable = cc.Sprite.extend({
     );
   },
 
-  playAudio: function () {},
+  playAudio: function () {
+    if (this.audioFile) {
+      cc.audioEngine.playEffect(this.audioFile);
+    }
+  },
 
   snapBack: function () {
     this.setPosition(this.initialPosition);
@@ -531,14 +535,14 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   },
 
   _renderDraggables: function () {
-    const draggablesData =
-      ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel].draggables;
+    const levelData = ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data[this._currentLevel];
+    const draggablesData = levelData.draggables;
     for (let i = 0; i < draggablesData.length; ++i) {
       const draggableObj = draggablesData[i];
       const draggableSprite = new ACTIVITY_DRAG_DROP_PARKING_1.Draggable(
         ACTIVITY_DRAG_DROP_PARKING_1.spritePath + draggableObj.imageName,
         draggableObj.position,
-        ACTIVITY_DRAG_DROP_PARKING_1.soundPath + draggableObj.audioName,
+        ACTIVITY_DRAG_DROP_PARKING_1.soundPath + levelData.audio,
         draggableObj.dropZoneIdx,
         i
       );
@@ -718,6 +722,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
           ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setCorrectCount(this._correctCount);
           this._lastIntersectedDropzoneSprite.dropDraggable(this._draggedSpriteRef);
           this._draggedSpriteRef.playCorrectAnimation();
+          this._draggedSpriteRef.playAudio();
           this.setResetButtonActive(true);
           if (this._isCurrentLevelCompleted()) {
             this.playLevelCompleteAnimation();
@@ -879,6 +884,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
     const dropzoneSprite = this.getChildByTag(dropzoneTag);
     if (draggableSprite && dropzoneSprite) {
       dropzoneSprite.dropDraggable(draggableSprite);
+      draggableSprite.playAudio();
       draggableSprite.playCorrectAnimation();
     }
   },

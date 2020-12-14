@@ -331,6 +331,7 @@
         "data": [
           {
             "background": 1,
+            "audio": "level_1_drop_sound.mp3",
             "dropZones": [
               {
                 "name": "parking star",
@@ -433,6 +434,7 @@
           },
           {
             "background": 0,
+            "audio": "level_2_drop_sound.mp3",
             "dropZones": [
               {
                 "name": "Cat",
@@ -604,6 +606,10 @@
         "violet_target_shape.png",
         "yellow_target_shape.png"
       ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": ["level_1_drop_sound.mp3", "level_2_drop_sound.mp3"]
     },
     "animationFrames": {
       "basePath": "res/AnimationFrames/",
