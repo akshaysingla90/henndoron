@@ -387,7 +387,7 @@
                   "x": 105,
                   "y": 350
                 },
-                "audioName": "",
+                "audioName": "level_1_draggable_cat.mp3",
                 "dropZoneIdx": 2
               },
               {
@@ -397,7 +397,7 @@
                   "x": 240,
                   "y": 155
                 },
-                "audioName": "",
+                "audioName": "level_1_draggable_dog.mp3",
                 "dropZoneIdx": 4
               },
               {
@@ -407,7 +407,7 @@
                   "x": 480,
                   "y": 175
                 },
-                "audioName": "",
+                "audioName": "level_1_draggable_shore.mp3",
                 "dropZoneIdx": 3
               },
               {
@@ -417,7 +417,7 @@
                   "x": 720,
                   "y": 155
                 },
-                "audioName": "",
+                "audioName": "level_1_draggable_star.mp3",
                 "dropZoneIdx": 0
               },
               {
@@ -427,7 +427,7 @@
                   "x": 885,
                   "y": 328
                 },
-                "audioName": "",
+                "audioName": "level_1_draggable_photos.mp3",
                 "dropZoneIdx": 1
               }
             ]
@@ -490,7 +490,7 @@
                   "x": 177.39773559570312,
                   "y": 456.69034004211426
                 },
-                "audioName": "",
+                "audioName": "level_2_draggable_star.mp3",
                 "dropZoneIdx": 3
               },
               {
@@ -500,7 +500,7 @@
                   "x": 460.2159118652344,
                   "y": 471.69034004211426
                 },
-                "audioName": "",
+                "audioName": "level_2_draggable_dog.mp3",
                 "dropZoneIdx": 4
               },
               {
@@ -510,7 +510,7 @@
                   "x": 778.6704559326172,
                   "y": 460.69034004211426
                 },
-                "audioName": "",
+                "audioName": "level_2_draggable_cat.mp3",
                 "dropZoneIdx": 0
               },
               {
@@ -520,7 +520,7 @@
                   "x": 781.6704559326172,
                   "y": 196.69034004211426
                 },
-                "audioName": "",
+                "audioName": "level_2_draggable_shore.mp3",
                 "dropZoneIdx": 2
               },
               {
@@ -530,7 +530,7 @@
                   "x": 131.39773559570312,
                   "y": 174.69034004211426
                 },
-                "audioName": "",
+                "audioName": "level_2_draggable_photos.mp3",
                 "dropZoneIdx": 1
               }
             ]
@@ -609,7 +609,20 @@
     },
     "sounds": {
       "basePath": "res/Sound/",
-      "audio": ["level_1_drop_sound.mp3", "level_2_drop_sound.mp3"]
+      "audio": [
+        "level_1.mp3",
+        "level_1_draggable_cat.mp3",
+        "level_1_draggable_dog.mp3",
+        "level_1_draggable_photos.mp3",
+        "level_1_draggable_shore.mp3",
+        "level_1_draggable_star.mp3",
+        "level_2.mp3",
+        "level_2_draggable_cat.mp3",
+        "level_2_draggable_dog.mp3",
+        "level_2_draggable_photos.mp3",
+        "level_2_draggable_shore.mp3",
+        "level_2_draggable_star.mp3"
+      ]
     },
     "animationFrames": {
       "basePath": "res/AnimationFrames/",

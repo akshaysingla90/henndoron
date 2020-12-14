@@ -542,7 +542,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
       const draggableSprite = new ACTIVITY_DRAG_DROP_PARKING_1.Draggable(
         ACTIVITY_DRAG_DROP_PARKING_1.spritePath + draggableObj.imageName,
         draggableObj.position,
-        ACTIVITY_DRAG_DROP_PARKING_1.soundPath + levelData.audio,
+        ACTIVITY_DRAG_DROP_PARKING_1.soundPath + draggableObj.audioName,
         draggableObj.dropZoneIdx,
         i
       );

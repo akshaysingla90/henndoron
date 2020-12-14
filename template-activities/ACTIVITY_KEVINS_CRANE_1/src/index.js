@@ -11,7 +11,8 @@ ACTIVITY_KEVINS_CRANE_1.Tag = {
     MULTIPLAYER_MODE     :   108,
     HELP_BUTTON          :   109,
     HINT_BASE            :   110,
-    GROUND_ELEMENT_START :  -1000
+    GROUND_ELEMENT_START :  -1000,
+    HELP_IMAGE_TAG       :   111,
 };
 
 ACTIVITY_KEVINS_CRANE_1.LEVEL_STATE ={
@@ -461,10 +462,8 @@ ACTIVITY_KEVINS_CRANE_1.CraneControl = cc.Node.extend({
         }
     },
 
-
     onTouchBegan:function(touch, event) {
         if(this.isAnimationStarted || !ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable || (ACTIVITY_KEVINS_CRANE_1.ref.isPreviewMode || (ACTIVITY_KEVINS_CRANE_1.ref.isTeacherView && ACTIVITY_KEVINS_CRANE_1.ref.isStudentSelected && ACTIVITY_KEVINS_CRANE_1.ref.isTurnBased()))) return false;
-
         var pos = touch.getLocation();
         if (this.shaftTouch(pos)){
             let newPoints = this.nobShaft.parent.convertToNodeSpace(pos);
@@ -497,10 +496,6 @@ ACTIVITY_KEVINS_CRANE_1.CraneControl = cc.Node.extend({
     onTouchEnded:function(touch, event) {
         console.log("touch ended called");
         if(!ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable || ACTIVITY_KEVINS_CRANE_1.ref.isPreviewMode || (ACTIVITY_KEVINS_CRANE_1.ref.isStudentSelected && (ACTIVITY_KEVINS_CRANE_1.ref.isStudentSelected && ACTIVITY_KEVINS_CRANE_1.ref.isTurnBased()))) return;
-        // var pos = touch.getLocation();
-        // if (this.shaftTouch(pos)){
-        //     // cc.log("onTouchCancelled at: " + pos.x + " " + pos.y + " Id:" + id );
-        // }
         this.craneNode.stopMoveAnimation();
         this.angle = 0;
         this.setShaftFrame(0, true);
@@ -521,7 +516,6 @@ ACTIVITY_KEVINS_CRANE_1.CraneControl = cc.Node.extend({
         this.setShaftFrame(0,true);
         this.sendCraneFinalPositionToOthers(0, true);
     },
-
     sendCraneMovementToOthers(angle, isIdle){
         var dataToSend = ACTIVITY_KEVINS_CRANE_1.ref.createDataToSend();  //
         ACTIVITY_KEVINS_CRANE_1.ref.updateUserInfo(dataToSend);
@@ -535,9 +529,7 @@ ACTIVITY_KEVINS_CRANE_1.CraneControl = cc.Node.extend({
                 }
          });
     },
-
     sendCraneFinalPositionToOthers(angle, isIdle){
-        // console.log("on send crane final position");
         var dataToSend = ACTIVITY_KEVINS_CRANE_1.ref.createDataToSend();  // sending final position
         ACTIVITY_KEVINS_CRANE_1.ref.updateUserInfo(dataToSend);
            ACTIVITY_KEVINS_CRANE_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
@@ -691,7 +683,6 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         });
     },
     buildHome: function() {
-
         var gameConfig = ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels;
         let rowInfo =[];
         if(this.gameType == ACTIVITY_KEVINS_CRANE_1.GAME_TYPE.CONSTRUCTION){
@@ -721,13 +712,15 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         this.homeLayer.setTag(ACTIVITY_KEVINS_CRANE_1.Tag.HOME_BASE_LAYER);
 
         var floorBalancerPositionInY    =   this.characterHeight;
+        var balancerIndex =1;
         for (var floorBalancerCounter   = this.maxNumberOfRows - 1; floorBalancerCounter > 0; floorBalancerCounter--) {
-            var floorBalancer           =   this.addSprite(ACTIVITY_KEVINS_CRANE_1.spriteBasePath + ACTIVITY_KEVINS_CRANE_1.config.assets.sections.building.data[1].imageName,
+            var floorBalancer           =   this.addSprite(ACTIVITY_KEVINS_CRANE_1.spriteBasePath + ACTIVITY_KEVINS_CRANE_1.config.assets.sections.building.data[balancerIndex].imageName,
                 cc.p(this.homeLayer.getContentSize().width * 0.5, floorBalancerPositionInY), this.homeLayer);
             floorBalancer.setAnchorPoint(cc.p(0.5, 0));
             floorBalancer.setTag(ACTIVITY_KEVINS_CRANE_1.Tag.BALANCER_ROW_1 + (this.maxNumberOfRows - (floorBalancerCounter + 1)));
             floorBalancerPositionInY = floorBalancerPositionInY + this.characterHeight + floorBalancer.getContentSize().height;
             // console.log("height",  floorBalancerPositionInY,this.characterHeight, floorBalancer.getContentSize().height, floorBalancer.getPosition());
+            balancerIndex++;
         }
 
         var roof = this.addSprite(ACTIVITY_KEVINS_CRANE_1.spriteBasePath +ACTIVITY_KEVINS_CRANE_1.config.assets.sections.building.data[0].imageName,
@@ -783,7 +776,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         var animation = HDUtility.runFrameAnimation(ACTIVITY_KEVINS_CRANE_1.animationBasePath + ACTIVITY_KEVINS_CRANE_1.config.assets.sections.animation.data.fallDustEffectAnimation.frameInitial, ACTIVITY_KEVINS_CRANE_1.config.assets.sections.animation.data.fallDustEffectAnimation.frameCount, 0.08, ".png", 1);
         dustImage.runAction(cc.sequence(animation, cc.removeSelf()));
     },
-    addHintImagesBase : function(hints) {
+    addHintImagesBase : function() {
         let images =[]
         if(this.gameType == ACTIVITY_KEVINS_CRANE_1.GAME_TYPE.CONSTRUCTION){
             images = ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels.data.construction[this.currentLevel].hintsSections.images;
@@ -1093,6 +1086,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
             cc.p(this.getContentSize().width * 1.1, this.getContentSize().height * 0.9), this);
         this.hintImagesBase.setAnchorPoint(cc.p(0, 1));
         this.hintImagesBase.setLocalZOrder(10005);
+        this.hintImagesBase.setTag(ACTIVITY_KEVINS_CRANE_1.Tag.HELP_IMAGE_TAG);
 
     },
     showOrHideBoard(openImageBoard) {
@@ -1284,6 +1278,8 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         this.levelStatus  = ACTIVITY_KEVINS_CRANE_1.LEVEL_STATE.ON_GOING;
         this.showResetHover();
         this.removeChildByTag(ACTIVITY_KEVINS_CRANE_1.Tag.HINT_BASE);
+        this.removeChildByTag(ACTIVITY_KEVINS_CRANE_1.Tag.HELP_IMAGE_TAG);
+        this.addAllImagesInBoard();
         this.addHintImagesBase();
         if(this.gameType == ACTIVITY_KEVINS_CRANE_1.GAME_TYPE.CONSTRUCTION){
             // reset ground characters;
@@ -1305,7 +1301,6 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
 
     },
     updateRowInfo : function(level){
-        console.log("update row info", level);
         this.gameData.length = 0;
         if (this.gameType == ACTIVITY_KEVINS_CRANE_1.GAME_TYPE.DEMOLISHING) {
             for(let item of ACTIVITY_KEVINS_CRANE_1.config.wordsAndHints.sections.levels.data.demolishing[level].words){
@@ -1485,7 +1480,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
     onStudentPreviewCellClicked: function (studentName, status, containerRef) {
         console.log("on student preview cell", studentName, status);
         if(studentName == HDAppManager.username && this.isTeacherView){
-            this.isPreviewMode  = false;
+            this.isPreviewMode = false;
         }else{
             this.isPreviewMode = status;
         }
@@ -1860,7 +1855,9 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
 
 
         this.removeChildByTag(ACTIVITY_KEVINS_CRANE_1.Tag.HINT_BASE);
+        this.removeChildByTag(ACTIVITY_KEVINS_CRANE_1.Tag.HELP_IMAGE_TAG);
         this.addHintImagesBase();
+        this.addAllImagesInBoard();
 
 
 
@@ -1883,6 +1880,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         ACTIVITY_KEVINS_CRANE_1.ref.craneControlNode.setShaftFrame(0, true);
         this.craneControlNode.craneNode.stopMoveAnimation();
         this.craneControlNode.craneNode.craneCylinder.stopAllActions();
+        this.craneControlNode.craneCockpit.stopAllActions();
 
         if(this.gamePlayInfo[previewingStudent]){
             this.gameData       = this.gamePlayInfo[previewingStudent].rowInfo;
@@ -1945,8 +1943,10 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         this.isStudentSelected           = false;
         this.previewingStudentName       = "";
         this.isPreviewMode               = false;
+        this.isStudentInteractionEnable  = false;
         ACTIVITY_KEVINS_CRANE_1.ref.craneControlNode.setShaftFrame(0, true);
         if(this.isTeacherView) {
+            this.isStudentInteractionEnable = true;
             lesson_1.ref.turnBased = false;
             var scrollView = lesson_1.ref.getChildByTag(lesson_1.Tag.studentScrollView);
             let container = scrollView._container;
@@ -2126,7 +2126,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         }
         else{
             // console.log("inside change cursor image in update game datat", this.isStudentInteractionEnable, cc.rectContainsPoint(this.craneControlNode.controlBase.getBoundingBoxToWorld(),location));
-            if (location.y < this.getContentSize().height * 0.9 && this.isStudentInteractionEnable && cc.rectContainsPoint(this.craneControlNode.controlBase.getBoundingBoxToWorld(),location)) {
+            if (location.y < this.getContentSize().height * 0.9 && ACTIVITY_KEVINS_CRANE_1.ref.isStudentInteractionEnable && cc.rectContainsPoint(this.craneControlNode.controlBase.getBoundingBoxToWorld(),location)) {
                 // console.log("inside change cursor image in update game datat");
                 this.changeMouseCursorImage();
                 this.customTexture = true;

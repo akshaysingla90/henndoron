@@ -399,7 +399,10 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     updateAlreadyConnectedFlupe : function (params){
         for(let flupe of params.connectedFlupe){
             let f =  this.flupeList.find(x=>x.imgName===flupe.imgName);
-            if(f)  f.stuName = flupe.stuName;
+            if(f)  {
+                f.stuName = flupe.stuName;
+                f.getBody().stuName = flupe.stuName;
+            }
 
         }
         this.emitSocketEvent( HDSocketEventType.GAME_MESSAGE, {
@@ -430,6 +433,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
      * @param nameList
      */
     updateFlupes: function (nameList){
+        console.trace();
         //Remove flupe which has left the game
         for(let child of this.flupeList) {
             if (!nameList.includes(child.stuName)) {
@@ -444,8 +448,11 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         }
         //Assign an flupe to new joined player
         for(let name of nameList){
-            if(!this.flupeList.find(x=>x.stuName===name)) {
-                let flupe = this.flupeList.find(x => x.stuName==="");
+            console.log("name", name, this.flupeList.find(x=>x.stuName==name), !this.flupeList.find(x=>x.stuName==name));
+            if(!this.flupeList.find(x=>x.stuName==name)) {
+                console.log("inside if ");
+                let flupe = this.flupeList.find(x => x.stuName=="");
+                console.log("flupe",flupe)
                 if(flupe){
                     flupe.stuName = name;
                     flupe.getBody().stuName = name;
@@ -773,13 +780,13 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             if(x.getPositionX() < -20 || x.getPositionX() > this.getContentSize().width + 20){
                 isoutSideScreen =  isoutSideScreen || true;
             }
-            if(x.getPositionY() < - 20 || x.getPositionY() > this.getContentSize().height + 20){
+            if(x.getPositionY() < 270 || x.getPositionY() > this.getContentSize().height + 20){
                 isoutSideScreen = isoutSideScreen || true;
             }
             if(isoutSideScreen) {
                 console.log(" is outside screen ", x.getPosition());
                 x.setPosition(cc.p(this.getContentSize().width * 0.7,  this.getContentSize().height * 0.7));
-                x.getBody().applyImpulse(cc.p(-50, 100), cc.p(0, 0));
+                x.getBody().applyImpulse(cc.p(0, 0), cc.p(0, 0));
             }
 
         });
