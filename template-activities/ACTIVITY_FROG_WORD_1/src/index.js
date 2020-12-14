@@ -40,7 +40,9 @@ ACTIVITY_FROG_WORD_1.socketEventKey = {
     REPLAY                      : 106,
     JUMPFROG                    : 107,
     TARGET_LETTER               : 108,
-    PATHSELECTION               : 109
+    PATHSELECTION               : 109,
+    FROG_ROTATION               : 110,
+
 };
 
 ACTIVITY_FROG_WORD_1.paths_1 = [
@@ -97,6 +99,7 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
     gamePlayInfo                :   {},
     syncInfo                    :   null,
     //
+    pathAndItems                : {},
     isFrogInAction              : false,
     tempPath                    : [],
     targetLetter                : null,
@@ -133,6 +136,8 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
                 ACTIVITY_FROG_WORD_1.ref.isStudentInteractionEnable = true;
             }
             // ACTIVITY_FROG_WORD_1.ref.triggerTip(config.teacherTips.moduleStart);
+            ACTIVITY_FROG_WORD_1.ref.syncInfo &&  ACTIVITY_FROG_WORD_1.ref.distributeItemsStudent(ACTIVITY_FROG_WORD_1.ref.syncInfo.pathAndItems);
+            ACTIVITY_FROG_WORD_1.ref.syncInfo &&  ACTIVITY_FROG_WORD_1.ref.setTargetLetter(ACTIVITY_FROG_WORD_1.ref.syncInfo.targetLetter);
         });
     },
 
@@ -208,9 +213,6 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
     },
 
     distributeItems :  function(path){
-        //todo paramatiesd common features so that there would be same path and items distribution on each student page
-        // let path = ACTIVITY_FROG_WORD_1.paths_1[Math.floor(Math.random() * ACTIVITY_FROG_WORD_1.paths_1.length)];
-        // cc.log("Path is ="+JSON.stringify(path));
         let itemsToBroadcast = [];
         this.setEmptyBoxes(path.length);
         let correctItems = this.getCorrectItems(true);
@@ -242,31 +244,36 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
     },
 
     distributeItemsStudent : function({path,itemsToBroadcast}){
+        this.setEmptyBoxes(path.length);
         for (let i = 0;i<this.lillyLeafs.length;i++){
             let leaf = this.lillyLeafs[i];
             if (leaf !== ACTIVITY_FROG_WORD_1.ref.lillyLeafs[5]) {
-                let itemName = itemsToBroadcast[i].itemName;
+                let obj = this.getItemNameFromData(leaf,itemsToBroadcast);
+                let itemName = obj.itemName;
                 let item = this.addSprite(ACTIVITY_FROG_WORD_1.spriteBasePath + itemName,cc.p(leaf.getContentSize().width*0.5,leaf.getContentSize().height*0.5),leaf);
                 item.setName(itemName);
                 item.setTag(ACTIVITY_FROG_WORD_1.Tag.LeafItem);
             }
         }
-        // for (let leaf of this.lillyLeafs){
-        //     if (leaf !== ACTIVITY_FROG_WORD_1.ref.lillyLeafs[5]) {
-        //         let itemName = "";
-        //
-        //         let item = this.addSprite(ACTIVITY_FROG_WORD_1.spriteBasePath + itemName,cc.p(leaf.getContentSize().width*0.5,leaf.getContentSize().height*0.5),leaf);
-        //         item.setName(itemName);
-        //         item.setTag(ACTIVITY_FROG_WORD_1.Tag.LeafItem);
-        //     }
-        // }
 
     },
+
+    getItemNameFromData : function(leaf, itemsToBroadcast){
+        for (let obj of itemsToBroadcast){
+            if(leaf.getTag() === obj.leafTag){
+                return obj;
+                break;
+            }
+        }
+    },
+
+
 
     brodcastPathSelection : function(){
         let path = ACTIVITY_FROG_WORD_1.paths_1[Math.floor(Math.random() * ACTIVITY_FROG_WORD_1.paths_1.length)];
         let itemsToBroadcast = this.distributeItems(path);
         let param = {"path":path,"itemsToBroadcast":itemsToBroadcast};
+        this.pathAndItems = param;
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE,{
             "eventType":ACTIVITY_FROG_WORD_1.socketEventKey.PATHSELECTION,
             "data" : param
@@ -612,6 +619,19 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
 
         node.setRotation(rotation);
     },
+
+    setFrogRotation : function({frogRotation}){
+        this.frog.setRotation(frogRotation)
+    },
+
+    brodcastFrogRotation : function(){
+        let param = {"frogRotation":this.frog.getRotation()};
+        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE,{
+            "eventType":ACTIVITY_FROG_WORD_1.socketEventKey.FROG_ROTATION,
+            "data" : param
+        });
+    },
+
     tempPathDisplay : function(){
         cc.log(JSON.stringify(this.tempPath));
     },
@@ -666,6 +686,7 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
         if (leaf && leaf.getChildByTag(ACTIVITY_FROG_WORD_1.Tag.LeafItem) && this.isApproachable(leaf.getPosition()) && !this.isFrogInAction) {
             // this.nodeMoveToLocation(leaf.getPosition(),leaf);
             this.jumpFrogBrodcasting(leaf.getPosition(),leaf);
+            this.brodcastFrogRotation();
         }
 
     },
@@ -690,9 +711,8 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
                 "roomData": {
                     "activity": ACTIVITY_FROG_WORD_1.config.properties.namespace,
                     "data": {
-                        'level'             : ACTIVITY_FROG_WORD_1.ref.currentLevel,
-                        'gamePlayInfo'      : JSON.stringify(ACTIVITY_FROG_WORD_1.ref.gamePlayInfo),
-                        'multiPlayerType'   : ACTIVITY_FROG_WORD_1.ref.multiPlayerType
+                        "pathAndItems" : this.pathAndItems,
+                        "targetLetter" : {"letter":this.targetLetter}
                     },
                     "activityStartTime": HDAppManager.getActivityStartTime()
                 }
@@ -835,6 +855,9 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
             case ACTIVITY_FROG_WORD_1.socketEventKey.PATHSELECTION:
                 this.distributeItemsStudent(res.data);
                 break;
+            case ACTIVITY_FROG_WORD_1.socketEventKey.FROG_ROTATION:
+                this.setFrogRotation(res.data);
+                break;
 
 
         }
@@ -857,7 +880,7 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
 
     syncData: function (data) {
         ACTIVITY_FROG_WORD_1.ref.syncInfo = data;
-        console.log("sync Data", data)
+        console.log("sync Data", data);
 
     },
 

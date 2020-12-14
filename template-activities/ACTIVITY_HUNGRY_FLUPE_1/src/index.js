@@ -234,6 +234,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         this.showStartScript && ACTIVITY_HUNGRY_FLUPE_1.ref.triggerScript(
             ACTIVITY_HUNGRY_FLUPE_1.config.teacherScripts.data.startButton.content.ops
         );
+        this.isStudentInteractionEnable= true;
         this.showStartScript = false;
         this.setPushButtonActive();
     },
@@ -445,8 +446,11 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         for(let name of nameList){
             if(!this.flupeList.find(x=>x.stuName===name)) {
                 let flupe = this.flupeList.find(x => x.stuName==="");
-                flupe && (flupe.stuName = name);
-                flupe && (flupe.getBody().stuName = name);
+                if(flupe){
+                    flupe.stuName = name;
+                    flupe.getBody().stuName = name;
+                    console.log("set sprite ", flupe.stuName, " get body ", flupe.getBody().stuName);
+                }
             }
         }
 
@@ -472,6 +476,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 child.removeAllChildren();
                 child.glow  = null;
             }
+            console.log("sprite ", child.stuName);
+            console.log("body ", child.getBody().stuName);
         }
     },
     flupeCollisionWithBubbles:function() {
