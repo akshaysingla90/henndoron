@@ -291,8 +291,8 @@
         "enableState": "next_idle.png",
         "pushedState": "next_pressed.png",
         "dimensions": {
-          "width": 139,
-          "height": 32
+          "width": 94,
+          "height": 64
         }
       },
       "backButton": {
@@ -300,8 +300,8 @@
         "enableState": "back_idle.png",
         "pushedState": "back_pressed.png",
         "dimensions": {
-          "width": 139,
-          "height": 32
+          "width": 94,
+          "height": 64
         }
       },
       "switchButton": {
@@ -310,8 +310,8 @@
         "pushedState": "btn_enable.png",
         "disableState": "btn_disable.png",
         "dimensions": {
-          "width": 96,
-          "height": 64
+          "width": 139,
+          "height": 32
         }
       }
     }
