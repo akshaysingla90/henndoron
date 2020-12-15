@@ -37,7 +37,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     isPreviewMode           : false,
     gameState               : ACTIVITY_HUNGRY_FLUPE_1.gameState.NOT_STARTED,
     interactableObject      : null,
-    customTexture           : null,
+    customTexture           : true,
     bubbleBouceDetails      : [],
     catchesBubblesName      : [],
     handIconUI              : [],
@@ -86,6 +86,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             // TODO : REPLACE config data of gameplayTime
             ACTIVITY_HUNGRY_FLUPE_1.ref.gamePlayTime = config.gamePlayTime;
             ACTIVITY_HUNGRY_FLUPE_1.ref.maxBubbleInScreen = config.maxBubbleInScreen;
+                ACTIVITY_HUNGRY_FLUPE_1.ref.MouseTextureUrl = ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath + config.cursors.data.cursor.imageName;
             ACTIVITY_HUNGRY_FLUPE_1.ref.setupUI();
             if (ACTIVITY_HUNGRY_FLUPE_1.ref.isTeacherView) {
                 ACTIVITY_HUNGRY_FLUPE_1.ref.updateRoomData();
@@ -272,6 +273,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             props.idleState, ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath +
             props.pressedState, "", 0, ACTIVITY_HUNGRY_FLUPE_1.Tag.PUSH_BUTTON,
             cc.p( props.position.x, props.position.y), this);
+        this.handIconUI.push(button);
     },
     setPushButtonActive(){
         let btn = this.getChildByTag(ACTIVITY_HUNGRY_FLUPE_1.Tag.PUSH_BUTTON);
@@ -281,8 +283,9 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 this.isStudentInteractionEnable;
             btn.setTouchEnabled(status);
             btn.setOpacity(  status ? 255 : 100);
+            this.isTeacherView && btn.setVisible(!this.isMultiPlayer);
         }
-        this.isTeacherView && btn.setVisible(!this.isMultiPlayer);
+
     },
     setScoreScreenActive : function (status){
         let score = this.getChildByTag(ACTIVITY_HUNGRY_FLUPE_1.Tag.SCORE_BG);
@@ -977,7 +980,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         }
     },
     studentStatus: function (data) {
-        if(this.isFirstTimeConnected && data.users.length > 2) return;
+        if(this.isFirstTimeConnected && data.users.length > 2
+            && this.flupeList.filter(x=>x.stuName != "").length !== 0) return;
         this.isFirstTimeConnected = false;
         this.joinedStudentList = [];
         this.joinedStudentList = data;
@@ -987,7 +991,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             data.users.map( x=> x.userName);
         this.updateFlupes([...users]);
         this.setPushButtonActive();
-        if(users[0] === HDAppManager.username && data.users.length > 2 && !ACTIVITY_HUNGRY_FLUPE_1.ref.pendingAck){
+        if(users[0] === HDAppManager.username && data.users.length > 2
+            && !ACTIVITY_HUNGRY_FLUPE_1.ref.pendingAck){
             ACTIVITY_HUNGRY_FLUPE_1.ref.pendingAck = true;
             ACTIVITY_HUNGRY_FLUPE_1.ref.sendUpdatedFlupe(data);
             ACTIVITY_HUNGRY_FLUPE_1.ref.intervalId = setInterval(ACTIVITY_HUNGRY_FLUPE_1.ref.sendUpdatedFlupe,
@@ -1066,7 +1071,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         this.setPushButtonActive();
     },
     mouseControlEnable: function (location) {
-        return this.interactableObject;
+        return this.isStudentInteractionEnable;
     },
     /**
      *  Return a Bool if custom texture has to be show on mouse cursor.
@@ -1083,11 +1088,19 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
      * This method will be called by Parent Activity
      */
     updateMouseIcon: function (location) {
-        let handICon = false
-        if (handICon) {
-            this.interactableObject = true;
-            this.customTexture = false;
+        let handICon = false;
+        for (let obj of this.handIconUI) {
+            if (cc.rectContainsPoint(obj.getBoundingBox(), obj.getParent().convertToNodeSpace(location))) {
+                handICon = true;
+                break;
+            }
         }
+        // if (handICon) {
+        //     this.interactableObject = true;
+        //     this.customTexture = true;
+        // }
+        this.interactableObject = this.isStudentInteractionEnable;
+        this.customTexture = true;
     },
 });
 ACTIVITY_HUNGRY_FLUPE_1.bubbleCell = cc.TableViewCell.extend({

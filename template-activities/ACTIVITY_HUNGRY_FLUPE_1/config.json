@@ -551,6 +551,16 @@
     "x" : 50,
     "y" : 100
   },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "cursor": {
+        "UIName": "CURSOR",
+        "imageName": "cursor_0001.png",
+        "dimensions": { "width": 32, "height": 32 }
+      }
+    }
+  },
   "resources": {
     "sprites": {
       "basePath": "res/Sprite/",
@@ -591,7 +601,8 @@
         "item_bubble-05.png",
         "item_bubble-05_grey.png",
         "score_box.png",
-        "items_container.png"
+        "items_container.png",
+        "cursor_0001.png"
       ]
     },
     "animationFrames": {
