@@ -1040,8 +1040,8 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
   onStudentPreviewCellClicked: function (userName, isSelected, scrollViewContainer) {
     this.previewRequestUserName = userName;
     this.setInteractionEnabled(userName === HDAppManager.username);
-    this.setNextButtonEnabled(userName === HDAppManager.username);
-    this.setBackButtonEnabled(userName === HDAppManager.username);
+    this.setNextButtonEnabled((userName === HDAppManager.username || !isSelected) && this.isThereNextLevel());
+    this.setBackButtonEnabled((userName === HDAppManager.username || !isSelected) && this.getCurrentLevel() !== 0);
     this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
       roomId: HDAppManager.roomId,
       type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.PREVIEW_REQUEST,
@@ -1049,7 +1049,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
       studentName: userName,
       request: isSelected,
     });
-    this.renderWithLevelData(userName ? userName : HDAppManager.username);
+    this.renderWithLevelData(isSelected ? userName : HDAppManager.username);
   },
 
   handleGameSocketEvents: function (data) {
@@ -1185,6 +1185,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
         ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(HDAppManager.username)
       );
       this.setStudentPreviewPanelActive(false);
+      this.setInteractionEnabled(true);
       this.updateRoomData();
     }
   },

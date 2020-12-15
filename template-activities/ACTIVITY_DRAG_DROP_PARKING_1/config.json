@@ -527,8 +527,8 @@
                 "name": "",
                 "imageName": "Item_photos.png",
                 "position": {
-                  "x": 131.39773559570312,
-                  "y": 174.69034004211426
+                  "x": 196.5,
+                  "y": 210.78125
                 },
                 "audioName": "level_2_draggable_photos.mp3",
                 "dropZoneIdx": 1

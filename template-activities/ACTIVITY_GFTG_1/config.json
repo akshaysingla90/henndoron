@@ -188,15 +188,49 @@
     "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
-      "images": ["bg.png", "ant.png", "bat.png", "bee.png", "cat.png"]
+      "images": [
+        "bg.png",
+        "cursor_watercan_idle.png",
+        "ant.png",
+        "bat.png",
+        "bee.png",
+        "crow.png",
+        "bat.png",
+        "pot01_front.png",
+        "pot01_back.png",
+        "pot02_front.png",
+        "pot02_back.png",
+        "pot03_front.png",
+        "pot03_back.png",
+        "pot04_front.png",
+        "pot04_back.png",
+        "pot05_front.png",
+        "pot05_back.png",
+        "pot06_front.png",
+        "pot06_back.png"
+      ]
     },
     "sounds": {
       "basePath": "res/Sound/",
-      "audio": ["cardTakeOut.mp3"]
+      "audio": [
+      ]
     },
     "animationFrames": {
       "basePath": "res/AnimationFrames/",
-      "animation": []
+      "animation": [
+        {
+          "Name": "water can animation",
+          "frameCount": 3,
+          "frameInitial": "cursor_watercan_animation/cursor_watercan_",
+          "extension": ".png"
+        },
+        {
+          "Name": "watering effect animation",
+          "frameCount": 3,
+          "frameInitial": "watering_effect_animation/watering_",
+          "extension": ".png"
+        }
+      ]
     }
   }
 }
