@@ -447,8 +447,8 @@
                   "display_word": "pa da"
                 }
               ],
-              "additionalRandomLetters": 1,
-              "groundLetters":"iognr",
+              "additionalRandomLetters": 0,
+              "groundLetters":"iogn",
               "hintsSections": {
                 "UIName": "HINTS",
                 "images": ["item_dog.png", "item_pig.png", "item_panda.png"],
@@ -476,8 +476,8 @@
                   "display_word": "pa da"
                 }
               ],
-              "additionalRandomLetters": 1,
-              "groundLetters":"iognr",
+              "additionalRandomLetters": 0,
+              "groundLetters":"gan",
               "hintsSections": {
                 "UIName": "HINTS",
                 "images": ["item_sing.png", "item_fat.png", "item_panda.png"],
