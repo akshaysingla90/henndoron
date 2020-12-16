@@ -29,7 +29,7 @@
           { "label": "CONSTRUCTION", "value": 1 },
           { "label": "DEMOLITION", "value": 2 }
         ],
-        "currentValue": 1
+        "currentValue": 2
       }
     }
   },

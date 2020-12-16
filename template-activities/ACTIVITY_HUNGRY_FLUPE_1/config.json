@@ -5,13 +5,19 @@
     "activityPath": "ACTIVITY_HUNGRY_FLUPE_1",
     "description": "game desc. here",
     "allocatedTime": 10,
+    "gamePlayTime": 40,
+    "maxBubbleInScreen": 10,
+    "bubbleSpeed" : {
+      "x" : 50,
+      "y" : 100
+    },
     "controls": {
       "mouse": true,
       "turnBased": false,
       "turnBasedEditable": false
     },
     "externalRewards": true,
-    "studentPreview":  false,
+    "studentPreview": false,
     "url": "res/Activity/ACTIVITY_HUNGRY_FLUPE_1/",
     "number": 1,
     "renderMode": 1,
@@ -104,10 +110,19 @@
               "attributes": {
                 "underline": true
               },
-              "insert": "Click the start button to enable the student’s mouse"
+              "insert": "Click the start button to enable the"
             },
             {
-              "insert": ". \n"
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "underline": true
+              },
+              "insert": "student’s mouse."
+            },
+            {
+              "insert": "\n"
             }
           ]
         }
@@ -116,7 +131,7 @@
         "UIName": "startButton",
         "enable": true,
         "description": "this will trigger when Start button clicked",
-        "content" : {
+        "content": {
           "ops": [
             {
               "attributes": {
@@ -193,7 +208,7 @@
         "UIName": "timesEnd",
         "enable": true,
         "description": "this will trigger when time ends",
-        "content" : {
+        "content": {
           "ops": [
             {
               "attributes": {
@@ -231,6 +246,14 @@
     }
   },
   "teacherTips": {
+    "component": "tipsCard",
+    "data": {
+      "moduleStart": {
+        "UIName": "moduleStart",
+        "description": "",
+        "content": ""
+      }
+    }
   },
   "background": {
     "component": "backgroundCard",
@@ -247,11 +270,11 @@
     "component": "buttonsCard",
     "data": {
       "push": {
-        "UIName": "PushButton",
-        "pressedState": "btn_pressed.png",
-        "idleState": "btn_idle.png",
+        "UIName": "Push Button",
+        "enableState": "btn_idle.png",
+        "pushedState": "btn_pressed.png",
         "dimensions": { "width": 102, "height": 102 },
-        "position" : {"x": 840 , "y":140}
+        "position": { "x": 840, "y": 140 }
       },
       "startButton": {
         "UIName": "Start Button",
@@ -276,265 +299,251 @@
   "assets": {
     "component": "assetsCard",
     "sections": {
-      "bubbles_panel": {
-        "component": "image",
-        "UIName": "Bubbles Holder",
-        "imageName": "items_container.png",
-        "dimensions": { "width": 386, "height": 80 },
-        "position": { "x": 480, "y": 80 }
-      },
-      "score_bg": {
-        "component": "image",
-        "UIName": "Result background",
-        "imageName": "score_box.png",
-        "scale": 1,
-        "dimensions": { "width": 580, "height": 490 },
-        "position": { "x": 480, "y": 320 }
-      },
-      "score_bucket": {
-        "component": "image",
-        "UIName": "Object basket",
-        "imageName": "basket_objects.png",
-        "scale": 0.9,
-        "dimensions": { "width": 546, "height": 574 },
-        "position": { "x": 290, "y": 300 }
-      },
-      "item_bubble" : {
-        "component" : "bubble",
-        "bubble_items_data" : {
-          "component"       :   "image",
-          "UIName"          :   "bubbles",
-          "data"      :   [
+      "item_bubble": {
+        "component": "bubble",
+        "bubble_items_data": {
+          "UIName": "Bouncing Balls",
+          "dimensions": {
+            "width": 56,
+            "height": 56
+          },
+          "data": [
             {
-              "imageName"    :   "item_bubble_01.png",
-              "grayImageName":   "item_bubble_01_grey.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "item_bubble_01"
+              "imageName": "item_bubble_01.png",
+              "grayImageName": "item_bubble_01_grey.png",
+              "name": "item_bubble_01"
             },
             {
-              "imageName"    :   "item_bubble_02.png",
-              "grayImageName":   "item_bubble_02_grey.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "item_bubble_02"
+              "imageName": "item_bubble_02.png",
+              "grayImageName": "item_bubble_02_grey.png",
+              "name": "item_bubble_02"
             },
             {
-              "imageName"    :   "item_bubble_03.png",
-              "grayImageName":   "item_bubble_03_grey.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "item_bubble_03"
+              "imageName": "item_bubble_03.png",
+              "grayImageName": "item_bubble_03_grey.png",
+              "name": "item_bubble_03"
             },
             {
-              "imageName"    :   "item_bubble_04.png",
-              "grayImageName":   "item_bubble_04_grey.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "item_bubble_04"
+              "imageName": "item_bubble_04.png",
+              "grayImageName": "item_bubble_04_grey.png",
+              "name": "item_bubble_04"
             },
             {
-              "imageName"    :   "item_bubble_05.png",
-              "grayImageName":   "item_bubble_05_grey.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "item_bubble_05"
+              "imageName": "item_bubble_05.png",
+              "grayImageName": "item_bubble_05_grey.png",
+              "name": "item_bubble_05"
             }
           ]
-        }
         },
-      "flupes" : {
-        "component" : "flupe",
-        "flupes_data" : {
-          "component"       :   "image",
-          "UIName"          :   "flupe",
-          "data"      :   [
-            {
-              "catch" :   "flupe_blue_catch.png",
-              "midAir":   "flupe_blue_midair.png",
-              "shadow":   "flupe_blue_shadow.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "flupe_blue"
-            },
-            {
-              "catch" :   "flupe_green_catch.png",
-              "midAir":   "flupe_green_midair.png",
-              "shadow":   "flupe_green_shadow.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "flupe_green"
-            },
-            {
-              "catch" :   "flupe_orange_catch.png",
-              "midAir":   "flupe_orange_midair.png",
-              "shadow":   "flupe_orange_shadow.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "flupe_orange"
-            },
-            {
-              "catch" : "flupe_pink_catch.png",
-              "midAir":   "flupe_pink_midair.png",
-              "shadow":   "flupe_pink_shadow.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "flupe_pink"
-            },
-            {
-              "catch":    "flupe_purple_catch.png",
-              "midAir":   "flupe_purple_midair.png",
-              "shadow":   "flupe_purple_shadow.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "flupe_purple"
-            },
-            {
-              "catch":    "flupe_yellow_catch.png",
-              "midAir":   "flupe_yellow_midair.png",
-              "shadow":   "flupe_yellow_shadow.png",
-              "dimension"    :   {
-                "width": 56,
-                "height": 56
-              },
-              "name"        :   "flupe_yellow"
+        "BallSpeed": {
+          "component": "select",
+          "UIName": "Enter ball speed",
+          "description": "Random value will be choose between x/2 to x",
+          "data": {
+            "speed": {
+              "x": 100,
+              "y": 200
             }
-          ]
-        }
-
-      },
-      "BallSpeed": {
-        "component": "select",
-        "UIName": "Enter ball speed",
-        "description": "Random value will be choose between x/2 to x",
-        "data" : {
-          "speed": {
-            "x": 100,
-            "y": 200
           }
         }
-      }
-    },
-    "animation": {
-        "component": "animationGroup",
+      },
+      "bubbles_panel": {
+        "component": "largeImage",
+        "UIName": "Collection Container",
+        "imageName": "items_container.png",
+        "dimensions": { "width": 386, "height": 80 }
+      },
+      "flupes": {
+        "component": "flupe",
+        "flupes_data": {
+          "UIName": "Characters",
+          "dimensions": {
+            "width": 215,
+            "height": 215
+          },
+          "jumpAudioName": "characters_jump_sound.mp3",
+          "catchAudioName": "characters_catch_sound.mp3",
+          "data": [
+            {
+              "catch": "flupe_blue_catch.png",
+              "midAir": "flupe_blue_midair.png",
+              "shadow": "flupe_blue_shadow.png",
+              "name": "flupe_blue",
+              "animation": {
+                "leap": {
+                  "configurable": true,
+                  "frameCount": 5,
+                  "frameInitial": "flupe_blue_leap/flupe_blue_leap_",
+                  "extension": ".png"
+                },
+                "land": {
+                  "configurable": true,
+                  "UIName": "FlupeBlueLandAnimation",
+                  "frameCount": 12,
+                  "frameInitial": "flupe_blue_land/flupe_blue_land_",
+                  "extension": ".png"
+                }
+              }
+            },
+            {
+              "catch": "flupe_green_catch.png",
+              "midAir": "flupe_green_midair.png",
+              "shadow": "flupe_green_shadow.png",
+              "name": "flupe_green",
+              "animation": {
+                "land": {
+                  "configurable": true,
+                  "UIName": "FlupeGreenLandAnimation",
+                  "frameCount": 12,
+                  "frameInitial": "flupe_green_land/flupe_green_land_",
+                  "extension": ".png"
+                },
+                "leap": {
+                  "configurable": true,
+                  "UIName": "FlupeGreenLeapAnimation",
+                  "frameCount": 5,
+                  "frameInitial": "flupe_green_leap/flupe_green_leap_",
+                  "extension": ".png"
+                }
+              }
+            },
+            {
+              "catch": "flupe_orange_catch.png",
+              "midAir": "flupe_orange_midair.png",
+              "shadow": "flupe_orange_shadow.png",
+              "name": "flupe_orange",
+              "animation": {
+                "land": {
+                  "configurable": true,
+                  "UIName": "FlupeOrangeLandAnimation",
+                  "frameCount": 12,
+                  "frameInitial": "flupe_orange_land/flupe_orange_land_",
+                  "extension": ".png"
+                },
+                "leap": {
+                  "configurable": true,
+                  "UIName": "FlupeOrangeLeapAnimation",
+                  "frameCount": 5,
+                  "frameInitial": "flupe_orange_leap/flupe_orange_leap_",
+                  "extension": ".png"
+                }
+              }
+            },
+            {
+              "catch": "flupe_pink_catch.png",
+              "midAir": "flupe_pink_midair.png",
+              "shadow": "flupe_pink_shadow.png",
+              "name": "flupe_pink",
+              "animation": {
+                "land": {
+                  "configurable": true,
+                  "UIName": "FlupePinkLandAnimation",
+                  "frameCount": 12,
+                  "frameInitial": "flupe_pink_land/flupe_pink_land_",
+                  "extension": ".png"
+                },
+                "leap": {
+                  "configurable": true,
+                  "UIName": "FlupePinkLeapAnimation",
+                  "frameCount": 5,
+                  "frameInitial": "flupe_pink_leap/flupe_pink_leap_",
+                  "extension": ".png"
+                }
+              }
+            },
+            {
+              "catch": "flupe_purple_catch.png",
+              "midAir": "flupe_purple_midair.png",
+              "shadow": "flupe_purple_shadow.png",
+              "name": "flupe_purple",
+              "animation": {
+                "land": {
+                  "configurable": true,
+                  "UIName": "FlupePurpleLandAnimation",
+                  "frameCount": 12,
+                  "frameInitial": "flupe_purple_land/flupe_purple_land_",
+                  "extension": ".png"
+                },
+                "leap": {
+                  "configurable": true,
+                  "UIName": "FlupePurpleLeapAnimation",
+                  "frameCount": 5,
+                  "frameInitial": "flupe_purple_leap/flupe_purple_leap_",
+                  "extension": ".png"
+                }
+              }
+            },
+            {
+              "catch": "flupe_yellow_catch.png",
+              "midAir": "flupe_yellow_midair.png",
+              "shadow": "flupe_yellow_shadow.png",
+              "name": "flupe_yellow",
+              "animation": {
+                "land": {
+                  "configurable": true,
+                  "UIName": "FlupeYellowLandAnimation",
+                  "frameCount": 12,
+                  "frameInitial": "flupe_yellow_land/flupe_yellow_land_",
+                  "extension": ".png"
+                },
+                "leap": {
+                  "configurable": true,
+                  "UIName": "FlupeYellowLeapAnimation",
+                  "frameCount": 5,
+                  "frameInitial": "flupe_yellow_leap/flupe_yellow_leap_",
+                  "extension": ".png"
+                }
+              }
+            },
+            {
+              "catch": "glowing_outline_catch.png",
+              "midAir": "glowing_outline_midair.png",
+              "shadow": "glowing_outline_shadow.png",
+              "name": "glowing_outline",
+              "animation": {
+                "land": {
+                  "configurable": true,
+                  "UIName": "GlowingOutlineLandAnimation",
+                  "frameCount": 12,
+                  "frameInitial": "glowing_outline_land/glowing_outline_land_",
+                  "extension": ".png"
+                },
+                "leap": {
+                  "configurable": true,
+                  "UIName": "GlowingOutlineLeapAnimation",
+                  "frameCount": 5,
+                  "frameInitial": "glowing_outline_leap/glowing_outline_leap_",
+                  "extension": ".png"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "score_bg": {
+        "component": "largeImage",
+        "UIName": "FINAL POP-UP BOX",
+        "imageName": "score_box.png",
+        "scale": 1,
+        "dimensions": { "width": 580, "height": 490 }
+      },
+      "score_bucket": {
+        "component": "largeImage",
+        "UIName": "FINAL POP-UP IMAGE",
+        "imageName": "basket_objects.png",
+        "scale": 0.9,
+        "dimensions": { "width": 546, "height": 574 }
+      },
+      "timer": {
+        "component": "largeImage",
+        "UIName": "Timer",
+        "imageName": "",
+        "scale": 0.9,
+        "dimensions": { "width": 0, "height": 0 }
+      },
+      "animation": {
+        "ignoreForAuthToolUI": true,
         "data": {
-          "flupe_blue_land": {
-            "configurable": true,
-            "UIName": "FlupeBlueLandAnimation",
-            "frameCount": 12,
-            "frameInitial": "flupe_blue_land/flupe_blue_land_",
-            "extension": ".png"
-          },
-          "flupe_blue_leap": {
-            "configurable": true,
-            "frameCount": 5,
-            "frameInitial": "flupe_blue_leap/flupe_blue_leap_",
-            "extension": ".png"
-          },
-          "flupe_green_land": {
-            "configurable": true,
-            "UIName": "FlupeGreenLandAnimation",
-            "frameCount": 12,
-            "frameInitial": "flupe_green_land/flupe_green_land_",
-            "extension": ".png"
-          },
-          "flupe_green_leap": {
-            "configurable": true,
-            "UIName": "FlupeGreenLeapAnimation",
-            "frameCount": 5,
-            "frameInitial": "flupe_green_leap/flupe_green_leap_",
-            "extension": ".png"
-          },
-          "flupe_orange_land": {
-            "configurable": true,
-            "UIName": "FlupeOrangeLandAnimation",
-            "frameCount": 12,
-            "frameInitial": "flupe_orange_land/flupe_orange_land_",
-            "extension": ".png"
-          },
-          "flupe_orange_leap": {
-            "configurable": true,
-            "UIName": "FlupeOrangeLeapAnimation",
-            "frameCount": 5,
-            "frameInitial": "flupe_orange_leap/flupe_orange_leap_",
-            "extension": ".png"
-          },
-          "flupe_pink_land": {
-            "configurable": true,
-            "UIName": "FlupePinkLandAnimation",
-            "frameCount": 12,
-            "frameInitial": "flupe_pink_land/flupe_pink_land_",
-            "extension": ".png"
-          },
-          "flupe_pink_leap": {
-            "configurable": true,
-            "UIName": "FlupePinkLeapAnimation",
-            "frameCount": 5,
-            "frameInitial": "flupe_pink_leap/flupe_pink_leap_",
-            "extension": ".png"
-          },
-          "flupe_purple_land": {
-            "configurable": true,
-            "UIName": "FlupePurpleLandAnimation",
-            "frameCount": 12,
-            "frameInitial": "flupe_purple_land/flupe_purple_land_",
-            "extension": ".png"
-          },
-          "flupe_purple_leap": {
-            "configurable": true,
-            "UIName": "FlupePurpleLeapAnimation",
-            "frameCount": 5,
-            "frameInitial": "flupe_purple_leap/flupe_purple_leap_",
-            "extension": ".png"
-          },
-          "flupe_yellow_land": {
-            "configurable": true,
-            "UIName": "FlupeYellowLandAnimation",
-            "frameCount": 12,
-            "frameInitial": "flupe_yellow_land/flupe_yellow_land_",
-            "extension": ".png"
-          },
-          "flupe_yellow_leap": {
-            "configurable": true,
-            "UIName": "FlupeYellowLeapAnimation",
-            "frameCount": 5,
-            "frameInitial": "flupe_yellow_leap/flupe_yellow_leap_",
-            "extension": ".png"
-          },
-          "glowing_outline_land": {
-            "configurable": true,
-            "UIName": "GlowingOutlineLandAnimation",
-            "frameCount": 12,
-            "frameInitial": "glowing_outline_land/glowing_outline_land_",
-            "extension": ".png"
-          },
-          "glowing_outline_leap": {
-            "configurable": true,
-            "UIName": "GlowingOutlineLeapAnimation",
-            "frameCount": 5,
-            "frameInitial": "glowing_outline_leap/glowing_outline_leap_",
-            "extension": ".png"
-          },
           "object_pulled_out_animation": {
             "configurable": true,
             "UIName": "GlowingOutlineLeapAnimation",
@@ -544,32 +553,18 @@
           }
         }
       }
-  },
-  "gamePlayTime" : 40,
-  "maxBubbleInScreen": 10,
-  "bubbleSpeed" : {
-    "x" : 50,
-    "y" : 100
-  },
-  "cursors": {
-    "component": "cursorsCard",
-    "data": {
-      "cursor": {
-        "UIName": "CURSOR",
-        "imageName": "cursor_0001.png",
-        "dimensions": { "width": 32, "height": 32 }
-      }
     }
   },
   "resources": {
+    "ignoreForAuthToolUI": true,
     "sprites": {
       "basePath": "res/Sprite/",
       "images": [
         "bg.png",
         "ball_moving_to_box.png",
         "btn_idle.png",
-         "btn_pressed.png",
-         "flupe_blue_catch.png",
+        "btn_pressed.png",
+        "flupe_blue_catch.png",
         "flupe_blue_midair.png",
         "flupe_blue_shadow.png",
         "flupe_green_catch.png",
@@ -601,9 +596,12 @@
         "item_bubble-05.png",
         "item_bubble-05_grey.png",
         "score_box.png",
-        "items_container.png",
-        "cursor_0001.png"
+        "items_container.png"
       ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": ["characters_jump_sound.mp3", "characters_catch_sound.mp3"]
     },
     "animationFrames": {
       "basePath": "res/AnimationFrames/",
@@ -621,98 +619,95 @@
           "frameInitial": "flupe_blue_land/flupe_blue_land_",
           "extension": ".png"
         },
-       {
-
+        {
           "name": "FlupeBlueLeapAnimation",
           "frameCount": 5,
           "frameInitial": "flupe_blue_leap/flupe_blue_leap_",
           "extension": ".png"
         },
         {
-
           "name": "FlupeGreenLandAnimation",
           "frameCount": 12,
           "frameInitial": "flupe_green_land/flupe_green_land_",
           "extension": ".png"
         },
         {
-
           "name": "FlupeGreenLeapAnimation",
           "frameCount": 5,
           "frameInitial": "flupe_green_leap/flupe_green_leap",
           "extension": ".png"
         },
-       {
-
+        {
           "name": "FlupeOrangeLandAnimation",
           "frameCount": 12,
           "frameInitial": "flupe_orange_land/flupe_orange_land_",
           "extension": ".png"
         },
-     {
-
+        {
           "name": "FlupeOrangeLeapAnimation",
           "frameCount": 5,
           "frameInitial": "flupe_orange_leap/flupe_orange_leap",
           "extension": ".png"
         },
-       {
-
+        {
           "name": "FlupePinkLandAnimation",
           "frameCount": 12,
           "frameInitial": "flupe_pink_land/flupe_pink_land_",
           "extension": ".png"
         },
-       {
-
+        {
           "name": "FlupePinkLeapAnimation",
           "frameCount": 5,
           "frameInitial": "flupe_pink_leap/flupe_pink_leap",
           "extension": ".png"
         },
         {
-
           "name": "FlupePurpleLandAnimation",
           "frameCount": 12,
           "frameInitial": "flupe_purple_land/flupe_purple_land_",
           "extension": ".png"
         },
         {
-
           "name": "FlupePurpleLeapAnimation",
           "frameCount": 5,
           "frameInitial": "flupe_purple_leap/flupe_purple_leap",
           "extension": ".png"
         },
-       {
-
+        {
           "name": "FlupeYellowLandAnimation",
           "frameCount": 12,
           "frameInitial": "flupe_yellow_land/flupe_yellow_land_",
           "extension": ".png"
         },
         {
-
           "name": "FlupeYellowLeapAnimation",
           "frameCount": 5,
           "frameInitial": "flupe_yellow_leap/flupe_yellow_leap_",
           "extension": ".png"
         },
         {
-
           "name": "GlowingOutlineLandAnimation",
           "frameCount": 12,
           "frameInitial": "glowing_outline_land/glowing_outline_land_",
           "extension": ".png"
         },
-       {
-
+        {
           "name": "GlowingOutlineLeapAnimation",
           "frameCount": 5,
           "frameInitial": "glowing_outline_leap/glowing_outline_leap_",
           "extension": ".png"
         }
       ]
+    }
+  },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "cursor": {
+        "UIName": "CURSOR",
+        "imageName": "cursor_0001.png",
+        "dimensions": { "width": 32, "height": 32 }
+      }
     }
   }
 }

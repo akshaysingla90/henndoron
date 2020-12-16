@@ -83,9 +83,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath =
                 ACTIVITY_HUNGRY_FLUPE_1.resourcePath + "Sprite/";
             ACTIVITY_HUNGRY_FLUPE_1.ref.isTeacherView = HDAppManager.isTeacherView;
-            // TODO : REPLACE config data of gameplayTime
-            ACTIVITY_HUNGRY_FLUPE_1.ref.gamePlayTime = config.gamePlayTime;
-            ACTIVITY_HUNGRY_FLUPE_1.ref.maxBubbleInScreen = config.maxBubbleInScreen;
+            ACTIVITY_HUNGRY_FLUPE_1.ref.gamePlayTime = config.properties.gamePlayTime;
+            ACTIVITY_HUNGRY_FLUPE_1.ref.maxBubbleInScreen = config.properties.maxBubbleInScreen;
                 ACTIVITY_HUNGRY_FLUPE_1.ref.MouseTextureUrl = ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath + config.cursors.data.cursor.imageName;
             ACTIVITY_HUNGRY_FLUPE_1.ref.setupUI();
             if (ACTIVITY_HUNGRY_FLUPE_1.ref.isTeacherView) {
@@ -223,7 +222,6 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     },
     startTheGame : function (){
         ACTIVITY_HUNGRY_FLUPE_1.ref.gameState = ACTIVITY_HUNGRY_FLUPE_1.gameState.STARTED;
-        cc.log(" ACTIVITY_HUNGRY_FLUPE_1.ref.gameState ",  ACTIVITY_HUNGRY_FLUPE_1.ref.gameState);
         this.updateButtonVisibility(ACTIVITY_HUNGRY_FLUPE_1.Tag.startButton, false);
         this.updateButtonVisibility(ACTIVITY_HUNGRY_FLUPE_1.Tag.stopButton, true);
         this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE,
@@ -270,8 +268,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     setupControlButton: function (){
         let props =  ACTIVITY_HUNGRY_FLUPE_1.config.buttons.data.push;
         let button = this.createButton( ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath +
-            props.idleState, ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath +
-            props.pressedState, "", 0, ACTIVITY_HUNGRY_FLUPE_1.Tag.PUSH_BUTTON,
+            props.enableState, ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath +
+            props.pushedState, "", 0, ACTIVITY_HUNGRY_FLUPE_1.Tag.PUSH_BUTTON,
             cc.p( props.position.x, props.position.y), this);
         this.handIconUI.push(button);
     },
@@ -293,12 +291,12 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         let bgProps = this.assets.score_bg;
         let basketProps = this.assets.score_bucket;
         let bg = this.addSprite(ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath + bgProps.imageName,
-            bgProps.position, this);
+            cc.p(480, 320), this);
         bg.setTag(ACTIVITY_HUNGRY_FLUPE_1.Tag.SCORE_BG);
         bg.setVisible(status);
         bg.setLocalZOrder(100);
         let bucket = this.addSprite(ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath + basketProps.imageName,
-            basketProps.position, bg);
+           cc.p(290,300), bg);
         bucket.setScale(basketProps.scale);
     },
 
@@ -371,9 +369,10 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             // phShape.sensor = true;
             phShape.setElasticity(0.1);
             phShape.setCollisionType(ACTIVITY_HUNGRY_FLUPE_1.CollisionType.Flupe);
-            let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data;
-            let animprops = animations[`${obj.name}_land`];
-            let  props  = animprops.frameInitial + (animprops.frameCount< 10 ? "000"+ animprops.frameCount: "00"+animprops.frameCount);
+            let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
+            let animprops = animations.find(x=>x.name === obj.name).animation[`land`];
+            // let animprops = animations[`${obj.name}_land`];
+            let  props  = animprops.frameInitial + ('0000' + animprops.frameCount).slice(-4);
             let flupe = new cc.PhysicsSprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath + props + ".png");
             flupe.setScale(0.5);
             flupe.setBody( phBodyBox );
@@ -422,7 +421,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
      */
     attachGlow : function (sprite){
         if(sprite.glow) return sprite.glow.setVisible(true);
-        let animationProps = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data.glowing_outline_land;
+        let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
+        let animationProps = animations.find(x=>x.name === "glowing_outline").animation[`land`];
         let glow = this.addSprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath +
             animationProps.frameInitial +  ("000" + animationProps.frameCount).slice(-4) + ".png",
             cc.p(sprite.getContentSize().width * 0.5, sprite.getContentSize().height * 0.5),
@@ -536,17 +536,20 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             }, null, null, null);
     },
     getFlupeAnimation : function (name, type){
-        let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data;
-        let flupeAnimationProps = animations[`${name}_${type}`];
-
+        // let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data;
+        // let flupeAnimationProps = animations[`${name}_${type}`];
+        let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
+        let flupeAnimationProps = animations.find(x=>x.name === name).animation[`${type}`];
         return cc.sequence( HDUtility.runFrameAnimation(
             ACTIVITY_HUNGRY_FLUPE_1.animationBasePath +
             flupeAnimationProps.frameInitial,
             flupeAnimationProps.frameCount, 0.1, '.png', 1));
     },
     getGlowAnimation : function (type){
-        let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data;
-        let glowAnimationProps = animations[`glowing_outline_${type}`];
+        // let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data;
+        // let glowAnimationProps = animations[`glowing_outline_${type}`];
+        let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
+        let glowAnimationProps = animations.find(x=>x.name === "glowing_outline").animation[`${type}`];
         return cc.sequence( HDUtility.runFrameAnimation(
             ACTIVITY_HUNGRY_FLUPE_1.animationBasePath +
             glowAnimationProps.frameInitial,
@@ -565,11 +568,11 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 target.getBody().applyImpulse(cc.p(0, this.impulse), cc.p(0, 100));
             }, flupe ), cc.delayTime(1),
             cc.callFunc((target, data)=>{
-                let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data;
-                let animprops = animations[`${flupe.imgName}_land`];
+                let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
+                let animprops = animations.find(x=>x.name === flupe.imgName).animation[`land`];
                 target.isGoingUp = false;
                 target.getBody().isGoingUp = false;
-                let  props  = animprops.frameInitial + (animprops.frameCount< 10 ? "000"+ animprops.frameCount: "00"+animprops.frameCount);
+                let  props  = animprops.frameInitial + ("0000" + animprops.frameCount).slice(-4);
                 target.setTexture(new cc.Sprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath +
                     props+".png").getTexture());
             }, flupe )
@@ -582,8 +585,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                         'glowing_outline_midair.png').getTexture());
                 }, flupe.glow ), cc.delayTime(1),
                 cc.callFunc((target, data)=>{
-                    let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data;
-                    let animprops = animations[`glowing_outline_land`];
+                    let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
+                    let animprops = animations.find(x=>x.name === "glowing_outline").animation[`land`];
                     let  props  = animprops.frameInitial +  ("000"+animprops.frameCount).slice(-4);
                     target.setTexture(new cc.Sprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath +
                         props+".png").getTexture());
@@ -593,6 +596,9 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         }
     },
     sendUpdatedFlupe : function (data){
+        if(!ACTIVITY_HUNGRY_FLUPE_1){
+             return clearInterval(ACTIVITY_HUNGRY_FLUPE_1.ref.intervalId)
+        }
         if(!ACTIVITY_HUNGRY_FLUPE_1.ref.pendingAck) return clearInterval(ACTIVITY_HUNGRY_FLUPE_1.ref.intervalId);
         let connectedFlupe  = ACTIVITY_HUNGRY_FLUPE_1.ref.flupeList.filter(x=>x.stuName !== "").map((x)=>{
             return {
@@ -639,14 +645,13 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         let initialX = [300, 600];
         let bubblesInfo = [];
         while(count--) {
-            // TODO: impulse X, Y change from config in line 630, 631
             let obj = { "itemInfo":bubblesData[Math.floor(Math.random() * bubblesData.length)],
                 "pos": {"x":initialX[Math.floor(Math.random()* 1.8)] + Math.random() * 50,
                     "y":  Math.random() * this.getContentSize().height * 0.2 +
                         this.getContentSize().height * 0.7 },
                 "impulse": {
-                    "x" : (Math.random() * -ACTIVITY_HUNGRY_FLUPE_1.config.bubbleSpeed.x),
-                    "y": ACTIVITY_HUNGRY_FLUPE_1.config.bubbleSpeed.y},
+                    "x" : (Math.random() * -ACTIVITY_HUNGRY_FLUPE_1.config.properties.bubbleSpeed.x),
+                    "y":ACTIVITY_HUNGRY_FLUPE_1.config.properties.bubbleSpeed.y},
                 "id" : Date.now()+Math.random(),
 
             };
@@ -658,6 +663,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             "eventType": ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.ADD_BUBBLES,
             "data": bubblesInfo
         } );
+        console.log("bubble items data ", bubblesInfo);
         bubblesInfo.forEach(ACTIVITY_HUNGRY_FLUPE_1.ref.addBubbleSprite);
         this.addObjectCount = 0;
     },
@@ -718,7 +724,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         let imgProp = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.bubbles_panel;
         let bg = this.addSprite(
             ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath +  imgProp.imageName,
-            cc.p(imgProp.position.x, imgProp.position.y),
+            cc.p(480, 80),
             this);
 
         this.tableView = new cc.TableView(this,
@@ -741,7 +747,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         if(newCell) newCell.makeColoured();
     },
     getStarsAnimation : function (pos){
-        let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation;
+        let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.animation;
         let starsAnimProps = animations.data.object_pulled_out_animation;
         let sprite = this.addSprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath +  starsAnimProps.frameInitial+'0001.png',
             pos, this);
@@ -1095,10 +1101,6 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 break;
             }
         }
-        // if (handICon) {
-        //     this.interactableObject = true;
-        //     this.customTexture = true;
-        // }
         this.interactableObject = this.isStudentInteractionEnable;
         this.customTexture = true;
     },
