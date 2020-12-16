@@ -37,14 +37,14 @@
         "UIName": "Start Button",
         "enableState": "start_idle.png",
         "pushedState": "start_pressed.png",
-        "dimensions": { "width": 100, "height": 100 },
+        "dimensions": { "width": 94, "height": 64 },
         "position": { "x": 85, "y": 120 }
       },
       "stop": {
         "UIName": "Stop Button",
         "enableState": "stop_idle.png",
         "pushedState": "stop_pressed.png",
-        "dimensions": { "width": 100, "height": 100 },
+        "dimensions": { "width": 94, "height": 64 },
         "position": { "x": 85, "y": 120 }
       }
     }
@@ -152,6 +152,31 @@
           }
         ]
       },
+      "leaves": {
+        "component": "carouselItems",
+        "UIName": "Leaves",
+        "allowDelete": false,
+        "allowAdd": false,
+        "dimensions": { "width": 104, "height": 67 },
+        "data": [
+          {
+            "imageName": "leaf_0001.png",
+            "label": "leaf 1"
+          },
+          {
+            "imageName": "leaf_0002.png",
+            "label": "leaf 2"
+          },
+          {
+            "imageName": "leaf_0003.png",
+            "label": "leaf 3"
+          },
+          {
+            "imageName": "leaf_0004.png",
+            "label": "leaf 4"
+          }
+        ]
+      },
       "arrayOfStudentsBag": {
         "component": "imagesGroup",
         "dimensions": [
@@ -195,6 +220,74 @@
             "image_2": "student8_bag_back.png"
           }
         ]
+      },
+      "animation": {
+        "component": "animationGroup",
+        "data": {
+          "windAnimation": {
+            "UIName": "Wind Animation",
+            "name": "wind_anim",
+            "frameCount": 12,
+            "frameInitial": "wind_anim/wind_anim_",
+            "extension": ".png"
+          },
+          "student1_rake": {
+            "UIName": "Student 1 Rake",
+            "name": "student1_rake",
+            "frameCount": 9,
+            "frameInitial": "student1_rake/student1_rake_",
+            "extension": ".png"
+          },
+          "student2_rake": {
+            "UIName": "Student 2 Rake",
+            "name": "student2_rake",
+            "frameCount": 9,
+            "frameInitial": "student2_rake/student2_rake_",
+            "extension": ".png"
+          },
+          "student3_rake": {
+            "UIName": "Student 3 Rake",
+            "name": "student3_rake",
+            "frameCount": 9,
+            "frameInitial": "student3_rake/student3_rake_",
+            "extension": ".png"
+          },
+          "student4_rake": {
+            "UIName": "Student 4 Rake",
+            "name": "student4_rake",
+            "frameCount": 9,
+            "frameInitial": "student4_rake/student4_rake_",
+            "extension": ".png"
+          },
+          "student5_rake": {
+            "UIName": "Student 5 Rake",
+            "name": "student5_rake",
+            "frameCount": 9,
+            "frameInitial": "student5_rake/student5_rake_",
+            "extension": ".png"
+          },
+          "student6_rake": {
+            "UIName": "Student 6 Rake",
+            "name": "student6_rake",
+            "frameCount": 9,
+            "frameInitial": "student6_rake/student6_rake_",
+            "extension": ".png"
+          },
+          "student7_rake": {
+            "UIName": "Student 7 Rake",
+            "name": "student7_rake",
+            "frameCount": 9,
+            "frameInitial": "student7_rake/student7_rake_",
+            "extension": ".png"
+          },
+          "student8_rake": {
+            "UIName": "Student 8 Rake",
+            "name": "student8_rake",
+            "frameCount": 9,
+            "frameInitial": "student8_rake/student8_rake_",
+            "extension": ".png"
+          }
+        }
       }
     }
   },
