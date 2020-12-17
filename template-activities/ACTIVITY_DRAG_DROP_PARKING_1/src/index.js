@@ -758,15 +758,31 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
           if (this._isCurrentLevelCompleted()) {
             this.playLevelCompleteAnimation(() => {
               if (this.isThereNextLevel()) {
-                this.renderNextLevelWithDelay(3);
-                if (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
-                  this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-                    roomId: HDAppManager.roomId,
-                    type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.UPDATE_USER_DATA,
-                    userName: HDAppManager.username,
-                    data: ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(HDAppManager.username),
-                  });
-                }
+                this.renderNextLevelWithDelay(
+                  3,
+                  () => {
+                    if (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
+                      this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+                        roomId: HDAppManager.roomId,
+                        type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.UPDATE_USER_DATA,
+                        userName: HDAppManager.username,
+                        data: ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(HDAppManager.username),
+                      });
+                    }
+                    if (
+                      this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+                      !HDAppManager.isTeacherView
+                    ) {
+                      this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+                        roomId: HDAppManager.roomId,
+                        type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.NEXT_LEVEL_BY_STUDENT_IN_INDIVIDUAL_MODE,
+                        userName: HDAppManager.username,
+                        data: ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(HDAppManager.username),
+                      });
+                    }
+                  },
+                  this
+                );
               }
             }, this);
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
@@ -878,8 +894,10 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
     this.renderLevel(ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCurrentLevel() + 1);
   },
 
-  renderNextLevelWithDelay: function (delay) {
-    this.runAction(cc.sequence([cc.delayTime(delay), cc.callFunc(this.renderNextLevel, this)]));
+  renderNextLevelWithDelay: function (delay, cb = () => {}, target = {}) {
+    this.runAction(
+      cc.sequence([cc.delayTime(delay), cc.callFunc(this.renderNextLevel, this), cc.callFunc(cb, target)])
+    );
   },
 
   renderGameMode: function (mode = ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
@@ -1200,6 +1218,14 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
       }
 
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.NEXT_LEVEL_BY_STUDENT_IN_INDIVIDUAL_MODE: {
+        const { data: userData } = data;
+        if (
+          this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+          userName === this.previewRequestUserName
+        ) {
+          ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setLevelInfoOfUser(userName, userData);
+          this.renderWithLevelData(userName);
+        }
         break;
       }
       default: {
