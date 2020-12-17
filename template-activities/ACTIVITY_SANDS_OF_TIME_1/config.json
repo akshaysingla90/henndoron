@@ -286,6 +286,20 @@
             "frameCount": 9,
             "frameInitial": "student8_rake/student8_rake_",
             "extension": ".png"
+          },
+          "bagStars": {
+            "UIName": "Bag Stars",
+            "name": "bag_stars",
+            "frameCount": 11,
+            "frameInitial": "bag_stars/bag_stars_",
+            "extension": ".png"
+          },
+          "itemStars": {
+            "UIName": "Item Stars",
+            "name": "item_stars",
+            "frameCount": 11,
+            "frameInitial": "item_stars/item_stars_",
+            "extension": ".png"
           }
         }
       }
