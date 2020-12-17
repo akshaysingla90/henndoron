@@ -371,14 +371,15 @@
               "name": "flupe_blue",
               "animation": {
                 "leap": {
-                  "configurable": true,
+                  "name": "FlupeBlueLeapAnimation",
+                  "UIName": "Flupe Blue Leap Animation",
                   "frameCount": 5,
                   "frameInitial": "flupe_blue_leap/flupe_blue_leap_",
                   "extension": ".png"
                 },
                 "land": {
-                  "configurable": true,
-                  "UIName": "FlupeBlueLandAnimation",
+                  "name": "FlupeBlueLandAnimation",
+                  "UIName": "Flupe Blue Land Animation",
                   "frameCount": 12,
                   "frameInitial": "flupe_blue_land/flupe_blue_land_",
                   "extension": ".png"
@@ -392,15 +393,15 @@
               "name": "flupe_green",
               "animation": {
                 "land": {
-                  "configurable": true,
-                  "UIName": "FlupeGreenLandAnimation",
+                  "name": "FlupeGreenLandAnimation",
+                  "UIName": "Flupe Green Land Animation",
                   "frameCount": 12,
                   "frameInitial": "flupe_green_land/flupe_green_land_",
                   "extension": ".png"
                 },
                 "leap": {
-                  "configurable": true,
-                  "UIName": "FlupeGreenLeapAnimation",
+                  "name": "FlupeGreenLeapAnimation",
+                  "UIName": "Flupe Green Leap Animation",
                   "frameCount": 5,
                   "frameInitial": "flupe_green_leap/flupe_green_leap_",
                   "extension": ".png"
@@ -414,15 +415,15 @@
               "name": "flupe_orange",
               "animation": {
                 "land": {
-                  "configurable": true,
-                  "UIName": "FlupeOrangeLandAnimation",
+                  "name": "FlupeOrangeLandAnimation",
+                  "UIName": "Flupe Orange Land Animation",
                   "frameCount": 12,
                   "frameInitial": "flupe_orange_land/flupe_orange_land_",
                   "extension": ".png"
                 },
                 "leap": {
-                  "configurable": true,
-                  "UIName": "FlupeOrangeLeapAnimation",
+                  "name": "FlupeOrangeLeapAnimation",
+                  "UIName": "Flupe Orange Leap Animation",
                   "frameCount": 5,
                   "frameInitial": "flupe_orange_leap/flupe_orange_leap_",
                   "extension": ".png"
@@ -436,14 +437,14 @@
               "name": "flupe_pink",
               "animation": {
                 "land": {
-                  "configurable": true,
-                  "UIName": "FlupePinkLandAnimation",
+                  "name": "FlupePinkLandAnimation",
+                  "UIName": "Flupe Pink Land Animation",
                   "frameCount": 12,
                   "frameInitial": "flupe_pink_land/flupe_pink_land_",
                   "extension": ".png"
                 },
                 "leap": {
-                  "configurable": true,
+                  "name": "Flupe Pink Leap Animation",
                   "UIName": "FlupePinkLeapAnimation",
                   "frameCount": 5,
                   "frameInitial": "flupe_pink_leap/flupe_pink_leap_",
@@ -458,15 +459,15 @@
               "name": "flupe_purple",
               "animation": {
                 "land": {
-                  "configurable": true,
-                  "UIName": "FlupePurpleLandAnimation",
+                  "name": "FlupePurpleLandAnimation",
+                  "UIName": "Flupe Purple Land Animation",
                   "frameCount": 12,
                   "frameInitial": "flupe_purple_land/flupe_purple_land_",
                   "extension": ".png"
                 },
                 "leap": {
-                  "configurable": true,
-                  "UIName": "FlupePurpleLeapAnimation",
+                  "name": "FlupePurpleLeapAnimation",
+                  "UIName": "Flupe Purple Leap Animation",
                   "frameCount": 5,
                   "frameInitial": "flupe_purple_leap/flupe_purple_leap_",
                   "extension": ".png"
@@ -480,15 +481,15 @@
               "name": "flupe_yellow",
               "animation": {
                 "land": {
-                  "configurable": true,
-                  "UIName": "FlupeYellowLandAnimation",
+                  "name": "FlupeYellowLandAnimation",
+                  "UIName": "Flupe Yellow Land Animation",
                   "frameCount": 12,
                   "frameInitial": "flupe_yellow_land/flupe_yellow_land_",
                   "extension": ".png"
                 },
                 "leap": {
-                  "configurable": true,
-                  "UIName": "FlupeYellowLeapAnimation",
+                  "name": "FlupeYellowLeapAnimation",
+                  "UIName": "Flupe Yellow Leap Animation",
                   "frameCount": 5,
                   "frameInitial": "flupe_yellow_leap/flupe_yellow_leap_",
                   "extension": ".png"
@@ -502,15 +503,15 @@
               "name": "glowing_outline",
               "animation": {
                 "land": {
-                  "configurable": true,
-                  "UIName": "GlowingOutlineLandAnimation",
+                  "name": "GlowingOutlineLandAnimation",
+                  "UIName": "Glowing Outline Land Animation",
                   "frameCount": 12,
                   "frameInitial": "glowing_outline_land/glowing_outline_land_",
                   "extension": ".png"
                 },
                 "leap": {
-                  "configurable": true,
-                  "UIName": "GlowingOutlineLeapAnimation",
+                  "name": "GlowingOutlineLeapAnimation",
+                  "UIName": "Glowing Outline Leap Animation",
                   "frameCount": 5,
                   "frameInitial": "glowing_outline_leap/glowing_outline_leap_",
                   "extension": ".png"
@@ -555,6 +556,18 @@
       }
     }
   },
+
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "cursor": {
+        "UIName": "CURSOR",
+        "imageName": "cursor_0001.png",
+        "dimensions": { "width": 32, "height": 32 }
+      }
+    }
+  },
+
   "resources": {
     "ignoreForAuthToolUI": true,
     "sprites": {
@@ -634,7 +647,7 @@
         {
           "name": "FlupeGreenLeapAnimation",
           "frameCount": 5,
-          "frameInitial": "flupe_green_leap/flupe_green_leap",
+          "frameInitial": "flupe_green_leap/flupe_green_leap_",
           "extension": ".png"
         },
         {
@@ -646,7 +659,7 @@
         {
           "name": "FlupeOrangeLeapAnimation",
           "frameCount": 5,
-          "frameInitial": "flupe_orange_leap/flupe_orange_leap",
+          "frameInitial": "flupe_orange_leap/flupe_orange_leap_",
           "extension": ".png"
         },
         {
@@ -658,7 +671,7 @@
         {
           "name": "FlupePinkLeapAnimation",
           "frameCount": 5,
-          "frameInitial": "flupe_pink_leap/flupe_pink_leap",
+          "frameInitial": "flupe_pink_leap/flupe_pink_leap_",
           "extension": ".png"
         },
         {
@@ -670,7 +683,7 @@
         {
           "name": "FlupePurpleLeapAnimation",
           "frameCount": 5,
-          "frameInitial": "flupe_purple_leap/flupe_purple_leap",
+          "frameInitial": "flupe_purple_leap/flupe_purple_leap_",
           "extension": ".png"
         },
         {
@@ -698,16 +711,6 @@
           "extension": ".png"
         }
       ]
-    }
-  },
-  "cursors": {
-    "component": "cursorsCard",
-    "data": {
-      "cursor": {
-        "UIName": "CURSOR",
-        "imageName": "cursor_0001.png",
-        "dimensions": { "width": 32, "height": 32 }
-      }
     }
   }
 }
