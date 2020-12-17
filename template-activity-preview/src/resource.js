@@ -68,7 +68,7 @@ var lessonResources = [
     lessonResourceBasePath + "lesson_1_reset_idle_icon.png",
     lessonResourceBasePath + "starDummy.png",
     lessonResourceBasePath + "lesson_1_play.png",
-    lessonResourceBasePath + "lesson_1_student_panel_bg.png",
+    lessonResourceBasePath +  "lesson_1_student_panel_bg.png",
     lessonResourceBasePath + "lesson_1_time_pie_chart.png",
     lessonResourceBasePath + "lesson_1_time_pie_chart_25.png",
     lessonResourceBasePath + "lesson_1_time_pie_chart_50.png",
@@ -77,18 +77,18 @@ var lessonResources = [
 
 ]
 
-for (let i = 1; i <= 22; ++i) {
-    counter = (i < 10 ? "000" + i : "00" + i);
+for(let i = 1; i <= 22; ++i) {
+    counter = (i < 10 ? "000" + i : "00"+i);
     lessonResources.push(magicHatAnimationFrames + "reward_star_appear/reward_star_appear_" + counter + ".png");
 }
 
-for (let i = 1; i <= 14; ++i) {
-    counter = (i < 10 ? "000" + i : "00" + i);
+for(let i = 1; i <= 14; ++i) {
+    counter = (i < 10 ? "000" + i : "00"+i);
     lessonResources.push(magicHatAnimationFrames + "reward_star_track/reward_star_track_" + counter + ".png");
 }
 
 
-for (var j in lessonResources) {
+for(var j in lessonResources){
     resources.push(lessonResources[j]);
 }
 //Font file
@@ -98,9 +98,16 @@ var fontFile = [
     fontBasePath + "Sassoon_Sans_US_W01_Medium.ttf",
     fontBasePath + "LondrinaSolid-Regular.ttf",
 ]
-for (var ff in fontFile) {
+for(var ff in fontFile){
     resources.push(fontFile[ff]);
 }
+// resources.push("res/Activity/ACTIVITY_MEMORY_GAME_1/res/Sprite/card_front.png");
+// resources.push("res/Activity/ACTIVITY_MEMORY_GAME_1/res/Sprite/card_back.png");
+// resources.push("res/Activity/ACTIVITY_MEMORY_GAME_1/res/Sprite/Item_book.png");
+// resources.push("res/Activity/ACTIVITY_MEMORY_GAME_1/res/Sprite/Item_dog.png");
+// resources.push("res/Activity/ACTIVITY_MEMORY_GAME_1/res/Sprite/Item_rat.png");
+// resources.push("res/Activity/ACTIVITY_MEMORY_GAME_1/res/Sprite/Item_sheep.png");
+// resources.push("res/Activity/ACTIVITY_MEMORY_GAME_1/res/Sprite/Item_sign.png");
 
 //--------Magic Hat
 // var magicHatSpriteBasePath = "res/Activity/ACTIVITY_MAGICHAT_1/res/Sprite/";

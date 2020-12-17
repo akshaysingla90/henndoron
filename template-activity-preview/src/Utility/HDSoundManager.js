@@ -25,8 +25,8 @@
  * @type {{getInstance, playSound, playMusic, stopMusic, stopAllSound, isMusicRunning, preloadMusic}}
  */
 var HDSoundManager = (function () {
-    this.isSoundOn  =  false;
     return {
+        isSoundOn : true,
         playSound : function (soundName, isLoopRequired) {
             if(this.isSoundOn)
                 cc.audioEngine.playEffect(soundName, isLoopRequired);

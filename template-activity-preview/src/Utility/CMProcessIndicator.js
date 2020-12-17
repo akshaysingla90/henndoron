@@ -4,7 +4,7 @@ var CMProcessIndicator = new function(){
             var colourLayer = new cc.LayerColor(cc.color(255,255,255,100), cc.winSize.width, cc.winSize.height);
             colourLayer.setPosition(cc.p(0.0,0.0));
             colourLayer.setTag(LoadingIndicatorTag);
-            parent.addChild(colourLayer,100);
+            parent.addChild(colourLayer,10000);
             //==== Preventive Touch button
             var button  = new ccui.Button();
             button.loadTextures("res/LessonResources/emptyImage.png", "res/LessonResources/emptyImage.png");
@@ -14,9 +14,8 @@ var CMProcessIndicator = new function(){
 
             var indicator = new cc.Sprite("res/LessonResources/loading.png");
             indicator.setPosition(cc.p(colourLayer.getContentSize().width * 0.5,colourLayer.getContentSize().height * 0.5));
-            colourLayer.addChild(indicator,200);
+            colourLayer.addChild(indicator,2000);
             indicator.runAction(new cc.RepeatForever(new cc.RotateBy(1,360)));
-
     };
     this.removeLoadingIndicator = function(parent){
         if (parent.getChildByTag(LoadingIndicatorTag)){

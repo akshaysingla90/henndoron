@@ -5,401 +5,2517 @@
     "name": "lesson_1",
     "timer": 11
   },
-  "graphicalAssets": {
-    "logo": {
+  "graphicalAssets" : {
+    "logo" : {
       "configurable": true,
       "name": "logo.png",
       "imageName": "lesson_1_logo.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "starBgTeacher": {
+
+    "starBgTeacher" : {
       "configurable": true,
       "name": "btn_star_reward.png",
       "imageName": "lesson_1_btn_star_reward.png",
       "size": "{85, 85}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "rewardStar": {
+
+    "rewardStar" : {
       "configurable": true,
       "name": "icon_star_reward.png",
       "imageName": "lesson_1_icon_star_reward.png",
       "size": "{40, 38}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "studentRewards": [
+    "studentRewards" : [
+
       {
         "configurable": true,
         "name": "icon_student_star_blue.png",
         "imageName": "lesson_1_icon_student_star_blue.png",
         "size": "{85, 85}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
+
       {
         "configurable": true,
         "name": "icon_student_star_green.png",
         "imageName": "lesson_1_icon_student_star_green.png",
         "size": "{85, 85}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "icon_student_star_orange.png",
         "imageName": " lesson_1_icon_student_star_orange",
         "size": "{85, 85}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "icon_student_star_pink.png",
         "imageName": "lesson_1_icon_student_star_pink.png",
         "size": "{85, 85}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "icon_student_star_purple.png",
         "imageName": "lesson_1_icon_student_star_purple.png",
         "size": "{85, 85}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "icon_student_star_red.png",
         "imageName": "lesson_1_icon_student_star_red.png",
         "size": "{85, 85}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "icon_student_star_teal.png",
         "imageName": "lesson_1_icon_student_star_teal.png",
         "size": "{85, 85}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
+
       {
         "configurable": true,
         "name": "icon_student_star_yellow.png",
         "imageName": "lesson_1_icon_student_star_yellow.png",
         "size": "{85, 85}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       }
+
     ],
-    "bottomRewardDropDown": {
+
+    "bottomRewardDropDown" : {
       "configurable": true,
       "name": "slice_bottom_dropdown.png",
       "imageName": "lesson_1_slice_bottom_dropdown.png",
       "size": "{65, 39}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "rewardDropDown": {
+
+    "rewardDropDown" : {
       "configurable": true,
       "name": "slice_dropdown.png",
       "imageName": "lesson_1_slice_dropdown.png",
       "size": "{65, 2}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "questionNormal": {
+
+    "questionNormal" : {
       "configurable": true,
       "name": "questionNormal.png",
       "imageName": "lesson_1_questionNormal.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "questionHighlighted": {
+
+    "questionHighlighted" : {
       "configurable": true,
       "name": "questionHighlighted.png",
       "imageName": "lesson_1_questionHighlighted.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "questionSelected": {
+
+    "questionSelected" : {
       "configurable": true,
       "name": "questionSelected.png",
       "imageName": "lesson_1_questionSelected.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "arrowNormal": {
+
+    "arrowNormal" : {
       "configurable": true,
       "name": "arrowNormal.png",
       "imageName": "lesson_1_arrowNormal.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "arrowHighlighted": {
+
+    "arrowHighlighted" : {
       "configurable": true,
       "name": "arrowHighlighted.png",
       "imageName": "lesson_1_arrowHighlighted.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "arrowSelected": {
+
+    "arrowSelected" : {
       "configurable": true,
       "name": "arrowSelected.png",
       "imageName": "lesson_1_arrowSelected.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "reloadMessageNormal": {
+
+    "reloadMessageNormal" : {
       "configurable": true,
       "name": "reloadMessageNormal.png",
       "imageName": "lesson_1_reloadMessageNormal.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "reloadMessageHighlighted": {
+
+    "reloadMessageHighlighted" : {
       "configurable": true,
       "name": "reloadMessageHighlighted.png",
       "imageName": "lesson_1_reloadMessageHighlighted.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "reloadMessageSelected": {
+
+    "reloadMessageSelected" : {
       "configurable": true,
       "name": "reloadMessageSelected.png",
       "imageName": "lesson_1_reloadMessageSelected.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "messageButtonNormal": {
+
+    "messageButtonNormal" : {
       "configurable": true,
       "name": "messageButtonNormal.png",
       "imageName": "lesson_1_messageButtonNormal.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "messageButtonHighlighted": {
+
+    "messageButtonHighlighted" : {
       "configurable": true,
       "name": "messageButtonHighlighted.png",
       "imageName": "lesson_1_messageButtonHighlighted.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "messageButtonSelected": {
+
+    "messageButtonSelected" : {
       "configurable": true,
       "name": "messageButtonSelected.png",
       "imageName": "lesson_1_messageButtonSelected.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "navigationArrowNormal": {
+
+    "navigationArrowNormal" : {
       "configurable": true,
       "name": "navigationArrowNormal.png",
       "imageName": "lesson_1_navigationArrowNormal.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "navigationArrowDisable": {
+
+    "navigationArrowDisable" : {
       "configurable": true,
       "name": "navigationArrowDisable.png",
       "imageName": "lesson_1_navigationArrowDisable.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "activityDotNormal": {
+
+    "activityDotNormal" : {
       "configurable": true,
       "name": "activityDotNormal.png",
       "imageName": "lesson_1_activityDotNormal.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "activityDotProgress": {
+
+    "activityDotProgress" : {
       "configurable": true,
       "name": "activityDotProgress.png",
       "imageName": "lesson_1_activityDotProgress.png",
       "size": "{300, 300}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
-    "activityDotComplete": {
+
+    "activityDotComplete" : {
       "configurable": true,
       "name": "activityDotComplete.png",
       "imageName": "lesson_1_activityDotComplete.png",
       "size": "{30, 30}",
-      "constraints": [
-        "name",
-        "size"
-      ]
+      "constraints" : ["name", "size"]
     },
+
     "lessonTimer": [
       {
         "configurable": true,
         "name": "time_pie_chart.png",
         "imageName": "lesson_1_time_pie_chart.png",
         "size": "{82, 82}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "time_pie_chart_25.png",
         "imageName": "lesson_1_time_pie_chart_25.png",
         "size": "{82, 82}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "time_pie_chart_50.png",
         "imageName": "lesson_1_time_pie_chart_50.png",
         "size": "{82, 82}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "time_pie_chart_75.png",
         "imageName": "lesson_1_time_pie_chart_75.png",
         "size": "{82, 82}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "time_pie_chart_90.png",
         "imageName": "lesson_1_time_pie_chart_90.png",
         "size": "{82, 82}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       },
       {
         "configurable": true,
         "name": "time_pie_chart_90.png",
         "imageName": "lesson_1_time_pie_chart_90.png",
         "size": "{82, 82}",
-        "constraints": [
-          "name",
-          "size"
-        ]
+        "constraints" : ["name", "size"]
       }
     ]
   },
-  "animations": {
-    "rewardStarAppear": {
-      "configurable": true,
-      "name": "reward_star_appear_",
-      "frameCount": 5,
-      "size": "{960,640}",
-      "position": {
-        "x": 450,
-        "y": 320
-      },
-      "scale": 1,
-      "constraints": [
-        "imageName, size"
-      ]
-    },
-    "rewardStarAppear": {
-      "configurable": true,
-      "name": "reward_star_track_",
-      "frameCount": 5,
-      "size": "{960,640}",
-      "position": {
-        "x": 450,
-        "y": 320
-      },
-      "scale": 1,
-      "constraints": [
-        "imageName, size"
-      ]
-    }
+  "animations" : {
   },
-  "activityGame": []
+  "activityGame" : [
+    {
+      "activityName": "Memory Game",
+      "activityPath": "ACTIVITY_MEMORY_GAME_1",
+      "description": "game desc. here",
+      "allocatedTime": 10,
+      "controls": {
+        "mouse": true,
+        "turnBased": true
+      },
+      "externalRewards": true,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_MEMORY_GAME_1/",
+      "number": 1,
+      "renderMode": 1,
+      "preLoaded": true,
+      "namespace": "ACTIVITY_MEMORY_GAME_1",
+      "layerName": "MemoryGame",
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/" ,
+          "images": [
+             "game_bg.png",
+            "Item_book.png",
+            "card_back.png",
+            "card_front.png",
+            "Item_book.png",
+            "Item_dog.png",
+            "Item_rat.png",
+            "Item_sheep.png",
+            "Item_sign.png",
+            "cursor_0001.png"
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+            "card_flip_normal.mp3",
+            "card_flip_special.wav",
+            "applause.mp3",
+            "playerLoss.mp3",
+            "swish1.mp3"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "name": "ConfettiAnimation",
+              "frameCount": 15,
+              "frameInitial": "object_pulled_out_animation/object_pulled_out_animation_",
+              "extension": ".png"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "namespace" : "ACTIVITY_HUNGRY_FLUPE_1",
+      "activityName": "Hunger Flupe",
+      "layerName" : "HungryFlupeLayer",
+      "teacherScriptsNotes": {
+        "notes": "Test Notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse": true,
+        "turnBased": false
+      },
+      "description" : "",
+      "allocatedTime": 100,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_HUNGRY_FLUPE_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg.png",
+            "ball_moving_to_box.png",
+            "btn_idle.png",
+            "btn_pressed.png",
+            "flupe_blue_catch.png",
+            "flupe_blue_midair.png",
+            "flupe_blue_shadow.png",
+            "flupe_green_catch.png",
+            "flupe_green_midair.png",
+            "flupe_green_shadow.png",
+            "flupe_orange_catch.png",
+            "flupe_orange_midair.png",
+            "flupe_orange_shadow.png",
+            "flupe_pink_catch.png",
+            "flupe_pink_midair.png",
+            "flupe_pink_shadow.png",
+            "flupe_purple_catch.png",
+            "flupe_purple_midair.png",
+            "flupe_purple_shadow.png",
+            "flupe_yellow_catch.png",
+            "flupe_yellow_midair.png",
+            "flupe_yellow_shadow.png",
+            "glowing_outline_catch.png",
+            "glowing_outline_midair.png",
+            "glowing_outline_shadow.png",
+            "item_bubble_01.png",
+            "item_bubble_01_grey.png",
+            "item_bubble_02.png",
+            "item_bubble_02_grey.png",
+            "item_bubble_03.png",
+            "item_bubble_03_grey.png",
+            "item_bubble_04.png",
+            "item_bubble_04_grey.png",
+            "item_bubble_05.png",
+            "item_bubble_05_grey.png",
+            "score_box.png",
+            "items_container.png",
+            "cursor_0001.png"
+          ]
+        },
+
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "name": "FlupeBlueLandAnimation",
+              "frameCount": 12,
+              "frameInitial": "flupe_blue_land/flupe_blue_land_",
+              "extension": ".png"
+            },
+            {
+              "name": "FlupeBlueLeapAnimation",
+              "frameCount": 5,
+              "frameInitial": "flupe_blue_leap/flupe_blue_leap_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupeGreenLandAnimation",
+              "frameCount": 12,
+              "frameInitial": "flupe_green_land/flupe_green_land_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupeGreenLeapAnimation",
+              "frameCount": 5,
+              "frameInitial": "flupe_green_leap/flupe_green_leap_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupeOrangeLandAnimation",
+              "frameCount": 12,
+              "frameInitial": "flupe_orange_land/flupe_orange_land_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupeOrangeLeapAnimation",
+              "frameCount": 5,
+              "frameInitial": "flupe_orange_leap/flupe_orange_leap_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupePinkLandAnimation",
+              "frameCount": 12,
+              "frameInitial": "flupe_pink_land/flupe_pink_land_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupePinkLeapAnimation",
+              "frameCount": 5,
+              "frameInitial": "flupe_pink_leap/flupe_pink_leap_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupePurpleLandAnimation",
+              "frameCount": 12,
+              "frameInitial": "flupe_purple_land/flupe_purple_land_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupePurpleLeapAnimation",
+              "frameCount": 5,
+              "frameInitial": "flupe_purple_leap/flupe_purple_leap_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupeYellowLandAnimation",
+              "frameCount": 12,
+              "frameInitial": "flupe_yellow_land/flupe_yellow_land_",
+              "extension": ".png"
+            },
+            {
+
+              "name": "FlupeYellowLeapAnimation",
+              "frameCount": 5,
+              "frameInitial": "flupe_yellow_leap/flupe_yellow_leap_",
+              "extension": ".png"
+            },
+            {
+              "name": "GlowingOutlineLandAnimation",
+              "frameCount": 12,
+              "frameInitial": "glowing_outline_land/glowing_outline_land_",
+              "extension": ".png"
+            },
+            {
+              "name": "GlowingOutlineLeapAnimation",
+              "frameCount": 5,
+              "frameInitial": "glowing_outline_leap/glowing_outline_leap_"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_FROG_WORD_1",
+      "activityName": "Frog Word Hop",
+      "layerName" : "FrogWordHop",
+      "teacherScriptsNotes": {
+        "notes": "Test Notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse": true,
+        "turnBased": true
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": true,
+      "url": "res/Activity/ACTIVITY_FROG_WORD_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg.png",
+            "lily_pad_dark.png",
+            "lily_pad_light.png",
+            "box_collected-item.png",
+            "tongue_arow_slice_01.png",
+            "tongue_arow_slice_02.png",
+            "tongue_arow_slice_03.png",
+            "item_friends.png",
+            "froggy_idle.png",
+            "item_pencil_case.png",
+            "item_rooster.png",
+            "item_runner.png",
+            "item_school_bag.png",
+            "item_hen.png",
+            "item_horse.png",
+            "item_house.png",
+            "item_fly1.png",
+            "item_fly2.png",
+            "item_fun.png",
+            "item_glue.png",
+            "item_hare.png",
+            "item_sheep.png",
+            "item_sing.png",
+            "item_sleep.png",
+            "item_sweep.png",
+            "item_ball.png",
+            "item_blackboard.png",
+            "item_bracelet.png",
+            "item_clap.png",
+            "item_dance.png",
+            "item_dancer.png",
+            "item_doctor.png",
+            "item_dog.png",
+            "item_duck.png",
+            "item_eraser.png",
+            "item_fall_down1.png",
+            "item_fall_down2.png",
+            "item_finish_line.png",
+            "item_five.png",
+            "letter_base.png",
+            "letter_a.png",
+            "letter_b.png",
+            "letter_c.png",
+            "letter_d.png",
+            "letter_e.png",
+            "letter_f.png",
+            "letter_g.png",
+            "letter_h.png",
+            "letter_i.png",
+            "letter_j.png",
+            "letter_k.png",
+            "letter_l.png",
+            "letter_m.png",
+            "letter_n.png",
+            "letter_o.png",
+            "letter_p.png",
+            "letter_q.png",
+            "letter_r.png",
+            "letter_s.png",
+            "letter_t.png",
+            "letter_u.png",
+            "letter_v.png",
+            "letter_w.png",
+            "letter_x.png",
+            "letter_y.png",
+            "letter_z.png"
+          ]
+        },
+
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "froggy_jump_splash",
+              "frameCount": 38,
+              "frameInitial": "froggy_jump_splash/froggy_jump_splash_",
+              "extension": ".png"
+            },
+            {
+              "Name": "froggy_climb_back",
+              "frameCount": 11,
+              "frameInitial": "froggy_climb_back/froggy_climb_",
+              "extension": ".png"
+            },
+            {
+              "Name": "froggy_jump_land",
+              "frameCount": 15,
+              "frameInitial": "froggy_jump_land/froggy_jump_land_",
+              "extension": ".png"
+            },
+            {
+              "Name": "correct_answer",
+              "frameCount": 15,
+              "frameInitial": "correct_answer/correct_ans_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_KEVINS_CRANE_1",
+      "activityName": "Kevin's Crane",
+      "layerName" : "KevinsCrane",
+      "teacherScriptsNotes": {
+        "notes": "Test Notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse": true,
+        "turnBased": true
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": true,
+      "url": "res/Activity/ACTIVITY_KEVINS_CRANE_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg.png",
+            "base.png",
+            "joystick_idle.png",
+            "joystick_down.png",
+            "joystick_left.png",
+            "joystick_right.png",
+            "joystick_up.png",
+            "nob.png",
+            "shaft.png",
+            "button_idle.png",
+            "button_pressed.png",
+            "building_base.png",
+            "a_lowercase.png",
+            "b_lowercase.png",
+            "c_lowercase.png",
+            "d_lowercase.png",
+            "e_lowercase.png",
+            "f_lowercase.png",
+            "g_lowercase.png",
+            "h_lowercase.png",
+            "i_lowercase.png",
+            "j_lowercase.png",
+            "k_lowercase.png",
+            "l_lowercase.png",
+            "m_lowercase.png",
+            "n_lowercase.png",
+            "o_lowercase.png",
+            "p_lowercase.png",
+            "q_lowercase.png",
+            "r_lowercase.png",
+            "s_lowercase.png",
+            "t_lowercase.png",
+            "u_lowercase.png",
+            "v_lowercase.png",
+            "w_lowercase.png",
+            "x_lowercase.png",
+            "y_lowercase.png",
+            "z_lowercase.png",
+            "floor_balancer_first_floor.png",
+            "floor_balancer_second_floor.png",
+            "building_roof.png",
+            "empty.png",
+            "character_highlight.png",
+            "hint_images_base.png",
+            "item_bad.png",
+            "item_band.png",
+            "item_bed.png",
+            "item_big.png",
+            "item_dad.png",
+            "item_dig.png",
+            "item_dog.png",
+            "item_egg.png",
+            "item_fat.png",
+            "item_food.png",
+            "item_gate.png",
+            "item_ghost.png",
+            "item_grape.png",
+            "item_happy.png",
+            "item_panda.png",
+            "item_pig.png",
+            "item_sand.png",
+            "item_sing.png",
+            "help_window.png",
+            "reset_cover_up.png",
+            "craneCockpit.png",
+            "crane_cylinder.png",
+            "craneChassis.png",
+            "Help.png",
+            "crane_clawclosed.png",
+            "dustEffect.png",
+            "btn_disable.png",
+            "btn_enable.png",
+            "cursor_0001.png",
+            "help_window_pictures"
+          ]
+        },
+
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "CorrectCharacterBrokenAnimation",
+              "frameCount": 10,
+              "frameInitial": "CorrectWordAnimation/correct_effect_",
+              "extension": ".png"
+            },
+            {
+              "Name": "InCorrectCharacterBrokenAnimation",
+              "frameCount": 9,
+              "frameInitial": "InCorrectWordAnimation/incorrect_effect_",
+              "extension": ".png"
+            },
+            {
+              "Name": "crane_ball_loop_anim",
+              "frameCount": 8,
+              "frameInitial": "crane_ball_loop_anim/crane_ball_idle_",
+              "extension": ".png"
+            },
+            {
+              "Name": "crane_chassis_goleft_loop_anim",
+              "frameCount": 4,
+              "frameInitial": "crane_chassis_goleft_loop_anim/crane_chassis_goleft_",
+              "extension": ".png"
+            },
+            {
+              "Name": "crane_chassis_goright_loop_anim",
+              "frameCount": 4,
+              "frameInitial": "crane_chassis_goright_loop_anim/crane_chassis_goright_",
+              "extension": ".png"
+            },
+            {
+              "Name": "breakWordWithSmasherAnimation",
+              "frameCount": 27,
+              "frameInitial": "crane_smash_anim/crane_smash_",
+              "extension": ".png"
+            },
+            {
+              "Name": "tileBreakAndSmokeAnimation",
+              "frameCount": 11,
+              "frameInitial": "TileBreakAndSmokeAnimation/smoke_effect_",
+              "extension": ".png"
+            },
+            {
+              "Name": "craneClawCloseAnimation",
+              "frameCount": 8,
+              "frameInitial": "crane_clawclosed_loop_anim/crane_clawclosed_",
+              "extension": ".png"
+            },
+            {
+              "Name": "craneClawOpenAnimation",
+              "frameCount": 8,
+              "frameInitial": "crane_clawopen_loop_anim/crane_clawopen_",
+              "extension": ".png"
+            },
+
+            {
+              "Name": "craneAddElement",
+              "frameCount": 14,
+              "frameInitial": "crane_add_element_anim/crane_insert_",
+              "extension": ".png"
+            },
+
+            {
+              "Name": "cranePickFalse",
+              "frameCount": 17,
+              "frameInitial": "crane_pickup_false_anim/crane_pickup_false_",
+              "extension": ".png"
+            },
+
+            {
+              "Name": "cranePickTrue",
+              "frameCount": 10,
+              "frameInitial": "crane_pickup_true_anim/crane_pickup_true_",
+              "extension": ".png"
+            },
+            {
+              "Name": "fall_dust_effect_animation",
+              "frameCount": 16,
+              "frameInitial": "fall_dust_effect_animation/fall_dust_effect_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_DRAG_DROP_PARKING_1",
+      "activityName": "Drag & Drop Parking",
+      "layerName" : "MainDragDropParkingLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse": true,
+        "turnBased": true
+      },
+
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": true,
+      "url": "res/Activity/ACTIVITY_DRAG_DROP_PARKING_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg_beach.png",
+            "bg_parking.png",
+            "car_cat.png",
+            "car_dog.png",
+            "car_photos.png",
+            "car_shore.png",
+            "car_star.png",
+            "Item_cat.png",
+            "Item_dog.png",
+            "Item_photos.png",
+            "Item_shore.png",
+            "Item_star.png",
+            "btn_disable.png",
+            "btn_enable.png",
+            "next_idle.png",
+            "next_pressed.png",
+            "cursor_0001.png",
+            "target_cat.png",
+            "target_dog.png",
+            "target_photos.png",
+            "target_shore.png",
+            "target_star.png",
+            "back_idle.png",
+            "back_pressed.png",
+            "blue_target_shape.png",
+            "green_target_shape.png",
+            "red_target_shape.png",
+            "violet_target_shape.png",
+            "yellow_target_shape.png"
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+            "level_1.mp3",
+            "level_1_draggable_cat.mp3",
+            "level_1_draggable_dog.mp3",
+            "level_1_draggable_photos.mp3",
+            "level_1_draggable_shore.mp3",
+            "level_1_draggable_star.mp3",
+            "level_2.mp3",
+            "level_2_draggable_cat.mp3",
+            "level_2_draggable_dog.mp3",
+            "level_2_draggable_photos.mp3",
+            "level_2_draggable_shore.mp3",
+            "level_2_draggable_star.mp3"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Stars",
+              "frameCount": 9,
+              "frameInitial": "stars_anim/stars_anim_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Win Game",
+              "frameCount": 11,
+              "frameInitial": "win_game_anim/win_game_anim_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_SANDS_OF_TIME_1",
+      "activityName": "Sands of time",
+      "layerName" : "SOTLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": false
+
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_SANDS_OF_TIME_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "game_bg.png",
+            "Item_cat.png",
+            "Item_dog.png",
+            "Item_donkey.png",
+            "Item_duck.png",
+            "Item_hare.png",
+            "Item_horse.png",
+            "Item_rabbit.png",
+            "Item_rooster.png",
+            "Item_sheep.png",
+            "Item_tortoise.png",
+            "leaf_0001.png",
+            "leaf_0002.png",
+            "leaf_0003.png",
+            "leaf_0004.png",
+            "score_window.png",
+            "student1_bag_back.png",
+            "student1_bag_front.png",
+            "student2_bag_back.png",
+            "student2_bag_front.png",
+            "student3_bag_back.png",
+            "student3_bag_front.png",
+            "student4_bag_back.png",
+            "student4_bag_front.png",
+            "student5_bag_back.png",
+            "student5_bag_front.png",
+            "student6_bag_back.png",
+            "student6_bag_front.png",
+            "student7_bag_back.png",
+            "student7_bag_front.png",
+            "student8_bag_back.png",
+            "student8_bag_front.png",
+            "whiteBG.png",
+            "stop_idle.png",
+            "start_pressed.png",
+            "start_idle.png",
+            "stop_pressed.png"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "bag_stars",
+              "frameCount": 11,
+              "frameInitial": "bag_stars/bag_stars_",
+              "extension": ".png"
+            },
+            {
+              "Name": "item_stars",
+              "frameCount": 11,
+              "frameInitial": "item_stars/item_stars_",
+              "extension": ".png"
+            },
+            {
+              "Name": "student1_rake",
+              "frameCount": 9,
+              "frameInitial": "student1_rake/student1_rake_",
+              "extension": ".png"
+            },
+            {
+              "Name": "student2_rake",
+              "frameCount": 9,
+              "frameInitial": "student2_rake/student2_rake_",
+              "extension": ".png"
+            },
+            {
+              "Name": "student3_rake",
+              "frameCount": 9,
+              "frameInitial": "student3_rake/student3_rake_",
+              "extension": ".png"
+            },
+            {
+              "Name": "student4_rake",
+              "frameCount": 9,
+              "frameInitial": "student4_rake/student4_rake_",
+              "extension": ".png"
+            },
+            {
+              "Name": "student5_rake",
+              "frameCount": 9,
+              "frameInitial": "student5_rake/student5_rake_",
+              "extension": ".png"
+            },
+            {
+              "Name": "student6_rake",
+              "frameCount": 9,
+              "frameInitial": "student6_rake/student6_rake_",
+              "extension": ".png"
+            },
+            {
+              "Name": "student7_rake",
+              "frameCount": 9,
+              "frameInitial": "student7_rake/student7_rake_",
+              "extension": ".png"
+            },
+            {
+              "Name": "student8_rake",
+              "frameCount": 9,
+              "frameInitial": "student8_rake/student8_rake_",
+              "extension": ".png"
+            },
+            {
+              "Name": "wind_anim",
+              "frameCount": 12,
+              "frameInitial": "wind_anim/wind_anim_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_WEB_LINK_1",
+      "activityName": "Web game",
+      "layerName" : "WebLinkLayer",
+      "teacherScriptsNotes": {
+
+      },
+      "controls" : {
+        "mouse" : false,
+        "turnBased": false
+
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_WEB_LINK_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "background.png"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+          ]
+        }
+      },
+      "externalRewards" : false
+    },
+    {
+      "namespace" : "ACTIVITY_WHO_AM_I_1",
+      "activityName": "Who Am I",
+      "layerName" : "WhoAmI",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse": false,
+        "turnBased": true
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_WHO_AM_I_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg_shelves.png",
+            "bg.png",
+            "btn_door_clicked.png",
+            "btn_door_idle.png",
+            "btn_help_clicked.png",
+            "btn_help_idle.png",
+            "btn_student_again.png",
+            "btn_student_idle.png",
+            "btn_student_selected.png",
+            "foreground.png",
+            "item_card_on_shelf.png",
+            "item_chair.png",
+            "item_classroom.png",
+            "item_desk.png",
+            "item_door.png",
+            "item_marker.png",
+            "item_sign.png",
+            "item_whiteboard.png",
+            "item_window.png",
+            "cursor_0001.png",
+            "student1_l_door.png",
+            "student1_r_door.png",
+            "student2_l_door.png",
+            "student2_r_door.png",
+            "student3_l_door.png",
+            "student3_r_door.png",
+            "student4_l_door.png",
+            "student4_r_door.png",
+            "student5_l_door.png",
+            "student5_r_door.png",
+            "student6_l_door.png",
+            "student6_r_door.png",
+            "student7_l_door.png",
+            "student7_r_door.png",
+            "student8_l_door.png",
+            "student8_r_door.png",
+            "teacher_carousel_start.png",
+            "teacher_carousel_mid.png",
+            "teacher_carousel_end.png",
+            "r_btn_container.png",
+            "l_btn_container.png",
+            "btn_door_disabled.png"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "foreground_anim",
+              "frameCount": 24,
+              "frameInitial": "foreground_anim/foreground_",
+              "extension": ".png"
+            },
+            {
+              "Name": "label_anim",
+              "frameCount": 57,
+              "frameInitial": "label_anim/label_",
+              "extension": ".png"
+            }
+
+          ]
+        }
+      },
+      "externalRewards" : false
+    },
+    {
+      "namespace" : "ACTIVITY_EWG_1",
+      "activityName": "Electric wire grid",
+      "layerName" : "EwgLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": true
+
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_EWG_1/",
+      "preLoaded": true,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg.png",
+            "frame_bottom.png",
+            "frame_top_lights_off.png",
+            "frame_top_lights_on.png",
+            "Item_build.png",
+            "Item_clap.png",
+            "Item_run.png",
+            "Item_sing.png",
+            "win_screen_01.png",
+            "win_screen_02.png",
+            "blue_light.png"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Item Box",
+              "frameCount": 22,
+              "frameInitial": "item_box/item_box_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Sidebar Item Box",
+              "frameCount": 22,
+              "frameInitial": "sidebar_item_box/sidebar_item_box_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Win",
+              "frameCount": 3,
+              "frameInitial": "win/win_animation_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_GFTG_1",
+      "activityName": "Growing from the ground",
+      "layerName" : "GftgLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": true
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_GFTG_1/",
+      "preLoaded": true,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg.png",
+            "cursor_watercan_idle.png",
+            "ant.png",
+            "bat.png",
+            "bee.png",
+            "crow.png",
+            "bat.png",
+            "pot01_front.png",
+            "pot01_back.png",
+            "pot02_front.png",
+            "pot02_back.png",
+            "pot03_front.png",
+            "pot03_back.png",
+            "pot04_front.png",
+            "pot04_back.png",
+            "pot05_front.png",
+            "pot05_back.png",
+            "pot06_front.png",
+            "pot06_back.png"
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "water can animation",
+              "frameCount": 3,
+              "frameInitial": "cursor_watercan_animation/cursor_watercan_",
+              "extension": ".png"
+            },
+            {
+              "Name": "watering effect animation",
+              "frameCount": 3,
+              "frameInitial": "watering_effect_animation/watering_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_SUDOKU_1",
+      "activityName": "Sudoku",
+      "layerName" : "SudokuLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": true
+
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_SUDOKU_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg.png",
+            "cursor_pencil.png",
+            "Item_eraser.png",
+            "Item_glue.png",
+            "Item_notebook.png",
+            "Item_pen.png",
+            "Item_pencil_case.png",
+            "Item_ruler.png",
+            "line.png",
+            "Blackboard.png",
+            "bar.png"
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Right Effect",
+              "frameCount": 18,
+              "frameInitial": "RightEffect/right_effect_animation_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Complete Block",
+              "frameCount": 15,
+              "frameInitial": "CompleteBlock/complete_block_",
+              "extension": ".png"
+            },
+            {
+              "Name": "CompleteRowOrColumn",
+              "frameCount": 11,
+              "frameInitial": "CompleteRowOrColumn/complete_row_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Win",
+              "frameCount": 47,
+              "frameInitial": "Win/win_game_animation_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_CHUG_1",
+      "activityName": "Chug",
+      "layerName" : "ChugLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": false
+
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_CHUG_1/",
+      "preLoaded": true,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "Item_little_girl.png",
+            "Item_big_braclet.png",
+            "Item_big_girl.png",
+            "Item_bg.png",
+            "Item_little_ball.png",
+            "bg.png",
+            "startDisable.png",
+            "botle_mask.png",
+            "Item_little_boy.png",
+            "coffee_mug_mask.png",
+            "chug_btn_idle.png",
+            "chug_btn_pressed.png",
+            "start_idle.png",
+            "start_pressed.png",
+            "Item_big_ball.png",
+            "Item_big_boy.png",
+            "Item_little_braclet.png",
+            "jar_mask.png",
+            "milkshake_glass_mask.png",
+            "plastic_cup_mask.png",
+            "regular_glass_mask.png",
+            "umbrella_glass_mask.png",
+            "tea_cup_mask.png",
+            "yellow_glow_shadow.png"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "bottle animation",
+              "frameCount": 11,
+              "frameInitial": "bottle_animation/bottle_",
+              "extension": ".png"
+            },
+            {
+              "Name": "bottle liquid animation",
+              "frameCount": 22,
+              "frameInitial": "bottle_liquid_animation/bottle_liquid_",
+              "extension": ".png"
+            },
+            {
+              "Name": "coffee mug animation",
+              "frameCount": 11,
+              "frameInitial": "coffee_mug_animation/coffee_mug_",
+              "extension": ".png"
+            },
+            {
+              "Name": "coffee mug liquid animation",
+              "frameCount": 22,
+              "frameInitial": "coffee_mug_liquid_animation/coffee_mug_liquid_",
+              "extension": ".png"
+            },
+            {
+              "Name": "jar animation",
+              "frameCount": 11,
+              "frameInitial": "jar_animation/jar_",
+              "extension": ".png"
+            },
+            {
+              "Name": "jar liquid animation",
+              "frameCount": 22,
+              "frameInitial": "jar_liquid_animation/jar_liquid_",
+              "extension": ".png"
+            },
+            {
+              "Name": "milkshake glass animation",
+              "frameCount": 11,
+              "frameInitial": "milkshake_glass_animation/milkshake_glass_",
+              "extension": ".png"
+            },
+            {
+              "Name": "milkshake glass liquid animation",
+              "frameCount": 22,
+              "frameInitial": "milkshake_glass_liquid_animation/milkshake_glass_liquid_",
+              "extension": ".png"
+            },
+            {
+              "Name": "plastic cup animation",
+              "frameCount": 11,
+              "frameInitial": "plastic_cup_animation/plastic_cup_",
+              "extension": ".png"
+            },
+            {
+              "Name": "plastic cup liquid animation",
+              "frameCount": 22,
+              "frameInitial": "plastic_cup_liquid_animation/plastic_cup_liquid_",
+              "extension": ".png"
+            },
+            {
+              "Name": "regular glass animation",
+              "frameCount": 11,
+              "frameInitial": "regular_glass_animation/regular_glass_",
+              "extension": ".png"
+            },
+            {
+              "Name": "regular glass liquid animation",
+              "frameCount": 22,
+              "frameInitial": "regular_glass_liquid_animation/regular_glass_liquid_",
+              "extension": ".png"
+            },
+            {
+              "Name": "tea cup animation",
+              "frameCount": 11,
+              "frameInitial": "tea_cup_animation/tea_cup_",
+              "extension": ".png"
+            },
+            {
+              "Name": "tea cup liquid animation",
+              "frameCount": 22,
+              "frameInitial": "tea_cup_liquid_animation/tea_cup_liquid_",
+              "extension": ".png"
+            },
+            {
+              "Name": "umbrella glass animation",
+              "frameCount": 11,
+              "frameInitial": "umbrella_glass_animation/umbrella_glass_",
+              "extension": ".png"
+            },
+            {
+              "Name": "umbrella glass liquid animation",
+              "frameCount": 22,
+              "frameInitial": "umbrella_glass_liquid_animation/umbrella_glass_liquid_",
+              "extension": ".png"
+            },
+
+            {
+              "Name": "card take out",
+              "frameCount": 15,
+              "frameInitial": "cardTakeOut/chug_cardTakeOut_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_MAGIC_HAT_1",
+      "activityName": "Magic Hat",
+      "layerName" : "HDMagicHatLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": true
+
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_MAGIC_HAT_1/",
+      "preLoaded": true,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "background.png",
+            "ant.png",
+            "bat.png",
+            "bee.png",
+            "cat.png",
+            "crow.png",
+            "dog.png",
+            "frog.png",
+            "wordHolder.png",
+            "carouselImage.png",
+            "HatFront.png",
+            "HatBack.png",
+            "BagFront.png",
+            "BagBack.png",
+            "ApronFront.png",
+            "ApronBack.png",
+            "cellGlow.png",
+            "Book.png",
+            "flupeSad.png",
+            "house.png",
+            "paulHappy.png",
+            "rat.png",
+            "sheep.png",
+            "sing.png",
+            "tub.png",
+            "tree.png"
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+            "cardTakeOut.mp3"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Card Take Out",
+              "frameCount": 15,
+              "frameInitial": "cardTakeOut/magicHat_cardTakeOut_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace" : "ACTIVITY_FLASH_CARDS_1",
+      "activityName": "Flashcards",
+      "layerName" : "MainFlashCardsLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : false
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_FLASH_CARDS_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "flashcards_background.png",
+            "flashcards_dog.png",
+            "flashcards_wordHolder.png",
+            "flashcards_boy.png",
+            "flashcards_cat.png",
+            "flashcards_girl.png",
+            "flashcards_hen.png",
+            "flashcards_mouse.png",
+            "flashcards_bookPage.png",
+            "flashcards_panelBackground.png",
+            "flashcards_panelForeground.png",
+            "flashcards_billboardBackground.png",
+            "flashcards_billboard.png",
+            "Item_book.png",
+            "Item_cat.png",
+            "Item_dog.png",
+            "Item_rat.png",
+            "Item_sheep.png",
+            "Item_sign.png"
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+            "flashcards_pageFlip.mp3",
+            "flashcards_swipe.mp3"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "name": "onePageTurn",
+              "frameCount": 8,
+              "extension": ".png",
+              "frameInitial": "one_page_turn/one_page_tern_"
+            },
+            {
+              "name": "pageTurnBook",
+              "frameCount": 8,
+              "frameInitial": "page_turn_book/page_turn_book_",
+              "extension": ".png"
+            },
+            {
+              "name": "pageTurnCat",
+              "frameCount": 8,
+              "frameInitial": "page_turn_cat/page_turn_cat_",
+              "extension": ".png"
+            },
+            {
+              "name": "pageTurnDog",
+              "frameCount": 8,
+              "frameInitial": "page_turn_dog/page_turn_dog_",
+              "extension": ".png"
+            },
+            {
+              "name": "pageTurnRat",
+              "frameCount": 8,
+              "frameInitial": "page_turn_rat/page_turn_rat_",
+              "extension": ".png"
+            },
+            {
+              "name": "pageTurnSheep",
+              "frameCount": 8,
+              "frameInitial": "page_turn_sheep/page_turn_sheep_",
+              "extension": ".png"
+            },
+            {
+              "name": "pageTurnSign",
+              "frameCount": 8,
+              "frameInitial": "page_turn_sign/page_turn_sign_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+
+      "externalRewards" : true},
+    {
+      "namespace": "ACTIVITY_CWC_1",
+      "activityName": "Character Conversation",
+      "layerName": "CharacterConversationLayer",
+      "url": "res/Activity/ACTIVITY_CWC_1/",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls": {
+        "mouse": false
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description": "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+              "Characters_popup.png",
+              "nat.png",
+              "polly.png",
+              "playground.png",
+              "Characters_popup_top.png",
+              "Characters_popup_middle.png",
+              "Characters_popup_down.png",
+              "Poul.png",
+              "Flupe.png",
+              "Grnanny_fix.png",
+              "btn_down.png",
+              "Characters_play.png",
+              "Characters_play_click.png",
+              "Characters_play_hover.png",
+              "Characters_popup.png",
+              "Characters_play.png",
+              "Demo_Character_rectangle.png",
+               "dotted_line_popup.png",
+               "dotted_line_popup_select.png",
+               "selectBG.png"
+
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+            "nat_hello.mp3",
+            "nat_i_am_nat.mp3",
+            "nat_who_are_you.mp3",
+            "polly_hello.mp3",
+            "polly_i_am_polly.mp3",
+            "polly_who_are_you.mp3",
+            "granny_hello.mp3",
+            "granny_i_am_nat.mp3",
+            "granny_who_are_you.mp3"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Flupe Excited",
+              "frameCount": 29,
+              "frameInitial": "Flupe/Excited/Flupe_excited_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Flupe Hi",
+              "frameCount": 23,
+              "frameInitial": "Flupe/Hi/Flupe_hi_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Flupe Restpose01",
+              "frameCount": 26,
+              "frameInitial": "Flupe/RestPose01/Flupe_restpose01_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Flupe Restpose02",
+              "frameCount": 20,
+              "frameInitial": "Flupe/RestPose02/Flupe_restpose02_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Flupe Restpose03",
+              "frameCount": 23,
+              "frameInitial": "Flupe/RestPose03/Flupe_restpose03_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Grnanny Excited",
+              "frameCount": 24,
+              "frameInitial": "Grnanny_fix/Excited/Grnanny_fix_excited_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Grnanny  Hi",
+              "frameCount": 27,
+              "frameInitial": "Grnanny_fix/Hi/Grnanny_fix_hi_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Grnanny_fix Restpose01",
+              "frameCount": 32,
+              "frameInitial": "Grnanny_fix/RestPose01/Grnanny_fix_restpose01_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Grnanny_fix Restpose02",
+              "frameCount": 31,
+              "frameInitial": "Grnanny_fix/RestPose02/Grnanny_fix_restpose02_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Grnanny_fix Restpose03",
+              "frameCount": 31,
+              "frameInitial": "Grnanny_fix/RestPose03/Grnanny_fix_restpose03_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Poul Excited",
+              "frameCount": 23,
+              "frameInitial": "Poul/Excited/Poul_excited_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Poul Hi",
+              "frameCount": 24,
+              "frameInitial": "Poul/Hi/Poul_hi_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Poul Restpose01",
+              "frameCount": 25,
+              "frameInitial": "Poul/RestPose01/Poul_restpose01_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Poul Restpose02",
+              "frameCount": 21,
+              "frameInitial": "Poul/RestPose02/Poul_restpose02_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Poul Restpose03",
+              "frameCount": 25,
+              "frameInitial": "Poul/RestPose03/Poul_restpose03_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : false
+    },
+    {
+      "namespace" : "ACTIVITY_COUNTING_1",
+      "activityName": "Counting",
+      "layerName" : "CountingLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": true
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_COUNTING_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "playground.png",
+            "backpack_hidden.png",
+            "backpack_revealed.png",
+            "bin_hidden.png",
+            "bin_revealed.png",
+            "book_hidden.png",
+            "book_revealed.png",
+            "bowl_hidden.png",
+            "bowl_revealed.png",
+            "box01_hidden.png",
+            "box01_revealed.png",
+            "box02_hidden.png",
+            "box02_revealed.png",
+            "hat01_hidden.png",
+            "hat01_revealed.png",
+            "hat02_hidden.png",
+            "hat02_revealed.png",
+            "hole_hidden.png",
+            "hole_revealed.png",
+            "trunk_hidden.png",
+            "trunk_revealed.png",
+            "btn_disable.png",
+            "btn_enable.png"
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+            "tap.mp3"
+          ]
+        }
+      },
+      "externalRewards": true
+    },
+    {
+      "namespace" : "ACTIVITY_SPINNINGWHEEL_1",
+      "activityName": "Spinning Wheel",
+      "layerName" : "SpinningWheelLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": true
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_SPINNINGWHEEL_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg.png",
+            "carouselBorderImage.png",
+            "carouselImage.png",
+            "ant.png",
+            "bat.png",
+            "bee.png",
+            "crow.png",
+            "go_button_disabled.png",
+            "go_button_idle.png",
+            "go_button_pushed.png",
+            "stop_button_disabled.png",
+            "stop_button_idle.png",
+            "stop_button_pushed.png",
+            "targetBg.png",
+            "wheel_4.png",
+            "wheel_5.png",
+            "wheel_6.png",
+            "wheel_arrow.png",
+            "wheel_center.png"
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+            "tap.mp3"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Win Object Pulled Out Animation",
+              "frameCount": 15,
+              "frameInitial": "Win/object_pulled_out_animation_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Loss Object Pulled Out Animation",
+              "frameCount": 15,
+              "frameInitial": "Loss/object_pulled_out_animation_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace"   : "ACTIVITY_BAP_1",
+      "activityName": "Background And Pen",
+      "layerName"   : "BackgroundAndPenLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased":false
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": true,
+      "url": "res/Activity/ACTIVITY_BAP_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "eraser.png",
+            "background_1.png",
+            "background_2.png",
+            "background_3.png",
+            "cursor_eraser.png",
+            "cursor_pencil.png",
+            "palette_sidebar.png",
+            "colour_black.png",
+            "colour_blue.png",
+            "colour_green.png",
+            "colour_orange.png",
+            "colour_pink.png",
+            "colour_red.png",
+            "colour_white.png",
+            "colour_yellow.png",
+            "btn_disable.png",
+            "btn_enable.png",
+            "btn_next.png",
+            "btn_previous.png",
+            "eraser_icon.png"
+
+          ]
+        }
+      },
+      "externalRewards" : true
+    },
+    {
+      "namespace"   : "ACTIVITY_FLASHLIGHT_1",
+      "activityName": "Flashlight",
+      "layerName"   : "Flashlight",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased":false
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_FLASHLIGHT_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "circle.png",
+            "redCircle.png",
+            "bg.png",
+            "tick.png",
+            "cross.png",
+            "blackImage.png"
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+            "object_pulled_out_animation_sound.mp3"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Granny Celebrating",
+              "frameCount": 32,
+              "frameInitial": "Granny_Fix_celebrating/celebrating_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Granny Idle",
+              "frameCount": 16,
+              "frameInitial": "Granny_Fix_idle/idle_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Granny Run Left",
+              "frameCount": 11,
+              "frameInitial": "Granny_Fix_run_left/run_left_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Granny Run Right",
+              "frameCount": 11,
+              "frameInitial": "Granny_Fix_run_right/run_right_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : false
+    },
+    {
+      "namespace" : "ACTIVITY_PIANO_PLAYER_1",
+      "activityName": "Piano Player",
+      "layerName" : "MainPianoPlayerLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse": true,
+        "turnBased": false
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_PIANO_PLAYER_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "student_answer.png",
+            "Item_book.png",
+            "Item_boy.png",
+            "Item_hat.png",
+            "Item_girl.png",
+            "Item_rabbit.png",
+            "Item_tree.png",
+            "Item_donkey.png",
+            "next_idle.png",
+            "next_pressed.png",
+            "start_idle.png",
+            "start_pressed.png",
+            "flashcards_boy.png",
+            "flashcards_cat.png",
+            "flashcards_dog.png",
+            "flashcards_girl.png",
+            "flashcards_hen.png",
+            "flashcards_mouse.png",
+            "A_idle.png",
+            "A_pressed.png",
+            "B_idle.png",
+            "B_pressed.png",
+            "bg.png",
+            "C_idle.png",
+            "C_pressed.png",
+            "D_idle.png",
+            "D_pressed.png",
+            "E_idle.png",
+            "E_pressed.png",
+            "F_idle.png",
+            "F_pressed.png",
+            "G_idle.png",
+            "G_pressed.png",
+            "key_pressed_correct.png",
+            "key_pressed_incorrect.png",
+            "play_idle.png",
+            "play_pressed.png"
+
+          ]
+        },
+        "sounds": {
+          "basePath": "res/Sound/",
+          "audio": [
+            "a-5.mp3",
+            "b-5.mp3",
+            "c-5.mp3",
+            "d-5.mp3",
+            "e-5.mp3",
+            "f-5.mp3",
+            "g-5.mp3"
+          ]
+        }
+      },
+      "externalRewards" : false
+    },
+    {
+      "namespace" : "ACTIVITY_SAVE_A_SITUATION_1",
+      "activityName": "Save A Situation",
+      "layerName" : "SaveASituation",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": true
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_SAVE_A_SITUATION_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "bg01.png",
+            "bg02.png",
+            "bg02_win.png",
+            "bg03.png",
+            "bg04.png",
+            "bg05.png",
+            "cat_regular.png",
+            "dog_regular.png",
+            "rat_regular.png",
+            "sheep_regular.png",
+            "tub02.png",
+            "tub01.png",
+            "water.png",
+            "cat_loose.png",
+            "dog_loose.png",
+            "rat_loose.png",
+            "sheep_loose.png",
+            "cat_win.png",
+            "dog_win.png",
+            "rat_win.png",
+            "sheep_win.png",
+            "carouselBorderImage.png",
+            "carouselImage.png",
+            "cellBGlow.png",
+            "cellBg.png",
+            "closed_pincer_fingers_pointer.png",
+            "open_pincer_fingers_pointer.png",
+            "item_house.png",
+            "item_tree.png",
+            "item_hat.png",
+            "item_book.png",
+            "item_stickers.png",
+            "next_botton_idle.png",
+            "next_botton_pushed.png",
+            "pop_up_bg.png",
+            "replay_botton_idle.png",
+            "replay_botton_pushed.png"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Tub Water Circle",
+              "frameCount": 12,
+              "frameInitial": "tub_watercircle_12fps_png_seq/tub_watecircle_loop_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Tub Waterline",
+              "frameCount": 5,
+              "frameInitial": "tubWaterline/tubWaterLine",
+              "extension": ".png"
+            },
+            {
+              "Name": "Animals Waterline Loop",
+              "frameCount": 5,
+              "frameInitial": "animalWaterline/animals_waterline_loop_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Tub Fill Waterline",
+              "frameCount": 24,
+              "frameInitial": "tub_waterFill/tub_fillwaterline_loop_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Card Take Out",
+              "frameCount": 15,
+              "frameInitial": "cardTakeOut/magicHat_cardTakeOut_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : false
+    },
+    {
+      "namespace" : "ACTIVITY_BUILD_SOMETHING_1",
+      "activityName": "Build Something",
+      "layerName" : "BuildSomething",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse" : true,
+        "turnBased": false
+      },
+      "teacherTipsNotes": {
+        "tips": "Don't ask about bag",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_BUILD_SOMETHING_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "background.png",
+            "circle.png",
+            "stop_idle.png",
+            "stop_pressed.png",
+            "start_idle.png",
+            "start_pressed.png",
+            "reset_idle.png",
+            "reset_pressed.png",
+            "carouselBorderImage.png",
+            "carouselImage.png",
+            "dwarf_head.png",
+            "dwarf_lefthand.png",
+            "dwarf_leftleg.png",
+            "dwarf_righthand.png",
+            "dwarf_rightleg.png",
+            "dwarf_torso.png",
+            "king_leftleg.png",
+            "king_righthand.png",
+            "king_lefthand.png",
+            "king_rightleg.png",
+            "king_head.png",
+            "king_torso.png",
+            "knight_head.png",
+            "knight_leftleg.png",
+            "knight_lefthand.png",
+            "knight_righthand.png",
+            "knight_rightleg.png",
+            "knight_torso.png",
+            "reward_screen_frame.png",
+            "close.png",
+            "left_arrow_idle.png",
+            "left_arrow_pushed.png",
+            "right_arrow_idle.png",
+            "right_arrow_pushed.png",
+            "winScreen.png",
+            "looseScreen.png",
+            "frame.png"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Dwarf Animation",
+              "frameCount": 16,
+              "frameInitial": "dwarf_animation/dwarf_animation_",
+              "extension": ".png"
+            },
+            {
+              "Name": "King Animation",
+              "frameCount": 16,
+              "frameInitial": "king_animation/king_animation_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Knight Animation",
+              "frameCount": 16,
+              "frameInitial": "knight_animation/knight_animation_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : false
+    },
+    {
+      "namespace" : "ACTIVITY_DONT_WAKE_THE_DRAGON_1",
+      "activityName": "Don't Wake The Dragon",
+      "layerName" : "MainLayer",
+      "teacherScriptsNotes": {
+        "notes": "Ask to identify notes",
+        "timestamp": "",
+        "triggers": ""
+      },
+      "controls" : {
+        "mouse": true,
+        "turnBased": true
+      },
+
+      "description" : "",
+      "allocatedTime": 1,
+      "studentPreview": false,
+      "url": "res/Activity/ACTIVITY_DONT_WAKE_THE_DRAGON_1/",
+      "preLoaded": false,
+      "resources": {
+        "sprites": {
+          "basePath": "res/Sprite/",
+          "images": [
+            "background.png",
+            "closed_pincer_fingers_pointer.png",
+            "Item_book.png",
+            "Item_hat.png",
+            "Item_house.png",
+            "Item_tree.png",
+            "Item_stickers.png",
+            "open_pincer_fingers_pointer.png",
+            "player_treasure_chest.png",
+            "treasurePile.png",
+            "student_answer.png"
+          ]
+        },
+        "animationFrames": {
+          "basePath": "res/AnimationFrames/",
+          "animation": [
+            {
+              "Name": "Card Take Out",
+              "frameCount": 15,
+              "frameInitial": "cardTakeOut/magicHat_cardTakeOut_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Dragon Awake",
+              "frameCount": 48,
+              "frameInitial": "dragon_awake/dragon_awake_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Dragon Sleep01",
+              "frameCount": 35,
+              "frameInitial": "dragon_sleep01/dragon_sleep01_",
+              "extension": ".png"
+            },{
+              "Name": "Dragon Sleep02",
+              "frameCount": 24,
+              "frameInitial": "dragon_sleep02/dragon_sleep02_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Dragon Sleep03",
+              "frameCount": 24,
+              "frameInitial": "dragon_sleep03/dragon_sleep03_",
+              "extension": ".png"
+            },
+            {
+              "Name": "Dragon Back To Sleep",
+              "frameCount": 38,
+              "frameInitial": "dragon_back_to_sleep/dragon_back_to_sleep_",
+              "extension": ".png"
+            }
+          ]
+        }
+      },
+      "externalRewards" : false
+    }
+  ]
 }
