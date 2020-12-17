@@ -481,6 +481,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   _isDragging: false,
   _isIncorrectMatchAnimationPlaying: false,
   _levelChangeDelegate: null,
+  _goToNextLevel: false,
   ctor: function () {
     // initializations here
     this._super();
@@ -756,33 +757,42 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
           this._draggedSpriteRef.playAudio();
           this.setResetButtonActive(true);
           if (this._isCurrentLevelCompleted()) {
+            if (HDAppManager.isTeacherView) {
+              this._goToNextLevel = true;
+            }
             this.playLevelCompleteAnimation(() => {
-              if (this.isThereNextLevel()) {
-                this.renderNextLevelWithDelay(
-                  3,
-                  () => {
-                    if (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
-                      this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-                        roomId: HDAppManager.roomId,
-                        type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.UPDATE_USER_DATA,
-                        userName: HDAppManager.username,
-                        data: ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(HDAppManager.username),
-                      });
-                    }
-                    if (
-                      this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
-                      !HDAppManager.isTeacherView
-                    ) {
-                      this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-                        roomId: HDAppManager.roomId,
-                        type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.NEXT_LEVEL_BY_STUDENT_IN_INDIVIDUAL_MODE,
-                        userName: HDAppManager.username,
-                        data: ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(HDAppManager.username),
-                      });
-                    }
-                  },
-                  this
-                );
+              if (!this._goToNextLevel) {
+                if (this.isThereNextLevel()) {
+                  this.renderNextLevelWithDelay(
+                    3,
+                    () => {
+                      if (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
+                        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+                          roomId: HDAppManager.roomId,
+                          type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.UPDATE_USER_DATA,
+                          userName: HDAppManager.username,
+                          data: ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(
+                            HDAppManager.username
+                          ),
+                        });
+                      }
+                      if (
+                        this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
+                        !HDAppManager.isTeacherView
+                      ) {
+                        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+                          roomId: HDAppManager.roomId,
+                          type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.NEXT_LEVEL_BY_STUDENT_IN_INDIVIDUAL_MODE,
+                          userName: HDAppManager.username,
+                          data: ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(
+                            HDAppManager.username
+                          ),
+                        });
+                      }
+                    },
+                    this
+                  );
+                }
               }
             }, this);
             this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
@@ -1040,6 +1050,10 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   getDraggableIdxByTag: function (tag) {
     const draggableSprite = this.getChildByTag(tag);
     return draggableSprite.getIdx();
+  },
+
+  setGoToNextLevel: function (flag) {
+    this._goToNextLevel = flag;
   },
 });
 
@@ -1405,6 +1419,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
       case ccui.Widget.TOUCH_ENDED:
         switch (sender.getTag()) {
           case ACTIVITY_DRAG_DROP_PARKING_1.TAGS.NEXT_BUTTON: {
+            this.setGoToNextLevel(true);
             this.renderNextLevel();
             if (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
               this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
