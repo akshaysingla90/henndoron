@@ -11,7 +11,7 @@
       "turnBasedEditable": true
     },
     "externalRewards": true,
-    "studentPreview":  true,
+    "studentPreview":  false,
     "url": "res/Activity/ACTIVITY_FROG_WORD_1/",
     "number": 1,
     "renderMode": 1,
@@ -20,7 +20,25 @@
     "layerName": "FrogWordHop"
   },
   "teacherScripts": {
+    "component": "scriptsCard",
+    "data":
+    {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content": {"ops":[{"attributes":{"bold":true},"insert":"Teacher Script: "},{"insert":"\n\n"},{"attributes":{"color":"#ff0000","bold":true},"insert":"[Module Starts]"},{"insert":"\n\n"},{"attributes":{"italic":true,"bold":true},"insert":"What letter is it? It’s the letter ____! What starts with the letter "},{"insert":"\n\n"},{"attributes":{"italic":true,"bold":true},"insert":"__? "},{"attributes":{"italic":true,"background":"#ffff00","bold":true},"insert":"INSERT TARGET VOCAB"},{"attributes":{"italic":true,"bold":true},"insert":". Let’s jump on the leaves! "},{"insert":"\n"}]}
+      },
+      "onMouseEnable": {
+        "UIName": "On Mouse Enable",
+        "enable": true,
+        "description": "This will trigger when student mouse is enabled."
+
+
+      }
+    }
   },
+
   "teacherTips": {
   },
   "background": {
@@ -34,40 +52,326 @@
       }
     }
   },
-
-  "buttons": {
-    "component": "buttonsCard",
-    "data": {
-      "help": {
-        "UIName": "HelpButton",
-        "enableState": "Help.png",
-        "pushedState": "Help.png",
-        "dimensions": { "width": 64, "height": 64 },
-        "position" : {"x": 900 , "y":300}
-      },
-
-     "multiplayerMode" :{
-       "UIName": "MultiPlayerButton",
-       "title": ["Shared Mode", "Individual Mode"],
-       "enableState": "btn_enable.png",
-       "disableState": "btn_disable.png",
-       "position": { "x": 0, "y": 0 },
-       "dimensions": { "width": 139, "height": 32 }
-     }
-    }
-  },
-
+  
   "assets": {
     "component": "assetsCard",
     "sections": {
-      "lilyLight": {
-        "component": "image",
-        "UIName": "lily_pad_light",
-        "imageName": "lily_pad_light.png",
-        "dimensions": {
-          "width": 450,
-          "height": 535
+      "leafs": {
+        "component": "Tiles",
+        "UIName"   : "Leaf",
+        "tiled"     : "lily_pad_dark.png",
+        "activeFilePath" : "lily_pad_light.png",
+        "sizes" : {
+          "large" : {"w":130 , "h": 130},
+          "medium" : {"w":110 , "h": 110},
+          "small" : {"w":90 , "h": 90}
         }
+      },
+      "tiles": {
+        "component" : "Pond Tiles",
+        "data" :  [
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 120,
+              "y": 455
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 227,
+              "y": 510
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 133,
+              "y": 374
+            },
+            "ActivePath": false,
+            "scale": 0.7
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 242,
+              "y": 399
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 192,
+              "y": 307
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 128,
+              "y": 226
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 297,
+              "y": 230
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 330,
+              "y": 327
+            },
+            "ActivePath": false,
+            "scale":1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 346,
+              "y": 451
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 334,
+              "y": 541
+            },
+            "ActivePath": false,
+            "scale": 0.7
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 423,
+              "y": 528
+            },
+            "ActivePath": false,
+            "scale": 0.7
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 455,
+              "y": 461
+            },
+            "ActivePath": false,
+            "scale": 0.7
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 448,
+              "y": 375
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 448,
+              "y": 375
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 420,
+              "y": 265
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 408,
+              "y": 181
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 513,
+              "y": 146
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 580,
+              "y": 204
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 514,
+              "y": 283
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 596,
+              "y": 375
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 556,
+              "y": 460
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 510,
+              "y": 531
+            },
+            "ActivePath": false,
+            "scale": 0.7
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 612,
+              "y": 531
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 727,
+              "y": 529
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 832,
+              "y": 505
+            },
+            "ActivePath": false,
+            "scale": 0.7
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 676,
+              "y": 45
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 781,
+              "y": 440
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 728,
+              "y": 347
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 660,
+              "y": 274
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 831,
+              "y": 305
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 863,
+              "y": 236
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 775,
+              "y": 206
+            },
+            "ActivePath": false,
+            "scale": 1
+          },
+          {
+            "size": 1,
+            "centerPosition": {
+              "x": 665,
+              "y": 144
+            },
+            "ActivePath": false,
+            "scale": 0.8
+          }]
+
+
+
+
+
       },
       "letters" : {
         "component": "letters",
@@ -101,38 +405,162 @@
       },
       "items" : {
         "component": "items",
-        "imageNames" : [
-          "item_friends.png",
-          "item_pencil_case.png",
-          "item_rooster.png",
-          "item_runner.png",
-          "item_school_bag.png",
-          "item_hen.png",
-          "item_horse.png",
-          "item_house.png",
-          "item_fly1.png",
-          "item_fly2.png",
-          "item_fun.png",
-          "item_glue.png",
-          "item_hare.png",
-          "item_sheep.png",
-          "item_sing.png",
-          "item_sleep.png",
-          "item_sweep.png",
-          "item_ball.png",
-          "item_blackboard.png",
-          "item_bracelet.png",
-          "item_clap.png",
-          "item_dance.png",
-          "item_dancer.png",
-          "item_doctor.png",
-          "item_dog.png",
-          "item_duck.png",
-          "item_eraser.png",
-          "item_fall_down1.png",
-          "item_fall_down2.png",
-          "item_finish_line.png",
-          "item_five.png"]
+        "sound"     : {
+          "objectCollectionSoundEffect" : ""
+        },
+        "data": [
+          {
+            "imageName": "item_friends.png",
+            "label"     : "Friends",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_friends.png",
+            "label"     : "Friends",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_rooster.png",
+            "label"     : "Rooster",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_runner.png",
+            "label"     : "Runner",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_school_bag.png",
+            "label"     : "School bag",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_hen.png",
+            "label"     : "Hen",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_horse.png",
+            "label"     : "Horse",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_house.png",
+            "label"     : "House",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_fly1.png",
+            "label"     : "Fly1",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_fly2.png",
+            "label"     : "Fly2",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_glue.png",
+            "label"     : "Glue",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_hare.png",
+            "label"     : "Hare",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_sheep.png",
+            "label"     : "Sheep",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_sing.png",
+            "label"     : "Sing",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_sleep.png",
+            "label"     : "Sleep",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_sweep.png",
+            "label"     : "Sweep",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_ball.png",
+            "label"     : "Ball",
+            "soundName": ""
+          },
+          {
+            "imageName": "item_blackboard.png",
+            "label"     : "Blackboard",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_bracelet.png",
+            "label"     : "Friends",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_clap.png",
+            "label"     : "Clap",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_dance.png",
+            "label"     : "Friends",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_dancer.png",
+            "label"     : "Dancer",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_doctor.png",
+            "label"     : "Doctor",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_duck.png",
+            "label"     : "Duck",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_eraser.png",
+            "label"     : "Eraser",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_fall_down1.png",
+            "label"     : "Fall Down1",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_fall_down2.png",
+            "label"     : "Fall Down2",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_finish_line.png",
+            "label"     : "Fall Down2",
+            "soundName": ""
+          },
+          {
+            "imageName":  "item_five.png",
+            "label"     : "Five",
+            "soundName": ""
+          }
+
+        ]
+      },
+      "FinishLine": {
+        "component" : "FinishLine",
+        "FinishLineImage" : "letter_f.png",
+        "baseImage"       :"letter_base.png"
       },
       "animation": {
         "component": "animationGroup",
@@ -170,6 +598,22 @@
             "extension": ".png"
           }
         }
+      },
+      "itemContainer" : {
+        "component"  : "image",
+        "UIName"     : "box_collection_item",
+        "ImageName"  : "box_collected-item.png"
+
+      }
+    }
+  },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "cursorPointer": {
+        "UIName": "Pointer Cursor",
+        "imageName": "cursor_0001.png",
+        "dimensions": { "width": 50, "height": 50 }
       }
     }
   },
@@ -243,7 +687,8 @@
         "letter_w.png",
         "letter_x.png",
         "letter_y.png",
-        "letter_z.png"
+        "letter_z.png",
+        "cursor_0001.png"
 
       ]
     },
