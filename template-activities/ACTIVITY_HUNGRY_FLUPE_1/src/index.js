@@ -624,6 +624,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 flupe.getPositionY(), 205, this.getContentSize().height * 0.8)));
         });
     },
+
     /**
      * * Shadow will be scaled according to flupe movement
      */
@@ -635,7 +636,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         });
     },
 
-    //==============================  Bubble operation
+    //=====================================================  Bubble operation
     /**
      * populateBubbles
      * @param count
@@ -802,7 +803,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     },
 
 
-    //========================  Table View Delegates
+    //==========================================================  Table View Delegates
     tableCellSizeForIndex: function (table, idx) {
         return cc.size(table.getViewSize().width / 5, table.getViewSize().height);
     },
@@ -822,7 +823,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     },
     tableCellTouched: function (table, cell) {},
 
-    //======================= Timer
+    //========================================================= Timer
     setupTimer : function(){
         this.timerLabel =   this.createTTFLabel("00:40", HDConstants.Sassoon_Medium, 30, HDConstants.White, cc.p(this.width * 0.93, this.height * 0.8), this);
         this.timerLabel.setLocalZOrder(10);
@@ -931,7 +932,6 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         }
         this.setPushButtonActive();
     },
-
     socketListener: function (res) {
         if (!ACTIVITY_HUNGRY_FLUPE_1.ref)
             return;

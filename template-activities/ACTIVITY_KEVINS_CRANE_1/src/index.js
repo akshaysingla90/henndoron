@@ -67,7 +67,7 @@ var CharacterBox = cc.Sprite.extend({
         var basePath            =   ACTIVITY_KEVINS_CRANE_1.config.assets.sections.alphabetBricks.charactersData;
         this.text               =   character;
         this.rowCounter         =   rowCounter;
-        var characterData       =   basePath[this.text];
+        var characterData       =   basePath.find(item => item.text == character);
 
         this.setTexture(ACTIVITY_KEVINS_CRANE_1.spriteBasePath + characterData.imageName);
         this.setAnchorPoint(cc.p(0.5, 0));
@@ -670,7 +670,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         this.updateUserInfo(dataToSend,"setUp");
         ACTIVITY_KEVINS_CRANE_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
             "eventType"     : ACTIVITY_KEVINS_CRANE_1.socketEventKey.USER_DATA,
-            "data"          : dataToSend,
+            "data"          : JSON.stringify(dataToSend)
         });
     },
     buildHome: function() {
@@ -798,6 +798,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
     setupCharacters : function() {
       for (var rowCounter = 0; rowCounter < this.maxNumberOfRows; rowCounter++) {
           var displayWords = this.gameData[rowCounter].display_word;
+          console.log("display characters",displayWords );
           this.addCharacterInRow(displayWords, rowCounter)
       }
     },
@@ -1181,7 +1182,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
 
             ACTIVITY_KEVINS_CRANE_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 "eventType"     : ACTIVITY_KEVINS_CRANE_1.socketEventKey.USER_DATA,
-                "data"          : dataToSend,
+                "data"          : JSON.stringify(dataToSend),
             });
         }
         return cc.spawn(cc.moveTo(0.25, data.location, this.getContentSize().height * 0.1), cc.rotateTo(0.25, rotationAngle));
@@ -1226,6 +1227,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
                 }
             }
             var dataToSend = this.createDataToSend();
+            console.log("data to send", dataToSend);
             var data = {
                 "levelStatus"  :  this.levelStatus,
                 "rowCounter"   : rowData.rowCounter,
@@ -1237,8 +1239,8 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
                 "data" : data
 
             });
-
-            this.updateUserInfo(dataToSend, "updateGameRowData");
+            console.log("game on going");
+            this.updateUserInfo(dataToSend, 3);
         }
     },
     playWordSuccessAnimation : function(){
@@ -1304,7 +1306,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
             var dataToSend = this.createDataToSend();
             ACTIVITY_KEVINS_CRANE_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                 "eventType"     : ACTIVITY_KEVINS_CRANE_1.socketEventKey.USER_DATA,
-                "data"          : dataToSend,
+                "data"          : JSON.stringify(dataToSend),
             });
             this.updateUserInfo(dataToSend, "start new level");
         }
@@ -1527,7 +1529,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
             }
         }, null);
 
-        console.log("user room data", ACTIVITY_KEVINS_CRANE_1.ref.multiPlayerType);
+        console.log("user room data", ACTIVITY_KEVINS_CRANE_1.ref.gamePlayInfo);
     },
     updateStudentInteraction: function (username, status) {
         if (this.isTeacherView) {
@@ -1646,7 +1648,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         if (!ACTIVITY_KEVINS_CRANE_1.ref)
             return;
 
-        console.log(this.isTurnBased() , this.isPreviewMode &&  res.userName == this.previewingStudentName );
+        console.log(this.isTurnBased() , this.isPreviewMode &&  res.userName == this.previewingStudentName, res.eventType );
         switch (res.eventType) {
             case ACTIVITY_KEVINS_CRANE_1.socketEventKey.STUDENT_INTERACTION:
                 ACTIVITY_KEVINS_CRANE_1.ref.onUpdateStudentInteraction(res.data);
@@ -1667,7 +1669,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
             case ACTIVITY_KEVINS_CRANE_1.socketEventKey.MOVE_WREACKING_BALL:
                 if(this.isTurnBased() ||(this.isPreviewMode &&  res.userName == this.previewingStudentName)){
                     console.log("MOVE_WREACKING_BALL",res.data);
-                    ACTIVITY_KEVINS_CRANE_1.ref.brokeBlock(res.data);
+                    // ACTIVITY_KEVINS_CRANE_1.ref.brokeBlock(res.data);
                 }
                 break;
 
@@ -1682,7 +1684,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
                 if(this.isTurnBased() || (this.isPreviewMode &&   res.userName == this.previewingStudentName)){
                     ACTIVITY_KEVINS_CRANE_1.ref.stopCrane(res.data);
                 }
-                this.updateUserInfo(JSON.parse(res.data.userInfo));
+                this.updateUserInfo(JSON.parse(res.data.userInfo),2);
                 break;
 
             case ACTIVITY_KEVINS_CRANE_1.socketEventKey.REPLAY:
@@ -1690,12 +1692,11 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
                 break;
 
             case ACTIVITY_KEVINS_CRANE_1.socketEventKey.USER_DATA:
-                 this.updateUserInfo(res.data);
+                 this.updateUserInfo(JSON.parse(res.data));
                  break;
 
 
             case ACTIVITY_KEVINS_CRANE_1.socketEventKey.START_NEXT_LEVEL:
-                console.log("start new level", res.data.level);
                 if(this.isTurnBased() || (this.isPreviewMode &&   res.userName == this.previewingStudentName)){
                     this.startNewLevel(null, res.data.level);
                 }
@@ -1703,10 +1704,10 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
 
             case ACTIVITY_KEVINS_CRANE_1.socketEventKey.BRICK_BROCK:
                 console.log("BRICK BROKE");
-                this.updateUserInfo(JSON.parse(res.data.userInfo));
                 if(this.isTurnBased() || (this.isPreviewMode &&   res.userName == this.previewingStudentName)){
                     this.updateBrickInfo(res.data, 2);
                 }
+                this.updateUserInfo(JSON.parse(res.data.userInfo), 2);
                 if(this.isTeacherView){
                     this.parent.setResetButtonActive(true);
                 }
@@ -1724,13 +1725,11 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
                         this.craneControlNode.craneNode.runCranePickAnimation();
                     }
                 }
-                console.log("user info", (res.data.userInfo));
                 this.updateUserInfo(JSON.parse(res.data.userInfo), 2);
                 break;
 
             case ACTIVITY_KEVINS_CRANE_1.socketEventKey.CHARACTER_PLACED:
                 if(this.isTurnBased() || (this.isPreviewMode &&   res.userName == this.previewingStudentName)) {
-                    console.log("character placed successfully");
                     this.elementPlacedSuccessfully(res.data);
                 }
                 if(this.isTeacherView){
@@ -1781,38 +1780,39 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         this.craneControlNode.craneNode.craneCylinder.runAction(cc.scaleTo(duration, this.craneControlNode.craneNode.craneCylinder.getScaleX(), craneInfo.cylenderScaleY));
     },
     updateUserInfo : function(data, caller) {
-        if(caller){
-            // console.log("caller", caller);
-        }
-            var userExist = false;
-            for (let user in this.gamePlayInfo) {
+        console.log("update user info", data);
+       var userExist = false;
+       for (let user in this.gamePlayInfo) {
                 if (user == data.userGamePlay.username) {
-                    this.gamePlayInfo[data.userGamePlay.username] = data.userGamePlay.userData;
+                    this.gamePlayInfo[data.userGamePlay.username] = {...data.userGamePlay.userData};
                     userExist = true;
                     break;
                 }
-            }
-            if (!userExist) {
-                this.gamePlayInfo[data.userGamePlay.username] = data.userGamePlay.userData;
-            }
+        }
+
+       if (!userExist) {
+                this.gamePlayInfo[data.userGamePlay.username] = {...data.userGamePlay.userData};
+         }
 
             if (this.isTurnBased()) {
                 for (let user in this.gamePlayInfo) {
-                    this.gamePlayInfo[user] = data.userGamePlay.userData;
+
+                    this.gamePlayInfo[user] = {...data.userGamePlay.userData};
                 }
 
             }
-
-
-            if(caller && caller == 2){
-                console.log("game play info", this.gamePlayInfo);
-
-            }
+        // for (let user in this.gamePlayInfo) {
+        //     console.log("game play info after updation",user, ...this.gamePlayInfo[user].rowInfo);
+        // }
 
         if(this.joinedStudentList && HDAppManager.username == this.joinedStudentList[0].userName) {
             this.updateRoomData();
         }
     },
+
+
+
+
     updateUI : function(){
         this.multiPlayerType = this.syncInfo.multiPlayerType;
         var type =  ACTIVITY_KEVINS_CRANE_1.ref.multiPlayerType == 1 ?"individual" : "turnbased";
@@ -1824,14 +1824,18 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
         if(this.multiPlayerType == ACTIVITY_KEVINS_CRANE_1.MULTIPLAYER_TYPE.INDIVIDUAL){
             for(let user in this.gamePlayInfo) {
                 if (user == HDAppManager.username) {
-                    this.gameData           = this.gamePlayInfo[user].rowInfo;
+
                     this.syncInfo           = null;
                     userDataPresent         = true;
                     this.levelStatus        = this.gamePlayInfo[user].levelStatus;
                     this.currentLevel       = this.gamePlayInfo[user].level;
                     this.groundElements     = this.gamePlayInfo[user].groundCharacter;
-                    this.setupCharacters();
+                    this.setupCharacters();  // updateUI
                     this.syncCranePosition(this.gamePlayInfo[user].craneInfo);
+                    let index = 0;
+                    for(let item of this.gamePlayInfo[user].rowInfo){
+                        this.gameData[index++]           = {...item};
+                    }
 
                     this.selectedCharacterFromGround     = this.gamePlayInfo[HDAppManager.username].characterPicked ? ACTIVITY_KEVINS_CRANE_1.ref.getChildByTag( this.gamePlayInfo[HDAppManager.username].characterPicked) : null;
                    if(this.isTeacherView){
@@ -1858,7 +1862,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
                     this.groundElements                  = this.gamePlayInfo[user].groundCharacter;
                     this.selectedCharacterFromGround     = this.gamePlayInfo[user].characterPicked ? ACTIVITY_KEVINS_CRANE_1.ref.getChildByTag( this.gamePlayInfo[user].characterPicked) : null;
                     userDataPresent      = true;
-                    this.setupCharacters();
+                    this.setupCharacters();// update UI
                     this.syncCranePosition(this.gamePlayInfo[user].craneInfo);
                     break;
                 }
@@ -1909,11 +1913,11 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
             this.groundElements = this.gamePlayInfo[previewingStudent].groundCharacter;
             this.currentLevel   = this.gamePlayInfo[previewingStudent].level;
             this.levelStatus    = this.gamePlayInfo[previewingStudent].levelStatus;
-            console.log("level status", this.levelStatus);
+            console.log("level status", this.levelStatus,  this.gameData );
             if(this.gamePlayInfo[previewingStudent].levelStatus == ACTIVITY_KEVINS_CRANE_1.LEVEL_STATE.ON_GOING){
                 this.stopBreakAnimation();
                 this.reconstructHome();
-                this.setupCharacters();
+                this.setupCharacters(); // show Preview
             }
             this.syncCranePosition(this.gamePlayInfo[previewingStudent].craneInfo);
             this.updateHintAndHelpImage();
@@ -2005,6 +2009,7 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
 
     },
     createDataToSend : function(){
+        console.log("create DAta to send");
         var actualUserInfo = this.gamePlayInfo[HDAppManager.username];
         if(!actualUserInfo){
             actualUserInfo = this.gameData;
@@ -2017,9 +2022,14 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
              "angle"             :   this.craneControlNode.angle,
         };
 
+        var rowInfo =[];
+        var index =0;
+        for(let item of this.gameData){
+            rowInfo[index++]           = {...item};
+        }
         var data  = {
             "craneInfo"         : ACTIVITY_KEVINS_CRANE_1.ref.craneInfo,
-            "rowInfo"           : !this.isPreviewMode ? this.gameData : actualUserInfo,
+            "rowInfo"           : rowInfo,
             "level"             : this.currentLevel,
             "levelStatus"       : this.levelStatus,
             "characterPicked"   : this.craneControlNode.craneNode.isCharacterPicked ? this.selectedCharacterFromGround.getTag() : 0,
@@ -2082,40 +2092,40 @@ ACTIVITY_KEVINS_CRANE_1.KevinsCrane = HDBaseLayer.extend({
     },
     updateStudentCraneInfo : function(){
         // console.log("game play info", this.gamePlayInfo);
-        for(let item in this.gamePlayInfo){
-            if(this.gamePlayInfo[item].craneInfo.angle !=0){
-                let pos =this.gamePlayInfo[item].craneInfo.position;
-                if(pos.x <= -this.width * 0.3){
-                    this.gamePlayInfo[item].craneInfo.position = cc.p(pos.x + 0.05,pos.y);
-
-                }else if(pos.x >= this.width * 0.25){
-                    this.gamePlayInfo[item].craneInfo.position = cc.p(pos.x - 0.05, pos.y);
-
-                }else {
-                    var multiplier  =   1;
-                    if(cc.sys.browserType == cc.sys.BROWSER_TYPE_FIREFOX) {
-                        multiplier  =   1.5;
-                    }
-                    var distance =  ACTIVITY_KEVINS_CRANE_1.ref.getContentSize().width * 0.001 * multiplier;
-                    if (this.craneControlNode.getJoyStickDirection(this.gamePlayInfo[item].craneInfo.angle) === 3){
-                        this.gamePlayInfo[item].craneInfo.position = cc.p(pos.x - distance, pos.y);
-                        // console.log("left");
-                    }else if(this.craneControlNode.getJoyStickDirection(this.gamePlayInfo[item].craneInfo.angle) === 1){
-                        // console.log("right");
-                        this.gamePlayInfo[item].craneInfo.position = cc.p(pos.x + distance, pos.y);
-                    }
-
-                    else if(this.craneControlNode.getJoyStickDirection(this.gamePlayInfo[item].craneInfo.angle) ===2){
-                        this.craneControlNode.craneNode.moveDown(this.gamePlayInfo[item].craneInfo);
-                    }
-                    else if(this.craneControlNode.getJoyStickDirection(this.gamePlayInfo[item].craneInfo.angle) ==4){
-                        this.craneControlNode.craneNode.moveUp(this.gamePlayInfo[item].craneInfo);
-                    }
-                }
-            }else{
-                // console.log("angle is zero");
-            }
-        }
+        // for(let item in this.gamePlayInfo){
+        //     if(this.gamePlayInfo[item].craneInfo.angle !=0){
+        //         let pos =this.gamePlayInfo[item].craneInfo.position;
+        //         if(pos.x <= -this.width * 0.3){
+        //             this.gamePlayInfo[item].craneInfo.position = cc.p(pos.x + 0.05,pos.y);
+        //
+        //         }else if(pos.x >= this.width * 0.25){
+        //             this.gamePlayInfo[item].craneInfo.position = cc.p(pos.x - 0.05, pos.y);
+        //
+        //         }else {
+        //             var multiplier  =   1;
+        //             if(cc.sys.browserType == cc.sys.BROWSER_TYPE_FIREFOX) {
+        //                 multiplier  =   1.5;
+        //             }
+        //             var distance =  ACTIVITY_KEVINS_CRANE_1.ref.getContentSize().width * 0.001 * multiplier;
+        //             if (this.craneControlNode.getJoyStickDirection(this.gamePlayInfo[item].craneInfo.angle) === 3){
+        //                 this.gamePlayInfo[item].craneInfo.position = cc.p(pos.x - distance, pos.y);
+        //                 // console.log("left");
+        //             }else if(this.craneControlNode.getJoyStickDirection(this.gamePlayInfo[item].craneInfo.angle) === 1){
+        //                 // console.log("right");
+        //                 this.gamePlayInfo[item].craneInfo.position = cc.p(pos.x + distance, pos.y);
+        //             }
+        //
+        //             else if(this.craneControlNode.getJoyStickDirection(this.gamePlayInfo[item].craneInfo.angle) ===2){
+        //                 this.craneControlNode.craneNode.moveDown(this.gamePlayInfo[item].craneInfo);
+        //             }
+        //             else if(this.craneControlNode.getJoyStickDirection(this.gamePlayInfo[item].craneInfo.angle) ==4){
+        //                 this.craneControlNode.craneNode.moveUp(this.gamePlayInfo[item].craneInfo);
+        //             }
+        //         }
+        //     }else{
+        //         // console.log("angle is zero");
+        //     }
+        // }
 
 
     },

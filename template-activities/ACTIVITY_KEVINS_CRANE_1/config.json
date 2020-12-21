@@ -29,7 +29,7 @@
           { "label": "CONSTRUCTION", "value": 1 },
           { "label": "DEMOLITION", "value": 2 }
         ],
-        "currentValue": 1
+        "currentValue": 2
       }
     }
   },
@@ -58,7 +58,7 @@
 
      "multiplayerMode" :{
        "UIName": "MultiPlayerButton",
-       "title": ["Shared Mode", "Individual Mode"],
+       "title": "Go to Individual Mode",
        "enableState": "btn_enable.png",
        "disableState": "btn_disable.png",
        "position": { "x": 0, "y": 0 },
@@ -160,116 +160,143 @@
           "height": 102,
           "width": 52
         },
-        "charactersData": {
-          "a": {
+        "charactersData": [
+           {
             "imageName": "a_lowercase.png",
-            "name": "a_lowercase"
+            "name": "a_lowercase",
+             "text":"a"
           },
-          "b": {
+          {
             "imageName": "b_lowercase.png",
-            "name": "b_lowercase"
+            "name": "b_lowercase",
+            "text":"b"
           },
-          "c": {
+         {
             "imageName": "c_lowercase.png",
-            "name": "c_lowercase"
+            "name": "c_lowercase",
+            "text":"c"
           },
-          "d": {
+          {
             "imageName": "d_lowercase.png",
-            "name": "d_lowercase"
+            "name": "d_lowercase",
+            "text":"d"
           },
-          "e": {
+          {
             "imageName": "e_lowercase.png",
-            "name": "e_lowercase"
+            "name": "e_lowercase",
+            "text":"e"
           },
-          "f": {
+          {
             "imageName": "f_lowercase.png",
-            "name": "f_lowercase"
+            "name": "f_lowercase",
+            "text":"f"
           },
-          "g": {
+           {
             "imageName": "g_lowercase.png",
-            "name": "g_lowercase"
+            "name": "g_lowercase",
+             "text":"g"
           },
-          "h": {
+          {
             "imageName": "h_lowercase.png",
-            "name": "h_lowercase"
+            "name": "h_lowercase",
+            "text":"h"
           },
-          "i": {
+          {
             "imageName": "i_lowercase.png",
-            "name": "i_lowercase"
+            "name": "i_lowercase",
+            "text":"i"
           },
-          "j": {
+          {
             "imageName": "j_lowercase.png",
-            "name": "j_lowercase"
+            "name": "j_lowercase",
+            "text":"j"
           },
-          "k": {
-            "imageName": "k_lowercase.png",
-            "name": "k_lowercase"
+           {
+            "imageName" : "k_lowercase.png",
+            "name"      : "k_lowercase",
+             "text"     :"k"
           },
-          "l": {
-            "imageName": "l_lowercase.png",
-            "name": "l_lowercase"
+          {
+            "imageName"   : "l_lowercase.png",
+            "name"        : "l_lowercase",
+            "text"        :"l"
           },
-          "m": {
-            "imageName": "m_lowercase.png",
-            "name": "m_lowercase"
+          {
+            "imageName" : "m_lowercase.png",
+            "name"      : "m_lowercase",
+            "text"      :  "m"
           },
-          "n": {
+          {
             "imageName": "n_lowercase.png",
-            "name": "n_lowercase"
+            "name": "n_lowercase",
+            "text":"n"
           },
-          "o": {
+         {
             "imageName": "o_lowercase.png",
-            "name": "o_lowercase"
+            "name": "o_lowercase",
+           "text":"o"
           },
-          "p": {
+          {
             "imageName": "p_lowercase.png",
-            "name": "p_lowercase"
+            "name": "p_lowercase",
+            "text":"p"
           },
-          "q": {
+          {
             "imageName": "q_lowercase.png",
-            "name": "q_lowercase"
+            "name": "q_lowercase",
+            "text":"q"
           },
-          "r": {
+          {
             "imageName": "r_lowercase.png",
-            "name": "r_lowercase"
+            "name": "r_lowercase",
+            "text":"r"
           },
-          "s": {
+          {
             "imageName": "s_lowercase.png",
-            "name": "s_lowercase"
+            "name": "s_lowercase",
+            "text":"s"
           },
-          "t": {
+          {
             "imageName": "t_lowercase.png",
-            "name": "t_lowercase"
+            "name": "t_lowercase",
+            "text":"t"
           },
-          "u": {
+          {
             "imageName": "u_lowercase.png",
-            "name": "u_lowercase"
+            "name": "u_lowercase",
+            "text":"u"
           },
-          "v": {
+          {
             "imageName": "v_lowercase.png",
-            "name": "v_lowercase"
+            "name": "v_lowercase",
+            "text":"v"
           },
-          "w": {
+          {
             "imageName": "w_lowercase.png",
-            "name": "w_lowercase"
+            "name": "w_lowercase",
+            "text":"w"
           },
-          "x": {
+          {
             "imageName": "x_lowercase.png",
-            "name": "x_lowercase"
+            "name": "x_lowercase",
+            "text":"x"
           },
-          "y": {
+          {
             "imageName": "y_lowercase.png",
-            "name": "y_lowercase"
+            "name": "y_lowercase",
+            "text":"y"
           },
-          "z": {
+          {
             "imageName": "z_lowercase.png",
-            "name": "z_lowercase"
+            "name": "z_lowercase",
+            "text":"z"
           },
-          "empty": {
+          {
             "imageName": "empty.png",
-            "name": "empty"
+            "name": "empty",
+            "text":"empty"
           }
-        }
+        ]
       },
       "animation": {
         "ignoreForAuthToolUI": true,
