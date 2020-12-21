@@ -323,7 +323,7 @@
         "component": "checkbox",
         "value": true,
         "UIName": "Snapback",
-        "toolTipText": "When turned on, draggables snap back into their original position if dropped outside of their correct dropzone"
+        "toolTipText": "When turned on, draggables snap back into their original position if dropped outside of their correct dropzone. If dropped in incorrect dropzone the draggable will be snapped back to last rest position."
       },
       "levels": {
         "UIName": "LEVELS",

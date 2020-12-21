@@ -9,7 +9,7 @@ const ACTIVITY_DRAG_DROP_PARKING_1 = {
 };
 
 ACTIVITY_DRAG_DROP_PARKING_1.SWITCH_BUTTON_TITLE = {
-  SHARED: "Shared",
+  SHARED: "Shared Mode",
   INDIVIDUAL_MODE: "Individual Mode",
 };
 
@@ -65,12 +65,36 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     maxLevels = levels;
   };
 
+  // return copy
+  const getDefaultDraggableInitialPositions = (levelIdx) => {
+    const levelsData = ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data;
+    const positions = [];
+    for (let draggableIdx = 0; draggableIdx < levelsData[levelIdx].draggables.length; ++draggableIdx) {
+      const draggable = levelsData[levelIdx].draggables[draggableIdx];
+      positions[draggableIdx] = {
+        x: draggable.position.x,
+        y: draggable.position.y,
+      };
+    }
+    return positions;
+  };
+
   const getDefaultUserData = () => {
     const levelsArr = [];
-    for (let i = 0; i < maxLevels; ++i) {
-      levelsArr[i] = {
+    const levelsData = ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data;
+    for (let levelIdx = 0; levelIdx < maxLevels; ++levelIdx) {
+      const positions = [];
+      for (let draggableIdx = 0; draggableIdx < levelsData[levelIdx].draggables.length; ++draggableIdx) {
+        const draggable = levelsData[levelIdx].draggables[draggableIdx];
+        positions[draggableIdx] = {
+          x: draggable.position.x,
+          y: draggable.position.y,
+        };
+      }
+      levelsArr[levelIdx] = {
         currentLevelInfo: [], // indices of draggables which are matched correctly,
         correctCount: 0,
+        positions: positions, // positions of draggables
       };
     }
     return {
@@ -128,6 +152,46 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     }
   };
 
+  // returns copy
+  const getPositionInfo = () => {
+    if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
+      const positions = [];
+      for (
+        let draggableIdx = 0;
+        draggableIdx < syncedState.shared.levels[syncedState.shared.currentLevel].positions.length;
+        ++draggableIdx
+      ) {
+        positions[draggableIdx] = {
+          x: syncedState.shared.levels[syncedState.shared.currentLevel].positions[draggableIdx].x,
+          y: syncedState.shared.levels[syncedState.shared.currentLevel].positions[draggableIdx].y,
+        };
+      }
+      return positions;
+    } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
+      const data = syncedState.individual[HDAppManager.username]
+        ? syncedState.individual[HDAppManager.username]
+        : syncedState.shared;
+      const positions = [];
+      for (let draggableIdx = 0; draggableIdx < data.levels[data.currentLevel].positions.length; ++draggableIdx) {
+        positions[draggableIdx] = {
+          x: data.levels[data.currentLevel].positions[draggableIdx].x,
+          y: data.levels[data.currentLevel].positions[draggableIdx].y,
+        };
+      }
+      return positions;
+    }
+  };
+
+  const setPositionInfo = (draggableIdx, position = { x: 0, y: 0 }) => {
+    if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
+      syncedState.shared.levels[syncedState.shared.currentLevel].positions[draggableIdx] = position;
+    } else if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE) {
+      syncedState.individual[HDAppManager.username].levels[
+        syncedState.individual[HDAppManager.username].currentLevel
+      ].positions[draggableIdx] = position;
+    }
+  };
+
   const getCorrectCount = () => {
     if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
       return syncedState.shared.levels[syncedState.shared.currentLevel].correctCount;
@@ -151,10 +215,19 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
 
   const makeCopy = (data = getDefaultUserData()) => {
     let levelsCopy = [];
-    for (let i = 0; i < data.levels.length; ++i) {
-      levelsCopy[i] = {
-        currentLevelInfo: [...data.levels[i].currentLevelInfo],
-        correctCount: data.levels[i].correctCount,
+    for (let levelIdx = 0; levelIdx < data.levels.length; ++levelIdx) {
+      let positions = [];
+      for (let draggableIdx = 0; draggableIdx < data.levels[levelIdx].positions.length; ++draggableIdx) {
+        const draggable = data.levels[levelIdx].positions[draggableIdx];
+        positions[draggableIdx] = {
+          x: draggable.x,
+          y: draggable.y,
+        };
+      }
+      levelsCopy[levelIdx] = {
+        currentLevelInfo: [...data.levels[levelIdx].currentLevelInfo],
+        correctCount: data.levels[levelIdx].correctCount,
+        positions: positions,
       };
     }
     return {
@@ -186,6 +259,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     if (syncedState.gameMode === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED) {
       syncedState.shared.levels[syncedState.shared.currentLevel].correctCount = 0;
       syncedState.shared.levels[syncedState.shared.currentLevel].currentLevelInfo = [];
+      syncedState.shared.levels[syncedState.shared.currentLevel].positions = getDefaultDraggableInitialPositions(
+        getCurrentLevel()
+      );
     }
   };
 
@@ -237,6 +313,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager = (() => {
     isUserStateExists,
     isMyStateExists,
     setMyState,
+    getPositionInfo,
+    setPositionInfo,
+    getDefaultDraggableInitialPositions,
   };
 })();
 
@@ -266,6 +345,10 @@ ACTIVITY_DRAG_DROP_PARKING_1.Draggable = cc.Sprite.extend({
 
   onExit: function () {
     this._super();
+  },
+
+  setInitialPosition: function (position = { x: 0, y: 0 }) {
+    this.initialPosition = position;
   },
 
   _createStarAnimationSprite: function () {
@@ -472,6 +555,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.Dropzone = HDBaseLayer.extend({
 ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   _currentLevel: 0,
   _levelInfo: [],
+  _draggablePositions: [],
   _draggableSprites: [],
   _dropzoneSprites: [],
   _draggedSpriteRef: null,
@@ -534,6 +618,9 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
     this._draggableSprites.length = 0;
     this._dropzoneSprites.length = 0;
     this._levelInfo.length = 0;
+    this._draggablePositions = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getDefaultDraggableInitialPositions(
+      this._currentLevel
+    );
     this._correctCount = 0;
     this._isIncorrectMatchAnimationPlaying = false;
   },
@@ -545,6 +632,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   _syncState: function () {
     this._setCurrentLevel(ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCurrentLevel());
     this._levelInfo = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfo();
+    this._draggablePositions = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getPositionInfo();
     this._correctCount = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCorrectCount();
     lesson_1.ref.turnBased = !(this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE);
   },
@@ -571,7 +659,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
       const draggableObj = draggablesData[i];
       const draggableSprite = new ACTIVITY_DRAG_DROP_PARKING_1.Draggable(
         ACTIVITY_DRAG_DROP_PARKING_1.spritePath + draggableObj.imageName,
-        draggableObj.position,
+        this._draggablePositions[i],
         draggableObj.audioName ? ACTIVITY_DRAG_DROP_PARKING_1.soundPath + draggableObj.audioName : "",
         draggableObj.dropZoneIdx,
         i
@@ -832,15 +920,25 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
           }, this);
         }
       } else {
-        if (ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.snapBack.value) {
+        const isSnackBack = ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.snapBack.value;
+        if (isSnackBack) {
           this._draggedSpriteRef.snapBack();
-          this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-            roomId: HDAppManager.roomId,
-            type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_SNAPPED_BACK,
-            userName: HDAppManager.username,
-            itemTag: this._draggedSpriteRef.getTag(),
-          });
+        } else {
+          this._draggedSpriteRef.setInitialPosition(event.getLocation());
+          ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setPositionInfo(
+            this._draggedSpriteRef.getIdx(),
+            event.getLocation()
+          );
         }
+        this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+          roomId: HDAppManager.roomId,
+          type: ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_SNAPPED_BACK,
+          userName: HDAppManager.username,
+          itemTag: this._draggedSpriteRef.getTag(),
+          snapBack: isSnackBack,
+          position: event.getLocation(),
+        });
+        this.updateRoomData();
       }
       this._draggedSpriteRef.setDraggable(true);
       this._isDragging = false;
@@ -850,6 +948,14 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
   },
 
   // public exposed functions below
+
+  setInitialPositionOfDraggableByTag: function (tag, position) {
+    const draggableSprite = this.getChildByTag(tag);
+    if (draggableSprite) {
+      draggableSprite.setInitialPosition(position);
+      ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setPositionInfo(draggableSprite.getIdx(), position);
+    }
+  },
 
   clampLevelNumber: function (level) {
     return cc.clampf(level, 0, ACTIVITY_DRAG_DROP_PARKING_1.config.assets.sections.levels.data.length - 1);
@@ -920,6 +1026,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
     ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setCurrentLevel(level);
     this._correctCount = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCorrectCount();
     this._levelInfo = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfo();
+    this._draggablePositions = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getPositionInfo();
     this._setCurrentLevel(level);
     this._renderCurrentLevel();
     this.updateRoomData();
@@ -932,6 +1039,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.CommonViewLayer = HDBaseLayer.extend({
     const data = ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getLevelInfoOfUser(userName);
     this._setCurrentLevel(data.currentLevel);
     this._levelInfo = data.levels[data.currentLevel].currentLevelInfo;
+    this._draggablePositions = data.levels[data.currentLevel].positions;
     this._renderCurrentLevel();
   },
 
@@ -1159,14 +1267,18 @@ ACTIVITY_DRAG_DROP_PARKING_1.TeacherViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_SNAPPED_BACK: {
-        const { itemTag } = data;
+        const { itemTag, snapBack, position } = data;
         if (
           (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED &&
             userName !== HDAppManager.username) ||
           (this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.INDIVIDUAL_MODE &&
             userName === this.previewRequestUserName)
         ) {
-          this.snapBackDraggableByTag(itemTag);
+          if (snapBack) {
+            this.snapBackDraggableByTag(itemTag);
+          } else {
+            this.setInitialPositionOfDraggableByTag(itemTag, position);
+          }
         }
         break;
       }
@@ -1560,12 +1672,16 @@ ACTIVITY_DRAG_DROP_PARKING_1.StudentViewLayer = ACTIVITY_DRAG_DROP_PARKING_1.Com
         break;
       }
       case ACTIVITY_DRAG_DROP_PARKING_1.GAME_EVENTS.ITEM_SNAPPED_BACK: {
-        const { itemTag } = data;
+        const { itemTag, snapBack, position } = data;
         if (
           userName !== HDAppManager.username &&
           this.getGameMode() === ACTIVITY_DRAG_DROP_PARKING_1.GAME_MODES.SHARED
         ) {
-          this.snapBackDraggableByTag(itemTag);
+          if (snapBack) {
+            this.snapBackDraggableByTag(itemTag);
+          } else {
+            this.setInitialPositionOfDraggableByTag(itemTag, position);
+          }
         }
         break;
       }
