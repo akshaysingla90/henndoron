@@ -107,6 +107,7 @@ var HDSocketEventType =  {
     EDIT_ROOM_DATA:21,
     REWARD_RECEIVED : 22,
     LESSON_START_AT : 23,
+    SOCKET_DISCONNECT : 24,
 }
 
 
