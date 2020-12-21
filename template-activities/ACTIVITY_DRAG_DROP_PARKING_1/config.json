@@ -278,6 +278,7 @@
           "width": 960,
           "height": 640
         },
+        "allowScriptAddition": false,
         "allowDelete": true,
         "allowAdd": true
       }
