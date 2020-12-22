@@ -1878,6 +1878,7 @@ ACTIVITY_DRAG_DROP_PARKING_1.MainDragDropParkingLayer = cc.Layer.extend({
   syncData: function (data) {
     ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.setState(data);
     ACTIVITY_DRAG_DROP_PARKING_1.isSyncedState = true;
+    this.delegate && this.delegate.renderLevel(ACTIVITY_DRAG_DROP_PARKING_1.SyncedStateManager.getCurrentLevel());
   },
 
   reset: function () {

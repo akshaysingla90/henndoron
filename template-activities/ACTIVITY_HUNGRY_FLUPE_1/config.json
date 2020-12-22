@@ -8,8 +8,8 @@
     "gamePlayTime": 40,
     "maxBubbleInScreen": 10,
     "bubbleSpeed" : {
-      "x" : 50,
-      "y" : 100
+      "x" : 20,
+      "y" : 50
     },
     "controls": {
       "mouse": true,
@@ -311,27 +311,27 @@
             {
               "imageName": "item_bubble_01.png",
               "grayImageName": "item_bubble_01_grey.png",
-              "name": "item_bubble_01"
+              "name": "cheese"
             },
             {
               "imageName": "item_bubble_02.png",
               "grayImageName": "item_bubble_02_grey.png",
-              "name": "item_bubble_02"
+              "name": "apple"
             },
             {
               "imageName": "item_bubble_03.png",
               "grayImageName": "item_bubble_03_grey.png",
-              "name": "item_bubble_03"
+              "name": "pear"
             },
             {
               "imageName": "item_bubble_04.png",
               "grayImageName": "item_bubble_04_grey.png",
-              "name": "item_bubble_04"
+              "name": "carrot"
             },
             {
               "imageName": "item_bubble_05.png",
               "grayImageName": "item_bubble_05_grey.png",
-              "name": "item_bubble_05"
+              "name": "water"
             }
           ]
         },

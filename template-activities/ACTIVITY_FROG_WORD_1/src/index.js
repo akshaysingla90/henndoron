@@ -546,7 +546,6 @@ ACTIVITY_FROG_WORD_1.FrogWordHop = HDBaseLayer.extend({
         let frogPos = this.frog.getPosition();
         let xFactor = Math.abs(location.x - frogPos.x);
         let yFactor = Math.abs(location.y - frogPos.y);
-        cc.log("x factor = "+xFactor+"  yfactor = "+yFactor);
         if (xFactor >= this._size.width * 0.16 || yFactor >= this._size.height * 0.2)
             return false;
         else

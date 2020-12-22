@@ -500,7 +500,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                     ACTIVITY_HUNGRY_FLUPE_1.ref.removeBubblesWithAnimation(bubbleBody);
                     ACTIVITY_HUNGRY_FLUPE_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
                         "eventType": ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.REMOVE_BUBBLES,
-                        "data": {"id": bubbleBody.id}
+                        "data": {"id": bubbleBody.id, "pos": bubbleBody.getPos()}
                     });
                     flupeBody.applyImpulse(cc.p(0, -100), cc.p(0, 0));
                 }
@@ -710,9 +710,12 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 ++ACTIVITY_HUNGRY_FLUPE_1.ref.addObjectCount;
         };
     },
-    removeBubblesWithAnimation : function ({id}){
+    removeBubblesWithAnimation : function ({id, pos}){
         let bubble =  ACTIVITY_HUNGRY_FLUPE_1.ref.bubbleList.find(x=>x.id===id);
         if(!bubble) return;
+        console.log("Pos ", pos);
+        if(pos)
+            bubble.getBody().setPos(pos);
          ACTIVITY_HUNGRY_FLUPE_1.ref.getStarsAnimation(bubble.getPosition());
         let  label = this.createTTFLabel(bubble.getBody().name, HDConstants.DarkBrown, 30,
             HDConstants.Brown, bubble.getPosition(), this);
@@ -794,8 +797,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 isoutSideScreen = isoutSideScreen || true;
             }
             if(isoutSideScreen) {
-                console.log(" is outside screen ", x.getPosition());
-                x.setPosition(cc.p(this.getContentSize().width * 0.7,  this.getContentSize().height * 0.7));
+                x.setPosition(cc.p(this.getContentSize().width * Math.random() * 0.8 + 100,  this.getContentSize().height * 0.4 * Math.random() + 300));
                 x.getBody().applyImpulse(cc.p(0, 0), cc.p(0, 0));
             }
 

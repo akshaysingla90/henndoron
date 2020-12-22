@@ -1554,6 +1554,8 @@ ACTIVITY_BUILD_SOMETHING_1.BuildSomething = HDBaseLayer.extend({
             bg.setLocalZOrder(30);
             bg.setTag(ACTIVITY_BUILD_SOMETHING_1.Tag.studentPreviewLayer);
         }
+        const userName = res.userName;
+        const userNameLabel = this.createTTFLabel(userName, HDConstants.Sassoon_Regular, 50, HDConstants.Black, cc.p(cc.winSize.width * 0.5, cc.winSize.height * 0.1), bg );
         var position = isAllCorrect ? ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.winBG.usernamePosition : ACTIVITY_BUILD_SOMETHING_1.config.assets.sections.looseBG.usernamePosition;
         this.createUIForData(res.userName, res.data, bg);
         var touchPrevention = this.createButton(ACTIVITY_BUILD_SOMETHING_1.spriteBasePath + "close.png", null, null, null, null, cc.p(bg.width * 0.5, bg.height * 0.5), bg, this, null);
