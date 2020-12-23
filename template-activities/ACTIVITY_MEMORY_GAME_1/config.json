@@ -1,0 +1,373 @@
+{
+  "properties": {
+    "component": "infoCard",
+    "activityName": "Memory Game",
+    "activityPath": "ACTIVITY_MEMORY_GAME_1",
+    "description": "game desc. here",
+    "allocatedTime": 10,
+    "controls": {
+      "mouse": true,
+      "turnBased": false
+    },
+    "externalRewards": true,
+    "studentPreview": false,
+    "url": "res/Activity/ACTIVITY_MEMORY_GAME_1/",
+    "number": 1,
+    "renderMode": 1,
+    "preLoaded": true,
+    "namespace": "ACTIVITY_MEMORY_GAME_1",
+    "layerName": "MemoryGame"
+  },
+  "teacherTips": {
+    "component": "tipsCard",
+    "data":
+    {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when activity starts.",
+        "content": {
+          "ops": [
+            {
+              "insert": "★ Click on the first card, call out the word, then click on the second card and ask the student if it is the same as the first. This way the student understands that the object of the game is to find two of the same images. \n★ Ask what images are showing even if they are not a pair.\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "teacherScripts": {
+    "component": "scriptsCard",
+    "data":
+    {
+      "moduleStart": {
+        "UIName": "Module Start",
+        "enable": true,
+        "description": "This will trigger when module starts.",
+        "content":{"ops":[{"attributes":{"color":"#ff0000","bold":true},"insert":"[Module starts]"},{"insert":"\n"},{"attributes":{"color":"#ff0000","bold":true},"insert":"[Teacher clicks on 1st cards] "},{"insert":"\n\nClick to open the 1st card. \n\n"},{"attributes":{"italic":true,"bold":true},"insert":"What's this? "},{"insert":"\n"},{"attributes":{"italic":true,"color":"#0000ff","bold":true},"insert":"This is _____. "},{"insert":"\n\nClick to open the 2nd card. \n\n"},{"attributes":{"italic":true,"bold":true},"insert":"Is this a "},{"attributes":{"italic":true},"insert":"(name 1st card)? "},{"insert":"\n"},{"attributes":{"italic":true,"color":"#0000ff","bold":true},"insert":"Yes, it is! No, it isn’t. "},{"insert":"\n\nFor matching cards: \n\n"},{"attributes":{"italic":true},"insert":"Look! They are a pair! Great! "},{"insert":"\n\nFor mismatched cards: \n\n"},{"attributes":{"italic":true},"insert":"Oh no, this is not a (1st card). "},{"attributes":{"italic":true,"bold":true},"insert":"Can you help me? "},{"insert":"\n"},{"attributes":{"italic":true,"color":"#0000ff","bold":true},"insert":"Yes, I can help! "},{"insert":"\n\nEnable student mouse.\n\n"}]}
+
+      },
+      "onMouseEnable": {
+        "UIName": "On Mouse Enable",
+        "enable": true,
+        "description": "This will trigger when student mouse is enabled.",
+        "content": {
+          "ops": [
+            {
+              "attributes": {
+                "color": "#ff0000",
+                "bold": true
+              },
+              "insert": "Student’s mouse is enabled]"
+            },
+            {
+              "insert": "\n\nHave students click on cards and find the pairs. \n\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "bold": true
+              },
+              "insert": "What's this? "
+            },
+            {
+              "insert": "\n"
+            },
+            {
+              "attributes": {
+                "italic": true,
+                "color": "#0000ff",
+                "bold": true
+              },
+              "insert": "This is _____. "
+            },
+            {
+              "insert": "\n\n\n"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "background": {
+    "component": "backgroundCard",
+    "sections": {
+      "background": {
+        "component": "background",
+        "UIName": "BACKGROUND",
+        "imageName": "game_bg.png",
+        "dimensions": { "width": 960, "height": 640 }
+      }
+    }
+  },
+  "assets": {
+    "component": "assetsCard",
+    "sections": {
+      "items": {
+        "component": "hiddenItems",
+        "dimensions": { "width": 350, "height": 350 },
+        "UIName": "Objects",
+        "data": [
+          {
+            "imageName": "Item_dog.png",
+            "name": "dog",
+            "pair": "dog",
+            "specialCard": false
+          },
+          {
+            "imageName": "Item_dog.png",
+            "name": "dog",
+            "pair": "dog",
+            "specialCard": false
+          },
+          {
+            "imageName": "Item_rat.png",
+            "name": "rat",
+            "pair": "rat",
+            "specialCard": false
+          },{
+            "imageName": "Item_rat.png",
+            "name": "rat",
+            "pair": "rat",
+            "specialCard": false
+          },
+          {
+            "imageName": "Item_sign.png",
+            "name": "sign",
+            "pair": "sign",
+            "specialCard": false
+          },       {
+            "imageName": "Item_sign.png",
+            "name": "sign",
+            "pair": "sign",
+            "specialCard": false
+          },
+          {
+            "imageName": "Item_book.png",
+            "name": "book",
+            "pair": "book",
+            "specialCard": false
+          },
+          {
+            "imageName": "Item_book.png",
+            "name": "book",
+            "pair": "book",
+            "specialCard": false
+          },
+          {
+            "imageName": "Item_sheep.png",
+            "name": "sheep",
+            "pair": "sheep",
+            "specialCard": false
+          },
+          {
+            "imageName": "Item_sheep.png",
+            "name": "sheep",
+            "pair": "sheep",
+            "specialCard": false
+          }
+        ]
+      },
+      "normalCardTurnSound": {
+        "component": "sound",
+        "UIName": "Sound For Turning the normal card",
+        "sound": "card_flip_normal.mp3"
+      },
+      "specialCardTurnSound": {
+        "component": "sound",
+        "UIName":  "Sound For Turning Special Card",
+        "sound": "card_flip_special.mp3"
+      },
+      "winSound"  : {
+        "component": "sound",
+        "UIName":  "Sound on result screen",
+        "sound": "applause.mp3"
+      },
+      "wrongCard" : {
+        "component": "sound",
+        "UIName":  "Sound on opening wrong card",
+        "sound": "playerLoss.mp3"
+      },
+      "correctCard" : {
+        "component": "sound",
+        "UIName":  "Sound on opening correct card",
+        "sound": "swish1.mp3"
+      }
+    },
+    "animation": {
+      "component": "animationGroup",
+      "data": {
+        "object_pulled_out_animation": {
+          "configurable": true,
+          "UIName": "ConfettiAnimation",
+          "frameCount": 15,
+          "frameInitial": "object_pulled_out_animation/object_pulled_out_animation_",
+          "extension": ".png"
+        }
+      }
+    }
+  },
+  "cursors": {
+    "component": "cursorsCard",
+    "data": {
+      "cursor": {
+        "UIName": "CURSOR",
+        "imageName": "cursor_0001.png",
+        "dimensions": { "width": 32, "height": 32 }
+      }
+    }
+  },
+  "cardsInfo": {
+    "component": "cards",
+    "sections": {
+      "levels": {
+        "component": "cardInfo",
+        "UIName": "LEVELS",
+        "data": [
+          {
+            "cards" : [
+              {
+                "imageName": "Item_dog.png",
+                "name": "dog",
+                "pair": "dog",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_dog.png",
+                "name": "dog",
+                "pair": "dog",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_rat.png",
+                "name": "rat",
+                "pair": "rat",
+                "specialCard": false
+              },{
+                "imageName": "Item_rat.png",
+                "name": "rat",
+                "pair": "rat",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_sign.png",
+                "name": "sign",
+                "pair": "sign",
+                "specialCard": false
+              },       {
+                "imageName": "Item_sign.png",
+                "name": "sign",
+                "pair": "sign",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_book.png",
+                "name": "book",
+                "pair": "book",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_book.png",
+                "name": "book",
+                "pair": "book",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_sheep.png",
+                "name": "sheep",
+                "pair": "sheep",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_sheep.png",
+                "name": "sheep",
+                "pair": "sheep",
+                "specialCard": false
+              }
+            ]
+          },
+          {
+            "cards" : [
+              {
+                "imageName": "Item_dog.png",
+                "name": "dog",
+                "pair": "dog",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_dog.png",
+                "name": "dog",
+                "pair": "dog",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_rat.png",
+                "name": "rat",
+                "pair": "rat",
+                "specialCard": false
+              },{
+                "imageName": "Item_rat.png",
+                "name": "rat",
+                "pair": "rat",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_sign.png",
+                "name": "sign",
+                "pair": "sign",
+                "specialCard": false
+              },       {
+                "imageName": "Item_sign.png",
+                "name": "sign",
+                "pair": "sign",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_book.png",
+                "name": "book",
+                "pair": "book",
+                "specialCard": false
+              },
+              {
+                "imageName": "Item_book.png",
+                "name": "book",
+                "pair": "book",
+                "specialCard": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "resources": {
+    "ignoreForAuthToolUI": true,
+    "sprites": {
+      "basePath": "res/Sprite/",
+      "images": [
+        "cursor_0001.png"
+      ]
+    },
+    "sounds": {
+      "basePath": "res/Sound/",
+      "audio": [
+        "card_flip_normal.mp3",
+        "card_flip_special.wav",
+        "applause.mp3",
+        "playerLoss.mp3",
+        "swish1.mp3"
+      ]
+    },
+    "animationFrames": {
+      "basePath": "res/AnimationFrames/",
+      "animation": [
+         {
+          "name":  "ConfettiAnimation",
+          "frameCount": 15,
+          "frameInitial": "object_pulled_out_animation/object_pulled_out_animation_",
+          "extension": ".png"
+        }
+      ]
+    }
+  }
+}
