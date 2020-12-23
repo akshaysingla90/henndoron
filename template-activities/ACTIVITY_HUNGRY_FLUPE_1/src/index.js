@@ -24,13 +24,7 @@ ACTIVITY_HUNGRY_FLUPE_1.gameState = {
     COMPLETED   : 2,
     STOP        : 3
 };
-ACTIVITY_HUNGRY_FLUPE_1.CollisionType =  {
-    Flupe: 1,
-    Bubbles: 2,
-    SideWall: 3,
-    BottomWall: 4,
-    AnimationInitiator: 5,
-};
+
 ACTIVITY_HUNGRY_FLUPE_1.ref = null;
 ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     isTeacherView           : false,
@@ -70,7 +64,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         this._super();
         ACTIVITY_HUNGRY_FLUPE_1.ref = this;
         ACTIVITY_HUNGRY_FLUPE_1.ref.catchesBubblesName = new Set();
-        ACTIVITY_HUNGRY_FLUPE_1.ref.gameState = ACTIVITY_HUNGRY_FLUPE_1.gameState.NOT_STARTED;
+        ACTIVITY_HUNGRY_FLUPE_1.ref.gameState = ACTIVITY_HUNGRY_FLUPE_1.gameState.STARTED;
         let activityName = 'ACTIVITY_HUNGRY_FLUPE_1';
         cc.loader.loadJson("res/Activity/" + activityName + "/config.json",
             function (error, config) {
@@ -82,13 +76,13 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 ACTIVITY_HUNGRY_FLUPE_1.resourcePath + "AnimationFrames/";
             ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath =
                 ACTIVITY_HUNGRY_FLUPE_1.resourcePath + "Sprite/";
-            ACTIVITY_HUNGRY_FLUPE_1.ref.isTeacherView = HDAppManager.isTeacherView;
+            ACTIVITY_HUNGRY_FLUPE_1.ref.isTeacherView =  HDAppManager.isTeacherView;
             ACTIVITY_HUNGRY_FLUPE_1.ref.gamePlayTime = config.properties.gamePlayTime;
             ACTIVITY_HUNGRY_FLUPE_1.ref.maxBubbleInScreen = config.properties.maxBubbleInScreen;
                 ACTIVITY_HUNGRY_FLUPE_1.ref.MouseTextureUrl = ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath + config.cursors.data.cursor.imageName;
             ACTIVITY_HUNGRY_FLUPE_1.ref.setupUI();
             if (ACTIVITY_HUNGRY_FLUPE_1.ref.isTeacherView) {
-                ACTIVITY_HUNGRY_FLUPE_1.ref.updateRoomData();
+                !ACTIVITY_HUNGRY_FLUPE_1.ref.syncDataInfo && ACTIVITY_HUNGRY_FLUPE_1.ref.updateRoomData();
                 ACTIVITY_HUNGRY_FLUPE_1.ref.isStudentInteractionEnable = true;
             }
             ACTIVITY_HUNGRY_FLUPE_1.ref.triggerScript(config.teacherScripts.data.moduleStart.content.ops);
@@ -98,8 +92,6 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     onEnterTransitionDidFinish: function (){
         this._super();
         this.setPushButtonActive();
-        this.fetchConnectedStudents();
-
     },
     /**
      * Update is response for restrict flupe postitions in x & y
@@ -107,12 +99,10 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
      * @param dt
      */
     update : function (dt){
-        this.space.step(dt);
-        this.restrictFlupePosition();
         this.updateFlupeShadow();
-        this.deleteMarkedObject();
         this.checkForNewBubbleAddition();
-        this.restrictBubbles();
+        this.checkIfLanding();
+        this.checkIfFlupeAte();
     },
     onExit: function () {
         this._super();
@@ -121,22 +111,16 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         ACTIVITY_HUNGRY_FLUPE_1.ref.interactableObject = false;
         ACTIVITY_HUNGRY_FLUPE_1.ref = null;
     },
-
     //================================ UI  & Control =================
     setupUI: function () {
         this.setBackground( ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath +
             ACTIVITY_HUNGRY_FLUPE_1.config.background.sections.background.imageName);
-        this.initPhysics();
-        this.setupBoundry();
         this.setupOptionButtons();
         this.scheduleUpdate();
         this.setupControlButton();
         this.setupBubblePanel();
         this.setupFlupes();
-        this.setupTimer();
-        this.flupeCollisionWithBubbles();
-        this.flupeCollidedWithAnimationWall();
-        this.flupeCollidedWithBottomWall();
+        this.isTeacherView &&  this.setupTimer();
         this.updateFlupes([]);
         if(this.syncDataInfo){
             this.updateUIWithSyncData();
@@ -147,20 +131,36 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         if(this.syncDataInfo &&
             this.syncDataInfo.bubbleInfo &&
             this.syncDataInfo.catchBubbleInfo && this.syncDataInfo.gameState) {
-            this.syncDataInfo.catchBubbleInfo.forEach(ACTIVITY_HUNGRY_FLUPE_1.ref.updateBubblePanel);
-            this.syncDataInfo.bubbleInfo.forEach(ACTIVITY_HUNGRY_FLUPE_1.ref.addBubbleSprite);
             this.gameState = this.syncDataInfo.gameState;
+            if(this.isTeacherView &&
+            this.gameState == ACTIVITY_HUNGRY_FLUPE_1.gameState.STARTED){
+                this.updateButtonVisibility(ACTIVITY_HUNGRY_FLUPE_1.Tag.startButton, false);
+                this.updateButtonVisibility(ACTIVITY_HUNGRY_FLUPE_1.Tag.stopButton, true);
+            }
+            this.syncDataInfo.catchBubbleInfo.forEach(ACTIVITY_HUNGRY_FLUPE_1.ref.updateBubblePanel);
+            this.isTeacherView &&
+            this.parent.setResetButtonActive(   this.syncDataInfo.catchBubbleInfo.length > 0);
+            this.syncDataInfo.bubbleInfo.forEach(ACTIVITY_HUNGRY_FLUPE_1.ref.addBubbleSprite);
+            this.gameStartTime = this.syncDataInfo.gameStartTime;
             let date = new Date();
             let currentTime = date.getTime();
             let delay = (currentTime - this.syncDataInfo.gameStartTime) / 1000;
-            if (this.time < 0 && this.gameState === ACTIVITY_SANDS_OF_TIME_1.gameState.STARTED) {
+            for(let flupe of  this.syncDataInfo.connectedFlupe){
+                let f =  this.flupeList.find(x=>x.imgName===flupe.imgName);
+                if(f)  {
+                    f.stuName = flupe.stuName;
+                }
+            }
+            if (this.isTeacherView && this.time < 0 &&
+                this.gameState === ACTIVITY_HUNGRY_FLUPE_1.gameState.STARTED) {
                 this.resetGame();
-            } else if (this.gameState === ACTIVITY_SANDS_OF_TIME_1.gameState.STARTED) {
+            } else if (this.isTeacherView && this.gameState === ACTIVITY_HUNGRY_FLUPE_1.gameState.STARTED) {
                 this.startTimer(this.gamePlayTime - delay);
             }
             if(this.syncDataInfo.gameState === ACTIVITY_HUNGRY_FLUPE_1.gameState.COMPLETED){
                 this.gameCompletion();
             }
+
         }
     },
     updateButtonVisibility: function (tag, visible) {
@@ -236,10 +236,10 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         this.isStudentInteractionEnable= true;
         this.showStartScript = false;
         this.setPushButtonActive();
+        this.updateRoomData();
     },
     resetGame : function (){
-        //=====
-        this.stopTimer();
+        //====
         this.setScoreScreenActive(false);
         ACTIVITY_HUNGRY_FLUPE_1.ref.catchesBubblesName.clear();
         ACTIVITY_HUNGRY_FLUPE_1.ref.tableView.reloadData();
@@ -249,7 +249,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     },
     gameCompletion : function (){
         this.gameState = ACTIVITY_HUNGRY_FLUPE_1.gameState.COMPLETED;
-        this.stopTimer();
+        this.isTeacherView &&  this.stopTimer();
         this.setScoreScreenActive(true);
         while (this.bubbleList.length > 0){
             this.removeBubbles(this.bubbleList[0]);
@@ -300,95 +300,35 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         bucket.setScale(basketProps.scale);
     },
 
-    //================================ PHYSICS  ====================================
-    /**
-     * setupOptionButtons: This will create option button for teacher.
-     */
-    initPhysics: function (){
-        this.space = new cp.Space();
-        //setup the Gravity
-        this.space.gravity = cp.v(0, -1000); //Earth gravity
-        this.space.iterations = 30;
-        this.space.sleepTimeThreshold = Infinity;
-        this.space.collisionSlop = Infinity;
-        // this._debugNode = new cc.PhysicsDebugNode(this.space);
-        // this.addChild(this._debugNode);
-    },
-    /**
-     *setup boundry to stop game objects to get out from screen
-     */
-    setupBoundry : function (){
-       this.getWall(cc.p(0, 0), cc.p(0,cc.winSize.height));//left wall
-        this.getWall(cc.p(cc.winSize.width, 0), cc.p(cc.winSize.width,cc.winSize.height));//Right wall
-        this.getWall(cc.p(0, cc.winSize.height), cc.p(cc.winSize.width, cc.winSize.height));//Top wall
-       this.getWall(cc.p(0, 170), cc.p(cc.winSize.width,170),
-           ACTIVITY_HUNGRY_FLUPE_1.CollisionType.BottomWall); //Flupe base wall
-       this.getWall(cc.p(0, 270), cc.p(cc.winSize.width,270),
-           ACTIVITY_HUNGRY_FLUPE_1.CollisionType.AnimationInitiator);//Animation initiator
-
-    },
-    /**
-     * Get a static wall
-     * @param p1: start point
-     * @param p2: End point
-     * @param collisionType
-     * @returns {*}
-     */
-    getWall : function (p1, p2, collisionType){
-        let WALLS_WIDTH = 20;
-        let WALLS_ELASTICITY = 1;
-        let WALLS_FRICTION = 1;
-        let wall =  new cp.SegmentShape(this.space.staticBody,
-            new cp.v(p1.x, p1.y),
-            new cp.v(p2.x, p2.y), WALLS_WIDTH);
-        wall.setElasticity(WALLS_ELASTICITY);
-        wall.setFriction(WALLS_FRICTION);
-        collisionType && wall.setCollisionType(collisionType);
-        this.space.addStaticShape(wall);
-        return wall;
-    },
-
    //============================= FLUPE OPERATION
     /**
      * setup Flupes
      */
     setupFlupes: function (){
         this.flupeList = [];
-        let width = 70, height = 30, mass = 1;
         let objInfo =this.assets.flupes.flupes_data.data;
         let initialX = this.getContentSize().width *  0.22;
         let initialY = 205;
         let count = 0;
         for(let obj of objInfo){
-            let  phBodyBox = this.space.addBody(new cp.Body(mass,
-                cp.momentForBox(mass, width, height)));
-            phBodyBox.stuName= "";
-            phBodyBox.setPos(cc.p(initialX, initialY));
-            let phShape = this.space.addShape(new cp.BoxShape(phBodyBox, width, height));
-            phShape.setFriction(100);
-            // phShape.sensor = true;
-            phShape.setElasticity(0.1);
-            phShape.setCollisionType(ACTIVITY_HUNGRY_FLUPE_1.CollisionType.Flupe);
             let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
             let animprops = animations.find(x=>x.name === obj.name).animation[`land`];
-            // let animprops = animations[`${obj.name}_land`];
             let  props  = animprops.frameInitial + ('0000' + animprops.frameCount).slice(-4);
-            let flupe = new cc.PhysicsSprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath + props + ".png");
+            let flupe = this.addSprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath + props + ".png",
+               cc.p(initialX, initialY), this);
             flupe.setScale(0.5);
-            flupe.setBody( phBodyBox );
             flupe.initialPos = flupe.getPosition();
-            this.addChild(flupe);
             let shadow = this.addSprite(
                 ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath + obj.shadow,
                 cc.p(initialX, initialY - flupe.getContentSize().height*0.5 * flupe.getScaleY()), this);
             shadow.setAnchorPoint(cc.p(0.5, 0));
+            shadow.setVisible(false);
             shadow.initialPos = shadow.getPosition();
             flupe.shadow = shadow;
             initialX += flupe.getContentSize().width*flupe.getScale();
-            flupe.stuName  =  phBodyBox.stuName;
+            flupe.stuName  =  "";
             flupe.object = [];
             flupe.imgName  = obj.name;
-            flupe.shape = phShape;
             flupe.isGoingUp = false;
             flupe.imgIdx = count++;
             this.flupeList.push(flupe);
@@ -399,19 +339,11 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
      * @param params
      */
     updateAlreadyConnectedFlupe : function (params){
-        for(let flupe of params.connectedFlupe){
-            let f =  this.flupeList.find(x=>x.imgName===flupe.imgName);
-            if(f)  {
-                f.stuName = flupe.stuName;
-                f.getBody().stuName = flupe.stuName;
-            }
 
-        }
         this.emitSocketEvent( HDSocketEventType.GAME_MESSAGE, {
             "eventType": ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.ACk_CONNECTED_FLUPE
         } );
         this.isFirstTimeConnected = false;
-        //console.log(" acknowlengement sent");
         this.studentStatus(params.users);
 
     },
@@ -441,8 +373,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         for(let child of this.flupeList) {
             if (!nameList.includes(child.stuName)) {
                 child.stuName = "";
-                child.getBody().stuName = "";
                 child.removeFromParent();
+                child.shadow.setVisible(false);
                 if(child.glow) {
                     child.removeAllChildren();
                     child.glow = null;
@@ -451,15 +383,10 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         }
         //Assign an flupe to new joined player
         for(let name of nameList){
-            console.log("name", name, this.flupeList.find(x=>x.stuName==name), !this.flupeList.find(x=>x.stuName==name));
             if(!this.flupeList.find(x=>x.stuName==name)) {
-                console.log("inside if ");
                 let flupe = this.flupeList.find(x => x.stuName=="");
-                console.log("flupe",flupe)
                 if(flupe){
                     flupe.stuName = name;
-                    flupe.getBody().stuName = name;
-                    console.log("set sprite ", flupe.stuName, " get body ", flupe.getBody().stuName);
                 }
             }
         }
@@ -471,9 +398,9 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         for(let child of this.flupeList){
             if( child.stuName != "" && !child.getParent()){
                 this.addChild(child);
+                child.shadow.setVisible(true);
             }
             if(child.stuName === HDAppManager.username){
-                //console.log("name : ",child.stuName);
                 ACTIVITY_HUNGRY_FLUPE_1.ref.attachGlow(child);
             }
             if(child.getParent()) {
@@ -486,58 +413,53 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 child.removeAllChildren();
                 child.glow  = null;
             }
-            console.log("sprite ", child.stuName);
-            console.log("body ", child.getBody().stuName);
+            ////console.log("sprite ", child.stuName);
         }
     },
-    flupeCollisionWithBubbles:function() {
-        this.space.addCollisionHandler(ACTIVITY_HUNGRY_FLUPE_1.CollisionType.Flupe,
-            ACTIVITY_HUNGRY_FLUPE_1.CollisionType.Bubbles,
-            function (arb) {
-                let flupeBody =  arb.a.type === "circle" ? arb.body_b : arb.body_a;
-                let bubbleBody = arb.a.type === "circle" ? arb.body_a : arb.body_b;
-                if(flupeBody.stuName === HDAppManager.username && flupeBody.isGoingUp) {
-                    ACTIVITY_HUNGRY_FLUPE_1.ref.removeBubblesWithAnimation(bubbleBody);
-                    ACTIVITY_HUNGRY_FLUPE_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
-                        "eventType": ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.REMOVE_BUBBLES,
-                        "data": {"id": bubbleBody.id, "pos": bubbleBody.getPos()}
-                    });
-                    flupeBody.applyImpulse(cc.p(0, -100), cc.p(0, 0));
-                }
-                return false;
-            }, null, null, null);
-    },
     /**
      *
      */
-    flupeCollidedWithAnimationWall:function() {
-        this.space.addCollisionHandler(ACTIVITY_HUNGRY_FLUPE_1.CollisionType.Flupe,
-            ACTIVITY_HUNGRY_FLUPE_1.CollisionType.AnimationInitiator,
-            function (arb) {
-                if(!arb.b.getBody().isGoingUp) {
-                  let flupe =   ACTIVITY_HUNGRY_FLUPE_1.ref.flupeList.find(x=>x.stuName===arb.b.getBody().stuName);
-                  if(!flupe) return ;
-                  flupe.runAction( ACTIVITY_HUNGRY_FLUPE_1.ref.getFlupeAnimation(flupe.imgName, "land") );
-                  if(flupe.glow) flupe.glow.runAction(  ACTIVITY_HUNGRY_FLUPE_1.ref.getGlowAnimation("land"));
+    checkIfLanding:function() {
+        this.flupeList.forEach(flupe=>{
+                if(!flupe.isGoingUp &&
+                    (flupe.getPositionY() - flupe.initialPos.y) > 100 && (flupe.getPositionY() - flupe.initialPos.y) < 105){
+                  flupe.runAction(cc.sequence( ACTIVITY_HUNGRY_FLUPE_1.ref.getFlupeAnimation(flupe.imgName, "land"),
+                      cc.callFunc((flupe)=>{
+                          var animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
+                          let animprops = animations.find(x=>x.name === flupe.imgName).animation[`land`];
+                          let  props  = animprops.frameInitial + ('0000' + animprops.frameCount).slice(-4);
+                          flupe.setTexture( new cc.Sprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath + props + ".png").getTexture());
+                      }, flupe)));
+                  if(flupe.glow) flupe.glow.runAction( cc.sequence(
+                      ACTIVITY_HUNGRY_FLUPE_1.ref.getGlowAnimation("land"),
+                      cc.callFunc((glow)=>{
+                          let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
+                          let animationProps = animations.find(x=>x.name === "glowing_outline").animation[`land`];
+                          glow.setTexture(new cc.Sprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath +
+                              animationProps.frameInitial +  ("000" + animationProps.frameCount).slice(-4) + ".png"
+                          ).getTexture());
+                      }, flupe.glow)
+                  ));
                 }
-            return false;
+            });
+    },
+    checkIfFlupeAte : function (){
+      let flupe = this.flupeList.find(x=>x.stuName == HDAppManager.username);
+      if(flupe &&  flupe.isGoingUp) {
+          let boundingBox = flupe.getBoundingBox();
+          for (let bubble of this.bubbleList) {
+              if (cc.rectContainsRect(boundingBox, bubble.getBoundingBox())) {
+                  ACTIVITY_HUNGRY_FLUPE_1.ref.removeBubblesWithAnimation(bubble);
+                  ACTIVITY_HUNGRY_FLUPE_1.ref.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+                      "eventType": ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.REMOVE_BUBBLES,
+                      "data": {"id": bubble.id, "pos": bubble.getPosition()}
+                  });
+              }
+          }
+      }
+    },
 
-                //Play Catch Animation
-            }, null, null, null);
-    },
-    /**
-     *
-     */
-    flupeCollidedWithBottomWall:function() {
-        this.space.addCollisionHandler(ACTIVITY_HUNGRY_FLUPE_1.CollisionType.Flupe,
-            ACTIVITY_HUNGRY_FLUPE_1.CollisionType.BottomWall,
-            function (arb) {
-                return true;
-            }, null, null, null);
-    },
     getFlupeAnimation : function (name, type){
-        // let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data;
-        // let flupeAnimationProps = animations[`${name}_${type}`];
         let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
         let flupeAnimationProps = animations.find(x=>x.name === name).animation[`${type}`];
         return cc.sequence( HDUtility.runFrameAnimation(
@@ -546,8 +468,6 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             flupeAnimationProps.frameCount, 0.1, '.png', 1));
     },
     getGlowAnimation : function (type){
-        // let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.animation.data;
-        // let glowAnimationProps = animations[`glowing_outline_${type}`];
         let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
         let glowAnimationProps = animations.find(x=>x.name === "glowing_outline").animation[`${type}`];
         return cc.sequence( HDUtility.runFrameAnimation(
@@ -560,18 +480,24 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         if(!flupe) return;
         if(flupe.getPositionY() - flupe.initialPos.y > 50 ||  flupe.isGoingUp) return;
         flupe.isGoingUp = true;
-        flupe.getBody().isGoingUp = true;
         flupe.runAction( cc.sequence(this.getFlupeAnimation(flupe.imgName, "leap"),
             cc.callFunc((target, data)=>{
                 target.setTexture(new cc.Sprite(ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath +
                     flupe.imgName + '_midair.png').getTexture());
-                target.getBody().applyImpulse(cc.p(0, this.impulse), cc.p(0, 100));
-            }, flupe ), cc.delayTime(1),
+                target.runAction( new cc.BezierTo(1, [
+                    cc.p(target.getPositionX(),ACTIVITY_HUNGRY_FLUPE_1.ref.getContentSize().height * 0.7),
+                    cc.p(target.getPositionX(),ACTIVITY_HUNGRY_FLUPE_1.ref.getContentSize().height * 0.8),
+                    cc.p(target.getPositionX(), target.initialPos.y)]
+                ) );
+            }, flupe ),
+            cc.delayTime(0.5),
+            cc.callFunc((target, data)=>{
+                target.isGoingUp = false;
+            }, flupe),
+            cc.delayTime(0.5),
             cc.callFunc((target, data)=>{
                 let animations = ACTIVITY_HUNGRY_FLUPE_1.config.assets.sections.flupes.flupes_data.data;
                 let animprops = animations.find(x=>x.name === flupe.imgName).animation[`land`];
-                target.isGoingUp = false;
-                target.getBody().isGoingUp = false;
                 let  props  = animprops.frameInitial + ("0000" + animprops.frameCount).slice(-4);
                 target.setTexture(new cc.Sprite(ACTIVITY_HUNGRY_FLUPE_1.animationBasePath +
                     props+".png").getTexture());
@@ -614,16 +540,6 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             }
         )
     },
-    /**
-     * Flupe position will be clamped to keep in screen and at same x Pos
-     */
-    restrictFlupePosition : function (){
-        this.flupeList.forEach(flupe=>{
-            flupe.setRotation(0);
-            flupe.setPosition(cc.p(flupe.initialPos.x, HDUtility.clampANumber(
-                flupe.getPositionY(), 205, this.getContentSize().height * 0.8)));
-        });
-    },
 
     /**
      * * Shadow will be scaled according to flupe movement
@@ -647,12 +563,9 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         let bubblesInfo = [];
         while(count--) {
             let obj = { "itemInfo":bubblesData[Math.floor(Math.random() * bubblesData.length)],
-                "pos": {"x":initialX[Math.floor(Math.random()* 1.8)] + Math.random() * 50,
-                    "y":  Math.random() * this.getContentSize().height * 0.2 +
-                        this.getContentSize().height * 0.7 },
-                "impulse": {
-                    "x" : (Math.random() * -ACTIVITY_HUNGRY_FLUPE_1.config.properties.bubbleSpeed.x),
-                    "y":ACTIVITY_HUNGRY_FLUPE_1.config.properties.bubbleSpeed.y},
+                "pos": {"x": this.getContentSize().width * Math.random(),
+                    "y":  this.getContentSize().height * 0.5 + Math.random() * 20 },
+                "isMoveLeft" : Math.random() < 0.5,
                 "id" : Date.now()+Math.random(),
 
             };
@@ -664,43 +577,84 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             "eventType": ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.ADD_BUBBLES,
             "data": bubblesInfo
         } );
-        console.log("bubble items data ", bubblesInfo);
         bubblesInfo.forEach(ACTIVITY_HUNGRY_FLUPE_1.ref.addBubbleSprite);
         this.addObjectCount = 0;
     },
-    addBubbleSprite: function({itemInfo, id, pos, impulse}) {
-        let width = 5, height = 5, mass = 0.2;
-        let  phBodyCircle = ACTIVITY_HUNGRY_FLUPE_1.ref.space.addBody(new cp.Body(mass,
-            cp.momentForCircle(mass, 0, width * 0.5, cc.p(0, 0))));
-        phBodyCircle.setPos(pos);
-        phBodyCircle.name = itemInfo.name;
-        phBodyCircle.id = id;
 
-        //#4
-        let phShape = ACTIVITY_HUNGRY_FLUPE_1.ref.space.addShape(new cp.CircleShape(phBodyCircle, width, cc.p(0, 0)));
-        phShape.setFriction(0);
-        phShape.setElasticity(1);
-        phShape.setCollisionType(ACTIVITY_HUNGRY_FLUPE_1.CollisionType.Bubbles);
+    addBubbleSprite: function({itemInfo, id, pos, isMoveLeft}) {
 
-        let sprite = new cc.PhysicsSprite(ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath+ itemInfo.imageName);
-        phBodyCircle.sprite = sprite;
-        sprite.setScale(1);
-        sprite.shape = phShape;
-        sprite.id = id;
-        sprite.setBody( phBodyCircle );
-        ACTIVITY_HUNGRY_FLUPE_1.ref.addChild(sprite);
+        let sprite = ACTIVITY_HUNGRY_FLUPE_1.ref.addSprite(ACTIVITY_HUNGRY_FLUPE_1.spriteBasePath + itemInfo.imageName,
+            cc.p(pos.x, pos.y),  ACTIVITY_HUNGRY_FLUPE_1.ref);
+        sprite.id = id,
+        sprite.name = itemInfo.name;
+        sprite.isMoveLeft = isMoveLeft;
+        sprite.jumpCount = 0;
         ACTIVITY_HUNGRY_FLUPE_1.ref.bubbleList.push(sprite);
-        phBodyCircle.applyImpulse(cc.p(impulse.x, impulse.y), cc.p(0, 0));
-        //         cc.p(0, 0));
+        ACTIVITY_HUNGRY_FLUPE_1.ref.moveSprite(sprite);
         return sprite;
     },
+
+    moveSprite : function ( sprite ){
+        let heightReduction = 10;
+       sprite.jumpCount  += 1;
+        sprite.isMoveLeft = (Math.random() < 0.5) ;
+        if(ACTIVITY_HUNGRY_FLUPE_1.ref.isOutOfScreen(sprite)) {
+            sprite.jumpCount  = 0;
+            sprite.setPosition(
+                cc.p(sprite.isMoveLeft ? this.getContentSize().width - (Math.random() * 300) : Math.random()  * 300,
+                    ACTIVITY_HUNGRY_FLUPE_1.ref.getContentSize().height * 0.35 + Math.random() * 100)
+            );
+        }
+            if(sprite.isMoveLeft) {
+                let distance = Math.random() * 100 + 100;
+                let height = 300;
+                sprite.runAction(
+                    cc.sequence(
+                        new cc.BezierTo(
+                            0.75, [
+                                cc.p(sprite.getPositionX() - distance/4 * Math.random(), sprite.getPositionY() + height - heightReduction),
+                                cc.p(sprite.getPositionX() - distance/2  * Math.random(), sprite.getPositionY() + height - heightReduction),
+                                cc.p(sprite.getPositionX() - distance, sprite.getPositionY()),
+                            ]
+                        ),
+                        cc.callFunc(
+                            ACTIVITY_HUNGRY_FLUPE_1.ref.moveSprite, ACTIVITY_HUNGRY_FLUPE_1.ref, sprite
+                        )
+                    )
+                )
+            }else {
+                let distance = Math.random() * 100 + 100;
+                let height = 300;
+                sprite.runAction(
+                    cc.sequence(
+                       new cc.BezierTo(
+                           0.75, [
+                                cc.p(sprite.getPositionX() + distance/4, sprite.getPositionY() + height  - heightReduction),
+                                cc.p(sprite.getPositionX() + distance/2, sprite.getPositionY() + height - heightReduction),
+                                cc.p(sprite.getPositionX() + distance, sprite.getPositionY()),
+                            ]
+                        ),
+                        cc.callFunc(
+                            ACTIVITY_HUNGRY_FLUPE_1.ref.moveSprite, ACTIVITY_HUNGRY_FLUPE_1.ref, sprite
+                        )
+                    )
+                )
+            }
+    },
+
+    isOutOfScreen : function (sprite){
+      return sprite.isMoveLeft ? sprite.getPositionX() < 0 :
+          sprite.getPositionX() > this.getContentSize().width;
+    },
+
     removeBubbles : function ({id}){
         let bubble =  ACTIVITY_HUNGRY_FLUPE_1.ref.bubbleList.find(x=>x.id==id);
         if(!bubble) return;
-        ACTIVITY_HUNGRY_FLUPE_1.ref.deleteObj.push({'b': bubble.getBody(), 's': bubble.shape});
         let idx = ACTIVITY_HUNGRY_FLUPE_1.ref.bubbleList.indexOf(bubble);
+        ACTIVITY_HUNGRY_FLUPE_1.ref.updateBubblePanel(bubble.name);
         ACTIVITY_HUNGRY_FLUPE_1.ref.bubbleList.splice( idx, 1);
         ACTIVITY_HUNGRY_FLUPE_1.ref.syncBubbleInfo.splice(idx, 1);
+        bubble.removeFromParent(true);
         if(ACTIVITY_HUNGRY_FLUPE_1.ref.joinedStudentList
             && ACTIVITY_HUNGRY_FLUPE_1.ref.joinedStudentList.users &&
             ACTIVITY_HUNGRY_FLUPE_1.ref.joinedStudentList.users[0] &&
@@ -713,11 +667,11 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     removeBubblesWithAnimation : function ({id, pos}){
         let bubble =  ACTIVITY_HUNGRY_FLUPE_1.ref.bubbleList.find(x=>x.id===id);
         if(!bubble) return;
-        console.log("Pos ", pos);
+        //console.log("Pos ", pos);
         if(pos)
-            bubble.getBody().setPos(pos);
+            bubble.setPosition(pos);
          ACTIVITY_HUNGRY_FLUPE_1.ref.getStarsAnimation(bubble.getPosition());
-        let  label = this.createTTFLabel(bubble.getBody().name, HDConstants.DarkBrown, 30,
+        let  label = this.createTTFLabel(bubble.name, HDConstants.DarkBrown, 30,
             HDConstants.Brown, bubble.getPosition(), this);
         label.setLocalZOrder(100);
         label.runAction(cc.sequence(cc.fadeOut(2), cc.removeSelf()));
@@ -743,9 +697,9 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         this.tableView.reloadData();
     },
     updateBubblePanel : function (name){
-        if(this.gameState !== ACTIVITY_HUNGRY_FLUPE_1.gameState.STARTED) return;
+        if(ACTIVITY_HUNGRY_FLUPE_1.ref.gameState !== ACTIVITY_HUNGRY_FLUPE_1.gameState.STARTED) return;
         ACTIVITY_HUNGRY_FLUPE_1.ref.catchesBubblesName.add(name);
-        this.parent.setResetButtonActive( ACTIVITY_HUNGRY_FLUPE_1.ref.catchesBubblesName.size > 0);
+        this.isTeacherView && this.parent.setResetButtonActive( ACTIVITY_HUNGRY_FLUPE_1.ref.catchesBubblesName.size > 0);
         let cells =  ACTIVITY_HUNGRY_FLUPE_1.ref.tableView.getContainer().getChildren();
         let newCell = cells.find(x=>x.name===name);
         if(newCell) newCell.makeColoured();
@@ -761,22 +715,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             starsAnimProps.frameCount, 0.08, '.png', true) ,
             cc.removeSelf()));
     },
-    /**
-     * delete bubbles remove body space and sprite
-     */
-    deleteMarkedObject : function (){
-        ACTIVITY_HUNGRY_FLUPE_1.ref.deleteObj.forEach(obj=>{
-            if( ACTIVITY_HUNGRY_FLUPE_1.ref.space.containsBody(obj.b)) {
-                obj.b.sprite.runAction(cc.sequence(cc.fadeOut(0.1), cc.removeSelf()));
-                ACTIVITY_HUNGRY_FLUPE_1.ref.space.removeBody(obj.b);
-                ACTIVITY_HUNGRY_FLUPE_1.ref.updateBubblePanel(obj.b.name);
-                ACTIVITY_HUNGRY_FLUPE_1.ref.space.removeShape(obj.s);
-                ACTIVITY_HUNGRY_FLUPE_1.ref.deleteObj.splice(
-                    ACTIVITY_HUNGRY_FLUPE_1.ref.deleteObj.indexOf(obj), 1
-                )
-            }
-        });
-    },
+
     /**
      * Check if new bubbles need to be added
      */
@@ -787,23 +726,6 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             ACTIVITY_HUNGRY_FLUPE_1.ref.populateBubbles(ACTIVITY_HUNGRY_FLUPE_1.ref.addObjectCount);
         }
     },
-    restrictBubbles : function (){
-        this.bubbleList.forEach((x)=>{
-            let isoutSideScreen = false;
-            if(x.getPositionX() < -20 || x.getPositionX() > this.getContentSize().width + 20){
-                isoutSideScreen =  isoutSideScreen || true;
-            }
-            if(x.getPositionY() < 270 || x.getPositionY() > this.getContentSize().height + 20){
-                isoutSideScreen = isoutSideScreen || true;
-            }
-            if(isoutSideScreen) {
-                x.setPosition(cc.p(this.getContentSize().width * Math.random() * 0.8 + 100,  this.getContentSize().height * 0.4 * Math.random() + 300));
-                x.getBody().applyImpulse(cc.p(0, 0), cc.p(0, 0));
-            }
-
-        });
-    },
-
 
     //==========================================================  Table View Delegates
     tableCellSizeForIndex: function (table, idx) {
@@ -848,6 +770,9 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         if(this.time < 0){
             this.time = 0;
             this.gameCompletion();
+            this.emitSocketEvent(HDSocketEventType.GAME_MESSAGE, {
+                "eventType": ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.GAME_COMPLETION
+            });
             this.stopTimer();
             this.updateTimerString();
             this.isTeacherView &&  this.showTimerEndScript &&  ACTIVITY_HUNGRY_FLUPE_1.ref.triggerScript(
@@ -872,19 +797,16 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     stopTimer : function(){
         this.unschedule(this.updateTimer);
     },
-    //===============================
-
-
 
     //========================SOCKET AND LESSONS METHODS ===========================
     triggerScript: function (message) {
         if (this.parent) {
-            this.parent.showScriptMessage(message);
+             this.parent.showScriptMessage(message);
         }
     },
     triggerTip: function (message) {
         if (this.parent) {
-            this.parent.showTipMessage(message.ops);
+             this.parent.showTipMessage(message.ops);
         }
     },
     fetchGameData: function () {
@@ -901,6 +823,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         this.previewingStudentName = (!status ? null : studentName);
     },
     updateRoomData: function () {
+        //TODO gameStartTime at student side set and update
             SocketManager.emitCutomEvent("SingleEvent", {
                 'eventType': HDSocketEventType.UPDATE_ROOM_DATA,
                 'roomId': HDAppManager.roomId,
@@ -911,13 +834,18 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                         "data": {"bubbleInfo" : ACTIVITY_HUNGRY_FLUPE_1.ref.syncBubbleInfo,
                             "catchBubbleInfo": [...ACTIVITY_HUNGRY_FLUPE_1.ref.catchesBubblesName],
                             "gameState": ACTIVITY_HUNGRY_FLUPE_1.ref.gameState,
-                            "gameStartTime" : ACTIVITY_HUNGRY_FLUPE_1.ref.gameStartTime,
+                             "connectedFlupe" : ACTIVITY_HUNGRY_FLUPE_1.ref.flupeList.filter(x=>x.stuName !== "").map((x)=>{
+                              return{
+                                    "imgName" : x.imgName,
+                                    "stuName": x.stuName
+                                }
+                            }),
+                            "gameStartTime" : ACTIVITY_HUNGRY_FLUPE_1.ref.gameStartTime
                         },
                         "activityStartTime": HDAppManager.getActivityStartTime()
                     }
                 }
             }, null);
-
     },
     updateStudentInteraction: function (username, status) {
         if (this.isTeacherView) {
@@ -966,10 +894,11 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 this.setPushButtonActive();
                 return;
             }
-            this.isStudentInteractionEnable = users.map(x=>x.userName).includes(HDAppManager.username);
+            this.isStudentInteractionEnable = users.map(x => x.userName).includes(HDAppManager.username);
         }
         this.setPushButtonActive();
     },
+
     updateStudentTurn: function (userName) {
         if (this.isTeacherView) {
             if (!userName) {
@@ -988,9 +917,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         }
     },
     studentStatus: function (data) {
-        if(this.isFirstTimeConnected && data.users.length > 2
-            && this.flupeList.filter(x=>x.stuName != "").length !== 0) return;
-        this.isFirstTimeConnected = false;
+        console.log("student status called ", data);
         this.joinedStudentList = [];
         this.joinedStudentList = data;
         this.isMultiPlayer = data.users.length > 2;
@@ -999,12 +926,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             data.users.map( x=> x.userName);
         this.updateFlupes([...users]);
         this.setPushButtonActive();
-        if(users[0] === HDAppManager.username && data.users.length > 2
-            && !ACTIVITY_HUNGRY_FLUPE_1.ref.pendingAck){
-            ACTIVITY_HUNGRY_FLUPE_1.ref.pendingAck = true;
-            ACTIVITY_HUNGRY_FLUPE_1.ref.sendUpdatedFlupe(data);
-            ACTIVITY_HUNGRY_FLUPE_1.ref.intervalId = setInterval(ACTIVITY_HUNGRY_FLUPE_1.ref.sendUpdatedFlupe,
-                2000, data );
+        if(data.users[0].userName === HDAppManager.username){
+            this.updateRoomData();
         }
     },
     /**
@@ -1026,12 +949,16 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 break;
             case ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.START:
                 this.gameState = ACTIVITY_HUNGRY_FLUPE_1.gameState.STARTED;
-                this.startTimer(this.gamePlayTime);
+                this.gameStartTime = new Date().getTime();
+                // this.isTeacherView && this.startTimer(this.gamePlayTime);
                 this.setScoreScreenActive(false);
                 break;
             case ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.STOP:
                 ACTIVITY_HUNGRY_FLUPE_1.ref.gameState = ACTIVITY_HUNGRY_FLUPE_1.gameState.STOP;
                 this.resetGame();
+                break;
+            case ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.GAME_COMPLETION:
+                this.gameCompletion();
                 break;
             case ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.ADD_BUBBLES:
                 res.data.forEach(ACTIVITY_HUNGRY_FLUPE_1.ref.addBubbleSprite);
@@ -1075,6 +1002,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             {"eventType": ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.STOP} );
         this.getParent().setAllStudentsMouseActive(false);
         this.parent.setResetButtonActive(false);
+        this.stopTimer();
         this.resetGame();
         this.setPushButtonActive();
     },

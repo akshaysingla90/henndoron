@@ -7,6 +7,7 @@ ACTIVITY_MEMORY_GAME_1.socketEventKey = {
     POPULATE_CARDS: 2,
     FLIP_CARD: 3,
     UPDATE_LEVEL: 4
+
 }
 ACTIVITY_MEMORY_GAME_1.gameState = {
     NOT_STARTED : 0,
@@ -118,10 +119,6 @@ ACTIVITY_MEMORY_GAME_1.MemoryGame   =   HDBaseLayer.extend({
             this.parent.setResetButtonActive(
                 (this.syncDataInfo.openCardTags.length > 0) && this.isTeacherView
             );
-            if(  (this.syncDataInfo.openCardTags.length > 0) && this.isTeacherView){
-                this.parent.setActive(true);
-            }
-
             setTimeout(this.updateRoomData, 1000);
         }
     },

@@ -6,7 +6,7 @@
     "description": "game desc. here",
     "allocatedTime": 10,
     "gamePlayTime": 40,
-    "maxBubbleInScreen": 10,
+    "maxBubbleInScreen": 15,
     "bubbleSpeed" : {
       "x" : 20,
       "y" : 50
@@ -255,6 +255,7 @@
       }
     }
   },
+
   "background": {
     "component": "backgroundCard",
     "sections": {
@@ -574,9 +575,14 @@
       "basePath": "res/Sprite/",
       "images": [
         "bg.png",
+
         "ball_moving_to_box.png",
         "btn_idle.png",
         "btn_pressed.png",
+        "start_idle.png",
+        "start_pressed.png",
+        "stop_idle.png",
+        "stop_pressed.png",
         "flupe_blue_catch.png",
         "flupe_blue_midair.png",
         "flupe_blue_shadow.png",
@@ -598,18 +604,20 @@
         "glowing_outline_catch.png",
         "glowing_outline_midair.png",
         "glowing_outline_shadow.png",
-        "item_bubble-01.png",
-        "item_bubble-01_grey.png",
-        "item_bubble-02.png",
-        "item_bubble-02_grey.png",
-        "item_bubble-03.png",
-        "item_bubble-03_grey.png",
-        "item_bubble-04.png",
-        "item_bubble-04_grey.png",
-        "item_bubble-05.png",
-        "item_bubble-05_grey.png",
+        "item_bubble_01.png",
+        "item_bubble_01_grey.png",
+        "item_bubble_02.png",
+        "item_bubble_02_grey.png",
+        "item_bubble_03.png",
+        "item_bubble_03_grey.png",
+        "item_bubble_04.png",
+        "item_bubble_04_grey.png",
+        "item_bubble_05.png",
+        "item_bubble_05_grey.png",
         "score_box.png",
-        "items_container.png"
+        "basket_objects.png",
+        "items_container.png",
+        "cursor_0001.png"
       ]
     },
     "sounds": {
@@ -620,7 +628,7 @@
       "basePath": "res/AnimationFrames/",
       "animation": [
         {
-          "Name": "CorrectCharacterBrokenAnimation",
+          "name": "CorrectCharacterBrokenAnimation",
           "frameCount": 10,
           "frameInitial": "CorrectWordAnimation/correct_effect_",
           "extension": ".png"
