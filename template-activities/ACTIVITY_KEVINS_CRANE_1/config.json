@@ -53,17 +53,17 @@
         "enableState": "Help.png",
         "pushedState": "Help.png",
         "dimensions": { "width": 64, "height": 64 },
-        "position" : {"x": 900 , "y":300}
+        "position": { "x": 900, "y": 300 }
       },
 
-     "multiplayerMode" :{
-       "UIName": "MultiPlayerButton",
-       "title": "Go to Individual Mode",
-       "enableState": "btn_enable.png",
-       "disableState": "btn_disable.png",
-       "position": { "x": 0, "y": 0 },
-       "dimensions": { "width": 139, "height": 32 }
-     }
+      "multiplayerMode": {
+        "UIName": "MultiPlayerButton",
+        "title": "Go to Individual Mode",
+        "enableState": "btn_enable.png",
+        "disableState": "btn_disable.png",
+        "position": { "x": 0, "y": 0 },
+        "dimensions": { "width": 139, "height": 32 }
+      }
     }
   },
   "assets": {
@@ -85,8 +85,8 @@
           },
           {
             "component": "image",
-            "UIName": "Section-B FIRST FLOOR",
-            "imageName": "floor_balancer_first_floor.png",
+            "UIName": "Section-B SECOND FLOOR",
+            "imageName": "floor_balancer_second_floor.png",
             "dimensions": {
               "width": 470,
               "height": 12
@@ -95,8 +95,8 @@
           },
           {
             "component": "image",
-            "UIName": "Section-B SECOND FLOOR",
-            "imageName": "floor_balancer_second_floor.png",
+            "UIName": "Section-B FIRST FLOOR",
+            "imageName": "floor_balancer_first_floor.png",
             "dimensions": {
               "width": 470,
               "height": 12
@@ -145,9 +145,9 @@
       },
       "character_highlight": {
         "ignoreForAuthToolUI": true,
-        "UIName"        :   "character_highlight",
-        "imageName"     :   "character_highlight.png",
-        "name"          :   "character_highlight",
+        "UIName": "character_highlight",
+        "imageName": "character_highlight.png",
+        "name": "character_highlight",
         "dimensions": {
           "width": 53,
           "height": 103
@@ -161,140 +161,140 @@
           "width": 52
         },
         "charactersData": [
-           {
+          {
             "imageName": "a_lowercase.png",
             "name": "a_lowercase",
-             "text":"a"
+            "text": "a"
           },
           {
             "imageName": "b_lowercase.png",
             "name": "b_lowercase",
-            "text":"b"
+            "text": "b"
           },
-         {
+          {
             "imageName": "c_lowercase.png",
             "name": "c_lowercase",
-            "text":"c"
+            "text": "c"
           },
           {
             "imageName": "d_lowercase.png",
             "name": "d_lowercase",
-            "text":"d"
+            "text": "d"
           },
           {
             "imageName": "e_lowercase.png",
             "name": "e_lowercase",
-            "text":"e"
+            "text": "e"
           },
           {
             "imageName": "f_lowercase.png",
             "name": "f_lowercase",
-            "text":"f"
+            "text": "f"
           },
-           {
+          {
             "imageName": "g_lowercase.png",
             "name": "g_lowercase",
-             "text":"g"
+            "text": "g"
           },
           {
             "imageName": "h_lowercase.png",
             "name": "h_lowercase",
-            "text":"h"
+            "text": "h"
           },
           {
             "imageName": "i_lowercase.png",
             "name": "i_lowercase",
-            "text":"i"
+            "text": "i"
           },
           {
             "imageName": "j_lowercase.png",
             "name": "j_lowercase",
-            "text":"j"
-          },
-           {
-            "imageName" : "k_lowercase.png",
-            "name"      : "k_lowercase",
-             "text"     :"k"
+            "text": "j"
           },
           {
-            "imageName"   : "l_lowercase.png",
-            "name"        : "l_lowercase",
-            "text"        :"l"
+            "imageName": "k_lowercase.png",
+            "name": "k_lowercase",
+            "text": "k"
           },
           {
-            "imageName" : "m_lowercase.png",
-            "name"      : "m_lowercase",
-            "text"      :  "m"
+            "imageName": "l_lowercase.png",
+            "name": "l_lowercase",
+            "text": "l"
+          },
+          {
+            "imageName": "m_lowercase.png",
+            "name": "m_lowercase",
+            "text": "m"
           },
           {
             "imageName": "n_lowercase.png",
             "name": "n_lowercase",
-            "text":"n"
+            "text": "n"
           },
-         {
+          {
             "imageName": "o_lowercase.png",
             "name": "o_lowercase",
-           "text":"o"
+            "text": "o"
           },
           {
             "imageName": "p_lowercase.png",
             "name": "p_lowercase",
-            "text":"p"
+            "text": "p"
           },
           {
             "imageName": "q_lowercase.png",
             "name": "q_lowercase",
-            "text":"q"
+            "text": "q"
           },
           {
             "imageName": "r_lowercase.png",
             "name": "r_lowercase",
-            "text":"r"
+            "text": "r"
           },
           {
             "imageName": "s_lowercase.png",
             "name": "s_lowercase",
-            "text":"s"
+            "text": "s"
           },
           {
             "imageName": "t_lowercase.png",
             "name": "t_lowercase",
-            "text":"t"
+            "text": "t"
           },
           {
             "imageName": "u_lowercase.png",
             "name": "u_lowercase",
-            "text":"u"
+            "text": "u"
           },
           {
             "imageName": "v_lowercase.png",
             "name": "v_lowercase",
-            "text":"v"
+            "text": "v"
           },
           {
             "imageName": "w_lowercase.png",
             "name": "w_lowercase",
-            "text":"w"
+            "text": "w"
           },
           {
             "imageName": "x_lowercase.png",
             "name": "x_lowercase",
-            "text":"x"
+            "text": "x"
           },
           {
             "imageName": "y_lowercase.png",
             "name": "y_lowercase",
-            "text":"y"
+            "text": "y"
           },
           {
             "imageName": "z_lowercase.png",
             "name": "z_lowercase",
-            "text":"z"
+            "text": "z"
           },
           {
             "imageName": "empty.png",
             "name": "empty",
-            "text":"empty"
+            "text": "empty"
           }
         ]
       },
@@ -376,14 +376,6 @@
             },
             "name": "craneClaw",
             "animation": {
-              "craneClawOpenAnimation": {
-                "configurable": true,
-                "UIName": "CLAW OPEN",
-                "name": "craneClawOpenAnimation",
-                "frameCount": 8,
-                "frameInitial": "crane_clawopen_loop_anim/crane_clawopen_",
-                "extension": ".png"
-              },
               "craneClawCloseAnimation": {
                 "configurable": true,
                 "UIName": "CLAW CLOSE",
@@ -475,7 +467,7 @@
                 }
               ],
               "additionalRandomLetters": 0,
-              "groundLetters":"iogn",
+              "groundLetters": "iogn",
               "hintsSections": {
                 "UIName": "HINTS",
                 "images": ["item_dog.png", "item_pig.png", "item_panda.png"],
@@ -488,7 +480,6 @@
                 "helpShowTime": 5
               }
             }
-
           ],
           "demolishing": [
             {
