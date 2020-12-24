@@ -141,6 +141,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
             this.isTeacherView &&
             this.parent.setResetButtonActive(   this.syncDataInfo.catchBubbleInfo.length > 0);
             this.syncDataInfo.bubbleInfo.forEach(ACTIVITY_HUNGRY_FLUPE_1.ref.addBubbleSprite);
+            ACTIVITY_HUNGRY_FLUPE_1.ref.syncBubbleInfo = this.syncDataInfo.bubbleInfo;
             this.gameStartTime = this.syncDataInfo.gameStartTime;
             let date = new Date();
             let currentTime = date.getTime();
@@ -445,7 +446,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
     },
     checkIfFlupeAte : function (){
       let flupe = this.flupeList.find(x=>x.stuName == HDAppManager.username);
-      if(flupe &&  flupe.isGoingUp) {
+      if(flupe) {
           let boundingBox = flupe.getBoundingBox();
           for (let bubble of this.bubbleList) {
               if (cc.rectContainsRect(boundingBox, bubble.getBoundingBox())) {
@@ -520,25 +521,6 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
 
             ));
         }
-    },
-    sendUpdatedFlupe : function (data){
-        if(!ACTIVITY_HUNGRY_FLUPE_1){
-             return clearInterval(ACTIVITY_HUNGRY_FLUPE_1.ref.intervalId)
-        }
-        if(!ACTIVITY_HUNGRY_FLUPE_1.ref.pendingAck) return clearInterval(ACTIVITY_HUNGRY_FLUPE_1.ref.intervalId);
-        let connectedFlupe  = ACTIVITY_HUNGRY_FLUPE_1.ref.flupeList.filter(x=>x.stuName !== "").map((x)=>{
-            return {
-                "imgName" : x.imgName,
-                "stuName": x.stuName
-            }
-        });
-        ACTIVITY_HUNGRY_FLUPE_1.ref.emitSocketEvent(
-            HDSocketEventType.GAME_MESSAGE,
-            {
-                "eventType": ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.CONNECTED_FLUPE,
-                "data" : {"connectedFlupe": connectedFlupe, "users": data}
-            }
-        )
     },
 
     /**
@@ -823,7 +805,6 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
         this.previewingStudentName = (!status ? null : studentName);
     },
     updateRoomData: function () {
-        //TODO gameStartTime at student side set and update
             SocketManager.emitCutomEvent("SingleEvent", {
                 'eventType': HDSocketEventType.UPDATE_ROOM_DATA,
                 'roomId': HDAppManager.roomId,
@@ -831,7 +812,8 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                     "roomId": HDAppManager.roomId,
                     "roomData": {
                         "activity": ACTIVITY_HUNGRY_FLUPE_1.config.properties.namespace,
-                        "data": {"bubbleInfo" : ACTIVITY_HUNGRY_FLUPE_1.ref.syncBubbleInfo,
+                        "data": {
+                            "bubbleInfo" : ACTIVITY_HUNGRY_FLUPE_1.ref.syncBubbleInfo,
                             "catchBubbleInfo": [...ACTIVITY_HUNGRY_FLUPE_1.ref.catchesBubblesName],
                             "gameState": ACTIVITY_HUNGRY_FLUPE_1.ref.gameState,
                              "connectedFlupe" : ACTIVITY_HUNGRY_FLUPE_1.ref.flupeList.filter(x=>x.stuName !== "").map((x)=>{
@@ -962,6 +944,7 @@ ACTIVITY_HUNGRY_FLUPE_1.HungryFlupeLayer = HDBaseLayer.extend({
                 break;
             case ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.ADD_BUBBLES:
                 res.data.forEach(ACTIVITY_HUNGRY_FLUPE_1.ref.addBubbleSprite);
+                ACTIVITY_HUNGRY_FLUPE_1.ref.syncBubbleInfo.push(...res.data);
                 break;
             case ACTIVITY_HUNGRY_FLUPE_1.socketEventKey.REMOVE_BUBBLES:
                 this.removeBubblesWithAnimation(res.data);
